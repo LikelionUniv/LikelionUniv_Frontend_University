@@ -18,8 +18,8 @@ const Nav:React.FC = () => {
                     <div className='nav-logo'>LIKELION</div>
                 </Link>
                 <ul className='nav-list'>
-                    <LinkTo to="/signup">리쿠르트</LinkTo>
-                    <LinkTo to="/#">참여대학</LinkTo>
+                    <LinkTo to="/signup">/singup</LinkTo>
+                    <LinkTo to="/login">/login</LinkTo>
                     <LinkTo to="/#">프로젝트</LinkTo>
                     <LinkTo to="/#">커뮤니티</LinkTo>
                 </ul>
