@@ -72,10 +72,10 @@ const Sform = () => {
         (field: keyof FormState) =>
         (
             selectedOption: OptionType | null,
-            actionMeta: ActionMeta<OptionType>
+            actionMeta: ActionMeta<OptionType>,
         ) => {
             if (selectedOption) {
-                setFormState((prev) => ({
+                setFormState(prev => ({
                     ...prev,
                     [field]: selectedOption.value,
                 }));
@@ -97,14 +97,14 @@ const Sform = () => {
                 <Nform
                     placeholder="자신의 이름을 작성해주세요."
                     value={formState.name}
-                    onChange={(e) =>
+                    onChange={e =>
                         setFormState({ ...formState, name: e.target.value })
                     }
                 />
                 <Ndiv>학교</Ndiv>
                 <SchoolDrop
                     selectedUniversity={formState.university}
-                    onChange={(selectedUniversity) =>
+                    onChange={selectedUniversity =>
                         setFormState({
                             ...formState,
                             university: selectedUniversity,
@@ -115,14 +115,13 @@ const Sform = () => {
                 <Nform
                     placeholder="학과를 입력해주세요."
                     value={formState.department}
-                    onChange={(e) =>
+                    onChange={e =>
                         setFormState({
                             ...formState,
                             department: e.target.value,
                         })
                     }
                 />
-
                 <div className="SformDiv">
                     <div className="SfromDiv2">
                         <Ndiv>기수</Ndiv>
@@ -146,7 +145,6 @@ const Sform = () => {
                         />
                     </div>
                 </div>
-
                 <button className="saveBtn" onClick={handleSubmit}>
                     저장하기
                 </button>

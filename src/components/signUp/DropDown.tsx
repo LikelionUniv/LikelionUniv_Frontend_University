@@ -11,7 +11,7 @@ type DropDownProps = {
     options: OptionType[];
     onChange: (
         selectedOption: OptionType | null,
-        actionMeta: ActionMeta<OptionType>
+        actionMeta: ActionMeta<OptionType>,
     ) => void;
 };
 
