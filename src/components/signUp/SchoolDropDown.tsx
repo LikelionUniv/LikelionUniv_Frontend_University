@@ -88,7 +88,6 @@ const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
         useState(universityOptions);
     const [regionCode, setRegionCode] = useState<Number>(11);
     useEffect(() => {
-        console.log(regionCode);
         setFilteredUniversity(
             universityOptions.filter(
                 item =>
@@ -96,7 +95,6 @@ const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
                     String(regionCode),
             ),
         );
-        console.log(filteredUniversity);
     }, [regionCode]);
 
     // MenuList 컴포넌트 재정의
