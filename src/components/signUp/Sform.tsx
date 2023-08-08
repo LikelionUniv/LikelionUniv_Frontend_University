@@ -92,6 +92,7 @@ const Sform = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        // 모든 필드 완성되었는지 검사하는 로직 추가함
         if (
             formState.name === '' ||
             formState.university === 0 ||

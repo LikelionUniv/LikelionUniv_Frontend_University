@@ -134,6 +134,8 @@ const genStyle = {
         },
     }),
 };
+
+// 학교 select 스타일
 const schoolStyle = {
     ...genStyle,
     control: (provided: any, state: any) => ({

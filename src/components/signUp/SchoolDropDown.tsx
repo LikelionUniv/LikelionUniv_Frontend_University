@@ -19,6 +19,7 @@ type SchoolDropDownProps = {
     ) => void;
 };
 
+// 지역 코드 (임의로 생성, 테스트 코드로 백엔드 서버에 가져올 때 수정 필요)
 const regionOptions: RegionOptionType[] = [
     { value: 11, label: '서울' },
     { value: 31, label: '경기' },
@@ -39,19 +40,20 @@ const regionOptions: RegionOptionType[] = [
     { value: 39, label: '제주' },
 ];
 
+// 대학 코드 번호 앞자리 2개가 지역 코드와 일치할 때만 필터링함
 const universityOptions: UniversityOptionType[] = [
     { value: 1101, label: '서울대학교1' },
-    { value: 1102, label: '한국외국어대학교' },
-    { value: 1103, label: '서울대학교1' },
-    { value: 1104, label: '한국외국어대학교' },
-    { value: 1105, label: '서울대학교1' },
-    { value: 1106, label: '한국외국어대학교' },
-    { value: 1107, label: '서울대학교1' },
-    { value: 1108, label: '한국외국어대학교' },
-    { value: 1109, label: '서울대학교1' },
-    { value: 1110, label: '한국외국어대학교' },
-    { value: 1111, label: '서울대학교1' },
-    { value: 1112, label: '한국외국어대학교' },
+    { value: 1102, label: '서울대학교2' },
+    { value: 1103, label: '서울대학교3' },
+    { value: 1104, label: '서울대학교4' },
+    { value: 1105, label: '서울대학교5' },
+    { value: 1106, label: '서울대학교6' },
+    { value: 1107, label: '서울대학교7' },
+    { value: 1108, label: '서울대학교8' },
+    { value: 1109, label: '서울대학교9' },
+    { value: 1110, label: '서울대학교10' },
+    { value: 1111, label: '서울대학교11' },
+    { value: 1112, label: '서울대학교12' },
     { value: 3101, label: '경기대학교1' },
     { value: 3102, label: '경기대학교2' },
     { value: 2301, label: '인천대학교1' },
@@ -61,64 +63,6 @@ const universityOptions: UniversityOptionType[] = [
     { value: 2901, label: '세종대학교1' },
     { value: 2902, label: '세종대학교2' },
 ];
-
-const CustomMenu = styled.div`
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-`;
-const CustomLeftMenuList = styled.div`
-    height: 353px;
-    width: 134px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    padding-left: 4px;
-    overflow-x: scroll;
-    overflow-x: hidden;
-    margin: 4px 0;
-    &::-webkit-scrollbar {
-        width: 4px;
-    }
-    &::-webkit-scrollbar-track {
-        border-radius: 3px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background-color: #d1d4d8;
-        border-radius: 3px;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-        background-color: #d1d4d8;
-    }
-`;
-const CustomOption = styled.div`
-    padding: 4px;
-    padding-left: 12px;
-    font-family: 'Pretendard';
-    font-size: 16px;
-    font-weight: 500;
-    width: 110px;
-    height: 32px;
-    flex-shrink: 0;
-    color: var(--grey-900, #212224);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    &:hover {
-        background-color: var(--grey-300, #eaecee);
-    }
-    &:active {
-        background-color: var(--grey-400, #dcdfe3);
-    }
-`;
-
-const Border = styled.div`
-    position: absolute;
-    left: 142px;
-    height: 347px;
-    margin-top: 5px;
-    border-right: 1px solid var(--grey-400, #dcdfe3);
-`;
 
 const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
@@ -139,6 +83,7 @@ const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
         );
     };
 
+    // 지역에 따른 대학 필터링을 위한 코드
     const [filteredUniversity, setFilteredUniversity] =
         useState(universityOptions);
     const [regionCode, setRegionCode] = useState<Number>(11);
@@ -199,3 +144,63 @@ const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
 };
 
 export default SchoolDropDown;
+
+// 커스텀 styled-components
+
+const CustomMenu = styled.div`
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+`;
+const CustomLeftMenuList = styled.div`
+    height: 353px;
+    width: 134px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 4px;
+    overflow-x: scroll;
+    overflow-x: hidden;
+    margin: 4px 0;
+    &::-webkit-scrollbar {
+        width: 4px;
+    }
+    &::-webkit-scrollbar-track {
+        border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #d1d4d8;
+        border-radius: 3px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #d1d4d8;
+    }
+`;
+const CustomOption = styled.div`
+    padding: 4px;
+    padding-left: 12px;
+    font-family: 'Pretendard';
+    font-size: 16px;
+    font-weight: 500;
+    width: 110px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--grey-900, #212224);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    &:hover {
+        background-color: var(--grey-300, #eaecee);
+    }
+    &:active {
+        background-color: var(--grey-400, #dcdfe3);
+    }
+`;
+
+const Border = styled.div`
+    position: absolute;
+    left: 142px;
+    height: 347px;
+    margin-top: 5px;
+    border-right: 1px solid var(--grey-400, #dcdfe3);
+`;

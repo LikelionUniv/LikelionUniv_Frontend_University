@@ -12,6 +12,143 @@ import mypage from '../img/nav/mypage.svg';
 import logout from '../img/nav/logout.svg';
 import { ReactComponent as Arrow } from '../img/arrow.svg';
 
+const Nav = () => {
+    const navigate = useNavigate();
+    // 로그인 상태
+    const [isLogin, setIsLogin] = useState<Boolean>(true);
+
+    // 네비게이션 바 스크롤 감지에 따른 상태
+    const [position, setPosition] = useState(window.pageYOffset);
+    const [visible, setVisible] = useState<Boolean | undefined>(undefined);
+    useEffect(() => {
+        const handleScroll = () => {
+            const moving = window.pageYOffset;
+            // 프로필 모달(마이페이지, 로그아웃 창)이 켜져 있으면 스크롤 내려도 없어지지 않음
+            if (!profileModal) setVisible(position > moving);
+            setPosition(moving);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [position]);
+
+    // 프로필 버튼 창 상태
+    const [profileModal, setProfileModal] = useState<Boolean>(false);
+    // 프로필 버튼 참조
+    const buttonRef = useRef<HTMLDivElement>(null);
+    // 프로필 모달 참조
+    const modalRef = useRef<HTMLDivElement>(null);
+    // 프로필 모달이 아닌 곳을 누르면 (버튼 포함) 모달이 꺼짐
+    useEffect(() => {
+        const clickOutside = (e: any) => {
+            if (
+                profileModal &&
+                modalRef.current &&
+                !modalRef.current.contains(e.target) &&
+                buttonRef.current &&
+                !buttonRef.current.contains(e.target)
+            ) {
+                setProfileModal(false);
+            }
+        };
+        document.addEventListener('mousedown', clickOutside);
+        return () => {
+            document.removeEventListener('mousedown', clickOutside);
+        };
+    }, [profileModal]);
+
+    return (
+        <Wrapper
+            className={
+                visible === false
+                    ? 'fade-out'
+                    : visible === true
+                    ? 'fade-in'
+                    : undefined
+            }
+        >
+            <Container>
+                <div className="left">
+                    <Logo src={logo} onClick={() => navigate('/')} />
+                    <Text to="/recruit" className="first">
+                        <p>리크루팅</p>
+                        <img src={navarrow} />
+                    </Text>
+                    <Text to="/univ">
+                        <p>참여대학</p>
+                        <img src={navarrow} />
+                    </Text>
+                    <Text to="/project">
+                        <p>프로젝트</p>
+                        <img src={navarrow} />
+                    </Text>
+                    <Text to="/community">
+                        <p>커뮤니티</p>
+                        <img src={navarrow} />
+                    </Text>
+                </div>
+                <div className="right">
+                    {isLogin ? (
+                        <>
+                            <ChatBtn to="/chat">
+                                <img src={chat} />
+                            </ChatBtn>
+                            <ProfileBtn
+                                ref={buttonRef}
+                                onClick={() => setProfileModal(!profileModal)}
+                                style={{
+                                    backgroundColor: profileModal
+                                        ? 'var(--grey-300, #eaecee)'
+                                        : '',
+                                }}
+                            >
+                                <div className="profile-img">
+                                    <img src={defaultprofile} />
+                                </div>
+                                <Arrow
+                                    style={{
+                                        transform: profileModal
+                                            ? 'rotate(0deg)'
+                                            : 'rotate(180deg)',
+                                        stroke: '#868C94',
+                                    }}
+                                />
+                            </ProfileBtn>
+                        </>
+                    ) : (
+                        <LoginBtn onClick={() => navigate('/login')}>
+                            로그인
+                        </LoginBtn>
+                    )}
+                </div>
+                {profileModal ? (
+                    <ProfileModal ref={modalRef}>
+                        <div
+                            onClick={() => navigate('/mypage')}
+                            className="inner"
+                        >
+                            <img src={mypage} />
+                            마이페이지
+                        </div>
+                        <div
+                            onClick={() => console.log('로그아웃')}
+                            className="inner"
+                        >
+                            <img src={logout} />
+                            로그아웃
+                        </div>
+                    </ProfileModal>
+                ) : null}
+            </Container>
+        </Wrapper>
+    );
+};
+
+export default Nav;
+
+// 커스텀 styled-components
+
 const Wrapper = styled.div`
     position: fixed;
     z-index: 998;
@@ -228,141 +365,3 @@ const ProfileModal = styled.div`
         }
     }
 `;
-
-const Nav = () => {
-    const navigate = useNavigate();
-
-    // 로그인 상태
-    const [isLogin, setIsLogin] = useState<Boolean>(true);
-
-    // 네비게이션 바 스크롤 감지에 따른 상태
-    const [position, setPosition] = useState(window.pageYOffset);
-    const [visible, setVisible] = useState<Boolean | undefined>(undefined);
-    useEffect(() => {
-        const handleScroll = () => {
-            const moving = window.pageYOffset;
-            // 프로필 모달이 켜져 있으면 스크롤 내려도 없어지지 않음
-            if (!profileModal) setVisible(position > moving);
-            setPosition(moving);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [position]);
-
-    // 프로필 버튼 창 상태
-    const [profileModal, setProfileModal] = useState<Boolean>(false);
-
-    // 프로필 버튼 참조
-    const buttonRef = useRef<HTMLDivElement>(null);
-    // 프로필 모달 참조
-    const modalRef = useRef<HTMLDivElement>(null);
-
-    // 프로필 모달이 아닌 곳을 누르면 (버튼 포함) 모달이 꺼짐
-    useEffect(() => {
-        const clickOutside = (e: any) => {
-            if (
-                profileModal &&
-                modalRef.current &&
-                !modalRef.current.contains(e.target) &&
-                buttonRef.current &&
-                !buttonRef.current.contains(e.target)
-            ) {
-                setProfileModal(false);
-            }
-        };
-        document.addEventListener('mousedown', clickOutside);
-        return () => {
-            document.removeEventListener('mousedown', clickOutside);
-        };
-    }, [profileModal]);
-
-    return (
-        <Wrapper
-            className={
-                visible === false
-                    ? 'fade-out'
-                    : visible === true
-                    ? 'fade-in'
-                    : undefined
-            }
-        >
-            <Container>
-                <div className="left">
-                    <Logo src={logo} onClick={() => navigate('/')} />
-                    <Text to="/recruit" className="first">
-                        <p>리크루팅</p>
-                        <img src={navarrow} />
-                    </Text>
-                    <Text to="/univ">
-                        <p>참여대학</p>
-                        <img src={navarrow} />
-                    </Text>
-                    <Text to="/project">
-                        <p>프로젝트</p>
-                        <img src={navarrow} />
-                    </Text>
-                    <Text to="/community">
-                        <p>커뮤니티</p>
-                        <img src={navarrow} />
-                    </Text>
-                </div>
-                <div className="right">
-                    {isLogin ? (
-                        <>
-                            <ChatBtn to="/chat">
-                                <img src={chat} />
-                            </ChatBtn>
-                            <ProfileBtn
-                                ref={buttonRef}
-                                onClick={() => setProfileModal(!profileModal)}
-                                style={{
-                                    backgroundColor: profileModal
-                                        ? 'var(--grey-300, #eaecee)'
-                                        : '',
-                                }}
-                            >
-                                <div className="profile-img">
-                                    <img src={defaultprofile} />
-                                </div>
-                                <Arrow
-                                    style={{
-                                        transform: profileModal
-                                            ? 'rotate(0deg)'
-                                            : 'rotate(180deg)',
-                                        stroke: '#868C94',
-                                    }}
-                                />
-                            </ProfileBtn>
-                        </>
-                    ) : (
-                        <LoginBtn onClick={() => navigate('/login')}>
-                            로그인
-                        </LoginBtn>
-                    )}
-                </div>
-                {profileModal ? (
-                    <ProfileModal ref={modalRef}>
-                        <div
-                            onClick={() => navigate('/mypage')}
-                            className="inner"
-                        >
-                            <img src={mypage} />
-                            마이페이지
-                        </div>
-                        <div
-                            onClick={() => console.log('로그아웃')}
-                            className="inner"
-                        >
-                            <img src={logout} />
-                            로그아웃
-                        </div>
-                    </ProfileModal>
-                ) : null}
-            </Container>
-        </Wrapper>
-    );
-};
-
-export default Nav;
