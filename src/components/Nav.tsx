@@ -321,7 +321,7 @@ const Nav = () => {
                                 style={{
                                     backgroundColor: profileModal
                                         ? 'var(--grey-300, #eaecee)'
-                                        : 'transparent',
+                                        : '',
                                 }}
                             >
                                 <div className="profile-img">
