@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDrop from './SchoolDrop';
+import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
 
 const Ndiv = styled.div`
     color: var(--black, #000);
-    /* Subtitle/18_Medium */
     font-family: Pretendard;
     font-size: 18px;
-    font-style: normal;
     font-weight: 500;
-    line-height: 150%; /* 27px */
+    line-height: 150%;
     margin-bottom: 12px;
 `;
 
@@ -22,12 +20,22 @@ const Nform = styled.input`
     height: 48px;
     font-family: Pretendard;
     font-size: 16px;
+    color: var(--grey-900, #212224);
+    font-weight: 500;
+    line-height: 150%;
     border-radius: 6px;
     border: 1px solid var(--grey-400, #dcdfe3);
     background: var(--white, #fff);
     margin-bottom: 34px;
     box-sizing: border-box;
-    padding: 0 24px 0 24px;
+    padding: 12px 16px;
+    outline: 0;
+    &::placeholder {
+        color: var(--grey-600, #adb3ba);
+    }
+    &:focus {
+        border: 1px solid var(--orange-600, #ff7710);
+    }
 `;
 
 /* dropdown option 부분 */
@@ -51,7 +59,7 @@ const roleOptions = [
 /* form type */
 interface FormState {
     name: string;
-    university: string;
+    university: number;
     department: string;
     generation: number;
     role: number;
@@ -61,7 +69,7 @@ interface FormState {
 const Sform = () => {
     const [formState, setFormState] = useState<FormState>({
         name: '',
-        university: '',
+        university: 0,
         department: '',
         generation: 0,
         role: 0,
@@ -84,15 +92,25 @@ const Sform = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        /* button click으로 해서 정보 저장됨 확인 */
-        console.log(formState);
+        if (
+            formState.name === '' ||
+            formState.university === 0 ||
+            formState.department === '' ||
+            formState.generation === 0 ||
+            formState.role === 0 ||
+            formState.track === 0
+        )
+            alert('모든 항목을 입력했는지 확인해주세요.');
+        else {
+            /* button click으로 해서 정보 저장됨 확인 */
+            console.log(formState);
+        }
     };
 
     return (
         <>
             <form className="formDiv">
                 <div className="Stitle">내 정보</div>
-
                 <Ndiv>이름</Ndiv>
                 <Nform
                     placeholder="자신의 이름을 작성해주세요."
@@ -102,15 +120,7 @@ const Sform = () => {
                     }
                 />
                 <Ndiv>학교</Ndiv>
-                <SchoolDrop
-                    selectedUniversity={formState.university}
-                    onChange={selectedUniversity =>
-                        setFormState({
-                            ...formState,
-                            university: selectedUniversity,
-                        })
-                    }
-                />
+                <SchoolDropDown onChange={handleSelectChange('university')} />
                 <Ndiv>학과</Ndiv>
                 <Nform
                     placeholder="학과를 입력해주세요."

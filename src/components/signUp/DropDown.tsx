@@ -1,7 +1,7 @@
 import React from 'react';
 import Select, { ActionMeta, components } from 'react-select';
-import arrow from '../../img/arrow.svg';
-import { customSelectStyles3 } from './customSelectStyles3';
+import { ReactComponent as Arrow } from '../../img/arrow.svg';
+import { roleTrackStyle, genStyle } from './customSelectStyles';
 
 export type OptionType = {
     value: number;
@@ -20,14 +20,16 @@ const DropDown = ({ options, onChange }: DropDownProps) => {
     const DropdownIndicator = (props: any) => {
         return (
             <components.DropdownIndicator {...props}>
-                <img
-                    src={arrow}
+                <Arrow
                     style={{
                         transform: props.selectProps.menuIsOpen
-                            ? 'rotate(180deg)'
-                            : 'rotate(0deg)',
+                            ? 'rotate(0deg)'
+                            : 'rotate(180deg)',
+                        stroke: props.selectProps.menuIsOpen
+                            ? '#4D5359'
+                            : '#ADB3BA',
                     }}
-                ></img>
+                ></Arrow>
             </components.DropdownIndicator>
         );
     };
@@ -35,11 +37,13 @@ const DropDown = ({ options, onChange }: DropDownProps) => {
     return (
         <Select
             options={options}
-            styles={customSelectStyles3}
+            styles={options.length > 3 ? genStyle : roleTrackStyle}
+            isSearchable={false}
             placeholder="선택"
             components={{ DropdownIndicator }}
-            maxMenuHeight={133}
+            maxMenuHeight={138}
             onChange={onChange}
+            blurInputOnSelect={true}
         />
     );
 };

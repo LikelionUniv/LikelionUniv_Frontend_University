@@ -261,7 +261,6 @@ const Nav = () => {
 
     // 프로필 모달이 아닌 곳을 누르면 (버튼 포함) 모달이 꺼짐
     useEffect(() => {
-        console.log(profileModal);
         const clickOutside = (e: any) => {
             if (
                 profileModal &&
