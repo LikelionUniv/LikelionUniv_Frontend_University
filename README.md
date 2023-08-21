@@ -17,7 +17,7 @@
 | <img width="150px" src="https://avatars.githubusercontent.com/u/77400298?v=4" /> |
 | [@ByeongChan Choi](https://github.com/chan-byeong)   |
 
-## 🧑🏻‍💻 CommunityPage Developer
+### 🧑🏻‍💻 CommunityPage Developer
 
 | 최병찬 |
 |:---------------------------------------------------:|
