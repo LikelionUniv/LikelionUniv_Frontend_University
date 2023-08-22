@@ -4,7 +4,7 @@
 
 ## FrontEnd Team Member
 
-### Team Reader of 🦁
+### Team Leader of 🦁
 |  양화영   |
 |:---------------------------------------------------:|
 | <img width="150px" src="https://avatars.githubusercontent.com/u/110398814?v=4" /> |
