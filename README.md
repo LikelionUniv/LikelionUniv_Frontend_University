@@ -19,7 +19,7 @@
 
 ### 🧑🏻‍💻 CommunityPage Developer
 
-| 최병찬 |
+| 안재현 |
 |:---------------------------------------------------:|
 | <img width="150px" src="https://avatars.githubusercontent.com/u/97944429?v=4" /> |
 | [@JaeHyun Ahn](https://github.com/JaeHyunGround)   |
