@@ -1,6 +1,5 @@
 /* SignUp.tsx */
 .sDiv {
-    margin-top: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,20 +7,25 @@
 
 .Stitle {
     color: var(--grey-900, #212224);
-
     font-family: Pretendard;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 39.2px */
-
     margin-bottom: 34px;
 }
 
 /* Sfrom.tsx */
 .formDiv {
+    width: 465px;
+    margin-top: 100px;
     display: flex;
     flex-direction: column;
+}
+@media (max-height: 832px) {
+    .formDiv {
+        margin-bottom: 100px;
+    }
 }
 
 .SformDiv {
@@ -50,5 +54,4 @@
     margin-top: 56px;
 
     align-self: self-end;
-    margin-right: 25px;
 }
