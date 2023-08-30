@@ -3,10 +3,12 @@ import Nav from '../components/Nav';
 
 function root() {
     return (
-        <div>
+        <>
             <Nav />
-            <Outlet />
-        </div>
+            <div style={{ paddingTop: '56px' }}>
+                <Outlet />
+            </div>
+        </>
     );
 }
 
