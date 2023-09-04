@@ -4,14 +4,17 @@ export const BlackDiv = styled.div`
     background: #212224;
     padding-top: 100px;
 
+    font-family: Pretendard;
     color: white;
     padding-bottom: 170px;
-    padding-left: 360px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 `;
 
 export const T1 = styled.div`
     color: #fff;
-    font-family: Pretendard;
     font-size: 48px;
     font-style: normal;
     font-weight: 700;
@@ -20,7 +23,6 @@ export const T1 = styled.div`
 
 export const T2 = styled.div`
     color: #eaecee;
-    font-family: Pretendard;
     font-size: 18px;
     width: 562px;
     font-style: normal;
@@ -31,7 +33,6 @@ export const T2 = styled.div`
 
 export const T3 = styled.div`
     color: #fff;
-    font-family: Pretendard;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
