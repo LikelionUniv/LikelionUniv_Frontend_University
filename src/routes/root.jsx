@@ -4,11 +4,12 @@ import GlobalStyles from '../styles/GlobalStyle';
 
 function root() {
     return (
-        <div>
-            <GlobalStyles/>
+        <>
             <Nav />
-            <Outlet />
-        </div>
+            <div style={{ paddingTop: '56px' }}>
+                <Outlet />
+            </div>
+        </>
     );
 }
 
