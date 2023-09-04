@@ -1,7 +1,11 @@
+import Header from '../components/recruit/Header';
+import Content from '../components/recruit/Content';
+
 const Recruit = () => {
     return (
         <div className="pDiv">
-            <h1>Recruit</h1>
+            <Header />
+            <Content />
         </div>
     );
 };

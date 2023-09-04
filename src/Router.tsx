@@ -1,4 +1,4 @@
-import { createBrowserRouter, Route, Routes } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import SignUp from './routes/SignUp';
 import LoginPage from './routes/LoginPage';
 import Project from './routes/Project';
@@ -30,6 +30,7 @@ const router = createBrowserRouter([
             {
                 path: '/recruit',
                 element: <Recruit />,
+                children: [],
             },
         ],
     },
