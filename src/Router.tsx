@@ -5,6 +5,7 @@ import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
 import Recruit from './routes/Recruit';
+import UnivPage from './routes/UnivPage';
 
 const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
                 path: '/recruit',
                 element: <Recruit />,
                 children: [],
+            },
+            {
+                path: '/univ',
+                element: <UnivPage />,
             },
         ],
     },

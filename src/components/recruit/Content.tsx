@@ -8,6 +8,7 @@ import Arrow6 from '../../img/recruit/6arrow.svg';
 import Oarrow from '../../img/recruit/Oarrow.svg';
 import Mail from '../../img/recruit/mail.svg';
 import { useState } from 'react';
+import Tab from '../univ/UnivTab';
 
 const Content = () => {
     /* FAQ click animation */
@@ -164,7 +165,7 @@ const Content = () => {
                 <R.Ps2>
                     <p>더 궁금한 것이 있으신가요?</p>
                     <img src={Mail}></img>
-                    <p>이베일로 문의하기</p>
+                    <p>이메일로 문의하기</p>
                 </R.Ps2>
 
                 {/*University 부분*/}
@@ -172,6 +173,13 @@ const Content = () => {
                     <R.TD>University</R.TD>
                     <R.TD>대학</R.TD>
                 </R.Title>
+                <R.Ps3>
+                    <p>소속 대학을 선택하면 지원 페이지로 이동합니다.</p>
+                </R.Ps3>
+
+                <R.Qbody4>
+                    <Tab showCount={false} />
+                </R.Qbody4>
             </div>
         </R.ContentDiv>
     );
