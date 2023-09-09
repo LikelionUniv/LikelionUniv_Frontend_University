@@ -8,7 +8,7 @@ export const ContentDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    background: var(--Grey-200, #f2f4f6);
     font-family: Pretendard;
 `;
 
@@ -17,10 +17,12 @@ export const Title = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+
     :nth-child(2) {
         font-size: 16px;
         margin-left: 16px;
     }
+
     margin-bottom: 40px;
 `;
 
@@ -220,4 +222,19 @@ export const AnsTable = styled.div`
     div:first-of-type {
         border-top: none;
     }
+`;
+
+// 대학 부분
+export const Qbody4 = styled.div`
+    display: flex;
+    width: 1200px;
+    margin-bottom: 160px;
+`;
+
+export const Ps3 = styled.div`
+    color: var(--Grey-900, #212224);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 150%; /* 27px */
+    margin-top: -30px;
 `;
