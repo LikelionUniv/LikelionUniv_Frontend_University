@@ -3,6 +3,7 @@ import SignUp from './routes/SignUp';
 import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
+import LoginPage from './routes/LoginPage';
 
 const router = createBrowserRouter([
     {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <SignUp />,
+            },
+            {
+                path: '/login',
+                element: <LoginPage />
             },
             {
                 path: '/project',
