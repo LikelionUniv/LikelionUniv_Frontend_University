@@ -1,5 +1,4 @@
-// 네비게이션 바 애니메이션 (스크롤에 따라 숨겨지거나 나타남)
-// 네브바가 없어지는 최소 높이를 더 늘리고 싶다면 추가 가능
+// 모바일 뷰 스타일 적용 필요
 
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
