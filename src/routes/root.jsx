@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 import Nav from '../components/Nav';
 
 function root() {
     return (
         <>
             <Nav />
-            <div style={{ paddingTop: '56px' }}>
+            <Padding />
+            <div>
                 <Outlet />
             </div>
         </>
@@ -13,3 +15,7 @@ function root() {
 }
 
 export default root;
+
+const Padding = styled.div`
+    height: 56px;
+`;
