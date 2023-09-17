@@ -4,6 +4,7 @@ import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
 import LoginPage from './routes/LoginPage';
+import Mypage from './routes/Mypage';
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: '/login',
                 element: <LoginPage />
+            },
+            {
+                path : '/mypage',
+                element: <Mypage/>
             },
             {
                 path: '/project',
