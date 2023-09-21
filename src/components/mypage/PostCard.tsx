@@ -38,13 +38,19 @@ export const PostCardBoxWrapper = styled.div`
         height: 426px;
         padding: 26px 16px 15px 24px;
     }
+    //여기가 문제...
+    @media (max-width: 1280px) {
+        width: calc(32% - 16px);
+        height: 426px;
+        padding: 26px 16px 15px 24px;
+    }
     @media (max-width: 1024px) {
-        width: 460px;
+        width: calc(50% - 12px);
         height: 463px;
         padding: 26px 24px 25px;
     }
     @media (max-width: 768px) {
-        width: 332px;
+        width: calc(50% - 12px);
         height: 383px;
         padding: 26px 24px 22px;
     }
