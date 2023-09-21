@@ -1,10 +1,17 @@
+import {useState} from 'react';
 
 import styled from 'styled-components';
-
-import tempimg from '../../img/nav/mypage.svg';
+import { Avatar , Button , UserBox } from './Common';
+import {UserFollows} from './UserFollows';
 
 
 export const UserInfo = () => {
+
+  const [isModal , setIsModal] = useState<string|undefined>('');
+
+  const handleModal = (e : React.MouseEvent<HTMLDivElement>) =>{
+      setIsModal(e.currentTarget.dataset.type);
+  }
 
   return (
     <Wrapper>
@@ -13,12 +20,18 @@ export const UserInfo = () => {
           <Avatar/>
           {/* 유저 정보 넣기 */}
           <UserProfile> 
-            <UserName> <p>김이름</p> <div>아기사자</div> </UserName>
-            <UserPart> <p>멋사대학교 / 프론트파트</p> <div>· 팔로워 200</div> <div>· 팔로잉 200</div> </UserPart>
+            <UserName> <p>박혜준</p> <div>아기사자</div> </UserName>
+            <UserPart> <p>홍익대학교 기획디자인</p>
+              <FItem data-type="팔로워" onClick={handleModal}> 팔로워 200</FItem>
+              <FItem data-type="팔로잉" onClick={handleModal}> 팔로잉 200</FItem>
+            </UserPart>
             <p>행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요</p>
           </UserProfile>
         </UserBox>
         <Button>내 정보 수정</Button>
+        {
+          isModal ? <UserFollows modal={isModal} setter={setIsModal} /> : ''
+        }
       </Container>
     </Wrapper>
   );
@@ -36,23 +49,6 @@ const Container = styled.div`
   display : flex;
   justify-content : space-between;
   margin-top:100px;
-`;
-
-const UserBox = styled.div`
-  //width : 1075px;
-  height: 124px;
-  display : flex;
-`;
-
-const Avatar = styled.div`
-  width: 124px;
-  height: 124px;
-  flex-shrink: 0; 
-  border-radius : 50%;
-  border : 1px solid #EAECEE;
-
-  background-image : url(${tempimg}) ; 
-  background-position: contain;
 `;
 
 const UserProfile = styled.div`
@@ -103,6 +99,7 @@ const UserPart = styled.div`
   }
 
   & > div {
+    cursor : pointer;
     margin-left : 6px; 
     font-size: 16px;
     font-weight: 500;
@@ -110,18 +107,15 @@ const UserPart = styled.div`
   }
 `;
 
-const Button = styled.div`
-  width : 125px;
-  height : 48px;
-  border-radius : 8px;
-  background-color : #FF7710;
-  flex-shrink: 0; 
-  display :inline-flex;
-  align-items : center;
-  justify-content : center;
+const FItem = styled.div`
+    cursor : pointer;
+    margin-left : 6px; 
+    font-size: 16px;
+    font-weight: 500;
+    color:#868C94;
 
-  font-size : 16px;
-  color :#fff;
-  font-weight : 700;
-  cursor :pointer;
+    &::before {
+      content : "· "; 
+    }
+
 `;
