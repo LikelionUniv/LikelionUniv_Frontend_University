@@ -3,10 +3,14 @@ import { styled } from 'styled-components';
 import ProjectCard from './ProjectCard';
 import PostCard from './PostCard';
 import Pagination from './Pagination';
+import PostCardWithPhoto from './PostCardWithPhoto';
+import { PostTestData, ProjectTestData } from './TestData';
+import { PostCardProp, ProjectCardProp } from './type';
 
 const UserPostSelect = () => {
     //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
-    const testData = [];
+    const [testData, setTestData] = useState<Array<ProjectCardProp>>([]);
+    const [postTestData, setPostTestData] = useState<Array<PostCardProp>>([]);
     const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
     const [select, setSelect] = useState<string>('게시글');
     const optionClickFn = (option: string) => {
@@ -14,10 +18,25 @@ const UserPostSelect = () => {
         //나중에 해당 option에 따른 api호출을 해야되므로 따로 함수로 분리
     };
     const [page, setPage] = useState(1);
-    const totalPageNum = [1, 2, 3];
+    //pagination 기능 제대로 작동되는지 확인 && 이거 현재는 6개씩 여기서 끊었지만 나중에 api연결할때는 전체를 데려와서 쪼갤 예정이라 약간 코드 변동 있음
     useEffect(() => {
-        console.log(page);
-    }, [page]);
+        if (select === '프로젝트') {
+            setTestData(
+                ProjectTestData.slice(
+                    6 * Math.ceil(page) - 6,
+                    6 * Math.ceil(page),
+                ),
+            );
+        } else {
+            setPostTestData(
+                PostTestData.slice(
+                    6 * Math.ceil(page) - 6,
+                    6 * Math.ceil(page),
+                ),
+            );
+        }
+    }, [select, page]);
+
     return (
         <>
             <ButtonSelectWrapper>
@@ -27,6 +46,7 @@ const UserPostSelect = () => {
                             className={select === e ? 'select' : ''}
                             onClick={() => {
                                 optionClickFn(e);
+                                setPage(1);
                             }}
                         >
                             {e}
@@ -36,11 +56,57 @@ const UserPostSelect = () => {
             </ButtonSelectWrapper>
             <SelectBorder />
             <PostBoxWrapper>
-                {/* 이 파트도 지금 수정해야되... Map돌면서 해야되기 때문 */}
-                {select === '프로젝트' ? <ProjectCard /> : <PostCard />}
+                {select === '프로젝트' ? (
+                    <>
+                        {testData.map(e => {
+                            return (
+                                <ProjectCard
+                                    img={e.img}
+                                    title={e.title}
+                                    content={e.content}
+                                    cardinal={e.cardinal}
+                                    school={e.school}
+                                    activity={e.activity}
+                                />
+                            );
+                        })}
+                    </>
+                ) : (
+                    <>
+                        {postTestData.map(e => {
+                            if (e.img !== null) {
+                                return (
+                                    <PostCardWithPhoto
+                                        img={e.img}
+                                        title={e.title}
+                                        date={e.date}
+                                        content={e.content}
+                                        like={e.like}
+                                        comment={e.comment}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <PostCard
+                                        img={e.img}
+                                        title={e.title}
+                                        date={e.date}
+                                        content={e.content}
+                                        like={e.like}
+                                        comment={e.comment}
+                                    />
+                                );
+                            }
+                        })}
+                    </>
+                )}
             </PostBoxWrapper>
             <Pagination
-                totalPage={totalPageNum}
+                totalPageNum={
+                    select === '프로젝트'
+                        ? Math.ceil(ProjectTestData.length / 6)
+                        : Math.ceil(PostTestData.length / 6)
+                }
                 pageNum={page}
                 setPageNum={setPage}
             />
@@ -99,7 +165,7 @@ const PostBoxWrapper = styled.div`
     align-content: flex-start;
     gap: 24px;
     flex-wrap: wrap;
-    margin-top: 40.5px;
+    margin: 40.5px auto 80px;
     @media (max-width: 1920px) {
         width: 1200px;
         height: 876px;

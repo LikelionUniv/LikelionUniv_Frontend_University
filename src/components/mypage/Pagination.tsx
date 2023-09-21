@@ -2,15 +2,16 @@ import React from 'react';
 import { styled } from 'styled-components';
 import leftArrow from '../../img/mypage/leftArrow.svg';
 import rightArrow from '../../img/mypage/rightArrow.svg';
+import useGetPageRange from './useGetPageRange';
 
 interface PaginationProp {
-    totalPage: Array<number>;
+    totalPageNum: number;
     pageNum: number;
     setPageNum: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const Pagination = (props: PaginationProp) => {
-    const page = props.totalPage;
+    const page = useGetPageRange(Math.ceil(props.pageNum / 5));
     return (
         <PaginationWrapper>
             <ArrowButton
@@ -28,7 +29,11 @@ const Pagination = (props: PaginationProp) => {
                     <button
                         className={props.pageNum === el ? 'select' : ''}
                         onClick={() => {
-                            props.setPageNum(el);
+                            if (el > props.totalPageNum) {
+                                return;
+                            } else {
+                                props.setPageNum(el);
+                            }
                         }}
                     >
                         {el}
@@ -38,7 +43,10 @@ const Pagination = (props: PaginationProp) => {
             <ArrowButton
                 className="right"
                 onClick={() => {
-                    if (props.pageNum === props.totalPage.length) {
+                    if (
+                        props.pageNum === props.totalPageNum ||
+                        props.totalPageNum === 0
+                    ) {
                         return;
                     } else {
                         props.setPageNum(props.pageNum + 1);
