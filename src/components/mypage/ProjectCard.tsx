@@ -35,8 +35,12 @@ const ProjectBoxWrapper = styled.div`
         width: 384px;
         height: 359px;
     }
+    @media (max-width: 1280px) {
+        width: 31.6%;
+        height: 359px;
+    }
     @media (max-width: 1024px) {
-        width: 460px;
+        width: calc(50% - 12px);
         height: 402px;
     }
 `;

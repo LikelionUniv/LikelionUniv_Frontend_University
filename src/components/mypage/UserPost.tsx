@@ -22,12 +22,17 @@ const PostWrapper = styled.div`
         width: 1200px;
         height: 1039px;
     }
+    //여기가 지금 약간 문제...
+    @media (max-width: 1280px) {
+        width: calc(100% - 80px);
+        height: 1039px;
+    }
     @media (max-width: 1024px) {
-        width: 944px;
+        width: calc(100% - 80px);
         height: 1675px;
     }
     @media (max-width: 768px) {
-        width: 688px;
+        width: calc(100% - 80px);
         height: 1426px;
     }
 `;

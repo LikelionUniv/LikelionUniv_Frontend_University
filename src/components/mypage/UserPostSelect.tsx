@@ -150,11 +150,8 @@ const SelectBorder = styled.div`
     @media (max-width: 1920px) {
         width: 1200px;
     }
-    @media (max-width: 1024px) {
-        width: 944px;
-    }
-    @media (max-width: 768px) {
-        width: 688px;
+    @media (max-width: 1280px) {
+        width: calc(100% - 80px);
     }
 `;
 
@@ -165,17 +162,21 @@ const PostBoxWrapper = styled.div`
     align-content: flex-start;
     gap: 24px;
     flex-wrap: wrap;
-    margin: 40.5px auto 80px;
+    margin: 40.5px 0px 80px;
     @media (max-width: 1920px) {
         width: 1200px;
         height: 876px;
     }
+    @media (max-width: 1280px) {
+        width: 100%;
+        height: 876px;
+    }
     @media (max-width: 1024px) {
-        width: 944px;
+        width: 100%;
         height: 1512px;
     }
     @media (max-width: 768px) {
-        width: 688px;
+        width: 100%;
         height: 1263px;
     }
 `;
