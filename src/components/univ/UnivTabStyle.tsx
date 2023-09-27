@@ -19,20 +19,6 @@ export const Text = styled.div`
     line-height: 150%; /* 30px */
 `;
 
-// 참여 대학 페이지 대학 개수
-export const CountText = styled.div`
-    margin: 40px 0 40px;
-    color: var(--Grey-900, #212224);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%; /* 30px */
-
-    :nth-child(2) {
-        color: var(--Orange-600, #ff7710);
-    }
-`;
-
 // 지역 탭 부분
 export const TabWrapper = styled.div`
     display: flex;
@@ -59,7 +45,32 @@ export const TabRegion = styled.button<{ active: boolean }>`
             : '1px solid var(--Grey-400, #DCDFE3)'};
 `;
 
-// 학교명들
+export const TabContent = styled.div`
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding: 12px;
+    gap: 12px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--White, #fff);
+    overflow: hidden;
+
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+        width: calc(50% - 24px);
+    }
+
+    @media screen and (min-width: 896px) {
+        width: calc(33.33% - 24px);
+    }
+
+    @media screen and (min-width: 1176px) {
+        width: 256px;
+    }
+`;
+
 export const SchoolWrapper = styled.div`
     display: flex;
     align-items: center;
@@ -67,19 +78,27 @@ export const SchoolWrapper = styled.div`
     width: 1200px;
     margin-top: 40px;
     gap: 24px;
-`;
 
-export const TabContent = styled.div`
-    display: flex;
-    align-items: center;
-    max-width: 282px;
-    min-width: 252px;
-    height: 80px;
-    padding: 12px;
-    gap: 12px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: var(--White, #fff);
+    @media screen and (max-width: 1175px) {
+        flex-direction: row;
+        ${TabContent} {
+            width: calc(25% - 24px);
+        }
+    }
+
+    @media screen and (max-width: 895px) {
+        flex-direction: row;
+        > ${TabContent} {
+            width: calc(33.33% - 24px);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: row;
+        > ${TabContent} {
+            width: calc(50% - 24px);
+        }
+    }
 `;
 
 export const SchoolLogo = styled.div<{ logo?: string }>`

@@ -17,6 +17,7 @@ export const T1 = styled.div`
     font-weight: 700;
     line-height: normal;
 
+    width: 1200px;
     margin-bottom: 24px;
 `;
 
@@ -46,4 +47,15 @@ export const Num = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 60px */
+`;
+
+export const T3 = styled.div`
+    color: var(--Grey-900, #212224);
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 150%; /* 30px */
+
+    margin-top: 82px;
 `;
