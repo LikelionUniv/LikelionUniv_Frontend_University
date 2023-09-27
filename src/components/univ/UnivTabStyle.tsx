@@ -1,4 +1,14 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
+
+const responsiveWidth = css`
+    @media screen and (max-width: 1280px) {
+        width: 950px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 688px;
+    }
+`;
 
 export const Container = styled.div`
     display: flex;
@@ -19,27 +29,17 @@ export const Text = styled.div`
     line-height: 150%; /* 30px */
 `;
 
-// 참여 대학 페이지 대학 개수
-export const CountText = styled.div`
-    margin: 40px 0 40px;
-    color: var(--Grey-900, #212224);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%; /* 30px */
-
-    :nth-child(2) {
-        color: var(--Orange-600, #ff7710);
-    }
-`;
-
 // 지역 탭 부분
 export const TabWrapper = styled.div`
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
+    width: 1200px;
+    align-items: flex-start;
+    align-content: flex-start;
     margin-top: 40px;
+    gap: 4px;
+    flex-wrap: wrap;
+
+    ${responsiveWidth}
 `;
 
 export const TabRegion = styled.button<{ active: boolean }>`
@@ -59,26 +59,60 @@ export const TabRegion = styled.button<{ active: boolean }>`
             : '1px solid var(--Grey-400, #DCDFE3)'};
 `;
 
-// 학교명들
-export const SchoolWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    width: 1200px;
-    gap: 24px;
-`;
-
 export const TabContent = styled.div`
     display: flex;
     align-items: center;
-    max-width: 282px;
-    min-width: 252px;
     height: 80px;
     padding: 12px;
     gap: 12px;
     flex-shrink: 0;
     border-radius: 8px;
     background: var(--White, #fff);
+    overflow: hidden;
+
+    @media screen and (min-width: 768px) {
+        width: calc(50% - 24px);
+    }
+
+    @media screen and (min-width: 896px) {
+        width: calc(33.33% - 24px);
+    }
+
+    @media screen and (min-width: 1176px) {
+        width: 256px;
+    }
+`;
+
+export const SchoolWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1200px;
+    margin-top: 40px;
+    gap: 24px;
+
+    @media screen and (max-width: 1175px) {
+        flex-direction: row;
+        ${TabContent} {
+            width: calc(25% - 24px);
+        }
+    }
+
+    @media screen and (max-width: 895px) {
+        flex-direction: row;
+        > ${TabContent} {
+            width: calc(33.33% - 24px);
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: row;
+        > ${TabContent} {
+            width: calc(50% - 24px);
+        }
+    }
+
+    ${responsiveWidth}
 `;
 
 export const SchoolLogo = styled.div<{ logo?: string }>`
@@ -128,6 +162,8 @@ export const BtnWrapper = styled.div`
         font-weight: 500;
         line-height: 150%; /* 24px */
     }
+
+    ${responsiveWidth}
 `;
 
 export const Btn = styled.div`

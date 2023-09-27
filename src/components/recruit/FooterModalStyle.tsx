@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-
+import modalring from '../../img/recruit/modalring.svg';
 export const ModalContent = styled.div``;
 
 export const ModalHeader = styled.div`
@@ -36,7 +36,7 @@ export const ModalGraphic = styled.div`
     width: 144px;
     height: 144px;
     flex-shrink: 0;
-    background: #d9d9d9;
+    background: url(${modalring});
 `;
 
 export const Text = styled.div`
