@@ -1,4 +1,14 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
+
+const responsiveWidth = css`
+    @media screen and (max-width: 1280px) {
+        width: 950px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 688px;
+    }
+`;
 
 export const Container = styled.div`
     display: flex;
@@ -22,10 +32,14 @@ export const Text = styled.div`
 // 지역 탭 부분
 export const TabWrapper = styled.div`
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 5px;
+    width: 1200px;
+    align-items: flex-start;
+    align-content: flex-start;
     margin-top: 40px;
+    gap: 4px;
+    flex-wrap: wrap;
+
+    ${responsiveWidth}
 `;
 
 export const TabRegion = styled.button<{ active: boolean }>`
@@ -55,8 +69,6 @@ export const TabContent = styled.div`
     border-radius: 8px;
     background: var(--White, #fff);
     overflow: hidden;
-
-    width: 100%;
 
     @media screen and (min-width: 768px) {
         width: calc(50% - 24px);
@@ -99,6 +111,8 @@ export const SchoolWrapper = styled.div`
             width: calc(50% - 24px);
         }
     }
+
+    ${responsiveWidth}
 `;
 
 export const SchoolLogo = styled.div<{ logo?: string }>`
@@ -148,6 +162,8 @@ export const BtnWrapper = styled.div`
         font-weight: 500;
         line-height: 150%; /* 24px */
     }
+
+    ${responsiveWidth}
 `;
 
 export const Btn = styled.div`

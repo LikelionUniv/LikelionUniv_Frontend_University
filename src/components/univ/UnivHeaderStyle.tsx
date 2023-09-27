@@ -1,10 +1,21 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
+
+const responsiveWidth = css`
+    @media screen and (max-width: 1280px) {
+        width: 950px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 688px;
+    }
+`;
 
 export const TopDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     padding-top: 100px;
     background: var(--Grey-200, #f2f4f6);
 `;
@@ -16,9 +27,10 @@ export const T1 = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-
-    width: 1200px;
     margin-bottom: 24px;
+    width: 1200px;
+
+    ${responsiveWidth}
 `;
 
 export const T2 = styled.div`
