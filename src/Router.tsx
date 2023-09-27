@@ -6,6 +6,7 @@ import Chat from './routes/Chat';
 import Root from './routes/root';
 import Recruit from './routes/Recruit';
 import UnivPage from './routes/UnivPage';
+import ProjectDetail from './components/project/Detail/ProjectDetail';
 
 const router = createBrowserRouter([
     {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
             {
                 path: '/univ',
                 element: <UnivPage />,
+            },
+            {
+                path: '/project/1',
+                element: <ProjectDetail />,
             },
         ],
     },
