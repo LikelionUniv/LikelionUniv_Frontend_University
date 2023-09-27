@@ -65,6 +65,7 @@ export const SchoolWrapper = styled.div`
     align-items: center;
     flex-wrap: wrap;
     width: 1200px;
+    margin-top: 40px;
     gap: 24px;
 `;
 

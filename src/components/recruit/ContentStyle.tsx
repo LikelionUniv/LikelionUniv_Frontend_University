@@ -243,8 +243,9 @@ export const AnsTable = styled.div`
 // 대학 부분
 export const Qbody4 = styled.div`
     display: flex;
-    width: 1200px;
     margin-bottom: 160px;
+
+    ${responsiveWidth}
 `;
 
 export const Ps3 = styled.div`

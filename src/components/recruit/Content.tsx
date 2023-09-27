@@ -181,9 +181,8 @@ const Content = () => {
                 <R.Ps3>
                     <p>소속 대학을 선택하면 지원 페이지로 이동합니다.</p>
                 </R.Ps3>
-
                 <R.Qbody4>
-                    <Tab showCount={false} />
+                    <Tab />
                 </R.Qbody4>
             </div>
         </R.ContentDiv>
