@@ -7,6 +7,8 @@ import Arrow5 from '../../img/recruit/5arrow.svg';
 import Arrow6 from '../../img/recruit/6arrow.svg';
 import Oarrow from '../../img/recruit/Oarrow.svg';
 import Mail from '../../img/recruit/mail.svg';
+import Plus from '../../img/recruit/plus.svg';
+import Min from '../../img/recruit/min.svg';
 import { useState } from 'react';
 import Tab from '../univ/UnivTab';
 
@@ -43,40 +45,43 @@ const Content = () => {
                     <R.Qtext>
                         <R.Arrow src={Arrow1}></R.Arrow>
                         <R.Detail>
-                            대학교에 재학 중이거나, 휴학 중인 학생
+                            대학교에 재학 중이거나, <br />
+                            휴학 중인 학생
                         </R.Detail>
                     </R.Qtext>
                     <R.Qtext>
                         <R.Arrow src={Arrow2}></R.Arrow>
                         <R.Detail>
-                            매주 1회 진행되는 학교 별 정규 세션에 참여할 수 있는
-                            분
+                            매주 1회 진행되는 학교 별 <br />
+                            정규 세션에 참여할 수 있는 분
                         </R.Detail>
                     </R.Qtext>
                     <R.Qtext>
                         <R.Arrow src={Arrow3}></R.Arrow>
                         <R.Detail>
-                            개발과 창업에 도전하며 아이디어를 실현시키려는
-                            열정을 가진 분
+                            개발과 창업에 도전하며 아이디어를 <br />
+                            실현시키려는 열정을 가진 분
                         </R.Detail>
                     </R.Qtext>
                     <R.Qtext>
                         <R.Arrow src={Arrow4}></R.Arrow>
                         <R.Detail>
-                            새로운 것을 배울 의지가 있고, 성장을 위해 노력하는
-                            분
+                            새로운 것을 배울 의지가 있고,
+                            <br /> 성장을 위해 노력하는 분
                         </R.Detail>
                     </R.Qtext>
                     <R.Qtext>
                         <R.Arrow src={Arrow5}></R.Arrow>
                         <R.Detail>
-                            협업하는 팀원들과 원활한 의사소통이 가능하신 분
+                            협업하는 팀원들과 원활한
+                            <br /> 의사소통이 가능하신 분
                         </R.Detail>
                     </R.Qtext>
                     <R.Qtext>
                         <R.Arrow src={Arrow6}></R.Arrow>
                         <R.Detail>
-                            1년 동안 자신의 역할에 책임감 있게 임할 수 있는 분
+                            1년 동안 자신의 역할에 책임감
+                            <br /> 있게 임할 수 있는 분
                         </R.Detail>
                     </R.Qtext>
                 </R.Qbody>
@@ -145,9 +150,9 @@ const Content = () => {
                                     <div>{key}</div>
                                 </div>
                                 {selected == index ? (
-                                    <div>-</div>
+                                    <img src={Min}></img>
                                 ) : (
-                                    <div>+</div>
+                                    <img src={Plus}></img>
                                 )}
                             </R.Table>
 
