@@ -7,6 +7,7 @@ export const Container = styled.div`
 
     width: 792px;
     margin: 0 auto;
+    margin-top: 64px;
 `;
 
 export const Title = styled.header`
@@ -297,34 +298,6 @@ export const Input = styled.input`
     line-height: 150%;
     
     outline: 0;
-
-    &::placeholder {
-        color: var(--grey-600, #adb3ba);
-    }
-    &:focus {
-        border: 1px solid var(--orange-600, #ff7710);
-    }
-`;
-
-
-export const Textarea = styled.textarea`
-    width: 100%;
-    height: 100px;
-    padding: 12px 24px;
-
-    border-radius: 6px;
-    border: 1px solid var(--grey-400, #dcdfe3);
-    background: var(--white, #fff);
-    box-sizing: border-box;
-
-    font-family: 'Pretendard';
-    font-size: 16px;
-    color: var(--grey-900, #212224);
-    font-weight: 500;
-    line-height: 150%;
-    
-    outline: 0;
-    resize: none;
 
     &::placeholder {
         color: var(--grey-600, #adb3ba);

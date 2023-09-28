@@ -11,11 +11,16 @@ import DropDown, { OptionType } from './DropDown';
 import SchoolDropDown from './SchoolDropDown';
 import Checkbox from './Checkbox';
 import useCheckbox from './useCheckbox';
+import useArray from '../../hooks/useArray';
+import AutoHeightTextarea from './AutoHeightTextarea';
 
 /* form type */
 interface FormState {
-    category: string;
-    output: string;
+    images: string[],
+    category: number;
+    categoryEtc: string;
+    output: number;
+    outputEtc: string;
     start: Date | null;
     end: Date | null;
     serviceName: string;
@@ -23,15 +28,22 @@ interface FormState {
     detailIntroduce: string;
     serviceLink: string;
     stack: number[];
+    stackEtc: string;
     generation: number;
     university: string;
     teamMember: string;
 }
 
 const ProjectRegister = () => {
+    const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
+    const {array: images, pushMany: setImages, remove} = useArray<string>([]) // image 배열
+
     const [formState, setFormState] = useState<FormState>({
-        category: '',
-        output: '',
+        images: images,
+        category: 0,
+        categoryEtc: '',
+        output: 0,
+        outputEtc: '',
         start: null,
         end: null,
         serviceName: '',
@@ -39,14 +51,17 @@ const ProjectRegister = () => {
         detailIntroduce: '',
         serviceLink: '',
         stack: [],
+        stackEtc: '',
         generation: 0,
         university: '',
         teamMember: '',
     });
 
-    const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
-    const [images, setImages] = useState<string[]>([]) // image 배열
+    const [activeCategoryEtc, setActiveCategoryEtc] = useState<boolean>(false);
+    const [activeOutputEtc, setActiveOutputEtc] = useState<boolean>(false);
     
+    // 드롭다운을 관리하는 함수
+    // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
     const handleSelectChange = (field: keyof FormState) =>
     (
         selectedOption: OptionType | null,
@@ -57,9 +72,18 @@ const ProjectRegister = () => {
                 ...prev,
                 [field]: selectedOption.value,
             }));
+
+            if (field === 'category') {
+                setActiveCategoryEtc(selectedOption.value === 4)
+            }
+            
+            if (field === 'output') {
+                setActiveOutputEtc(selectedOption.value === 3)
+            }
         }
     };
 
+    // 입력창을 관리하는 함수
     const handleInputChange = (field: keyof FormState, event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => (        
         setFormState(prev => ({
             ...prev,
@@ -67,6 +91,7 @@ const ProjectRegister = () => {
         }))
     );
 
+    // 폼 제출할 때 실행되는 함수
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
@@ -77,6 +102,7 @@ const ProjectRegister = () => {
     const {checkboxList, checkHandler} = useCheckbox(checkboxes);
     const [etcCheck, setEtcCheck] = useState<boolean>(false);
 
+    // 체크박스 선택을 관리하는 함수
     const handleCheckboxChange = (id: number, checked: boolean) => {
         const state = checkHandler(id, checked)
 
@@ -116,20 +142,26 @@ const ProjectRegister = () => {
         })
     };
 
+    // 이미지 버튼을 눌렀을 때 파일 선택 창을 띄우는 함수
     const handleImgBtn = () => {
         if (fileRef.current) {
             fileRef.current.click();
         }
     };
 
+    // 이미지가 변동되면 form에 이미지 변경사항 반영
     useEffect(() => {
-        console.log(images);
+        setFormState(prev => ({
+            ...prev,
+            images: images
+        }));
     }, [images])
 
-    useEffect(() => {                        
+    useEffect(() => {
         if (
-            formState.category === '' ||
-            formState.output === '' ||
+            formState.images.length === 0 ||
+            formState.category === 0 ||
+            formState.output === 0 ||
             formState.start === null ||
             formState.end === null ||
             formState.serviceName === '' ||
@@ -138,13 +170,16 @@ const ProjectRegister = () => {
             formState.stack.length === 0 ||
             formState.generation === 0 ||
             formState.university === '' ||
-            formState.teamMember === ''
+            formState.teamMember === '' ||
+            (formState.category === 4 && formState.categoryEtc === '') ||
+            (formState.output === 3 && formState.outputEtc === '') || 
+            (etcCheck && formState.stackEtc === '')
         ) {
             setIsFill(false);
         } else {
             setIsFill(true);
         }
-    }, [formState])
+    }, [formState, etcCheck])
 
     return (
         <P.Container>
@@ -173,7 +208,7 @@ const ProjectRegister = () => {
                 <P.Images>
                     {images.map((image, idx) => (
                         <P.Img key={`img-${idx}`} src={image}>
-                            <P.DeleteBtn isFirst={idx === 0}>
+                            <P.DeleteBtn isFirst={idx === 0} onClick={() => remove(idx)}>
                                 <P.ImgNumber>{idx + 1}</P.ImgNumber>
                                 <img src={idx === 0 ? FirstVertical : Vertical} alt='vertical' />
                                 <img src={Cancel} alt='cancel' />
@@ -186,10 +221,12 @@ const ProjectRegister = () => {
                 <P.Field>
                     <P.Label>활동유형</P.Label>
                     <DropDown placeholder='활동 선택' options={projectCategory} onChange={handleSelectChange('category')} />
+                    {activeCategoryEtc ? <P.Input type='text' placeholder='활동 이름을 입력해주세요.' value={formState.categoryEtc} onChange={(event) => handleInputChange('categoryEtc', event)} /> : null}
                 </P.Field>
                 <P.Field>
                     <P.Label>아웃풋 형태</P.Label>
                     <DropDown placeholder='아웃풋 형태 선택' options={output} onChange={handleSelectChange('output')} />
+                    {activeOutputEtc ? <P.Input type='text' placeholder='아웃풋 형태를 입력해주세요.' value={formState.outputEtc} onChange={(event) => handleInputChange('outputEtc', event)} /> : null}
                 </P.Field>
                 <P.Field>
                     <P.Label>제작 기간</P.Label>
@@ -209,7 +246,7 @@ const ProjectRegister = () => {
                 </P.Field>
                 <P.Field>
                     <P.Label>상세 소개</P.Label>
-                    <P.Textarea placeholder='서비스의 상세 소개를 입력해주세요.' value={formState.detailIntroduce} onChange={(event) => handleInputChange('detailIntroduce', event)} />
+                    <AutoHeightTextarea placeholder='서비스의 상세 소개를 입력해주세요.' value={formState.detailIntroduce} onChange={(event) => handleInputChange('detailIntroduce', event)} />
                 </P.Field>
                 <P.Field>
                     <P.Label>서비스 링크</P.Label>
@@ -227,6 +264,7 @@ const ProjectRegister = () => {
                             </P.CheckArea>
                         ))}
                     </P.CheckBoxDiv>
+                    {etcCheck ? <P.Input type='text' placeholder='기술 스택을 입력해주세요.' value={formState.stackEtc} onChange={(event) => handleInputChange('stackEtc', event)} /> : null}
                 </P.Field>
                 <P.Field>
                     <P.Label>기수/학교</P.Label>

@@ -16,6 +16,7 @@ const roleTrackStyle = {
         fontSize: '16px',
         fontWeight: '500',
         paddingLeft: '6px',
+        paddingTop: '3px',
         border: state.isFocused
             ? ' 1px solid #ff7710'
             : '1px solid var(--grey-400, #DCDFE3)',
@@ -149,6 +150,7 @@ const schoolStyle = {
         fontSize: '16px',
         fontWeight: '500',
         paddingLeft: '6px',
+        paddingTop: '3px',
         border: state.isFocused
             ? ' 1px solid #ff7710'
             : '1px solid var(--grey-400, #DCDFE3)',

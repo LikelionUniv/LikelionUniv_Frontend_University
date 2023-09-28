@@ -124,7 +124,7 @@ const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
     };
 
     return (
-        <div style={{ marginBottom: '34px' }}>
+        <div>
             {filteredUniversity && (
                 <Select
                     options={filteredUniversity}
@@ -180,7 +180,7 @@ const CustomOption = styled.div`
     font-family: 'Pretendard';
     font-size: 16px;
     font-weight: 500;
-    width: 110px;
+    width: 63px;
     height: 32px;
     flex-shrink: 0;
     color: var(--grey-900, #212224);
@@ -200,5 +200,4 @@ const Border = styled.div`
     left: 142px;
     height: 347px;
     margin-top: 5px;
-    border-right: 1px solid var(--grey-400, #dcdfe3);
 `;
