@@ -5,6 +5,7 @@ import Chat from './routes/Chat';
 import Root from './routes/root';
 import LoginPage from './routes/LoginPage';
 import Mypage from './routes/Mypage';
+import Community from './routes/Community';
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: '/chat',
                 element: <Chat />,
+            },
+            {
+                path: '/community',
+                element: <Community />,
             },
         ],
     },
