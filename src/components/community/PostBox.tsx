@@ -27,11 +27,14 @@ const PostBox:React.FC<PostBoxProp> = (props) => {
                     ></Box>
                     <div className="user">{props.user}</div>
                 </div>
+                <Dot/>
                 <Box className="date">{props.date}</Box>
+                <Dot/>
                 <div className="wrapper">
                     <div className="heart" />
                     <div>{props.like}</div>
                 </div>
+                <Dot/>
                 <div className="wrapper">
                     <div className="comment" />
                     <div>{props.comment}</div>
@@ -60,6 +63,13 @@ const Wrapper = styled.div`
 const BoxWrapper = styled.div`
   padding: 28px 32px 28px 0;
 `;
+
+const Dot = styled.div`
+    width: 2px;
+    height: 2px;
+    background-color: var(--Grey-500, #D1D4D8);
+    border-radius: 50%;
+`
 
 //디테일 수정 필요
 export const Box = styled.div<{ img?: string | null }>`
@@ -94,13 +104,14 @@ export const Box = styled.div<{ img?: string | null }>`
         flex-shrink: 0;
         width: ${props => props.img ? '180px' : '0'};
         height: ${props => props.img ? '180px' : '0'};
+        background-size: cover;
     }
     &.nav {
         display: inline-flex;
         align-items: center;
         margin-top: auto;
         height: 28px;
-        gap: 16px;
+        gap: 6px;
         font-size: 14px;
         color: rgba(134, 140, 148, 1);
         & > div {
@@ -121,9 +132,18 @@ export const Box = styled.div<{ img?: string | null }>`
                     background-image: url(${comment});
                 }
                 .user {
-                    width: 50px;
+                    width: auto;
                     font-weight: 700;
                     color: var(--Grey-900, #212224);
+                }.profile {
+                    background-repeat: no-repeat;
+                    flex-shrink: 0;
+                    width: 28px;
+                    height: 28px;
+                    background-size: cover;
+                    border-radius: 50%;
+                    border: 0.5px solid #EAECEE;
+                    margin-right: 2px;
                 }
             }
         }

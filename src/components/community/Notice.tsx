@@ -7,9 +7,10 @@ import { PostBoxProp } from './PostBox';
 
 interface NoticeProps {
     selectedItem: string;
+    searchQuery: string;
 }
 
-//정보공유 카테고리가 2개라 이 방식은 수정해야함. sidebar에서 아예 subtitle도 props로 넘기는 방식이 최선일지 
+
 const contentSubtitles: Record<string, string> = {
     '공지사항': '멋대 중앙의 공지사항을 확인할 수 있어요.',
     '질문건의': '미정.',
@@ -24,9 +25,10 @@ const contentSubtitles: Record<string, string> = {
     '기타': '미정.'
 }
 
-const Notice: React.FC<NoticeProps> = ({ selectedItem }) => {
+const Notice: React.FC<NoticeProps> = ({ selectedItem,searchQuery }) => {
     const content = selectedItem;
     const subtitle = contentSubtitles[content];
+
 
     //api 연결할때 PostList에 props 추가해서 카테고리에 맞는 data 받아서 구성하도록 수정할 예정
     return (
@@ -38,7 +40,7 @@ const Notice: React.FC<NoticeProps> = ({ selectedItem }) => {
             <OrderDropDown />
             <Button><img src={WriteIcon} alt='펜'/>글쓰기</Button>
           </div>
-          <PostList/>
+          <PostList searchQuery={searchQuery}/>
       </Wrapper>
       
     );

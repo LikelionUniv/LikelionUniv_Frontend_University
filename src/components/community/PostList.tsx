@@ -5,18 +5,29 @@ import { TestData} from './DummyData';
 import Pagination from '../mypage/Pagination';
 import { PostBoxProp } from './PostBox';
 
+interface PostListProps {
+  searchQuery: string;
+}
 
-const PostList:React.FC = () => {
+const PostList:React.FC<PostListProps> = ({searchQuery}) => {
   const [page, setPage] = useState(1);
   const [testData, setTestData] = useState<Array<PostBoxProp>>([]);
+  const [totalPage, setTotalPage] = useState<number>(1);
+
   useEffect(() => {
-   setTestData(
-      TestData.slice(
-        5 * Math.ceil(page) - 5,
-        5 * Math.ceil(page),
-      ),
+    const filteredData = TestData.filter(post => 
+        post.title.includes(searchQuery)
     );
-}, [page]);
+    setTestData(
+        filteredData.slice(
+            5 * Math.ceil(page) - 5,
+            5 * Math.ceil(page)
+        )
+    );
+
+    setTotalPage(Math.ceil(filteredData.length / 5));
+
+  }, [page, searchQuery]);
 
   return (
     <Wrapper>
@@ -38,9 +49,7 @@ const PostList:React.FC = () => {
       </>
       <PageWrapper>
         <Pagination
-          totalPageNum={
-              Math.ceil(TestData.length / 5)
-          }
+          totalPageNum={totalPage}
           pageNum={page}
           setPageNum={setPage}
           

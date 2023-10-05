@@ -5,12 +5,13 @@ import Notice from '../components/community/Notice'
 
 const Community: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<string>('공지사항');
+    const [searchQuery, setSearchQuery] = useState<string>('');
 
   return (
     <>
       <Container>
-        <SideBar onItemSelect={setSelectedItem} />
-        <Notice selectedItem={selectedItem} />
+        <SideBar onItemSelect={setSelectedItem} onSearch={(query: string) => setSearchQuery(query)} />
+        <Notice selectedItem={selectedItem} searchQuery={searchQuery} />
       </Container> 
     </>
   )

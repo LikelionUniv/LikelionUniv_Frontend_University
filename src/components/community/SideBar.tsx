@@ -1,14 +1,21 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled, {css} from 'styled-components'
+import search from '../../img/community/search.svg'
 
 
 interface SideBarProps {
-    onItemSelect: (item: string) => void;
+  onItemSelect: (item: string) => void;
+  onSearch: (query: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onItemSelect }) => {
 
-    const [selectedTab, setSelectedTab] = useState<string>('공지사항')
+
+const SideBar: React.FC<SideBarProps> = ({ onItemSelect, onSearch}) => {
+
+    const [selectedTab, setSelectedTab] = useState<string>('공지사항');
+    const [inputValue, setInputValue] = useState<string>('');
+    
+
 
     return (
       <Wrapper>
@@ -96,6 +103,27 @@ const SideBar: React.FC<SideBarProps> = ({ onItemSelect }) => {
               기타
             </Tab>
           </Content>
+          <TextInput borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+            <input 
+              style={{width: '100%', outline: 'none', border: 'none'}}
+              type="text"
+              placeholder=' 검색'
+              value={inputValue}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                if (e.key === 'Enter') {
+                  onSearch(inputValue);
+                }
+              }}
+              onChange={(e) => {
+                setInputValue(e.target.value);
+              }}/>
+            <img 
+              style={{marginLeft: '8px'}}
+              src={search}
+              onClick={() => onSearch(inputValue)}
+              alt="검색" />
+            
+          </TextInput>
       </Wrapper>
     );
   };
@@ -150,3 +178,16 @@ const Divider = styled.div`
   background-color: var(--Grey-400, #DCDFE3);
   width: 80%;
 `;
+
+const TextInput = styled.div<{ borderColor: string }>`
+  height: 40px;
+  width: 80%;
+  border-radius: 6px;
+  border: 1px solid ${props => props.borderColor};
+  align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding: 0 8px;
+`;
+
