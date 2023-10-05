@@ -22,7 +22,7 @@ export default Community
 const Container = styled.div`
   max-width: 1280px;
   padding: 0 40px;
-  min-width: 688px;
+  min-width: 768px;
   width: 100%;
   margin : 0 auto;
   display : flex;
