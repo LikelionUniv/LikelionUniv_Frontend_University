@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import SignUp from './routes/SignUp';
+import LoginPage from './routes/LoginPage';
+import LandingPage from './routes/LandingPage';
 import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
-import LoginPage from './routes/LoginPage';
 import Mypage from './routes/Mypage';
 import Recruit from './routes/Recruit';
 import UnivPage from './routes/UnivPage';
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
         path: '/',
         element: <Root />,
         children: [
+            {
+                path: '/',
+                element: <LandingPage />,
+            },
             {
                 path: '/signup',
                 element: <SignUp />,

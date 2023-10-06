@@ -7,6 +7,7 @@
         "@testing-library/react": "^13.4.0",
         "@testing-library/user-event": "^13.5.0",
         "@types/jest": "^27.5.2",
+        "@types/lodash": "^4.14.198",
         "@types/node": "^16.18.39",
         "@types/react-modal": "^3.16.0",
         "@types/react-select": "^5.0.1",
