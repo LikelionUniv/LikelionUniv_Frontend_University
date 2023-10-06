@@ -41,7 +41,9 @@
 
 ### 🧑🏻‍💻 Recruiting Page Developer
 
-|                                      김예지                                       |                                      노하림                                      |                                      임정민                                       |
-| :-------------------------------------------------------------------------------: | :------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------: |
-| <img width="150px" src="https://avatars.githubusercontent.com/u/101444425?v=4" /> | <img width="150px" src="https://avatars.githubusercontent.com/u/90364684?v=4" /> | <img width="150px" src="https://avatars.githubusercontent.com/u/105098123?v=4" /> |
-|                    [@mnbvcxzyj](https://github.com/mnbvcxzyj)                     |                     [@harim061](https://github.com/harim061)                     |               [@JeongMinIsBest](https://github.com/JeongMinIsBest)                |
+| 김예지 |   노하림                                                                       | 임정민                                                                      |
+|:---------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------:|
+| <img width="150px" src="https://avatars.githubusercontent.com/u/101444425?v=4" />| <img width="150px" src="https://avatars.githubusercontent.com/u/90364684?v=4" />| <img width="150px" src="https://avatars.githubusercontent.com/u/105098123?v=4" />|
+|  [@mnbvcxzyj](https://github.com/mnbvcxzyj)    |  [@harim061](https://github.com/harim061)    | [@JeongMinIsBest](https://github.com/JeongMinIsBest)   |
+
+

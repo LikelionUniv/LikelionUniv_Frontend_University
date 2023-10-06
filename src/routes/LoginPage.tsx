@@ -1,8 +1,10 @@
-import Login from '../components/login/Login';
+import {Login} from "../components/login/Login"
 
-const LoginPage= () =>{
+const LoginPage = () => {
   return (
-    <Login/>
+    <>
+      <Login/>
+    </>
   )
 }
 

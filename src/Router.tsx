@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import SignUp from './routes/SignUp';
-import LoginPage from './routes/LoginPage';
 import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
+import LoginPage from './routes/LoginPage';
+import Mypage from './routes/Mypage';
 import Recruit from './routes/Recruit';
 import UnivPage from './routes/UnivPage';
 
@@ -18,7 +19,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage />,
+                element: <LoginPage />
+            },
+            {
+                path : '/mypage',
+                element: <Mypage/>
             },
             {
                 path: '/project',
