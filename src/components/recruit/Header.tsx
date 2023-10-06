@@ -1,5 +1,6 @@
 import * as R from './HeaderStyle';
 import Arrow from '../../img/recruit/warrow.svg';
+import gra2 from '../../img/recruit/gra2.svg';
 
 const Header = () => {
     return (
@@ -17,7 +18,7 @@ const Header = () => {
                 </R.Button>
             </div>
 
-            <div>그래픽</div>
+            <R.Gra src={gra2}></R.Gra>
         </R.BlackDiv>
     );
 };

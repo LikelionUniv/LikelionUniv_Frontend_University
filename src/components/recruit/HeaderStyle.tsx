@@ -10,7 +10,9 @@ export const BlackDiv = styled.div`
 
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    padding-left: 6em;
+    padding-right: 6em;
 `;
 
 export const T1 = styled.div`
@@ -62,4 +64,16 @@ export const Button = styled.button`
     justify-content: center;
     align-items: flex-start;
     gap: 202px;
+`;
+
+export const Gra = styled.img`
+    width: 35em;
+
+    @media screen and (max-width: 1280px) {
+        width: 460px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 332px;
+    }
 `;

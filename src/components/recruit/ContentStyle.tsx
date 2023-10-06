@@ -1,5 +1,14 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 
+const responsiveWidth = css`
+    @media screen and (max-width: 1280px) {
+        width: 950px;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 688px;
+    }
+`;
 /* 전체 layout */
 export const ContentDiv = styled.div`
     padding-top: 160px;
@@ -49,6 +58,7 @@ export const Qbody = styled.div`
     box-sizing: border-box;
     width: 1200px;
     margin-bottom: 160px;
+    ${responsiveWidth};
 `;
 
 export const Qtext = styled.div`
@@ -82,6 +92,8 @@ export const Qbody2 = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 33px;
+
+    ${responsiveWidth}
 `;
 
 export const Qtext2 = styled.div`
@@ -155,6 +167,8 @@ export const Table = styled.div`
         flex-direction: row;
         align-items: center;
     }
+
+    ${responsiveWidth};
 `;
 
 export const Ps2 = styled.div`
@@ -222,13 +236,16 @@ export const AnsTable = styled.div`
     div:first-of-type {
         border-top: none;
     }
+
+    ${responsiveWidth};
 `;
 
 // 대학 부분
 export const Qbody4 = styled.div`
     display: flex;
-    width: 1200px;
     margin-bottom: 160px;
+
+    ${responsiveWidth}
 `;
 
 export const Ps3 = styled.div`
