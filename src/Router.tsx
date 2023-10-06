@@ -9,6 +9,9 @@ import Mypage from './routes/Mypage';
 import Recruit from './routes/Recruit';
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
+import ProjectRegister from './components/project/register/ProjectRegister';
+import ProjectList from './components/project/ProjectList';
+import Community from './routes/Community';
 
 const router = createBrowserRouter([
     {
@@ -34,6 +37,20 @@ const router = createBrowserRouter([
             {
                 path: '/project',
                 element: <Project />,
+                children: [
+                    {
+                        path: '',
+                        element: <ProjectList />
+                    },
+                    {
+                        path: 'register',
+                        element: <ProjectRegister />
+                    },
+                    {
+                        path: ':projectId',
+                        element: <ProjectDetail />
+                    } 
+                ]
             },
             {
                 path: '/chat',
@@ -49,9 +66,13 @@ const router = createBrowserRouter([
                 element: <UnivPage />,
             },
             {
-                path: '/project/1',
-                element: <ProjectDetail />,
+                path: '/community',
+                element: <Community />
             },
+            {
+                path: '/chat',
+                element: <Chat />
+            }
         ],
     },
 ]);

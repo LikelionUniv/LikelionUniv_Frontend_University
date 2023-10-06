@@ -12,27 +12,25 @@ export const Container = styled.div`
   width: 1200px;
   align-items: center;
   align-content: center;
- 
   flex-wrap: wrap;
 
- 
- 
+  grid-column-gap: 24px;
 `;
 
 export const Box = styled.div`
-  width: 380px;
-  height:343px;
-  display flex;
+  width: 384px;
+  height: 343px;
+
+  display: flex;
+  flex-direction: column;
+
   margin-top: 64px;
-  margin-left: 80%;
-  gap: 40px 24px;
-  
-  
+  gap: 16px 0;
 `;
 
 export const SubBox = styled.div`
-    width :380px; 
-    height :216px; 
+    width: 384px; 
+    height: 216px; 
     background: var(--Grey-400, #DCDFE3);
 
 `;
@@ -52,10 +50,10 @@ export const BlackBox = styled.div<BoxProps>`
   `;
 
 export const SmallBox = styled.div`
-   width :128px; 
-   height :127px; 
+   width: 128px; 
+   height: 127px; 
    border: 1px solid black;
-   background-color:# ffffff ;
+   background-color: #ffffff ;
  
    
 `;
@@ -91,7 +89,7 @@ export const SmallBox2 = styled.div<BoxProps>`
 export const SmallBox3 = styled.div`
    width :380px; 
    height :32px; 
-   background-color:# ffffff ;
+   background-color: #ffffff ;
    color: var(--Grey-700, #868C94);
 
     

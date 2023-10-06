@@ -9,9 +9,10 @@ function Projectbox() {
         <B.Container onClick={() => setClicked(true)}>
             {[...Array(12)].map((_, i) => (
                 <B.Box key={i}>
-                    <div style={{position: 'relative'}}>
-                        <B.SubBox/>
-                        <B.BlackBox clicked={clicked} style={{position: 'absolute', bottom: 0, left: 0}}>WEB</B.BlackBox>
+                    <div style={{ position: 'relative'}}>
+                        <B.SubBox style={{position: 'relative'}}>
+                            <B.BlackBox clicked={clicked} style={{position: 'absolute', bottom: 0, left: 0}}>WEB</B.BlackBox>
+                        </B.SubBox>
                     </div>
                     <div style={{display:'flex', flexDirection: 'column'}}>
                         <B.SmallBox1 clicked={clicked}>서비스 이름</B.SmallBox1>

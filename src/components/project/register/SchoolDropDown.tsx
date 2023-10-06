@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Select, { ActionMeta, components } from 'react-select';
 import styled from 'styled-components';
-import { ReactComponent as Arrow } from '../../img/arrow.svg';
+import { ReactComponent as Arrow } from '../../../img/arrow.svg';
 import { schoolStyle } from './customSelectStyles';
 
 export type RegionOptionType = {

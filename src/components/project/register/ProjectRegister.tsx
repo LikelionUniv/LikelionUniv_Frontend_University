@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as P from './ProjectRegisterStyle';
-import Gallery from '../../img/project/gallery.svg';
-import Hyphen from '../../img/project/hyphen.svg';
-import Cancel from '../../img/project/cancel.svg';
-import Vertical from '../../img/project/vertical.svg';
-import FirstVertical from '../../img/project/firstVertical.svg';
+import Gallery from '../../../img/project/gallery.svg';
+import Hyphen from '../../../img/project/hyphen.svg';
+import Cancel from '../../../img/project/cancel.svg';
+import Vertical from '../../../img/project/vertical.svg';
+import FirstVertical from '../../../img/project/firstVertical.svg';
 import { checkboxes, genOptions, output, projectCategory } from './RegisterOptions';
 import { ActionMeta } from 'react-select';
 import DropDown, { OptionType } from './DropDown';
 import SchoolDropDown from './SchoolDropDown';
 import Checkbox from './Checkbox';
 import useCheckbox from './useCheckbox';
-import useArray from '../../hooks/useArray';
+
 import AutoHeightTextarea from './AutoHeightTextarea';
+import useArray from '../../../hooks/useArray';
 
 /* form type */
 interface FormState {

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Check from '../../img/project/check.svg';
+import Check from '../../../img/project/check.svg';
 
 interface CheckboxProps {
     label: string;

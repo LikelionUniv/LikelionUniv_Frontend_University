@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import * as P from './HeaderStyle';
+import WriteIcon from '../../img/project/write.svg'
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -7,6 +9,12 @@ const Header = () => {
   const handleClick = (index: number) => {
     setActiveTab(index);
   };
+
+  const navigate = useNavigate()
+
+  const goRegister = (): void => {
+    navigate('register')
+  }
 
   return (
     <P.HeaderContainer>
@@ -67,6 +75,11 @@ const Header = () => {
         {activeTab === 6 && <P.Divider>_</P.Divider>}
     </P.Tab>
     </P.TabContainer>
+
+    <P.WriteBtn onClick={goRegister}>
+        <img src={WriteIcon} alt='write' />
+        글쓰기
+    </P.WriteBtn>
 
     </P.HeaderContainer>
   );

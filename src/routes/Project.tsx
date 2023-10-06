@@ -1,9 +1,9 @@
-import ProjectRegister from "../components/project/ProjectRegister";
+import { Outlet } from "react-router-dom";
 
 const Project = () => {
     return (
         <div className="pDiv">
-            <ProjectRegister />
+            <Outlet />
         </div>
     );
 };
