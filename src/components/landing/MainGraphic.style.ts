@@ -197,7 +197,7 @@ export const Description = styled.div`
         width: 580px;
         margin-left: 3%;
         @media (max-width: 1280px) {
-            width: 40vw;
+            width: 38vw;
             margin-left: 1%;
         }
         @media (max-width: 768px) {
