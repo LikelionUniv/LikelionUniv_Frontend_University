@@ -1,5 +1,3 @@
-// 모바일 뷰 스타일 적용 필요
-
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate, NavLink } from 'react-router-dom';
@@ -34,10 +32,13 @@ const Nav = () => {
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
+
     // 프로필 버튼 참조
     const buttonRef = useRef<HTMLDivElement>(null);
+
     // 프로필 모달 참조
     const modalRef = useRef<HTMLDivElement>(null);
+
     // 프로필 모달이 아닌 곳을 누르면 (버튼 포함) 모달이 꺼짐
     useEffect(() => {
         const clickOutside = (e: any) => {
@@ -57,6 +58,29 @@ const Nav = () => {
         };
     }, [profileModal]);
 
+    // 리크루팅 드롭다운 메뉴 상태
+    const [isDropdownVisible, setIsDropdownVisible] = useState<Boolean>(false);
+
+    // 리크루팅 드롭다운 메뉴 참조
+    const recruitRef = useRef<HTMLDivElement>(null);
+
+    // 리크루팅 드롭다운 메뉴 외부 클릭 시 메뉴 닫기
+    useEffect(() => {
+        const clickOutside = (e: any) => {
+            if (
+                isDropdownVisible &&
+                recruitRef.current &&
+                !recruitRef.current.contains(e.target)
+            ) {
+                setIsDropdownVisible(false);
+            }
+        };
+        document.addEventListener('mousedown', clickOutside);
+        return () => {
+            document.removeEventListener('mousedown', clickOutside);
+        };
+    }, [isDropdownVisible]);
+
     return (
         <Wrapper
             className={
@@ -70,9 +94,26 @@ const Nav = () => {
             <Container>
                 <div className="left">
                     <Logo src={logo} onClick={() => navigate('/')} />
-                    <Text to="/recruit" className="first">
+                    <Text
+                        to="/recruit"
+                        className="first"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            setIsDropdownVisible(!isDropdownVisible);
+                        }}
+                    >
                         <p>리크루팅</p>
                         <img src={navarrow} />
+                        {isDropdownVisible ? (
+                            <RecruitMenu ref={recruitRef}>
+                                <NavLink to="/baby-lion">
+                                    아기사자
+                                </NavLink>
+                                <NavLink to="/univ-recruit">
+                                    대학 리크루팅
+                                </NavLink>
+                            </RecruitMenu>
+                        ) : null}
                     </Text>
                     <Text to="/univ">
                         <p>참여대학</p>
@@ -362,5 +403,24 @@ const ProfileModal = styled.div`
             width: 16px;
             margin: 0 8px 0 11px;
         }
+    }
+`;
+const RecruitMenu = styled.div`
+    position: absolute;
+    top: 30px;
+    width: 138px;
+    height: 88px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    a {
+        display: block;
+        color: black;
+        padding: 10px;
+        text-decoration: none;
+    }
+    a:hover {
+        background-color: #ddd;
     }
 `;

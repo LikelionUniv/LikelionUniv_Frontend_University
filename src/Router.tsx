@@ -7,6 +7,7 @@ import Chat from './routes/Chat';
 import Root from './routes/root';
 import Mypage from './routes/Mypage';
 import Recruit from './routes/Recruit';
+
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectRegister from './components/project/register/ProjectRegister';

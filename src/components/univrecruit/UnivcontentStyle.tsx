@@ -136,7 +136,6 @@ export const Qbody3 = styled.div`
     }
 
     width: 1100px;
-   
 `;
 
 export const Table = styled.div`
@@ -240,3 +239,4 @@ export const AnsTable = styled.div`
 
     ${responsiveWidth};
 `;
+

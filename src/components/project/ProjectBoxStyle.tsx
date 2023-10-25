@@ -73,7 +73,7 @@ export const SmallBox1 = styled.div<BoxProps>`
 
 export const SmallBox2 = styled.div<BoxProps>`
     display: flex;
-    gap: 7px;
+    gap: 16px;
     width :380px; 
     height :48px; 
     color: ${props => props.clicked ? '#FF7710' : '#000000'};
@@ -92,11 +92,11 @@ export const SmallBox3 = styled.div`
    background-color: #ffffff ;
    color: var(--Grey-700, #868C94);
 
-    
-    font-family: Pretendard;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 150%; /* 18px */
+  gap: 6  
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%; /* 18px */
 
 `;
