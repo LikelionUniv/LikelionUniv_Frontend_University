@@ -2,12 +2,18 @@ import { useRecoilValue } from 'recoil';
 import { currentWidthState } from '../../store/landing';
 import InfoNumber from './InfoNumber';
 import InfoService from './InfoService';
+import InfoActivity from './InfoActivity';
+import InfoTrack from './InfoTrack';
+import InfoPlan from './InfoPlan';
+import InfoSupport from './InfoSupport';
 import * as IF from './Information.style';
 import { ReactComponent as PixelBulbIcon } from '../../img/landing/pixel_bulb.svg';
 import { ReactComponent as PixelStarIcon } from '../../img/landing/pixel_star.svg';
 import { ReactComponent as PixelFootprintsIcon } from '../../img/landing/pixel_footprints.svg';
 import { ReactComponent as PixelCalendarIcon } from '../../img/landing/pixel_calendar.svg';
 import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
+
+
 
 const Information = () => {
     const desWidth = useRecoilValue(currentWidthState);
@@ -33,7 +39,9 @@ const Information = () => {
                     <IF.SubText>
                         다채로운 경험을 통해 즐겁게 교류하고, 빠르게 성장해요.
                     </IF.SubText>
-                    <IF.SectionContainer></IF.SectionContainer>
+                    <IF.SectionContainer>
+                        <InfoActivity />
+                    </IF.SectionContainer>
                     <IF.Title>
                         <PixelFootprintsIcon />
                         트랙 소개
@@ -41,7 +49,9 @@ const Information = () => {
                     <IF.SubText>
                         트랙별로 세분화된 경험을 할 수 있어요.
                     </IF.SubText>
-                    <IF.SectionContainer></IF.SectionContainer>
+                    <IF.SectionContainer>
+                        <InfoTrack />
+                    </IF.SectionContainer>
                     <IF.Title>
                         연간 <PixelCalendarIcon />
                         일정
@@ -50,7 +60,9 @@ const Information = () => {
                         일년 동안 체계적으로 역량을 쌓을 수 있는 커리큘럼이
                         준비되어 있어요.
                     </IF.SubText>
-                    <IF.SectionContainer></IF.SectionContainer>
+                    <IF.SectionContainer>
+                        <InfoPlan />
+                    </IF.SectionContainer>
                     <IF.Title>
                         <PixelDiamondIcon />
                         후원사
@@ -58,7 +70,9 @@ const Information = () => {
                     <IF.SubText>
                         멋진 후원사의 도움으로 더 좋은 교육 환경을 만들어요.
                     </IF.SubText>
-                    <IF.SectionContainer></IF.SectionContainer>
+                    <IF.SectionContainer>
+                        <InfoSupport />
+                    </IF.SectionContainer>
                 </div>
             </IF.Wrapper>
         </IF.Outer>
