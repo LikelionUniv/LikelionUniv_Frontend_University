@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as F from './Footer.style';
 import recruitimage from '../../img/landing/recruit_image.png';
 import makersbackground from '../../img/landing/makers_background.png';
@@ -5,8 +6,19 @@ import { ReactComponent as PixelNoticeIcon } from '../../img/landing/pixel_notic
 import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_long_right_arrow.svg';
 import { ReactComponent as PixelArrowIcon } from '../../img/landing/pixel_arrow_upright.svg';
 import { ReactComponent as ArrowIcon } from '../../img/arrow_up_right.svg';
+import FooterModal from '../recruit/FooterModal';
 
 const Footer = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <F.Wrapper>
             <F.Recruit>
@@ -19,9 +31,10 @@ const Footer = () => {
                             모집이 시작되면 이메일과 카톡으로 안내받고, <br />
                             멋쟁이사자처럼에 합류해 보세요!
                         </div>
-                        <div className="btn">
+                        <div className="btn" onClick={openModal}>
                             모집 알림 신청하기 <PixelLongArrowIcon />
                         </div>
+                        <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                     </div>
                     <div className="img-rect">
                         <img src={recruitimage} />

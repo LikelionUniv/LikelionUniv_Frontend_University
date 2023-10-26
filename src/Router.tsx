@@ -12,6 +12,9 @@ import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectRegister from './components/project/register/ProjectRegister';
 import ProjectList from './components/project/ProjectList';
 import Community from './routes/Community';
+import Modal from 'react-modal'
+
+Modal.setAppElement('#root')
 
 const router = createBrowserRouter([
     {
