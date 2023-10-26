@@ -21,6 +21,7 @@ export const T1 = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin-bottom: 10px;
 `;
 
 export const T2 = styled.div`
