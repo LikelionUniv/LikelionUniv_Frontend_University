@@ -19,9 +19,9 @@ const Footer = () => {
                             모집이 시작되면 이메일과 카톡으로 안내받고, <br />
                             멋쟁이사자처럼에 합류해 보세요!
                         </div>
-                        <div className="btn">
+                        <a href="/" target="_blank" className="btn">
                             모집 알림 신청하기 <PixelLongArrowIcon />
-                        </div>
+                        </a>
                     </div>
                     <div className="img-rect">
                         <img src={recruitimage} />
