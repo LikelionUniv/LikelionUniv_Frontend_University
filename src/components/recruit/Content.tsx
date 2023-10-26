@@ -10,7 +10,6 @@ import Mail from '../../img/recruit/mail.svg';
 import Plus from '../../img/recruit/plus.svg';
 import Min from '../../img/recruit/min.svg';
 import { useState } from 'react';
-import Tab from '../univ/UnivTab';
 
 const Content = () => {
     /* FAQ click animation */
@@ -173,17 +172,8 @@ const Content = () => {
                     <p>이메일로 문의하기</p>
                 </R.Ps2>
 
-                {/*University 부분*/}
-                <R.Title>
-                    <R.TD>University</R.TD>
-                    <R.TD>대학</R.TD>
-                </R.Title>
-                <R.Ps3>
-                    <p>소속 대학을 선택하면 지원 페이지로 이동합니다.</p>
-                </R.Ps3>
-                <R.Qbody4>
-                    <Tab />
-                </R.Qbody4>
+                
+             
             </div>
         </R.ContentDiv>
     );
