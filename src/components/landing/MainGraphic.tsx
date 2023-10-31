@@ -1,18 +1,22 @@
 import * as MG from './MainGraphic.style';
 import { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
+import { useRecoilState } from 'recoil';
+import { currentWidthState } from '../../store/landing';
 
 import maintext from '../../img/landing/main_text.png';
 import mainimage from '../../img/landing/main_image.png';
 import desimage from '../../img/landing/des_image.png';
-import { ReactComponent as MainText } from '../../img/landing/main_text.svg';
 import { ReactComponent as PixelFireworksIcon } from '../../img/landing/pixel_fireworks.svg';
 import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_singing.svg';
-import { ReactComponent as PixelBlubIcon } from '../../img/landing/pixel_bulb.svg';
+import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
 
 const MainGraphic = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [isPC, setIsPC] = useState<boolean>(true);
+    const desRef1 = useRef<HTMLDivElement>(null);
+    const desRef2 = useRef<HTMLImageElement>(null);
+    const [desWidth, setDesWidth] = useRecoilState(currentWidthState);
     useEffect(() => {
         const handleResize = debounce(() => {
             setWidth(window.innerWidth);
@@ -25,8 +29,15 @@ const MainGraphic = () => {
     useEffect(() => {
         if (width > 768) setIsPC(true);
         else setIsPC(false);
-        console.log(isPC);
     }, [width]);
+    useEffect(() => {
+        if (!desRef1.current || !desRef2.current) return;
+        setDesWidth(
+            desRef2.current.offsetLeft -
+                desRef1.current.offsetLeft +
+                desRef2.current.offsetWidth,
+        );
+    }, [desRef1, desRef2, width]);
 
     return (
         <MG.Wrapper>
@@ -61,10 +72,10 @@ const MainGraphic = () => {
                 ))}
             </MG.Line>
             <MG.Description>
-                <div className="container">
+                <div className="container" ref={desRef1}>
                     <div className="title">국내 최대 규모 개발 창업 동아리</div>
                     <div className="title">
-                        <PixelBlubIcon /> 멋쟁이사자처럼
+                        <PixelLionIcon /> 멋쟁이사자처럼
                     </div>
                     <div className="text">
                         ‘멋쟁이사자처럼’은 전국 61개 대학의 2,000여 명의
@@ -75,7 +86,7 @@ const MainGraphic = () => {
                         만들기 위한 끊임없는 도전을 응원합니다.
                     </div>
                 </div>
-                <img className="desimage" src={desimage} />
+                <img className="desimage" src={desimage} ref={desRef2} />
             </MG.Description>
         </MG.Wrapper>
     );
