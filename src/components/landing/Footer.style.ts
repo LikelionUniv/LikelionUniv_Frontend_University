@@ -97,8 +97,9 @@ export const Recruit = styled.div`
                 color: #fff;
                 font-family: Pretendard;
                 font-size: 20px;
-                font-weight: 700;
+                font-weight: 600;
                 word-break: keep-all;
+                text-decoration: none;
                 &:hover {
                     background-color: #eb6500;
                 }
