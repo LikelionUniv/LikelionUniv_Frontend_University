@@ -5,13 +5,13 @@ import InfoService from './InfoService';
 import InfoActivity from './InfoActivity';
 import InfoTrack from './InfoTrack';
 import InfoPlan from './InfoPlan';
-import InfoSupport from './InfoSupport';
+//import InfoSupport from './InfoSupport';
 import * as IF from './Information.style';
 import { ReactComponent as PixelBulbIcon } from '../../img/landing/pixel_bulb.svg';
 import { ReactComponent as PixelStarIcon } from '../../img/landing/pixel_star.svg';
 import { ReactComponent as PixelFootprintsIcon } from '../../img/landing/pixel_footprints.svg';
 import { ReactComponent as PixelCalendarIcon } from '../../img/landing/pixel_calendar.svg';
-import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
+//import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
 
 
 
@@ -63,6 +63,7 @@ const Information = () => {
                     <IF.SectionContainer>
                         <InfoPlan />
                     </IF.SectionContainer>
+                    {/*
                     <IF.Title>
                         <PixelDiamondIcon />
                         후원사
@@ -72,7 +73,7 @@ const Information = () => {
                     </IF.SubText>
                     <IF.SectionContainer>
                         <InfoSupport />
-                    </IF.SectionContainer>
+                    </IF.SectionContainer>*/}
                 </div>
             </IF.Wrapper>
         </IF.Outer>
