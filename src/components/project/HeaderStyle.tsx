@@ -61,6 +61,7 @@ export const WriteBtn = styled.button`
     gap: 6px;
 
     border-radius: 6px;
+    border: none;
     background: var(--Orange-600, #FF7710);
 
     color: var(--White, #FFF);
