@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { TrackBoxProps } from './InfoTrack';
+import { BoxProps } from './InfoActivity';
 
 export const Outer = styled.div`
     width: 100%;
@@ -222,3 +224,234 @@ export const SwiperWrapper = styled.div`
         }
     }
 `;
+
+
+export const Box = styled.div<BoxProps>`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: ${(props) => props.background || "transparent"};
+    border-radius: 8px;
+    padding: 24px;
+
+    @media (max-width: 1280px) {
+        flex-direction: column;
+    }
+    
+
+    .hover-text {
+        opacity: 0;
+        font-size: 0;
+    }
+    .img-hide {
+        @media (max-width: 1280px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            margin-top: 16px;
+        }
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        
+        .name {
+            color: var(--Black, #000);
+            font-family: Pretendard;
+            font-size: 28px;
+            font-weight: 700;
+
+            @media (max-width: 1280px) {
+            flex-direction: row;
+            align-items: center;
+            color: var(--Grey-900, #212224);
+            font-family: Pretendard;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            flex-direction: row;
+        }
+
+        
+    }
+
+    &:hover {
+        background: 
+            ${(props) => props.hoverBackColor},
+            #212224;
+        
+        .title {
+            flex-direction: column;
+            .name {
+                color: #fff;
+                margin-bottom: 16px;
+            }
+        }
+        
+        
+        .hover-hide, .img-hide {
+            opacity: 0;
+            width: 0;
+        }
+        .hover-text {
+            opacity: 100;
+            color: var(--Grey-200, #F2F4F6);
+            font-family: Pretendard;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+        }
+    }
+`;
+
+
+export const TrackBox = styled.div<TrackBoxProps>`
+    width: 100%;
+    height: 100%;
+    height: 400px;
+    max-width: 384px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #212224;
+    border-radius: 8px;
+
+    @media (max-width: 1280px) {
+        height:80%;
+    }
+    @media (max-width: 768px) {
+        height: 240px;
+    }
+
+    .hover-text {
+        opacity: 0;
+        font-size: 0;
+    }
+
+    .img-hide {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 24px 24px 16px 24px;
+        .name {
+            color: #fff;
+            font-family: Pretendard;
+            font-size: 28px;
+            font-weight: 700;
+            @media (max-width: 768px) {
+                font-size: 20px;
+            }
+        }
+    }
+
+    &:hover {
+
+        .title{
+            margin: 40px 0 16px 40px;
+            @media (max-width: 768px) {
+                margin: 24px 0 6px 24px;
+            }
+        }
+        
+        .name {
+            color: ${(props) => props.hoverColor};
+            @media (max-width: 768px) {
+                font-size: 15px;
+            }
+        }
+        .hover-hide {
+            opacity: 0;
+            width: 0;
+        }
+        .hover-text {
+            opacity: 100;
+            color: var(--Grey-200, #F2F4F6);
+            font-family: Pretendard;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            margin: 0 40px;
+            line-height: 150%;
+            @media (max-width: 768px) {
+                font-size: 12px;
+                margin: 0 24px;
+            }
+        }
+        .img-hide {
+            opacity: 0;
+        }
+    }
+`;
+
+export const PlanBox = styled.div`
+    height: 195px;
+    .img {
+        width: 100%;
+        
+        @media (max-width: 768px) {
+            width: 319px;
+        }
+    }
+    .week {
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; 
+        margin: 23.5px 0 7.5px 0;
+    }
+    .content {
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+    }
+    
+`
+
+export const SupportBox = styled.div`
+    width: 100%;
+    gap: 24px;
+    display: flex;
+    margin-bottom: 24px;
+    
+    .wrapper {
+        width: 100%;
+        background: var(--White, #FFF);
+        border-radius: 8px;
+        padding: 28px 78px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .logo {
+            height: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            @media (max-width: 1280px) {
+                height: 35px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            padding: 15px 35px;
+        }
+    }
+`

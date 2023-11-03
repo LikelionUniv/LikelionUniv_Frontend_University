@@ -100,6 +100,10 @@ export const Recruit = styled.div`
                 font-weight: 600;
                 word-break: keep-all;
                 text-decoration: none;
+                border: none;
+                outline: none;
+                width: 100%;
+                cursor: pointer;
                 &:hover {
                     background-color: #eb6500;
                 }
@@ -246,6 +250,7 @@ export const Info = styled.div`
     .container {
         position: relative;
         width: 1200px;
+        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -259,9 +264,10 @@ export const Info = styled.div`
                 font-size: 28px;
                 font-weight: 700;
                 font-family: Pretendard;
+                margin-bottom: 10px;
             }
             .text {
-                color: #868c94;
+                color: #212224;
                 font-family: Pretendard;
                 font-size: 12px;
                 font-weight: 500;

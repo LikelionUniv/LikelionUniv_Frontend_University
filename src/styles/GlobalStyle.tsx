@@ -1,7 +1,9 @@
 import {createGlobalStyle} from 'styled-components'
 import Reset from "styled-reset";
 
+
 const GlobalStyles = createGlobalStyle`
+
   ${Reset}
   a {
     text-decoration: none;
@@ -13,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
     line-height: 1.5;
     margin: 0;
   }
-
+  
   *{
     font-family : Pretendard;
     box-sizing: border-box;

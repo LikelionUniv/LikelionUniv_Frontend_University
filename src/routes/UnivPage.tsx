@@ -6,7 +6,7 @@ const UnivPage = () => {
     return (
         <div>
             <UnivHeader />
-            <UnivTab showCount={true} />
+            <UnivTab />
         </div>
     );
 };

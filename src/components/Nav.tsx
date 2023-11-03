@@ -68,8 +68,8 @@ const Nav = () => {
             }
         >
             <Container>
-                <div className="left">
-                    <Logo src={logo} onClick={() => navigate('/')} />
+                <div className="left" style={{ visibility: 'hidden'}}>
+                    <Logo src={logo} onClick={() => navigate('/')} style={{ visibility: 'visible'}} />
                     <Text to="/recruit" className="first">
                         <p>리크루팅</p>
                         <img src={navarrow} />
@@ -87,7 +87,7 @@ const Nav = () => {
                         <img src={navarrow} />
                     </Text>
                 </div>
-                <div className="right">
+                <div className="right" style={{ visibility: 'hidden'}}>
                     {isLogin ? (
                         <>
                             <ChatBtn to="/chat">

@@ -1,4 +1,4 @@
-interface ITabData {
+export interface ITabData {
     school: string;
     region: string;
 }

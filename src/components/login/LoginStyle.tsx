@@ -1,31 +1,46 @@
-import styled from 'styled-components'
-import googleIcon from "../../img/icon-google.svg"
-import kakaoIcon from "../../img/icon-kakao.svg"
+import styled from "styled-components";
+import googleIcon from '../../img/login/google-icon.svg'
+import kakaoIcon from '../../img/login/kakao-icon.svg'
 
-export const Container = styled.section`
-  width : 1120px;
-  height : 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items : center;
-  padding-top : 160px;
+export const Container = styled.div`
   margin : 0 auto;
+  display : flex;
+  justify-content : flex-start;
+  align-items : center;
+  padding : 0 40px;
+  margin-top : 241px;
+  
+  @media (max-width: 1920px) {
+        margin-top : 241px;
 
-  @media screen and (max-width : 1120px){
-    width : auto;
-    margin : 0 20px;
+        & > img:first-child {
+          margin-right : 126px;
+        }
+    }
+
+  @media (max-width: 1280px){
+    margin-top : 117px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1280px) {
+    & > img:first-child {
+      margin-right : 24px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
+export const Item = styled.img`
+  width : 486px;
+  height : 486px;
 
-export const ImgBox = styled.div`
-  width : 458px;
-  height : 490px;
-  background-color : #eee;
-
-  @media screen and (max-width : 900px){
-    width: 289px;
-    height: 308px; 
+  @media screen and (min-width: 768px) and (max-width: 1280px) {
+    width: 332px;
+    height: 332px;
+    background-position : contain;
   }
 `;
 

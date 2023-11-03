@@ -1,6 +1,6 @@
-import Header from '../components/recruit/Header';
-import Content from '../components/recruit/Content';
-import Footer from '../components/recruit/Footer';
+import Header from '../components/univrecruit/UnivHeader';
+import Content from '../components/univrecruit/Univcontent';
+import Footer from '../components/univrecruit/UnivFooter';
 
 const Recruit = () => {
     return (
