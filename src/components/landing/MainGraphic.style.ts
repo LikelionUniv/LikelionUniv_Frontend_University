@@ -19,21 +19,10 @@ export const Background = styled.div`
         width: 100%;
         height: 89.2%;
         background: linear-gradient(
-            0deg,
-            rgba(198, 249, 89, 0) 0%,
-            rgba(198, 249, 89, 0.25) 100%
+            180deg,
+            rgba(255, 146, 64, 0.2) 0%,
+            rgba(255, 146, 64, 0) 100%
         );
-        display: flex;
-        align-items: center;
-
-        img {
-            width: 45%;
-            margin-left: 10%;
-            @media (max-width: 1280px) {
-                width: 50vw;
-                margin-left: 32px;
-            }
-        }
     }
 
     & > img {
@@ -45,6 +34,68 @@ export const Background = styled.div`
             height: 120%;
             top: -10%;
             right: -5%;
+        }
+    }
+
+    .inner {
+        width: 43%;
+        margin-left: 10%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @media (max-width: 1280px) {
+            width: 50vw;
+            margin-left: 32px;
+        }
+
+        img {
+            width: 100%;
+            margin-top: 22%;
+        }
+    }
+
+    .btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 32px;
+        margin-top: 25px;
+
+        background-color: #ff7710;
+        border-radius: 8px;
+        color: #fff;
+        font-family: Pretendard;
+        font-size: 20px;
+        font-weight: 600;
+        word-break: keep-all;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        width: 65%;
+        cursor: pointer;
+        &:hover {
+            background-color: #eb6500;
+        }
+        @media (max-width: 1280px) {
+            padding: 12px 32px;
+            margin-top: 15px;
+        }
+        @media (max-width: 957px) {
+            font-size: 2.1vw;
+        }
+        @media (max-width: 720px) {
+            font-size: 15px;
+            padding: 10px 22px;
+        }
+
+        svg {
+            height: 30px;
+            @media (max-width: 957px) {
+                height: 3vw;
+            }
+            @media (max-width: 720px) {
+                height: 20px;
+            }
         }
     }
 `;
