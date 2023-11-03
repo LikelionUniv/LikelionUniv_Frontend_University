@@ -13,6 +13,7 @@ import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectRegister from './components/project/register/ProjectRegister';
 import ProjectList from './components/project/ProjectList';
 import Community from './routes/Community';
+import AboutPage from './routes/AboutPage';
 
 const router = createBrowserRouter([
     {
@@ -73,6 +74,10 @@ const router = createBrowserRouter([
             {
                 path: '/chat',
                 element: <Chat />
+            },
+            {
+                path: '/about',
+                element: <AboutPage />
             }
         ],
     },
