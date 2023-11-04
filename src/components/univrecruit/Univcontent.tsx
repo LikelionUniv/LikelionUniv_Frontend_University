@@ -34,7 +34,7 @@ const Univcontent = () => {
     return (
         <U.ContentDiv>
             <U.ContentSection>
-                {/*Qualifications 부분*/}
+                {/* Qualifications 부분
                 <U.Title>
                     <U.TD>Qualifications</U.TD>
                     <U.TD>지원 자격</U.TD>
@@ -44,21 +44,21 @@ const Univcontent = () => {
                     <U.Qtext>
                         <U.Arrow src={Arrow1}></U.Arrow>
                         <U.Detail>
-                            대학교에 재학 중이거나, <br />
+                            대학교에 재학 중이거나,
                             휴학 중인 학생
                         </U.Detail>
                     </U.Qtext>
                     <U.Qtext>
                         <U.Arrow src={Arrow2}></U.Arrow>
                         <U.Detail>
-                            매주 1회 진행되는 학교 별 <br />
+                            매주 1회 진행되는 학교 별
                             정규 세션에 참여할 수 있는 분
                         </U.Detail>
                     </U.Qtext>
                     <U.Qtext>
                         <U.Arrow src={Arrow3}></U.Arrow>
                         <U.Detail>
-                            개발과 창업에 도전하며 아이디어를 <br />
+                            개발과 창업에 도전하며 아이디어를
                             실현시키려는 열정을 가진 분
                         </U.Detail>
                     </U.Qtext>
@@ -66,27 +66,27 @@ const Univcontent = () => {
                         <U.Arrow src={Arrow4}></U.Arrow>
                         <U.Detail>
                             새로운 것을 배울 의지가 있고,
-                            <br /> 성장을 위해 노력하는 분
+                            성장을 위해 노력하는 분
                         </U.Detail>
                     </U.Qtext>
                     <U.Qtext>
                         <U.Arrow src={Arrow5}></U.Arrow>
                         <U.Detail>
                             협업하는 팀원들과 원활한
-                            <br /> 의사소통이 가능하신 분
+                            의사소통이 가능하신 분
                         </U.Detail>
                     </U.Qtext>
                     <U.Qtext>
                         <U.Arrow src={Arrow6}></U.Arrow>
                         <U.Detail>
                             1년 동안 자신의 역할에 책임감
-                            <br /> 있게 임할 수 있는 분
+                            있게 임할 수 있는 분
                         </U.Detail>
                     </U.Qtext>
                 </U.Qbody>
 
                
-                <U.Title>
+                <U.Title className='recruitSchedule'>
                     <U.TD>Recruitment schedule</U.TD>
                     <U.TD>모집 일정</U.TD>
                 </U.Title>
@@ -123,7 +123,7 @@ const Univcontent = () => {
                 </U.Qbody2>
                 <U.Ps>* 자세한 일정은 학교별 모집 안내문을 확인해 주세요</U.Ps>
 
-                
+                 */}
                 <U.Title>
                     <U.TD>FAQ</U.TD>
                     <U.TD>자주 묻는 질문</U.TD>

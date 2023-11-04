@@ -5,7 +5,7 @@ import gra2 from '../../img/recruit/gra.svg';
 const Header = () => {
     return (
         <U.BlackDiv>
-            <div>
+            <U.Content>
                 <U.T1>대학 리쿠르팅</U.T1>
                 <U.T2>
                     대학 리크루팅에 대한 설명 대학 리크루팅에 대한 설명 대학 리크루팅에 대한 설명 
@@ -16,7 +16,7 @@ const Header = () => {
                     <div>지원하기</div>
                     <img src={Arrow}></img>
                 </U.Button>
-            </div>
+            </U.Content>
 
             <U.Gra src={gra2}></U.Gra>
         </U.BlackDiv>

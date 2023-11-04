@@ -19,6 +19,7 @@ export const ContentDiv = styled.div`
     align-items: center;
     background: var(--Grey-200, #f2f4f6);
     font-family: Pretendard;
+    box-sizing: border-box;
 
     width: 100%;
     padding: 0 20px;
@@ -29,14 +30,14 @@ export const ContentSection = styled.section`
     width: 1200px;
 
     @media screen and (max-width: 1280px) {
-        width: 688px;
+        width: 100%;
     }
 
     @media screen and (max-width: 767px) {
         width: 100%;
         max-width: 727px;
     }
-`
+`;
 
 /* 전체 Title */
 export const Title = styled.div`
@@ -50,6 +51,17 @@ export const Title = styled.div`
     }
 
     margin-bottom: 40px;
+
+    &.recruitSchedule {
+        @media screen and (max-width: 360px) {
+            flex-direction: column;
+            align-items: flex-start;
+
+            & > div {
+                margin-left: 0;
+            }
+        }
+    }
 `;
 
 /* 전체 Title 한글 버전 */
@@ -112,7 +124,12 @@ export const Arrow = styled.img`
     margin-right: 15px;
 `;
 
-export const Detail = styled.div``;
+export const Detail = styled.div`
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+        width: 100%;
+    }
+`;
 
 /* Recruitment schedule 부분 */
 
@@ -175,7 +192,6 @@ export const Qbody3 = styled.div`
         border-top: 1px solid #212224;
     }
 
-    width: 1100px;
     width: 100%;
 `;
 
@@ -278,6 +294,8 @@ export const AnsTable = styled.div`
         border-top: none;
     }
 
-    ${responsiveWidth};
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+    }
 `;
 

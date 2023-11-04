@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 export const BlackDiv = styled.div`
     background: #212224;
     padding-top: 100px;
+    box-sizing: border-box;
 
     font-family: Pretendard;
     color: white;
@@ -25,6 +26,10 @@ export const BlackDiv = styled.div`
     }
 `;
 
+export const Content = styled.div`  
+    width: 100%;
+`;
+
 export const T1 = styled.div`
     color: #fff;
     font-size: 48px;
@@ -32,6 +37,14 @@ export const T1 = styled.div`
     font-weight: 700;
     line-height: normal;
     margin-bottom: 10px;
+
+    @media screen and (max-width: 767px) {
+        font-size: 40px;
+    }
+
+    @media screen and (max-width: 360px) {
+        font-size: 28px;
+    }
 `;
 
 export const T2 = styled.div`
@@ -42,6 +55,14 @@ export const T2 = styled.div`
     line-height: 150%;
     margin-bottom: 48px;
     max-width: 588px;
+
+    @media screen and (max-width: 768px) {
+        max-width: 100%;
+    }
+
+    @media screen and (max-width: 360px) {
+        font-size: 16px;
+    }
 `;
 
 export const T3 = styled.div`
@@ -52,6 +73,10 @@ export const T3 = styled.div`
     line-height: 150%; /* 36px */
 
     margin-bottom: 16px;
+
+    @media screen and (max-width: 767px) {
+        font-size: 20px;
+    }
 `;
 
 export const Button = styled.button`
@@ -76,7 +101,7 @@ export const Button = styled.button`
     align-items: flex-start;
     gap: 202px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 768px) {
         margin: 0 auto;
     }
 
@@ -102,6 +127,7 @@ export const Gra = styled.img`
 
     @media screen and (max-width: 767px) {
         width: 480px;
+        max-width: 100%;
         margin-bottom: 40px;
     }
 `;
