@@ -11,6 +11,8 @@ import { ReactComponent as PixelBulbIcon } from '../../img/landing/pixel_bulb.sv
 import { ReactComponent as PixelStarIcon } from '../../img/landing/pixel_star.svg';
 import { ReactComponent as PixelFootprintsIcon } from '../../img/landing/pixel_footprints.svg';
 import { ReactComponent as PixelCalendarIcon } from '../../img/landing/pixel_calendar.svg';
+import InfoTrackTemp from './InfoTrackTemp';
+import InfoActivityTemp from './InfoActivityTemp';
 //import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
 
 
@@ -40,7 +42,8 @@ const Information = () => {
                         다채로운 경험을 통해 즐겁게 교류하고, 빠르게 성장해요.
                     </IF.SubText>
                     <IF.SectionContainer>
-                        <InfoActivity />
+                        {/*<InfoActivity />*/}
+                        <InfoActivityTemp />
                     </IF.SectionContainer>
                     <IF.Title>
                         <PixelFootprintsIcon />
@@ -50,7 +53,8 @@ const Information = () => {
                         트랙별로 세분화된 경험을 할 수 있어요.
                     </IF.SubText>
                     <IF.SectionContainer>
-                        <InfoTrack />
+                        {/*<InfoTrack />*/}
+                        <InfoTrackTemp />
                     </IF.SectionContainer>
                     <IF.Title>
                         연간 <PixelCalendarIcon />

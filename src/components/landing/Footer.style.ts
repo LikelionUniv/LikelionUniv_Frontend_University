@@ -49,7 +49,7 @@ export const Recruit = styled.div`
                 font-size: 48px;
                 font-weight: 700;
                 @media (max-width: 957px) {
-                    font-size: 4.5vw;
+                    font-size: 4vw;
                 }
                 @media (max-width: 720px) {
                     font-size: 30px;
@@ -108,7 +108,7 @@ export const Recruit = styled.div`
                     background-color: #eb6500;
                 }
                 @media (max-width: 957px) {
-                    font-size: 2.2vw;
+                    font-size: 2vw;
                 }
                 @media (max-width: 720px) {
                     font-size: 16px;

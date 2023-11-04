@@ -79,7 +79,7 @@ const InfoNumber = () => {
     const count1 = useCountUp(11, duration, true);
     const count11 = useCountDown(2013, duration - 500);
     const count2 = useCountUp(10000, duration - 800);
-    const count3 = useCountUp(120, duration - 500, true);
+    const count3 = useCountUp(1500, duration - 500, true);
 
     return (
         <>
@@ -95,11 +95,11 @@ const InfoNumber = () => {
                     </div>
                 </div>
                 <div className="number-rect">
-                    <div className="subtitle">누적 회원</div>
+                    <div className="subtitle">멋사 대학 출신 학생 수</div>
                     <div className="number">{count2.toLocaleString()}⁺</div>
                 </div>
                 <div className="number-rect">
-                    <div className="subtitle">누적 참여 대학</div>
+                    <div className="subtitle">누적 완성 서비스 수</div>
                     <div className="number">{count3}⁺</div>
                 </div>
             </IF.SectionContainer>
