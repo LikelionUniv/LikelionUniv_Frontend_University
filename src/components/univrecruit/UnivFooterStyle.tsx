@@ -16,6 +16,17 @@ export const UnivText = styled.div`
     font-size: 2rem;
     font-weight: 700;
     line-height: 150%;
+
+    @media screen and (max-width: 768px) {
+        color: var(--White, #FFF);
+        text-align: center;
+        /* Title/28_Bold */
+        font-family: Pretendard;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 39.2px */
+    }
 `;
 
 export const UnivBtn = styled.div`

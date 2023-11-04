@@ -70,11 +70,11 @@ const Nav = () => {
             <Container>
                 <div className="left" style={{ visibility: 'hidden'}}>
                     <Logo src={logo} onClick={() => navigate('/')} style={{ visibility: 'visible'}} />
-                    <Text to="/recruit" className="first">
+                    <Text to="/recruit" className="first" style={{ visibility: 'visible'}} >
                         <p>리크루팅</p>
                         <img src={navarrow} />
                     </Text>
-                    <Text to="/univ">
+                    <Text to="/univ" style={{ visibility: 'visible'}} >
                         <p>참여대학</p>
                         <img src={navarrow} />
                     </Text>

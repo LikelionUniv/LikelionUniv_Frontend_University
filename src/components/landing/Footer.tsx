@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import * as F from './Footer.style';
 import recruitimage from '../../img/landing/recruit_image.png';
 import makersbackground from '../../img/landing/makers_background.png';
@@ -31,9 +30,10 @@ const Footer = () => {
                             모집이 시작되면 이메일과 카톡으로 안내받고, <br />
                             멋쟁이사자처럼에 합류해 보세요!
                         </div>
-                        <button className='btn' onClick={openModal}>
+                        <div className="btn" onClick={openModal}>
                             모집 알림 신청하기 <PixelLongArrowIcon />
-                        </button>
+                        </div>
+                        <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                     </div>
                     <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                     <div className="img-rect">

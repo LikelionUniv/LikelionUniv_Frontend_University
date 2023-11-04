@@ -33,7 +33,7 @@ const Univcontent = () => {
 
     return (
         <U.ContentDiv>
-            <div>
+            <U.ContentSection>
                 {/*Qualifications 부분*/}
                 <U.Title>
                     <U.TD>Qualifications</U.TD>
@@ -174,7 +174,7 @@ const Univcontent = () => {
 
                 {/*University 부분*/}
                 
-            </div>
+            </U.ContentSection>
         </U.ContentDiv>
     );
 };

@@ -13,6 +13,16 @@ export const BlackDiv = styled.div`
     justify-content: space-evenly;
     padding-left: 6em;
     padding-right: 6em;
+    width: 100%;
+
+
+    @media screen and (max-width: 767px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 2.875rem 1.25rem;
+    }
 `;
 
 export const T1 = styled.div`
@@ -27,11 +37,11 @@ export const T1 = styled.div`
 export const T2 = styled.div`
     color: #eaecee;
     font-size: 18px;
-    width: 562px;
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
     margin-bottom: 48px;
+    max-width: 588px;
 `;
 
 export const T3 = styled.div`
@@ -65,16 +75,33 @@ export const Button = styled.button`
     justify-content: center;
     align-items: flex-start;
     gap: 202px;
+
+    @media screen and (max-width: 767px) {
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 480px) {
+        justify-content: space-between;
+        width: 320px;
+        padding: 1rem 2rem;
+        gap: 0;
+
+        & > div {
+            width: 100px;
+            white-space: nowrap;
+        }
+    }
 `;
 
 export const Gra = styled.img`
     width: 35em;
 
     @media screen and (max-width: 1280px) {
-        width: 460px;
+        max-width: 332px;
     }
 
-    @media screen and (max-width: 768px) {
-        width: 332px;
+    @media screen and (max-width: 767px) {
+        width: 480px;
+        margin-bottom: 40px;
     }
 `;

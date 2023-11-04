@@ -4,7 +4,7 @@ import Footer from '../components/univrecruit/UnivFooter';
 
 const Recruit = () => {
     return (
-        <div className="pDiv">
+        <div className="pDiv" style={{ width: '100%' }}>
             <Header />
             <Content />
             <Footer />
