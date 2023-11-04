@@ -29,18 +29,15 @@ const Developers = () => {
                 <DevInfo name='양화영' from='00대학교 00기 운영진' position='프론트엔드 파트장'/>
                 <DevInfo name='김강민' from='00대학교 00기 운영진' />
                 <DevInfo name='김예린' from='00대학교 00기 운영진' />
-            </D.PeopleBox>
-            <D.PeopleBox>
+            
                 <DevInfo name='김예지' from='00대학교 00기 운영진'/>
                 <DevInfo name='김진호' from='00대학교 00기 운영진' />
                 <DevInfo name='노하림' from='00대학교 00기 운영진'/>
-            </D.PeopleBox>
-            <D.PeopleBox>
+            
                 <DevInfo name='서가영' from='00대학교 00기 운영진'/>
                 <DevInfo name='이서진' from='00대학교 00기 운영진' />
                 <DevInfo name='조민규' from='00대학교 00기 운영진'/>
-            </D.PeopleBox>
-            <D.PeopleBox>
+            
                 <DevInfo name='최병찬' from='00대학교 00기 운영진'/>
                 <DevInfo name='한영준' from='00대학교 00기 운영진' />
             </D.PeopleBox>
