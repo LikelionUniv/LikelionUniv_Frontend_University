@@ -8,13 +8,13 @@ const responsiveWidth = css`
     }
 
     @media screen and (max-width: 768px) {
-        max-width: 688px;
+        max-width: 680px;
         padding: 5%;
     }
 
-    @media screen and (max-width: 450px) {
-        max-width: 300px;
-        padding: 5%; 
+    @media screen and (max-width: 480px) {
+        max-width: 360px;
+        padding: 3%; 
     }
 `;
 
@@ -46,6 +46,11 @@ export const T1 = styled.div`
     font-weight: 700;
     line-height: 150%; 
 
+    @media (max-width: 500px) {
+        margin-top: 50px;
+        font-size: 16px;
+    }
+
     .link {
         display: flex;
         align-items: center;
@@ -62,6 +67,10 @@ export const T2 = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; 
+    
+    @media (max-width: 500px) {
+        font-size: 48px;
+    }
 `
 export const T3 = styled.div`
     margin: 0 0 64px 2px;
@@ -70,4 +79,8 @@ export const T3 = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: 150%; 
+
+    @media (max-width: 500px) {
+        font-size: 16px;
+    }
 `

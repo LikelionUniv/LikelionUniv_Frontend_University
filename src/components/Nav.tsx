@@ -197,6 +197,9 @@ const Container = styled.div`
     @media (max-width: 1120px) {
         width: 672px;
     }
+    @media (max-width: 500px) {
+        width: 400px;
+    }
     .left {
         width: 60%;
         display: flex;
@@ -225,6 +228,9 @@ const Container = styled.div`
 const Logo = styled.img`
     height: 16px;
     cursor: pointer;
+    @media (max-width: 500px) {
+        margin-right: 20px;
+    }
 `;
 
 const Text = styled(NavLink)`
@@ -239,6 +245,12 @@ const Text = styled(NavLink)`
     display: flex;
     align-items: center;
     cursor: default;
+
+    @media (max-width: 500px) {
+        font-size: 14px;
+        width: 80px;
+    }
+
     &.first {
         margin-left: 10%;
     }

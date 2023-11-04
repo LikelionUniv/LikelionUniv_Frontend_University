@@ -7,13 +7,13 @@ const responsiveWidth = css`
     }
 
     @media screen and (max-width: 768px) {
-        max-width: 688px;
-        padding: 1%;
+        max-width: 680px;
+        padding: 5%;
     }
 
-    @media screen and (max-width: 450px) {
-        max-width: 300px;
-        padding: 5%;
+    @media screen and (max-width: 480px) {
+        max-width: 360px;
+        padding: 3%; 
     }
 `;
 
@@ -72,6 +72,10 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 140%;
+
+        @media screen and (max-width: 500px) {
+            font-size: 22px;
+        }
     }
 `;
 

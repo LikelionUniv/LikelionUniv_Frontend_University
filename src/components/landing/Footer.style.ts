@@ -52,7 +52,7 @@ export const Recruit = styled.div`
                     font-size: 4vw;
                 }
                 @media (max-width: 720px) {
-                    font-size: 30px;
+                    font-size: 28px;
                 }
 
                 svg {
@@ -102,7 +102,7 @@ export const Recruit = styled.div`
                 text-decoration: none;
                 border: none;
                 outline: none;
-                width: 100%;
+                //width: 100%;
                 cursor: pointer;
                 &:hover {
                     background-color: #eb6500;
@@ -112,6 +112,9 @@ export const Recruit = styled.div`
                 }
                 @media (max-width: 720px) {
                     font-size: 16px;
+                }
+                @media (max-width: 500px) {
+                    font-size: 3.4vw;
                 }
 
                 svg {
