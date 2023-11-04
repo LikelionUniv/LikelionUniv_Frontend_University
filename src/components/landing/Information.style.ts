@@ -182,7 +182,8 @@ export const SwiperWrapper = styled.div`
             align-items: center;
         }
         .logo-rect {
-            padding: 24px;
+            margin: 24px;
+            border-radius: 12px;
             width: 31.25%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
@@ -225,30 +226,36 @@ export const SwiperWrapper = styled.div`
     }
 `;
 
-
-export const Box = styled.div<BoxProps>`
+export const ActivityContainer = styled.div`
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    background: ${(props) => props.background || "transparent"};
+    gap: 24px;
+`;
+
+export const Box = styled.div<BoxProps>`
+    width: calc(50% - 60px);
+    display: flex;
+    justify-content: space-between;
+    background: ${props => props.background || 'transparent'};
     border-radius: 8px;
     padding: 24px;
 
     @media (max-width: 1280px) {
         flex-direction: column;
+        justify-content: flex-start;
     }
-    
 
     .hover-text {
-        opacity: 0;
-        font-size: 0;
+        display: none;
     }
     .img-hide {
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            margin-top: 16px;
+            margin-top: 24px;
         }
     }
 
@@ -256,79 +263,86 @@ export const Box = styled.div<BoxProps>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
+
         .name {
-            color: var(--Black, #000);
+            width: 30%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
+            word-break: keep-all;
 
             @media (max-width: 1280px) {
-            flex-direction: row;
-            align-items: center;
-            color: var(--Grey-900, #212224);
-            font-family: Pretendard;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
+                width: 70%;
+                flex-direction: row;
+                align-items: center;
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
             }
         }
 
         @media (max-width: 1280px) {
+            height: 40px;
             flex-direction: row;
+            align-items: center;
+            svg {
+                width: 5vw;
+            }
         }
-
-        
     }
 
     &:hover {
-        background: 
-            ${(props) => props.hoverBackColor},
-            #212224;
-        
-        .title {
-            flex-direction: column;
-            .name {
-                color: #fff;
-                margin-bottom: 16px;
-            }
-        }
-        
-        
-        .hover-hide, .img-hide {
+        background: ${props => props.hoverBackColor}, #212224;
+
+        .hover-hide,
+        .img-hide {
             opacity: 0;
             width: 0;
+            height: 0;
+            margin-top: 0;
         }
         .hover-text {
-            opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            display: block;
+            width: 70%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
+            line-height: 150%;
+        }
+
+        @media (max-width: 1280px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            .title {
+                margin-bottom: 24px;
+            }
+            .hover-text {
+                width: 100%;
+            }
         }
     }
 `;
 
+export const TrackWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+`;
 
 export const TrackBox = styled.div<TrackBoxProps>`
-    width: 100%;
-    height: 100%;
-    height: 400px;
-    max-width: 384px;
-    max-height: 400px;
+    width: calc(50% - 12px);
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: #212224;
     border-radius: 8px;
-
-    @media (max-width: 1280px) {
-        height:80%;
-    }
-    @media (max-width: 768px) {
-        height: 240px;
-    }
 
     .hover-text {
         opacity: 0;
@@ -358,16 +372,15 @@ export const TrackBox = styled.div<TrackBoxProps>`
     }
 
     &:hover {
-
-        .title{
+        .title {
             margin: 40px 0 16px 40px;
             @media (max-width: 768px) {
                 margin: 24px 0 6px 24px;
             }
         }
-        
+
         .name {
-            color: ${(props) => props.hoverColor};
+            color: ${props => props.hoverColor};
             @media (max-width: 768px) {
                 font-size: 15px;
             }
@@ -378,7 +391,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
         }
         .hover-text {
             opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            color: var(--Grey-200, #f2f4f6);
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
@@ -400,7 +413,7 @@ export const PlanBox = styled.div`
     height: 195px;
     .img {
         width: 100%;
-        
+
         @media (max-width: 768px) {
             width: 319px;
         }
@@ -411,7 +424,7 @@ export const PlanBox = styled.div`
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 150%; 
+        line-height: 150%;
         margin: 23.5px 0 7.5px 0;
     }
     .content {
@@ -422,18 +435,17 @@ export const PlanBox = styled.div`
         font-weight: 600;
         line-height: 150%;
     }
-    
-`
+`;
 
 export const SupportBox = styled.div`
     width: 100%;
     gap: 24px;
     display: flex;
     margin-bottom: 24px;
-    
+
     .wrapper {
         width: 100%;
-        background: var(--White, #FFF);
+        background: var(--White, #fff);
         border-radius: 8px;
         padding: 28px 78px;
         display: flex;
@@ -454,4 +466,4 @@ export const SupportBox = styled.div`
             padding: 15px 35px;
         }
     }
-`
+`;
