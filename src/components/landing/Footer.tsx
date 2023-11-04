@@ -47,7 +47,7 @@ const Footer = () => {
                     <div className="text">
                         멋쟁이사자처럼 홈페이지를 만든 사람들이 궁금하다면?
                     </div>
-                    <a href="/" target="_blank" className="btn">
+                    <a href="/about" target="_blank" className="btn">
                         제작자 보기 <PixelArrowIcon />
                     </a>
                 </div>

@@ -7,9 +7,13 @@ import { currentWidthState } from '../../store/landing';
 import maintext from '../../img/landing/main_text.png';
 import mainimage from '../../img/landing/main_image.png';
 import desimage from '../../img/landing/des_image.png';
+import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_long_right_arrow.svg';
 import { ReactComponent as PixelFireworksIcon } from '../../img/landing/pixel_fireworks.svg';
 import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_singing.svg';
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
+import CountDown from './CountDown';
+
+const recruitURL = 'https://www.google.com/intl/ko_kr/forms/about/';
 
 const MainGraphic = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
@@ -43,7 +47,13 @@ const MainGraphic = () => {
         <MG.Wrapper>
             <MG.Background>
                 <div>
-                    <img src={maintext} />
+                    <div className="inner">
+                        <img src={maintext} />
+                        <CountDown />
+                        <a className="btn" href={recruitURL} target="_blank">
+                            아기사자 지원하기 <PixelLongArrowIcon />
+                        </a>
+                    </div>
                 </div>
                 <img src={mainimage} />
             </MG.Background>

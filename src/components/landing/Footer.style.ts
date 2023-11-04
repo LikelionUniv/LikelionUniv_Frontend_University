@@ -103,6 +103,7 @@ export const Recruit = styled.div`
                 border: none;
                 outline: none;
                 width: 100%;
+                cursor: pointer;
                 &:hover {
                     background-color: #eb6500;
                 }
