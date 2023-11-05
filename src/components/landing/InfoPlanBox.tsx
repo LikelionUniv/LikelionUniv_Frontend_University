@@ -7,6 +7,8 @@ const InfoPlanBox = () => {
         <img src={Arrow} alt="" className='img'/>
         <div className='week'>WEEK 1</div>
         <div className='content'>활동 내용 설명을 작성해야해요</div>
+        <div className='week'>WEEK 2</div>
+        <div className='content'>활동 내용 설명을 작성해야해요</div>
     </IF.PlanBox>
     
   )
