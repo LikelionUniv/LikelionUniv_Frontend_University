@@ -26,9 +26,15 @@ const Tab = () => {
         }
     };
 
+    const hongikLikelionSite = 'https://likelionhongik.com/';
+
+    const popupUnivSite = (siteUrl: string): void => {
+        window.open(siteUrl, "_blank");
+    }
+
     return (
         <T.Container>
-            <div>
+            <T.Content>
                 {/* 지역 탭 부분 */}
                 <T.TabWrapper>
                     {regionTab.map(tab => (
@@ -45,7 +51,7 @@ const Tab = () => {
                 {/* 학교명  */}
                 <T.SchoolWrapper>
                     {getFilteredUniversities().map(school => (
-                        <T.TabContent>
+                        <T.TabContent onClick={() => popupUnivSite(hongikLikelionSite)}>
                             <T.SchoolLogo logo={Logo} />
                             <T.SchoolText>
                                 {school.school}
@@ -63,7 +69,7 @@ const Tab = () => {
                         <img src={BtnArrow} alt="버튼화살표" />
                     </T.Btn>
                 </T.BtnWrapper>
-            </div>
+            </T.Content>
         </T.Container>
     );
 };
