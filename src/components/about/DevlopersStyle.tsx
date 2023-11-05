@@ -3,11 +3,17 @@ import { styled, css } from 'styled-components';
 
 const responsiveWidth = css`
     @media screen and (max-width: 1280px) {
-        width: 950px;
+        max-width: 950px;
     }
 
     @media screen and (max-width: 768px) {
-        width: 688px;
+        max-width: 680px;
+        padding: 5%;
+    }
+
+    @media screen and (max-width: 480px) {
+        max-width: 360px;
+        padding: 3%; 
     }
 `;
 
@@ -20,8 +26,15 @@ export const Wrapper = styled.div`
     color: var(--Grey-900, #212224);
     font-family: Pretendard;
     
-    width: 1200px;
+    width: 100%; 
+    max-width: 1200px; 
+    padding: 1rem;
+
     ${responsiveWidth}
+
+    @media screen and (max-width: 450px) {
+        padding: 0.5rem;
+    }
 
     .year {
         border-bottom: 1px solid #EAECEE;
@@ -59,6 +72,10 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 140%;
+
+        @media screen and (max-width: 500px) {
+            font-size: 22px;
+        }
     }
 `;
 
@@ -70,6 +87,17 @@ export const PeopleBox = styled.div`
     grid-template-columns: repeat(3, minmax(auto, 1fr));
     align-items: center; 
     justify-content: space-around;
+
+    @media (max-width: 780px) {
+        grid-template-columns: repeat(2, 1fr); 
+        grid-template-rows: none; 
+    }
+
+    @media (max-width: 530px) {
+        grid-template-columns: repeat(1, 1fr); 
+        grid-template-rows: none; 
+    }
+
 `;
 
 export const InfoBox = styled.div`

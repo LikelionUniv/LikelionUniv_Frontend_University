@@ -54,6 +54,10 @@ export const Title = styled.div`
         font-size: 6vw;
         height: 6vw;
     }
+    @media (max-width: 768px) {
+        font-size: 5.5vw;
+        height: 5.5vw;
+    }
 
     svg {
         flex-shrink: 0;
@@ -108,7 +112,11 @@ export const SectionContainer = styled.div`
                 font-size: 2vw;
             }
             @media (max-width: 768px) {
-                font-size: 3vw;
+                font-size: 2.5vw;
+                padding-bottom: 6%;
+            }
+            @media (max-width: 500px) {
+                font-size: 2vw;
                 padding-bottom: 6%;
             }
         }
@@ -136,6 +144,13 @@ export const SectionContainer = styled.div`
                 margin-top: 8%;
                 sup {
                     font-size: 2.5vw;
+                }
+            }
+            @media (max-width: 500px) {
+                font-size: 5vw;
+                margin-top: 8%;
+                sup {
+                    font-size: 2vw;
                 }
             }
         }
@@ -190,6 +205,9 @@ export const SwiperWrapper = styled.div`
             @media (max-width: 768px) {
                 padding: 20px;
             }
+            @media (max-width: 500px) {
+                padding: 14px;
+            }
             img {
                 width: 100%;
                 height: 100%;
@@ -210,6 +228,9 @@ export const SwiperWrapper = styled.div`
                 }
                 @media (max-width: 768px) {
                     font-size: 2.8vw;
+                }
+                @media (max-width: 500px) {
+                    font-size: 2.5vw;
                 }
             }
             .gen {
@@ -411,11 +432,15 @@ export const TrackBox = styled.div<TrackBoxProps>`
 
 export const PlanBox = styled.div`
     height: 195px;
+
+    @media (max-width: 500px) {
+        height: 130px;
+    }
+
     .img {
         width: 100%;
-
         @media (max-width: 768px) {
-            width: 319px;
+            width: 100%;
         }
     }
     .week {
@@ -426,6 +451,10 @@ export const PlanBox = styled.div`
         font-weight: 700;
         line-height: 150%;
         margin: 23.5px 0 7.5px 0;
+        @media (max-width: 768px) {
+            font-size: 3vw;
+            margin: 15px 0 5px 0;
+        }
     }
     .content {
         color: var(--Grey-900, #212224);
@@ -434,6 +463,9 @@ export const PlanBox = styled.div`
         font-style: normal;
         font-weight: 600;
         line-height: 150%;
+        @media (max-width: 768px) {
+            font-size: 3vw;
+        }
     }
 `;
 

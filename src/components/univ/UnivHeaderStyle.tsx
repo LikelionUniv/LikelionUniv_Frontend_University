@@ -1,14 +1,4 @@
-import { styled, css } from 'styled-components';
-
-const responsiveWidth = css`
-    @media screen and (max-width: 1280px) {
-        width: 950px;
-    }
-
-    @media screen and (max-width: 768px) {
-        width: 688px;
-    }
-`;
+import { styled } from 'styled-components';
 
 export const TopDiv = styled.div`
     display: flex;
@@ -16,9 +6,20 @@ export const TopDiv = styled.div`
     justify-content: center;
     align-items: center;
 
+    padding: 0 40px;
     padding-top: 100px;
     background: var(--Grey-200, #f2f4f6);
+
+    @media screen and (max-width: 767px) {
+        padding: 0 20px;
+        padding-top: 40px;
+    }
 `;
+
+export const Content = styled.section`
+    max-width: 1200px;
+    width: 100%;
+`
 
 export const T1 = styled.div`
     color: var(--Grey-900, #212224);
@@ -30,7 +31,13 @@ export const T1 = styled.div`
     margin-bottom: 24px;
     width: 1200px;
 
-    ${responsiveWidth}
+    width: 100%;
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: 11px;
+        font-size: 28px;
+        line-height: 140%;
+    }
 `;
 
 export const T2 = styled.div`
@@ -43,6 +50,10 @@ export const T2 = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 60px */
+
+    @media screen and (max-width: 767px) {
+        font-size: 20px;
+    }
 `;
 
 export const Num = styled.div`
@@ -59,6 +70,16 @@ export const Num = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 60px */
+
+    @media screen and (max-width: 767px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 72px;
+        height: 36px;
+        flex-shrink: 0;
+        font-size: 20px;
+    }
 `;
 
 export const T3 = styled.div`
@@ -70,4 +91,9 @@ export const T3 = styled.div`
     line-height: 150%; /* 30px */
 
     margin-top: 82px;
+
+    @media screen and (max-width: 767px) {
+        margin-top: 20px;
+        font-size: 16px;
+    }
 `;

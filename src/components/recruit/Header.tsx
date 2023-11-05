@@ -1,3 +1,4 @@
+import React from 'react';
 import * as R from './HeaderStyle';
 import Arrow from '../../img/recruit/warrow.svg';
 import gra2 from '../../img/recruit/gra2.svg';
@@ -5,7 +6,7 @@ import gra2 from '../../img/recruit/gra2.svg';
 const Header = () => {
     return (
         <R.BlackDiv>
-            <div>
+            <R.Content>
                 <R.T1>아기사자 모집</R.T1>
                 <R.T2>
                     아기사자 모집 설명 아기사자 모집 설명 아기사자 모집 설명
@@ -16,7 +17,7 @@ const Header = () => {
                     <div>지원하기</div>
                     <img src={Arrow}></img>
                 </R.Button>
-            </div>
+            </R.Content>
 
             <R.Gra src={gra2}></R.Gra>
         </R.BlackDiv>

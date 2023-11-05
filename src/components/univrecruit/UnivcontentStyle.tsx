@@ -9,9 +9,9 @@ const responsiveWidth = css`
         width: 688px;
     }
 `;
+
 /* 전체 layout */
 export const ContentDiv = styled.div`
-    padding-top: 160px;
     color: #f2f4f6;
     display: flex;
     flex-direction: column;
@@ -19,6 +19,24 @@ export const ContentDiv = styled.div`
     align-items: center;
     background: var(--Grey-200, #f2f4f6);
     font-family: Pretendard;
+    box-sizing: border-box;
+
+    width: 100%;
+    padding: 0 20px;
+    padding-top: 160px;
+`;
+
+export const ContentSection = styled.section`
+    width: 1200px;
+
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+        max-width: 727px;
+    }
 `;
 
 /* 전체 Title */
@@ -33,6 +51,17 @@ export const Title = styled.div`
     }
 
     margin-bottom: 40px;
+
+    &.recruitSchedule {
+        @media screen and (max-width: 360px) {
+            flex-direction: column;
+            align-items: flex-start;
+
+            & > div {
+                margin-left: 0;
+            }
+        }
+    }
 `;
 
 /* 전체 Title 한글 버전 */
@@ -41,6 +70,16 @@ export const TD = styled.div`
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
+
+    @media screen and (max-width: 1280px) {
+        color: var(--Grey-900, #212224);
+
+        font-family: Pretendard;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%;
+    }
 `;
 
 /* Qualifications 부분 */
@@ -54,11 +93,21 @@ export const Qbody = styled.div`
     /* layout */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+
+    @media screen and (max-width: 480px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 360px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
     row-gap: 40px;
     box-sizing: border-box;
     width: 1200px;
     margin-bottom: 160px;
-    ${responsiveWidth};
+
+    width: 100%;
 `;
 
 export const Qtext = styled.div`
@@ -76,7 +125,10 @@ export const Arrow = styled.img`
 `;
 
 export const Detail = styled.div`
-    width: 264px;
+    @media screen and (max-width: 768px) {
+        font-size: 16px;
+        width: 100%;
+    }
 `;
 
 /* Recruitment schedule 부분 */
@@ -89,11 +141,16 @@ export const Qbody2 = styled.div`
     width: 1100px;
 
     /* layout */
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     margin-bottom: 33px;
 
-    ${responsiveWidth}
+    width: 100%;
+
+    @media screen and (max-width: 480px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 24px;
+    }
 `;
 
 export const Qtext2 = styled.div`
@@ -135,7 +192,7 @@ export const Qbody3 = styled.div`
         border-top: 1px solid #212224;
     }
 
-    width: 1100px;
+    width: 100%;
 `;
 
 export const Table = styled.div`
@@ -168,7 +225,7 @@ export const Table = styled.div`
         align-items: center;
     }
 
-    ${responsiveWidth};
+    width: 100%;
 `;
 
 export const Ps2 = styled.div`
@@ -237,6 +294,8 @@ export const AnsTable = styled.div`
         border-top: none;
     }
 
-    ${responsiveWidth};
+    @media screen and (max-width: 1280px) {
+        width: 100%;
+    }
 `;
 

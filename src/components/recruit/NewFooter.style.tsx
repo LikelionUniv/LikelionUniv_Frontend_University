@@ -1,51 +1,5 @@
-import { styled } from 'styled-components';
+import styled from "styled-components";
 
-export const UnivFooterWrapper = styled.div`
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    min-height: 304px;
-    gap: 32px;
-    background: var(--Grey-900, #212224);
-`;
-
-export const UnivText = styled.div`
-    color: var(--White, #fff);
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 150%;
-
-    @media screen and (max-width: 768px) {
-        color: var(--White, #FFF);
-        text-align: center;
-        /* Title/28_Bold */
-        font-family: Pretendard;
-        font-size: 28px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 140%; /* 39.2px */
-    }
-`;
-
-export const UnivBtn = styled.div`
-    display: flex;
-    padding: 16px 32px;
-    align-items: center;
-    gap: 10px;
-    border-radius: 8px;
-    background: var(--Orange-600, #ff7710);
-    cursor: pointer;
-
-    &:hover {
-        background: var(--Grey-900, #212224);
-    }
-    font-size: 20px;
-    font-weight: 700;
-    color: white;
-    line-height: 150%; /* 30px */
-`;
 export const Info = styled.div`
     width: 100%;
     min-height: 100px;
@@ -57,6 +11,7 @@ export const Info = styled.div`
     .container {
         position: relative;
         width: 1200px;
+        margin-top: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -65,39 +20,19 @@ export const Info = styled.div`
         }
 
         .left {
-            @media (max-width: 768px) {
-                gap: 10px;
-                padding: 20px 0;
-            }
             .title {
                 color: #212224;
                 font-size: 28px;
                 font-weight: 700;
                 font-family: Pretendard;
+                margin-bottom: 10px;
             }
             .text {
-                color: #868c94;
+                color: #212224;
                 font-family: Pretendard;
                 font-size: 12px;
                 font-weight: 500;
                 margin-top: 5px;
-                margin-bottom: 20px;
-            }
-            a {
-                display: flex;
-                align-items: center;
-                margin-bottom: 8px;
-                color: #212224;
-                font-family: Pretendard;
-                font-size: 14px;
-                font-weight: 500;
-                text-decoration: none;
-                flex-shrink: 0;
-                svg {
-                    width: 16px;
-                    height: 16px;
-                    margin-left: 3px;
-                }
             }
         }
 

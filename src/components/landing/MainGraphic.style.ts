@@ -44,7 +44,8 @@ export const Background = styled.div`
         flex-direction: column;
         align-items: center;
         @media (max-width: 1280px) {
-            width: 50vw;
+            width: 50vw; // here
+            width: 43%;
             margin-left: 32px;
         }
 
@@ -176,7 +177,7 @@ export const Line = styled.div`
 
 export const Description = styled.div`
     width: calc(100% - 80px);
-    height: 666px;
+    height: 948px;
     background-color: #fff;
     display: flex;
     justify-content: center;
@@ -212,6 +213,9 @@ export const Description = styled.div`
         @media (max-width: 768px) {
             font-size: 6vw;
         }
+        @media (max-width: 500px) {
+            font-size: 5vw;
+        }
 
         svg {
             margin-right: 10px;
@@ -234,7 +238,7 @@ export const Description = styled.div`
         line-height: 150%;
         word-break: keep-all;
         font-size: 20px;
-        margin-top: 20px;
+        margin-top: 8px;
         @media (max-width: 1280px) {
             width: 50vw;
             font-size: 1.6vw;
@@ -256,6 +260,22 @@ export const Description = styled.div`
             margin-left: 0;
             margin-right: 0;
             margin-bottom: 40px;
+        }
+    }
+    .subtitle{
+        color: var(--Orange-600, #FF7710);
+        font-family: Pretendard;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%;
+        margin-top: 40px;
+
+        @media (max-width: 768px) {
+            font-size: 5vw;
+        }
+        @media (max-width: 500px) {
+            font-size: 4vw;
         }
     }
 `;

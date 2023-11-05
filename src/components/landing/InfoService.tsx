@@ -101,17 +101,17 @@ const serviceList: serviceType[] = [
         url: 'https://taling.me/',
     },
     {
-        id: 3,
+        id: 5,
         name: '그루머노트',
         gen: 8,
-        logo: 'https://play-lh.googleusercontent.com/9TbIVU2W-PYGb4YIcxQ83B2pW7bfJ5Ma1gmaJ7Yze3-U8zQ6RH5sIs9pHpy59A7MGm0=w240-h480-rw',
+        logo: 'https://contents.nextunicorn.kr/company/8e939d241e4396d4/service/logo-42db17a9fb38d16f41feac16f73eb7e9f9dd.png?s=200x&t=cover',
         url: 'https://www.groomernote.com/',
     },
     {
-        id: 4,
+        id: 6,
         name: '글루코핏',
         gen: 10,
-        logo: 'https://play-lh.googleusercontent.com/igh7OZpVXDzuozn423LGboFDlz5LIxtMf9ZH8jZj5fRfFOI0mcuANpxq9QVNGyvKKBI=w240-h480-rw',
+        logo: 'https://www.wadiz.kr/ft/images/maker/2023/0203/20230203105915946_null.png',
         url: 'https://glucofit.co.kr/',
     },
 ];

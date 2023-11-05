@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import fArrow from '../../img/recruit/footerArrow.svg';
 import * as F from './FooterStyle';
 import FooterModal from './FooterModal';
