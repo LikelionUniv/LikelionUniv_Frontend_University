@@ -44,7 +44,8 @@ export const Background = styled.div`
         flex-direction: column;
         align-items: center;
         @media (max-width: 1280px) {
-            width: 50vw;
+            width: 50vw; // here
+            width: 43%;
             margin-left: 32px;
         }
 
