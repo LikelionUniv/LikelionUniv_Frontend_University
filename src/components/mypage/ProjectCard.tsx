@@ -31,17 +31,26 @@ export default ProjectCard;
 const ProjectBoxWrapper = styled.div`
     flex-shrink: 0;
     padding-bottom: 16px;
+    position: relative;
     @media (max-width: 1920px) {
         width: 384px;
-        height: 359px;
+        height: 346px;
     }
     @media (max-width: 1280px) {
         width: 31.6%;
-        height: 359px;
+        height: calc(50% - 12px);
     }
     @media (max-width: 1024px) {
         width: calc(50% - 12px);
-        height: 402px;
+        height: 31.6%;
+    }
+    @media (max-width: 479px) {
+        width: 100%;
+        height: 358px;
+    }
+    @media (max-width: 360px) {
+        width: 100%;
+        height: 291px;
     }
 `;
 
@@ -49,6 +58,7 @@ const ProjectBox = styled.div`
     width: 100%;
     line-height: 150%;
     font-weight: 500;
+    position: relative;
     &.img {
         background-repeat: no-repeat;
         background-size: 100% 100%;
@@ -56,29 +66,48 @@ const ProjectBox = styled.div`
         @media (max-width: 1920px) {
             height: 216px;
         }
+        @media (max-width: 1280px) {
+            height: 60%;
+        }
         @media (max-width: 1024px) {
-            height: 259px;
+            height: 64%;
+        }
+        @media (max-width: 479px) {
+            height: 247px;
+        }
+        @media (max-width: 360px) {
+            height: 180px;
         }
     }
     &.title {
         font-size: 28px;
         font-weight: 700;
-        line-height: 140%; /* 39.2px */
+        line-height: 140%;
+        @media (max-width: 767px) {
+            font-size: 20px;
+            line-height: 150%;
+        }
     }
     &.content {
         font-size: 16px;
+        line-height: 150%;
         overflow: hidden;
         text-overflow: ellipsis;
         margin-bottom: 6px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
+        @media (max-width: 767px) {
+            font-size: 14px;
+            line-height: 150%;
+        }
     }
     &.teaminfo {
         display: flex;
         align-items: center;
         gap: 4px;
-        font-size: 12px;
+        font-size: 14px;
+        line-height: 150%;
         color: var(--Grey-700, #868c94);
         .dot {
             width: 2px;
@@ -90,7 +119,9 @@ const ProjectBox = styled.div`
 `;
 
 const Outputtag = styled.div`
-    position: relative;
+    position: absolute;
+    left: 0;
+    bottom: 0;
     z-index: 10;
     display: inline-flex;
     justify-content: center;
@@ -102,10 +133,4 @@ const Outputtag = styled.div`
     color: white;
     font-size: 14px;
     line-height: 150%;
-    @media (max-width: 1920px) {
-        top: 86.5%;
-    }
-    @media (max-width: 1024px) {
-        top: 88.8%;
-    }
 `;

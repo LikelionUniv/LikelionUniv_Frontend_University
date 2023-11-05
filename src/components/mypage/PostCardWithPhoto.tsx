@@ -1,9 +1,9 @@
-import { PostCardBox, PostCardBoxWrapper } from './PostCard';
+import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { PostCardProp } from './type';
 
 const PostCardWithPhoto = (props: PostCardProp) => {
     return (
-        <PostCardBoxWrapper className="photo">
+        <PostCardBoxWrapper className="photo" photoTitle>
             <PostCardBox
                 className="photo"
                 style={{
@@ -11,8 +11,12 @@ const PostCardWithPhoto = (props: PostCardProp) => {
                 }}
             ></PostCardBox>
             <PostCardBox className="date">{props.date}</PostCardBox>
-            <PostCardBox className="title">{props.title}</PostCardBox>
-            <PostCardBox className="photocontent">{props.content}</PostCardBox>
+            <PostCardBox className="title" photoTitle>
+                {props.title}
+            </PostCardBox>
+            <PostCardBox className="content" photoTitle>
+                {props.content}
+            </PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
                     <div className="heart" />

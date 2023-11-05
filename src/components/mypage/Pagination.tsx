@@ -60,7 +60,7 @@ const Pagination = (props: PaginationProp) => {
 export default Pagination;
 
 const PaginationWrapper = styled.div`
-    margin: 0 auto;
+    margin: 0 auto 100px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
