@@ -85,8 +85,10 @@ export const Background = styled.div`
             font-size: 2.1vw;
         }
         @media (max-width: 720px) {
-            font-size: 15px;
-            padding: 10px 22px;
+            font-size: 2vw;
+            padding: 1.6vw 4vw;
+            border-radius: 1vw;
+            margin-top: 3vw;
         }
 
         svg {
@@ -95,7 +97,7 @@ export const Background = styled.div`
                 height: 3vw;
             }
             @media (max-width: 720px) {
-                height: 20px;
+                width: 20%;
             }
         }
     }
@@ -262,8 +264,8 @@ export const Description = styled.div`
             margin-bottom: 40px;
         }
     }
-    .subtitle{
-        color: var(--Orange-600, #FF7710);
+    .subtitle {
+        color: var(--Orange-600, #ff7710);
         font-family: Pretendard;
         font-size: 28px;
         font-style: normal;

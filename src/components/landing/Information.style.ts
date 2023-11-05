@@ -203,10 +203,12 @@ export const SwiperWrapper = styled.div`
             aspect-ratio: 1 / 1;
             overflow: hidden;
             @media (max-width: 768px) {
-                padding: 20px;
+                width: 25%;
+                margin: 2vw;
             }
             @media (max-width: 500px) {
-                padding: 14px;
+                width: 30%;
+                margin: 2vw;
             }
             img {
                 width: 100%;
