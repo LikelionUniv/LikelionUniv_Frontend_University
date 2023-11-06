@@ -6,6 +6,13 @@ import Pagination from './Pagination';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import { PostTestData, ProjectTestData } from './TestData';
 import { PostCardProp, ProjectCardProp } from './type';
+import {
+    SearchAndSortWrapper,
+    SearchBoxWrapper,
+    SearchInput,
+    SearchSVG,
+} from './LikeCompoStyle';
+import SortBox from './SortBox';
 
 const UserPostSelect = () => {
     //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
@@ -55,6 +62,15 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
+            {select === '좋아요' ? (
+                <SearchAndSortWrapper>
+                    <SearchBoxWrapper>
+                        <SearchInput type="text" placeholder="검색" />
+                        <SearchSVG></SearchSVG>
+                    </SearchBoxWrapper>
+                    <SortBox />
+                </SearchAndSortWrapper>
+            ) : null}
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
@@ -83,6 +99,7 @@ const UserPostSelect = () => {
                                         content={e.content}
                                         like={e.like}
                                         comment={e.comment}
+                                        type={select}
                                     />
                                 );
                             } else {
@@ -94,6 +111,7 @@ const UserPostSelect = () => {
                                         content={e.content}
                                         like={e.like}
                                         comment={e.comment}
+                                        type={select}
                                     />
                                 );
                             }

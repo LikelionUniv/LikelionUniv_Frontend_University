@@ -1,7 +1,8 @@
 import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
-import { PostCardProp } from './type';
+import { PostCardPropType } from './type';
+import PostModal from './PostModal';
 
-const PostCardWithPhoto = (props: PostCardProp) => {
+const PostCardWithPhoto = (props: PostCardPropType) => {
     return (
         <PostCardBoxWrapper className="photo" photoTitle>
             <PostCardBox
@@ -10,7 +11,10 @@ const PostCardWithPhoto = (props: PostCardProp) => {
                     backgroundImage: `url(${props.img})`,
                 }}
             ></PostCardBox>
-            <PostCardBox className="date">{props.date}</PostCardBox>
+            <PostCardBox className="date">
+                <div>{props.date}</div>
+                {props.type === '게시글' ? <PostModal /> : null}
+            </PostCardBox>
             <PostCardBox className="title" photoTitle>
                 {props.title}
             </PostCardBox>
