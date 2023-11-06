@@ -1,11 +1,15 @@
 import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
-import { PostCardProp } from './type';
+import { PostCardPropType } from './type';
+import PostModal from './PostModal';
 
-const PostCard = (props: PostCardProp) => {
+const PostCard = (props: PostCardPropType) => {
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료
         <PostCardBoxWrapper>
-            <PostCardBox className="date">{props.date}</PostCardBox>
+            <PostCardBox className="date">
+                <div>{props.date}</div>
+                {props.type === '게시글' ? <PostModal /> : null}
+            </PostCardBox>
             <PostCardBox className="title">{props.title}</PostCardBox>
             <PostCardBox className="content">{props.content}</PostCardBox>
             <PostCardBox className="nav">

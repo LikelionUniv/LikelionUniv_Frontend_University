@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import heart from '../../img/mypage/heart.svg';
 import comment from '../../img/mypage/comment.svg';
+import editdots from '../../img/mypage/editdots.svg';
 
 interface PhotoCheck {
     photoTitle?: boolean;
@@ -13,6 +14,7 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
     align-items: flex-start;
     background: var(--Grey-100, #f6f8f9);
     flex-shrink: 0;
+    position: relative;
     @media (max-width: 1920px) {
         width: 384px;
         height: 362px;
@@ -56,11 +58,25 @@ export const PostCardBox = styled.div<PhotoCheck>`
     width: 100%;
     line-height: 150%;
     font-weight: 500;
+    position: relative;
     &.date {
         color: var(--Grey-700, #868c94);
         font-size: 12px;
         font-weight: 500;
         line-height: 150%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .edit {
+            display: flex;
+            width: 24px;
+            height: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            background-repeat: no-repeat;
+            background-image: url(${editdots});
+        }
     }
     &.title {
         font-size: 20px;
