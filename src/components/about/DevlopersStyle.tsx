@@ -107,7 +107,7 @@ export const InfoBox = styled.div`
     height: 84px;
     margin: 0;
     .image {
-        background-color: grey;
+        background-color: transparent;
         border-radius: 50%;
         width: 80px;
         height: 80px;
