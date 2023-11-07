@@ -1,20 +1,21 @@
 import * as D from './DevlopersStyle'
+import profileImage from '../../img/about/profile.png'
 
 interface InfoProp {
     name: string
     from: string
     position?: string|null
-    profile?: string|null
+    profile?: string
 }
 
-const DevInfo:React.FC<InfoProp> = (props) => {
+const DevInfo:React.FC<InfoProp> = ({name, from, position, profile = profileImage}) => {
   return (
     <D.InfoBox>
-        <img src='https://cdn.pixabay.com/photo/2019/12/11/18/06/snowman-4688913_1280.jpg' alt='' className='image'/>
+        <img src={profile} alt='' className='image'/>
         <div className='info'>
-            <p className='name'>{props.name}</p>
-            <p className='from'>{props.from}</p>
-            {props.position && <p className='position'>{props.position}</p>}
+            <p className='name'>{name}</p>
+            <p className='from'>{from}</p>
+            {position && <p className='position'>{position}</p>}
         </div>
       
     </D.InfoBox>
