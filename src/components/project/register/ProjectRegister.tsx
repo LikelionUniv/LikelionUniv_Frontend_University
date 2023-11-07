@@ -9,7 +9,7 @@ import {
     checkboxes,
     genOptions,
     output,
-    projectCategory,
+    thon,
 } from './RegisterOptions';
 import { ActionMeta } from 'react-select';
 import DropDown, { OptionType } from './DropDown';
@@ -22,22 +22,22 @@ import useArray from '../../../hooks/useArray';
 
 /* form type */
 interface FormState {
-    images: Image[];
-    category: number;
-    categoryEtc: string;
-    output: number;
-    outputEtc: string;
-    start: Date | null;
-    end: Date | null;
+    thon: string;
+    thonEtc: string;
+    outPut: string;
+    outPutEtc: string;
     serviceName: string;
-    introduce: string;
-    detailIntroduce: string;
-    serviceLink: string;
-    stack: number[];
-    stackEtc: string;
+    startDate: Date | null;
+    endDate: Date | null;
+    tech: string[];
+    techEtc: string;
+    description: string;
+    content: string;
+    projectUrl: string;
+    images: Image[];
     generation: number;
     university: string;
-    teamMember: string;
+    members: string;
 }
 
 interface Image {
@@ -50,26 +50,26 @@ const ProjectRegister = () => {
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
 
     const [formState, setFormState] = useState<FormState>({
-        category: 0,
-        categoryEtc: '',
-        images: images,
-        output: 0,
-        outputEtc: '',
-        start: null,
-        end: null,
+        thon: '',
+        thonEtc: '',
+        outPut: '',
+        outPutEtc: '',
         serviceName: '',
-        introduce: '',
-        detailIntroduce: '',
-        serviceLink: '',
-        stack: [],
-        stackEtc: '',
+        startDate: null,
+        endDate: null,
+        tech: [],
+        techEtc: '',
+        description: '',
+        content: '',
+        projectUrl: '',
+        images: images,
         generation: 0,
         university: '',
-        teamMember: '',
+        members: '',
     });
 
-    const [activeCategoryEtc, setActiveCategoryEtc] = useState<boolean>(false);
-    const [activeOutputEtc, setActiveOutputEtc] = useState<boolean>(false);
+    const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
+    const [activeOutPutEtc, setActiveOutPutEtc] = useState<boolean>(false);
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -82,15 +82,15 @@ const ProjectRegister = () => {
             if (selectedOption) {
                 setFormState(prev => ({
                     ...prev,
-                    [field]: selectedOption.value,
+                    [field]: selectedOption.label,
                 }));
 
-                if (field === 'category') {
-                    setActiveCategoryEtc(selectedOption.value === 4);
+                if (field === 'thon') {
+                    setActiveThonEtc(selectedOption.label === '기타');
                 }
 
-                if (field === 'output') {
-                    setActiveOutputEtc(selectedOption.value === 3);
+                if (field === 'outPut') {
+                    setActiveOutPutEtc(selectedOption.label === '기타');
                 }
             }
         };
@@ -122,9 +122,9 @@ const ProjectRegister = () => {
 
         setFormState(prev => ({
             ...prev,
-            stack: state
+            tech: state
                 .filter(checkbox => checkbox.isChecked)
-                .map(checkbox => checkbox.id),
+                .map(checkbox => checkbox.label),
         }));
     };
 
@@ -143,7 +143,7 @@ const ProjectRegister = () => {
                 const file = files[i];
                 const name = file.name;
                 const saved = await readUrl(file);
-                imageMeta.push({name, saved});
+                imageMeta.push({ name, saved });
             }
             setImages(imageMeta);
         }
@@ -174,33 +174,35 @@ const ProjectRegister = () => {
             ...prev,
             images: images,
         }));
-
-        console.log(images);
     }, [images]);
 
     useEffect(() => {
         if (
             formState.images.length === 0 ||
-            formState.category === 0 ||
-            formState.output === 0 ||
-            formState.start === null ||
-            formState.end === null ||
+            formState.thon === '' ||
+            formState.outPut === '' ||
+            formState.startDate === null ||
+            formState.endDate === null ||
             formState.serviceName === '' ||
-            formState.introduce === '' ||
-            formState.detailIntroduce === '' ||
-            formState.stack.length === 0 ||
+            formState.description === '' ||
+            formState.content === '' ||
+            formState.tech.length === 0 ||
             formState.generation === 0 ||
             formState.university === '' ||
-            formState.teamMember === '' ||
-            (formState.category === 4 && formState.categoryEtc === '') ||
-            (formState.output === 3 && formState.outputEtc === '') ||
-            (etcCheck && formState.stackEtc === '')
+            formState.members === '' ||
+            (formState.thon === '기타' && formState.thonEtc === '') ||
+            (formState.outPut === '기타' && formState.outPutEtc === '') ||
+            (etcCheck && formState.techEtc === '')
         ) {
             setIsFill(false);
         } else {
             setIsFill(true);
         }
     }, [formState, etcCheck]);
+
+    useEffect(() => {
+        console.log(formState);
+    }, [formState])
 
     return (
         <P.Container>
@@ -256,16 +258,16 @@ const ProjectRegister = () => {
                     <P.Label>활동유형</P.Label>
                     <DropDown
                         placeholder="활동 선택"
-                        options={projectCategory}
-                        onChange={handleSelectChange('category')}
+                        options={thon}
+                        onChange={handleSelectChange('thon')}
                     />
-                    {activeCategoryEtc ? (
+                    {activeThonEtc ? (
                         <P.Input
                             type="text"
                             placeholder="활동 이름을 입력해주세요."
-                            value={formState.categoryEtc}
+                            value={formState.thonEtc}
                             onChange={event =>
-                                handleInputChange('categoryEtc', event)
+                                handleInputChange('thonEtc', event)
                             }
                         />
                     ) : null}
@@ -275,15 +277,15 @@ const ProjectRegister = () => {
                     <DropDown
                         placeholder="아웃풋 형태 선택"
                         options={output}
-                        onChange={handleSelectChange('output')}
+                        onChange={handleSelectChange('outPut')}
                     />
-                    {activeOutputEtc ? (
+                    {activeOutPutEtc ? (
                         <P.Input
                             type="text"
                             placeholder="아웃풋 형태를 입력해주세요."
-                            value={formState.outputEtc}
+                            value={formState.outPutEtc}
                             onChange={event =>
-                                handleInputChange('outputEtc', event)
+                                handleInputChange('outPutEtc', event)
                             }
                         />
                     ) : null}
@@ -295,14 +297,14 @@ const ProjectRegister = () => {
                             type="date"
                             placeholder="YYYY-MM-DD"
                             value={
-                                formState.start
-                                    ? formState.start
-                                          .toString()
-                                          .substring(0, 10)
+                                formState.startDate
+                                    ? formState.startDate
+                                        .toString()
+                                        .substring(0, 10)
                                     : ''
                             }
                             onChange={event =>
-                                handleInputChange('start', event)
+                                handleInputChange('startDate', event)
                             }
                         />
                         <img src={Hyphen} alt="hyphen" />
@@ -310,11 +312,15 @@ const ProjectRegister = () => {
                             type="date"
                             placeholder="YYYY-MM-DD"
                             value={
-                                formState.end
-                                    ? formState.end.toString().substring(0, 10)
+                                formState.endDate
+                                    ? formState.endDate
+                                          .toString()
+                                          .substring(0, 10)
                                     : ''
                             }
-                            onChange={event => handleInputChange('end', event)}
+                            onChange={event =>
+                                handleInputChange('endDate', event)
+                            }
                         />
                     </P.FlexField>
                 </P.Field>
@@ -334,9 +340,9 @@ const ProjectRegister = () => {
                     <P.Input
                         type="text"
                         placeholder="서비스의 한줄 소개를 입력해주세요."
-                        value={formState.introduce}
+                        value={formState.description}
                         onChange={event =>
-                            handleInputChange('introduce', event)
+                            handleInputChange('description', event)
                         }
                     />
                 </P.Field>
@@ -344,10 +350,8 @@ const ProjectRegister = () => {
                     <P.Label>상세 소개</P.Label>
                     <AutoHeightTextarea
                         placeholder="서비스의 상세 소개를 입력해주세요."
-                        value={formState.detailIntroduce}
-                        onChange={event =>
-                            handleInputChange('detailIntroduce', event)
-                        }
+                        value={formState.content}
+                        onChange={event => handleInputChange('content', event)}
                     />
                 </P.Field>
                 <P.Field>
@@ -355,9 +359,9 @@ const ProjectRegister = () => {
                     <P.Input
                         type="text"
                         placeholder="서비스로 연결되는 링크를 입력해주세요."
-                        value={formState.serviceLink}
+                        value={formState.projectUrl}
                         onChange={event =>
-                            handleInputChange('serviceLink', event)
+                            handleInputChange('projectUrl', event)
                         }
                     />
                 </P.Field>
@@ -373,8 +377,8 @@ const ProjectRegister = () => {
                                 onChange={() => setEtcCheck(prev => !prev)}
                             />
                         </P.CheckEtc>
-                        {checkboxList.map(checkbox => (
-                            <P.CheckArea key={checkbox.id} $id={checkbox.id}>
+                        <P.TechGrid>
+                            {checkboxList.map(checkbox => (
                                 <Checkbox
                                     checkboxId={checkbox.id}
                                     label={checkbox.label}
@@ -387,16 +391,16 @@ const ProjectRegister = () => {
                                         )
                                     }
                                 />
-                            </P.CheckArea>
-                        ))}
+                            ))}
+                        </P.TechGrid>
                     </P.CheckBoxDiv>
                     {etcCheck ? (
                         <P.Input
                             type="text"
                             placeholder="기술 스택을 입력해주세요."
-                            value={formState.stackEtc}
+                            value={formState.techEtc}
                             onChange={event =>
-                                handleInputChange('stackEtc', event)
+                                handleInputChange('techEtc', event)
                             }
                         />
                     ) : null}
@@ -420,10 +424,8 @@ const ProjectRegister = () => {
                     <P.Input
                         type="text"
                         placeholder="팀원 이름을 작성해주세요."
-                        value={formState.teamMember}
-                        onChange={event =>
-                            handleInputChange('teamMember', event)
-                        }
+                        value={formState.members}
+                        onChange={event => handleInputChange('members', event)}
                     />
                 </P.Field>
                 <P.RegisterBtn type="submit" active={isFill}>

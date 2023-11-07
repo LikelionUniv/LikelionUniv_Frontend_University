@@ -333,13 +333,8 @@ export const RegisterBtn = styled.button<{ active: boolean }>`
 `;
 
 export const CheckBoxDiv = styled.div`
-    display: grid;
-    grid-template-areas:
-        'etc . . .'
-        'check1 check2 check3 check4'
-        'check5 check6 check7 check8'
-        'check9 check10 check11 check12';
     width: 100%;
+    height: auto;
 
     padding: 22px 24px;
 
@@ -353,6 +348,10 @@ export const CheckEtc = styled.div`
     grid-area: etc;
 `;
 
-export const CheckArea = styled.div<{ $id: number }>`
-    grid-area: ${props => `check${props.$id}`};
+export const TechGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-row-gap: 8px;
+
+    margin-top: 16px;
 `;
