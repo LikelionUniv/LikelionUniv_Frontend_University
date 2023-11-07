@@ -22,7 +22,7 @@ import useArray from '../../../hooks/useArray';
 
 /* form type */
 interface FormState {
-    images: string[];
+    images: Image[];
     category: number;
     categoryEtc: string;
     output: number;
@@ -47,12 +47,12 @@ interface Image {
 
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
-    const { array: images, pushMany: setImages, remove } = useArray<string>([]); // image 배열
+    const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
 
     const [formState, setFormState] = useState<FormState>({
-        images: images,
         category: 0,
         categoryEtc: '',
+        images: images,
         output: 0,
         outputEtc: '',
         start: null,
@@ -137,14 +137,15 @@ const ProjectRegister = () => {
         const files = event.target.files;
 
         if (files != null) {
-            const newUrls: string[] = [];
+            const imageMeta: Image[] = [];
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                const newUrl = await readUrl(file);
-                newUrls.push(newUrl);
+                const name = file.name;
+                const saved = await readUrl(file);
+                imageMeta.push({name, saved});
             }
-            setImages(newUrls);
+            setImages(imageMeta);
         }
     };
 
@@ -173,6 +174,8 @@ const ProjectRegister = () => {
             ...prev,
             images: images,
         }));
+
+        console.log(images);
     }, [images]);
 
     useEffect(() => {
@@ -232,7 +235,7 @@ const ProjectRegister = () => {
             ) : (
                 <P.Images>
                     {images.map((image, idx) => (
-                        <P.Img key={`img-${idx}`} src={image}>
+                        <P.Img key={`img-${idx}`} src={image.saved}>
                             <P.DeleteBtn
                                 isFirst={idx === 0}
                                 onClick={() => remove(idx)}
