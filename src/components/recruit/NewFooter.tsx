@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../../img/nav/logo.svg';
 
 function NewFooter() {
     return (
-        <div style={{ maxWidth: 1280 }}>
+        <div>
             <F.Info>
                 <div className="container">
                     <div className="left">
