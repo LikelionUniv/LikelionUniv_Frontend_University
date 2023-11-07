@@ -5,12 +5,7 @@ import Hyphen from '../../../img/project/hyphen.svg';
 import Cancel from '../../../img/project/cancel.svg';
 import Vertical from '../../../img/project/vertical.svg';
 import FirstVertical from '../../../img/project/firstVertical.svg';
-import {
-    checkboxes,
-    genOptions,
-    output,
-    thon,
-} from './RegisterOptions';
+import { checkboxes, genOptions, output, thon } from './RegisterOptions';
 import { ActionMeta } from 'react-select';
 import DropDown, { OptionType } from './DropDown';
 import SchoolDropDown from './SchoolDropDown';
@@ -202,7 +197,7 @@ const ProjectRegister = () => {
 
     useEffect(() => {
         console.log(formState);
-    }, [formState])
+    }, [formState]);
 
     return (
         <P.Container>
@@ -299,8 +294,8 @@ const ProjectRegister = () => {
                             value={
                                 formState.startDate
                                     ? formState.startDate
-                                        .toString()
-                                        .substring(0, 10)
+                                          .toString()
+                                          .substring(0, 10)
                                     : ''
                             }
                             onChange={event =>
