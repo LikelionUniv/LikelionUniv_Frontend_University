@@ -105,6 +105,4 @@ const serviceList: serviceType[] = [
         logo: 'https://www.wadiz.kr/ft/images/maker/2023/0203/20230203105915946_null.png',
         url: 'https://glucofit.co.kr/',
     },
-    
-    
 ];

@@ -15,8 +15,6 @@ import InfoTrackTemp from './InfoTrackTemp';
 import InfoActivityTemp from './InfoActivityTemp';
 //import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
 
-
-
 const Information = () => {
     const desWidth = useRecoilValue(currentWidthState);
     return (

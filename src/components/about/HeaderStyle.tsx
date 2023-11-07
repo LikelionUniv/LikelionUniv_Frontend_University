@@ -1,7 +1,5 @@
 import { styled, css } from 'styled-components';
 
-
-
 const responsiveWidth = css`
     @media screen and (max-width: 1280px) {
         max-width: 950px;
@@ -14,7 +12,7 @@ const responsiveWidth = css`
 
     @media screen and (max-width: 480px) {
         max-width: 360px;
-        padding: 3%; 
+        padding: 3%;
     }
 `;
 
@@ -27,9 +25,9 @@ export const Wrapper = styled.div`
     color: var(--Grey-900, #212224);
     font-family: Pretendard;
 
-    width: 100%; 
+    width: 100%;
     max-width: 1200px;
-    padding: 1rem; 
+    padding: 1rem;
 
     ${responsiveWidth}
 
@@ -40,11 +38,11 @@ export const Wrapper = styled.div`
 
 export const T1 = styled.div`
     margin-top: 80px;
-    
+
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%; 
+    line-height: 150%;
 
     @media (max-width: 500px) {
         margin-top: 50px;
@@ -57,30 +55,29 @@ export const T1 = styled.div`
         gap: 8px;
         text-decoration: none;
         color: var(--Grey-900, #212224);
-        
     }
-`
+`;
 export const T2 = styled.div`
     margin: 40px 0 16px 2px;
 
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
-    line-height: 140%; 
-    
+    line-height: 140%;
+
     @media (max-width: 500px) {
         font-size: 48px;
     }
-`
+`;
 export const T3 = styled.div`
     margin: 0 0 64px 2px;
 
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
-    line-height: 150%; 
+    line-height: 150%;
 
     @media (max-width: 500px) {
         font-size: 16px;
     }
-`
+`;

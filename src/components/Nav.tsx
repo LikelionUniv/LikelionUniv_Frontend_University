@@ -68,13 +68,21 @@ const Nav = () => {
             }
         >
             <Container>
-                <div className="left" style={{ visibility: 'hidden'}}>
-                    <Logo src={logo} onClick={() => navigate('/')} style={{ visibility: 'visible'}} />
-                    <Text to="/recruit" className="first" style={{ visibility: 'visible'}} >
+                <div className="left" style={{ visibility: 'hidden' }}>
+                    <Logo
+                        src={logo}
+                        onClick={() => navigate('/')}
+                        style={{ visibility: 'visible' }}
+                    />
+                    <Text
+                        to="/recruit"
+                        className="first"
+                        style={{ visibility: 'visible' }}
+                    >
                         <p>리크루팅</p>
                         <img src={navarrow} />
                     </Text>
-                    <Text to="/univ" style={{ visibility: 'visible'}} >
+                    <Text to="/univ" style={{ visibility: 'visible' }}>
                         <p>참여대학</p>
                         <img src={navarrow} />
                     </Text>
@@ -87,7 +95,7 @@ const Nav = () => {
                         <img src={navarrow} />
                     </Text>
                 </div>
-                <div className="right" style={{ visibility: 'hidden'}}>
+                <div className="right" style={{ visibility: 'hidden' }}>
                     {isLogin ? (
                         <>
                             <ChatBtn to="/chat">

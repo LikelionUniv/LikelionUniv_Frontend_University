@@ -2,25 +2,24 @@ import styled from 'styled-components';
 
 interface TitleProps {
     color?: string;
-  }
+}
 
 interface CardProp {
-    title: string
-    content: string
+    title: string;
+    content: string;
     color?: string;
 }
 
+const TrackBox: React.FC<CardProp> = props => {
+    return (
+        <Box>
+            <Title color={props.color}>{props.title}</Title>
+            <Content>{props.content} </Content>
+        </Box>
+    );
+};
 
-const TrackBox:React.FC<CardProp> = (props) => {
-  return (
-    <Box>
-      <Title color={props.color}>{props.title}</Title>
-      <Content>{props.content} </Content>
-    </Box>
-  )
-}
-
-export default TrackBox
+export default TrackBox;
 
 const Box = styled.div`
     padding: 40px;
@@ -36,30 +35,28 @@ const Box = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
 
-   
-
     @media (max-width: 760px) {
-        padding: 25px; 
+        padding: 25px;
         height: 35vh;
-        max-height: 320px; 
+        max-height: 320px;
     }
 
     @media (max-width: 480px) {
         padding: 18px;
-        height: 25vh; 
+        height: 25vh;
         max-height: 320px;
         gap: 8px;
     }
-`
+`;
 
 const Title = styled.div<TitleProps>`
-    color: ${(props) => props.color || "transparent"};
+    color: ${props => props.color || 'transparent'};
 
     font-family: Pretendard;
     font-size: 28px;
     font-style: normal;
     font-weight: 700;
-    line-height: 140%; 
+    line-height: 140%;
 
     @media (max-width: 760px) {
         font-size: 20px;
@@ -68,16 +65,15 @@ const Title = styled.div<TitleProps>`
     @media (max-width: 500px) {
         font-size: 3.8vw;
     }
-
-`
+`;
 
 const Content = styled.div`
-    color: var(--Grey-200, #F2F4F6);
+    color: var(--Grey-200, #f2f4f6);
     font-family: Pretendard;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;
-    line-height: 150%; 
+    line-height: 150%;
 
     @media (max-width: 760px) {
         font-size: 16px;
@@ -89,4 +85,4 @@ const Content = styled.div`
     @media (max-width: 400px) {
         font-size: 12px;
     }
-`
+`;

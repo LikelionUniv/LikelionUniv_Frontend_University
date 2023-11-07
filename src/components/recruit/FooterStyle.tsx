@@ -36,7 +36,6 @@ export const Btn = styled.div`
     line-height: 150%; /* 30px */
 `;
 
-
 export const Info = styled.div`
     width: 100%;
     min-height: 100px;

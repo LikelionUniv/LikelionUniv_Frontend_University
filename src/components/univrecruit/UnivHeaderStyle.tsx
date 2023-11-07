@@ -16,7 +16,6 @@ export const BlackDiv = styled.div`
     padding-right: 6em;
     width: 100%;
 
-
     @media screen and (max-width: 767px) {
         flex-direction: column-reverse;
         align-items: center;
@@ -26,7 +25,7 @@ export const BlackDiv = styled.div`
     }
 `;
 
-export const Content = styled.div`  
+export const Content = styled.div`
     width: 100%;
 `;
 

@@ -3,27 +3,25 @@ import { ReactComponent as Arrow } from '../../img/landing/pixel_arrow_white.svg
 
 import { ReactComponent as HackathonImg } from '../../img/landing/hackathon.svg';
 
-interface TitleProps{
-    name: any
+interface TitleProps {
+    name: any;
 }
 
-const ActivityBox:React.FC<TitleProps> = (props) => {
-  return (
-    <>
-        <Box>
-            <div className='title'>
-                <div className='name'>{props.name}</div>
-                <Arrow className="hover-hide"/>
-            </div>
-            <HackathonImg className="img-hide"/>
-        </Box>
-      
-    </>
-  )
-}
+const ActivityBox: React.FC<TitleProps> = props => {
+    return (
+        <>
+            <Box>
+                <div className="title">
+                    <div className="name">{props.name}</div>
+                    <Arrow className="hover-hide" />
+                </div>
+                <HackathonImg className="img-hide" />
+            </Box>
+        </>
+    );
+};
 
-export default ActivityBox
-
+export default ActivityBox;
 
 export const Box = styled.div`
     //max-width: 588px;
@@ -33,8 +31,6 @@ export const Box = styled.div`
     border-radius: 8px;
     padding: 24px;
     max-height: 240px;
-    
-
 
     @media (max-width: 1280px) {
         flex-direction: column;
@@ -59,27 +55,25 @@ export const Box = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
-        
+
         .name {
-            color: #FFF;
+            color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
 
             @media (max-width: 1280px) {
-            flex-direction: row;
-            align-items: center;
-            font-family: Pretendard;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
+                flex-direction: row;
+                align-items: center;
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
             }
             @media (max-width: 500px) {
                 font-size: 3.8vw;
             }
         }
-        
 
         @media (max-width: 1280px) {
             flex-direction: row;
@@ -87,11 +81,5 @@ export const Box = styled.div`
         @media (max-width: 500px) {
             align-items: center;
         }
-
-        
     }
-
-   
 `;
-
-

@@ -262,8 +262,8 @@ export const Description = styled.div`
             margin-bottom: 40px;
         }
     }
-    .subtitle{
-        color: var(--Orange-600, #FF7710);
+    .subtitle {
+        color: var(--Orange-600, #ff7710);
         font-family: Pretendard;
         font-size: 28px;
         font-style: normal;

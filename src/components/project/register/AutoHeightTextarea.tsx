@@ -2,19 +2,19 @@ import { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 
 interface ITextarea {
-    value: string
-    placeholder: string
-    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void
+    value: string;
+    placeholder: string;
+    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
 function AutoHeightTextarea(props: ITextarea) {
     const textRef = useRef<HTMLTextAreaElement>(null);
     const handleResize = useCallback(() => {
         if (textRef.current !== null) {
-            textRef.current.style.height = '0px'; 
+            textRef.current.style.height = '0px';
             textRef.current.style.height = textRef.current.scrollHeight + 'px';
         }
-    }, [])
+    }, []);
 
     return (
         <Textarea
@@ -24,10 +24,10 @@ function AutoHeightTextarea(props: ITextarea) {
             onInput={handleResize}
             onChange={props.onChange}
         />
-    )
+    );
 }
 
-export default AutoHeightTextarea
+export default AutoHeightTextarea;
 
 const Textarea = styled.textarea`
     width: 100%;
@@ -44,7 +44,7 @@ const Textarea = styled.textarea`
     color: var(--grey-900, #212224);
     font-weight: 500;
     line-height: 150%;
-    
+
     outline: 0;
     resize: none;
     overflow-y: hidden;

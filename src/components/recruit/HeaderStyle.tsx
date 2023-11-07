@@ -25,7 +25,7 @@ export const BlackDiv = styled.div`
     }
 `;
 
-export const Content = styled.div`  
+export const Content = styled.div`
     width: 100%;
 `;
 
@@ -120,13 +120,13 @@ export const Button = styled.button`
 export const Gra = styled.img`
     width: 35em;
 
-@media screen and (max-width: 1280px) {
-    max-width: 332px;
-}
+    @media screen and (max-width: 1280px) {
+        max-width: 332px;
+    }
 
-@media screen and (max-width: 767px) {
-    width: 480px;
-    max-width: 100%;
-    margin-bottom: 40px;
-}
+    @media screen and (max-width: 767px) {
+        width: 480px;
+        max-width: 100%;
+        margin-bottom: 40px;
+    }
 `;

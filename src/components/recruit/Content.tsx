@@ -87,7 +87,7 @@ const Content = () => {
                 </R.Qbody>
 
                 {/*Recruitment schedule 부분*/}
-                <R.Title className='recruitSchedule'>
+                <R.Title className="recruitSchedule">
                     <R.TD>Recruitment schedule</R.TD>
                     <R.TD>모집 일정</R.TD>
                 </R.Title>
@@ -172,9 +172,6 @@ const Content = () => {
                     <img src={Mail}></img>
                     <p>이메일로 문의하기</p>
                 </R.Ps2>
-
-                
-             
             </R.ContentSection>
         </R.ContentDiv>
     );

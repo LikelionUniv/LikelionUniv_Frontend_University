@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 // 전체 layout
 export const Container = styled.div`
@@ -28,7 +28,7 @@ export const Caption = styled.div`
 
     width: 100%;
     margin-bottom: 24px;
-`
+`;
 
 export const Label = styled.div`
     color: #212224;
@@ -50,10 +50,10 @@ export const ImgRegisterBtn = styled.button`
 
     padding: 8px 20px;
     background-color: transparent;
-    border: 1px solid #DCDFE3;
+    border: 1px solid #dcdfe3;
     border-radius: 6px;
 
-    color: #4D5359;
+    color: #4d5359;
     text-align: center;
     font-family: 'Pretendard';
     font-size: 16px;
@@ -78,18 +78,18 @@ export const ImgRegisterGuide = styled.ul`
     padding-left: 16px;
 
     border-radius: 8px;
-    background: #FFF2E8;
+    background: #fff2e8;
     box-sizing: border-box;
     list-style-type: none;
 `;
 
 export const Li = styled.li`
-    color: #4D5359;
+    color: #4d5359;
     font-family: 'Pretendard';
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 150%; 
+    line-height: 150%;
 
     &:before {
         content: '-';
@@ -98,7 +98,7 @@ export const Li = styled.li`
 `;
 
 export const Accent = styled.span`
-    color: #FF7710;
+    color: #ff7710;
 
     font-family: 'Pretendard';
     font-size: 16px;
@@ -116,9 +116,9 @@ export const ImageMent = styled.div`
     min-height: 120px;
 
     border-radius: 8px;
-    background: #F2F4F6;
+    background: #f2f4f6;
 
-    color: #ADB3BA;
+    color: #adb3ba;
     text-align: center;
 
     font-family: 'Pretendard';
@@ -126,7 +126,6 @@ export const ImageMent = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
-
 `;
 
 export const Images = styled.div`
@@ -141,9 +140,9 @@ export const Images = styled.div`
     padding: 16px;
 
     border-radius: 8px;
-    background: #F2F4F6;
+    background: #f2f4f6;
 
-    color: #ADB3BA;
+    color: #adb3ba;
     text-align: center;
 
     font-family: 'Pretendard';
@@ -177,7 +176,10 @@ export const DeleteBtn = styled.button<{ isFirst: boolean }>`
 
     border-radius: 4.516px;
     border: none;
-    background: ${props => props.isFirst ? 'var(--Orange-600, #FF7710)' : 'var(--Grey-900, #212224)'};
+    background: ${props =>
+        props.isFirst
+            ? 'var(--Orange-600, #FF7710)'
+            : 'var(--Grey-900, #212224)'};
 
     &:hover {
         cursor: pointer;
@@ -186,7 +188,7 @@ export const DeleteBtn = styled.button<{ isFirst: boolean }>`
 
 export const ImgNumber = styled.div`
     width: 20px;
-    color: var(--White, #FFF);
+    color: var(--White, #fff);
     text-align: center;
 
     font-family: Pretendard;
@@ -220,11 +222,11 @@ export const Field = styled.div`
 export const FlexField = styled.div`
     display: flex;
     justify-content: flex-start;
-`
+`;
 export const Gap = styled.div`
     width: 8px;
     height: 8px;
-`
+`;
 
 export const PeriodInput = styled.input<{ value: any }>`
     position: relative;
@@ -236,10 +238,11 @@ export const PeriodInput = styled.input<{ value: any }>`
     box-sizing: border-box;
 
     border-radius: 6px;
-    border: 1px solid var(--Grey-400, #DCDFE3);
-    background: var(--White, #FFF);
+    border: 1px solid var(--Grey-400, #dcdfe3);
+    background: var(--White, #fff);
 
-    color: ${props => props.value ? 'var(--Grey-900, #212224)' : 'var(--grey-600, #adb3ba)'};
+    color: ${props =>
+        props.value ? 'var(--Grey-900, #212224)' : 'var(--grey-600, #adb3ba)'};
     font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
@@ -261,8 +264,8 @@ export const PeriodInput = styled.input<{ value: any }>`
     }
 
     &::before {
-        display: ${props => props.value ? 'none' : 'block'};
-        content: attr(placeholder); 
+        display: ${props => (props.value ? 'none' : 'block')};
+        content: attr(placeholder);
         width: 100%;
         height: 100%;
     }
@@ -272,13 +275,12 @@ export const PeriodInput = styled.input<{ value: any }>`
     }
 
     &:hover {
-        border-color: #FF7710;
+        border-color: #ff7710;
     }
 
     &:focus {
-        border-color: #FF7710;
+        border-color: #ff7710;
     }
-
 `;
 
 export const Input = styled.input`
@@ -296,7 +298,7 @@ export const Input = styled.input`
     color: var(--grey-900, #212224);
     font-weight: 500;
     line-height: 150%;
-    
+
     outline: 0;
 
     &::placeholder {
@@ -314,9 +316,9 @@ export const RegisterBtn = styled.button<{ active: boolean }>`
 
     border-radius: 8px;
     border: none;
-    background: ${props => props.active ?  '#FF7710' : '#ADB3BA'};
+    background: ${props => (props.active ? '#FF7710' : '#ADB3BA')};
 
-    color: var(--White, #FFF);
+    color: var(--White, #fff);
     text-align: center;
 
     font-family: 'Pretendard';
@@ -326,7 +328,7 @@ export const RegisterBtn = styled.button<{ active: boolean }>`
     line-height: 150%;
 
     &:hover {
-        ${props => props.active ? 'cursor: pointer' : 'null'};
+        ${props => (props.active ? 'cursor: pointer' : 'null')};
     }
 `;
 
@@ -336,8 +338,7 @@ export const CheckBoxDiv = styled.div`
         'etc . . .'
         'check1 check2 check3 check4'
         'check5 check6 check7 check8'
-        'check9 check10 check11 check12'
-    ;
+        'check9 check10 check11 check12';
     width: 100%;
 
     padding: 22px 24px;
@@ -350,8 +351,8 @@ export const CheckBoxDiv = styled.div`
 
 export const CheckEtc = styled.div`
     grid-area: etc;
-`
+`;
 
 export const CheckArea = styled.div<{ $id: number }>`
     grid-area: ${props => `check${props.$id}`};
-`
+`;

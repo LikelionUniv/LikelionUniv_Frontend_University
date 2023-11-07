@@ -21,7 +21,10 @@ const UnivFooter = () => {
     return (
         <>
             <F.UnivFooterWrapper>
-                <F.UnivText>모집 알림 신청하고 {!isPC && <br />}멋쟁이사자처럼에서 만나요!</F.UnivText>
+                <F.UnivText>
+                    모집 알림 신청하고 {!isPC && <br />}멋쟁이사자처럼에서
+                    만나요!
+                </F.UnivText>
                 <F.UnivBtn onClick={openModal}>
                     모집 알림 신청하기
                     <img src={fArrow} alt="버튼화살표" />

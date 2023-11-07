@@ -1,75 +1,76 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { PostCardProp } from '../mypage/type';
-import heart from '../../img/community/heart16.svg'
+import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
 
-
-export interface PostBoxProp extends PostCardProp{
-    user: string
-    profile: string|null
+export interface PostBoxProp extends PostCardProp {
+    user: string;
+    profile: string | null;
 }
 
+const PostBox: React.FC<PostBoxProp> = props => {
+    return (
+        <Wrapper>
+            <BoxWrapper>
+                <Box className="title">{props.title}</Box>
+                <Box className="content">{props.content}</Box>
+                <Box className="nav">
+                    <div className="wrapper">
+                        <Box
+                            className="profile"
+                            style={{
+                                backgroundImage: `url(${props.profile})`,
+                            }}
+                        ></Box>
+                        <div className="user">{props.user}</div>
+                    </div>
+                    <Dot />
+                    <Box className="date">{props.date}</Box>
+                    <Dot />
+                    <div className="wrapper">
+                        <div className="heart" />
+                        <div>{props.like}</div>
+                    </div>
+                    <Dot />
+                    <div className="wrapper">
+                        <div className="comment" />
+                        <div>{props.comment}</div>
+                    </div>
+                </Box>
+            </BoxWrapper>
+            <Box
+                className="photo"
+                img={props.img}
+                style={{
+                    backgroundImage: props.img ? `url(${props.img})` : 'none',
+                }}
+            ></Box>
+        </Wrapper>
+    );
+};
 
-const PostBox:React.FC<PostBoxProp> = (props) => {
-  return (
-    <Wrapper>
-        <BoxWrapper>
-            <Box className="title">{props.title}</Box>
-            <Box className="content">{props.content}</Box>
-            <Box className="nav">
-                <div className="wrapper">
-                    <Box
-                        className="profile"
-                        style={{
-                            backgroundImage: `url(${props.profile})`,
-                        }}
-                    ></Box>
-                    <div className="user">{props.user}</div>
-                </div>
-                <Dot/>
-                <Box className="date">{props.date}</Box>
-                <Dot/>
-                <div className="wrapper">
-                    <div className="heart" />
-                    <div>{props.like}</div>
-                </div>
-                <Dot/>
-                <div className="wrapper">
-                    <div className="comment" />
-                    <div>{props.comment}</div>
-                </div>
-            </Box>
-        </BoxWrapper>
-        <Box className="photo" img={props.img} style={{
-            backgroundImage: props.img ? `url(${props.img})` : 'none',
-        }}> 
-        </Box>
-    </Wrapper>
-  )
-}
-
-export default PostBox
+export default PostBox;
 
 const Wrapper = styled.div`
-  width: 100%;
-  height: 216px; 
-  border-bottom: 1px solid #DCDFE3;
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    height: 216px;
+    border-bottom: 1px solid #dcdfe3;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 const BoxWrapper = styled.div`
-  padding: 28px 32px 28px 0;
+    padding: 28px 32px 28px 0;
 `;
 
 const Dot = styled.div`
     width: 2px;
     height: 2px;
-    background-color: var(--Grey-500, #D1D4D8);
+    background-color: var(--Grey-500, #d1d4d8);
     border-radius: 50%;
-`
+`;
 
 //디테일 수정 필요
 export const Box = styled.div<{ img?: string | null }>`
@@ -102,8 +103,8 @@ export const Box = styled.div<{ img?: string | null }>`
     &.photo {
         background-repeat: no-repeat;
         flex-shrink: 0;
-        width: ${props => props.img ? '180px' : '0'};
-        height: ${props => props.img ? '180px' : '0'};
+        width: ${props => (props.img ? '180px' : '0')};
+        height: ${props => (props.img ? '180px' : '0')};
         background-size: cover;
     }
     &.nav {
@@ -135,14 +136,15 @@ export const Box = styled.div<{ img?: string | null }>`
                     width: auto;
                     font-weight: 700;
                     color: var(--Grey-900, #212224);
-                }.profile {
+                }
+                .profile {
                     background-repeat: no-repeat;
                     flex-shrink: 0;
                     width: 28px;
                     height: 28px;
                     background-size: cover;
                     border-radius: 50%;
-                    border: 0.5px solid #EAECEE;
+                    border: 0.5px solid #eaecee;
                     margin-right: 2px;
                 }
             }

@@ -246,19 +246,17 @@ export const SwiperWrapper = styled.div`
     }
 `;
 
-
 export const Box = styled.div<BoxProps>`
     width: 100%;
     display: flex;
     justify-content: space-between;
-    background: ${(props) => props.background || "transparent"};
+    background: ${props => props.background || 'transparent'};
     border-radius: 8px;
     padding: 24px;
 
     @media (max-width: 1280px) {
         flex-direction: column;
     }
-    
 
     .hover-text {
         opacity: 0;
@@ -277,7 +275,7 @@ export const Box = styled.div<BoxProps>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
+
         .name {
             color: var(--Black, #000);
             font-family: Pretendard;
@@ -285,28 +283,24 @@ export const Box = styled.div<BoxProps>`
             font-weight: 700;
 
             @media (max-width: 1280px) {
-            flex-direction: row;
-            align-items: center;
-            color: var(--Grey-900, #212224);
-            font-family: Pretendard;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
+                flex-direction: row;
+                align-items: center;
+                color: var(--Grey-900, #212224);
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
             }
         }
 
         @media (max-width: 1280px) {
             flex-direction: row;
         }
-
-        
     }
 
     &:hover {
-        background: 
-            ${(props) => props.hoverBackColor},
-            #212224;
-        
+        background: ${props => props.hoverBackColor}, #212224;
+
         .title {
             flex-direction: column;
             .name {
@@ -314,15 +308,15 @@ export const Box = styled.div<BoxProps>`
                 margin-bottom: 16px;
             }
         }
-        
-        
-        .hover-hide, .img-hide {
+
+        .hover-hide,
+        .img-hide {
             opacity: 0;
             width: 0;
         }
         .hover-text {
             opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            color: var(--Grey-200, #f2f4f6);
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
@@ -330,7 +324,6 @@ export const Box = styled.div<BoxProps>`
         }
     }
 `;
-
 
 export const TrackBox = styled.div<TrackBoxProps>`
     width: 100%;
@@ -345,7 +338,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
     border-radius: 8px;
 
     @media (max-width: 1280px) {
-        height:80%;
+        height: 80%;
     }
     @media (max-width: 768px) {
         height: 240px;
@@ -379,16 +372,15 @@ export const TrackBox = styled.div<TrackBoxProps>`
     }
 
     &:hover {
-
-        .title{
+        .title {
             margin: 40px 0 16px 40px;
             @media (max-width: 768px) {
                 margin: 24px 0 6px 24px;
             }
         }
-        
+
         .name {
-            color: ${(props) => props.hoverColor};
+            color: ${props => props.hoverColor};
             @media (max-width: 768px) {
                 font-size: 15px;
             }
@@ -399,7 +391,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
         }
         .hover-text {
             opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            color: var(--Grey-200, #f2f4f6);
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
@@ -429,7 +421,6 @@ export const PlanBox = styled.div`
         @media (max-width: 768px) {
             width: 100%;
         }
-        
     }
     .week {
         color: var(--Grey-900, #212224);
@@ -437,7 +428,7 @@ export const PlanBox = styled.div`
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 150%; 
+        line-height: 150%;
         margin: 23.5px 0 7.5px 0;
         @media (max-width: 768px) {
             font-size: 3vw;
@@ -455,18 +446,17 @@ export const PlanBox = styled.div`
             font-size: 3vw;
         }
     }
-    
-`
+`;
 
 export const SupportBox = styled.div`
     width: 100%;
     gap: 24px;
     display: flex;
     margin-bottom: 24px;
-    
+
     .wrapper {
         width: 100%;
-        background: var(--White, #FFF);
+        background: var(--White, #fff);
         border-radius: 8px;
         padding: 28px 78px;
         display: flex;
@@ -487,4 +477,4 @@ export const SupportBox = styled.div`
             padding: 15px 35px;
         }
     }
-`
+`;
