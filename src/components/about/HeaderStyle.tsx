@@ -11,8 +11,8 @@ const responsiveWidth = css`
     }
 
     @media screen and (max-width: 480px) {
-        max-width: 360px;
-        padding: 3%;
+        //max-width: 360px;
+        padding: 5%;
     }
 `;
 
