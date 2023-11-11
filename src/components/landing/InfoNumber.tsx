@@ -83,13 +83,15 @@ const InfoNumber = () => {
 
     return (
         <>
-            <IF.Title>
-                숫자가 <PixelNumberIcon />
-                말해주는 멋사
+            <IF.Title className="br">
+                <span>
+                    숫자가 <PixelNumberIcon />
+                </span>
+                <span className="right">말해주는 멋사</span>
             </IF.Title>
             <IF.SectionContainer ref={numberRef}>
                 <div className="number-rect">
-                    <div className="subtitle">시작한지</div>
+                    <div className="subtitle">시작된지</div>
                     <div className="number">
                         {count1}년<sup>{count11}~</sup>
                     </div>

@@ -49,9 +49,11 @@ const MainGraphic = () => {
                 <div>
                     <div className="inner">
                         <img src={maintext} />
+                        <div className="new-text">12기 신규 대학 모집 중!</div>
                         <CountDown />
                         <a className="btn" href={recruitURL} target="_blank">
-                            아기사자 지원하기 <PixelLongArrowIcon />
+                            신규 대학 지원하기{' '}
+                            <PixelLongArrowIcon fill="#ffffff" />
                         </a>
                     </div>
                 </div>
@@ -87,19 +89,27 @@ const MainGraphic = () => {
                     <div className="title">
                         <PixelLionIcon /> 멋쟁이사자처럼
                     </div>
-                    <div className='subtitle'>”내 아이디어를 내 손으로 실현하자!”</div>
-                    <div className="text">
-                        2013년, 서울대학교에서 이두희 대표를 필두로 시작된 ‘멋쟁이사자처럼 대학’. 
-                        현재는 국내외 121개 대학, 4천여 명이 활동하는 국내 최대 규모의 IT 창업 동아리로 자리매김하였습니다. 
-                        “내 아이디어를 내 손으로 실현한다”는 모토로, 누구든지 자신이 원하는 IT 서비스를 구현할 수 있도록 각종 스터디와 네트워킹, 
-                        행사를 지원하고 있죠.
+                    <div className="subtitle">
+                        ”내 아이디어를 내 손으로 실현하자!”
                     </div>
-                    <div className='subtitle'>”Growl to World, 이제는 세계로”</div>
                     <div className="text">
-                        2024년, 멋쟁이사자처럼 대학은 대한민국과 미국의 커뮤니티를 연결하여 
-                        “Growl to World”라는 비전을 실현하기 위해 전 세계로 뻗어 나갑니다. 
-                        글로벌 IT 창업 인재들이 함께 성장하는 커뮤니티로 발돋움할 멋쟁이사자처럼 대학의 미래를 함께 기대해주세요!
-                        2013년, 뜨거운 마음에서 일어난 작은 불씨가 세상을 어떻게 변화시킬까요?
+                        2013년, 서울대학교에서 이두희 대표를 필두로 시작된
+                        ‘멋쟁이사자처럼 대학’. 현재는 국내외 121개 대학, 4천여
+                        명이 활동하는 국내 최대 규모의 IT 창업 동아리로
+                        자리매김하였습니다. “내 아이디어를 내 손으로 실현한다”는
+                        모토로, 누구든지 자신이 원하는 IT 서비스를 구현할 수
+                        있도록 각종 스터디와 네트워킹, 행사를 지원하고 있죠.
+                    </div>
+                    <div className="subtitle">
+                        ”Growl to World, 이제는 세계로”
+                    </div>
+                    <div className="text">
+                        2024년, 멋쟁이사자처럼 대학은 대한민국과 미국의
+                        커뮤니티를 연결하여 “Growl to World”라는 비전을 실현하기
+                        위해 전 세계로 뻗어 나갑니다. 글로벌 IT 창업 인재들이
+                        함께 성장하는 커뮤니티로 발돋움할 멋쟁이사자처럼 대학의
+                        미래를 함께 기대해주세요! 2013년, 뜨거운 마음에서 일어난
+                        작은 불씨가 세상을 어떻게 변화시킬까요?
                     </div>
                 </div>
                 <img className="desimage" src={desimage} ref={desRef2} />

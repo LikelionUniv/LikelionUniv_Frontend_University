@@ -29,7 +29,8 @@ export const Wrapper = styled.div`
 
     .container {
         @media (max-width: 768px) {
-            width: calc(100% - 80px) !important;
+            width: calc(100% - 40px) !important;
+            max-width: 520px;
             margin-left: 0;
         }
     }
@@ -43,20 +44,57 @@ export const Title = styled.div`
     color: #212224;
     font-family: Pretendard;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 48px;
     height: 48px;
+    &.br {
+        display: flex;
+        align-items: center;
+        .right {
+            margin-left: 1%;
+        }
+    }
     @media (max-width: 1280px) {
         font-size: 3.6vw;
         height: 3.6vw;
+        &.br {
+            span {
+                height: 3.6vw;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
     @media (max-width: 768px) {
-        font-size: 6vw;
-        height: 6vw;
+        font-size: 28px;
+        height: 30px;
+        white-space: initial;
+        word-break: break-all;
+        &.br {
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+            }
+        }
     }
-    @media (max-width: 768px) {
-        font-size: 5.5vw;
-        height: 5.5vw;
+    @media (max-width: 480px) {
+        &.br {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            white-space: nowrap;
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+            }
+            .right {
+                margin-left: 0;
+            }
+        }
     }
 
     svg {
@@ -69,7 +107,7 @@ export const Title = styled.div`
             margin: 0 1%;
         }
         @media (max-width: 768px) {
-            margin: 0 1%;
+            margin: 0 5px;
         }
     }
 `;
@@ -81,11 +119,11 @@ export const SubText = styled.div`
     font-weight: 600;
     font-size: 20px;
     margin: 24px 0 40px 0;
-    @media (max-width: 1280px) {
-        font-size: 1.6vw;
-    }
     @media (max-width: 768px) {
-        font-size: 2.8vw;
+        font-size: 16px;
+        white-space: initial;
+        word-break: keep-all;
+        line-height: 150%;
         margin: 4% 0 8% 0;
     }
 `;
@@ -96,6 +134,9 @@ export const SectionContainer = styled.div`
     justify-content: space-between;
     gap: 25px;
     margin-bottom: 165px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 
     .number-rect {
         width: 100%;
@@ -112,12 +153,7 @@ export const SectionContainer = styled.div`
                 font-size: 2vw;
             }
             @media (max-width: 768px) {
-                font-size: 2.5vw;
-                padding-bottom: 6%;
-            }
-            @media (max-width: 500px) {
-                font-size: 2vw;
-                padding-bottom: 6%;
+                font-size: 20px;
             }
         }
         .number {
@@ -140,17 +176,9 @@ export const SectionContainer = styled.div`
                 }
             }
             @media (max-width: 768px) {
-                font-size: 6.2vw;
-                margin-top: 8%;
+                font-size: 32px;
                 sup {
-                    font-size: 2.5vw;
-                }
-            }
-            @media (max-width: 500px) {
-                font-size: 5vw;
-                margin-top: 8%;
-                sup {
-                    font-size: 2vw;
+                    font-size: 14px;
                 }
             }
         }
@@ -183,7 +211,7 @@ export const SwiperWrapper = styled.div`
             width: calc((100vw - 36px) / 3) !important;
         }
         @media (max-width: 768px) {
-            width: calc(100vw / 3) !important;
+            width: 259px !important;
         }
         a {
             text-decoration: none;
@@ -204,11 +232,7 @@ export const SwiperWrapper = styled.div`
             overflow: hidden;
             @media (max-width: 768px) {
                 width: 25%;
-                margin: 2vw;
-            }
-            @media (max-width: 500px) {
-                width: 30%;
-                margin: 2vw;
+                margin: 20px;
             }
             img {
                 width: 100%;
@@ -229,10 +253,7 @@ export const SwiperWrapper = styled.div`
                     font-size: 2.2vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.8vw;
-                }
-                @media (max-width: 500px) {
-                    font-size: 2.5vw;
+                    font-size: 20px;
                 }
             }
             .gen {
@@ -242,7 +263,7 @@ export const SwiperWrapper = styled.div`
                     font-size: 1.6vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.2vw;
+                    font-size: 15px;
                 }
             }
         }

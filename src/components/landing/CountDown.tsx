@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const targetDate = '2024-02-10 00:00:00';
+const targetDate = '2023-12-10 23:59:59';
 
 const getRemainTime = (countDown: number) => {
     const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
@@ -63,20 +63,41 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-top: 15%;
+    margin-top: 8%;
     .text {
+        color: #fff;
+        font-family: Pretendard;
+        font-size: 24px;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-bottom: 2px;
+    }
+    .timer {
+        flex-shrink: 0;
+        width: 55%;
+    }
+    .time-container {
+        max-height: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         color: #fff;
         font-family: Pretendard;
         font-size: 30px;
         font-weight: 700;
-        flex-shrink: 0;
-    }
-    .timer {
-        flex-shrink: 0;
-        width: 60%;
+        div {
+            width: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .colon {
+            margin: 0 5%;
+        }
     }
     .text-container {
         display: flex;
+        max-height: 16px;
         div {
             color: #d1d4d8;
             font-size: 13px;
@@ -87,28 +108,11 @@ const Container = styled.div`
         }
         margin-bottom: 5px;
     }
-    .time-container {
-        display: flex;
-        justify-content: space-between;
-        color: #fff;
-        font-family: Pretendard;
-        font-size: 30px;
-        font-weight: 700;
-        div {
-            width: 25%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .colon {
-            margin: 0 5px;
-        }
-    }
 
     @media (max-width: 1280px) {
-        margin-top: 10%;
+        margin-top: 8%;
         .text {
-            font-size: 2.5vw;
+            font-size: 2vw;
         }
         .time-container {
             font-size: 2.5vw;
@@ -119,7 +123,19 @@ const Container = styled.div`
             }
         }
     }
-    @media (max-width: 720px) {
-        width: calc(65% + 44px);
+    @media (max-width: 768px) {
+        max-width: 500px;
+        padding: 0 10px;
+        .text {
+            font-size: 16px;
+        }
+        .time-container {
+            font-size: 24px;
+        }
+        .text-container {
+            div {
+                font-size: 10px;
+            }
+        }
     }
 `;
