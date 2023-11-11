@@ -40,7 +40,7 @@ export const ContentSection = styled.section`
 
 /* 전체 Title */
 export const Title = styled.div`
-   display: flex;
+    display: flex;
     flex-direction: row;
     align-items: center;
 
@@ -100,7 +100,7 @@ export const Qbody = styled.div`
     @media screen and (max-width: 360px) {
         grid-template-columns: repeat(1, 1fr);
     }
-    
+
     row-gap: 40px;
     box-sizing: border-box;
     width: 1200px;
@@ -192,7 +192,6 @@ export const Qbody3 = styled.div`
     }
 
     width: 100%;
-
 `;
 
 export const Table = styled.div`

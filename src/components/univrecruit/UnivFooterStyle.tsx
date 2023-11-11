@@ -18,7 +18,7 @@ export const UnivText = styled.div`
     line-height: 150%;
 
     @media screen and (max-width: 768px) {
-        color: var(--White, #FFF);
+        color: var(--White, #fff);
         text-align: center;
         /* Title/28_Bold */
         font-family: Pretendard;

@@ -12,7 +12,6 @@ export const Container = styled.div`
     box-sizing: border-box;
     padding: 0 40px;
 
-    
     @media screen and (max-width: 767px) {
         padding: 0 20px;
     }
@@ -22,7 +21,7 @@ export const Content = styled.section`
     box-sizing: border-box;
     max-width: 1200px;
     width: 100%;
-`
+`;
 
 // 참여 대학 페이지 텍스트
 export const Text = styled.div`
@@ -183,7 +182,6 @@ export const BtnWrapper = styled.div`
     }
 
     width: 100%;
-
 `;
 
 export const Btn = styled.div`

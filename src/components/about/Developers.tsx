@@ -1,12 +1,12 @@
-import DevInfo from './DevInfo'
-import * as D from './DevlopersStyle'
+import DevInfo from './DevInfo';
+import * as D from './DevlopersStyle';
 
 const Developers = () => {
-  return (
-    <D.Wrapper>
-        <div className='year'>
-            <p className='first'>1기</p>
-        </div>
+    return (
+        <D.Wrapper>
+            <div className="year">
+                <p className="first">1기</p>
+            </div>
 
         <D.Container>
             <p className='part'>총괄</p>
@@ -32,7 +32,7 @@ const Developers = () => {
             
                 <DevInfo name='김예지' from='동덕여자대학교 11기 대표' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F161317e3-8b0e-4f8f-ac9d-ce1aee5a3736%2F73f2eaa61885aafa86ad1302e68b3efa-sticker.png?id=7e7c0e3b-c55b-4b68-8340-5e33da339df3&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='김진호' from='홍익대학교 11기 아기사자' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F08bc59ea-eef6-46f7-a70d-6c99d91b77c1%2F%25EB%2582%25B4_%25EB%25AF%25BC%25EC%25A6%259D%25EC%2582%25AC%25EC%25A7%2584.jpg?id=1607b4c3-3d09-452a-a0a8-83fa0bfe062e&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
-                <DevInfo name='노하림' from='덕성여자대학교 11기 운영진'/>
+                <DevInfo name='노하림' from='덕성여자대학교 11기 운영진' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F924f604f-664c-468b-95d0-986b933894ed%2FKakaoTalk_20231107_184045256.jpg?id=53f8454e-5027-4f75-b609-b9cc03b9d5e6&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
             
                 <DevInfo name='서가영' from='홍익대학교 11기 아기사자' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fa9a78fbb-8e5e-43ff-afd7-ab36920986c6%2F3472497127623705176_20230120165552901.jpg?id=68a74145-1b9b-4dc1-b7c7-b02502c18916&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='이서진' from='이화여자대학교 11기 대표' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F8f17f114-9543-4e69-95df-b60f78d351fc%2Fprofile.jpg?id=19125834-1e6d-4d03-bf76-a64f27e4ab2f&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
@@ -44,24 +44,22 @@ const Developers = () => {
             <D.Divider/>
             <p className='part'>Backend</p>
             <D.PeopleBox>
-                <DevInfo name='김슬기' from='홍익대학교 11기 운영진' position='백엔드 파트장'/>
+                <DevInfo name='김슬기' from='홍익대학교 11기 운영진' position='백엔드 파트장' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fdd622d49-1b87-4be6-9a41-75bf3ecbe76c%2F%25E1%2584%2591%25E1%2585%25B3%25E1%2584%2589%25E1%2585%25A1.jpeg?id=fd64fb34-b744-4384-ad53-a71617e80f5c&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='황제철' from='한국항공대학교 11기 대표' position='백엔드 파트장' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fdc328fc0-6c49-4705-9d55-e13dd2073203%2FHappyFace.jpg?id=c783c5e3-d1b4-4124-999e-116fc2d71063&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='김민석' from='상명대학교(천안) 11기 대표 ' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fe756eb71-688b-436d-b2d4-7506c4b8f7b8%2FKakaoTalk_20231106_134234461.jpg?id=e1fb9e72-9613-4898-a22e-a7090d494ba6&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='김태완' from='순천향대학교 11기 대표' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F253e74fd-a289-4942-b322-a993a3cb7d03%2FIMG_8885.jpg?id=394f8e82-9f87-4ad9-85c6-34842d78a1fc&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='서송현' from='남서울대학교 11기 운영진'/>
                 <DevInfo name='심보영' from='서경대학교 11기 운영진'/>
-                <DevInfo name='이가현' from='한서대학교 11기 대표'/>
+                <DevInfo name='이가현' from='한서대학교 11기 대표' profile='https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fc94d1814-aa21-4601-9587-666065b9d386%2FIMG_1995.png?id=d66d7afe-307e-4aae-9143-db8b80003976&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2'/>
                 <DevInfo name='이나현' from='을지대학교 11기 대표' />
-                
                 <DevInfo name='채서연' from='명지대학교(서울) 11기 대표'/>
+                <DevInfo name="최가현" from="서울여자대학교 11기 운영진" />
+                <DevInfo name="최혁순" from="광운대학교 11기 운영진" />
+                </D.PeopleBox>
+                
+            </D.Container>
+        </D.Wrapper>
+    );
+};
 
-                <DevInfo name='최가현' from='서울여자대학교 11기 운영진'/>
-                <DevInfo name='최혁순' from='광운대학교 11기 운영진'/>
-            </D.PeopleBox>
-        </D.Container>
-    </D.Wrapper>
-
-  )
-}
-
-export default Developers
+export default Developers;

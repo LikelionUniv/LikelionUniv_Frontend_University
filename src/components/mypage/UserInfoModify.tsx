@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 /* dropdown option 부분 */
@@ -30,74 +30,76 @@ interface FormState {
 }
 
 const UserInfoModify = () => {
+    const [formState, setFormState] = useState<FormState>({
+        name: '',
+        university: 0,
+        description: '',
+        generation: 0,
+        role: 0,
+        track: 0,
+    });
 
-  const [formState, setFormState] = useState<FormState>({
-    name: '',
-    university: 0,
-    description: '',
-    generation: 0,
-    role: 0,
-    track: 0,
-  });
+    // const handleSelectChange =
+    //     (field: keyof FormState) =>
+    //     (
+    //         selectedOption: OptionType | null,
+    //         actionMeta: ActionMeta<OptionType>,
+    //     ) => {
+    //         if (selectedOption) {
+    //             setFormState(prev => ({
+    //                 ...prev,
+    //                 [field]: selectedOption.value,
+    //             }));
+    //         }
+    //     };
 
-// const handleSelectChange =
-//     (field: keyof FormState) =>
-//     (
-//         selectedOption: OptionType | null,
-//         actionMeta: ActionMeta<OptionType>,
-//     ) => {
-//         if (selectedOption) {
-//             setFormState(prev => ({
-//                 ...prev,
-//                 [field]: selectedOption.value,
-//             }));
-//         }
-//     };
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // 모든 필드 완성되었는지 검사하는 로직 추가함
+        if (
+            formState.name === '' ||
+            formState.university === 0 ||
+            formState.description === '' ||
+            formState.generation === 0 ||
+            formState.role === 0 ||
+            formState.track === 0
+        )
+            alert('모든 항목을 입력했는지 확인해주세요.');
+        else {
+            /* button click으로 해서 정보 저장됨 확인 */
+            console.log(formState);
+        }
+    };
 
-const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // 모든 필드 완성되었는지 검사하는 로직 추가함
-    if (
-        formState.name === '' ||
-        formState.university === 0 ||
-        formState.description === '' ||
-        formState.generation === 0 ||
-        formState.role === 0 ||
-        formState.track === 0
-    )
-        alert('모든 항목을 입력했는지 확인해주세요.');
-    else {
-        /* button click으로 해서 정보 저장됨 확인 */
-        console.log(formState);
-    }
-  };
-
-return (
-    <Wrapper>
-        <Form>
-            <div className="Stitle">내 정보 수정</div>
-            <Ndiv>이름</Ndiv>
-            <Nform
-                placeholder="자신의 이름을 작성해주세요."
-                value={formState.name}
-                onChange={e =>
-                    setFormState({ ...formState, name: e.target.value })
-                }
-            />
-             <Ndiv>한 줄 소개</Ndiv>
-             <Nformarea
-              placeholder="한 줄 소개글을 작성해보세요."
-              value={formState.description}
-              maxLength={49}
-              onChange={e =>
-                  setFormState({ ...formState, description: e.target.value })
-              }
-            />
-            <p >{formState.description.length}/50</p>
-            {/* <Ndiv>학교</Ndiv>
+    return (
+        <Wrapper>
+            <Form>
+                <div className="Stitle">내 정보 수정</div>
+                <Ndiv>이름</Ndiv>
+                <Nform
+                    placeholder="자신의 이름을 작성해주세요."
+                    value={formState.name}
+                    onChange={e =>
+                        setFormState({ ...formState, name: e.target.value })
+                    }
+                />
+                <Ndiv>한 줄 소개</Ndiv>
+                <Nformarea
+                    placeholder="한 줄 소개글을 작성해보세요."
+                    value={formState.description}
+                    maxLength={49}
+                    onChange={e =>
+                        setFormState({
+                            ...formState,
+                            description: e.target.value,
+                        })
+                    }
+                />
+                <p>{formState.description.length}/50</p>
+                {/* <Ndiv>학교</Ndiv>
             <SchoolDropDown onChange={handleSelectChange('university')} /> */}
-           
-            {/* <div className="SformDiv">
+
+                {/* <div className="SformDiv">
                 <div className="SfromDiv2">
                     <Ndiv>기수</Ndiv>
                     <DropDown
@@ -120,20 +122,20 @@ return (
                     />
                 </div>
             </div> */}
-            <button className="saveBtn" onClick={handleSubmit}>
-                저장하기
-            </button>
-        </Form>
-    </Wrapper>
-);
-}
+                <button className="saveBtn" onClick={handleSubmit}>
+                    저장하기
+                </button>
+            </Form>
+        </Wrapper>
+    );
+};
 
 export default UserInfoModify;
 
 const Wrapper = styled.div`
-  display : flex;
-  flex-direction : column;
-  align-items : center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const Form = styled.form`
@@ -143,10 +145,10 @@ const Form = styled.form`
     flex-direction: column;
 
     & > p {
-      color: var(--Grey-600, #ADB3BA);
-      text-align: right;
-      font-size: 16px;
-      font-weight: 500;
+        color: var(--Grey-600, #adb3ba);
+        text-align: right;
+        font-size: 16px;
+        font-weight: 500;
     }
 `;
 
@@ -187,12 +189,12 @@ const Nformarea = styled.textarea`
     height: 100px;
     font-size: 16px;
     color: var(--grey-900, #212224);
-    resize : none;
+    resize: none;
     font-weight: 500;
     line-height: 150%;
     border-radius: 6px;
     border: 1px solid var(--grey-400, #dcdfe3);
-    margin-bottom : 8px;
+    margin-bottom: 8px;
     background: var(--white, #fff);
     padding: 24px 16px;
     outline: 0;

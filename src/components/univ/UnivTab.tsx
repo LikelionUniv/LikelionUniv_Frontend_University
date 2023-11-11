@@ -29,8 +29,8 @@ const Tab = () => {
     const hongikLikelionSite = 'https://likelionhongik.com/';
 
     const popupUnivSite = (siteUrl: string): void => {
-        window.open(siteUrl, "_blank");
-    }
+        window.open(siteUrl, '_blank');
+    };
 
     return (
         <T.Container>
@@ -51,7 +51,9 @@ const Tab = () => {
                 {/* 학교명  */}
                 <T.SchoolWrapper>
                     {getFilteredUniversities().map(school => (
-                        <T.TabContent onClick={() => popupUnivSite(hongikLikelionSite)}>
+                        <T.TabContent
+                            onClick={() => popupUnivSite(hongikLikelionSite)}
+                        >
                             <T.SchoolLogo logo={Logo} />
                             <T.SchoolText>
                                 {school.school}

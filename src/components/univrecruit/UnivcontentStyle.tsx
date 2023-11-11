@@ -101,7 +101,7 @@ export const Qbody = styled.div`
     @media screen and (max-width: 360px) {
         grid-template-columns: repeat(1, 1fr);
     }
-    
+
     row-gap: 40px;
     box-sizing: border-box;
     width: 1200px;
@@ -298,4 +298,3 @@ export const AnsTable = styled.div`
         width: 100%;
     }
 `;
-

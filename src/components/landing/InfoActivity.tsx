@@ -42,23 +42,31 @@ const activityArray: any[] = [
 
 const InfoActivity = () => {
     return (
-        <div style={{ width: '100%' }}>
-            <IF.ActivityContainer>
-                {activityArray.map(item => (
-                    <IF.Box
-                        background={item.background}
-                        hoverBackColor={item.hoverBackColor}
-                    >
-                        <div className="title">
-                            <div className="name">{item.name}</div>
-                            <Arrow className="hover-hide" />
-                        </div>
-                        <HackathonImg className="img-hide" />
-                        <div className="hover-text">{item.text}</div>
-                    </IF.Box>
-                ))}
-            </IF.ActivityContainer>
-        </div>
+        <>
+            <IF.Box
+                background="#FF7710"
+                hoverBackColor="linear-gradient(180deg, rgba(255, 119, 16, 0.30) 0%, rgba(255, 119, 16, 0.00) 100%)"
+            >
+                <div className="title">
+                    <div className="name">해커톤</div>
+                    <div className="hover-text">해커톤에 대한 설명</div>
+                    <Arrow className="hover-hide" />
+                </div>
+                <HackathonImg className="img-hide" />
+            </IF.Box>
+
+            <IF.Box
+                background="#C6F959"
+                hoverBackColor="linear-gradient(180deg, rgba(198, 249, 89, 0.30) 0%, rgba(198, 249, 89, 0.00) 100%)"
+            >
+                <div className="title">
+                    <div className="name">아이디어톤</div>
+                    <div className="hover-text">아이디어톤에 대한 설명</div>
+                    <Arrow className="hover-hide" />
+                </div>
+                <IdeathonImg className="img-hide" />
+            </IF.Box>
+        </>
     );
 };
 

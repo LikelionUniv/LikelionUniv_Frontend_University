@@ -1,6 +1,5 @@
 import { styled, css } from 'styled-components';
 
-
 const responsiveWidth = css`
     @media screen and (max-width: 1280px) {
         max-width: 950px;
@@ -12,8 +11,8 @@ const responsiveWidth = css`
     }
 
     @media screen and (max-width: 480px) {
-        max-width: 360px;
-        padding: 3%; 
+        //max-width: 360px;
+        padding: 5%;
     }
 `;
 
@@ -25,19 +24,17 @@ export const Wrapper = styled.div`
 
     color: var(--Grey-900, #212224);
     font-family: Pretendard;
-    
-    width: 100%; 
-    max-width: 1200px; 
+
+    width: 100%;
+    max-width: 1200px;
     padding: 1rem;
 
     ${responsiveWidth}
 
-    @media screen and (max-width: 450px) {
-        padding: 0.5rem;
-    }
+   
 
     .year {
-        border-bottom: 1px solid #EAECEE;
+        border-bottom: 1px solid #eaecee;
         width: 100%;
         position: relative;
         margin-bottom: 39.5px;
@@ -58,7 +55,6 @@ export const Wrapper = styled.div`
         }
     }
 `;
-
 
 export const Container = styled.div`
     width: 100%;
@@ -82,22 +78,21 @@ export const Container = styled.div`
 export const PeopleBox = styled.div`
     width: 100%;
     margin-top: 24px;
-    display: grid; 
-    grid-gap: 24px; 
+    display: grid;
+    grid-gap: 24px;
     grid-template-columns: repeat(3, minmax(auto, 1fr));
-    align-items: center; 
+    align-items: center;
     justify-content: space-around;
 
     @media (max-width: 780px) {
-        grid-template-columns: repeat(2, 1fr); 
-        grid-template-rows: none; 
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: none;
     }
 
     @media (max-width: 530px) {
-        grid-template-columns: repeat(1, 1fr); 
-        grid-template-rows: none; 
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: none;
     }
-
 `;
 
 export const InfoBox = styled.div`
@@ -112,7 +107,7 @@ export const InfoBox = styled.div`
         width: 80px;
         height: 80px;
         flex-shrink: 0;
-        fill: var(--Grey-300, #EAECEE);
+        fill: var(--Grey-300, #eaecee);
         object-fit: cover;
     }
 
@@ -124,7 +119,9 @@ export const InfoBox = styled.div`
         margin-left: 13px;
     }
 
-    .name, .from, .position {
+    .name,
+    .from,
+    .position {
         margin: 0;
     }
 
@@ -134,11 +131,11 @@ export const InfoBox = styled.div`
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 150%; 
+        line-height: 150%;
     }
 
     .from {
-        color: var(--Grey-800, #4D5359);
+        color: var(--Grey-800, #4d5359);
         font-family: Pretendard;
         font-size: 16px;
         font-style: normal;
@@ -153,21 +150,20 @@ export const InfoBox = styled.div`
         align-items: center;
         gap: 10px;
         border-radius: 13px;
-        background: var(--Orange-100, #FFF2E8);
+        background: var(--Orange-100, #fff2e8);
 
-        color: var(--Orange-600, #FF7710);
+        color: var(--Orange-600, #ff7710);
         font-family: Pretendard;
         font-size: 12px;
         font-style: normal;
         font-weight: 700;
-        line-height: 150%; 
+        line-height: 150%;
     }
 `;
-
 
 export const Divider = styled.div`
     height: 1px;
     background-color: var(--Grey-900, #212224);
     width: 100%;
     margin: 32px 0;
-`
+`;

@@ -22,4 +22,4 @@ const DevInfo:React.FC<InfoProp> = ({name, from, position, profile = profileImag
   )
 }
 
-export default DevInfo
+export default DevInfo;

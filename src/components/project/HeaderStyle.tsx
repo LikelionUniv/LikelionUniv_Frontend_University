@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const HeaderContainer = styled.div`
     display: flex;
@@ -8,19 +8,19 @@ export const HeaderContainer = styled.div`
     width: 1200px;
     margin: 0 auto;
     margin-top: 64px;
-`
+`;
 
 export const TabContainer = styled.div`
     display: flex;
     gap: 0 24px;
-`
+`;
 
 export const Tab = styled.div`
     position: relative;
 
     padding: 5px 0;
 
-    color: var(--Grey-600, #ADB3BA);
+    color: var(--Grey-600, #adb3ba);
     text-align: center;
     /* Subtitle/20_Bold */
     font-family: Pretendard;
@@ -47,11 +47,11 @@ export const Tab = styled.div`
     &:hover {
         cursor: pointer;
     }
-`
+`;
 
 export const Divider = styled.div`
     display: none;
-`
+`;
 
 export const WriteBtn = styled.button`
     display: inline-flex;
@@ -62,9 +62,9 @@ export const WriteBtn = styled.button`
 
     border-radius: 6px;
     border: none;
-    background: var(--Orange-600, #FF7710);
+    background: var(--Orange-600, #ff7710);
 
-    color: var(--White, #FFF);
+    color: var(--White, #fff);
     text-align: center;
     /* Subtitle/16_Bold */
     font-family: Pretendard;
@@ -76,4 +76,4 @@ export const WriteBtn = styled.button`
     &:hover {
         cursor: pointer;
     }
-`
+`;

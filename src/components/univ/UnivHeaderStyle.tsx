@@ -19,7 +19,7 @@ export const TopDiv = styled.div`
 export const Content = styled.section`
     max-width: 1200px;
     width: 100%;
-`
+`;
 
 export const T1 = styled.div`
     color: var(--Grey-900, #212224);

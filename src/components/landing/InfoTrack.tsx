@@ -10,7 +10,21 @@ export interface TrackBoxProps {
 
 const InfoTrack = () => {
     return (
-        <IF.TrackWrapper>
+        <>
+            <IF.TrackBox hoverColor="#FFB13C">
+                <div className="title">
+                    <div className="name">기획디자인</div>
+                    <Arrow className="hover-hide" />
+                </div>
+                <div className="hover-text">
+                    Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자,
+                    PM이 되기 위한 역량을 기를 수 있습니다. 또한 디자인 툴을
+                    익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이
+                    되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한
+                    내용들을 설계하는 경험을 할 수 있습니다.
+                </div>
+                <img src={Track1} alt="" className="img-hide" />
+            </IF.TrackBox>
             <IF.TrackBox hoverColor="#C6F959">
                 <div className="title">
                     <div className="name">백엔드</div>
@@ -23,6 +37,7 @@ const InfoTrack = () => {
                     다양한 프레임 워크를 바탕으로 서비스 운영을 위한 전체적인
                     인프라를 구현합니다.
                 </div>
+                <img src={Track2} alt="" className="img-hide" />
             </IF.TrackBox>
             <IF.TrackBox hoverColor="#FF7710">
                 <div className="title">
@@ -34,34 +49,9 @@ const InfoTrack = () => {
                     기초부터 심화까지의 스킬을 배울 수 있습니다. HTML, CSS,
                     Javascript를 학습하며 기초 개발 역량을 잡아나갑니다.
                 </div>
+                <img src={Track3} alt="" className="img-hide" />
             </IF.TrackBox>
-            <IF.TrackBox hoverColor="#FFB13C">
-                <div className="title">
-                    <div className="name">디자인</div>
-                    <Arrow className="hover-hide" />
-                </div>
-                <div className="hover-text">
-                    Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자,
-                    PM이 되기 위한 역량을 기를 수 있습니다. 또한 디자인 툴을
-                    익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이
-                    되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한
-                    내용들을 설계하는 경험을 할 수 있습니다.
-                </div>
-            </IF.TrackBox>
-            <IF.TrackBox hoverColor="#FFB13C">
-                <div className="title">
-                    <div className="name">기획</div>
-                    <Arrow className="hover-hide" />
-                </div>
-                <div className="hover-text">
-                    Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자,
-                    PM이 되기 위한 역량을 기를 수 있습니다. 또한 디자인 툴을
-                    익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이
-                    되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한
-                    내용들을 설계하는 경험을 할 수 있습니다.
-                </div>
-            </IF.TrackBox>
-        </IF.TrackWrapper>
+        </>
     );
 };
 

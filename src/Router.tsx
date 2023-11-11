@@ -30,11 +30,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage />
+                element: <LoginPage />,
             },
             {
-                path : '/mypage',
-                element: <Mypage/>
+                path: '/mypage',
+                element: <Mypage />,
             },
             {
                 path: '/project',
@@ -42,17 +42,17 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '',
-                        element: <ProjectList />
+                        element: <ProjectList />,
                     },
                     {
                         path: 'register',
-                        element: <ProjectRegister />
+                        element: <ProjectRegister />,
                     },
                     {
                         path: ':projectId',
-                        element: <ProjectDetail />
-                    } 
-                ]
+                        element: <ProjectDetail />,
+                    },
+                ],
             },
             {
                 path: '/chat',
@@ -69,16 +69,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/community',
-                element: <Community />
+                element: <Community />,
             },
             {
                 path: '/chat',
-                element: <Chat />
+                element: <Chat />,
             },
             {
                 path: '/about',
-                element: <AboutPage />
-            }
+                element: <AboutPage />,
+            },
         ],
     },
 ]);
