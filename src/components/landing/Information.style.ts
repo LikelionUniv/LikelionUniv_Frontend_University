@@ -32,6 +32,10 @@ export const Wrapper = styled.div`
             width: calc(100% - 80px) !important;
             margin-left: 0;
         }
+        @media (max-width: 360px) {
+            width: calc(100%-40px) !important;
+            padding: 0px 20px;
+        }
     }
 `;
 
@@ -54,9 +58,15 @@ export const Title = styled.div`
         font-size: 6vw;
         height: 6vw;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         font-size: 5.5vw;
         height: 5.5vw;
+        /* margin-bottom: 21px; */
+    }
+    @media (max-width: 360px) {
+        font-size: 6vw;
+        height: 6vw;
+        /* margin-bottom: 24px; */
     }
 
     svg {
@@ -88,6 +98,20 @@ export const SubText = styled.div`
         font-size: 2.8vw;
         margin: 4% 0 8% 0;
     }
+    @media (max-width: 767px) {
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 150%;
+        white-space: normal;
+        margin: 24px 0px;
+    }
+    @media (max-width: 360px) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 160%;
+        white-space: normal;
+        margin: 8px 0px 24px;
+    }
 `;
 
 export const SectionContainer = styled.div`
@@ -96,6 +120,10 @@ export const SectionContainer = styled.div`
     justify-content: space-between;
     gap: 25px;
     margin-bottom: 165px;
+    @media (max-width: 767px) {
+        flex-direction: column;
+        margin-bottom: 20vw;
+    }
 
     .number-rect {
         width: 100%;
@@ -115,9 +143,9 @@ export const SectionContainer = styled.div`
                 font-size: 2.5vw;
                 padding-bottom: 6%;
             }
-            @media (max-width: 500px) {
-                font-size: 2vw;
-                padding-bottom: 6%;
+            @media (max-width: 767px) {
+                font-size: 20px;
+                padding-bottom: 9px;
             }
         }
         .number {
@@ -146,11 +174,18 @@ export const SectionContainer = styled.div`
                     font-size: 2.5vw;
                 }
             }
-            @media (max-width: 500px) {
+            @media (max-width: 767px) {
                 font-size: 5vw;
-                margin-top: 8%;
+                margin-top: 9px;
                 sup {
                     font-size: 2vw;
+                }
+            }
+            @media (max-width: 360px) {
+                font-size: 8.8vw;
+                margin-top: 9px;
+                sup {
+                    font-size: 3.8vw;
                 }
             }
         }
@@ -412,8 +447,8 @@ export const TrackBox = styled.div<TrackBoxProps>`
 export const PlanBox = styled.div`
     height: 195px;
 
-    @media (max-width: 500px) {
-        height: 130px;
+    @media (max-width: 767px) {
+        height: 100px;
     }
 
     .img {
@@ -434,16 +469,27 @@ export const PlanBox = styled.div`
             font-size: 3vw;
             margin: 15px 0 5px 0;
         }
+        @media (max-width: 767px) {
+            font-size: 20px;
+            margin: 24px 0px 8px 0;
+        }
+        @media (max-width: 360px) {
+            font-size: 16px;
+            margin: 8px 0 4px 0;
+        }
     }
     .content {
         color: var(--Grey-900, #212224);
         font-family: Pretendard;
         font-size: 20px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 150%;
         @media (max-width: 768px) {
-            font-size: 3vw;
+            font-size: 18px;
+        }
+        @media (max-width: 360px) {
+            font-size: 4.5vw;
         }
     }
 `;

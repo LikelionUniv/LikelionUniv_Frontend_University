@@ -32,10 +32,11 @@ const Wrapper = styled.div`
     @media (max-width: 768px) {
         grid-template-columns: repeat(2, minmax(auto, 1fr));
         grid-template-rows: repeat(2, auto);
-        grid-gap: 14px;
+        grid-gap: 40px 14px;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 360px) {
         grid-template-columns: repeat(2, minmax(auto, 1fr));
         grid-template-rows: repeat(2, auto);
+        grid-gap: 40px 10px;
     }
 `;
