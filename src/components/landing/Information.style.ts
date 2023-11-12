@@ -196,6 +196,12 @@ export const SwiperWrapper = styled.div`
     width: 100%;
     overflow-x: hidden;
     padding-bottom: 165px;
+    @media (max-width: 767px) {
+        padding-bottom: 120px;
+    }
+    @media (max-width: 360px) {
+        padding-bottom: 80px;
+    }
 
     .swiper-container {
         width: 984px !important;
@@ -217,8 +223,8 @@ export const SwiperWrapper = styled.div`
         @media (max-width: 1280px) {
             width: calc((100vw - 36px) / 3) !important;
         }
-        @media (max-width: 768px) {
-            width: calc(100vw / 3) !important;
+        @media (max-width: 767px) {
+            width: calc(100vw / 2) !important;
         }
         a {
             text-decoration: none;
@@ -236,11 +242,11 @@ export const SwiperWrapper = styled.div`
             width: 31.25%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
-            @media (max-width: 768px) {
+            /* @media (max-width: 768px) {
                 padding: 20px;
-            }
-            @media (max-width: 500px) {
-                padding: 14px;
+            } */
+            @media (max-width: 360px) {
+                padding: 12px;
             }
             img {
                 width: 100%;
@@ -261,10 +267,16 @@ export const SwiperWrapper = styled.div`
                     font-size: 2.2vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.8vw;
+                    font-size: 3.6vw;
+                    font-weight: 700;
+                    line-height: 150%;
+                    margin-bottom: 8px;
                 }
-                @media (max-width: 500px) {
-                    font-size: 2.5vw;
+                @media (max-width: 360px) {
+                    font-size: 5vw;
+                    font-weight: 700;
+                    line-height: 150%;
+                    margin-bottom: 4px;
                 }
             }
             .gen {
@@ -273,8 +285,11 @@ export const SwiperWrapper = styled.div`
                 @media (max-width: 1280px) {
                     font-size: 1.6vw;
                 }
-                @media (max-width: 768px) {
-                    font-size: 2.2vw;
+                @media (max-width: 767px) {
+                    font-size: 2.5vw;
+                }
+                @media (max-width: 360px) {
+                    font-size: 4vw;
                 }
             }
         }
