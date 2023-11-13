@@ -42,6 +42,15 @@ export const Keyword = styled.span`
 
 export const UnivRecruit = styled.div`
   margin-top: 32px;
+
+  @media screen and (max-width: 450px) {
+    margin: 0 auto;
+    margin-top: 154px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `
 
 export const Text = styled.div`

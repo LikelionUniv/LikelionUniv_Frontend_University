@@ -14,6 +14,14 @@ export const SearchWindow = styled.div`
   border-radius: 8px;
   border: 1px solid var(--Grey-400, #DCDFE3);
   box-sizing: border-box;
+
+  &:hover {
+    border-color: #ff7710;
+  }
+
+  &:focus {
+    border-color: #ff7710;
+  }
 `;
 
 export const Input = styled.input`

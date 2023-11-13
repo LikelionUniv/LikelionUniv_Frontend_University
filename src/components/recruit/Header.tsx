@@ -4,9 +4,20 @@ import Arrow from '../../img/recruit/warrow.svg';
 import gra2 from '../../img/recruit/gra2.svg';
 import useModal from '../../hooks/useModal';
 import RecruitModal from './apply/RecruitModal';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const {isModalOpen, openModal, closeModal} = useModal();
+    const navigate = useNavigate();
+
+    const onClick = (): void => {
+        if (window.innerWidth > 450) {
+            openModal();
+        } else {
+            navigate('babylion');
+        }
+    };
+
     return (
         <>
             <R.BlackDiv>
@@ -17,7 +28,7 @@ const Header = () => {
                         아기사자 모집 설명아기사자 모집 설명 아기사자 모집 설명{' '}
                     </R.T2>
                     <R.T3>지원기간 : 0000/00/00 ~ 0000/00/00</R.T3>
-                    <R.Button onClick={openModal}>
+                    <R.Button onClick={onClick}>
                         <div>지원하기</div>
                         <img src={Arrow}></img>
                     </R.Button>
