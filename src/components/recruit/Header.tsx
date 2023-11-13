@@ -7,7 +7,7 @@ import RecruitModal from './apply/RecruitModal';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    const {isModalOpen, openModal, closeModal} = useModal();
+    const { isModalOpen, openModal, closeModal } = useModal();
     const navigate = useNavigate();
 
     const onClick = (): void => {
@@ -36,9 +36,10 @@ const Header = () => {
 
                 <R.Gra src={gra2}></R.Gra>
             </R.BlackDiv>
-            {isModalOpen && <RecruitModal isOpen={isModalOpen} closeModal={closeModal}/>}
+            {isModalOpen && (
+                <RecruitModal isOpen={isModalOpen} closeModal={closeModal} />
+            )}
         </>
-        
     );
 };
 

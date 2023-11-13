@@ -4,10 +4,10 @@ import GlobalStyles from '../styles/GlobalStyle';
 const AboutPage = () => {
     return (
         <>
-            <GlobalStyles/>
+            <GlobalStyles />
             <About />;
         </>
-    )
+    );
 };
 
 export default AboutPage;

@@ -1,5 +1,3 @@
-function SelectUnivForm() {
-  
-}
+function SelectUnivForm() {}
 
 export default SelectUnivForm;
