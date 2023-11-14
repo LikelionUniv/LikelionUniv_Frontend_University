@@ -60,6 +60,7 @@ export const Background = styled.div`
             margin-top: 22%;
         }
         .new-text {
+            font-family: Pretendard;
             font-size: 30px;
             font-weight: 700;
             color: #c6f959;
