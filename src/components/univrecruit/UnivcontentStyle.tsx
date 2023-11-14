@@ -23,7 +23,11 @@ export const ContentDiv = styled.div`
 
     width: 100%;
     padding: 0 20px;
-    padding-top: 160px;
+    padding-top: 100px;
+
+    @media screen and (max-width: 767px) {
+        padding-top: 80px;
+    }
 `;
 
 export const ContentSection = styled.section`
@@ -234,7 +238,11 @@ export const Ps2 = styled.div`
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    margin-bottom: 160px;
+    margin-bottom: 100px;
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: 80px;
+    }
 
     /*layout*/
     display: flex;

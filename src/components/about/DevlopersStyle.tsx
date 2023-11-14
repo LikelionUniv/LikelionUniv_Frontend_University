@@ -31,8 +31,6 @@ export const Wrapper = styled.div`
 
     ${responsiveWidth}
 
-   
-
     .year {
         border-bottom: 1px solid #eaecee;
         width: 100%;
