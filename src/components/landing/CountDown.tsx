@@ -158,6 +158,12 @@ const Container = styled.div`
             }
         }
     }
+    @media (max-width: 390px) {
+        width: 80%;
+        .time-container {
+            font-size: 6vw;
+        }
+    }
 `;
 
 const FloatingContainer = styled.div`
@@ -185,7 +191,7 @@ const FloatingContainer = styled.div`
     }
 
     @media (max-width: 768px) {
-        width: 160px;
+        width: 38svw;
         flex-direction: column;
         align-items: flex-start;
         margin-left: 20px;
@@ -201,8 +207,13 @@ const FloatingContainer = styled.div`
         .time-container {
             margin-left: 0;
             .colon {
-                margin: 0 8px;
+                margin: 0 1svw;
             }
+        }
+    }
+    @media (max-width: 390px) {
+        .time-container {
+            font-size: 6vw;
         }
     }
 `;

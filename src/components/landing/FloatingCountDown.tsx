@@ -100,9 +100,8 @@ const Wrapper = styled.div`
         height: 68px;
     }
     &.countdown-fade-in {
-        margin-bottom: 0;
-        animation: show 0.5s;
-        @keyframes show {
+        animation: countdown-show 0.5s;
+        @keyframes countdown-show {
             from {
                 opacity: 0;
                 margin-bottom: -88px;
@@ -114,9 +113,10 @@ const Wrapper = styled.div`
         }
     }
     &.countdown-fade-out {
+        opacity: 0;
         margin-bottom: -88px;
-        animation: disappear 0.3s;
-        @keyframes disappear {
+        animation: countdown-disappear 0.3s;
+        @keyframes countdown-disappear {
             from {
                 opacity: 1;
                 margin-bottom: 0;
@@ -192,12 +192,12 @@ const Button = styled.a`
     }
     @media (max-width: 768px) {
         margin: 0 20px;
-        width: 300px;
+        width: auto;
         max-width: 300px;
         height: 44px;
         font-size: 16px;
         justify-content: center;
-        white-space: nowrap;
+        text-align: center;
     }
 
     svg {

@@ -465,6 +465,7 @@ const MMenuContainer = styled.div`
 
     a {
         justify-content: center;
+        padding: 12px 0;
         img {
             left: 0px;
         }
