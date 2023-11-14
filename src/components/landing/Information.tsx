@@ -3,7 +3,7 @@ import { currentWidthState } from '../../store/landing';
 import InfoNumber from './InfoNumber';
 import InfoService from './InfoService';
 import InfoActivity from './InfoActivity';
-import InfoTrack from './InfoTrack';
+//import InfoTrack from './InfoTrack';
 import InfoPlan from './InfoPlan';
 //import InfoSupport from './InfoSupport';
 import * as IF from './Information.style';
@@ -11,8 +11,8 @@ import { ReactComponent as PixelBulbIcon } from '../../img/landing/pixel_bulb.sv
 import { ReactComponent as PixelStarIcon } from '../../img/landing/pixel_star.svg';
 import { ReactComponent as PixelFootprintsIcon } from '../../img/landing/pixel_footprints.svg';
 import { ReactComponent as PixelCalendarIcon } from '../../img/landing/pixel_calendar.svg';
-import InfoTrackTemp from './InfoTrackTemp';
-import InfoActivityTemp from './InfoActivityTemp';
+import InfoTrack from './InfoTrack';
+//import InfoActivity from './InfoActivity';
 //import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
 
 const Information = () => {
@@ -43,7 +43,7 @@ const Information = () => {
                     </IF.SubText>
                     <IF.SectionContainer>
                         {/*<InfoActivity />*/}
-                        <InfoActivityTemp />
+                        <InfoActivity />
                     </IF.SectionContainer>
                     <IF.Title>
                         <PixelFootprintsIcon />
@@ -54,7 +54,7 @@ const Information = () => {
                     </IF.SubText>
                     <IF.SectionContainer>
                         {/*<InfoTrack />*/}
-                        <InfoTrackTemp />
+                        <InfoTrack />
                     </IF.SectionContainer>
                     <IF.Title>
                         연간 <PixelCalendarIcon />
