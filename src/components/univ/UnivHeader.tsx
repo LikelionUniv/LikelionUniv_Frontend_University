@@ -1,11 +1,24 @@
 // 참여 대학 Header
+import React, { useState, useEffect } from 'react';
 import * as H from './UnivHeaderStyle';
 import { tabData, ITabData } from './UnivTabData';
 
 const UnivHeader = () => {
-    const univCount = ([] as ITabData[]).concat(
+    const totalCount = ([] as ITabData[]).concat(
         ...Object.values(tabData),
     ).length;
+
+    const [univCount, setUnivCount] = useState<number>(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setUnivCount(currentCount =>
+                currentCount < totalCount ? currentCount + 1 : currentCount,
+            );
+        }, 30);
+
+        return () => clearInterval(interval);
+    }, [totalCount]);
 
     return (
         <H.TopDiv>
