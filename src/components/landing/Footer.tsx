@@ -17,6 +17,7 @@ import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.sv
 import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 import FooterModal from '../recruit/FooterModal';
+import { recruitURL } from './MainGraphic';
 
 const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,16 +60,11 @@ const Footer = () => {
                             만들고 싶다면, 아래 버튼을 눌러 지원해주세요!
                             (~2023. 12. 10)
                         </div>
-                        <div className="btn" onClick={openModal}>
+                        <a className="btn" href={recruitURL} target="_blank">
                             신규 대학 지원하기
                             <PixelLongArrowIcon fill="#212224" />
-                        </div>
-                        <FooterModal
-                            isOpen={isModalOpen}
-                            closeModal={closeModal}
-                        />
+                        </a>
                     </div>
-                    <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                     <div className="img-rect">
                         <img src={newrecruitimage} />
                     </div>
@@ -85,11 +81,12 @@ const Footer = () => {
                             모집이 시작되면 이메일과 문자로 알려드려요.
                         </div>
                     </div>
-                    <a href="/about" target="_blank" className="btn">
+                    <div className="btn" onClick={openModal}>
                         모집 알림 신청하기
                         <PixelLongArrowIcon fill="#212224" />
-                    </a>
+                    </div>
                 </div>
+                <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
             </F.Notification>
             <F.Makers>
                 <img src={makersbackground} />

@@ -64,45 +64,53 @@ const MainGraphic = () => {
     }, []);
 
     return (
-        <MG.Wrapper ref={targetRef}>
-            <MG.Background>
-                <div>
-                    <div className="inner">
-                        <img src={maintext} />
-                        <div className="new-text">12기 신규 대학 모집 중!</div>
-                        <CountDown />
-                        <a className="btn" href={recruitURL} target="_blank">
-                            신규 대학 지원하기
-                            <PixelLongArrowIcon fill="#ffffff" />
-                        </a>
-                    </div>
-                </div>
-                <img src={mainimage} />
-            </MG.Background>
-            <MG.Line>
-                {[1, 2].map(item => (
-                    <div
-                        className={
-                            item === 1
-                                ? 'track track1'
-                                : item === 2
-                                ? 'track track2'
-                                : ''
-                        }
-                        key={item}
-                    >
-                        {[1, 2, 3, 4].map(item => (
-                            <div className="flex" key={item}>
-                                <PixelFireworksIcon />
-                                <PixelSingingIcon />
-                                <div className="spacemono text">
-                                    Possibility to Reality
-                                </div>
+        <MG.Wrapper>
+            <div ref={targetRef} className="refDiv">
+                <MG.Background>
+                    <div>
+                        <div className="inner">
+                            <img src={maintext} />
+                            <div className="new-text">
+                                12기 신규 대학 모집 중!
                             </div>
-                        ))}
+                            <CountDown />
+                            <a
+                                className="btn"
+                                href={recruitURL}
+                                target="_blank"
+                            >
+                                신규 대학 지원하기
+                                <PixelLongArrowIcon fill="#ffffff" />
+                            </a>
+                        </div>
                     </div>
-                ))}
-            </MG.Line>
+                    <img src={mainimage} />
+                </MG.Background>
+                <MG.Line ref={targetRef}>
+                    {[1, 2].map(item => (
+                        <div
+                            className={
+                                item === 1
+                                    ? 'track track1'
+                                    : item === 2
+                                    ? 'track track2'
+                                    : ''
+                            }
+                            key={item}
+                        >
+                            {[1, 2, 3, 4].map(item => (
+                                <div className="flex" key={item}>
+                                    <PixelFireworksIcon />
+                                    <PixelSingingIcon />
+                                    <div className="spacemono text">
+                                        Possibility to Reality
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </MG.Line>
+            </div>
             <MG.Description>
                 <div className="container" ref={desRef1}>
                     <div className="title">국내 최대 규모 개발 창업 동아리</div>
