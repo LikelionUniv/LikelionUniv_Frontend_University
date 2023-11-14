@@ -109,8 +109,8 @@ const Nav = () => {
                 visible === false && position > 60
                     ? 'fade-out'
                     : visible === true
-                    ? 'fade-in'
-                    : undefined
+                      ? 'fade-in'
+                      : undefined
             }
         >
             {isPC ? (
