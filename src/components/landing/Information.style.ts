@@ -50,8 +50,12 @@ export const Title = styled.div`
     &.br {
         display: flex;
         align-items: center;
-        .right {
-            margin-left: 1%;
+        span {
+            display: flex;
+            align-items: center;
+            svg {
+                margin: 0 10px;
+            }
         }
     }
     @media (max-width: 1280px) {

@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
+import { viewFloatingCountDownState } from '../../store/landing';
+
 import * as F from './Footer.style';
 import recruitimage from '../../img/landing/recruit_image.png';
 import newrecruitimage from '../../img/landing/new_recruit_image.png';
@@ -25,8 +28,28 @@ const Footer = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
+
+    // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
+    const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
+    const io = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0)
+                    setIsView(prev => ({ top: prev.top, bottom: true }));
+                else setIsView(prev => ({ top: prev.top, bottom: false }));
+            });
+        },
+        {
+            rootMargin: '-150px',
+        },
+    );
+    const targetRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (targetRef.current) io.observe(targetRef.current);
+    }, []);
+
     return (
-        <F.Wrapper>
+        <F.Wrapper ref={targetRef}>
             <F.Recruit>
                 <div className="container">
                     <div className="left">

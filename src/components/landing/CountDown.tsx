@@ -18,7 +18,8 @@ const getRemainTime = (countDown: number) => {
     ];
 };
 
-const CountDown = () => {
+type Props = { isFloating?: boolean };
+const CountDown = ({ isFloating }: Props) => {
     const [countDown, setCountDown] = useState(
         new Date(targetDate).getTime() - new Date().getTime(),
     );
@@ -30,29 +31,49 @@ const CountDown = () => {
     }, []);
     const [days, hours, minutes, seconds] = getRemainTime(countDown);
     return (
-        <Container>
-            <div className="text">모집 종료까지</div>
-            <div className="timer">
-                <div className="time-container text-container">
-                    <div>DAYS</div>
-                    <p className="colon">:</p>
-                    <div>HOURS</div>
-                    <p className="colon">:</p>
-                    <div>MINS</div>
-                    <p className="colon">:</p>
-                    <div>SECS</div>
-                </div>
-                <div className="time-container">
-                    <div>{days}</div>
-                    <p className="colon">:</p>
-                    <div>{hours}</div>
-                    <p className="colon">:</p>
-                    <div>{minutes}</div>
-                    <p className="colon">:</p>
-                    <div>{seconds}</div>
-                </div>
-            </div>
-        </Container>
+        <>
+            {isFloating ? (
+                <FloatingContainer>
+                    <div className="text">
+                        <div className="mobile">신규 대학&nbsp;</div>
+                        모집 종료까지
+                    </div>
+                    <div className="time-container">
+                        <div>{days}</div>
+                        <div className="colon">:</div>
+                        <div>{hours}</div>
+                        <div className="colon">:</div>
+                        <div>{minutes}</div>
+                        <div className="colon">:</div>
+                        <div>{seconds}</div>
+                    </div>
+                </FloatingContainer>
+            ) : (
+                <Container>
+                    <div className="text">모집 종료까지</div>
+                    <div className="timer">
+                        <div className="time-container text-container">
+                            <div>DAYS</div>
+                            <p className="colon">:</p>
+                            <div>HOURS</div>
+                            <p className="colon">:</p>
+                            <div>MINS</div>
+                            <p className="colon">:</p>
+                            <div>SECS</div>
+                        </div>
+                        <div className="time-container">
+                            <div>{days}</div>
+                            <p className="colon">:</p>
+                            <div>{hours}</div>
+                            <p className="colon">:</p>
+                            <div>{minutes}</div>
+                            <p className="colon">:</p>
+                            <div>{seconds}</div>
+                        </div>
+                    </div>
+                </Container>
+            )}
+        </>
     );
 };
 
@@ -64,8 +85,8 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: flex-end;
     margin-top: 8%;
+    color: #f6f8f9;
     .text {
-        color: #fff;
         font-family: Pretendard;
         font-size: 24px;
         font-weight: 700;
@@ -81,7 +102,6 @@ const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #fff;
         font-family: Pretendard;
         font-size: 30px;
         font-weight: 700;
@@ -99,7 +119,7 @@ const Container = styled.div`
         display: flex;
         max-height: 16px;
         div {
-            color: #d1d4d8;
+            color: #eaecee;
             font-size: 13px;
         }
         .colon {
@@ -135,6 +155,53 @@ const Container = styled.div`
         .text-container {
             div {
                 font-size: 10px;
+            }
+        }
+    }
+`;
+
+const FloatingContainer = styled.div`
+    display: flex;
+    align-items: center;
+    color: #f2f4f6;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-weight: 700;
+    flex-shrink: 0;
+    .text {
+        display: flex;
+        flex-shrink: 0;
+        margin-left: 26px;
+        @media (max-width: 890px) {
+            font-size: 2.7vw;
+        }
+    }
+    .time-container {
+        display: flex;
+        margin-left: 12px;
+        .colon {
+            margin: 0 5px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: 160px;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 20px;
+        font-size: 20px;
+        .text {
+            margin-left: 0;
+            margin-bottom: 5px;
+            font-size: 14px;
+            .mobile {
+                display: none;
+            }
+        }
+        .time-container {
+            margin-left: 0;
+            .colon {
+                margin: 0 8px;
             }
         }
     }
