@@ -1,4 +1,4 @@
-// 대학 Tab
+ // src/components/univ/UnivTab.tsx
 import { useState, useCallback } from 'react';
 import * as T from './UnivTabStyle';
 import Logo from '../../img/recruit/logo.svg';
@@ -16,20 +16,17 @@ const Tab = () => {
     const getFilteredUniversities = () => {
         if (activeTab === '전체') {
             const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
+            return allUniversities.sort((a, b) => a.school.localeCompare(b.school));
         } else {
-            return tabData[activeTab].sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
+            return tabData[activeTab].sort((a, b) => a.school.localeCompare(b.school));
         }
     };
 
-    const hongikLikelionSite = 'https://likelionhongik.com/';
-
-    const popupUnivSite = (siteUrl: string): void => {
-        window.open(siteUrl, '_blank');
+    const popupUnivSite = (siteUrl?: string): void => {
+        if (siteUrl) {
+            window.open(siteUrl, '_blank');
+        }
+        // Add any other actions you want to perform if there is no website link.
     };
 
     return (
@@ -50,11 +47,15 @@ const Tab = () => {
 
                 {/* 학교명  */}
                 <T.SchoolWrapper>
-                    {getFilteredUniversities().map(school => (
+                    {getFilteredUniversities().map((school, index) => (
                         <T.TabContent
-                            onClick={() => popupUnivSite(hongikLikelionSite)}
+                            key={index}
+                            onClick={() => popupUnivSite(school.website)}
                         >
+                            {/* 학교 로고 추가 */}
                             <T.SchoolLogo logo={Logo} />
+
+                            {/* 학교 텍스트 */}
                             <T.SchoolText>
                                 {school.school}
                                 <div>{school.region}</div>
@@ -77,3 +78,4 @@ const Tab = () => {
 };
 
 export default Tab;
+
