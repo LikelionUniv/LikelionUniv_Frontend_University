@@ -7,6 +7,7 @@ import planningImage from '../../img/landing/plan.png';
 
 export interface TrackBoxProps {
     hoverColor: string;
+    
 }
 
 const InfoTrack = () => {
