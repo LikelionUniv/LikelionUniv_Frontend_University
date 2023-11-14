@@ -52,7 +52,7 @@ export const T2 = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
-    margin-bottom: 48px;
+    margin-bottom: 24px;
     max-width: 588px;
 
     @media screen and (max-width: 768px) {
@@ -62,19 +62,39 @@ export const T2 = styled.div`
     @media screen and (max-width: 360px) {
         font-size: 16px;
     }
+
+    :nth-child(1) {
+        color: var(--Grey-600, #adb3ba);
+        font-size: 14px;
+        margin-top: 24px;
+
+        @media screen and (max-width: 767px) {
+            font-size: 12px;
+            font-weight: 500;
+            line-height: 150%;
+        }
+    }
 `;
 
 export const T3 = styled.div`
-    color: #fff;
+    color: var(--Orange-600, #ff7710);
+
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 36px */
 
     margin-bottom: 16px;
+    white-space: nowrap;
 
     @media screen and (max-width: 767px) {
         font-size: 20px;
+        line-height: 150%;
+    }
+
+    @media screen and (max-width: 387px) {
+        font-size: 19px;
+        max-width: 100%;
     }
 `;
 
@@ -106,6 +126,7 @@ export const Button = styled.button`
 
     @media screen and (max-width: 480px) {
         justify-content: space-between;
+        align-items: center;
         width: 320px;
         padding: 1rem 2rem;
         gap: 0;
