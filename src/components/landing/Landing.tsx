@@ -2,6 +2,7 @@ import './landing.css';
 import MainGraphic from './MainGraphic';
 import Information from './Information';
 import Footer from './Footer';
+import FloatingCountDown from './FloatingCountDown';
 import { useEffect } from 'react';
 const Landing = () => {
     useEffect(() => {
@@ -12,6 +13,7 @@ const Landing = () => {
             <MainGraphic />
             <Information />
             <Footer />
+            <FloatingCountDown />
         </>
     );
 };

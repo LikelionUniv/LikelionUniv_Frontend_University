@@ -10,14 +10,20 @@ export const Wrapper = styled.div`
 
 export const Background = styled.div`
     width: 100%;
-    aspect-ratio: 2.15 / 1;
     background-color: #000;
     position: relative;
     overflow: hidden;
+    @media (max-width: 1280px) {
+    }
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
     & > div {
         width: 100%;
-        height: 89.2%;
+        height: 50%;
         background: linear-gradient(
             180deg,
             rgba(255, 146, 64, 0.2) 0%,
@@ -27,13 +33,19 @@ export const Background = styled.div`
 
     & > img {
         position: absolute;
-        height: 100%;
+        height: 110%;
         top: 0;
-        right: 2%;
+        right: 3%;
         @media (max-width: 1280px) {
-            height: 120%;
-            top: -10%;
-            right: -5%;
+            height: 103%;
+            right: -7%;
+        }
+        @media (max-width: 768px) {
+            position: relative;
+            max-width: calc(100% - 40px);
+            height: auto;
+            right: 0;
+            padding: 20px 0;
         }
     }
 
@@ -43,15 +55,38 @@ export const Background = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
-        @media (max-width: 1280px) {
-            width: 50vw; // here
-            width: 43%;
-            margin-left: 32px;
-        }
-
         img {
             width: 100%;
             margin-top: 22%;
+        }
+        .new-text {
+            font-size: 30px;
+            font-weight: 700;
+            color: #c6f959;
+            margin-top: 8%;
+        }
+
+        @media (max-width: 1280px) {
+            width: 55%;
+            margin-left: 3%;
+            img {
+                margin-top: 18%;
+            }
+            .new-text {
+                font-size: 2.5vw;
+            }
+        }
+        @media (max-width: 768px) {
+            width: 100%;
+            margin-left: 0;
+            img {
+                width: 80%;
+                margin-top: 10%;
+            }
+            .new-text {
+                font-size: 5vw;
+                margin-top: 5%;
+            }
         }
     }
 
@@ -61,6 +96,7 @@ export const Background = styled.div`
         align-items: center;
         padding: 12px 32px;
         margin-top: 25px;
+        margin-bottom: 15%;
 
         background-color: #ff7710;
         border-radius: 8px;
@@ -84,9 +120,13 @@ export const Background = styled.div`
         @media (max-width: 957px) {
             font-size: 2.1vw;
         }
-        @media (max-width: 720px) {
-            font-size: 15px;
-            padding: 10px 22px;
+        @media (max-width: 768px) {
+            max-width: calc(520px - 64px);
+            font-size: 20px;
+            padding: 16px 32px;
+            border-radius: 1vw;
+            margin-top: 3vw;
+            margin-bottom: 0;
         }
 
         svg {
@@ -94,8 +134,9 @@ export const Background = styled.div`
             @media (max-width: 957px) {
                 height: 3vw;
             }
-            @media (max-width: 720px) {
-                height: 20px;
+            @media (max-width: 768px) {
+                width: 36px;
+                height: auto;
             }
         }
     }
@@ -108,8 +149,11 @@ export const Line = styled.div`
     position: relative;
     overflow-x: hidden;
     padding: 20px 0;
-    @media (max-width: 780px) {
-        padding: 2.5% 0;
+    @media (max-width: 1280px) {
+        padding: 15px 0;
+    }
+    @media (max-width: 768px) {
+        padding: 2vw 0;
     }
 
     .track {
@@ -158,9 +202,13 @@ export const Line = styled.div`
             height: 28px;
             padding-right: 20px;
             flex-shrink: 0;
+            @media (max-width: 1280px) {
+                height: 2.3vw;
+                padding-right: 1.5vw;
+            }
             @media (max-width: 768px) {
                 height: 3.8vw;
-                padding-right: 2.4vw;
+                padding-right: 2%;
             }
         }
 
@@ -168,8 +216,11 @@ export const Line = styled.div`
             font-size: 28px;
             line-height: 140%;
             color: #000;
+            @media (max-width: 1280px) {
+                font-size: 2vw;
+            }
             @media (max-width: 768px) {
-                font-size: 3.4vw;
+                font-size: 3vw;
             }
         }
     }
@@ -190,7 +241,7 @@ export const Description = styled.div`
     @media (max-width: 768px) {
         width: 100%;
         flex-direction: column-reverse;
-        padding: 80px 0;
+        padding: 100px 0;
     }
 
     .container {
@@ -251,6 +302,7 @@ export const Description = styled.div`
     .desimage {
         width: 580px;
         margin-left: 3%;
+        margin-top: 3%;
         @media (max-width: 1280px) {
             width: 38vw;
             margin-left: 1%;
@@ -260,6 +312,7 @@ export const Description = styled.div`
             margin-left: 0;
             margin-right: 0;
             margin-bottom: 40px;
+            margin-top: 0;
         }
     }
     .subtitle {

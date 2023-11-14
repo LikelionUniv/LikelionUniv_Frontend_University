@@ -30,7 +30,14 @@ const InfoService = () => {
                     <SwiperSlide key={item.id}>
                         <a href={item.url} target="_blank">
                             <div className="rect">
-                                <div className="logo-rect">
+                                <div
+                                    className="logo-rect"
+                                    style={{
+                                        backgroundColor: item.backgroundColor
+                                            ? item.backgroundColor
+                                            : '#fff',
+                                    }}
+                                >
                                     <img src={item.logo} />
                                 </div>
                                 <div className="text-section">
@@ -54,6 +61,7 @@ type serviceType = {
     gen: number;
     logo: string;
     url: string;
+    backgroundColor?: string;
 };
 const serviceList: serviceType[] = [
     {
@@ -73,7 +81,7 @@ const serviceList: serviceType[] = [
     {
         id: 2,
         name: '뱅크샐러드',
-        gen: 0,
+        gen: 3,
         logo: 'https://play-lh.googleusercontent.com/9S1i6ZhYK4gIKThBQ4HFUN1srbKCERKo_wcW3sg7vWOxlu0W-KJlJdVOLH6juWpkVw',
         url: 'https://www.banksalad.com',
     },
@@ -81,8 +89,9 @@ const serviceList: serviceType[] = [
         id: 3,
         name: '구닥',
         gen: 3,
-        logo: 'https://play-lh.googleusercontent.com/q0KUJgBcJka1jRg3WdQsTos0p0kyo3q9i0b1cE6L66SCOCSUqkfKwJ3uF38tw67vQg52',
-        url: '',
+        logo: 'https://play-lh.googleusercontent.com/q0KUJgBcJka1jRg3WdQsTos0p0kyo3q9i0b1cE6L66SCOCSUqkfKwJ3uF38tw67vQg52=w240-h480-rw',
+        url: 'https://play.google.com/store/apps/details?id=com.screwbar.gudakcamera&hl=ko&gl=US',
+        backgroundColor: '#FC3',
     },
     {
         id: 4,

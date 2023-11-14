@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useRecoilState } from 'recoil';
 import { currentWidthState } from '../../store/landing';
+import { viewFloatingCountDownState } from '../../store/landing';
 
 import maintext from '../../img/landing/main_text.png';
 import mainimage from '../../img/landing/main_image.png';
@@ -13,7 +14,7 @@ import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_sing
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
 import CountDown from './CountDown';
 
-const recruitURL = 'https://www.google.com/intl/ko_kr/forms/about/';
+export const recruitURL = 'https://www.google.com/intl/ko_kr/forms/about/';
 
 const MainGraphic = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
@@ -43,15 +44,36 @@ const MainGraphic = () => {
         );
     }, [desRef1, desRef2, width]);
 
+    // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
+    const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
+    const io = new IntersectionObserver(
+        entries => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0)
+                    setIsView(prev => ({ top: true, bottom: prev.bottom }));
+                else setIsView(prev => ({ top: false, bottom: prev.bottom }));
+            });
+        },
+        {
+            rootMargin: '-150px',
+        },
+    );
+    const targetRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (targetRef.current) io.observe(targetRef.current);
+    }, []);
+
     return (
-        <MG.Wrapper>
+        <MG.Wrapper ref={targetRef}>
             <MG.Background>
                 <div>
                     <div className="inner">
                         <img src={maintext} />
+                        <div className="new-text">12기 신규 대학 모집 중!</div>
                         <CountDown />
                         <a className="btn" href={recruitURL} target="_blank">
-                            아기사자 지원하기 <PixelLongArrowIcon />
+                            신규 대학 지원하기
+                            <PixelLongArrowIcon fill="#ffffff" />
                         </a>
                     </div>
                 </div>

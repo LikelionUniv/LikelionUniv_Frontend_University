@@ -22,9 +22,11 @@ const Information = () => {
             <IF.Wrapper style={{ paddingBottom: '0' }}>
                 <div className="container" style={{ width: desWidth }}>
                     <InfoNumber />
-                    <IF.Title>
-                        멋사에서 탄생한 <PixelBulbIcon />
-                        다양한 서비스
+                    <IF.Title className="br">
+                        <span>
+                            멋사에서 탄생한 <PixelBulbIcon />
+                        </span>
+                        <span className="right">다양한 서비스</span>
                     </IF.Title>
                     <IF.SubText>다음 주인공은 바로 당신!</IF.SubText>
                 </div>

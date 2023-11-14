@@ -29,7 +29,8 @@ export const Wrapper = styled.div`
 
     .container {
         @media (max-width: 768px) {
-            width: calc(100% - 80px) !important;
+            width: calc(100% - 40px) !important;
+            max-width: 520px;
             margin-left: 0;
         }
     }
@@ -43,20 +44,61 @@ export const Title = styled.div`
     color: #212224;
     font-family: Pretendard;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 48px;
     height: 48px;
+    &.br {
+        display: flex;
+        align-items: center;
+        span {
+            display: flex;
+            align-items: center;
+            svg {
+                margin: 0 10px;
+            }
+        }
+    }
     @media (max-width: 1280px) {
         font-size: 3.6vw;
         height: 3.6vw;
+        &.br {
+            span {
+                height: 3.6vw;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
     @media (max-width: 768px) {
-        font-size: 6vw;
-        height: 6vw;
+        font-size: 28px;
+        height: 30px;
+        white-space: initial;
+        word-break: break-all;
+        &.br {
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+            }
+        }
     }
-    @media (max-width: 768px) {
-        font-size: 5.5vw;
-        height: 5.5vw;
+    @media (max-width: 480px) {
+        &.br {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            white-space: nowrap;
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+            }
+            .right {
+                margin-left: 0;
+            }
+        }
     }
 
     svg {
@@ -69,7 +111,7 @@ export const Title = styled.div`
             margin: 0 1%;
         }
         @media (max-width: 768px) {
-            margin: 0 1%;
+            margin: 0 5px;
         }
     }
 `;
@@ -81,11 +123,11 @@ export const SubText = styled.div`
     font-weight: 600;
     font-size: 20px;
     margin: 24px 0 40px 0;
-    @media (max-width: 1280px) {
-        font-size: 1.6vw;
-    }
     @media (max-width: 768px) {
-        font-size: 2.8vw;
+        font-size: 16px;
+        white-space: initial;
+        word-break: keep-all;
+        line-height: 150%;
         margin: 4% 0 8% 0;
     }
 `;
@@ -96,6 +138,9 @@ export const SectionContainer = styled.div`
     justify-content: space-between;
     gap: 25px;
     margin-bottom: 165px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 
     .number-rect {
         width: 100%;
@@ -112,12 +157,7 @@ export const SectionContainer = styled.div`
                 font-size: 2vw;
             }
             @media (max-width: 768px) {
-                font-size: 2.5vw;
-                padding-bottom: 6%;
-            }
-            @media (max-width: 500px) {
-                font-size: 2vw;
-                padding-bottom: 6%;
+                font-size: 20px;
             }
         }
         .number {
@@ -140,17 +180,9 @@ export const SectionContainer = styled.div`
                 }
             }
             @media (max-width: 768px) {
-                font-size: 6.2vw;
-                margin-top: 8%;
+                font-size: 32px;
                 sup {
-                    font-size: 2.5vw;
-                }
-            }
-            @media (max-width: 500px) {
-                font-size: 5vw;
-                margin-top: 8%;
-                sup {
-                    font-size: 2vw;
+                    font-size: 14px;
                 }
             }
         }
@@ -183,7 +215,7 @@ export const SwiperWrapper = styled.div`
             width: calc((100vw - 36px) / 3) !important;
         }
         @media (max-width: 768px) {
-            width: calc(100vw / 3) !important;
+            width: 259px !important;
         }
         a {
             text-decoration: none;
@@ -197,15 +229,14 @@ export const SwiperWrapper = styled.div`
             align-items: center;
         }
         .logo-rect {
-            padding: 24px;
+            margin: 24px;
+            border-radius: 12px;
             width: 31.25%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
             @media (max-width: 768px) {
-                padding: 20px;
-            }
-            @media (max-width: 500px) {
-                padding: 14px;
+                width: 25%;
+                margin: 20px;
             }
             img {
                 width: 100%;
@@ -226,10 +257,7 @@ export const SwiperWrapper = styled.div`
                     font-size: 2.2vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.8vw;
-                }
-                @media (max-width: 500px) {
-                    font-size: 2.5vw;
+                    font-size: 20px;
                 }
             }
             .gen {
@@ -239,15 +267,23 @@ export const SwiperWrapper = styled.div`
                     font-size: 1.6vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.2vw;
+                    font-size: 15px;
                 }
             }
         }
     }
 `;
 
-export const Box = styled.div<BoxProps>`
+export const ActivityContainer = styled.div`
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+`;
+
+export const Box = styled.div<BoxProps>`
+    width: calc(50% - 60px);
     display: flex;
     justify-content: space-between;
     background: ${props => props.background || 'transparent'};
@@ -256,18 +292,18 @@ export const Box = styled.div<BoxProps>`
 
     @media (max-width: 1280px) {
         flex-direction: column;
+        justify-content: flex-start;
     }
 
     .hover-text {
-        opacity: 0;
-        font-size: 0;
+        display: none;
     }
     .img-hide {
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            margin-top: 16px;
+            margin-top: 24px;
         }
     }
 
@@ -277,15 +313,17 @@ export const Box = styled.div<BoxProps>`
         justify-content: space-between;
 
         .name {
-            color: var(--Black, #000);
+            width: 30%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
+            word-break: keep-all;
 
             @media (max-width: 1280px) {
+                width: 70%;
                 flex-direction: row;
                 align-items: center;
-                color: var(--Grey-900, #212224);
                 font-family: Pretendard;
                 font-size: 20px;
                 font-style: normal;
@@ -294,55 +332,65 @@ export const Box = styled.div<BoxProps>`
         }
 
         @media (max-width: 1280px) {
+            height: 40px;
             flex-direction: row;
+            align-items: center;
+            svg {
+                width: 5vw;
+            }
         }
     }
 
     &:hover {
         background: ${props => props.hoverBackColor}, #212224;
 
-        .title {
-            flex-direction: column;
-            .name {
-                color: #fff;
-                margin-bottom: 16px;
-            }
-        }
-
         .hover-hide,
         .img-hide {
             opacity: 0;
             width: 0;
+            height: 0;
+            margin-top: 0;
         }
         .hover-text {
-            opacity: 100;
-            color: var(--Grey-200, #f2f4f6);
+            display: block;
+            width: 70%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
+            line-height: 150%;
+        }
+
+        @media (max-width: 1280px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            .title {
+                margin-bottom: 24px;
+            }
+            .hover-text {
+                width: 100%;
+            }
         }
     }
 `;
 
-export const TrackBox = styled.div<TrackBoxProps>`
+export const TrackWrapper = styled.div`
     width: 100%;
-    height: 100%;
-    height: 400px;
-    max-width: 384px;
-    max-height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+`;
+
+export const TrackBox = styled.div<TrackBoxProps>`
+    width: calc(50% - 12px);
+    height: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: #212224;
     border-radius: 8px;
-
-    @media (max-width: 1280px) {
-        height: 80%;
-    }
-    @media (max-width: 768px) {
-        height: 240px;
-    }
 
     .hover-text {
         opacity: 0;
