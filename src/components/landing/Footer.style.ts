@@ -308,8 +308,14 @@ export const Makers = styled.div`
     img {
         height: 190px;
     }
+    @media (min-width: 1820px) {
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
 
-    .container {
+    .makers-container {
         position: absolute;
         display: flex;
         justify-content: space-between;
@@ -361,18 +367,19 @@ export const Makers = styled.div`
             border-radius: 8px;
             color: #fff;
             word-break: keep-all;
-            &:hover {
-                svg {
-                    fill: #ff7710;
-                }
-            }
             font-family: Pretendard;
             font-size: 16px;
             font-weight: 700;
             text-decoration: none;
-
             svg {
                 fill: #fff;
+            }
+
+            &:hover {
+                color: #ff7710;
+                svg {
+                    fill: #ff7710;
+                }
             }
         }
     }

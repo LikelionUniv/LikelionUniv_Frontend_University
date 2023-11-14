@@ -90,11 +90,11 @@ const Footer = () => {
             </F.Notification>
             <F.Makers>
                 <img src={makersbackground} />
-                <div className="container">
+                <div className="makers-container">
                     <div className="text">
                         멋쟁이사자처럼 홈페이지를 만든 사람들이 궁금하다면?
                     </div>
-                    <a href="/about" target="_blank" className="btn">
+                    <a href="/about" className="btn">
                         제작자 보기 <PixelArrowIcon />
                     </a>
                 </div>
@@ -137,11 +137,7 @@ const Footer = () => {
                             >
                                 <BrunchIcon />
                             </a>
-                            <a
-                                href="/about"
-                                target="_blank"
-                                className="makers-btn"
-                            >
+                            <a href="/about" className="makers-btn">
                                 제작자
                             </a>
                         </div>

@@ -34,12 +34,12 @@ const FloatingCountDown = () => {
     useEffect(() => {
         setFadeClassName(
             isView.top === true && isView.bottom === false
-                ? 'fade-out'
+                ? 'countdown-fade-out'
                 : isView.top === false && isView.bottom === false
-                ? 'fade-in'
+                ? 'countdown-fade-in'
                 : isView.top === false && isView.bottom === true
-                ? 'fade-out'
-                : 'fade-out',
+                ? 'countdown-fade-out'
+                : 'countdown-fade-out',
         );
     }, [isView]);
 
@@ -92,16 +92,14 @@ const Wrapper = styled.div`
     z-index: 998;
     width: 100%;
     height: 88px;
-    margin-bottom: -88px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
     @media (max-width: 768px) {
-        bottom: 0;
         height: 68px;
     }
-    &.fade-in {
+    &.countdown-fade-in {
         margin-bottom: 0;
         animation: show 0.5s;
         @keyframes show {
@@ -115,7 +113,8 @@ const Wrapper = styled.div`
             }
         }
     }
-    &.fade-out {
+    &.countdown-fade-out {
+        margin-bottom: -88px;
         animation: disappear 0.3s;
         @keyframes disappear {
             from {
