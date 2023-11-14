@@ -15,7 +15,7 @@ import Community from './routes/Community';
 import RecruitPage from './routes/RecruitPage';
 import AboutPage from './routes/AboutPage';
 import BabyLion from './components/recruit/apply/mobile/BabyLion';
-import Recruit from './components/recruit/Recruit';
+import Recruit from './components/univrecruit/UnivRecruit';
 
 const router = createBrowserRouter([
     {
