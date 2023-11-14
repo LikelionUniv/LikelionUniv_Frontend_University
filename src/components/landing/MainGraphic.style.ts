@@ -110,7 +110,7 @@ export const Background = styled.div`
         font-family: Pretendard;
         font-size: 20px;
         font-weight: 600;
-        word-break: keep-all;
+        white-space: nowrap;
         text-decoration: none;
         border: none;
         outline: none;
@@ -264,14 +264,12 @@ export const Description = styled.div`
         font-weight: 700;
         margin-bottom: 5px;
         font-size: 48px;
+        word-break: keep-all;
         @media (max-width: 1280px) {
             font-size: 3.6vw;
         }
         @media (max-width: 768px) {
-            font-size: 6vw;
-        }
-        @media (max-width: 500px) {
-            font-size: 5vw;
+            font-size: 28px;
         }
 
         svg {
@@ -282,8 +280,8 @@ export const Description = styled.div`
                 margin-right: 1.5%;
             }
             @media (max-width: 768px) {
-                width: 7vw;
-                height: 7vw;
+                width: 20px;
+                height: 20px;
             }
         }
     }
@@ -302,7 +300,7 @@ export const Description = styled.div`
         }
         @media (max-width: 768px) {
             width: 100%;
-            font-size: 2.8vw;
+            font-size: 14px;
         }
     }
     .desimage {
@@ -329,12 +327,10 @@ export const Description = styled.div`
         font-weight: 700;
         line-height: 140%;
         margin-top: 40px;
+        word-break: keep-all;
 
         @media (max-width: 768px) {
-            font-size: 5vw;
-        }
-        @media (max-width: 500px) {
-            font-size: 4vw;
+            font-size: 20px;
         }
     }
 `;
