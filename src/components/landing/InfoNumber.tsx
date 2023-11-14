@@ -6,7 +6,7 @@ const InfoNumber = () => {
     // number section이 스크롤 뷰 내에 있는지 감지
     const numberRef = useRef<HTMLDivElement>(null);
     const [isInView, setIsInView] = useState<boolean>(false);
-    const options = { rootMargin: '0px', threshold: 1 };
+    const options = { rootMargin: '100px' };
     const onIntersect = (entry: any, observer: any) => {
         observer.unobserve(entry.target);
         setIsInView(true);
@@ -43,8 +43,8 @@ const InfoNumber = () => {
             easeOnlyOut
                 ? 1 - Math.pow(1 - x, 4)
                 : x < 0.5
-                  ? 8 * x * x * x * x
-                  : 1 - Math.pow(-2 * x + 2, 4) / 2;
+                ? 8 * x * x * x * x
+                : 1 - Math.pow(-2 * x + 2, 4) / 2;
         useEffect(() => {
             if (isInView) {
                 let currentNumber = 0;
