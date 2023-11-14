@@ -63,8 +63,8 @@ const Nav = () => {
                 visible === false
                     ? 'fade-out'
                     : visible === true
-                    ? 'fade-in'
-                    : undefined
+                      ? 'fade-in'
+                      : undefined
             }
         >
             <Container>

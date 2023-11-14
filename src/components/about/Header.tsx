@@ -4,7 +4,6 @@ import { ReactComponent as ArrowIcon } from '../../img/about/arrow_left.svg';
 import useIsPC from '../../hooks/useIsPC';
 
 const Header = () => {
-
     const isPC = useIsPC();
 
     return (

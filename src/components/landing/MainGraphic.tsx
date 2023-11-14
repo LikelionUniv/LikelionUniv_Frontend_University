@@ -64,8 +64,8 @@ const MainGraphic = () => {
                             item === 1
                                 ? 'track track1'
                                 : item === 2
-                                ? 'track track2'
-                                : ''
+                                  ? 'track track2'
+                                  : ''
                         }
                         key={item}
                     >
