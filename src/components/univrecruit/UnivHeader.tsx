@@ -29,7 +29,7 @@ const Header = () => {
                         학교라면, 각 학교의 대표를 통해 문의해주세요.
                     </div>
                 </U.T2>
-                <U.T3>모집 기간 : 0000/00/00 ~ 0000/00/00</U.T3>
+                <U.T3>모집 기간 : 2023/11/20 ~ 2023/12/10</U.T3>
                 <U.Button onClick={onClick}>
                     <div>지원하기</div>
                     <img src={Arrow} alt="->"></img>
