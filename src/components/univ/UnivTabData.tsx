@@ -7,6 +7,7 @@ export interface ITabData {
 
 export const tabData: { [key: string]: ITabData[] } = {
     서울: [
+        { school: '홍익대학교', region: '서울' , website: 'https://likelionhongik.com/' },
         { school: '강남대학교', region: '서울' , website: 'https://www.knu-likelion.org/' },
         { school: '국민대학교', region: '서울' , website: 'https://www.instagram.com/likelion_kmu/'},
         { school: '단국대학교', region: '서울', website: 'https://www.instagram.com/dku_likelion11th/' },
