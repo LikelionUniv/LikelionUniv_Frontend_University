@@ -33,7 +33,7 @@ const Developers = () => {
                 <D.PeopleBox>
                     <DevInfo
                         name="박혜준"
-                        from="홍익대학교 00기 운영진"
+                        from="홍익대학교"
                         position="디자인 파트장"
                         profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F240f073e-1349-403a-969b-d240c37cc1c5%2FProfile_%25EB%25B0%2595%25ED%2598%259C%25EC%25A4%2580.png?id=7d651a8d-3bb1-4ac1-9481-37679bf36f17&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
                     />
@@ -124,8 +124,12 @@ const Developers = () => {
                         from="한서대학교 11기 대표"
                         profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fc94d1814-aa21-4601-9587-666065b9d386%2FIMG_1995.png?id=d66d7afe-307e-4aae-9143-db8b80003976&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
                     />
-                    <DevInfo name="이나현" from="을지대학교 11기 대표" />
-                    <DevInfo name="채서연" from="명지대학교(서울) 11기 대표" />
+                    <DevInfo 
+                        name="이나현" 
+                        from="을지대학교 11기 대표" 
+                        profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F60151541-194c-4be9-8625-79945890e6e6%2FKakaoTalk_20231009_222134073.jpg?id=835e3c58-96d4-4401-ad67-a6e766e1bfb2&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
+                        />
+                    <DevInfo name="채서연" from="명지대학교(인문) 11기 대표" />
                     <DevInfo name="최가현" from="서울여자대학교 11기 운영진" />
                     <DevInfo name="최혁순" from="광운대학교 11기 운영진" />
                 </D.PeopleBox>
