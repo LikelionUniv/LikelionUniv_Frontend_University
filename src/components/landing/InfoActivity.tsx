@@ -13,6 +13,12 @@ export interface BoxProps {
     hoverBackColor?: string;
 }
 
+interface ImageSize {
+    width: number;
+    height: number;
+}
+
+
 const activityArray: any[] = [
     {
         background:'var(--Grey-900, #212224)', 
@@ -55,10 +61,27 @@ const activityArray: any[] = [
 ];
 
 const InfoActivity = () => {
+    const [imgSizes, setImgSizes] = useState<{ [name: string]: ImageSize }>({});
+
+    const handleImageLoad = (
+        name: string,
+        e: React.SyntheticEvent<HTMLImageElement>,
+    ) => {
+        const imgElement = e.target as HTMLImageElement;
+
+        setImgSizes(prevSizes => ({
+            ...prevSizes,
+            [name]: {
+                width: imgElement.width,
+                height: imgElement.height,
+            },
+        }));
+    };
+
     return (
         <div style={{ width: '100%' }}>
             <IF.ActivityContainer>
-                {activityArray.map(item => (
+                {activityArray.map((item, index) => (
                     <IF.Box
                         background={item.background}
                         hoverBackColor={item.hoverBackColor}
@@ -68,13 +91,25 @@ const InfoActivity = () => {
                             <Arrow className="hover-hide" />
                         </div>
                         <div className='img-wrapper'>
-                            {item.name === '해커톤' && <img src={HackathonImg} className="img-hide" alt="" />}
-                            {item.name === '아이디어톤' && <img src={IdeathonImg} className="img-hide" alt="" />}
-                            {item.name === '학교별 스터디' && <img src={StudyImg} className="img-hide" alt="" />}
-                            {item.name === '데모데이' && <img src={DemoImg} className="img-hide" alt="" />}
+                            {item.name === '해커톤' && <img src={HackathonImg} className="img-hide" alt="" onLoad={e => handleImageLoad(item.name, e)} />}
+                            {item.name === '아이디어톤' && <img src={IdeathonImg} className="img-hide" alt="" onLoad={e => handleImageLoad(item.name, e)} />}
+                            {item.name === '학교별 스터디' && <img src={StudyImg} className="img-hide" alt="" onLoad={e => handleImageLoad(item.name, e)} />}
+                            {item.name === '데모데이' && <img src={DemoImg} className="img-hide" alt="" onLoad={e => handleImageLoad(item.name, e)} />}
+                            <div
+                            className={`hover-text box-${index}`}
+                            style={{
+                                height: imgSizes[item.name]
+                                    ? imgSizes[item.name].height
+                                    : 'auto',
+                                width: 'auto',
+                                whiteSpace: 'normal',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                            }}
+                        >
+                            {item.text}
                         </div>
-                        
-                        <div className="hover-text">{item.text}</div>
+                        </div>  
                     </IF.Box>
                 ))}
             </IF.ActivityContainer>

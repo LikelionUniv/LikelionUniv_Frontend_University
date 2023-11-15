@@ -294,6 +294,10 @@ export const Box = styled.div<BoxProps>`
     border-radius: 8px;
     padding: 16px;
 
+    @media screen and (max-width: 1280px) {
+        flex-direction: row;
+    }
+
     .hover-text {
         display: none;
     }
@@ -301,9 +305,12 @@ export const Box = styled.div<BoxProps>`
     .img-wrapper {
         display: flex;
         justify-content: flex-end;
-        width: 100%;
         height: 100%;
         box-sizing: border-box;
+
+        & div {
+            height: inherit;
+        }
     }
 
     .img-hide {
@@ -340,7 +347,6 @@ export const Box = styled.div<BoxProps>`
         @media (max-width: 1280px) {
             min-width: 100px;
             height: 100%;
-            flex-direction: column;
             align-items: center;
             & svg {
                 width: 5vw;
@@ -352,7 +358,10 @@ export const Box = styled.div<BoxProps>`
     }
 
     &:hover {
+        position: relative;
         background: ${props => props.hoverBackColor}, #212224;
+        flex-direction: row;
+        justify-content: flex-start;
 
         .hover-hide,
         .img-hide {
@@ -363,17 +372,25 @@ export const Box = styled.div<BoxProps>`
         }
         .hover-text {
             display: block;
-            width: 70%;
+            position: relative;
+            width: 100%;
             color: #fff;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
+
+            @media screen and (max-width: 767px) {
+                font-size: 14px;
+            }
+
+            @media screen and (max-width: 360px) {
+                font-size: 12px;
+            }
         }
 
         @media (max-width: 1280px) {
-            flex-direction: column;
             justify-content: flex-start;
             .title {
                 margin-bottom: 24px;
