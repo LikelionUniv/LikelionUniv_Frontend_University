@@ -45,7 +45,7 @@ export const UnivRecruit = styled.div`
 
     @media screen and (max-width: 450px) {
         margin: 0 auto;
-        margin-top: 154px;
+        margin-top: 30px;
 
         display: flex;
         flex-direction: column;

@@ -12,7 +12,7 @@ export const customStyles: Modal.Styles = {
         left: '50%',
         maxWidth: '688px',
         width: '100%',
-        height: '562px',
+        height: '100%',
         flexShrink: '0',
         transform: 'translate(-50%, -50%)',
         background: 'white',

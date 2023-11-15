@@ -3,9 +3,19 @@ import Arrow from '../../img/recruit/warrow.svg';
 import gra2 from '../../img/recruit/gra.svg';
 import useModal from '../../hooks/useModal';
 import RecruitModal from '../recruit/apply/RecruitModal';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
+    const navigate = useNavigate();
+    
+    const onClick = (): void => {
+        if (window.innerWidth > 450) {
+            openModal();
+        } else {
+            navigate('babylion');
+        }
+    };
 
     return (
         <U.BlackDiv>
@@ -20,7 +30,7 @@ const Header = () => {
                     </div>
                 </U.T2>
                 <U.T3>모집 기간 : 0000/00/00 ~ 0000/00/00</U.T3>
-                <U.Button onClick={openModal}>
+                <U.Button onClick={onClick}>
                     <div>지원하기</div>
                     <img src={Arrow} alt="->"></img>
                 </U.Button>
