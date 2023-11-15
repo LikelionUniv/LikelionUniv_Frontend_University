@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import fArrow from '../../img/recruit/footerArrow.svg';
 import * as F from './UnivFooterStyle';
 import FooterModal from './UnivFooterModal';
+import FooterModalMobile from './UnivModalMobile';
+import { ReactComponent as ArrowIcon } from '../../img/arrow_up_right.svg';
 import useIsPC from '../../hooks/useIsPC';
 import UnivFooterATag from './UnivFooterATag';
 
 const UnivFooter = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -16,6 +19,14 @@ const UnivFooter = () => {
         setIsModalOpen(false);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const isPC = useIsPC();
 
     return (
@@ -30,7 +41,8 @@ const UnivFooter = () => {
                     <img src={fArrow} alt="버튼화살표" />
                 </F.UnivBtn>
             </F.UnivFooterWrapper>
-            <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+
+            <FooterModalMobile isOpen={isModalOpen} closeModal={closeModal} />
 
             <F.Info>
                 <div className="container">

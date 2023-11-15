@@ -17,10 +17,12 @@ import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.sv
 import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 import FooterModal from '../recruit/FooterModal';
+import FooterModalMobile from '../univrecruit//UnivModalMobile';
 import { recruitURL } from './MainGraphic';
 
 const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -30,6 +32,14 @@ const Footer = () => {
         setIsModalOpen(false);
     };
 
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
     const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
     const io = new IntersectionObserver(
@@ -86,7 +96,14 @@ const Footer = () => {
                         <PixelLongArrowIcon fill="#212224" />
                     </div>
                 </div>
-                <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+                {isMobileView ? (
+                    <FooterModalMobile
+                        isOpen={isModalOpen}
+                        closeModal={closeModal}
+                    />
+                ) : (
+                    <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+                )}
             </F.Notification>
             <F.Makers>
                 <img src={makersbackground} />
