@@ -1,29 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import Line from '../../img/recruit/line.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './FooterModalStyle';
 
-// 모달 스타일
-const customStyles: Modal.Styles = {
-    overlay: {
-        backgroundColor: 'rgba(152, 146, 146, 0.5)',
-        zIndex: 1000,
-    },
-    content: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '688px',
-        height: '636px',
-        flexShrink: '0',
-        transform: 'translate(-50%, -50%)',
-        background: 'white',
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
-    },
-};
+
+//modal style
 
 Modal.setAppElement('#root');
 
@@ -33,6 +15,45 @@ interface FooterModalProps {
 }
 
 const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(()=>{
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+          };
+      
+          window.addEventListener('resize', handleResize);
+      
+          return () => {
+            window.removeEventListener('resize', handleResize);
+          };
+
+    },[])
+
+// 모달 스타일
+    const customStyles: Modal.Styles = {
+        overlay: {
+            backgroundColor: 'rgba(152, 146, 146, 0.5)',
+            zIndex: 1000,
+        },
+        content: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            // width: '688px',
+            // height: '636px',
+            width: windowWidth < 768 ? '80%' : '688px',
+            height: windowWidth <= 480 ? '70%' : windowWidth <= 768 ? '70%' : '636px',
+            flexShrink: '0',
+            transform: 'translate(-50%, -50%)',
+            background: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
+        },
+    };
+
     const [email, setEmail] = useState<string>('');
     const [phoneNumber, setPhoneNumber] = useState<string>('');
 
