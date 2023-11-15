@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
 import { UserFollows } from './UserFollows';
+import { useNavigate } from 'react-router-dom';
 
 export const UserInfo = () => {
     const [isModal, setIsModal] = useState<string | undefined>('');
@@ -10,6 +11,11 @@ export const UserInfo = () => {
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
         setIsModal(e.currentTarget.dataset.type);
     };
+
+    const navigate = useNavigate()
+    const goToModify = ():void => {        
+      navigate("modify")
+    }
 
     return (
         <Wrapper>
@@ -39,7 +45,7 @@ export const UserInfo = () => {
                         </p>
                     </UserProfile>
                 </UserBox>
-                <Button>내 정보 수정</Button>
+                <Button onClick={goToModify}>내 정보 수정</Button>
                 {isModal ? (
                     <UserFollows modal={isModal} setter={setIsModal} />
                 ) : (
