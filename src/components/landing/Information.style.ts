@@ -276,34 +276,45 @@ export const SwiperWrapper = styled.div`
 
 export const ActivityContainer = styled.div`
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+
+    @media screen and (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 export const Box = styled.div<BoxProps>`
     width: calc(50% - 60px);
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
     background: ${props => props.background || 'transparent'};
     border-radius: 8px;
-    padding: 24px;
+    padding: 16px;
 
     @media (max-width: 1280px) {
-        flex-direction: column;
-        justify-content: flex-start;
     }
 
     .hover-text {
         display: none;
     }
+
+    .img-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
     .img-hide {
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            margin-top: 24px;
         }
     }
 
@@ -311,6 +322,7 @@ export const Box = styled.div<BoxProps>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        position: relative;
 
         .name {
             width: 30%;
@@ -321,9 +333,7 @@ export const Box = styled.div<BoxProps>`
             word-break: keep-all;
 
             @media (max-width: 1280px) {
-                width: 70%;
-                flex-direction: row;
-                align-items: center;
+                width: 100%;
                 font-family: Pretendard;
                 font-size: 20px;
                 font-style: normal;
@@ -332,11 +342,15 @@ export const Box = styled.div<BoxProps>`
         }
 
         @media (max-width: 1280px) {
-            height: 40px;
-            flex-direction: row;
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
             align-items: center;
-            svg {
+            & svg {
                 width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
             }
         }
     }

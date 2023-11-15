@@ -67,10 +67,13 @@ const InfoActivity = () => {
                         <div className="name" style={{ color: item.color }}>{item.name}</div>
                             <Arrow className="hover-hide" />
                         </div>
-                        {item.name === '해커톤' && <img src={HackathonImg} className="img-hide" alt="" />}
-                        {item.name === '아이디어톤' && <img src={IdeathonImg} className="img-hide" alt="" />}
-                        {item.name === '학교별 스터디' && <img src={StudyImg} className="img-hide" alt="" />}
-                        {item.name === '데모데이' && <img src={DemoImg} className="img-hide" alt="" />}
+                        <div className='img-wrapper'>
+                            {item.name === '해커톤' && <img src={HackathonImg} className="img-hide" alt="" />}
+                            {item.name === '아이디어톤' && <img src={IdeathonImg} className="img-hide" alt="" />}
+                            {item.name === '학교별 스터디' && <img src={StudyImg} className="img-hide" alt="" />}
+                            {item.name === '데모데이' && <img src={DemoImg} className="img-hide" alt="" />}
+                        </div>
+                        
                         <div className="hover-text">{item.text}</div>
                     </IF.Box>
                 ))}
