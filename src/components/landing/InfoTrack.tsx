@@ -40,7 +40,7 @@ const trackArray: any[] = [
 
 const InfoTrack = () => {
     return (
-        <>
+        <IF.TrackWrapper>
             {trackArray.map((item, index) => (
                 <IF.TrackBox key={index} hoverColor={item.hoverColor} hoverBackColor={item.hoverBackColor}>
                     <div className="title">
@@ -48,10 +48,12 @@ const InfoTrack = () => {
                         <Arrow className="hover-hide" />
                     </div>
                     <div className="hover-text">{item.text}</div>
-                    <img src={item.image} alt="" className="img-hide" />
+                    <div className='img-wrapper'>
+                        <img src={item.image} alt="" className="img-hide" />
+                    </div>
                 </IF.TrackBox>
             ))}
-        </>
+        </IF.TrackWrapper>
     );
 };
 

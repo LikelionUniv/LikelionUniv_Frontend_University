@@ -286,7 +286,6 @@ export const ActivityContainer = styled.div`
 `;
 
 export const Box = styled.div<BoxProps>`
-    width: calc(50% - 60px);
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -294,9 +293,6 @@ export const Box = styled.div<BoxProps>`
     background: ${props => props.background || 'transparent'};
     border-radius: 8px;
     padding: 16px;
-
-    @media (max-width: 1280px) {
-    }
 
     .hover-text {
         display: none;
@@ -390,55 +386,85 @@ export const Box = styled.div<BoxProps>`
 `;
 
 export const TrackWrapper = styled.div`
-width: 100%;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-gap: 24px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+
+    @media screen and (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
 `;
 
 export const TrackBox = styled.div<TrackBoxProps>`
-    width: calc(50% - 12px);
-    height: 320px;
+    width: 100%;
+    max-height: 312px;
+    height: auto;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     background: #212224;
     border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
 
     .hover-text {
         opacity: 0;
         font-size: 0;
     }
 
-    .img-hide {
-        width: 100%;
+    .img-wrapper {
+        display: flex;
+        justify-content: flex-end;
         height: 100%;
-        object-fit: cover;
+        box-sizing: border-box;
+    }
+
+    .img-hide {
+        @media (max-width: 1280px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     .title {
+        position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        margin: 24px 24px 16px 24px;
+
         .name {
+            width: 100%;
+            display: flex;
+            justify-content: start;
             color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
-            @media (max-width: 768px) {
+
+            @media (max-width: 1280px) {
                 font-size: 20px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+
+            & svg {
+                width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
             }
         }
     }
 
     &:hover {
         .title {
-            margin: 40px 0 16px 40px;
-            @media (max-width: 768px) {
-                margin: 24px 0 6px 24px;
-            }
         }
 
         .name {
@@ -451,6 +477,11 @@ export const TrackBox = styled.div<TrackBoxProps>`
             opacity: 0;
             width: 0;
         }
+
+        .img-wrapper {
+            display: none;
+        }
+
         .hover-text {
             opacity: 100;
             color: var(--Grey-200, #f2f4f6);
@@ -458,7 +489,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
-            margin: 0 40px;
             line-height: 150%;
             @media (max-width: 768px) {
                 font-size: 12px;
