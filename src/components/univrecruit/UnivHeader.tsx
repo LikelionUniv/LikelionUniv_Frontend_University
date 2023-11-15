@@ -1,8 +1,12 @@
 import * as U from './UnivHeaderStyle';
 import Arrow from '../../img/recruit/warrow.svg';
 import gra2 from '../../img/recruit/gra.svg';
+import useModal from '../../hooks/useModal';
+import RecruitModal from '../recruit/apply/RecruitModal';
 
 const Header = () => {
+    const { isModalOpen, openModal, closeModal } = useModal();
+
     return (
         <U.BlackDiv>
             <U.Content>
@@ -16,11 +20,14 @@ const Header = () => {
                     </div>
                 </U.T2>
                 <U.T3>모집 기간 : 0000/00/00 ~ 0000/00/00</U.T3>
-                <U.Button>
+                <U.Button onClick={openModal}>
                     <div>지원하기</div>
                     <img src={Arrow} alt="->"></img>
                 </U.Button>
             </U.Content>
+            {isModalOpen && (
+                <RecruitModal isOpen={isModalOpen} closeModal={closeModal} />
+            )}
 
             <U.Gra src={gra2}></U.Gra>
         </U.BlackDiv>
