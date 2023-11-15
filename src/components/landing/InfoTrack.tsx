@@ -28,13 +28,13 @@ const trackArray: any[] = [
         hoverColor: "#FF7710",
         name: "기획",
         text: "Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자, PM이 되기 위한 역량을 기를 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.",
-        image: designImage,
+        image: planningImage,
     },
     {
         hoverColor: "#FF7710",
         name: "디자인",
         text: "디자인 툴을 익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이 되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.",
-        image: planningImage,
+        image: designImage,
     },
 ];
 
