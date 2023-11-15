@@ -1,29 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import Line from '../../img/recruit/line.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './FooterModalStyle';
+import axios from 'axios';
 
-// 모달 스타일
-const customStyles: Modal.Styles = {
-    overlay: {
-        backgroundColor: 'rgba(152, 146, 146, 0.5)',
-        zIndex: 1000,
-    },
-    content: {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '688px',
-        height: '636px',
-        flexShrink: '0',
-        transform: 'translate(-50%, -50%)',
-        background: 'white',
-        padding: '20px',
-        borderRadius: '8px',
-        boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
-    },
-};
+//modal style
 
 Modal.setAppElement('#root');
 
@@ -33,6 +15,48 @@ interface FooterModalProps {
 }
 
 const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    // 모달 스타일
+    const customStyles: Modal.Styles = {
+        overlay: {
+            backgroundColor: 'rgba(152, 146, 146, 0.5)',
+            zIndex: 1000,
+        },
+        content: {
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            // width: '688px',
+            // height: '636px',
+            width: windowWidth < 768 ? '80%' : '688px',
+            height:
+                windowWidth <= 480
+                    ? '70%'
+                    : windowWidth <= 768
+                    ? '70%'
+                    : '636px',
+            flexShrink: '0',
+            transform: 'translate(-50%, -50%)',
+            background: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
+        },
+    };
+
     const [email, setEmail] = useState<string>('');
     const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -44,6 +68,22 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
         e: React.ChangeEvent<HTMLInputElement>,
     ) => {
         setPhoneNumber(e.target.value);
+    };
+
+    const CommitSubmit = async (e: any) => {
+        e.preventDefault();
+        const url = `https://stag.likelionuniv.com/api/v1/alarm/12/register`;
+
+        try {
+            const response = await axios.post(url, {
+                email: email,
+                alarmType: 'NEW_UNIVERSITY_RECRUITING',
+            });
+
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
     };
 
     return (
@@ -59,7 +99,7 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                         <M.ModalGraphic />
                         <M.Text>
                             모집이 시작되었을 때<br />
-                            이메일과 문자로 알려드려요.
+                            이메일로 알려드려요.
                             <M.Text>
                                 * 입력하신 개인정보는 모집 알림 발송 후
                                 파기됩니다.
@@ -76,17 +116,8 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                                 onChange={handleEmailChange}
                             />
                         </M.ModalInput>
-                        <M.ModalInput>
-                            <M.InputLabel>휴대폰번호</M.InputLabel>
-                            <M.Input
-                                type="tel"
-                                placeholder="휴대폰 번호를 입력하세요."
-                                value={phoneNumber}
-                                onChange={handlePhoneNumberChange}
-                            />
-                        </M.ModalInput>
                     </M.InputWrapper>
-                    <M.InputBtn>신청하기</M.InputBtn>
+                    <M.InputBtn onClick={CommitSubmit}>신청하기</M.InputBtn>
                 </M.ModalBody>
             </M.ModalContent>
         </Modal>

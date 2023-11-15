@@ -16,6 +16,17 @@ export const UnivText = styled.div`
     font-size: 2rem;
     font-weight: 700;
     line-height: 150%;
+
+    @media screen and (max-width: 768px) {
+        color: var(--White, #fff);
+        text-align: center;
+        /* Title/28_Bold */
+        font-family: Pretendard;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 140%; /* 39.2px */
+    }
 `;
 
 export const UnivBtn = styled.div`
@@ -54,6 +65,10 @@ export const Info = styled.div`
         }
 
         .left {
+            @media (max-width: 768px) {
+                gap: 10px;
+                padding: 20px 0;
+            }
             .title {
                 color: #212224;
                 font-size: 28px;
@@ -66,6 +81,23 @@ export const Info = styled.div`
                 font-size: 12px;
                 font-weight: 500;
                 margin-top: 5px;
+                margin-bottom: 20px;
+            }
+            a {
+                display: flex;
+                align-items: center;
+                margin-bottom: 8px;
+                color: #212224;
+                font-family: Pretendard;
+                font-size: 14px;
+                font-weight: 500;
+                text-decoration: none;
+                flex-shrink: 0;
+                svg {
+                    width: 16px;
+                    height: 16px;
+                    margin-left: 3px;
+                }
             }
         }
 

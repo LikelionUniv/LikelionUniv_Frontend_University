@@ -6,7 +6,7 @@ const InfoNumber = () => {
     // number section이 스크롤 뷰 내에 있는지 감지
     const numberRef = useRef<HTMLDivElement>(null);
     const [isInView, setIsInView] = useState<boolean>(false);
-    const options = { rootMargin: '0px', threshold: 1 };
+    const options = { rootMargin: '100px' };
     const onIntersect = (entry: any, observer: any) => {
         observer.unobserve(entry.target);
         setIsInView(true);
@@ -79,27 +79,29 @@ const InfoNumber = () => {
     const count1 = useCountUp(11, duration, true);
     const count11 = useCountDown(2013, duration - 500);
     const count2 = useCountUp(10000, duration - 800);
-    const count3 = useCountUp(120, duration - 500, true);
+    const count3 = useCountUp(1500, duration - 500, true);
 
     return (
         <>
-            <IF.Title>
-                숫자가 <PixelNumberIcon />
-                말해주는 멋사
+            <IF.Title className="br">
+                <span>
+                    숫자가 <PixelNumberIcon />
+                </span>
+                <span className="right">말해주는 멋사</span>
             </IF.Title>
             <IF.SectionContainer ref={numberRef}>
                 <div className="number-rect">
-                    <div className="subtitle">시작한지</div>
+                    <div className="subtitle">시작된지</div>
                     <div className="number">
                         {count1}년<sup>{count11}~</sup>
                     </div>
                 </div>
                 <div className="number-rect">
-                    <div className="subtitle">누적 회원</div>
+                    <div className="subtitle">멋사 대학 출신 학생 수</div>
                     <div className="number">{count2.toLocaleString()}⁺</div>
                 </div>
                 <div className="number-rect">
-                    <div className="subtitle">누적 참여 대학</div>
+                    <div className="subtitle">누적 완성 서비스 수</div>
                     <div className="number">{count3}⁺</div>
                 </div>
             </IF.SectionContainer>

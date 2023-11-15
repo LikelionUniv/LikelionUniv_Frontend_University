@@ -6,13 +6,16 @@ import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
 import Mypage from './routes/Mypage';
-import Recruit from './routes/Recruit';
 
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectRegister from './components/project/register/ProjectRegister';
 import ProjectList from './components/project/ProjectList';
 import Community from './routes/Community';
+import RecruitPage from './routes/RecruitPage';
+import AboutPage from './routes/AboutPage';
+import BabyLion from './components/recruit/apply/mobile/BabyLion';
+import Recruit from './components/univrecruit/UnivRecruit';
 
 const router = createBrowserRouter([
     {
@@ -29,11 +32,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage />
+                element: <LoginPage />,
             },
             {
-                path : '/mypage',
-                element: <Mypage/>
+                path: '/mypage',
+                element: <Mypage />,
             },
             {
                 path: '/project',
@@ -41,17 +44,17 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: '',
-                        element: <ProjectList />
+                        element: <ProjectList />,
                     },
                     {
                         path: 'register',
-                        element: <ProjectRegister />
+                        element: <ProjectRegister />,
                     },
                     {
                         path: ':projectId',
-                        element: <ProjectDetail />
-                    } 
-                ]
+                        element: <ProjectDetail />,
+                    },
+                ],
             },
             {
                 path: '/chat',
@@ -59,8 +62,17 @@ const router = createBrowserRouter([
             },
             {
                 path: '/recruit',
-                element: <Recruit />,
-                children: [],
+                element: <RecruitPage />,
+                children: [
+                    {
+                        path: '',
+                        element: <Recruit />,
+                    },
+                    {
+                        path: 'babylion',
+                        element: <BabyLion />,
+                    },
+                ],
             },
             {
                 path: '/univ',
@@ -68,12 +80,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/community',
-                element: <Community />
+                element: <Community />,
             },
             {
                 path: '/chat',
-                element: <Chat />
-            }
+                element: <Chat />,
+            },
+            {
+                path: '/about',
+                element: <AboutPage />,
+            },
         ],
     },
 ]);

@@ -29,7 +29,8 @@ export const Wrapper = styled.div`
 
     .container {
         @media (max-width: 768px) {
-            width: calc(100% - 80px) !important;
+            width: calc(100% - 40px) !important;
+            max-width: 520px;
             margin-left: 0;
         }
     }
@@ -43,16 +44,61 @@ export const Title = styled.div`
     color: #212224;
     font-family: Pretendard;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 48px;
     height: 48px;
+    &.br {
+        display: flex;
+        align-items: center;
+        span {
+            display: flex;
+            align-items: center;
+            svg {
+                margin: 0 10px;
+            }
+        }
+    }
     @media (max-width: 1280px) {
         font-size: 3.6vw;
         height: 3.6vw;
+        &.br {
+            span {
+                height: 3.6vw;
+                display: flex;
+                align-items: center;
+            }
+        }
     }
     @media (max-width: 768px) {
-        font-size: 6vw;
-        height: 6vw;
+        font-size: 28px;
+        height: 30px;
+        white-space: initial;
+        word-break: break-all;
+        &.br {
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+            }
+        }
+    }
+    @media (max-width: 480px) {
+        &.br {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-start;
+            white-space: nowrap;
+            span {
+                height: 30px;
+                display: flex;
+                align-items: center;
+                margin-bottom: 4px;
+            }
+            .right {
+                margin-left: 0;
+            }
+        }
     }
 
     svg {
@@ -65,7 +111,7 @@ export const Title = styled.div`
             margin: 0 1%;
         }
         @media (max-width: 768px) {
-            margin: 0 1%;
+            margin: 0 5px;
         }
     }
 `;
@@ -77,11 +123,11 @@ export const SubText = styled.div`
     font-weight: 600;
     font-size: 20px;
     margin: 24px 0 40px 0;
-    @media (max-width: 1280px) {
-        font-size: 1.6vw;
-    }
     @media (max-width: 768px) {
-        font-size: 2.8vw;
+        font-size: 16px;
+        white-space: initial;
+        word-break: keep-all;
+        line-height: 150%;
         margin: 4% 0 8% 0;
     }
 `;
@@ -92,6 +138,9 @@ export const SectionContainer = styled.div`
     justify-content: space-between;
     gap: 25px;
     margin-bottom: 165px;
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 
     .number-rect {
         width: 100%;
@@ -108,8 +157,7 @@ export const SectionContainer = styled.div`
                 font-size: 2vw;
             }
             @media (max-width: 768px) {
-                font-size: 3vw;
-                padding-bottom: 6%;
+                font-size: 20px;
             }
         }
         .number {
@@ -132,10 +180,9 @@ export const SectionContainer = styled.div`
                 }
             }
             @media (max-width: 768px) {
-                font-size: 6.2vw;
-                margin-top: 8%;
+                font-size: 32px;
                 sup {
-                    font-size: 2.5vw;
+                    font-size: 14px;
                 }
             }
         }
@@ -168,7 +215,7 @@ export const SwiperWrapper = styled.div`
             width: calc((100vw - 36px) / 3) !important;
         }
         @media (max-width: 768px) {
-            width: calc(100vw / 3) !important;
+            width: 259px !important;
         }
         a {
             text-decoration: none;
@@ -182,12 +229,14 @@ export const SwiperWrapper = styled.div`
             align-items: center;
         }
         .logo-rect {
-            padding: 24px;
+            margin: 24px;
+            border-radius: 12px;
             width: 31.25%;
             aspect-ratio: 1 / 1;
             overflow: hidden;
             @media (max-width: 768px) {
-                padding: 20px;
+                width: 25%;
+                margin: 20px;
             }
             img {
                 width: 100%;
@@ -208,7 +257,7 @@ export const SwiperWrapper = styled.div`
                     font-size: 2.2vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.8vw;
+                    font-size: 20px;
                 }
             }
             .gen {
@@ -218,37 +267,50 @@ export const SwiperWrapper = styled.div`
                     font-size: 1.6vw;
                 }
                 @media (max-width: 768px) {
-                    font-size: 2.2vw;
+                    font-size: 15px;
                 }
             }
         }
     }
 `;
 
+export const ActivityContainer = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+
+    @media screen and (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+`;
 
 export const Box = styled.div<BoxProps>`
-    width: 100%;
     display: flex;
     justify-content: space-between;
-    background: ${(props) => props.background || "transparent"};
+    width: 100%;
+    box-sizing: border-box;
+    background: ${props => props.background || 'transparent'};
     border-radius: 8px;
-    padding: 24px;
-
-    @media (max-width: 1280px) {
-        flex-direction: column;
-    }
-    
+    padding: 16px;
 
     .hover-text {
-        opacity: 0;
-        font-size: 0;
+        display: none;
     }
+
+    .img-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+
     .img-hide {
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            margin-top: 16px;
         }
     }
 
@@ -256,118 +318,157 @@ export const Box = styled.div<BoxProps>`
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        
+        position: relative;
+
         .name {
-            color: var(--Black, #000);
+            width: 30%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
+            word-break: keep-all;
 
             @media (max-width: 1280px) {
-            flex-direction: row;
-            align-items: center;
-            color: var(--Grey-900, #212224);
-            font-family: Pretendard;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
+                width: 100%;
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
             }
         }
 
         @media (max-width: 1280px) {
-            flex-direction: row;
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            & svg {
+                width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
+            }
         }
-
-        
     }
 
     &:hover {
-        background: 
-            ${(props) => props.hoverBackColor},
-            #212224;
-        
-        .title {
-            flex-direction: column;
-            .name {
-                color: #fff;
-                margin-bottom: 16px;
-            }
-        }
-        
-        
-        .hover-hide, .img-hide {
+        background: ${props => props.hoverBackColor}, #212224;
+
+        .hover-hide,
+        .img-hide {
             opacity: 0;
             width: 0;
+            height: 0;
+            margin-top: 0;
         }
         .hover-text {
-            opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            display: block;
+            width: 70%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
+            line-height: 150%;
+        }
+
+        @media (max-width: 1280px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            .title {
+                margin-bottom: 24px;
+            }
+            .hover-text {
+                width: 100%;
+            }
         }
     }
 `;
 
+export const TrackWrapper = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+
+    @media screen and (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+`;
 
 export const TrackBox = styled.div<TrackBoxProps>`
     width: 100%;
-    height: 100%;
-    height: 400px;
-    max-width: 384px;
-    max-height: 400px;
+    max-height: 312px;
+    height: auto;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     background: #212224;
     border-radius: 8px;
-
-    @media (max-width: 1280px) {
-        height:80%;
-    }
-    @media (max-width: 768px) {
-        height: 240px;
-    }
+    padding: 16px;
+    box-sizing: border-box;
 
     .hover-text {
         opacity: 0;
         font-size: 0;
     }
 
-    .img-hide {
-        width: 100%;
+    .img-wrapper {
+        display: flex;
+        justify-content: flex-end;
         height: 100%;
-        object-fit: cover;
+        box-sizing: border-box;
+    }
+
+    .img-hide {
+        @media (max-width: 1280px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
     .title {
+        position: relative;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
-        margin: 24px 24px 16px 24px;
+
         .name {
+            width: 100%;
+            display: flex;
+            justify-content: start;
             color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
-            @media (max-width: 768px) {
+
+            @media (max-width: 1280px) {
                 font-size: 20px;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+
+            & svg {
+                width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
             }
         }
     }
 
     &:hover {
-
-        .title{
-            margin: 40px 0 16px 40px;
-            @media (max-width: 768px) {
-                margin: 24px 0 6px 24px;
-            }
+        .title {
         }
-        
+
         .name {
-            color: ${(props) => props.hoverColor};
+            color: ${props => props.hoverColor};
             @media (max-width: 768px) {
                 font-size: 15px;
             }
@@ -376,14 +477,18 @@ export const TrackBox = styled.div<TrackBoxProps>`
             opacity: 0;
             width: 0;
         }
+
+        .img-wrapper {
+            display: none;
+        }
+
         .hover-text {
             opacity: 100;
-            color: var(--Grey-200, #F2F4F6);
+            color: var(--Grey-200, #f2f4f6);
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
-            margin: 0 40px;
             line-height: 150%;
             @media (max-width: 768px) {
                 font-size: 12px;
@@ -398,11 +503,15 @@ export const TrackBox = styled.div<TrackBoxProps>`
 
 export const PlanBox = styled.div`
     height: 195px;
+
+    @media (max-width: 500px) {
+        height: 130px;
+    }
+
     .img {
         width: 100%;
-        
         @media (max-width: 768px) {
-            width: 319px;
+            width: 100%;
         }
     }
     .week {
@@ -411,8 +520,12 @@ export const PlanBox = styled.div`
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
-        line-height: 150%; 
+        line-height: 150%;
         margin: 23.5px 0 7.5px 0;
+        @media (max-width: 768px) {
+            font-size: 3vw;
+            margin: 15px 0 5px 0;
+        }
     }
     .content {
         color: var(--Grey-900, #212224);
@@ -421,19 +534,21 @@ export const PlanBox = styled.div`
         font-style: normal;
         font-weight: 600;
         line-height: 150%;
+        @media (max-width: 768px) {
+            font-size: 3vw;
+        }
     }
-    
-`
+`;
 
 export const SupportBox = styled.div`
     width: 100%;
     gap: 24px;
     display: flex;
     margin-bottom: 24px;
-    
+
     .wrapper {
         width: 100%;
-        background: var(--White, #FFF);
+        background: var(--White, #fff);
         border-radius: 8px;
         padding: 28px 78px;
         display: flex;
@@ -454,4 +569,4 @@ export const SupportBox = styled.div`
             padding: 15px 35px;
         }
     }
-`
+`;

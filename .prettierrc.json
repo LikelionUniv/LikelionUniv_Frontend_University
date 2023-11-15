@@ -8,9 +8,7 @@
     "quoteProps": "as-needed",
     "semi": true,
     "singleQuote": true,
-    "doubleQuote": false,
     "jsxSingleQuote": false,
-    "jsxDoubleQuote": true,
     "tabWidth": 4,
     "trailingComma": "all",
     "useTabs": false

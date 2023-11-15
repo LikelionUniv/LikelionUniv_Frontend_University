@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import Line from '../../img/recruit/linemobile.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './UnivFooterModalMobileStyle';
+import axios from 'axios';
 
 // 모달 스타일
 const customStyles: Modal.Styles = {
@@ -33,18 +34,26 @@ interface FooterModalProps {
 
 const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
     const [email, setEmail] = useState<string>('');
-    const [phoneNumber, setPhoneNumber] = useState<string>('');
 
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(e.target.value);
     };
 
-    const handlePhoneNumberChange = (
-        e: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setPhoneNumber(e.target.value);
-    };
+    const CommitSubmit = async (e: any) => {
+        e.preventDefault();
+        const url = `https://stag.likelionuniv.com/api/v1/alarm/12/register`;
 
+        try {
+            const response = await axios.post(url, {
+                email: email,
+                alarmType: 'NEW_UNIVERSITY_RECRUITING',
+            });
+
+            console.log(response.data);
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+    };
     return (
         <Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles}>
             <M.ModalContent>
@@ -56,7 +65,7 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
                     <M.ModalText>
                         <M.Text>
                             모집이 시작되었을 때<br />
-                            이메일과 문자로 알려드려요.
+                            이메일로 알려드려요.
                             <M.Text>
                                 * 입력하신 개인정보는 모집 알림 발송 후
                                 파기됩니다.
@@ -73,17 +82,8 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
                                 onChange={handleEmailChange}
                             />
                         </M.ModalInput>
-                        <M.ModalInput>
-                            <M.InputLabel>휴대폰번호</M.InputLabel>
-                            <M.Input
-                                type="tel"
-                                placeholder="휴대폰 번호를 입력하세요."
-                                value={phoneNumber}
-                                onChange={handlePhoneNumberChange}
-                            />
-                        </M.ModalInput>
                     </M.InputWrapper>
-                    <M.InputBtn>신청하기</M.InputBtn>
+                    <M.InputBtn onClick={CommitSubmit}>신청하기</M.InputBtn>
                 </M.ModalBody>
             </M.ModalContent>
         </Modal>

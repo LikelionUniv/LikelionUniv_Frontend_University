@@ -1,3 +1,4 @@
+import React from 'react';
 import * as R from './ContentStyle';
 import Arrow1 from '../../img/recruit/1arrow.svg';
 import Arrow2 from '../../img/recruit/2arrow.svg';
@@ -33,7 +34,7 @@ const Content = () => {
 
     return (
         <R.ContentDiv>
-            <div>
+            <R.ContentSection>
                 {/*Qualifications 부분*/}
                 <R.Title>
                     <R.TD>Qualifications</R.TD>
@@ -86,7 +87,7 @@ const Content = () => {
                 </R.Qbody>
 
                 {/*Recruitment schedule 부분*/}
-                <R.Title>
+                <R.Title className="recruitSchedule">
                     <R.TD>Recruitment schedule</R.TD>
                     <R.TD>모집 일정</R.TD>
                 </R.Title>
@@ -171,10 +172,7 @@ const Content = () => {
                     <img src={Mail}></img>
                     <p>이메일로 문의하기</p>
                 </R.Ps2>
-
-                
-             
-            </div>
+            </R.ContentSection>
         </R.ContentDiv>
     );
 };

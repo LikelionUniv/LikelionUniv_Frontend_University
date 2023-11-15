@@ -11,8 +11,10 @@
         "@types/node": "^16.18.39",
         "@types/react-modal": "^3.16.0",
         "@types/react-select": "^5.0.1",
+        "axios": "^1.6.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.48.2",
         "react-modal": "^3.16.1",
         "react-router-dom": "^6.17.0",
         "react-scripts": "5.0.1",
@@ -28,7 +30,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "format": "prettier --check ./src",
+        "format:fix": "prettier --write ./src"
     },
     "eslintConfig": {
         "extends": [
@@ -49,8 +53,10 @@
         ]
     },
     "devDependencies": {
+        "@types/axios": "^0.14.0",
         "@types/react": "^18.2.20",
         "@types/react-dom": "^18.2.7",
         "@types/styled-components": "^5.1.26"
-    }
+    },
+    "proxy": "https://stag.likelionuniv.com"
 }

@@ -1,29 +1,28 @@
-import React from 'react'
-import {OptionType} from '../signUp/DropDown'
+import React from 'react';
+import { OptionType } from '../signUp/DropDown';
 import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
-
 
 const orderOptions = [
     { value: 1, label: '최신순' },
     { value: 2, label: '좋아요순' },
     { value: 3, label: '댓글순' },
-  ];
+];
 
 //나중에 api 연결할 때 수정
 const OrderDropDown = () => {
     const handleSortChange = (selectedOption: OptionType | null) => {
-        if (!selectedOption) return; 
-  
+        if (!selectedOption) return;
+
         switch (selectedOption.value) {
             case 1:
-                console.log("최신순");
+                console.log('최신순');
                 break;
             case 2:
-                console.log("좋아요순");
+                console.log('좋아요순');
                 break;
             case 3:
-                console.log("댓글순");
+                console.log('댓글순');
                 break;
             default:
                 break;
@@ -47,23 +46,23 @@ const OrderDropDown = () => {
         );
     };
 
-  return (
-    <div>
-      <Select
-            options={orderOptions}
-            styles={orderStyle}
-            isSearchable={false}
-            placeholder="최신순"
-            components={{ DropdownIndicator }}
-            maxMenuHeight={136}
-            onChange={handleSortChange}
-            blurInputOnSelect={true}
-        />
-    </div>
-  )
-}
+    return (
+        <div>
+            <Select
+                options={orderOptions}
+                styles={orderStyle}
+                isSearchable={false}
+                placeholder="최신순"
+                components={{ DropdownIndicator }}
+                maxMenuHeight={136}
+                onChange={handleSortChange}
+                blurInputOnSelect={true}
+            />
+        </div>
+    );
+};
 
-export default OrderDropDown
+export default OrderDropDown;
 
 const orderStyle = {
     indicatorSeparator: () => ({
@@ -93,7 +92,6 @@ const orderStyle = {
             borderColor: 'transparent',
             border: '1px solid transparent',
         },
-        
     }),
     menu: (provided: any) => ({
         ...provided,
@@ -109,8 +107,8 @@ const orderStyle = {
     menuList: (provided: any) => ({
         ...provided,
         backgroundColor: 'transparent',
-        maxHeight: '136px', 
-        width: '100px', 
+        maxHeight: '136px',
+        width: '100px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -133,8 +131,8 @@ const orderStyle = {
         backgroundColor: state.isFocused
             ? 'var(--grey-300, #EAECEE)'
             : state.isSelected
-            ? 'var(--grey-300, #EAECEE)'
-            : provided.backgroundColor,
+              ? 'var(--grey-300, #EAECEE)'
+              : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },

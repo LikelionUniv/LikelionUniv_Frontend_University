@@ -1,4 +1,4 @@
-// 대학 Tab
+ // src/components/univ/UnivTab.tsx
 import { useState, useCallback } from 'react';
 import * as T from './UnivTabStyle';
 import Logo from '../../img/recruit/logo.svg';
@@ -16,19 +16,22 @@ const Tab = () => {
     const getFilteredUniversities = () => {
         if (activeTab === '전체') {
             const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
+            return allUniversities.sort((a, b) => a.school.localeCompare(b.school));
         } else {
-            return tabData[activeTab].sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
+            return tabData[activeTab].sort((a, b) => a.school.localeCompare(b.school));
         }
+    };
+
+    const popupUnivSite = (siteUrl?: string): void => {
+        if (siteUrl) {
+            window.open(siteUrl, '_blank');
+        }
+        // Add any other actions you want to perform if there is no website link.
     };
 
     return (
         <T.Container>
-            <div>
+            <T.Content>
                 {/* 지역 탭 부분 */}
                 <T.TabWrapper>
                     {regionTab.map(tab => (
@@ -44,9 +47,15 @@ const Tab = () => {
 
                 {/* 학교명  */}
                 <T.SchoolWrapper>
-                    {getFilteredUniversities().map(school => (
-                        <T.TabContent>
+                    {getFilteredUniversities().map((school, index) => (
+                        <T.TabContent
+                            key={index}
+                            onClick={() => popupUnivSite(school.website)}
+                        >
+                            {/* 학교 로고 추가 */}
                             <T.SchoolLogo logo={Logo} />
+
+                            {/* 학교 텍스트 */}
                             <T.SchoolText>
                                 {school.school}
                                 <div>{school.region}</div>
@@ -63,9 +72,10 @@ const Tab = () => {
                         <img src={BtnArrow} alt="버튼화살표" />
                     </T.Btn>
                 </T.BtnWrapper>
-            </div>
+            </T.Content>
         </T.Container>
     );
 };
 
 export default Tab;
+

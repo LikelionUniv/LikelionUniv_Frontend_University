@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import Check from '../../../img/project/check.svg';
 
 interface CheckboxProps {
@@ -12,32 +12,31 @@ interface CheckboxProps {
 
 function Checkbox(props: CheckboxProps) {
     return (
-      <CheckboxItem>
-        <StyledInput
-          type="checkbox"
-          id={props.checkboxId.toString()}
-          name={props.checkboxId.toString()}
-          value={props.value}
-          checked={props.checked}
-          onChange={props.onChange}
-          img={Check}
-        />
-        <CheckboxLabel>{props.label}</CheckboxLabel>
-      </CheckboxItem>
-      
+        <CheckboxItem>
+            <StyledInput
+                type="checkbox"
+                id={props.checkboxId.toString()}
+                name={props.checkboxId.toString()}
+                value={props.value}
+                checked={props.checked}
+                onChange={props.onChange}
+                img={Check}
+            />
+            <CheckboxLabel>{props.label}</CheckboxLabel>
+        </CheckboxItem>
     );
 }
 
 export default Checkbox;
 
 const CheckboxItem = styled.div`
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 `;
 
 const CheckboxLabel = styled.label`
     margin-left: 8px;
-    color: var(--Grey-700, #868C94);
+    color: var(--Grey-700, #868c94);
 
     font-family: Pretendard;
     font-size: 16px;
@@ -47,18 +46,18 @@ const CheckboxLabel = styled.label`
 `;
 
 const StyledInput = styled.input<{ img: string }>`
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border: 1px solid #DCDFE3;
-  border-radius: 3px;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #dcdfe3;
+    border-radius: 3px;
 
-  &:checked {
-    font-weight: 900;
-    background-position: 50%;
-    background-image: url(${props => props.img});
-    background-color: #FF7710;
-    background-repeat: no-repeat;
-    border: none;
-  }
+    &:checked {
+        font-weight: 900;
+        background-position: 50%;
+        background-image: url(${props => props.img});
+        background-color: #ff7710;
+        background-repeat: no-repeat;
+        border: none;
+    }
 `;

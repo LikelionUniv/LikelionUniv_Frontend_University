@@ -3,7 +3,7 @@ import { currentWidthState } from '../../store/landing';
 import InfoNumber from './InfoNumber';
 import InfoService from './InfoService';
 import InfoActivity from './InfoActivity';
-import InfoTrack from './InfoTrack';
+//import InfoTrack from './InfoTrack';
 import InfoPlan from './InfoPlan';
 //import InfoSupport from './InfoSupport';
 import * as IF from './Information.style';
@@ -11,9 +11,9 @@ import { ReactComponent as PixelBulbIcon } from '../../img/landing/pixel_bulb.sv
 import { ReactComponent as PixelStarIcon } from '../../img/landing/pixel_star.svg';
 import { ReactComponent as PixelFootprintsIcon } from '../../img/landing/pixel_footprints.svg';
 import { ReactComponent as PixelCalendarIcon } from '../../img/landing/pixel_calendar.svg';
+import InfoTrack from './InfoTrack';
+//import InfoActivity from './InfoActivity';
 //import { ReactComponent as PixelDiamondIcon } from '../../img/landing/pixel_diamond.svg';
-
-
 
 const Information = () => {
     const desWidth = useRecoilValue(currentWidthState);
@@ -22,9 +22,11 @@ const Information = () => {
             <IF.Wrapper style={{ paddingBottom: '0' }}>
                 <div className="container" style={{ width: desWidth }}>
                     <InfoNumber />
-                    <IF.Title>
-                        멋사에서 탄생한 <PixelBulbIcon />
-                        다양한 서비스
+                    <IF.Title className="br">
+                        <span>
+                            멋사에서 탄생한 <PixelBulbIcon />
+                        </span>
+                        <span className="right">다양한 서비스</span>
                     </IF.Title>
                     <IF.SubText>다음 주인공은 바로 당신!</IF.SubText>
                 </div>
@@ -40,6 +42,7 @@ const Information = () => {
                         다채로운 경험을 통해 즐겁게 교류하고, 빠르게 성장해요.
                     </IF.SubText>
                     <IF.SectionContainer>
+                        {/*<InfoActivity />*/}
                         <InfoActivity />
                     </IF.SectionContainer>
                     <IF.Title>
@@ -50,6 +53,7 @@ const Information = () => {
                         트랙별로 세분화된 경험을 할 수 있어요.
                     </IF.SubText>
                     <IF.SectionContainer>
+                        {/*<InfoTrack />*/}
                         <InfoTrack />
                     </IF.SectionContainer>
                     <IF.Title>
