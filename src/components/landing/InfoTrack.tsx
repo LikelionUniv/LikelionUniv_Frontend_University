@@ -2,9 +2,9 @@ import * as IF from './Information.style';
 import { ReactComponent as Arrow } from '../../img/landing/pixel_arrow_white.svg';
 import frontEndImage from '../../img/landing/frontend.png';
 import backEndImage from '../../img/landing/back.png';
-import designImage from '../../img/landing/design.png';
-import planningImage from '../../img/landing/plan.png';
-import { BoxProps } from './InfoActivity';
+import designImage from '../../img/landing/plan.png';
+import planningImage from '../../img/landing/design.png';
+//import { BoxProps } from './InfoActivity';
 
 export interface TrackBoxProps {
     hoverColor: string;
@@ -13,6 +13,7 @@ export interface TrackBoxProps {
 
 const trackArray: any[] = [
     {
+        background:'var(--Grey-900, #212224)', 
         hoverColor: "#FFB13C",
         name: "프론트엔드",
         text: "사용자와 가까이 있는 개발 파트로, 웹 클라이언트 개발을 위한 기초부터 심화까지의 스킬을 배울 수 있습니다. HTML, CSS, Javascript를 학습하며 기초 개발 역량을 잡아나갑니다.",
@@ -25,13 +26,13 @@ const trackArray: any[] = [
         image: backEndImage,
     },
     {
-        hoverColor: "#FF7710",
+        hoverColor: "#D1D4D8",
         name: "기획",
         text: "Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자, PM이 되기 위한 역량을 기를 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.",
         image: designImage,
     },
     {
-        hoverColor: "#FF7710",
+        hoverColor: "#C6F959",
         name: "디자인",
         text: "디자인 툴을 익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이 되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.",
         image: planningImage,
