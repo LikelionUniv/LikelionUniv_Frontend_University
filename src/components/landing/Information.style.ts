@@ -294,6 +294,14 @@ export const Box = styled.div<BoxProps>`
     border-radius: 8px;
     padding: 16px;
 
+    @media screen and (max-width: 1280px) {
+      height: 240px;
+    }
+
+    @media screen and (max-width: 768px) {
+      height: 136px;
+    }
+
     .hover-text {
         display: none;
     }
@@ -370,10 +378,17 @@ export const Box = styled.div<BoxProps>`
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
+
+            @media screen and (max-width: 768px) {
+              font-size: 14px;
+            }
+
+            @media screen and (max-width: 450px) {
+              font-size: 12px;
+            }
         }
 
         @media (max-width: 1280px) {
-            flex-direction: column;
             justify-content: flex-start;
             .title {
                 margin-bottom: 24px;
@@ -399,11 +414,9 @@ export const TrackWrapper = styled.div`
 
 
 export const TrackBox = styled.div<TrackBoxProps>`
-    width: 100%;
-    max-height: 312px;
-    height: auto;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     background-color: ${props => props.backgroundColor};
     &:hover {
         background-color: ${props => props.hoverColor};
@@ -411,43 +424,25 @@ export const TrackBox = styled.div<TrackBoxProps>`
     border-radius: 8px;
     padding: 16px;
     box-sizing: border-box;
-    @media (max-width: 768px) {
-        width: 100%;
-        max-height: 168px;
-        height: auto;
-        display: flex;
-        justify-content: space-between;
-        border-radius: 4.354px;
-        box-sizing: border-box;
-    }
-    
-    @media (max-width: 360px) {
-        width: ;
-        max-height: 168px;
-        height: auto;
-        flex-shrink: 0;
-        display: flex;
-        justify-content: space-between;
-        border-radius: 4.354px;
-        padding: 16px 16px 16px 120px;
-        box-sizing: border-box;
+
+    @media screen and (max-width: 1280px) {
+      height: 312px;
     }
 
-    
+    @media screen and (max-width: 768px) {
+      height: 168px;
+    }
 
     .hover-text {
-        opacity: 0;
-        font-size: 0;
+      display: none;
     }
 
     .img-wrapper {
         display: flex;
         justify-content: flex-end;
+        width: 100%;
         height: 100%;
         box-sizing: border-box;
-        
-       
-
     }
 
     .img-hide {
@@ -472,23 +467,25 @@ export const TrackBox = styled.div<TrackBoxProps>`
     }
 
     .title {
-        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        position: relative;
 
         .name {
-            width: 100%;
-            display: flex;
-            justify-content: start;
+            width: 30%;
             color: #fff;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
+            word-break: keep-all;
 
             @media (max-width: 1280px) {
+                width: 100%;
+                font-family: Pretendard;
                 font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
             }
             
         }
@@ -511,7 +508,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
     &:hover {
         .title {
             word-break: keep-all;
-         
         }
 
         .name {
@@ -527,25 +523,24 @@ export const TrackBox = styled.div<TrackBoxProps>`
             @media (max-width: 360px) {
                 color: var(--White, #FFF);
 
-                    /* Body/12_Medium */
-                    font-family: Pretendard;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 150%; /* 18px */
+                /* Body/12_Medium */
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%; /* 18px */
             }
             
         }
         .hover-text {
-            opacity: 100;
-            color: var(--Grey-200, #f2f4f6);
-            gap: 16px;
+            display: block;
+            width: 100%;
+            color: #fff;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
-            margin-left: 52px;
 
             @media (max-width: 768px) {
                 color: var(--White, #FFF);
@@ -557,7 +552,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 font-weight: 500;
                 line-height: 160%; /* 25.6px */
             }
-            @media (max-width: 360px) {
+            @media (max-width: 450px) {
                 color: var(--White, #FFF);
 
                     /* Body/12_Medium */
@@ -568,14 +563,9 @@ export const TrackBox = styled.div<TrackBoxProps>`
                     line-height: 150%; /* 18px */
             }
         }
-        .img-wrapper {
-            display: none;
-            
-        }
-
   
         .img-hide {
-            opacity: 0;
+          display: none;
         }
     }
 `;
