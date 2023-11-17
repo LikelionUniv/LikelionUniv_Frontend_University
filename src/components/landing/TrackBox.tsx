@@ -35,17 +35,20 @@ const Box = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
 
-    @media (max-width: 760px) {
+    @media (max-width: 768px) {
         padding: 25px;
         height: 35vh;
         max-height: 320px;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 360px) {
+        width: 520px;
         padding: 18px;
         height: 25vh;
-        max-height: 320px;
+        max-height: 168px;
         gap: 8px;
+        width: 320px;
+
     }
 `;
 

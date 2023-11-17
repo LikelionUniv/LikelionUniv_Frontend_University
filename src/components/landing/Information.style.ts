@@ -396,16 +396,44 @@ export const TrackWrapper = styled.div`
     }
 `;
 
+
+
 export const TrackBox = styled.div<TrackBoxProps>`
     width: 100%;
     max-height: 312px;
     height: auto;
     display: flex;
     justify-content: space-between;
-    background: #212224;
+    background-color: ${props => props.backgroundColor};
+    &:hover {
+        background-color: ${props => props.hoverColor};
+    }
     border-radius: 8px;
     padding: 16px;
     box-sizing: border-box;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-height: 168px;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 4.354px;
+        box-sizing: border-box;
+    }
+    
+    @media (max-width: 360px) {
+        width: ;
+        max-height: 168px;
+        height: auto;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 4.354px;
+        padding: 16px 16px 16px 120px;
+        box-sizing: border-box;
+    }
+
+    
 
     .hover-text {
         opacity: 0;
@@ -417,14 +445,30 @@ export const TrackBox = styled.div<TrackBoxProps>`
         justify-content: flex-end;
         height: 100%;
         box-sizing: border-box;
+        
+       
+
     }
 
     .img-hide {
+        border-radius: 8px;
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        @media (max-width: 768px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 360px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+       
+
     }
 
     .title {
@@ -446,6 +490,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
             @media (max-width: 1280px) {
                 font-size: 20px;
             }
+            
         }
 
         @media (max-width: 1280px) {
@@ -465,36 +510,70 @@ export const TrackBox = styled.div<TrackBoxProps>`
 
     &:hover {
         .title {
+            word-break: keep-all;
+         
         }
 
         .name {
             color: ${props => props.hoverColor};
             @media (max-width: 768px) {
-                font-size: 15px;
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%
+            }            
+           
+            @media (max-width: 360px) {
+                color: var(--White, #FFF);
+
+                    /* Body/12_Medium */
+                    font-family: Pretendard;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 150%; /* 18px */
             }
+            
         }
-        .hover-hide {
-            opacity: 0;
-            width: 0;
-        }
-
-        .img-wrapper {
-            display: none;
-        }
-
         .hover-text {
             opacity: 100;
             color: var(--Grey-200, #f2f4f6);
+            gap: 16px;
             font-family: Pretendard;
             font-size: 18px;
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
+            margin-left: 52px;
+
             @media (max-width: 768px) {
-                font-size: 12px;
-                margin: 0 24px;
+                color: var(--White, #FFF);
+
+                /* Body/16_Medium_160 */
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 160%; /* 25.6px */
+            }
+            @media (max-width: 360px) {
+                color: var(--White, #FFF);
+
+                    /* Body/12_Medium */
+                    font-family: Pretendard;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 150%; /* 18px */
             }
         }
+        .img-wrapper {
+            display: none;
+            
+        }
+
+  
         .img-hide {
             opacity: 0;
         }

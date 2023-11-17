@@ -63,7 +63,7 @@ export const Box = styled.div`
             font-weight: 700;
 
             @media (max-width: 1280px) {
-                flex-direction: row;
+                
                 align-items: center;
                 font-family: Pretendard;
                 font-size: 20px;
