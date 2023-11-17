@@ -23,8 +23,12 @@ const Univcontent = () => {
         }
     };
 
+    const goEmail = (): void => {
+        window.open('mailto:univ_admin@likelion.net');
+    }
+
     const table = {
-        '아기사자’가 무엇인가요?':
+        '’아기사자’가 무엇인가요?':
             '멋쟁이사자처럼 대학에 들어온 구성원들을 지칭하는 말입니다.',
         '대학 졸업생이나 직장인도 참여 가능한가요?':
             '아니요, 대학 기반 동아리이니만큼 재학생, 휴학생에 한해 지원할 수 있습니다.',
@@ -188,7 +192,7 @@ const Univcontent = () => {
                 <U.Ps2>
                     <p>더 궁금한 것이 있으신가요?</p>
                     <img src={Mail}></img>
-                    <p>이메일로 문의하기</p>
+                    <p onClick={goEmail}>이메일로 문의하기</p>
                 </U.Ps2>
 
                 {/*University 부분*/}
