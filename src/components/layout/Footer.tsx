@@ -9,10 +9,28 @@ import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.sv
 import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 
+import rules from '../../constants/file/rules.pdf';
+import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
+
 function Footer(): JSX.Element {
-    // 개인정보 처리방침에 대한 디자인이 없어 노션링크로 대체
-    const privacyPolicy = (): void => {
-        window.open('https://likelion.notion.site/57da1115d36144abbeb1c843ec4c18b3?pvs=4');
+    const downloadFile = (url: string, fileName: string): void => {
+        const link = document.createElement('a');
+        link.href = url;
+
+        link.download = fileName;
+
+        document.body.appendChild(link);
+        link.click();
+        
+        document.body.removeChild(link);
+    }
+
+    const downloadRules = () => {
+        downloadFile(rules, '[멋쟁이사자처럼 대학 IT 창업 동아리 연합회칙].pdf');
+    }
+
+    const downloadPrivacyPolicy = () => {
+        downloadFile(privacyPolicy, '[멋쟁이사자처럼 대학 개인정보 처리방침].pdf');
     }
 
     return (
@@ -85,8 +103,8 @@ function Footer(): JSX.Element {
                         </div>
                         <div className="section">
                             <div className="title">POLICY</div>
-                            <div className="text">회칙</div>
-                            <div className="text" onClick={privacyPolicy}>개인정보처리방침</div>
+                            <div className="text" onClick={downloadRules}>회칙</div>
+                            <div className="text" onClick={downloadPrivacyPolicy}>개인정보처리방침</div>
                             <div className="text">
                                 Nonprofit Report <DownloadIcon />
                             </div>
