@@ -33,7 +33,7 @@ function Footer(): JSX.Element {
                         </p>
                         <div className="icon-container">
                             <a
-                                href="https://www.instagram.com/likelion.official"
+                                href="https://www.instagram.com/likelion.univ/"
                                 target="_blank"
                                 rel="noreferrer"
                             >
