@@ -280,7 +280,7 @@ export const ActivityContainer = styled.div`
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 24px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 768px) {
         grid-template-columns: repeat(1, 1fr);
     }
 `;
@@ -315,6 +315,7 @@ export const Box = styled.div<BoxProps>`
     }
 
     .img-hide {
+        border-radius: 8px;
         @media (max-width: 1280px) {
             width: 100%;
             height: 100%;
@@ -327,6 +328,7 @@ export const Box = styled.div<BoxProps>`
         flex-direction: column;
         justify-content: space-between;
         position: relative;
+        min-width: 150px;
 
         .name {
             width: 30%;
@@ -372,6 +374,7 @@ export const Box = styled.div<BoxProps>`
         .hover-text {
             display: block;
             width: 70%;
+            height: 100%;
             color: #fff;
             font-family: Pretendard;
             font-size: 18px;
@@ -379,7 +382,7 @@ export const Box = styled.div<BoxProps>`
             font-weight: 500;
             line-height: 150%;
 
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 910px) {
                 font-size: 14px;
             }
 
