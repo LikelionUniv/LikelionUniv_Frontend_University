@@ -10,6 +10,11 @@ import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg'
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 
 function Footer(): JSX.Element {
+    // 개인정보 처리방침에 대한 디자인이 없어 노션링크로 대체
+    const privacyPolicy = (): void => {
+        window.open('https://likelion.notion.site/57da1115d36144abbeb1c843ec4c18b3?pvs=4');
+    }
+
     return (
         <F.Wrapper>
             <F.Info>
@@ -81,7 +86,7 @@ function Footer(): JSX.Element {
                         <div className="section">
                             <div className="title">POLICY</div>
                             <div className="text">회칙</div>
-                            <div className="text">개인정보처리방침</div>
+                            <div className="text" onClick={privacyPolicy}>개인정보처리방침</div>
                             <div className="text">
                                 Nonprofit Report <DownloadIcon />
                             </div>

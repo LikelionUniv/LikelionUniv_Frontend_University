@@ -77,7 +77,7 @@ const MainGraphic = () => {
                             <a
                                 className="btn"
                                 href={recruitURL}
-                                target="_blank"
+                                target="_blank" rel="noreferrer"
                             >
                                 신규 대학 지원하기
                                 <PixelLongArrowIcon fill="#ffffff" />
@@ -113,7 +113,7 @@ const MainGraphic = () => {
             </div>
             <MG.Description>
                 <div className="container" ref={desRef1}>
-                    <div className="title">국내 최대 규모 개발 창업 동아리</div>
+                    <div className="title">국내 최대 규모 IT 창업 동아리</div>
                     <div className="title">
                         <PixelLionIcon /> 멋쟁이사자처럼
                     </div>
