@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import Check from '../../img/login/Check.svg';
 import { Button } from '../mypage/Common';
+import { useNavigate } from 'react-router-dom';
 
 export const LoginComplete = () => {
+    const navigate = useNavigate();
+
     return (
         <Wrapper>
             <Container>
@@ -13,7 +16,7 @@ export const LoginComplete = () => {
                         <br />
                         운영진의 승인을 기다려주세요.
                     </p>
-                    <LButton>홈으로 돌아가기</LButton>
+                    <LButton onClick={()=>{navigate("/")}}>홈으로 돌아가기</LButton>
                 </ItemBox>
             </Container>
         </Wrapper>
