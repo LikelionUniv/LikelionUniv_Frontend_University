@@ -39,7 +39,6 @@ const MainGraphic = () => {
         if (!desRef1.current || !desRef2.current) return;
         setDesWidth(
             desRef2.current.offsetLeft -
-            
                 desRef1.current.offsetLeft +
                 desRef2.current.offsetWidth,
         );

@@ -13,6 +13,10 @@ const message = {
 };
 
 function NoSearchResult({ keyword }: INoSearchResult) {
+    const onClick = (): void => {
+        window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
+    };
+
     return (
         <>
             <NSR.Container>
@@ -23,7 +27,7 @@ function NoSearchResult({ keyword }: INoSearchResult) {
             </NSR.Container>
             <NSR.UnivRecruit>
                 <NSR.Text>{message.APPLY_UNIV}</NSR.Text>
-                <NSR.UnivBtn>{message.BTN}</NSR.UnivBtn>
+                <NSR.UnivBtn onClick={onClick}>{message.BTN}</NSR.UnivBtn>
             </NSR.UnivRecruit>
         </>
     );

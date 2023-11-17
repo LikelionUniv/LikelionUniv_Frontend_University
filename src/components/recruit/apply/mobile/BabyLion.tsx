@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import * as B from './BabyLion.style';
 import SearchWindow from '../SearchWindow';
 import useInput from '../../../../hooks/useInput';
-import UnivDemo from '../UnivDemo';
 import SearchResult from '../SearchResult';
 import NoSearchResult from '../NoSearchResult';
+import { schoolList } from '../../../univ/UnivTabData';
 
 function BabyLion() {
     const [keyword, onChange, setKeyword] = useInput<string>('');
@@ -15,7 +15,7 @@ function BabyLion() {
     const onSearch = (): void => {
         if (keyword.trim() === '') return;
 
-        const results = UnivDemo.filter(univ => univ.includes(keyword));
+        const results = schoolList.filter(univ => univ.includes(keyword));
         setResults(results);
 
         if (results.length <= 0) {

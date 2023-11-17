@@ -96,7 +96,7 @@ const Sform = () => {
         if (
             formState.name === '' ||
             formState.university === 0 ||
-            formState.department === '' 
+            formState.department === ''
             // formState.generation === 0 ||
             // formState.role === 0 ||
             // formState.track === 0

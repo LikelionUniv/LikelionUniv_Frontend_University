@@ -131,8 +131,8 @@ const orderStyle = {
         backgroundColor: state.isFocused
             ? 'var(--grey-300, #EAECEE)'
             : state.isSelected
-              ? 'var(--grey-300, #EAECEE)'
-              : provided.backgroundColor,
+            ? 'var(--grey-300, #EAECEE)'
+            : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },

@@ -1,11 +1,10 @@
 import { styled } from 'styled-components';
 import modalring from '../../img/recruit/modalring.svg';
 export const ModalContent = styled.div`
-  
     & > img {
         @media (max-width: 768px) {
             width: calc(100%);
-        }   
+        }
     }
 `;
 
@@ -31,16 +30,15 @@ export const ModalCloseButton = styled.div<{ close?: string }>`
 
 export const ModalBody = styled.div`
     margin: 40px;
-    @media (max-width : 768px) {
-
-        margin : 25px;
+    @media (max-width: 768px) {
+        margin: 25px;
     }
 
     @media (max-width: 480px) {
-        margin : 10px;
-        display : flex;
-        flex-direction : column;
-        align-items : center;
+        margin: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         /* width: calc(100% - 80px); */
         /* margin : 5px; */
     }
@@ -52,8 +50,8 @@ export const ModalText = styled.div`
     gap: 24px;
 
     @media (max-width: 480px) {
-        flex-direction : column;
-    }   
+        flex-direction: column;
+    }
 `;
 
 export const ModalGraphic = styled.div`
@@ -63,11 +61,11 @@ export const ModalGraphic = styled.div`
     background: url(${modalring});
 
     @media (max-width: 480px) {
-        width : 100px;
-        height : 100px;
-        background-position : center;
+        width: 100px;
+        height: 100px;
+        background-position: center;
         background-size: contain;
-    }   
+    }
 `;
 
 export const Text = styled.div`
@@ -76,13 +74,13 @@ export const Text = styled.div`
     font-weight: 700;
     line-height: 140%; /* 39.2px */
 
-    @media (max-width : 768px){
+    @media (max-width: 768px) {
         font-size: 24px;
     }
 
     @media (max-width: 480px) {
-        font-size : 22px;
-    }   
+        font-size: 22px;
+    }
 
     :nth-child(2) {
         margin-top: 24px;
@@ -91,14 +89,14 @@ export const Text = styled.div`
         font-weight: 500;
         line-height: 150%; /* 24px */
 
-        @media (max-width : 768px){
+        @media (max-width: 768px) {
             font-size: 16px;
-            margin-top : 12px;
+            margin-top: 12px;
         }
         @media (max-width: 480px) {
-            font-size : 13px;
-            margin-top : 8px;
-        }   
+            font-size: 13px;
+            margin-top: 8px;
+        }
     }
 `;
 
@@ -110,13 +108,12 @@ export const InputWrapper = styled.div`
 
     @media (max-width: 768px) {
         width: calc(100%);
-        margin-top : 20px;
-        gap : 20px;
+        margin-top: 20px;
+        gap: 20px;
     }
 `;
 
-export const ModalInput = styled.div`
-`;
+export const ModalInput = styled.div``;
 
 export const InputLabel = styled.div`
     color: var(--Grey-900, #212224);
@@ -168,7 +165,7 @@ export const InputBtn = styled.div`
 
     @media (max-width: 768px) {
         width: calc(100% - 80px);
-        margin : 20px auto 0;
-        padding : 8px 25px;
-    }   
+        margin: 20px auto 0;
+        padding: 8px 25px;
+    }
 `;

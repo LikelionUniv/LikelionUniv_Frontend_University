@@ -72,8 +72,8 @@ const roleTrackStyle = {
         backgroundColor: state.isFocused
             ? 'var(--grey-300, #EAECEE)'
             : state.isSelected
-              ? 'var(--grey-300, #EAECEE)'
-              : provided.backgroundColor,
+            ? 'var(--grey-300, #EAECEE)'
+            : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },
@@ -133,8 +133,8 @@ const genStyle = {
         backgroundColor: state.isFocused
             ? 'var(--grey-300, #EAECEE)'
             : state.isSelected
-              ? 'var(--grey-300, #EAECEE)'
-              : provided.backgroundColor,
+            ? 'var(--grey-300, #EAECEE)'
+            : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },
@@ -208,8 +208,8 @@ const schoolStyle = {
         backgroundColor: state.isFocused
             ? 'var(--grey-300, #EAECEE)'
             : state.isSelected
-              ? 'var(--grey-300, #EAECEE)'
-              : provided.backgroundColor,
+            ? 'var(--grey-300, #EAECEE)'
+            : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },

@@ -12,10 +12,10 @@ export const UserInfo = () => {
         setIsModal(e.currentTarget.dataset.type);
     };
 
-    const navigate = useNavigate()
-    const goToModify = ():void => {        
-      navigate("modify")
-    }
+    const navigate = useNavigate();
+    const goToModify = (): void => {
+        navigate('modify');
+    };
 
     return (
         <Wrapper>

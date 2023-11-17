@@ -9,11 +9,13 @@ const InfoPlan = () => {
             <InfoPlanBox week="8월" content="해커톤" />
             <InfoPlanBox week="10월" content="트랙별 역량 강화 행사" />
             <InfoPlanBox week="12월" content="데모데이" />
-            <InfoPlanBox week="2월" content="우수 활동자와 함께 떠나는 실리콘벨리 기업 탐방" />
+            <InfoPlanBox
+                week="2월"
+                content="우수 활동자와 함께 떠나는 실리콘벨리 기업 탐방"
+            />
         </Wrapper>
     );
 };
-
 
 export default InfoPlan;
 
@@ -40,4 +42,3 @@ const Wrapper = styled.div`
         grid-template-rows: repeat(2, auto);
     }
 `;
-

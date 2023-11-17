@@ -48,7 +48,6 @@ const Box = styled.div`
         max-height: 168px;
         gap: 8px;
         width: 320px;
-
     }
 `;
 

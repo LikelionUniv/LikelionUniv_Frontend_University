@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
     const { isModalOpen, openModal, closeModal } = useModal();
     const navigate = useNavigate();
-    
+
     const onClick = (): void => {
         if (window.innerWidth > 450) {
             openModal();

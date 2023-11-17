@@ -5,9 +5,9 @@ import * as RM from './RecruitModal.style';
 import Close from './../../../img/recruit/close.svg';
 import SearchWindow from './SearchWindow';
 import useInput from '../../../hooks/useInput';
-import UnivDemo from './UnivDemo';
 import SearchResult from './SearchResult';
 import NoSearchResult from './NoSearchResult';
+import { schoolList } from '../../univ/UnivTabData';
 
 Modal.setAppElement('#root');
 
@@ -25,7 +25,7 @@ function RecruitModal({ isOpen, closeModal }: RecruitModalProps) {
     const onSearch = (): void => {
         if (keyword.trim() === '') return;
 
-        const results = UnivDemo.filter(univ => univ.includes(keyword));
+        const results = schoolList.filter(univ => univ.includes(keyword));
         setResults(results);
 
         if (results.length <= 0) {

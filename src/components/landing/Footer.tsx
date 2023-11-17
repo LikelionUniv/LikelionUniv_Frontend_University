@@ -6,16 +6,9 @@ import * as F from './Footer.style';
 import recruitimage from '../../img/landing/recruit_image.png';
 import newrecruitimage from '../../img/landing/new_recruit_image.png';
 import makersbackground from '../../img/landing/makers_background.png';
-import { ReactComponent as Logo } from '../../img/nav/logo.svg';
 import notiicon from '../../img/landing/pixel_notice.svg';
 import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_long_right_arrow.svg';
 import { ReactComponent as PixelArrowIcon } from '../../img/landing/pixel_arrow_upright.svg';
-import { ReactComponent as EmailIcon } from '../../img/landing/footer_email.svg';
-import { ReactComponent as InstagramIcon } from '../../img/landing/footer_instagram.svg';
-import { ReactComponent as YoutubeIcon } from '../../img/landing/footer_youtube.svg';
-import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.svg';
-import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
-import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 import FooterModal from '../recruit/FooterModal';
 import FooterModalMobile from '../univrecruit//UnivModalMobile';
 import { recruitURL } from './MainGraphic';
@@ -70,7 +63,12 @@ const Footer = () => {
                             만들고 싶다면, 아래 버튼을 눌러 지원해주세요!
                             (~2023. 12. 10)
                         </div>
-                        <a className="btn" href={recruitURL} target="_blank">
+                        <a
+                            className="btn"
+                            href={recruitURL}
+                            target="_blank"
+                            rel="noreferrer"
+                        >
                             신규 대학 지원하기
                             <PixelLongArrowIcon fill="#212224" />
                         </a>
@@ -116,81 +114,6 @@ const Footer = () => {
                     </a>
                 </div>
             </F.Makers>
-            <F.Info>
-                <div className="container">
-                    <div className="left">
-                        <Logo />
-                        <p className="text">
-                            사단법인 멋쟁이사자처럼 | 대표자 이두희
-                        </p>
-                        <p className="text">
-                            서울특별시 종로구 종로3길 17, D1동 16, 17층(청진동,
-                            D타워)
-                        </p>
-                        <p className="text">등록번호 : 206-82-13812</p>
-                        <p className="text mail">
-                            <EmailIcon />
-                            문의처
-                            <a href="mailto:univ_admin@likelion.net">
-                                univ_admin@likelion.net
-                            </a>
-                        </p>
-                        <div className="icon-container">
-                            <a
-                                href="https://www.instagram.com/likelion.official"
-                                target="_blank"
-                            >
-                                <InstagramIcon />
-                            </a>
-                            <a
-                                href="https://www.youtube.com/@likelion.official"
-                                target="_blank"
-                            >
-                                <YoutubeIcon />
-                            </a>
-                            <a
-                                href="https://brunch.co.kr/@likelion"
-                                target="_blank"
-                            >
-                                <BrunchIcon />
-                            </a>
-                            <a href="/about" className="makers-btn">
-                                제작자
-                            </a>
-                        </div>
-                    </div>
-                    <div className="right">
-                        <div className="section">
-                            <div className="title">FAMILY SITE</div>
-                            <a
-                                href="https://techit.education"
-                                target="_blank"
-                                className="link text"
-                            >
-                                TECHIT <ArrowIcon />
-                            </a>
-                            <a
-                                href="https://www.modernlion.io"
-                                target="_blank"
-                                className="link text"
-                            >
-                                MODERN LION <ArrowIcon />
-                            </a>
-                        </div>
-                        <div className="section">
-                            <div className="title">POLICY</div>
-                            <div className="text">회칙</div>
-                            <div className="text">개인정보처리방침</div>
-                            <div className="text">
-                                Nonprofit Report <DownloadIcon />
-                            </div>
-                            <div className="text">
-                                지정기탁신청서 <DownloadIcon />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </F.Info>
         </F.Wrapper>
     );
 };

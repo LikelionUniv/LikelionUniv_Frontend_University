@@ -1,4 +1,4 @@
- // src/components/univ/UnivTab.tsx
+// src/components/univ/UnivTab.tsx
 import { useState, useCallback } from 'react';
 import * as T from './UnivTabStyle';
 import Logo from '../../img/recruit/logo.svg';
@@ -16,9 +16,13 @@ const Tab = () => {
     const getFilteredUniversities = () => {
         if (activeTab === '전체') {
             const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) => a.school.localeCompare(b.school));
+            return allUniversities.sort((a, b) =>
+                a.school.localeCompare(b.school),
+            );
         } else {
-            return tabData[activeTab].sort((a, b) => a.school.localeCompare(b.school));
+            return tabData[activeTab].sort((a, b) =>
+                a.school.localeCompare(b.school),
+            );
         }
     };
 
@@ -78,4 +82,3 @@ const Tab = () => {
 };
 
 export default Tab;
-

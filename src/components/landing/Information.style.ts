@@ -295,11 +295,11 @@ export const Box = styled.div<BoxProps>`
     padding: 16px;
 
     @media screen and (max-width: 1280px) {
-      height: 240px;
+        height: 240px;
     }
 
     @media screen and (max-width: 768px) {
-      height: 136px;
+        height: 136px;
     }
 
     .hover-text {
@@ -380,11 +380,11 @@ export const Box = styled.div<BoxProps>`
             line-height: 150%;
 
             @media screen and (max-width: 768px) {
-              font-size: 14px;
+                font-size: 14px;
             }
 
             @media screen and (max-width: 450px) {
-              font-size: 12px;
+                font-size: 12px;
             }
         }
 
@@ -411,8 +411,6 @@ export const TrackWrapper = styled.div`
     }
 `;
 
-
-
 export const TrackBox = styled.div<TrackBoxProps>`
     display: flex;
     justify-content: space-between;
@@ -426,15 +424,15 @@ export const TrackBox = styled.div<TrackBoxProps>`
     box-sizing: border-box;
 
     @media screen and (max-width: 1280px) {
-      height: 312px;
+        height: 312px;
     }
 
     @media screen and (max-width: 768px) {
-      height: 168px;
+        height: 168px;
     }
 
     .hover-text {
-      display: none;
+        display: none;
     }
 
     .img-wrapper {
@@ -462,8 +460,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
             height: 100%;
             object-fit: cover;
         }
-       
-
     }
 
     .title {
@@ -487,7 +483,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 font-style: normal;
                 font-weight: 700;
             }
-            
         }
 
         @media (max-width: 1280px) {
@@ -517,11 +512,11 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 font-size: 20px;
                 font-style: normal;
                 font-weight: 700;
-                line-height: 150%
-            }            
-           
+                line-height: 150%;
+            }
+
             @media (max-width: 360px) {
-                color: var(--White, #FFF);
+                color: var(--White, #fff);
 
                 /* Body/12_Medium */
                 font-family: Pretendard;
@@ -530,7 +525,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 font-weight: 700;
                 line-height: 150%; /* 18px */
             }
-            
         }
         .hover-text {
             display: block;
@@ -543,7 +537,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
             line-height: 150%;
 
             @media (max-width: 768px) {
-                color: var(--White, #FFF);
+                color: var(--White, #fff);
 
                 /* Body/16_Medium_160 */
                 font-family: Pretendard;
@@ -553,19 +547,19 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 line-height: 160%; /* 25.6px */
             }
             @media (max-width: 450px) {
-                color: var(--White, #FFF);
+                color: var(--White, #fff);
 
-                    /* Body/12_Medium */
-                    font-family: Pretendard;
-                    font-size: 12px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 150%; /* 18px */
+                /* Body/12_Medium */
+                font-family: Pretendard;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 150%; /* 18px */
             }
         }
-  
+
         .img-hide {
-          display: none;
+            display: none;
         }
     }
 `;
