@@ -99,6 +99,7 @@ export const T3 = styled.div`
 `;
 
 export const Button = styled.button`
+    border: none;
     border-radius: 8px;
     background: #ff7710;
     width: 384px;

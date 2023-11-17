@@ -1,21 +1,23 @@
 import * as U from './UnivHeaderStyle';
 import Arrow from '../../img/recruit/warrow.svg';
 import gra2 from '../../img/recruit/gra.svg';
-import useModal from '../../hooks/useModal';
 import RecruitModal from '../recruit/apply/RecruitModal';
-import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
-    const { isModalOpen, openModal, closeModal } = useModal();
-    const navigate = useNavigate();
+    // const { isModalOpen, openModal, closeModal } = useModal();
+    // const navigate = useNavigate();
+
+    // const onClick = (): void => {
+    //     if (window.innerWidth > 450) {
+    //         openModal();
+    //     } else {
+    //         navigate('babylion');
+    //     }
+    // };
 
     const onClick = (): void => {
-        if (window.innerWidth > 450) {
-            openModal();
-        } else {
-            navigate('babylion');
-        }
-    };
+        window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
+    }
 
     return (
         <U.BlackDiv>
@@ -36,10 +38,6 @@ const Header = () => {
                     <img src={Arrow} alt="->"></img>
                 </U.Button>
             </U.Content>
-            {isModalOpen && (
-                <RecruitModal isOpen={isModalOpen} closeModal={closeModal} />
-            )}
-
             <U.Gra src={gra2}></U.Gra>
         </U.BlackDiv>
     );
