@@ -245,12 +245,321 @@ export const SwiperWrapper = styled.div`
         border-radius: 12px;
       }
     }
+<<<<<<< HEAD
     .text-section {
       font-family: Pretendard;
       color: #212224;
       .name {
         color: #212224;
         font-size: 28px;
+=======
+
+    .img-hide {
+        @media (max-width: 1280px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+
+        .name {
+            width: 30%;
+            color: #fff;
+            font-family: Pretendard;
+            font-size: 28px;
+            font-weight: 700;
+            word-break: keep-all;
+
+            @media (max-width: 1280px) {
+                width: 100%;
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+            }
+        }
+
+        @media (max-width: 1280px) {
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+            & svg {
+                width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
+            }
+        }
+    }
+
+    &:hover {
+        background: ${props => props.hoverBackColor}, #212224;
+
+        .hover-hide,
+        .img-hide {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            margin-top: 0;
+        }
+        .hover-text {
+            display: block;
+            width: 70%;
+            color: #fff;
+            font-family: Pretendard;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+        }
+
+        @media (max-width: 1280px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            .title {
+                margin-bottom: 24px;
+            }
+            .hover-text {
+                width: 100%;
+            }
+        }
+    }
+`;
+
+export const TrackWrapper = styled.div`
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 24px;
+
+    @media screen and (max-width: 767px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+`;
+
+
+
+export const TrackBox = styled.div<TrackBoxProps>`
+    width: 100%;
+    max-height: 312px;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    background-color: ${props => props.backgroundColor};
+    &:hover {
+        background-color: ${props => props.hoverColor};
+    }
+    border-radius: 8px;
+    padding: 16px;
+    box-sizing: border-box;
+    @media (max-width: 768px) {
+        width: 100%;
+        max-height: 168px;
+        height: auto;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 4.354px;
+        box-sizing: border-box;
+    }
+    
+    @media (max-width: 360px) {
+        width: ;
+        max-height: 168px;
+        height: auto;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 4.354px;
+        padding: 16px 16px 16px 120px;
+        box-sizing: border-box;
+    }
+
+    
+
+    .hover-text {
+        opacity: 0;
+        font-size: 0;
+    }
+
+    .img-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        height: 100%;
+        box-sizing: border-box;
+        
+       
+
+    }
+
+    .img-hide {
+        border-radius: 8px;
+        @media (max-width: 1280px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 360px) {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+       
+
+    }
+
+    .title {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .name {
+            width: 100%;
+            display: flex;
+            justify-content: start;
+            color: #fff;
+            font-family: Pretendard;
+            font-size: 28px;
+            font-weight: 700;
+
+            @media (max-width: 1280px) {
+                font-size: 20px;
+            }
+            
+        }
+
+        @media (max-width: 1280px) {
+            min-width: 100px;
+            height: 100%;
+            flex-direction: column;
+            align-items: center;
+
+            & svg {
+                width: 5vw;
+                position: absolute;
+                bottom: 0;
+                left: 10px;
+            }
+        }
+    }
+
+    &:hover {
+        .title {
+            word-break: keep-all;
+         
+        }
+
+        .name {
+            color: ${props => props.hoverColor};
+            @media (max-width: 768px) {
+                font-family: Pretendard;
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 150%
+            }            
+           
+            @media (max-width: 360px) {
+                color: var(--White, #FFF);
+
+                    /* Body/12_Medium */
+                    font-family: Pretendard;
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 150%; /* 18px */
+            }
+            
+        }
+        .hover-text {
+            opacity: 100;
+            color: var(--Grey-200, #f2f4f6);
+            gap: 16px;
+            font-family: Pretendard;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%;
+            margin-left: 52px;
+
+            @media (max-width: 768px) {
+                color: var(--White, #FFF);
+
+                /* Body/16_Medium_160 */
+                font-family: Pretendard;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 160%; /* 25.6px */
+            }
+            @media (max-width: 360px) {
+                color: var(--White, #FFF);
+
+                    /* Body/12_Medium */
+                    font-family: Pretendard;
+                    font-size: 12px;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 150%; /* 18px */
+            }
+        }
+        .img-wrapper {
+            display: none;
+            
+        }
+
+  
+        .img-hide {
+            opacity: 0;
+        }
+    }
+`;
+
+export const PlanBox = styled.div`
+    height: 195px;
+
+    @media (max-width: 500px) {
+        height: 130px;
+    }
+
+    .img {
+        width: 100%;
+        @media (max-width: 768px) {
+            width: 100%;
+        }
+    }
+    .week {
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+        margin: 23.5px 0 7.5px 0;
+        @media (max-width: 768px) {
+            font-size: 3vw;
+            margin: 15px 0 5px 0;
+        }
+    }
+    .content {
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 20px;
+        font-style: normal;
+>>>>>>> feature/modal-mobile
         font-weight: 600;
         line-height: 200%;
         @media (max-width: 1280px) {

@@ -14,7 +14,7 @@ import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_sing
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
 import CountDown from './CountDown';
 
-export const recruitURL = 'https://www.google.com/intl/ko_kr/forms/about/';
+export const recruitURL = ' https://forms.gle/j4CJ35VwWgePBEJX6';
 
 const MainGraphic = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
@@ -39,6 +39,7 @@ const MainGraphic = () => {
         if (!desRef1.current || !desRef2.current) return;
         setDesWidth(
             desRef2.current.offsetLeft -
+            
                 desRef1.current.offsetLeft +
                 desRef2.current.offsetWidth,
         );
