@@ -61,9 +61,9 @@ interface FormState {
     name: string;
     university: number;
     department: string;
-    generation: number;
-    role: number;
-    track: number;
+    // generation: number;
+    // role: number;
+    // track: number;
 }
 
 const Sform = () => {
@@ -71,9 +71,9 @@ const Sform = () => {
         name: '',
         university: 0,
         department: '',
-        generation: 0,
-        role: 0,
-        track: 0,
+        // generation: 0,
+        // role: 0,
+        // track: 0,
     });
 
     const handleSelectChange =
@@ -96,10 +96,10 @@ const Sform = () => {
         if (
             formState.name === '' ||
             formState.university === 0 ||
-            formState.department === '' ||
-            formState.generation === 0 ||
-            formState.role === 0 ||
-            formState.track === 0
+            formState.department === '' 
+            // formState.generation === 0 ||
+            // formState.role === 0 ||
+            // formState.track === 0
         )
             alert('모든 항목을 입력했는지 확인해주세요.');
         else {
@@ -133,7 +133,8 @@ const Sform = () => {
                         })
                     }
                 />
-                <div className="SformDiv">
+
+                {/* <div className="SformDiv">
                     <div className="SfromDiv2">
                         <Ndiv>기수</Ndiv>
                         <DropDown
@@ -155,7 +156,7 @@ const Sform = () => {
                             onChange={handleSelectChange('track')}
                         />
                     </div>
-                </div>
+                </div> */}
                 <button className="saveBtn" onClick={handleSubmit}>
                     저장하기
                 </button>
