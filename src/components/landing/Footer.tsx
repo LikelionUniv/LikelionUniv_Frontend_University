@@ -13,6 +13,13 @@ import FooterModal from '../recruit/FooterModal';
 import FooterModalMobile from '../univrecruit//UnivModalMobile';
 import { recruitURL } from './MainGraphic';
 
+const recruitNotice = {
+    title: '12기 멋대 알림 신청',
+    paragraph: `아기사자 모집 및 홈페이지 기능 추가 등
+    멋대의 새로운 소식을 이메일로 알려드려요.`,
+    btn: '멋대 알림 신청하기',
+}
+
 const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
@@ -83,14 +90,14 @@ const Footer = () => {
                     <div className="left">
                         <div className="title">
                             <img src={notiicon} />
-                            <div>12기 아기사자 모집 알림 신청</div>
+                            <div>{recruitNotice.title}</div>
                         </div>
                         <div className="text">
-                            모집이 시작되면 이메일과 문자로 알려드려요.
+                            {recruitNotice.paragraph}
                         </div>
                     </div>
                     <div className="btn" onClick={openModal}>
-                        모집 알림 신청하기
+                        {recruitNotice.btn}
                         <PixelLongArrowIcon fill="#212224" />
                     </div>
                 </div>

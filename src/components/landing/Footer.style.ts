@@ -184,6 +184,10 @@ export const Notification = styled.div`
         }
         .left {
             flex-shrink: 0;
+
+            @media screen and (min-width: 768px) {
+                width: 50%;
+            }
         }
         .title {
             height: 60px;
@@ -235,6 +239,7 @@ export const Notification = styled.div`
             line-height: 150%;
             margin-top: 20px;
             word-break: keep-all;
+            white-space: pre-line;
             @media (max-width: 1280px) {
                 font-size: 1.6vw;
             }
