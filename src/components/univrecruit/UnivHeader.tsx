@@ -17,7 +17,7 @@ const Header = () => {
                 </U.T2>
                 <U.T3>모집 기간 : 0000/00/00 ~ 0000/00/00</U.T3>
                 <U.Button>
-                    <div>지원하기</div>
+                     <div>지원하기</div>
                     <img src={Arrow} alt="->"></img>
                 </U.Button>
             </U.Content>
