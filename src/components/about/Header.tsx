@@ -16,8 +16,7 @@ const Header = () => {
             </H.T1>
             <H.T2>Likelion Univ.</H.T2>
             <H.T3>
-                Likelion Univ. 제작자들은 멋쟁이사자차럼 대학의 대표와
-                운영진들로 구성되어 있습니다.
+                Likelion Univ. 제작자들은 멋쟁이사자차럼 대학의 일원들로 구성되어 있습니다.
                 <br />
                 멋쟁이사자차럼의 네트워킹과 소통의 편리함을 제공하고 있으며,
                 {isPC && <br />}
