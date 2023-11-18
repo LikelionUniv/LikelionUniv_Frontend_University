@@ -10,6 +10,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '홍익대학교',
             region: '서울',
             website: 'https://likelionhongik.com/',
+            
         },
         {
             school: '강남대학교',
@@ -40,6 +41,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '중앙대학교',
             region: '서울',
             website: 'https://cau-likelion.org/',
+            
         },
         {
             school: '가톨릭대학교',
@@ -229,7 +231,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelion_kangwon/',
         },
         {
-            school: '힌림대학교',
+            school: '한림대학교',
             region: '강원',
             website: 'https://www.instagram.com/likelion_hallym/',
         },

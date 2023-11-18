@@ -381,7 +381,7 @@ export const Box = styled.div<BoxProps>`
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
-
+           
             @media screen and (max-width: 910px) {
                 font-size: 14px;
             }
@@ -538,6 +538,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
+            margin-left : 74px;
 
             @media (max-width: 768px) {
                 color: var(--White, #fff);

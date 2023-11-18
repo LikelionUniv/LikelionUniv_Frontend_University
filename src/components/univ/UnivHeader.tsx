@@ -28,8 +28,7 @@ const UnivHeader = () => {
                     <H.Num>{univCount}</H.Num>개 대학이 함께하고 있어요!
                 </H.T2>
                 <H.T3>
-                    대학을 선택하시면 각 대학의 멋쟁이사자처럼 소개 홈페이지를
-                    볼 수 있어요.
+                학교명을 클릭하시면 대학 별 소개 페이지로 연결됩니다.
                 </H.T3>
             </H.Content>
         </H.TopDiv>

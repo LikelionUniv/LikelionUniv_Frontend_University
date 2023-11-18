@@ -131,6 +131,7 @@ const InfoActivity = () => {
                             >
                                 {item.text}
                             </div>
+                            
                         </div>
                     </IF.Box>
                 ))}

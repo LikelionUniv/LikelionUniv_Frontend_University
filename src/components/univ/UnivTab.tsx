@@ -1,4 +1,3 @@
-// src/components/univ/UnivTab.tsx
 import { useState, useCallback } from 'react';
 import * as T from './UnivTabStyle';
 import Logo from '../../img/recruit/logo.svg';
@@ -8,7 +7,7 @@ import { tabData, regionTab } from './UnivTabData';
 const Tab = () => {
     const [activeTab, setActiveTab] = useState<string>('전체');
 
-    const onClick = useCallback((tab: string) => {
+    const onTabClick = useCallback((tab: string) => {
         setActiveTab(tab);
     }, []);
 
@@ -32,6 +31,10 @@ const Tab = () => {
         }
         // Add any other actions you want to perform if there is no website link.
     };
+    const onButtonClick = (): void => {
+        window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
+    }
+
 
     return (
         <T.Container>
@@ -42,7 +45,7 @@ const Tab = () => {
                         <T.TabRegion
                             key={tab}
                             active={activeTab === tab}
-                            onClick={() => onClick(tab)}
+                            onClick={() => onTabClick(tab)}
                         >
                             {tab}
                         </T.TabRegion>
@@ -58,7 +61,6 @@ const Tab = () => {
                         >
                             {/* 학교 로고 추가 */}
                             <T.SchoolLogo logo={Logo} />
-
                             {/* 학교 텍스트 */}
                             <T.SchoolText>
                                 {school.school}
@@ -71,7 +73,7 @@ const Tab = () => {
                 {/* 참여 버튼  */}
                 <T.BtnWrapper>
                     <div>우리 학교에는 아직 멋쟁이 사자처럼이 없다면?</div>
-                    <T.Btn>
+                    <T.Btn onClick={onButtonClick}>
                         우리 학교도 멋쟁이사자처럼 참여하기
                         <img src={BtnArrow} alt="버튼화살표" />
                     </T.Btn>
