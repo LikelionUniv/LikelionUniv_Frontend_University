@@ -34,20 +34,19 @@ const trackArray: any[] = [
         text: '눈에 보이지 않는 서버를 전반적으로 담당하는 백엔드는, 서비스의 요구사항에 맞춰 API를 개발하고 서비스 배포 및 운영을 통해 데이터를 관리합니다. Django, DRF, Spring 등 다양한 프레임워크를 바탕으로 서비스 운영을 위한 전체적인 인프라를 구현합니다.',
         image: backEndImage,
     },
-
-    {
-        hoverColor: '#212224',
-        initialColor: '#C6F959',
-        name: '디자인',
-        text: '디자인 툴을 익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이 되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.',
-        image: designImage,
-    },
     {
         hoverColor: '#212224',
         initialColor: '#ADB3BA',
         name: '기획',
         text: 'Team Leader로서 프로젝트의 진행을 리드하며 서비스 기획자, PM이 되기 위한 역량을 기를 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.',
         image: planningImage,
+    },
+    {
+        hoverColor: '#212224',
+        initialColor: '#C6F959',
+        name: '디자인',
+        text: '디자인 툴을 익히고 다양한 웹 디자인 이론과 용어들을 배우며 협업에 도움이 되는 스킬을 키울 수 있습니다. 이를 통해 협업에 필요한 내용들을 설계하는 경험을 할 수 있습니다.',
+        image: designImage,
     },
 ];
 
@@ -84,7 +83,7 @@ const InfoTrack = () => {
                         <div className="name" id={`trackBox-${index}`}>
                             {item.name}
                         </div>
-                        <Arrow className="hover-hide" />
+                        <Arrow className="hover-hide" fill="#212224" />
                     </div>
                     <div className="img-wrapper">
                         <img src={item.image} alt="" className="img-hide" />

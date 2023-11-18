@@ -356,7 +356,14 @@ export const Box = styled.div<BoxProps>`
                 width: 5vw;
                 position: absolute;
                 bottom: 0;
-                left: 10px;
+                left: -6px;
+            }
+        }
+        @media (max-width: 768px) {
+            & svg {
+                bottom: -8px;
+                width: 24px;
+                left: -5px;
             }
         }
     }
@@ -364,7 +371,9 @@ export const Box = styled.div<BoxProps>`
     &:hover {
         background: ${props => props.hoverBackColor}, #212224;
 
-        .hover-hide,
+        .hover-hide {
+            transform: rotate(180deg);
+        }
         .img-hide {
             opacity: 0;
             width: 0;
@@ -381,7 +390,7 @@ export const Box = styled.div<BoxProps>`
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
-           
+
             @media screen and (max-width: 910px) {
                 font-size: 14px;
             }
@@ -473,7 +482,7 @@ export const TrackBox = styled.div<TrackBoxProps>`
 
         .name {
             width: 30%;
-            color: #fff;
+            color: #212224;
             font-family: Pretendard;
             font-size: 28px;
             font-weight: 700;
@@ -487,18 +496,23 @@ export const TrackBox = styled.div<TrackBoxProps>`
                 font-weight: 700;
             }
         }
-
         @media (max-width: 1280px) {
             min-width: 100px;
             height: 100%;
             flex-direction: column;
             align-items: center;
-
             & svg {
                 width: 5vw;
                 position: absolute;
                 bottom: 0;
-                left: 10px;
+                left: -6px;
+            }
+        }
+        @media (max-width: 768px) {
+            & svg {
+                bottom: -8px;
+                width: 24px;
+                left: -5px;
             }
         }
     }
@@ -506,6 +520,11 @@ export const TrackBox = styled.div<TrackBoxProps>`
     &:hover {
         .title {
             word-break: keep-all;
+        }
+
+        .hover-hide {
+            transform: rotate(180deg);
+            fill: ${props => props.backgroundColor};
         }
 
         .name {
@@ -538,7 +557,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
             font-style: normal;
             font-weight: 500;
             line-height: 150%;
-            margin-left : 74px;
 
             @media (max-width: 768px) {
                 color: var(--White, #fff);
@@ -590,7 +608,7 @@ export const PlanBox = styled.div`
         line-height: 150%;
         margin: 23.5px 0 7.5px 0;
         @media (max-width: 768px) {
-            font-size: 3vw;
+            font-size: 16px;
             margin: 15px 0 5px 0;
         }
     }
@@ -599,10 +617,10 @@ export const PlanBox = styled.div`
         font-family: Pretendard;
         font-size: 20px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 150%;
         @media (max-width: 768px) {
-            font-size: 3vw;
+            font-size: 16px;
         }
     }
 `;

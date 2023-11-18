@@ -82,7 +82,7 @@ const InfoActivity = () => {
                             <div className="name" style={{ color: item.color }}>
                                 {item.name}
                             </div>
-                            <Arrow className="hover-hide" />
+                            <Arrow className="hover-hide" fill={item.color} />
                         </div>
                         <div className="img-wrapper">
                             {item.name === '해커톤' && (
@@ -131,7 +131,6 @@ const InfoActivity = () => {
                             >
                                 {item.text}
                             </div>
-                            
                         </div>
                     </IF.Box>
                 ))}
