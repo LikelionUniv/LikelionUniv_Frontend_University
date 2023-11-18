@@ -33,8 +33,7 @@ const Tab = () => {
     };
     const onButtonClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
-    }
-
+    };
 
     return (
         <T.Container>
@@ -63,7 +62,15 @@ const Tab = () => {
                             <T.SchoolLogo logo={Logo} />
                             {/* 학교 텍스트 */}
                             <T.SchoolText>
-                                {school.school}
+                                <div
+                                    className={
+                                        school.school.length > 5
+                                            ? 'long name'
+                                            : 'name'
+                                    }
+                                >
+                                    {school.school}
+                                </div>
                                 <div>{school.region}</div>
                             </T.SchoolText>
                         </T.TabContent>
