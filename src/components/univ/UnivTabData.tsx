@@ -11,6 +11,18 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '서울',
             website: 'https://likelionhongik.com/',
             
+        },  
+        {
+            school: '광운대학교',
+            region: '서울',
+            website: 'https://likelionhongik.com/',
+            
+        },
+          {
+            school: '고려대학교',
+            region: '서울',
+            website: 'https://likelionhongik.com/',
+            
         },
         {
             school: '강남대학교',
@@ -147,7 +159,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '서울',
             website: 'https://linktr.ee/likelion.ewha',
         },
-        { school: '한양여자대학교', region: '서울', website: '' },
+        { school: '한양여자대학교', region: '서울', website: 'https://instagram.com/likelion_hywoman?igshid=NzZlODBkYWE4Ng%3D%3D&utm_source=qr' },
     ],
 
     부산: [
@@ -242,7 +254,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '충북',
             website: 'http://knut.likelion.org/',
         },
-        { school: '충북대학교', region: '충북', website: '' },
+     
     ],
     충남: [
         {
