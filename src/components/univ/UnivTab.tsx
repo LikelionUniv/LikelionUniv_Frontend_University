@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import * as T from './UnivTabStyle';
 import Logo from '../../img/recruit/logo.svg';
 import BtnArrow from '../../img/recruit/btnArrow.svg';
+import default_image from '../../img/univ/_default.png';
 import { tabData, regionTab } from './UnivTabData';
 
 const Tab = () => {
@@ -59,18 +60,18 @@ const Tab = () => {
                             onClick={() => popupUnivSite(school.website)}
                         >
                             {/* 학교 로고 추가 */}
-                            <T.SchoolLogo logo={Logo} />
+                            <T.SchoolLogo>
+                                <img
+                                    src={
+                                        school.logo
+                                            ? school.logo
+                                            : default_image
+                                    }
+                                />
+                            </T.SchoolLogo>
                             {/* 학교 텍스트 */}
                             <T.SchoolText>
-                                <div
-                                    className={
-                                        school.school.length > 5
-                                            ? 'long name'
-                                            : 'name'
-                                    }
-                                >
-                                    {school.school}
-                                </div>
+                                {school.school}
                                 <div>{school.region}</div>
                             </T.SchoolText>
                         </T.TabContent>

@@ -69,6 +69,7 @@ export const TabRegion = styled.button<{ active: boolean }>`
 
 export const TabContent = styled.div`
     display: flex;
+    align-items: center;
     height: 80px;
     padding: 12px;
     gap: 12px;
@@ -132,34 +133,32 @@ export const SchoolWrapper = styled.div`
     }
 `;
 
-export const SchoolLogo = styled.div<{ logo?: string }>`
+export const SchoolLogo = styled.div`
     width: 56px;
     height: 56px;
     flex-shrink: 0;
-    background: ${props =>
-        props.logo ? `url(${props.logo})` : 'lightgray 50% / cover no-repeat'};
+    overflow: hidden;
+    border-radius: 50%;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `;
 
 export const SchoolText = styled.div`
-    .name {
-        color: var(--Grey-900, #212224);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 150%; /* 24px */
-
-        // 필요하면 나중 추가
-        /* overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap; */
-    }
-    .long {
-        font-size: 80%;
-        min-height: 24px;
-    }
-    :nth-child(2) {
+    color: var(--Grey-900, #212224);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 24px */
+    // 필요하면 나중 추가
+    /* overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap; */
+    :nth-child(1) {
         color: var(--Grey-800, #4d5359);
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 500;
         line-height: 150%; /* 21px */
     }
