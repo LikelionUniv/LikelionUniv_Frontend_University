@@ -1,5 +1,6 @@
 import chungang from '../../img/univ/chungang.png';
 import chungnam from '../../img/univ/chungnam.png';
+import hongik from '../../img/univ/hongik 1.png';
 import duksung from '../../img/univ/duksung.png';
 import dongduk from '../../img/univ/dongduk.png';
 import dongguk from '../../img/univ/dongguk.png';
@@ -37,6 +38,7 @@ import sungkyunkwan from '../../img/univ/sungkyunkwan.png';
 import sungshin from '../../img/univ/sungshin.png';
 import yeungnam from '../../img/univ/yeungnam.png';
 import yonsei from '../../img/univ/yonsei.png';
+import hallym from '../../img/univ/hallym.png'
 
 export interface ITabData {
     school: string;
@@ -51,6 +53,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '홍익대학교',
             region: '서울',
             website: 'https://likelionhongik.com/',
+            logo: hongik,
         },
         {
             school: '광운대학교',
@@ -96,6 +99,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '중앙대학교',
             region: '서울',
             website: 'https://cau-likelion.org/',
+            logo: chungang,
         },
         {
             school: '가톨릭대학교',
@@ -315,6 +319,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '한림대학교',
             region: '강원',
             website: 'https://www.instagram.com/likelion_hallym/',
+            logo : hallym,
         },
     ],
     충북: [
@@ -362,6 +367,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '전북',
             website:
                 'https://likelionjbnu.notion.site/11-a32d1db7bba2467eb985f9a4d97e7a77',
+            logo: jeonbuk,
         },
     ],
     경북: [
@@ -374,8 +380,9 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '영남대학교',
             region: '경북',
             website: 'https://linktr.ee/likelion_yu',
+            logo: yeungnam,
         },
-        { school: '한동대학교', region: '경북', website: '' },
+        { school: '한동대학교', region: '경북', website: '', logo: handong },
         {
             school: '경북대학교',
             region: '경북',
