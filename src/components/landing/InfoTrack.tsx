@@ -5,15 +5,6 @@ import backEndImage from '../../img/landing/back.png';
 import designImage from '../../img/landing/design.png';
 import planningImage from '../../img/landing/plan.png';
 
-// import frontEndImageMobile from '../../img/landing/frontEndImageMobile.png'
-// import backEndImageMobile from '../../img/landing/BackEndImageMobile.png'
-// import planningImageMobile from '../../img/landing/planingImageMobile.png'
-// import DesignImageMobile from '../../img/landing/DesignImageMobile.png'
-// import frontEndsmallImageMobile from '../../img/landing/frontEndsmallImageMobile.png'
-// import backEndsmallImageMobile from '../../img/landing/backEndsmallImageMobile .png'
-// import planningsmallImageMobile from '../../img/landing/planningsmallImageMobile .png'
-// import DesignsmallImageMobile from '../../img/landing/DesignsmallImageMobile.png'
-
 export interface TrackBoxProps {
     backgroundColor?: string;
     hoverColor?: string;
@@ -51,10 +42,6 @@ const trackArray: any[] = [
 ];
 
 const InfoTrack = () => {
-    const isLargeScreen = window.innerWidth > 1024;
-    const isMediumScreen = window.innerWidth <= 1024 && window.innerWidth > 768;
-    const isSmallScreen = window.innerWidth <= 768;
-
     const handleMouseEnter = (index: number) => {
         const trackBox = document.getElementById(`trackBox-${index}`);
         if (trackBox) {

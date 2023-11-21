@@ -498,7 +498,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
         }
         @media (max-width: 1280px) {
             min-width: 100px;
-            height: 100%;
             flex-direction: column;
             align-items: center;
             & svg {
@@ -518,11 +517,20 @@ export const TrackBox = styled.div<TrackBoxProps>`
     }
 
     &:hover {
+        
+        @media screen and (min-width: 768px) {
+            flex-direction: column;
+
+            .title {
+                margin-bottom: 16px;
+            }
+        }
         .title {
             word-break: keep-all;
         }
 
         .hover-hide {
+            display: none;
             transform: rotate(180deg);
             fill: ${props => props.backgroundColor};
         }
