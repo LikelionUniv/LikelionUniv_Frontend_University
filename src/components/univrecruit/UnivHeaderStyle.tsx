@@ -1,32 +1,43 @@
 import { styled } from 'styled-components';
 
 export const BlackDiv = styled.div`
+    display: flex;
+    justify-content: center;
     background: #212224;
     padding-top: 100px;
+    padding-left: 6em;
+    padding-right: 6em;
     box-sizing: border-box;
 
     font-family: Pretendard;
     color: white;
     padding-bottom: 170px;
 
+    width: 100%;
+
+    @media screen and (max-width: 767px) {
+        padding: 2.875rem 1.25rem;
+    }
+`;
+
+export const Inner = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
-    padding-left: 6em;
-    padding-right: 6em;
+    justify-content: space-between;
     width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
 
     @media screen and (max-width: 767px) {
         flex-direction: column-reverse;
         align-items: center;
         justify-content: center;
-        width: 100%;
-        padding: 2.875rem 1.25rem;
     }
-`;
+`
 
 export const Content = styled.div`
     width: 100%;
+    max-width: 588px;
 `;
 
 export const T1 = styled.div`
@@ -63,7 +74,7 @@ export const T2 = styled.div`
         font-size: 16px;
     }
 
-    :nth-child(1) {
+    :nth-child(2) {
         color: var(--Grey-600, #adb3ba);
         font-size: 14px;
         margin-top: 24px;
