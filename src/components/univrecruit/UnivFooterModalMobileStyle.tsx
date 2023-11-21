@@ -3,14 +3,16 @@ import { styled } from 'styled-components';
 export const ModalContent = styled.div`
     display: flex;
     flex-direction: column;
-    width: 300px;
-    height: 492px;
     align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
 `;
 
 export const ModalHeader = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: -10px;
 `;
 
@@ -26,20 +28,20 @@ export const ModalCloseButton = styled.div<{ close?: string }>`
     height: 24px;
     position: relative;
     top: -13px;
-    left: 140px;
+    left: 123px;
     background: ${props => (props.close ? `url(${props.close})` : '')};
     cursor: pointer;
 `;
 
 export const ModalBody = styled.div`
-    width: 290px;
+    width: 100%;
+    box-sizing: border-box;
 `;
 
 export const ModalText = styled.div`
     border-top: 1px solid #dcdfe3;
     display: flex;
     align-items: center;
-    gap: 24px;
 `;
 
 export const Text = styled.div`
@@ -62,7 +64,7 @@ export const InputWrapper = styled.div`
     display: inline-flex;
     flex-direction: column;
     margin-top: 24px;
-    gap: 40px;
+    box-sizing: border-box;
 `;
 
 export const ModalInput = styled.div``;
@@ -75,7 +77,7 @@ export const InputLabel = styled.div`
 `;
 
 export const Input = styled.input`
-    width: 260px;
+    width: 100%;
     height: 48px;
     flex-shrink: 0;
     margin-top: 8px;
@@ -94,9 +96,10 @@ export const Input = styled.input`
 export const InputBtn = styled.div`
     display: flex;
     justify-content: center;
-    width: 260px;
+    width: 100%;
     padding: 12px 12px;
     margin-top: 32px;
+    box-sizing: border-box;
 
     border-radius: 8px;
     background: var(--Orange-600, #ff7710);

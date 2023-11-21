@@ -12,6 +12,8 @@ export const ModalHeader = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    height: 100%;
 `;
 
 export const ModalTitle = styled.div`
@@ -19,6 +21,8 @@ export const ModalTitle = styled.div`
     font-size: 20px;
     font-weight: 700;
     line-height: 150%; /* 30px */
+    width: 100%;
+    text-align: center;
 `;
 
 export const ModalCloseButton = styled.div<{ close?: string }>`
@@ -30,6 +34,7 @@ export const ModalCloseButton = styled.div<{ close?: string }>`
 
 export const ModalBody = styled.div`
     margin: 40px;
+    height: 100%;
     @media (max-width: 768px) {
         margin: 25px;
     }

@@ -16,12 +16,13 @@ const customStyles: Modal.Styles = {
         top: '50%',
         left: '50%',
         width: '300px',
-        height: '492px',
+        height: '361px',
         flexShrink: '0',
         transform: 'translate(-50%, -50%)',
         background: 'white',
         borderRadius: '8px',
         boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
+        boxSizing: 'border-box',
     },
 };
 

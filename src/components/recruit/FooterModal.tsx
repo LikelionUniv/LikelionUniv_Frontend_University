@@ -39,20 +39,13 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
             position: 'absolute',
             top: '50%',
             left: '50%',
-            // width: '688px',
-            // height: '636px',
             width: windowWidth < 768 ? '80%' : '688px',
-            height:
-                windowWidth <= 480
-                    ? '70%'
-                    : windowWidth <= 768
-                    ? '70%'
-                    : '636px',
+            height: windowWidth < 768 ? '361px' : '510px',
             flexShrink: '0',
             transform: 'translate(-50%, -50%)',
             background: 'white',
             padding: '20px',
-            borderRadius: '8px',
+            borderRadius: '20px',
             boxShadow: '0px 12px 20px 0px rgba(0, 0, 0, 0.07)',
         },
     };
