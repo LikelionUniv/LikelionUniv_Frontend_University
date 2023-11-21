@@ -77,7 +77,6 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
         try {
             const response = await axios.post(url, {
                 email: email,
-                alarmType: 'NEW_UNIVERSITY_RECRUITING',
             });
 
             console.log(response.data);
