@@ -25,7 +25,7 @@ const Univcontent = () => {
 
     const goEmail = (): void => {
         window.open('mailto:univ_admin@likelion.net');
-    }
+    };
 
     const table = {
         '’아기사자’가 무엇인가요?':

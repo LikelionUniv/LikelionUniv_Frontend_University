@@ -84,7 +84,11 @@ const Developers = () => {
                         from="이화여자대학교 11기 대표"
                         profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F8f17f114-9543-4e69-95df-b60f78d351fc%2Fprofile.jpg?id=19125834-1e6d-4d03-bf76-a64f27e4ab2f&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
                     />
-                    <DevInfo name="조민규" from="중앙대학교 11기 아기사자" profile="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fabd41a92-065b-4c8d-88c4-58f7b6d5e559%2FKakaoTalk_Photo_2022-09-11-17-05-44.jpeg?table=block&id=94e5736c-8f92-4850-a391-427aeffa53ed&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"/>
+                    <DevInfo
+                        name="조민규"
+                        from="중앙대학교 11기 아기사자"
+                        profile="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2Fabd41a92-065b-4c8d-88c4-58f7b6d5e559%2FKakaoTalk_Photo_2022-09-11-17-05-44.jpeg?table=block&id=94e5736c-8f92-4850-a391-427aeffa53ed&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"
+                    />
 
                     <DevInfo name="최병찬" from="건국대학교 11기 운영진" />
                     <DevInfo
@@ -118,8 +122,16 @@ const Developers = () => {
                         from="순천향대학교 11기 대표"
                         profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F253e74fd-a289-4942-b322-a993a3cb7d03%2FIMG_8885.jpg?id=394f8e82-9f87-4ad9-85c6-34842d78a1fc&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
                     />
-                    <DevInfo name="서송현" from="남서울대학교 11기 운영진" profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3369c432-9eef-46b6-858e-5b39d3a43eb3%2FIMG_5670.jpeg?table=block&id=6725b288-4148-46d2-90ac-469420f6fac9&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"/>
-                    <DevInfo name="심보영" from="서경대학교 11기 운영진" profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc084987e-6215-459b-aa5b-66616e383d4d%2FC4556A5E-819A-442C-B72E-47E72B78CB1D.jpeg?table=block&id=ea87616d-04a7-4125-ac7a-2fd88db4d2e6&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2n" />
+                    <DevInfo
+                        name="서송현"
+                        from="남서울대학교 11기 운영진"
+                        profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F3369c432-9eef-46b6-858e-5b39d3a43eb3%2FIMG_5670.jpeg?table=block&id=6725b288-4148-46d2-90ac-469420f6fac9&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"
+                    />
+                    <DevInfo
+                        name="심보영"
+                        from="서경대학교 11기 운영진"
+                        profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc084987e-6215-459b-aa5b-66616e383d4d%2FC4556A5E-819A-442C-B72E-47E72B78CB1D.jpeg?table=block&id=ea87616d-04a7-4125-ac7a-2fd88db4d2e6&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2n"
+                    />
                     <DevInfo
                         name="이가현"
                         from="한서대학교 11기 대표"
@@ -130,9 +142,17 @@ const Developers = () => {
                         from="을지대학교 11기 대표"
                         profile="https://spiny-lilac-a2a.notion.site/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F60151541-194c-4be9-8625-79945890e6e6%2FKakaoTalk_20231009_222134073.jpg?id=835e3c58-96d4-4401-ad67-a6e766e1bfb2&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=&cache=v2"
                     />
-                    <DevInfo name="채서연" from="명지대학교(인문) 11기 대표" profile="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F0a243333-a3a4-4ab3-ae03-729e1f62ca0b%2FIMG_6873.jpeg?id=01e23695-b533-4a48-a08f-450a3facfe5b&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2" />
+                    <DevInfo
+                        name="채서연"
+                        from="명지대학교(인문) 11기 대표"
+                        profile="https://www.notion.so/image/https%3A%2F%2Fprod-files-secure.s3.us-west-2.amazonaws.com%2F9aed2014-30e7-4fb1-890f-7420bc8497ef%2F0a243333-a3a4-4ab3-ae03-729e1f62ca0b%2FIMG_6873.jpeg?id=01e23695-b533-4a48-a08f-450a3facfe5b&table=block&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=600&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"
+                    />
                     <DevInfo name="최가현" from="서울여자대학교 11기 운영진" />
-                    <DevInfo name="최혁순" from="광운대학교 11기 운영진" profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe292f642-2279-45ee-bd19-37b4229b72e6%2FIMG_4356.jpg?table=block&id=cac9a370-541c-4f08-bed6-18a60b90cf1d&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2" />
+                    <DevInfo
+                        name="최혁순"
+                        from="광운대학교 11기 운영진"
+                        profile="https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe292f642-2279-45ee-bd19-37b4229b72e6%2FIMG_4356.jpg?table=block&id=cac9a370-541c-4f08-bed6-18a60b90cf1d&spaceId=9aed2014-30e7-4fb1-890f-7420bc8497ef&width=2000&userId=56c38f32-89fd-423f-bebb-3acd4a79ef42&cache=v2"
+                    />
                 </D.PeopleBox>
             </D.Container>
         </D.Wrapper>

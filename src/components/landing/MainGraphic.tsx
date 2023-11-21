@@ -77,7 +77,8 @@ const MainGraphic = () => {
                             <a
                                 className="btn"
                                 href={recruitURL}
-                                target="_blank" rel="noreferrer"
+                                target="_blank"
+                                rel="noreferrer"
                             >
                                 신규 대학 지원하기
                                 <PixelLongArrowIcon fill="#ffffff" />

@@ -18,7 +18,7 @@ const recruitNotice = {
     paragraph: `아기사자 모집 및 홈페이지 기능 추가 등
     멋대의 새로운 소식을 이메일로 알려드려요.`,
     btn: '멋대 알림 신청하기',
-}
+};
 
 const Footer = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -92,9 +92,7 @@ const Footer = () => {
                             <img src={notiicon} />
                             <div>{recruitNotice.title}</div>
                         </div>
-                        <div className="text">
-                            {recruitNotice.paragraph}
-                        </div>
+                        <div className="text">{recruitNotice.paragraph}</div>
                     </div>
                     <div className="btn" onClick={openModal}>
                         {recruitNotice.btn}

@@ -21,17 +21,23 @@ function Footer(): JSX.Element {
 
         document.body.appendChild(link);
         link.click();
-        
+
         document.body.removeChild(link);
-    }
+    };
 
     const downloadRules = () => {
-        downloadFile(rules, '[멋쟁이사자처럼 대학 IT 창업 동아리 연합회칙].pdf');
-    }
+        downloadFile(
+            rules,
+            '[멋쟁이사자처럼 대학 IT 창업 동아리 연합회칙].pdf',
+        );
+    };
 
     const downloadPrivacyPolicy = () => {
-        downloadFile(privacyPolicy, '[멋쟁이사자처럼 대학 개인정보 처리방침].pdf');
-    }
+        downloadFile(
+            privacyPolicy,
+            '[멋쟁이사자처럼 대학 개인정보 처리방침].pdf',
+        );
+    };
 
     return (
         <F.Wrapper>
@@ -103,8 +109,15 @@ function Footer(): JSX.Element {
                         </div>
                         <div className="section">
                             <div className="title">POLICY</div>
-                            <div className="text" onClick={downloadRules}>회칙</div>
-                            <div className="text" onClick={downloadPrivacyPolicy}>개인정보처리방침</div>
+                            <div className="text" onClick={downloadRules}>
+                                회칙
+                            </div>
+                            <div
+                                className="text"
+                                onClick={downloadPrivacyPolicy}
+                            >
+                                개인정보처리방침
+                            </div>
                             <div className="text">
                                 Nonprofit Report <DownloadIcon />
                             </div>

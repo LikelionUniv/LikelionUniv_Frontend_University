@@ -517,7 +517,6 @@ export const TrackBox = styled.div<TrackBoxProps>`
     }
 
     &:hover {
-        
         @media screen and (min-width: 768px) {
             flex-direction: column;
 

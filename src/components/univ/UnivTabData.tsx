@@ -38,7 +38,7 @@ import sungkyunkwan from '../../img/univ/sungkyunkwan.png';
 import sungshin from '../../img/univ/sungshin.png';
 import yeungnam from '../../img/univ/yeungnam.png';
 import yonsei from '../../img/univ/yonsei.png';
-import hallym from '../../img/univ/hallym.png'
+import hallym from '../../img/univ/hallym.png';
 
 export interface ITabData {
     school: string;
@@ -319,7 +319,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '한림대학교',
             region: '강원',
             website: 'https://www.instagram.com/likelion_hallym/',
-            logo : hallym,
+            logo: hallym,
         },
     ],
     충북: [

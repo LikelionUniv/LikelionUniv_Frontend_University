@@ -17,7 +17,7 @@ const Header = () => {
 
     const onClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
-    }
+    };
 
     return (
         <U.BlackDiv>
