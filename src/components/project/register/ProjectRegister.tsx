@@ -14,6 +14,7 @@ import useCheckbox from './useCheckbox';
 
 import AutoHeightTextarea from './AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
+import request from '../../../utils/request';
 
 /* form type */
 interface FormState {
@@ -29,20 +30,35 @@ interface FormState {
     description: string;
     content: string;
     projectUrl: string;
-    images: Image[];
+    images: string[];
     generation: number;
     university: string;
     members: string;
 }
 
-interface Image {
-    name: string;
-    saved: string;
+interface ProjectRegister {
+    thon: string
+    outPut: string
+    serviceName: string
+    ordinal: number
+    univ: string
+    startDate: string
+    endDate: string
+    tech: string
+    description: string
+    content: string
+    projectUrl: string
+    images: string[]
+    members: Member[]
+}
+
+interface Member {
+    id: number
 }
 
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
-    const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
+    const { array: images, pushMany: setImages, remove } = useArray<string>([]); // image 배열
 
     const [formState, setFormState] = useState<FormState>({
         thon: '',
@@ -101,11 +117,21 @@ const ProjectRegister = () => {
         }));
 
     // 폼 제출할 때 실행되는 함수
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
         console.log(formState);
+        // const data = {}
+
+        // // 전송 코드
+        // const response = await request<ProjectRegister>({
+        //     uri: '/api/v1/project/post',
+        //     method: 'post',
+        //     data
+        // });
+        // console.log(response);
+        
     };
 
     const { checkboxList, checkHandler } = useCheckbox(checkboxes);
@@ -132,13 +158,12 @@ const ProjectRegister = () => {
         const files = event.target.files;
 
         if (files != null) {
-            const imageMeta: Image[] = [];
+            const imageMeta: string[] = [];
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                const name = file.name;
                 const saved = await readUrl(file);
-                imageMeta.push({ name, saved });
+                imageMeta.push(saved);
             }
             setImages(imageMeta);
         }
@@ -195,10 +220,6 @@ const ProjectRegister = () => {
         }
     }, [formState, etcCheck]);
 
-    useEffect(() => {
-        console.log(formState);
-    }, [formState]);
-
     return (
         <P.Container>
             <P.Title>프로젝트 등록</P.Title>
@@ -232,7 +253,7 @@ const ProjectRegister = () => {
             ) : (
                 <P.Images>
                     {images.map((image, idx) => (
-                        <P.Img key={`img-${idx}`} src={image.saved}>
+                        <P.Img key={`img-${idx}`} src={image}>
                             <P.DeleteBtn
                                 isFirst={idx === 0}
                                 onClick={() => remove(idx)}
