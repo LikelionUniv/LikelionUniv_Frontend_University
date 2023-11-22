@@ -3,8 +3,9 @@ import Modal from 'react-modal';
 import Line from '../../img/recruit/line.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './FooterModalStyle';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import ModalComplete from './modal-complete/ModalComplete';
+import { EMAIL } from '../../constants/regEx/regEx';
 
 //modal style
 
@@ -85,6 +86,12 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
         e.preventDefault();
         const url = `https://stag.likelionuniv.com/api/v1/alarm/12/register`;
 
+        // 이메일 형식에 맞지 않는 경우
+        if (!EMAIL.test(email)) {
+            alert('이메일 형식에 맞지 않습니다.');
+            return;
+        }
+
         try {
             const response = await axios.post(url, {
                 email: email,
@@ -94,6 +101,9 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
             setSuccess(response.data.isSuccess);
         } catch (error) {
             console.error('Error submitting form:', error);
+            const errorMessage = (error as AxiosError).response
+                ?.data as AxiosError;
+            alert(errorMessage.message);
         }
     };
 
