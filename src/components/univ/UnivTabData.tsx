@@ -39,6 +39,20 @@ import sungshin from '../../img/univ/sungshin.png';
 import yeungnam from '../../img/univ/yeungnam.png';
 import yonsei from '../../img/univ/yonsei.png';
 import hallym from '../../img/univ/hallym.png';
+import korea from '../../img/univ/korea.png';
+import catholic from '../../img/univ/catholic.png'
+import konkuk from '../../img/univ/konkuk.png'
+import sungkonghoe from '../../img/univ/sungkonghoe.png'
+import kangwon from '../../img/univ/kangwon.png'
+import koreaseoul from '../../img/univ/koreaseoul.png'
+import hufsglobal from '../../img/univ/hufsglobal.png'
+import suncheon from '../../img/univ/suncheon.png'
+import bufs from '../../img/univ/bufs.jpg'
+import hsu from '../../img/univ/hanseo.png'
+import kyungnam from '../../img/univ/kyungnam.png'
+import koreatransport from '../../img/univ/koreatransport.jpeg'
+import kit from '../../img/univ/kit.png'
+import dku from '../../img/univ/dku.png'
 
 export interface ITabData {
     school: string;
@@ -64,7 +78,9 @@ export const tabData: { [key: string]: ITabData[] } = {
         {
             school: '고려대학교',
             region: '서울',
-            website: '',
+            website: 'https://next-ku.com/',
+            logo:  koreaseoul,
+     
         },
         {
             school: '강남대학교',
@@ -82,6 +98,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '단국대학교',
             region: '서울',
             website: 'https://www.instagram.com/dku_likelion11th/',
+            logo: dku,
         },
         {
             school: '동국대학교',
@@ -106,6 +123,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '서울',
             website:
                 'https://likelioncuk.notion.site/likelioncuk/ade52330317b445998c7b066071bbff4',
+            logo:catholic,
         },
         {
             school: '서울여자대학교',
@@ -141,6 +159,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '건국대학교',
             region: '서울',
             website: 'https://linktr.ee/likelion.ku',
+            logo:konkuk,
         },
         {
             school: '상명대학교(서울)',
@@ -152,6 +171,8 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '성공회대학교',
             region: '서울',
             website: 'https://www.instagram.com/likelion_skhu/',
+            logo:  sungkonghoe,
+
         },
         {
             school: '서강대학교',
@@ -231,6 +252,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '부산외국어대학교',
             region: '부산',
             website: 'https://www.instagram.com/likelion_bufs/',
+            logo: bufs,
         },
     ],
     대구: [
@@ -276,6 +298,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '고려대학교(세종)',
             region: '경기',
             website: 'https://www.instagram.com/likelion_ku_sejong/',
+            logo: korea,
         },
         {
             school: '성결대학교',
@@ -300,6 +323,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '경기',
             website:
                 'https://hufsglobal.notion.site/ece28870debd4c50b943266433f284cc',
+            logo: hufsglobal,
         },
         {
             school: '명지대학교(자연)',
@@ -307,13 +331,14 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://mju-likelion.org/',
             logo: myongji_nat,
         },
-        { school: '아주대학교', region: '경기', website: '' },
+        { school: '아주대학교', region: '경기', website: 'https://www.instagram.com/likelion.ajou/' },
     ],
     강원: [
         {
             school: '강원대학교',
             region: '강원',
             website: 'https://www.instagram.com/likelion_kangwon/',
+            logo: kangwon,
         },
         {
             school: '한림대학교',
@@ -327,6 +352,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '한국교통대학교',
             region: '충북',
             website: 'http://knut.likelion.org/',
+            logo: koreatransport,
         },
     ],
     충남: [
@@ -341,6 +367,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '순천향대학교',
             region: '충남',
             website: 'https://www.instagram.com/schlikelion/',
+            logo: suncheon,
         },
         {
             school: '남서울대학교',
@@ -352,6 +379,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '한서대학교',
             region: '충남',
             website: 'https://www.instagram.com/likelion_hsu/',
+            logo: hsu,
         },
         {
             school: '충남대학교',
@@ -360,7 +388,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             logo: chungnam,
         },
     ],
-    전남: [{ school: '순천대학교', region: '전남', website: '' }],
+    전남: [{ school: '순천대학교', region: '전남', website: '' ,}],
     전북: [
         {
             school: '전북대학교',
@@ -375,6 +403,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '금오공과대학교',
             region: '경북',
             website: 'https://www.instagram.com/likelionkumoh/',
+            logo: kit,
         },
         {
             school: '영남대학교',
@@ -382,7 +411,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://linktr.ee/likelion_yu',
             logo: yeungnam,
         },
-        { school: '한동대학교', region: '경북', website: '', logo: handong },
+        { school: '한동대학교', region: '경북', website: 'https://hgulikelion.web.app/', logo: handong },
         {
             school: '경북대학교',
             region: '경북',
@@ -395,7 +424,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             region: '경남',
             website: 'https://www.instagram.com/likelion_gnu/',
         },
-        { school: '경남대학교', region: '경남', website: '' },
+        { school: '경남대학교', region: '경남', website: 'https://instagram.com/likelion_ku?igshid=YzAwZjE1ZTI0Zg==' ,logo: kyungnam,},
     ],
 };
 // 탭 메뉴
