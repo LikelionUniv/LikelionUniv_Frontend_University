@@ -21,6 +21,6 @@ export interface PostCardPropType extends PostCardProp {
 }
 
 export type OptionType = {
-    value: string;
+    value: number;
     label: string;
 };
