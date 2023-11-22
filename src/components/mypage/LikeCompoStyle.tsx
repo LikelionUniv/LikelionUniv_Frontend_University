@@ -3,7 +3,7 @@ import search from '../../img/mypage/search.svg';
 
 export const SearchAndSortWrapper = styled.div`
     display: flex;
-    align-items: start;
+    align-items: center;
     justify-content: space-between;
     height: 54px;
     margin-top: 40px;
