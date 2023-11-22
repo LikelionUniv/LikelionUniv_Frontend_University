@@ -14,7 +14,8 @@ import useCheckbox from './useCheckbox';
 
 import AutoHeightTextarea from './AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
-import request from '../../../utils/request';
+import UserFind from './user/UserFind';
+import UserEnrolled from './user/UserEnrolled';
 
 /* form type */
 interface FormState {
@@ -437,12 +438,8 @@ const ProjectRegister = () => {
                 </P.Field>
                 <P.Field>
                     <P.Label>팀원</P.Label>
-                    <P.Input
-                        type="text"
-                        placeholder="팀원 이름을 작성해주세요."
-                        value={formState.members}
-                        onChange={event => handleInputChange('members', event)}
-                    />
+                    <UserFind />
+                    <UserEnrolled />
                 </P.Field>
                 <P.RegisterBtn type="submit" active={isFill}>
                     등록하기

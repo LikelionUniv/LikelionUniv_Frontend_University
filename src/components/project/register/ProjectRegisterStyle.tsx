@@ -31,6 +31,7 @@ export const Caption = styled.div`
 `;
 
 export const Label = styled.div`
+    margin-bottom: 8px;
     color: #212224;
 
     font-family: 'Pretendard';
@@ -213,16 +214,13 @@ export const Field = styled.div`
     &:last-child {
         margin-bottom: 0;
     }
-
-    div {
-        margin-bottom: 8px;
-    }
 `;
 
 export const FlexField = styled.div`
     display: flex;
     justify-content: flex-start;
 `;
+
 export const Gap = styled.div`
     width: 8px;
     height: 8px;
