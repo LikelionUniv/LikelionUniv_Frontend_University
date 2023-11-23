@@ -23,7 +23,14 @@ const PostCardWithPhoto = (props: PostCardPropType) => {
             </PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
-                    <div className="heart" />
+                    {props.type === '좋아요' ? (
+                        <div
+                            className="likeheart"
+                            onClick={() => alert('좋아요 취소 기능')}
+                        />
+                    ) : (
+                        <div className="heart" />
+                    )}
                     <div>{props.like}</div>
                 </div>
                 <div className="wrapper">
