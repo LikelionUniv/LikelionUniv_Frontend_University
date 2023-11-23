@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import heart from '../../img/mypage/heart.svg';
 import comment from '../../img/mypage/comment.svg';
 import editdots from '../../img/mypage/editdots.svg';
+import likeheart from '../../img/mypage/likeheart.svg';
 
 interface PhotoCheck {
     photoTitle?: boolean;
@@ -149,6 +150,12 @@ export const PostCardBox = styled.div<PhotoCheck>`
                     height: 20px;
                     background-repeat: no-repeat;
                     background-image: url(${heart});
+                }
+                .likeheart {
+                    width: 20px;
+                    height: 20px;
+                    background-repeat: no-repeat;
+                    background-image: url(${likeheart});
                 }
                 .comment {
                     width: 20px;
