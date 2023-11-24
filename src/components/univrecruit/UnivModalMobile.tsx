@@ -45,7 +45,7 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
 
     const CommitSubmit = async (e: any) => {
         e.preventDefault();
-        const url = `https://stag.likelionuniv.com/api/v1/alarm/12/register`;
+        const url = `https://likelion.university/api/v1/alarm/12/register`;
 
         // 이메일 형식에 맞지 않는 경우
         if (!EMAIL.test(email)) {
