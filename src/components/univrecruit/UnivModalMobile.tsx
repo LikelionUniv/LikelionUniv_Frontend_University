@@ -45,7 +45,7 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
 
     const CommitSubmit = async (e: any) => {
         e.preventDefault();
-        const url = `https://stag.likelionuniv.com/api/v1/alarm/12/register`;
+        const url = `https://likelion.university/api/v1/alarm/12/register`;
 
         // 이메일 형식에 맞지 않는 경우
         if (!EMAIL.test(email)) {
@@ -80,17 +80,16 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
             ) : (
                 <M.ModalContent>
                     <M.ModalHeader>
-                        <M.ModalTitle>모집 알림 신청하기</M.ModalTitle>
+                        <M.ModalTitle>멋대 알림 신청하기</M.ModalTitle>
                     </M.ModalHeader>
                     <M.ModalCloseButton onClick={closeModal} close={Close} />
                     <M.ModalBody>
                         <M.ModalText>
                             <M.Text>
-                                모집이 시작되었을 때<br />
-                                이메일로 알려드려요.
+                               멋대의 새로운 소식을 이메일로 알려드려요<br />
+                
                                 <M.Text>
-                                    * 입력하신 개인정보는 모집 알림 발송 후
-                                    파기됩니다.
+                                * 입력하신 개인정보는 멋쟁이사자처럼 대학 홈페이지의 개인정보처리방침에 의거하여 관리됩니다.
                                 </M.Text>
                             </M.Text>
                         </M.ModalText>

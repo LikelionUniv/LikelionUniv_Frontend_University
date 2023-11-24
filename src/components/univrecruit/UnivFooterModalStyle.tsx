@@ -41,7 +41,7 @@ export const ModalGraphic = styled.div`
 
 export const Text = styled.div`
     color: var(--Grey-900, #212224);
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 140%; /* 39.2px */
 

@@ -6,6 +6,7 @@ import Arrow4 from '../../img/recruit/4arrow.svg';
 import Arrow5 from '../../img/recruit/5arrow.svg';
 import Arrow6 from '../../img/recruit/6arrow.svg';
 import Oarrow from '../../img/recruit/Oarrow.svg';
+import Email2 from '../../img/recruit/Email2.svg';
 import Mail from '../../img/recruit/mail.svg';
 import Plus from '../../img/recruit/plus.svg';
 import Min from '../../img/recruit/min.svg';
@@ -14,6 +15,8 @@ import { useState } from 'react';
 const Univcontent = () => {
     /* FAQ click animation */
     const [selected, setSelected] = useState(null);
+    const [hovered, setHovered] = useState(false);
+
 
     const handleClick = (index: any) => {
         if (selected === index) {
@@ -191,10 +194,16 @@ const Univcontent = () => {
                 </U.Qbody3>
                 <U.Ps2>
                     <p>더 궁금한 것이 있으신가요?</p>
-                    <img src={Mail}></img>
-                    <p onClick={goEmail}>이메일로 문의하기</p>
+                    <img src={hovered ? Email2: Mail} alt="이미지" />
+                    <p
+                        onClick={goEmail}
+                        style={{ color: hovered ? '#FF7710' : '#212224' }}
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        이메일로 문의하기
+                    </p>
                 </U.Ps2>
-
                 {/*University 부분*/}
             </U.ContentSection>
         </U.ContentDiv>
