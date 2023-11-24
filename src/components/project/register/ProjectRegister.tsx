@@ -20,37 +20,37 @@ import useFetch from '../../../hooks/useFetch';
 
 /* form type */
 interface FormState {
-    thon: string;
-    thonEtc: string;
+    activity: string;
+    activityEtc: string;
     outPut: string;
     outPutEtc: string;
     serviceName: string;
+    ordinal: number;
+    univ: string;
     startDate: Date | null;
     endDate: Date | null;
-    tech: string[];
-    techEtc: string;
+    projectTeches: string[];
+    projectTechEtc: string;
     description: string;
     content: string;
-    projectUrl: string;
-    images: string[];
-    generation: number;
-    university: string;
+    productionUrl: string;
+    imageUrl: string[];
     members: number[];
 }
 
 interface ProjectRegisterType {
-    thon: string
+    activity: string
     outPut: string
     serviceName: string
     ordinal: number
     univ: string
     startDate: string
     endDate: string
-    tech: string
     description: string
     content: string
-    projectUrl: string
-    images: string[]
+    productionUrl: string
+    projectTeches: string
+    imageUrl: string[]
     members: number[]
 }
 
@@ -60,21 +60,21 @@ const ProjectRegister = () => {
     const {userLength: memberLength, userIdList: memberIdList} = useEnrolledUser();
 
     const [formState, setFormState] = useState<FormState>({
-        thon: '',
-        thonEtc: '',
+        activity: '',
+        activityEtc: '',
         outPut: '',
         outPutEtc: '',
         serviceName: '',
         startDate: null,
         endDate: null,
-        tech: [],
-        techEtc: '',
+        projectTeches: [],
+        projectTechEtc: '',
         description: '',
         content: '',
-        projectUrl: '',
-        images: images,
-        generation: 0,
-        university: '',
+        productionUrl: '',
+        imageUrl: images,
+        ordinal: 0,
+        univ: '',
         members: memberIdList,
     });
 
@@ -95,7 +95,7 @@ const ProjectRegister = () => {
                     [field]: selectedOption.label,
                 }));
 
-                if (field === 'thon') {
+                if (field === 'activity') {
                     setActiveThonEtc(selectedOption.label === '기타');
                 }
 
@@ -142,7 +142,7 @@ const ProjectRegister = () => {
 
         setFormState(prev => ({
             ...prev,
-            tech: state
+            projectTeches: state
                 .filter(checkbox => checkbox.isChecked)
                 .map(checkbox => checkbox.label),
         }));
@@ -191,7 +191,7 @@ const ProjectRegister = () => {
     useEffect(() => {
         setFormState(prev => ({
             ...prev,
-            images: images,
+            imageUrl: images,
         }));
     }, [images]);
 
@@ -203,27 +203,31 @@ const ProjectRegister = () => {
 
     useEffect(() => {
         if (
-            formState.images.length === 0 ||
-            formState.thon === '' ||
+            formState.imageUrl.length === 0 ||
+            formState.activity === '' ||
             formState.outPut === '' ||
             formState.startDate === null ||
             formState.endDate === null ||
             formState.serviceName === '' ||
             formState.description === '' ||
             formState.content === '' ||
-            formState.tech.length === 0 ||
-            formState.generation === 0 ||
-            formState.university === '' ||
+            formState.projectTeches.length === 0 ||
+            formState.ordinal === 0 ||
+            formState.univ === '' ||
             memberLength === 0 ||
-            (formState.thon === '기타' && formState.thonEtc === '') ||
+            (formState.activity === '기타' && formState.activityEtc === '') ||
             (formState.outPut === '기타' && formState.outPutEtc === '') ||
-            (etcCheck && formState.techEtc === '')
+            (etcCheck && formState.projectTechEtc === '')
         ) {
             setIsFill(false);
         } else {
             setIsFill(true);
         }
     }, [formState, etcCheck, memberLength]);
+
+    useEffect(() => {
+        console.log(formState);
+    }, [formState])
 
     return (
         <P.Container>
@@ -280,15 +284,15 @@ const ProjectRegister = () => {
                     <DropDown
                         placeholder="활동 선택"
                         options={Thon.loadThon()}
-                        onChange={handleSelectChange('thon')}
+                        onChange={handleSelectChange('activity')}
                     />
                     {activeThonEtc ? (
                         <P.Input
                             type="text"
                             placeholder="활동 이름을 입력해주세요."
-                            value={formState.thonEtc}
+                            value={formState.activityEtc}
                             onChange={event =>
-                                handleInputChange('thonEtc', event)
+                                handleInputChange('activityEtc', event)
                             }
                         />
                     ) : null}
@@ -380,9 +384,9 @@ const ProjectRegister = () => {
                     <P.Input
                         type="text"
                         placeholder="서비스로 연결되는 링크를 입력해주세요."
-                        value={formState.projectUrl}
+                        value={formState.productionUrl}
                         onChange={event =>
-                            handleInputChange('projectUrl', event)
+                            handleInputChange('productionUrl', event)
                         }
                     />
                 </P.Field>
@@ -419,9 +423,9 @@ const ProjectRegister = () => {
                         <P.Input
                             type="text"
                             placeholder="기술 스택을 입력해주세요."
-                            value={formState.techEtc}
+                            value={formState.projectTechEtc}
                             onChange={event =>
-                                handleInputChange('techEtc', event)
+                                handleInputChange('projectTechEtc', event)
                             }
                         />
                     ) : null}
@@ -432,13 +436,13 @@ const ProjectRegister = () => {
                         <DropDown
                             placeholder="기수 선택"
                             options={Gen.loadAllGen()}
-                            onChange={handleSelectChange('generation')}
+                            onChange={handleSelectChange('ordinal')}
                         />
                         <P.Gap />
                         <DropDown
                             placeholder='학교 선택'
                             options={univList}
-                            onChange={handleSelectChange('university')}
+                            onChange={handleSelectChange('univ')}
                         />
                     </P.FlexField>
                 </P.Field>

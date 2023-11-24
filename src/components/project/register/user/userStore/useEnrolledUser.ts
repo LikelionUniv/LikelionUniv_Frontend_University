@@ -21,7 +21,7 @@ interface RUseEnrolledUser {
 function useEnrolledUser(): RUseEnrolledUser {
   const entire = useRecoilValue(userEnrolledStore);
   
-  const entireEnrolledUser: User[] = Object.values(entire).flatMap(user => Array.from(user));
+  const entireEnrolledUser: User[] = Object.values(entire).flatMap(user => Array.from(user));  
   const userLength = entireEnrolledUser.length;
   const userIdList: number[] = entireEnrolledUser.map(user => user.id);
 
