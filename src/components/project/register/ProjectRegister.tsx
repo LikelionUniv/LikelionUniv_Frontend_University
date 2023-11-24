@@ -16,6 +16,7 @@ import AutoHeightTextarea from './AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
 import UserFind from './user/UserFind';
 import UserEnrolled from './user/UserEnrolled';
+import useEnrolledUser from './user/userStore/useEnrolledUser';
 
 /* form type */
 interface FormState {
@@ -34,10 +35,10 @@ interface FormState {
     images: string[];
     generation: number;
     university: string;
-    members: string;
+    members: Member[];
 }
 
-interface ProjectRegister {
+interface ProjectRegisterType {
     thon: string
     outPut: string
     serviceName: string
@@ -53,13 +54,14 @@ interface ProjectRegister {
     members: Member[]
 }
 
-interface Member {
+export interface Member {
     id: number
 }
 
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<string>([]); // image 배열
+    const {userLength: memberLength, userIdList: memberIdList} = useEnrolledUser();
 
     const [formState, setFormState] = useState<FormState>({
         thon: '',
@@ -77,7 +79,7 @@ const ProjectRegister = () => {
         images: images,
         generation: 0,
         university: '',
-        members: '',
+        members: memberIdList,
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
@@ -126,7 +128,7 @@ const ProjectRegister = () => {
         // const data = {}
 
         // // 전송 코드
-        // const response = await request<ProjectRegister>({
+        // const response = await request<ProjectRegisterType>({
         //     uri: '/api/v1/project/post',
         //     method: 'post',
         //     data
@@ -210,7 +212,7 @@ const ProjectRegister = () => {
             formState.tech.length === 0 ||
             formState.generation === 0 ||
             formState.university === '' ||
-            formState.members === '' ||
+            memberLength === 0 ||
             (formState.thon === '기타' && formState.thonEtc === '') ||
             (formState.outPut === '기타' && formState.outPutEtc === '') ||
             (etcCheck && formState.techEtc === '')
@@ -219,7 +221,7 @@ const ProjectRegister = () => {
         } else {
             setIsFill(true);
         }
-    }, [formState, etcCheck]);
+    }, [formState, etcCheck, memberLength]);
 
     return (
         <P.Container>

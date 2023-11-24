@@ -2,23 +2,23 @@ import { atom, selector } from 'recoil';
 import { User } from './../components/project/register/user/UserFind';
 
 interface IUserEnrolledStore {
-  plan: User[]
-  design: User[]
-  frontend: User[]
-  backend: User[]
+  plan: Set<User>
+  design: Set<User>
+  frontend: Set<User>
+  backend: Set<User>
 }
 
 export const userEnrolledStore = atom<IUserEnrolledStore>({
   key: 'userEnrolledStore',
   default: {
-    plan: [],
-    design: [],
-    frontend: [],
-    backend: [],
+    plan: new Set(),
+    design: new Set(),
+    frontend: new Set(),
+    backend: new Set(),
   }
 });
 
-export const planStore = selector<User[]>({
+export const planStore = selector<Set<User>>({
   key: 'userEnrolled-plan',
   get: ({get}) => {
     const list = get(userEnrolledStore);
@@ -26,11 +26,11 @@ export const planStore = selector<User[]>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);    
-    set(userEnrolledStore, {...list, plan: newValue as User[]});
+    set(userEnrolledStore, {...list, plan: newValue as Set<User>});
   }
 });
 
-export const designStore = selector<User[]>({
+export const designStore = selector<Set<User>>({
   key: 'userEnrolled-design',
   get: ({get}) => {
     const list = get(userEnrolledStore);
@@ -39,11 +39,11 @@ export const designStore = selector<User[]>({
   ,
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, design: newValue as User[]});
+    set(userEnrolledStore, {...list, design: newValue as Set<User>});
   }
 });
 
-export const frontendStore = selector<User[]>({
+export const frontendStore = selector<Set<User>>({
   key: 'userEnrolled-frontend',
   get: ({get}) => {
     const list = get(userEnrolledStore);
@@ -51,12 +51,12 @@ export const frontendStore = selector<User[]>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, frontend: newValue as User[]});
+    set(userEnrolledStore, {...list, frontend: newValue as Set<User>});
   }
 });
 
 
-export const backendStore = selector<User[]>({
+export const backendStore = selector<Set<User>>({
   key: 'userEnrolled-backend',
   get: ({get}) => {
     const list = get(userEnrolledStore);
@@ -64,6 +64,6 @@ export const backendStore = selector<User[]>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, backend: newValue as User[]});
+    set(userEnrolledStore, {...list, backend: newValue as Set<User>});
   }
 });

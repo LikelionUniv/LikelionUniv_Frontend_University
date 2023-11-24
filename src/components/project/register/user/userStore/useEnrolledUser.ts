@@ -1,16 +1,17 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { User } from '../UserFind';
 
-import useArray from '../../../../../hooks/useArray';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { backendStore, designStore, frontendStore, planStore, userEnrolledStore } from '../../../../../store/projectUser';
+import { Member } from '../../ProjectRegister';
 
 interface RUseEnrolledUser {
   userLength: number
-  planUser: User[]
-  designUser: User[]
-  frontendUser: User[]
-  backendUser: User[]
+  userIdList: Member[]
+  planUser: Set<User>
+  designUser: Set<User>
+  frontendUser: Set<User>
+  backendUser: Set<User>
   enrollUser: (user: User) => void
   removePlanUser: (user: User) => void
   removeDesignUser: (user: User) => void
@@ -20,71 +21,57 @@ interface RUseEnrolledUser {
 
 function useEnrolledUser(): RUseEnrolledUser {
   const entire = useRecoilValue(userEnrolledStore);
-  const entireEnrolledUser = Object.values(entire).flatMap(user => user);
+  
+  const entireEnrolledUser: User[] = Object.values(entire).flatMap(user => Array.from(user));
   const userLength = entireEnrolledUser.length;
+  const userIdList: Member[] = entireEnrolledUser.map(user => {
+    return {id: user.id}
+  });
 
   const [plan, setPlan] = useRecoilState(planStore);
   const [design, setDesign] = useRecoilState(designStore);
   const [frontend, setFrontend] = useRecoilState(frontendStore);
   const [backend, setBackend] = useRecoilState(backendStore);
 
-  const {array: planUser, push: pushPlan, remove: removePlan} = useArray<User>([]);
-  const {array: designUser, push: pushDesign, remove: removeDesign} = useArray<User>([]);
-  const {array: frontendUser, push: pushFrontend, remove: removeFrontend} = useArray<User>([]);
-  const {array: backendUser, push: pushBackend, remove: removeBackend} = useArray<User>([]);
-
-  const isAlreadyEnroll = (userList: User[], user: User) => {   
-    return userList.find(enrolled => enrolled.id === user.id) !== undefined   
-  }    
-
   const enrollUser = useCallback((user: User) => {    
-    if (!isAlreadyEnroll(plan, user) && user.part === 'plan') {
-      pushPlan(user);
-    } else if (!isAlreadyEnroll(design, user) && user.part === 'design') {
-      pushDesign(user);
-    } else if (!isAlreadyEnroll(frontend, user) && user.part === 'frontend') {
-      pushFrontend(user);
-    } else if (!isAlreadyEnroll(backend, user) && user.part === 'backend') {
-      pushBackend(user);
+    if (user.part === 'plan') {
+      setPlan(prev => prev.add(user));
+    } else if (user.part === 'design') {
+      setDesign(prev => prev.add(user));
+    } else if (user.part === 'frontend') {
+      setFrontend(prev => prev.add(user));
+    } else if ( user.part === 'backend') {
+      setBackend(prev => prev.add(user));
     }
-  }, [plan, design, frontend, backend, pushPlan, pushDesign, pushFrontend, pushBackend]);
-
+  }, [setPlan, setDesign, setFrontend, setBackend]);
 
   const removePlanUser =  useCallback((user: User) => {
-      removePlan(planUser.findIndex(enrolled => enrolled === user));
-  }, [])
-
+    const newPlan = new Set(plan);
+    newPlan.delete(user);
+    setPlan(newPlan);
+  }, [plan, setPlan])
 
   const removeDesignUser = useCallback((user: User) => {
-      removeDesign(designUser.findIndex(enrolled => enrolled === user));
-  }, [])
+    const newDesign = new Set(design);
+    newDesign.delete(user);
+    setDesign(newDesign);
+  }, [design, setDesign])
 
   const removeFrontendUser = useCallback((user: User) => {
-      removeFrontend(frontendUser.findIndex(enrolled => enrolled === user));
-  }, [])
+    const newFrontend = new Set(frontend);
+    newFrontend.delete(user);
+    setFrontend(newFrontend);
+  }, [frontend, setFrontend])
 
   const removeBackendUser = useCallback((user: User) => {
-      removeBackend(backendUser.findIndex(enrolled => enrolled === user));
-  }, []);
-
-  useEffect(() => {
-    setPlan(planUser);
-  }, [planUser, setPlan]);
-
-  useEffect(() => {
-    setDesign(designUser);
-  }, [designUser, setDesign]);
-
-  useEffect(() => {
-    setFrontend(frontendUser)
-  }, [frontendUser, setFrontend]);
-
-  useEffect(() => {
-    setBackend(backendUser);
-  }, [backendUser, setBackend]);
+    const newBackend = new Set(backend);
+    newBackend.delete(user);
+    setBackend(newBackend);
+  }, [backend, setBackend]);
 
   return {
     userLength,
+    userIdList,
     planUser: plan,
     designUser: design,
     frontendUser: frontend,

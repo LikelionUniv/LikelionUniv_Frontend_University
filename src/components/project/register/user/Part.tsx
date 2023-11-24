@@ -5,7 +5,7 @@ import EachEnrolledUser from './EachEnrolledUser';
 
 interface IPart {
   name: string
-  user: User[]
+  user: Set<User>
   remove: (user: User) => void
 }
 
@@ -14,7 +14,7 @@ function Part({name, user, remove}: IPart) {
     <P.Container>
       <P.Title>{name}</P.Title>
       <P.List>
-        {user?.map(eachUser => (
+        {Array.from(user)?.map(eachUser => (
           <EachEnrolledUser key={eachUser.id} user={eachUser} remove={remove} />
         ))}
       </P.List>
