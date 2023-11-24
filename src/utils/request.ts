@@ -7,6 +7,14 @@ interface Irequest<T> {
   data?: T;
 }
 
+export interface Response<T> {
+  timestamp: string
+  isSuccess: boolean
+  code: string
+  message: string
+  data: T
+}
+
 async function request<T>({uri, method, data}: Irequest<T>) {
   const config: AxiosRequestConfig = {
     url: uri,
@@ -15,7 +23,7 @@ async function request<T>({uri, method, data}: Irequest<T>) {
   }
 
   try {
-    const response = await axiosInstance<T>(config);
+    const response = await axiosInstance<T, Response<T>>(config);    
     return response.data;
   } catch (error) {
     const errorMessage = (error as AxiosError).message;

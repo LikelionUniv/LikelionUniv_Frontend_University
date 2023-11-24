@@ -1,40 +1,88 @@
-export const thon = [
-    { value: 1, label: '아이디어톤' },
-    { value: 2, label: '해커톤' },
-    { value: 3, label: '각 개별 해커톤' },
-    { value: 4, label: '기타' },
-];
+import request, { Response } from "../../../utils/request"
 
-export const output = [
-    { value: 1, label: 'APP' },
-    { value: 2, label: 'WEB' },
-    { value: 3, label: '기타' },
-];
-
-export const genOptions: { value: number; label: string }[] = [];
-for (let i = 11; i >= 1; i--) {
-    genOptions.push({ value: i, label: `${i}기` });
+export interface IDropdown {
+  value: number
+  label: string
 }
 
-export const checkboxes = [
-    { id: 1, isChecked: false, label: 'JAVA' },
-    { id: 2, isChecked: false, label: 'JavaScript' },
-    { id: 3, isChecked: false, label: 'Spring' },
-    { id: 4, isChecked: false, label: 'HTML/CSS' },
-    { id: 5, isChecked: false, label: 'Oracle' },
-    { id: 6, isChecked: false, label: 'JQuery' },
-    { id: 7, isChecked: false, label: 'JSP' },
-    { id: 8, isChecked: false, label: 'Vue.js' },
-    { id: 9, isChecked: false, label: 'PHP' },
-    { id: 10, isChecked: false, label: 'MySQL' },
-    { id: 11, isChecked: false, label: 'React' },
-    { id: 12, isChecked: false, label: 'Spring Boot' },
-    { id: 13, isChecked: false, label: 'Swift' },
-    { id: 14, isChecked: false, label: 'Python' },
-    { id: 15, isChecked: false, label: 'Node.js' },
-    { id: 16, isChecked: false, label: 'C#' },
-    { id: 17, isChecked: false, label: 'React Native' },
-    { id: 18, isChecked: false, label: '전자정부프레임워크' },
-    { id: 19, isChecked: false, label: 'Kotlin' },
-    { id: 20, isChecked: false, label: 'MSSQL' },
-];
+interface ICheckbox {
+  id: number
+  isChecked: boolean
+  label: string
+}
+
+interface Universities {
+  name: string
+}
+
+export class Gen {
+  static loadAllGen(): IDropdown[] {
+    const genOptions: IDropdown[] = [];
+    
+    // 기수 2023년 기준 11기
+    const generate = new Date().getFullYear() - 2012;
+
+    Array.from({length: generate}).forEach((_, index) => {
+      genOptions.push({ value: index + 1, label: `${index + 1}기` })
+    });
+
+    genOptions.sort((a, b) => b.value-a.value);
+    return genOptions;
+  } 
+};
+
+export class Thon {
+  static loadThon(): IDropdown[] {
+    const labels = ['아이디어톤', '해커톤', '각 개별 해커톤', '기타'];
+    
+    const thon: IDropdown[] = labels.map((label, index) => (
+      {value: index + 1, label}
+    ));
+
+    return thon
+  }
+}
+
+export class Output {
+  static loadOutput(): IDropdown[] {
+    const labels = ['APP', 'WEB', '기타'];
+    
+    const output: IDropdown[] = labels.map((label, index) => (
+      {value: index + 1, label}
+    ));
+
+    return output
+  }
+}
+
+
+export class Tech { 
+  static loadTech(): ICheckbox[] {
+    const labels = ['JAVA', 'JavaScript', 'Spring', 'HTML/CSS', 'Oracle', 'JQuery', 'JSP', 'Vue.js', 'PHP', 'MySQL', 'React', 'Spring Boot', 'Swift', 'Python', 'Node.js', 'C#', 'React Native', '전자정부프레임워크', 'Kotlin', 'MSSQL'];
+    
+    const tech: ICheckbox[] = labels.map((label, index) => (
+      {id: index + 1, isChecked: false, label}
+    ));
+
+    return tech
+  }
+}
+
+export class Univ {
+  static async loadUniv(): Promise<IDropdown[]> {
+    const response = await request<Response<Universities[]>>({
+      uri: '/api/v1/project/university',
+      method: 'get',
+    });    
+
+    if (response === undefined) {
+      throw Error('조회 실패');
+    }
+
+    const universities: IDropdown[] = response.data.map((univ, index) => (
+      {value: index + 1, label: univ.name}
+    ));
+
+    return universities;
+  }
+}

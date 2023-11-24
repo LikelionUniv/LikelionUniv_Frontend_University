@@ -1,11 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
-import { axiosInstance } from "../utils/axios";
 import { AxiosError } from "axios";
 
 interface IuseFetch<T> {
-  uri: string
   initValue: T
+  asyncFunc: () => Promise<T>
 }
 
 interface RuseFetch<T> {
@@ -14,7 +13,7 @@ interface RuseFetch<T> {
   error: string
 }
 
-function useFetch<T>({uri, initValue}: IuseFetch<T>): RuseFetch<T> {
+function useFetch<T>({initValue, asyncFunc}: IuseFetch<T>): RuseFetch<T> {
   const [data, setData] = useState<T>(initValue);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -22,8 +21,8 @@ function useFetch<T>({uri, initValue}: IuseFetch<T>): RuseFetch<T> {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axiosInstance.get<T>(uri);
-      setData(response.data);
+      const response = await asyncFunc();
+      setData(response);
     } catch (error) {
       const errorMessage = (error as AxiosError).message;
       setError(errorMessage);
@@ -34,7 +33,7 @@ function useFetch<T>({uri, initValue}: IuseFetch<T>): RuseFetch<T> {
 
   useEffect(() => {
     fetchData();
-  }, [uri]);
+  }, []);
 
   return {
     data,

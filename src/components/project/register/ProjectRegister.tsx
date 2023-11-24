@@ -5,10 +5,8 @@ import Hyphen from '../../../img/project/hyphen.svg';
 import Cancel from '../../../img/project/cancel.svg';
 import Vertical from '../../../img/project/vertical.svg';
 import FirstVertical from '../../../img/project/firstVertical.svg';
-import { checkboxes, genOptions, output, thon } from './RegisterOptions';
 import { ActionMeta } from 'react-select';
 import DropDown, { OptionType } from './DropDown';
-import SchoolDropDown from './SchoolDropDown';
 import Checkbox from './Checkbox';
 import useCheckbox from './useCheckbox';
 
@@ -17,6 +15,8 @@ import useArray from '../../../hooks/useArray';
 import UserFind from './user/UserFind';
 import UserEnrolled from './user/UserEnrolled';
 import useEnrolledUser from './user/userStore/useEnrolledUser';
+import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
+import useFetch from '../../../hooks/useFetch';
 
 /* form type */
 interface FormState {
@@ -137,7 +137,7 @@ const ProjectRegister = () => {
         
     };
 
-    const { checkboxList, checkHandler } = useCheckbox(checkboxes);
+    const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
     const [etcCheck, setEtcCheck] = useState<boolean>(false);
 
     // 체크박스 선택을 관리하는 함수
@@ -198,6 +198,12 @@ const ProjectRegister = () => {
             images: images,
         }));
     }, [images]);
+
+    // 학교 목록을 불러오는 api
+    const {data: univList} = useFetch<IDropdown[]>({
+        initValue: [],
+        asyncFunc: Univ.loadUniv
+    });
 
     useEffect(() => {
         if (
@@ -277,7 +283,7 @@ const ProjectRegister = () => {
                     <P.Label>활동유형</P.Label>
                     <DropDown
                         placeholder="활동 선택"
-                        options={thon}
+                        options={Thon.loadThon()}
                         onChange={handleSelectChange('thon')}
                     />
                     {activeThonEtc ? (
@@ -295,7 +301,7 @@ const ProjectRegister = () => {
                     <P.Label>아웃풋 형태</P.Label>
                     <DropDown
                         placeholder="아웃풋 형태 선택"
-                        options={output}
+                        options={Output.loadOutput()}
                         onChange={handleSelectChange('outPut')}
                     />
                     {activeOutPutEtc ? (
@@ -429,11 +435,13 @@ const ProjectRegister = () => {
                     <P.FlexField>
                         <DropDown
                             placeholder="기수 선택"
-                            options={genOptions}
+                            options={Gen.loadAllGen()}
                             onChange={handleSelectChange('generation')}
                         />
                         <P.Gap />
-                        <SchoolDropDown
+                        <DropDown
+                            placeholder='학교 선택'
+                            options={univList}
                             onChange={handleSelectChange('university')}
                         />
                     </P.FlexField>
