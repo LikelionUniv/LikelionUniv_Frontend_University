@@ -3,11 +3,10 @@ import { User } from '../UserFind';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { backendStore, designStore, frontendStore, planStore, userEnrolledStore } from '../../../../../store/projectUser';
-import { Member } from '../../ProjectRegister';
 
 interface RUseEnrolledUser {
   userLength: number
-  userIdList: Member[]
+  userIdList: number[]
   planUser: Set<User>
   designUser: Set<User>
   frontendUser: Set<User>
@@ -24,9 +23,7 @@ function useEnrolledUser(): RUseEnrolledUser {
   
   const entireEnrolledUser: User[] = Object.values(entire).flatMap(user => Array.from(user));
   const userLength = entireEnrolledUser.length;
-  const userIdList: Member[] = entireEnrolledUser.map(user => {
-    return {id: user.id}
-  });
+  const userIdList: number[] = entireEnrolledUser.map(user => user.id);
 
   const [plan, setPlan] = useRecoilState(planStore);
   const [design, setDesign] = useRecoilState(designStore);

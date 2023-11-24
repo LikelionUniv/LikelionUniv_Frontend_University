@@ -35,7 +35,7 @@ interface FormState {
     images: string[];
     generation: number;
     university: string;
-    members: Member[];
+    members: number[];
 }
 
 interface ProjectRegisterType {
@@ -51,11 +51,7 @@ interface ProjectRegisterType {
     content: string
     projectUrl: string
     images: string[]
-    members: Member[]
-}
-
-export interface Member {
-    id: number
+    members: number[]
 }
 
 const ProjectRegister = () => {
