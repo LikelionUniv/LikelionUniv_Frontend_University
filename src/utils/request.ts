@@ -1,5 +1,5 @@
 import { axiosInstance } from './axios';
-import { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 interface Irequest<T> {
   uri: string;
@@ -7,12 +7,20 @@ interface Irequest<T> {
   data?: T;
 }
 
-export interface Response<T> {
+interface IResponse<T> {
   timestamp: string
   isSuccess: boolean
   code: string
   message: string
   data: T
+}
+
+interface IError {
+  timestamp: string
+  isSuccess: boolean
+  code: string
+  message: string
+  httpStatus: number
 }
 
 async function request<T>({uri, method, data}: Irequest<T>) {
@@ -23,11 +31,15 @@ async function request<T>({uri, method, data}: Irequest<T>) {
   }
 
   try {
-    const response = await axiosInstance<T, Response<T>>(config);    
+    const response = await axiosInstance<T, AxiosResponse<IResponse<T>>>(config);    
     return response.data;
   } catch (error) {
-    const errorMessage = (error as AxiosError).message;
-    alert(errorMessage);
+    if (axios.isAxiosError(error)) {
+      const serverError = error as AxiosError<IError>;
+      if (serverError && serverError.response) {
+        alert(serverError.response.data.message);
+      }
+    }
   }
 }
 
