@@ -5,6 +5,9 @@ import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { LoginComplete } from '../login/LoginComplete';
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -90,6 +93,34 @@ const Sform = () => {
             }
         };
 
+
+    const {provider} = useParams();
+    const [isSuccess , updateIsSuccess] = useState<boolean>(false);
+
+    const requestSignup = async () =>{
+        const idtoken = localStorage.getItem('idtoken');
+        
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+            formState,
+             {
+                withCredentials : true,
+            });
+            
+            //응답 성공 시
+            if(response.data.isSuccess){
+                localStorage.removeItem('idtoken');
+                updateIsSuccess(true);
+            }
+            else {
+                alert("서버 통신 오류! 다시 시도해주세요!");
+            }
+        }
+        catch(error) {
+            console.error("요청 실패" , error);
+        }
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // 모든 필드 완성되었는지 검사하는 로직 추가함
@@ -105,11 +136,14 @@ const Sform = () => {
         else {
             /* button click으로 해서 정보 저장됨 확인 */
             console.log(formState);
+            requestSignup();
         }
     };
 
     return (
         <>
+        {
+        !isSuccess?
             <form className="formDiv">
                 <div className="Stitle">내 정보</div>
                 <Ndiv>이름</Ndiv>
@@ -133,34 +167,13 @@ const Sform = () => {
                         })
                     }
                 />
-
-                {/* <div className="SformDiv">
-                    <div className="SfromDiv2">
-                        <Ndiv>기수</Ndiv>
-                        <DropDown
-                            options={genOptions}
-                            onChange={handleSelectChange('generation')}
-                        />
-                    </div>
-                    <div className="SfromDiv2">
-                        <Ndiv>역할</Ndiv>
-                        <DropDown
-                            options={roleOptions}
-                            onChange={handleSelectChange('role')}
-                        />
-                    </div>
-                    <div className="SfromDiv2">
-                        <Ndiv>트랙</Ndiv>
-                        <DropDown
-                            options={trackOptions}
-                            onChange={handleSelectChange('track')}
-                        />
-                    </div>
-                </div> */}
                 <button className="saveBtn" onClick={handleSubmit}>
                     저장하기
                 </button>
             </form>
+            :
+            <LoginComplete/>
+        }
         </>
     );
 };
