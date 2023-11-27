@@ -15,3 +15,12 @@ export interface PostCardProp {
     like: number;
     comment: number;
 }
+
+export interface PostCardPropType extends PostCardProp {
+    type: string;
+}
+
+export type OptionType = {
+    value: number;
+    label: string;
+};

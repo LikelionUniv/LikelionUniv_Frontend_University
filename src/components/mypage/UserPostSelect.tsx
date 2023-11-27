@@ -6,6 +6,13 @@ import Pagination from './Pagination';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import { PostTestData, ProjectTestData } from './TestData';
 import { PostCardProp, ProjectCardProp } from './type';
+import {
+    SearchAndSortWrapper,
+    SearchBoxWrapper,
+    SearchInput,
+    SearchSVG,
+} from './LikeCompoStyle';
+import SortBox from './SortBox';
 
 const UserPostSelect = () => {
     //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
@@ -55,6 +62,15 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
+            {select === '좋아요' ? (
+                <SearchAndSortWrapper>
+                    <SearchBoxWrapper>
+                        <SearchInput type="text" placeholder="검색" />
+                        <SearchSVG></SearchSVG>
+                    </SearchBoxWrapper>
+                    <SortBox />
+                </SearchAndSortWrapper>
+            ) : null}
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
@@ -83,6 +99,7 @@ const UserPostSelect = () => {
                                         content={e.content}
                                         like={e.like}
                                         comment={e.comment}
+                                        type={select}
                                     />
                                 );
                             } else {
@@ -94,6 +111,7 @@ const UserPostSelect = () => {
                                         content={e.content}
                                         like={e.like}
                                         comment={e.comment}
+                                        type={select}
                                     />
                                 );
                             }
@@ -155,7 +173,6 @@ const SelectBorder = styled.div`
     }
 `;
 
-//나중에 이 파트는 분리될 예정(현재는 상태관리 라이브러리가 없어서 이 방식으로 해야됨)
 const PostBoxWrapper = styled.div`
     display: flex;
     align-items: flex-start;
@@ -165,18 +182,34 @@ const PostBoxWrapper = styled.div`
     margin: 40.5px 0px 80px;
     @media (max-width: 1920px) {
         width: 1200px;
-        height: 876px;
+        height: 748px;
     }
     @media (max-width: 1280px) {
+        //1025px을 기준으로 퍼센트를 잡음 두 사이즈간의 일정적인 퍼센트가 안나오기 때문
         width: 100%;
-        height: 876px;
+        height: calc((652 / 1025) * 100vw);
     }
     @media (max-width: 1024px) {
+        //768px을 기준으로 퍼센트를 잡았습니다.
         width: 100%;
-        height: 1512px;
+        height: calc((1047 / 768) * 100vw);
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         width: 100%;
-        height: 1263px;
+        height: calc((779 / 480) * 100vw);
+        margin: 20px 0px 64px;
+        gap: 20px 2%;
+    }
+    @media (max-width: 479px) {
+        width: 100%;
+        height: 1754px;
+        margin: 20px 0px 64px;
+        gap: 40px 0px;
+    }
+    @media (max-width: 360px) {
+        width: 100%;
+        height: 1946px;
+        margin: 20px 0px 64px;
+        gap: 40px 0px;
     }
 `;
