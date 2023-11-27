@@ -1,4 +1,8 @@
-import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
+import {
+    PostCardBox,
+    PostCardBoxWrapper,
+    ProjectBoxWrapper,
+} from './PostCardStyle';
 import { PostCardPropType } from './type';
 import PostModal from './PostModal';
 

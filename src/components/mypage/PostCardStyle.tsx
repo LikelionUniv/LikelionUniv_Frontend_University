@@ -16,6 +16,7 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
     background: var(--Grey-100, #f6f8f9);
     flex-shrink: 0;
     position: relative;
+    box-sizing: border-box;
     @media (max-width: 1920px) {
         width: 384px;
         height: 362px;
@@ -52,6 +53,32 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
         @media (max-width: 1920px) {
             padding: 0px;
         }
+    }
+`;
+
+export const ProjectBoxWrapper = styled.div`
+    flex-shrink: 0;
+    padding-bottom: 16px;
+    position: relative;
+    @media (max-width: 1920px) {
+        width: 384px;
+        height: 346px;
+    }
+    @media (max-width: 1280px) {
+        width: 31.6%;
+        height: calc(50% - 12px);
+    }
+    @media (max-width: 1024px) {
+        width: calc(50% - 12px);
+        height: 31.6%;
+    }
+    @media (max-width: 479px) {
+        width: 100%;
+        height: 358px;
+    }
+    @media (max-width: 360px) {
+        width: 100%;
+        height: 291px;
     }
 `;
 

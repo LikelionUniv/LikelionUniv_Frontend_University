@@ -1,6 +1,7 @@
 import dot from '../../img/mypage/dot.svg';
 import { styled } from 'styled-components';
 import { ProjectCardProp } from './type';
+import { ProjectBoxWrapper } from './PostCardStyle';
 
 const ProjectCard = (props: ProjectCardProp) => {
     return (
@@ -27,32 +28,6 @@ const ProjectCard = (props: ProjectCardProp) => {
 };
 
 export default ProjectCard;
-
-const ProjectBoxWrapper = styled.div`
-    flex-shrink: 0;
-    padding-bottom: 16px;
-    position: relative;
-    @media (max-width: 1920px) {
-        width: 384px;
-        height: 346px;
-    }
-    @media (max-width: 1280px) {
-        width: 31.6%;
-        height: calc(50% - 12px);
-    }
-    @media (max-width: 1024px) {
-        width: calc(50% - 12px);
-        height: 31.6%;
-    }
-    @media (max-width: 479px) {
-        width: 100%;
-        height: 358px;
-    }
-    @media (max-width: 360px) {
-        width: 100%;
-        height: 291px;
-    }
-`;
 
 const ProjectBox = styled.div`
     width: 100%;

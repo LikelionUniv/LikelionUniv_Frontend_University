@@ -38,6 +38,7 @@ export const SearchBoxWrapper = styled.div`
     border-radius: 6px;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     @media (max-width: 1024px) {
         width: 586px;
     }

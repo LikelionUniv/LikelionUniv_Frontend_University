@@ -13,6 +13,7 @@ import {
     SearchSVG,
 } from './LikeCompoStyle';
 import SortBox from './SortBox';
+import { PostCardBoxWrapper } from './PostCardStyle';
 
 const UserPostSelect = () => {
     //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
@@ -148,6 +149,7 @@ const ButtonSelectWrapper = styled.div`
         height: 40px;
         padding: 5px 0px;
         color: var(--Grey-600, #adb3ba);
+        border: none;
         text-align: center;
         font-size: 20px;
         font-weight: 700;
