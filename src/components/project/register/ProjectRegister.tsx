@@ -17,6 +17,7 @@ import UserEnrolled from './user/UserEnrolled';
 import useEnrolledUser from './user/userStore/useEnrolledUser';
 import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
 import useFetch from '../../../hooks/useFetch';
+import request from '../../../utils/request';
 
 /* form type */
 interface FormState {
@@ -25,10 +26,10 @@ interface FormState {
     outPut: string;
     outPutEtc: string;
     serviceName: string;
-    ordinal: number;
+    ordinal: string;
     univ: string;
-    startDate: Date | null;
-    endDate: Date | null;
+    startDate: string
+    endDate: string
     projectTeches: string[];
     projectTechEtc: string;
     description: string;
@@ -65,15 +66,15 @@ const ProjectRegister = () => {
         outPut: '',
         outPutEtc: '',
         serviceName: '',
-        startDate: null,
-        endDate: null,
+        startDate: '',
+        endDate: '',
         projectTeches: [],
         projectTechEtc: '',
         description: '',
         content: '',
         productionUrl: '',
         imageUrl: images,
-        ordinal: 0,
+        ordinal: '',
         univ: '',
         members: memberIdList,
     });
@@ -115,21 +116,71 @@ const ProjectRegister = () => {
             [field]: event.target.value,
         }));
 
+    const processActivityEtc = (): string => {
+        if (activeThonEtc) {
+            return formState.activityEtc;
+        }
+
+        return formState.activity;
+    }
+
+    const processOutputEtc = (): string => {
+        if (activeOutPutEtc) {
+            return formState.outPutEtc;
+        }
+
+        return formState.outPut;
+    }
+
+    const processOrdinal = (): number => {
+        return Number(formState.ordinal.slice(0, -1));
+    }
+
+    const processTech = (): string => {
+        if (etcCheck) {
+            const teches = [...formState.projectTeches, formState.projectTechEtc];
+            return teches.filter((tech) => tech !== '').join(',');
+        }
+
+        return [...formState.projectTeches].join(',');
+    }
+
+    // 이거만 해결되면 끝날텐데...
+    const processSendData = (): FormData => {     
+        const formData = new FormData();
+
+        formData.append('activity', processActivityEtc());
+        formData.append('outPut', processOutputEtc());
+        formData.append('serviceName', formState.serviceName);
+        formData.append('ordinal', processOrdinal().toString());
+        formData.append('univ', formState.univ);
+        formData.append('startDate', formState.startDate);
+        formData.append('endDate', formState.endDate);
+        formData.append('description', formState.description);
+        formData.append('content', formState.content);
+        formData.append('productionUrl', formState.productionUrl);
+        formData.append('projectTeches', processTech());
+        images.forEach(image => {
+            formData.append('images', image);
+        });
+        formData.append('members', memberIdList.join(','));
+
+        return formData
+    }
+
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
-        console.log(formState);
-        // const data = {}
-
-        // // 전송 코드
-        // const response = await request<ProjectRegisterType>({
-        //     uri: '/api/v1/project/post',
-        //     method: 'post',
-        //     data
-        // });
-        // console.log(response);
+        const data = processSendData()
+        
+        const response = await request<FormData, number, null>({
+            uri: '/api/v1/project/post/',
+            method: 'post',
+            data
+        });
+        alert(response?.data);
         
     };
 
@@ -201,18 +252,19 @@ const ProjectRegister = () => {
         asyncFunc: Univ.loadUniv
     });
 
-    useEffect(() => {
+    useEffect(() => {                
         if (
             formState.imageUrl.length === 0 ||
             formState.activity === '' ||
             formState.outPut === '' ||
-            formState.startDate === null ||
-            formState.endDate === null ||
+            formState.startDate === '' ||
+            formState.endDate === '' ||
             formState.serviceName === '' ||
             formState.description === '' ||
             formState.content === '' ||
             formState.projectTeches.length === 0 ||
-            formState.ordinal === 0 ||
+            formState.productionUrl === '' ||
+            formState.ordinal === '' ||
             formState.univ === '' ||
             memberLength === 0 ||
             (formState.activity === '기타' && formState.activityEtc === '') ||
@@ -224,10 +276,6 @@ const ProjectRegister = () => {
             setIsFill(true);
         }
     }, [formState, etcCheck, memberLength]);
-
-    useEffect(() => {
-        console.log(formState);
-    }, [formState])
 
     return (
         <P.Container>
@@ -289,6 +337,7 @@ const ProjectRegister = () => {
                     {activeThonEtc ? (
                         <P.Input
                             type="text"
+                            className='etc'
                             placeholder="활동 이름을 입력해주세요."
                             value={formState.activityEtc}
                             onChange={event =>
@@ -307,6 +356,7 @@ const ProjectRegister = () => {
                     {activeOutPutEtc ? (
                         <P.Input
                             type="text"
+                            className='etc'
                             placeholder="아웃풋 형태를 입력해주세요."
                             value={formState.outPutEtc}
                             onChange={event =>
@@ -422,6 +472,7 @@ const ProjectRegister = () => {
                     {etcCheck ? (
                         <P.Input
                             type="text"
+                            className='etc'
                             placeholder="기술 스택을 입력해주세요."
                             value={formState.projectTechEtc}
                             onChange={event =>

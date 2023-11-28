@@ -305,6 +305,10 @@ export const Input = styled.input`
     &:focus {
         border: 1px solid var(--orange-600, #ff7710);
     }
+
+    &.etc {
+        margin-top: 8px;
+    }
 `;
 
 export const RegisterBtn = styled.button<{ active: boolean }>`
