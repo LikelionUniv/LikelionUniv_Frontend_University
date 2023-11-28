@@ -125,6 +125,33 @@ function Footer(): JSX.Element {
                                 지정기탁신청서 <DownloadIcon />
                             </div>
                         </div>
+                        <div className="section">
+                            <div className="title">관련사이트</div>
+                            <a
+                                href="https://www.acrc.go.kr/"
+                                target="_blank"
+                                className="link text"
+                                rel="noreferrer"
+                            >
+                                국민권익위원회 <ArrowIcon />
+                            </a>
+                            <a
+                                href="https://www.moj.go.kr/"
+                                target="_blank"
+                                className="link text"
+                                rel="noreferrer"
+                            >
+                                법무부 <ArrowIcon />
+                            </a>
+                            <a
+                                href="https://www.nts.go.kr/"
+                                target="_blank"
+                                className="link text"
+                                rel="noreferrer"
+                            >
+                                국세청 <ArrowIcon />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </F.Info>
