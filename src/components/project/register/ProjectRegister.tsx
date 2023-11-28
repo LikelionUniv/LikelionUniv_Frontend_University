@@ -28,8 +28,8 @@ interface FormState {
     serviceName: string;
     ordinal: string;
     univ: string;
-    startDate: string
-    endDate: string
+    startDate: string;
+    endDate: string;
     projectTeches: string[];
     projectTechEtc: string;
     description: string;
@@ -40,25 +40,30 @@ interface FormState {
 }
 
 interface ProjectRegisterType {
-    activity: string
-    outPut: string
-    serviceName: string
-    ordinal: number
-    univ: string
-    startDate: string
-    endDate: string
-    description: string
-    content: string
-    productionUrl: string
-    projectTeches: string
-    imageUrl: string[]
-    members: number[]
+    activity: string;
+    outPut: string;
+    serviceName: string;
+    ordinal: number;
+    univ: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    content: string;
+    productionUrl: string;
+    projectTeches: string;
+    imageUrl: string[];
+    members: number[];
+}
+
+interface PostId {
+    id: number;
 }
 
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<string>([]); // image 배열
-    const {userLength: memberLength, userIdList: memberIdList} = useEnrolledUser();
+    const { userLength: memberLength, userIdList: memberIdList } =
+        useEnrolledUser();
 
     const [formState, setFormState] = useState<FormState>({
         activity: '',
@@ -122,7 +127,7 @@ const ProjectRegister = () => {
         }
 
         return formState.activity;
-    }
+    };
 
     const processOutputEtc = (): string => {
         if (activeOutPutEtc) {
@@ -130,58 +135,76 @@ const ProjectRegister = () => {
         }
 
         return formState.outPut;
-    }
+    };
 
     const processOrdinal = (): number => {
         return Number(formState.ordinal.slice(0, -1));
-    }
+    };
 
     const processTech = (): string => {
         if (etcCheck) {
-            const teches = [...formState.projectTeches, formState.projectTechEtc];
-            return teches.filter((tech) => tech !== '').join(',');
+            const teches = [
+                ...formState.projectTeches,
+                formState.projectTechEtc,
+            ];
+            return teches.filter(tech => tech !== '').join(',');
         }
 
         return [...formState.projectTeches].join(',');
-    }
+    };
 
     // 이거만 해결되면 끝날텐데...
-    const processSendData = (): FormData => {     
-        const formData = new FormData();
+    const processSendData = (): ProjectRegisterType => {
+        // const formData = new FormData();
 
-        formData.append('activity', processActivityEtc());
-        formData.append('outPut', processOutputEtc());
-        formData.append('serviceName', formState.serviceName);
-        formData.append('ordinal', processOrdinal().toString());
-        formData.append('univ', formState.univ);
-        formData.append('startDate', formState.startDate);
-        formData.append('endDate', formState.endDate);
-        formData.append('description', formState.description);
-        formData.append('content', formState.content);
-        formData.append('productionUrl', formState.productionUrl);
-        formData.append('projectTeches', processTech());
-        images.forEach(image => {
-            formData.append('images', image);
-        });
-        formData.append('members', memberIdList.join(','));
+        // formData.append('activity', processActivityEtc());
+        // formData.append('outPut', processOutputEtc());
+        // formData.append('serviceName', formState.serviceName);
+        // formData.append('ordinal', processOrdinal().toString());
+        // formData.append('univ', formState.univ);
+        // formData.append('startDate', formState.startDate);
+        // formData.append('endDate', formState.endDate);
+        // formData.append('description', formState.description);
+        // formData.append('content', formState.content);
+        // formData.append('productionUrl', formState.productionUrl);
+        // formData.append('projectTeches', processTech());
+        // images.forEach(image => {
+        //     formData.append('imageUrl', image);
+        // });
+        // formData.append('members', memberIdList.join(','));
 
-        return formData
-    }
+        // return formData
+
+        return {
+            activity: processActivityEtc(),
+            outPut: processOutputEtc(),
+            serviceName: formState.serviceName,
+            ordinal: processOrdinal(),
+            univ: formState.univ,
+            startDate: formState.startDate,
+            endDate: formState.endDate,
+            description: formState.description,
+            content: formState.content,
+            productionUrl: formState.productionUrl,
+            projectTeches: processTech(),
+            imageUrl: formState.imageUrl,
+            members: memberIdList,
+        };
+    };
 
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
-        const data = processSendData()
-        
-        const response = await request<FormData, number, null>({
+        const data = processSendData();
+
+        const response = await request<ProjectRegisterType, PostId, null>({
             uri: '/api/v1/project/post/',
             method: 'post',
-            data
+            data,
         });
         alert(response?.data);
-        
     };
 
     const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
@@ -247,12 +270,12 @@ const ProjectRegister = () => {
     }, [images]);
 
     // 학교 목록을 불러오는 api
-    const {data: univList} = useFetch<IDropdown[]>({
+    const { data: univList } = useFetch<IDropdown[]>({
         initValue: [],
-        asyncFunc: Univ.loadUniv
+        asyncFunc: Univ.loadUniv,
     });
 
-    useEffect(() => {                
+    useEffect(() => {
         if (
             formState.imageUrl.length === 0 ||
             formState.activity === '' ||
@@ -337,7 +360,7 @@ const ProjectRegister = () => {
                     {activeThonEtc ? (
                         <P.Input
                             type="text"
-                            className='etc'
+                            className="etc"
                             placeholder="활동 이름을 입력해주세요."
                             value={formState.activityEtc}
                             onChange={event =>
@@ -356,7 +379,7 @@ const ProjectRegister = () => {
                     {activeOutPutEtc ? (
                         <P.Input
                             type="text"
-                            className='etc'
+                            className="etc"
                             placeholder="아웃풋 형태를 입력해주세요."
                             value={formState.outPutEtc}
                             onChange={event =>
@@ -472,7 +495,7 @@ const ProjectRegister = () => {
                     {etcCheck ? (
                         <P.Input
                             type="text"
-                            className='etc'
+                            className="etc"
                             placeholder="기술 스택을 입력해주세요."
                             value={formState.projectTechEtc}
                             onChange={event =>
@@ -491,7 +514,7 @@ const ProjectRegister = () => {
                         />
                         <P.Gap />
                         <DropDown
-                            placeholder='학교 선택'
+                            placeholder="학교 선택"
                             options={univList}
                             onChange={handleSelectChange('univ')}
                         />
