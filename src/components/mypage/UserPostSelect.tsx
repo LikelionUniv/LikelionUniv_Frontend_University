@@ -13,7 +13,6 @@ import {
     SearchSVG,
 } from './LikeCompoStyle';
 import SortBox from './SortBox';
-import { PostCardBoxWrapper } from './PostCardStyle';
 
 const UserPostSelect = () => {
     //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
@@ -21,6 +20,11 @@ const UserPostSelect = () => {
     const [postTestData, setPostTestData] = useState<Array<PostCardProp>>([]);
     const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
     const [select, setSelect] = useState<string>('게시글');
+    //혹시 모르니 추가된 것들
+    const [searchValue, setSearchValue] = useState<string>('');
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchValue(e.target.value);
+    };
     const optionClickFn = (option: string) => {
         setSelect(option);
         //나중에 해당 option에 따른 api호출을 해야되므로 따로 함수로 분리
@@ -44,6 +48,9 @@ const UserPostSelect = () => {
             );
         }
     }, [select, page]);
+    useEffect(() => {
+        setSearchValue('');
+    }, [select]);
 
     return (
         <>
@@ -63,7 +70,19 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
-            {select === '좋아요' ? (
+            <SearchAndSortWrapper>
+                <SearchBoxWrapper>
+                    <SearchInput
+                        type="text"
+                        placeholder="검색"
+                        onChange={handleInputChange}
+                        value={searchValue}
+                    />
+                    <SearchSVG></SearchSVG>
+                </SearchBoxWrapper>
+                <SortBox select={select} />
+            </SearchAndSortWrapper>
+            {/* {select === '좋아요' ? (
                 <SearchAndSortWrapper>
                     <SearchBoxWrapper>
                         <SearchInput type="text" placeholder="검색" />
@@ -71,7 +90,7 @@ const UserPostSelect = () => {
                     </SearchBoxWrapper>
                     <SortBox />
                 </SearchAndSortWrapper>
-            ) : null}
+            ) : null} */}
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
@@ -205,12 +224,14 @@ const PostBoxWrapper = styled.div`
     @media (max-width: 479px) {
         width: 100%;
         height: 1754px;
+        /* height: calc((3.66) * 479px); */
         margin: 20px 0px 64px;
         gap: 40px 0px;
     }
     @media (max-width: 360px) {
         width: 100%;
         height: 1946px;
+        /* height: calc((5.4) * 360px); */
         margin: 20px 0px 64px;
         gap: 40px 0px;
     }

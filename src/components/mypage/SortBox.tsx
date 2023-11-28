@@ -1,6 +1,11 @@
 import Select, { components } from 'react-select';
 import { OptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
+import { useEffect, useState } from 'react';
+
+interface SortType {
+    select: string;
+}
 
 const options: OptionType[] = [
     { value: 1, label: '최신순' },
@@ -8,8 +13,18 @@ const options: OptionType[] = [
     { value: 3, label: '댓글순' },
 ];
 
-const SortBox = () => {
+const SortBox = (props: SortType) => {
+    const [selectedOption, setSelectedOption] = useState<OptionType | null>(
+        null,
+    );
+
+    useEffect(() => {
+        setSelectedOption(null);
+    }, [props.select]);
+
     const handleSortChange = (selectedOption: OptionType | null) => {
+        setSelectedOption(selectedOption); // 선택된 값을 상태로 업데이트합니다.
+
         if (!selectedOption) return;
 
         switch (selectedOption.value) {
@@ -45,9 +60,10 @@ const SortBox = () => {
     };
 
     return (
-        <div>
+        <>
             <Select
                 options={options}
+                value={selectedOption}
                 styles={orderStyle}
                 isSearchable={false}
                 placeholder="최신순"
@@ -56,7 +72,7 @@ const SortBox = () => {
                 onChange={handleSortChange}
                 blurInputOnSelect={true}
             />
-        </div>
+        </>
     );
 };
 
@@ -66,25 +82,29 @@ const orderStyle = {
     indicatorSeparator: () => ({
         backgroundColor: 'transparent',
     }),
-    valueContainer: () => ({
-        display: 'flex',
-    }),
+    // valueContainer: () => ({
+    //     display: 'flex',
+    // }),
     placeholder: () => ({
         color: 'var(--Grey-900, #212224)',
         fontSize: '16px',
+        marginTop: '-20px',
     }),
     control: (provided: any, state: any) => ({
         ...provided,
-        paddingLeft: '12px',
+        paddingLeft: '2px',
         fontFamily: 'Pretendard',
         fontSize: '16px',
         fontWeight: '500',
         border: '1px solid var(--grey-400, #DCDFE3)',
-        width: state.isFocused ? '100px' : '100px',
+        width: state.isFocused ? '106px' : '106px',
         height: state.isFocused ? '40px' : '40px',
         borderRadius: '6px',
         backgroundColor: 'white',
         boxShadow: '0 0 0 0px transparent',
+        display: 'inline-flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         '&:hover': {
             border: '1px solid var(--grey-400, #DCDFE3)',
         },
