@@ -18,6 +18,20 @@ export const userEnrolledStore = atom<IUserEnrolledStore>({
   }
 });
 
+const deleteDuplicateUser = (list: Set<User>) => {
+  const uniqueIds = new Set<number>();
+  const uniqueUsers: User[] = [];
+
+  for (const user of Array.from(list)) {
+    if (!uniqueIds.has(user.userId)) {
+      uniqueIds.add(user.userId);
+      uniqueUsers.push(user);
+    }
+  }
+
+  return new Set(uniqueUsers)
+}
+
 export const planStore = selector<Set<User>>({
   key: 'userEnrolled-plan',
   get: ({get}) => {
@@ -26,7 +40,8 @@ export const planStore = selector<Set<User>>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);    
-    set(userEnrolledStore, {...list, plan: newValue as Set<User>});
+    const uniqueUsers = deleteDuplicateUser(newValue as Set<User>);
+    set(userEnrolledStore, {...list, plan: uniqueUsers});
   }
 });
 
@@ -35,11 +50,11 @@ export const designStore = selector<Set<User>>({
   get: ({get}) => {
     const list = get(userEnrolledStore);
     return list.design;
-  }
-  ,
+  },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, design: newValue as Set<User>});
+    const uniqueUsers = deleteDuplicateUser(newValue as Set<User>);
+    set(userEnrolledStore, {...list, design: uniqueUsers});
   }
 });
 
@@ -51,7 +66,8 @@ export const frontendStore = selector<Set<User>>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, frontend: newValue as Set<User>});
+    const uniqueUsers = deleteDuplicateUser(newValue as Set<User>);
+    set(userEnrolledStore, {...list, frontend: uniqueUsers});
   }
 });
 
@@ -64,6 +80,7 @@ export const backendStore = selector<Set<User>>({
   },
   set: ({get, set}, newValue) => {
     const list = get(userEnrolledStore);
-    set(userEnrolledStore, {...list, backend: newValue as Set<User>});
+    const uniqueUsers = deleteDuplicateUser(newValue as Set<User>);
+    set(userEnrolledStore, {...list, backend: uniqueUsers});
   }
 });

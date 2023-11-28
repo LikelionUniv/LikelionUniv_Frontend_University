@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import { User, partName } from './UserFind';
+import { User } from './UserFind';
 
 const Element = styled.div`
   width: 99%;
@@ -36,11 +36,11 @@ function EachSearchUser({user, selectMember}: IEachSearchUser) {
   }
 
   const showUserInfo = () => {
-    return `${user.name} (${user.univ}, ${user.ordinary}기, ${partName[user.part]})`;
+    return `${user.name} (${user.universityName}, ${user.ordinal}기, ${user.part})`;
   }
 
   return (
-    <Element key={user.id} onClick={onSelect}>{showUserInfo()}</Element>
+    <Element key={user.userId} onClick={onSelect}>{showUserInfo()}</Element>
   )
 }
 

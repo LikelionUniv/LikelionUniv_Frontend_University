@@ -23,7 +23,7 @@ function useEnrolledUser(): RUseEnrolledUser {
   
   const entireEnrolledUser: User[] = Object.values(entire).flatMap(user => Array.from(user));  
   const userLength = entireEnrolledUser.length;
-  const userIdList: number[] = entireEnrolledUser.map(user => user.id);
+  const userIdList: number[] = entireEnrolledUser.map(user => user.userId);
 
   const [plan, setPlan] = useRecoilState(planStore);
   const [design, setDesign] = useRecoilState(designStore);
@@ -31,13 +31,13 @@ function useEnrolledUser(): RUseEnrolledUser {
   const [backend, setBackend] = useRecoilState(backendStore);
 
   const enrollUser = useCallback((user: User) => {    
-    if (user.part === 'plan') {
+    if (user.part === '기획') {
       setPlan(prev => prev.add(user));
-    } else if (user.part === 'design') {
+    } else if (user.part === '디자인') {
       setDesign(prev => prev.add(user));
-    } else if (user.part === 'frontend') {
+    } else if (user.part === '프론트엔드') {
       setFrontend(prev => prev.add(user));
-    } else if ( user.part === 'backend') {
+    } else if ( user.part === '백엔드') {
       setBackend(prev => prev.add(user));
     }
   }, [setPlan, setDesign, setFrontend, setBackend]);

@@ -15,7 +15,7 @@ function Part({name, user, remove}: IPart) {
       <P.Title>{name}</P.Title>
       <P.List>
         {Array.from(user)?.map(eachUser => (
-          <EachEnrolledUser key={eachUser.id} user={eachUser} remove={remove} />
+          <EachEnrolledUser key={eachUser.userId} user={eachUser} remove={remove} />
         ))}
       </P.List>
     </P.Container>

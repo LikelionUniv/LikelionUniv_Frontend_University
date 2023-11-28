@@ -1,4 +1,4 @@
-import request, { Response } from "../../../utils/request"
+import request from "../../../utils/request"
 
 export interface IDropdown {
   value: number
@@ -45,7 +45,7 @@ export class Thon {
 
 export class Output {
   static loadOutput(): IDropdown[] {
-    const labels = ['APP', 'WEB', '기타'];
+    const labels = ['WEB', 'ANDROID', 'IOS', '기타'];
     
     const output: IDropdown[] = labels.map((label, index) => (
       {value: index + 1, label}
@@ -70,7 +70,7 @@ export class Tech {
 
 export class Univ {
   static async loadUniv(): Promise<IDropdown[]> {
-    const response = await request<Response<Universities[]>>({
+    const response = await request<null, Universities[], null>({
       uri: '/api/v1/project/university',
       method: 'get',
     });    

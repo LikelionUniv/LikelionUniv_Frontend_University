@@ -10,7 +10,7 @@ interface IEachEnrolledUser {
 
 function EachEnrolledUser({user, remove}: IEachEnrolledUser) {
   const showUserName = () => {
-    return `${user.name} (${user.univ} ${user.ordinary}기)`;
+    return `${user.name} (${user.universityName} ${user.ordinal}기)`;
   }
   return (
     <EU.Container>
