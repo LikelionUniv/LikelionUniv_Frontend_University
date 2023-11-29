@@ -6,6 +6,7 @@ import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
 import Mypage from './routes/Mypage';
+import MypageRoot from './routes/MypageRoot';
 
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
@@ -18,6 +19,7 @@ import BabyLion from './components/recruit/apply/mobile/BabyLion';
 import Recruit from './components/univrecruit/UnivRecruit';
 import UnivRecruit from './components/univrecruit/UnivRecruit';
 import { Redirect } from './components/login/Redirect';
+import UserModify from './routes/UserModify';
 
 const router = createBrowserRouter([
     {
@@ -42,7 +44,17 @@ const router = createBrowserRouter([
             },
             {
                 path: '/mypage',
-                element: <Mypage />,
+                element: <MypageRoot />,
+                children : [
+                    {
+                        path: '',
+                        element: <Mypage/>
+                    },
+                    {
+                        path:'modify',
+                        element : <UserModify/>
+                    }
+                ]
             },
             {
                 path: '/project',
