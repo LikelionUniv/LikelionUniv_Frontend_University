@@ -36,6 +36,11 @@ export const Input = styled.input`
     &:focus {
         border: 1px solid var(--orange-600, #ff7710);
     }
+
+    @media screen and (max-width: 800px) {
+        width: 70%;
+        font-size: 13px;
+    }
 `;
 
 export const SearchBtn = styled.button`
@@ -61,6 +66,10 @@ export const SearchBtn = styled.button`
 
     &:hover {
         cursor: pointer;
+    }
+
+    @media screen and (max-width: 800px) {
+        font-size: 13px;
     }
 `;
 

@@ -8,6 +8,12 @@ export const Container = styled.div`
     width: 792px;
     margin: 0 auto;
     margin-top: 64px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+        padding: 0 10px;
+    }
 `;
 
 export const Title = styled.header`
@@ -356,4 +362,8 @@ export const TechGrid = styled.div`
     grid-row-gap: 8px;
 
     margin-top: 16px;
+
+    @media screen and (max-width: 450px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;

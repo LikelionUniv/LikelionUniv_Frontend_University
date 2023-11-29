@@ -61,18 +61,18 @@ interface PostId {
 }
 
 interface Image {
-    file: File
-    src: string
+    file: File;
+    src: string;
 }
 
 interface PresignedUrlParam {
-    fileNameExtension: string
+    fileNameExtension: string;
 }
 
 interface PresignedUrlResponse {
-    presignedUrl: string
-    imageUrl: string
-    fileName: string
+    presignedUrl: string;
+    imageUrl: string;
+    fileName: string;
 }
 
 const ProjectRegister = () => {
@@ -175,18 +175,24 @@ const ProjectRegister = () => {
             console.log('S3 오류');
             return;
         }
-    }
+    };
 
     // presigned url 발급
-    const getPresignedUrl = async (file: File): Promise<PresignedUrlResponse> => {
+    const getPresignedUrl = async (
+        file: File,
+    ): Promise<PresignedUrlResponse> => {
         const fileName = file.name.split('.');
         const extension = fileName[fileName.length - 1];
-        const response = await request<null, PresignedUrlResponse, PresignedUrlParam>({
+        const response = await request<
+            null,
+            PresignedUrlResponse,
+            PresignedUrlParam
+        >({
             uri: '/api/v1/image/project',
             method: 'get',
             params: {
-                fileNameExtension: extension
-            }
+                fileNameExtension: extension,
+            },
         });
 
         if (response === undefined) {
@@ -194,21 +200,21 @@ const ProjectRegister = () => {
         }
 
         return response.data;
-    }
+    };
 
-    const processImages = async (): Promise<string[]> => { 
+    const processImages = async (): Promise<string[]> => {
         const imageFiles: File[] = formState.images.map(image => image.file);
         const presignedUrlImages: PresignedUrlResponse[] = [];
 
         // presigned url 얻어와서 S3에 등록
-        imageFiles.forEach(async (file) => {
+        imageFiles.forEach(async file => {
             const url = await getPresignedUrl(file);
             await enrollImagesToS3(file, url.presignedUrl);
             presignedUrlImages.push(url);
         });
 
         return presignedUrlImages.map(image => image.imageUrl);
-    }
+    };
 
     // 이거만 해결되면 끝날텐데...
     const processSendData = async (): Promise<ProjectRegisterType> => {
@@ -273,7 +279,7 @@ const ProjectRegister = () => {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 const url = await readUrl(file);
-                imageMeta.push({file: files[i], src: url});
+                imageMeta.push({ file: files[i], src: url });
             }
             setImages(imageMeta);
         }
@@ -312,7 +318,7 @@ const ProjectRegister = () => {
         asyncFunc: Univ.loadUniv,
     });
 
-    useEffect(() => {        
+    useEffect(() => {
         if (
             formState.images.length === 0 ||
             formState.activity === '' ||
