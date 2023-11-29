@@ -18,6 +18,7 @@ import useEnrolledUser from './user/userStore/useEnrolledUser';
 import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
 import useFetch from '../../../hooks/useFetch';
 import request from '../../../utils/request';
+import axios from 'axios';
 
 /* form type */
 interface FormState {
@@ -35,7 +36,7 @@ interface FormState {
     description: string;
     content: string;
     productionUrl: string;
-    imageUrl: string[];
+    images: Image[];
     members: number[];
 }
 
@@ -59,9 +60,24 @@ interface PostId {
     id: number;
 }
 
+interface Image {
+    file: File
+    src: string
+}
+
+interface PresignedUrlParam {
+    fileNameExtension: string
+}
+
+interface PresignedUrlResponse {
+    presignedUrl: string
+    imageUrl: string
+    fileName: string
+}
+
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
-    const { array: images, pushMany: setImages, remove } = useArray<string>([]); // image 배열
+    const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
     const { userLength: memberLength, userIdList: memberIdList } =
         useEnrolledUser();
 
@@ -78,7 +94,7 @@ const ProjectRegister = () => {
         description: '',
         content: '',
         productionUrl: '',
-        imageUrl: images,
+        images: [],
         ordinal: '',
         univ: '',
         members: memberIdList,
@@ -153,28 +169,49 @@ const ProjectRegister = () => {
         return [...formState.projectTeches].join(',');
     };
 
+    const enrollImagesToS3 = async (file: File, presignedUrl: string) => {
+        const response = await axios.put(presignedUrl, file);
+        if (response.status !== 200) {
+            console.log('S3 오류');
+            return;
+        }
+    }
+
+    // presigned url 발급
+    const getPresignedUrl = async (file: File): Promise<PresignedUrlResponse> => {
+        const fileName = file.name.split('.');
+        const extension = fileName[fileName.length - 1];
+        const response = await request<null, PresignedUrlResponse, PresignedUrlParam>({
+            uri: '/api/v1/image/project',
+            method: 'get',
+            params: {
+                fileNameExtension: extension
+            }
+        });
+
+        if (response === undefined) {
+            throw Error('서버 에러');
+        }
+
+        return response.data;
+    }
+
+    const processImages = async (): Promise<string[]> => { 
+        const imageFiles: File[] = formState.images.map(image => image.file);
+        const presignedUrlImages: PresignedUrlResponse[] = [];
+
+        // presigned url 얻어와서 S3에 등록
+        imageFiles.forEach(async (file) => {
+            const url = await getPresignedUrl(file);
+            await enrollImagesToS3(file, url.presignedUrl);
+            presignedUrlImages.push(url);
+        });
+
+        return presignedUrlImages.map(image => image.imageUrl);
+    }
+
     // 이거만 해결되면 끝날텐데...
-    const processSendData = (): ProjectRegisterType => {
-        // const formData = new FormData();
-
-        // formData.append('activity', processActivityEtc());
-        // formData.append('outPut', processOutputEtc());
-        // formData.append('serviceName', formState.serviceName);
-        // formData.append('ordinal', processOrdinal().toString());
-        // formData.append('univ', formState.univ);
-        // formData.append('startDate', formState.startDate);
-        // formData.append('endDate', formState.endDate);
-        // formData.append('description', formState.description);
-        // formData.append('content', formState.content);
-        // formData.append('productionUrl', formState.productionUrl);
-        // formData.append('projectTeches', processTech());
-        // images.forEach(image => {
-        //     formData.append('imageUrl', image);
-        // });
-        // formData.append('members', memberIdList.join(','));
-
-        // return formData
-
+    const processSendData = async (): Promise<ProjectRegisterType> => {
         return {
             activity: processActivityEtc(),
             outPut: processOutputEtc(),
@@ -187,7 +224,7 @@ const ProjectRegister = () => {
             content: formState.content,
             productionUrl: formState.productionUrl,
             projectTeches: processTech(),
-            imageUrl: formState.imageUrl,
+            imageUrl: await processImages(),
             members: memberIdList,
         };
     };
@@ -197,7 +234,7 @@ const ProjectRegister = () => {
         e.preventDefault();
         if (!isFill) return;
 
-        const data = processSendData();
+        const data = await processSendData();
 
         const response = await request<ProjectRegisterType, PostId, null>({
             uri: '/api/v1/project/post/',
@@ -231,12 +268,12 @@ const ProjectRegister = () => {
         const files = event.target.files;
 
         if (files != null) {
-            const imageMeta: string[] = [];
+            const imageMeta: Image[] = [];
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                const saved = await readUrl(file);
-                imageMeta.push(saved);
+                const url = await readUrl(file);
+                imageMeta.push({file: files[i], src: url});
             }
             setImages(imageMeta);
         }
@@ -265,7 +302,7 @@ const ProjectRegister = () => {
     useEffect(() => {
         setFormState(prev => ({
             ...prev,
-            imageUrl: images,
+            images,
         }));
     }, [images]);
 
@@ -275,9 +312,9 @@ const ProjectRegister = () => {
         asyncFunc: Univ.loadUniv,
     });
 
-    useEffect(() => {
+    useEffect(() => {        
         if (
-            formState.imageUrl.length === 0 ||
+            formState.images.length === 0 ||
             formState.activity === '' ||
             formState.outPut === '' ||
             formState.startDate === '' ||
@@ -333,7 +370,7 @@ const ProjectRegister = () => {
             ) : (
                 <P.Images>
                     {images.map((image, idx) => (
-                        <P.Img key={`img-${idx}`} src={image}>
+                        <P.Img key={`img-${idx}`} src={image.src}>
                             <P.DeleteBtn
                                 isFirst={idx === 0}
                                 onClick={() => remove(idx)}
