@@ -25,7 +25,6 @@ interface FormState {
     activity: string;
     activityEtc: string;
     outPut: string;
-    outPutEtc: string;
     serviceName: string;
     ordinal: string;
     univ: string;
@@ -85,7 +84,6 @@ const ProjectRegister = () => {
         activity: '',
         activityEtc: '',
         outPut: '',
-        outPutEtc: '',
         serviceName: '',
         startDate: '',
         endDate: '',
@@ -101,7 +99,6 @@ const ProjectRegister = () => {
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
-    const [activeOutPutEtc, setActiveOutPutEtc] = useState<boolean>(false);
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -119,10 +116,6 @@ const ProjectRegister = () => {
 
                 if (field === 'activity') {
                     setActiveThonEtc(selectedOption.label === '기타');
-                }
-
-                if (field === 'outPut') {
-                    setActiveOutPutEtc(selectedOption.label === '기타');
                 }
             }
         };
@@ -143,14 +136,6 @@ const ProjectRegister = () => {
         }
 
         return formState.activity;
-    };
-
-    const processOutputEtc = (): string => {
-        if (activeOutPutEtc) {
-            return formState.outPutEtc;
-        }
-
-        return formState.outPut;
     };
 
     const processOrdinal = (): number => {
@@ -220,7 +205,7 @@ const ProjectRegister = () => {
     const processSendData = async (): Promise<ProjectRegisterType> => {
         return {
             activity: processActivityEtc(),
-            outPut: processOutputEtc(),
+            outPut: formState.outPut,
             serviceName: formState.serviceName,
             ordinal: processOrdinal(),
             univ: formState.univ,
@@ -334,7 +319,6 @@ const ProjectRegister = () => {
             formState.univ === '' ||
             memberLength === 0 ||
             (formState.activity === '기타' && formState.activityEtc === '') ||
-            (formState.outPut === '기타' && formState.outPutEtc === '') ||
             (etcCheck && formState.projectTechEtc === '')
         ) {
             setIsFill(false);
@@ -419,17 +403,6 @@ const ProjectRegister = () => {
                         options={Output.loadOutput()}
                         onChange={handleSelectChange('outPut')}
                     />
-                    {activeOutPutEtc ? (
-                        <P.Input
-                            type="text"
-                            className="etc"
-                            placeholder="아웃풋 형태를 입력해주세요."
-                            value={formState.outPutEtc}
-                            onChange={event =>
-                                handleInputChange('outPutEtc', event)
-                            }
-                        />
-                    ) : null}
                 </P.Field>
                 <P.Field>
                     <P.Label>제작 기간</P.Label>

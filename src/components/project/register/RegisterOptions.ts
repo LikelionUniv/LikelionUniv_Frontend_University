@@ -46,7 +46,7 @@ export class Thon {
 
 export class Output {
     static loadOutput(): IDropdown[] {
-        const labels = ['WEB', 'ANDROID', 'IOS', '기타'];
+        const labels = ['WEB', 'ANDROID', 'IOS'];
 
         const output: IDropdown[] = labels.map((label, index) => ({
             value: index + 1,
