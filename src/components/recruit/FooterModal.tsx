@@ -86,7 +86,6 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
         e.preventDefault();
         const url = `https://likelion.university/api/v1/alarm/12/register`;
 
-        
         // 이메일 형식에 맞지 않는 경우
         if (!EMAIL.test(email)) {
             alert('이메일 형식에 맞지 않습니다.');
