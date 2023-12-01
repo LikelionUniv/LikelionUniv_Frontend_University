@@ -155,7 +155,7 @@ const ProjectRegister = () => {
     };
 
     const enrollImagesToS3 = async (file: File, presignedUrl: string) => {
-        const response = await axios.put(presignedUrl, file);
+        const response = await axios.put(presignedUrl, file);        
         if (response.status !== 200) {
             console.log('S3 오류');
             return;
@@ -192,12 +192,14 @@ const ProjectRegister = () => {
         const presignedUrlImages: PresignedUrlResponse[] = [];
 
         // presigned url 얻어와서 S3에 등록
-        imageFiles.forEach(async file => {
+        for(const file of imageFiles) {
             const url = await getPresignedUrl(file);
             await enrollImagesToS3(file, url.presignedUrl);
             presignedUrlImages.push(url);
-        });
+        };
 
+        console.log(presignedUrlImages);
+        
         return presignedUrlImages.map(image => image.imageUrl);
     };
 
@@ -226,6 +228,8 @@ const ProjectRegister = () => {
         if (!isFill) return;
 
         const data = await processSendData();
+        console.log(data);
+        
 
         const response = await request<ProjectRegisterType, PostId, null>({
             uri: '/api/v1/project/post/',
