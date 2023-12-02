@@ -1,18 +1,13 @@
 import Header from './Header';
 import Projectbox from './Projectbox';
+import * as P from './ProjectList.style';
 
 function ProjectList() {
     return (
-        <div
-            style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-            }}
-        >
+        <P.Container>
             <Header />
             <Projectbox />
-        </div>
+        </P.Container>
     );
 }
 

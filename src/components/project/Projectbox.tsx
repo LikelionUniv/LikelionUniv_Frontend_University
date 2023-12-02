@@ -1,39 +1,38 @@
 // Projectbox.js
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as B from './ProjectBoxStyle';
+import { type ProjectEach } from './register/ProjectRegister';
+import { projectData } from './projectDummy';
+import useInnerWidth from '../../hooks/useInnerWidth';
+import EachBox from './EachBox';
 
 function Projectbox() {
-    const [clicked, setClicked] = useState(false);
+    const data: ProjectEach[] = projectData;
+    const [pageSize, setPageSize] = useState<number>(12);
+    const { innerWidth } = useInnerWidth();
+
+    // 1024부터는 페이지 사이즈는 6
+    useEffect(() => {
+        if (innerWidth < 1024) {
+            setPageSize(6);
+            return;
+        }
+
+        setPageSize(12);
+    }, [innerWidth]);
+
+    // api 연동되면 아래 코드를 사용할 예정
+    // const {curPageItem, renderPaginationBtn} = useServerSidePagination<ProjectEach>({
+    //     uri: '/api/v1/project',
+    //     size: pageSize,
+    // });
 
     return (
-        <B.Container onClick={() => setClicked(true)}>
-            {[...Array(12)].map((_, i) => (
-                <B.Box key={i}>
-                    <div style={{ position: 'relative' }}>
-                        <B.SubBox style={{ position: 'relative' }}>
-                            <B.BlackBox
-                                clicked={clicked}
-                                style={{
-                                    position: 'absolute',
-                                    bottom: 0,
-                                    left: 0,
-                                }}
-                            >
-                                WEB
-                            </B.BlackBox>
-                        </B.SubBox>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <B.SmallBox1 clicked={clicked}>서비스 이름</B.SmallBox1>
-                        <B.SmallBox2 clicked={clicked}>
-                            서비스(프로젝트)에 대한 소개
-                            <br />
-                            두줄까지 표시되고, 넘치면 궁시렁 콩시렁
-                        </B.SmallBox2>
-                        <B.SmallBox3>11기 중앙대학교 아이디어톤</B.SmallBox3>
-                    </div>
-                </B.Box>
+        <B.Container>
+            {data.map((project, i) => (
+                <EachBox key={i} project={project} />
             ))}
+            {/* {renderPaginationBtn()} */}
         </B.Container>
     );
 }

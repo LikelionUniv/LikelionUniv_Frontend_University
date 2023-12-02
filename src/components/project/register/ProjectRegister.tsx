@@ -39,7 +39,7 @@ interface FormState {
     members: number[];
 }
 
-interface ProjectRegisterType {
+export interface ProjectEach {
     activity: string;
     outPut: string;
     serviceName: string;
@@ -204,7 +204,7 @@ const ProjectRegister = () => {
     };
 
     // 이거만 해결되면 끝날텐데...
-    const processSendData = async (): Promise<ProjectRegisterType> => {
+    const processSendData = async (): Promise<ProjectEach> => {
         return {
             activity: processActivityEtc(),
             outPut: formState.outPut,
@@ -230,7 +230,7 @@ const ProjectRegister = () => {
         const data = await processSendData();
         console.log(data);
 
-        const response = await request<ProjectRegisterType, PostId, null>({
+        const response = await request<ProjectEach, PostId, null>({
             uri: '/api/v1/project/post/',
             method: 'post',
             data,

@@ -29,46 +29,46 @@ const Header = () => {
                 </P.Tab>
 
                 <P.Tab
-                    onClick={() => handleClick(1)}
-                    className={activeTab === 1 ? 'selected' : ''}
+                    onClick={() => handleClick(11)}
+                    className={activeTab === 11 ? 'selected' : ''}
                 >
                     11기
-                    {activeTab === 1 && <P.Divider>_</P.Divider>}{' '}
+                    {activeTab === 11 && <P.Divider>_</P.Divider>}{' '}
                     {/* 수정된 부분 */}
                 </P.Tab>
 
                 <P.Tab
-                    onClick={() => handleClick(2)}
-                    className={activeTab === 2 ? 'selected' : ''}
+                    onClick={() => handleClick(10)}
+                    className={activeTab === 10 ? 'selected' : ''}
                 >
                     10기
-                    {activeTab === 2 && <P.Divider>_</P.Divider>}{' '}
+                    {activeTab === 10 && <P.Divider>_</P.Divider>}{' '}
                     {/* 수정된 부분 */}
                 </P.Tab>
 
                 <P.Tab
-                    onClick={() => handleClick(3)}
-                    className={activeTab === 3 ? 'selected' : ''}
+                    onClick={() => handleClick(9)}
+                    className={activeTab === 9 ? 'selected' : ''}
                 >
                     9기
-                    {activeTab === 3 && <P.Divider>_</P.Divider>}{' '}
+                    {activeTab === 9 && <P.Divider>_</P.Divider>}{' '}
                     {/* 수정된 부분 */}
                 </P.Tab>
 
                 <P.Tab
-                    onClick={() => handleClick(4)} // 8기 탭
-                    className={activeTab === 4 ? 'selected' : ''}
+                    onClick={() => handleClick(8)} // 8기 탭
+                    className={activeTab === 8 ? 'selected' : ''}
                 >
                     8기
-                    {activeTab === 4 && <P.Divider>_</P.Divider>}
+                    {activeTab === 8 && <P.Divider>_</P.Divider>}
                 </P.Tab>
 
                 <P.Tab
-                    onClick={() => handleClick(5)} // 7기 탭
-                    className={activeTab === 5 ? 'selected' : ''}
+                    onClick={() => handleClick(7)} // 7기 탭
+                    className={activeTab === 7 ? 'selected' : ''}
                 >
                     7기
-                    {activeTab === 5 && <P.Divider>_</P.Divider>}
+                    {activeTab === 7 && <P.Divider>_</P.Divider>}
                 </P.Tab>
 
                 <P.Tab
