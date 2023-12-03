@@ -40,7 +40,8 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
     }
     @media (max-width: 479px) {
         width: 100%;
-        height: ${({ photoTitle }) => (photoTitle ? '358px' : '160px')};
+        /* height: ${({ photoTitle }) => (photoTitle ? '358px' : '160px')}; */
+        height: 358px;
     }
     //여기 부분은 나중에 바꾸면 된다
     @media (max-width: 360px) {
@@ -60,6 +61,7 @@ export const ProjectBoxWrapper = styled.div`
     flex-shrink: 0;
     padding-bottom: 16px;
     position: relative;
+    box-sizing: border-box;
     @media (max-width: 1920px) {
         width: 384px;
         height: 346px;
@@ -131,7 +133,7 @@ export const PostCardBox = styled.div<PhotoCheck>`
         @media (max-width: 479px) {
             margin: 0px 0px 8px;
             font-size: 14px;
-            -webkit-line-clamp: ${({ photoTitle }) => (photoTitle ? 1 : 2)};
+            -webkit-line-clamp: ${({ photoTitle }) => (photoTitle ? 1 : 4)};
         }
         @media (max-width: 360px) {
             margin: 0px 0px 16px;

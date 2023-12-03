@@ -24,3 +24,8 @@ export type OptionType = {
     value: number;
     label: string;
 };
+
+export type MypageOptionType = {
+    value: string;
+    label: string;
+};

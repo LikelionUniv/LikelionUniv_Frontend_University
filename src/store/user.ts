@@ -1,15 +1,15 @@
-import {atom} from 'recoil';
+import { atom } from 'recoil';
 
 type UserInfo = {
-    name : string,
-    profileImage : string,
-    userId : number,
-}
+    name: string;
+    profileImage: string;
+    userId: number;
+};
 export const userState = atom<UserInfo>({
-    key : 'userInfo',
-    default : {
-        name : '',
-        profileImage :'',
-        userId : -1, 
+    key: 'userInfo',
+    default: {
+        name: '',
+        profileImage: '',
+        userId: 1,
     },
-})
+});

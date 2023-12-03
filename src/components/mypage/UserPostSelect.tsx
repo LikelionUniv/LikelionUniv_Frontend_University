@@ -70,27 +70,15 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
-            <SearchAndSortWrapper>
-                <SearchBoxWrapper>
-                    <SearchInput
-                        type="text"
-                        placeholder="검색"
-                        onChange={handleInputChange}
-                        value={searchValue}
-                    />
-                    <SearchSVG></SearchSVG>
-                </SearchBoxWrapper>
-                <SortBox select={select} />
-            </SearchAndSortWrapper>
-            {/* {select === '좋아요' ? (
+            {select === '좋아요' ? (
                 <SearchAndSortWrapper>
                     <SearchBoxWrapper>
                         <SearchInput type="text" placeholder="검색" />
                         <SearchSVG></SearchSVG>
                     </SearchBoxWrapper>
-                    <SortBox />
+                    <SortBox select={select} />
                 </SearchAndSortWrapper>
-            ) : null} */}
+            ) : null}
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
@@ -184,13 +172,15 @@ const ButtonSelectWrapper = styled.div`
 const SelectBorder = styled.div`
     height: 0px;
     border: 1px solid rgba(234, 236, 238, 1);
-    position: absolute;
-    top: 381.5px;
+    margin-top: -2px;
     @media (max-width: 1920px) {
         width: 1200px;
     }
     @media (max-width: 1280px) {
-        width: calc(100% - 80px);
+        width: 100%;
+    }
+    @media (max-width: 479px) {
+        width: 100%;
     }
 `;
 
@@ -223,15 +213,14 @@ const PostBoxWrapper = styled.div`
     }
     @media (max-width: 479px) {
         width: 100%;
-        height: 1754px;
-        /* height: calc((3.66) * 479px); */
+        height: 2348px;
         margin: 20px 0px 64px;
         gap: 40px 0px;
     }
     @media (max-width: 360px) {
         width: 100%;
         height: 1946px;
-        /* height: calc((5.4) * 360px); */
+        /* height: calc((1946 / 2035) * 100vh); */
         margin: 20px 0px 64px;
         gap: 40px 0px;
     }

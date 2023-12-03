@@ -1,5 +1,5 @@
 import Select, { components } from 'react-select';
-import { OptionType } from './type';
+import { MypageOptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
 import { useEffect, useState } from 'react';
 
@@ -7,34 +7,33 @@ interface SortType {
     select: string;
 }
 
-const options: OptionType[] = [
-    { value: 1, label: '최신순' },
-    { value: 2, label: '좋아요순' },
-    { value: 3, label: '댓글순' },
+const options: MypageOptionType[] = [
+    { value: 'created_at', label: '최신순' },
+    { value: 'like', label: '좋아요순' },
+    { value: 'comment', label: '댓글순' },
 ];
 
 const SortBox = (props: SortType) => {
-    const [selectedOption, setSelectedOption] = useState<OptionType | null>(
-        null,
-    );
+    const [selectedOption, setSelectedOption] =
+        useState<MypageOptionType | null>(null);
 
     useEffect(() => {
         setSelectedOption(null);
     }, [props.select]);
 
-    const handleSortChange = (selectedOption: OptionType | null) => {
-        setSelectedOption(selectedOption); // 선택된 값을 상태로 업데이트합니다.
+    const handleSortChange = (selectedOption: MypageOptionType | null) => {
+        setSelectedOption(selectedOption);
 
         if (!selectedOption) return;
 
         switch (selectedOption.value) {
-            case 1:
+            case 'created_at':
                 console.log('최신순');
                 break;
-            case 2:
+            case 'like':
                 console.log('좋아요순');
                 break;
-            case 3:
+            case 'comment':
                 console.log('댓글순');
                 break;
             default:

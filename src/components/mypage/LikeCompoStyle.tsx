@@ -49,7 +49,7 @@ export const SearchBoxWrapper = styled.div`
         flex-shrink: 0;
     }
     @media (max-width: 479px) {
-        width: 325px;
+        width: 68%;
         height: 40px;
         flex-shrink: 0;
     }
