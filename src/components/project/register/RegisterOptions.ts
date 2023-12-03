@@ -29,6 +29,18 @@ export class Gen {
         genOptions.sort((a, b) => b.value - a.value);
         return genOptions;
     }
+
+    static loadRecentFiveGen(): number[] {
+        const gen: number[] = [];
+        const generate = new Date().getFullYear() - 2012;
+
+        Array.from({ length: generate }).forEach((_, index) => {
+            gen.push(index + 1);
+        });
+
+        gen.sort((a, b) => b - a);
+        return gen.slice(0, 5);
+    }
 }
 
 export class Thon {
