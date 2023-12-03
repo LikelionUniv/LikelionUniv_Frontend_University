@@ -4,10 +4,10 @@ import { type ProjectEach } from './register/ProjectRegister';
 import EachBox from './EachBox';
 
 interface IProjectBox {
-    projects: ProjectEach[]
+    projects: ProjectEach[];
 }
 
-function Projectbox({projects}:IProjectBox) {
+function Projectbox({ projects }: IProjectBox) {
     return (
         <B.Container>
             {projects.map((project, i) => (

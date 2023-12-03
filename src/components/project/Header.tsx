@@ -6,10 +6,10 @@ import { ProjectAPI } from './ProjectList';
 import { Gen } from './register/RegisterOptions';
 
 interface IHeader {
-    setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>
+    setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
 }
 
-function Header({setProjectApi}: IHeader) {
+function Header({ setProjectApi }: IHeader) {
     const [activeTab, setActiveTab] = useState<number | undefined>();
 
     const handleClick = (index?: number) => {
@@ -19,12 +19,15 @@ function Header({setProjectApi}: IHeader) {
     useEffect(() => {
         // 전체를 클릭할 경우
         if (activeTab === undefined) {
-            setProjectApi({uri: '/api/v1/project', ordinal: undefined});
+            setProjectApi({ uri: '/api/v1/project', ordinal: undefined });
             return;
         }
 
         // 아닐 경우
-        setProjectApi({uri: `/api/v1/project/ordinal/${activeTab}`, ordinal: activeTab});
+        setProjectApi({
+            uri: `/api/v1/project/ordinal/${activeTab}`,
+            ordinal: activeTab,
+        });
     }, [activeTab, setProjectApi]);
 
     const navigate = useNavigate();
@@ -47,17 +50,17 @@ function Header({setProjectApi}: IHeader) {
                     {/* 수정된 부분 */}
                 </P.Tab>
 
-                {recentFiveGen !== undefined && (
+                {recentFiveGen !== undefined &&
                     recentFiveGen.map(gen => (
-                        <P.Tab key={gen}
+                        <P.Tab
+                            key={gen}
                             onClick={() => handleClick(gen)}
                             className={activeTab === gen ? 'selected' : ''}
                         >
-                        {gen}기
-                        {activeTab === gen && <P.Divider>_</P.Divider>}{' '}
+                            {gen}기
+                            {activeTab === gen && <P.Divider>_</P.Divider>}{' '}
                         </P.Tab>
-                    ))
-                )}
+                    ))}
                 <P.Tab
                     onClick={() => handleClick(sixYearsAgoGen)}
                     className={activeTab === sixYearsAgoGen ? 'selected' : ''}
@@ -73,6 +76,6 @@ function Header({setProjectApi}: IHeader) {
             </P.WriteBtn>
         </P.HeaderContainer>
     );
-};
+}
 
 export default Header;

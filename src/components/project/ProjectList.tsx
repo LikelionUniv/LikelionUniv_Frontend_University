@@ -7,13 +7,16 @@ import { projectData } from './projectDummy';
 import useInnerWidth from '../../hooks/useInnerWidth';
 
 export interface ProjectAPI {
-    uri: string
-    ordinal?: number
+    uri: string;
+    ordinal?: number;
 }
 
 function ProjectList() {
     const data: ProjectEach[] = projectData;
-    const [projectApi, setProjectApi] = useState<ProjectAPI>({uri: '/api/v1/project', ordinal: undefined});
+    const [projectApi, setProjectApi] = useState<ProjectAPI>({
+        uri: '/api/v1/project',
+        ordinal: undefined,
+    });
 
     const [pageSize, setPageSize] = useState<number>(12);
     const { innerWidth } = useInnerWidth();
@@ -23,7 +26,7 @@ function ProjectList() {
     //     uri: projectApi.uri,
     //     size: pageSize,
     // });
-    
+
     // 1024부터는 페이지 사이즈는 6
     useEffect(() => {
         if (innerWidth < 1024) {
@@ -36,7 +39,7 @@ function ProjectList() {
 
     return (
         <P.Container>
-            <Header setProjectApi={setProjectApi}/>
+            <Header setProjectApi={setProjectApi} />
             <Projectbox projects={data} />
         </P.Container>
     );
