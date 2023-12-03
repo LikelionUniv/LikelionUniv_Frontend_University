@@ -79,10 +79,12 @@ export const Box = styled.div<{ img?: string | null }>`
     &.date {
         color: var(--Grey-700, #868c94);
         font-size: 14px;
+        line-height: 150%;
     }
     &.title {
         font-size: 20px;
         font-weight: 700;
+        line-height: 150%;
         margin-bottom: 8px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -93,6 +95,7 @@ export const Box = styled.div<{ img?: string | null }>`
     &.content {
         font-size: 16px;
         overflow: hidden;
+        line-height: 150%;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 3;
@@ -136,6 +139,7 @@ export const Box = styled.div<{ img?: string | null }>`
                     width: auto;
                     font-weight: 700;
                     color: var(--Grey-900, #212224);
+                    line-height: 150%;
                 }
                 .profile {
                     background-repeat: no-repeat;

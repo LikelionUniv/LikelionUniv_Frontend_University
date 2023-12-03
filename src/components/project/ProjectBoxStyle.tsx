@@ -87,7 +87,7 @@ export const SmallBox3 = styled.div`
    background-color: #ffffff ;
    color: var(--Grey-700, #868C94);
 
-  gap: 6  
+  gap: 6;
   font-family: Pretendard;
   font-size: 12px;
   font-style: normal;

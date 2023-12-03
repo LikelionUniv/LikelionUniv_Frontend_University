@@ -11,12 +11,15 @@ import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectRegister from './components/project/register/ProjectRegister';
 import ProjectList from './components/project/ProjectList';
-import Community from './routes/Community';
+import Community from './components/community/Community';
 import RecruitPage from './routes/RecruitPage';
 import AboutPage from './routes/AboutPage';
 import BabyLion from './components/recruit/apply/mobile/BabyLion';
 import Recruit from './components/univrecruit/UnivRecruit';
 import UnivRecruit from './components/univrecruit/UnivRecruit';
+import CommunityWrite from './components/community/write/CommunityWrite';
+import CommunityDetail from './components/community/detail/CommunityDetail';
+import CommunityPage from './routes/CommunityPage';
 
 const router = createBrowserRouter([
     {
@@ -81,8 +84,23 @@ const router = createBrowserRouter([
             },
             {
                 path: '/community',
-                element: <Community />,
+                element: <CommunityPage />,
+                children: [
+                    {
+                        path: '',
+                        element: <Community />,
+                    },
+                    {
+                        path: ':communityId',
+                        element: <CommunityDetail />,
+                    },
+                    {
+                        path: 'write',
+                        element: <CommunityWrite />,
+                    },
+                ],
             },
+            
             {
                 path: '/chat',
                 element: <Chat />,
