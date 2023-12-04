@@ -4,6 +4,7 @@ import Projectbox from './Projectbox';
 import * as P from './ProjectList.style';
 import { projectData } from './projectDummy';
 import useInnerWidth from '../../hooks/useInnerWidth';
+import useServerSidePagination from '../../hooks/useServerSidePagination';
 
 export interface ProjectAPI {
     uri: string;
@@ -33,7 +34,7 @@ export interface Member {
 }
 
 function ProjectList() {
-    const data: Project[] = projectData;
+    // const data: Project[] = projectData;
     const [projectApi, setProjectApi] = useState<ProjectAPI>({
         uri: '/api/v1/project',
         ordinal: undefined,
@@ -43,10 +44,10 @@ function ProjectList() {
     const { innerWidth } = useInnerWidth();
 
     // api 연동되면 아래 코드를 사용할 예정
-    // const {curPageItem, renderPaginationBtn} = useServerSidePagination<ProjectEach>({
-    //     uri: projectApi.uri,
-    //     size: pageSize,
-    // });
+    const {curPageItem, renderPaginationBtn} = useServerSidePagination<Project>({
+        uri: projectApi.uri,
+        size: pageSize,
+    });
 
     // 1024부터는 페이지 사이즈는 6
     useEffect(() => {
@@ -61,8 +62,8 @@ function ProjectList() {
     return (
         <P.Container>
             <Header setProjectApi={setProjectApi} />
-            <Projectbox projects={data} />
-            {/* {renderPaginationBtn()} */}
+            <Projectbox projects={curPageItem} />
+            {renderPaginationBtn()}
         </P.Container>
     );
 }

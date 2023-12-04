@@ -1,7 +1,7 @@
 .pagination {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-bottom: 100px;
 }
 
 ul {
@@ -11,10 +11,9 @@ ul {
 
 ul.pagination li {
     display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    margin: 0 10px;
+    width: 32px;
+    height: 32px;
+    margin: 0 2px;
 
     display: flex;
     justify-content: center;
@@ -23,17 +22,20 @@ ul.pagination li {
 }
 
 ul.pagination li a {
-    color: #adb5bd;
-
-    font-family: 'Pretendard';
-    font-weight: 300;
-    text-align: center;
-    font-size: 18px;
     text-decoration: none;
+    color: var(--Grey-600, #ADB3BA);
+    text-align: center;
+
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
 }
 
 ul.pagination li.active a {
-    color: #fff;
+    text-decoration: none;
+    color: var(--Grey-900, #212224);
 }
 
 ul.pagination li.active {

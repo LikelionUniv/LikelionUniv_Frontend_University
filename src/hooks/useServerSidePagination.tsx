@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import PaginationComponent from '../components/utils/PaginationComponent';
 import { usePagination } from 'react-use-pagination';
 import request from '../utils/request';
+import PaginationComponent from '../components/utils/pagination/PaginationComponent';
 
 interface IuseServerSidePagination {
     uri: string;
