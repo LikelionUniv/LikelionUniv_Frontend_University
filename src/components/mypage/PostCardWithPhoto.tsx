@@ -1,29 +1,27 @@
-import {
-    PostCardBox,
-    PostCardBoxWrapper,
-    ProjectBoxWrapper,
-} from './PostCardStyle';
-import { PostCardPropType } from './type';
+import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
+import { MypagePostCardPropType, PostCardPropType } from './type';
 import PostModal from './PostModal';
 
-const PostCardWithPhoto = (props: PostCardPropType) => {
+const PostCardWithPhoto = (props: MypagePostCardPropType) => {
     return (
         <PostCardBoxWrapper className="photo" photoTitle>
             <PostCardBox
                 className="photo"
                 style={{
-                    backgroundImage: `url(${props.img})`,
+                    backgroundImage: `url(${props.thumbnail})`,
                 }}
             ></PostCardBox>
             <PostCardBox className="date">
-                <div>{props.date}</div>
-                {props.type === '게시글' ? <PostModal /> : null}
+                <div>{props.createdDate}</div>
+                {props.type === '게시글' && props.isAuthor === true ? (
+                    <PostModal />
+                ) : null}
             </PostCardBox>
             <PostCardBox className="title" photoTitle>
                 {props.title}
             </PostCardBox>
             <PostCardBox className="content" photoTitle>
-                {props.content}
+                {props.body}
             </PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
@@ -35,11 +33,11 @@ const PostCardWithPhoto = (props: PostCardPropType) => {
                     ) : (
                         <div className="heart" />
                     )}
-                    <div>{props.like}</div>
+                    <div>{props.likeCount}</div>
                 </div>
                 <div className="wrapper">
                     <div className="comment" />
-                    <div>{props.comment}</div>
+                    <div>{props.commentCount}</div>
                 </div>
             </PostCardBox>
         </PostCardBoxWrapper>
