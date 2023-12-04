@@ -44,3 +44,19 @@ export type MypageOptionType = {
     value: string;
     label: string;
 };
+
+export interface IuserProfile {    
+    followerNum : number,
+    followingNum : number,
+    id : number,
+    introduction : string,
+    isMine : boolean,
+    major : string,
+    name :string,
+    ordinal : number,
+    part : string,
+    phoneNum : string,
+    profileImage : string,
+    role : string,
+    universityName : string,
+}
