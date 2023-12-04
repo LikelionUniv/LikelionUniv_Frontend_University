@@ -1,58 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
-import { UserFollows } from './UserFollows';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
 
+import { UserFollows } from './UserFollows'; //삭제예정
+
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue , useRecoilState} from 'recoil';
+import { userState } from '../../store/user';
+import {UserProfileAtom} from '../../store/mypageData'
+import useModal from '../../hooks/useModal';
+import axios from 'axios';
+import {userProfileApi, userFollowerApi,userFollowingApi } from '../../api/mypage/userinfo';
+import { FollowModal } from './FollowModal';
 
 export const UserInfo = () => {
-    const [isModal, setIsModal] = useState<string | undefined>('');
-
-    const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
-        setIsModal(e.currentTarget.dataset.type);
-    };
     const navigate = useNavigate();
     const goToModify = (): void => {
         navigate('modify');
     };
-    
-    const userinfo = useRecoilValue(userState);
+
+    const UserLoginState = useRecoilValue(userState);
+    const [userProfile , updateUserProfile] = useRecoilState(UserProfileAtom)
+
+    const { isModalOpen, openModal, closeModal } = useModal();
+    const [modalProps , setModalProps] = useState<string | undefined>('');
+    const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        openModal();
+        //팔로우 , 팔로잉 모달 정보 전달
+        setModalProps(e.currentTarget.dataset.type);
+    };
+
+    //마운트 시 API(유저 프로필 , 팔로워/팔로잉 목록) 요청
+    useEffect(()=>{
+        const fetchData = async () => {
+
+            if(UserLoginState.name != ""){
+                const userProfile = await userProfileApi(UserLoginState.userId);
+                updateUserProfile(userProfile);
+            }
+        }
+
+        fetchData();
+    },[UserLoginState])
+
+   
 
     return (
         <Wrapper>
             <Container>
                 <UserBox>
-                    <Avatar />
+                    <Avatar imgurl={userProfile.profileImage}/>
                     {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
-                            {' '}
-                            <p>{userinfo.name}</p> <div>아기사자</div>{' '}
+                            <p>{UserLoginState.name}</p> <div>{userProfile.role}</div>{' '}
                         </UserName>
                         <UserPart>
-                            {' '}
-                            <p>홍익대학교 기획디자인</p>
+                            <p>{userProfile.universityName} {userProfile.part}</p>
                             <FItem data-type="팔로워" onClick={handleModal}>
-                                {' '}
-                                팔로워 200
+                                팔로워 {userProfile.followerNum}
                             </FItem>
                             <FItem data-type="팔로잉" onClick={handleModal}>
-                                {' '}
-                                팔로잉 200
+                                팔로잉 {userProfile.followingNum}
                             </FItem>
                         </UserPart>
                         <p>
-                            행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요
+                            {userProfile.introduction}
                         </p>
                     </UserProfile>
                 </UserBox>
                 <Button onClick={goToModify}>내 정보 수정</Button>
-                {isModal ? (
-                    <UserFollows modal={isModal} setter={setIsModal} />
-                ) : (
-                    ''
+                {isModalOpen && (
+                    <FollowModal isOpen={isModalOpen} modalProps={modalProps} closeModal={closeModal} />
                 )}
             </Container>
         </Wrapper>
