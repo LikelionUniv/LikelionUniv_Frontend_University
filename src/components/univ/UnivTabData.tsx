@@ -211,7 +211,7 @@ export const tabData: { [key: string]: ITabData[] } = {
         {
             school: '서울대학교',
             region: '서울',
-            website: 'https://www.instagram.com/likelion_snu/',
+            website: 'https://snulion.vercel.app/',
             logo: seoul,
         },
         {
@@ -277,6 +277,12 @@ export const tabData: { [key: string]: ITabData[] } = {
     ],
     대전: [
         {
+            school: '충남대학교',
+            region: '충남',
+            website: 'https://www.instagram.com/likelion._.cnu/',
+            logo: chungnam,
+        },
+        {
             school: '한밭대학교',
             region: '대전',
             website: 'http://hanbat-likelion.kr/',
@@ -290,14 +296,17 @@ export const tabData: { [key: string]: ITabData[] } = {
         },
         { school: '한남대학교', region: '대전', website: '' },
     ],
-
-    경기: [
+    세종: [
         {
             school: '고려대학교(세종)',
             region: '경기',
             website: 'https://www.instagram.com/likelion_ku_sejong/',
             logo: korea,
         },
+    ],
+    경기: [
+        { school: '중부대학교', region: '충남', website: '', logo: joongbu },
+      
         {
             school: '성결대학교',
             region: '경기',
@@ -364,7 +373,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelion_smuc/',
             logo: sangmyung_cheonan,
         },
-        { school: '중부대학교', region: '충남', website: '', logo: joongbu },
+      
         {
             school: '순천향대학교',
             region: '충남',
@@ -383,12 +392,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelion_hsu/',
             logo: hsu,
         },
-        {
-            school: '충남대학교',
-            region: '충남',
-            website: 'https://www.instagram.com/likelion._.cnu/',
-            logo: chungnam,
-        },
+       
     ],
     전남: [{ school: '순천대학교', region: '전남', website: '' }],
     전북: [
@@ -447,10 +451,11 @@ export const regionTab: string[] = [
     '부산',
     '대구',
     '인천',
-
+    
     '대전',
 
     '경기',
+    '세종',
     '강원',
     '충북',
     '충남',
