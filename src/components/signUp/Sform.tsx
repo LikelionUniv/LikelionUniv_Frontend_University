@@ -62,8 +62,8 @@ const roleOptions = [
 /* form type */
 interface FormState {
     name: string;
-    university: number;
-    department: string;
+    universityName: number;
+    major: string;
     // generation: number;
     // role: number;
     // track: number;
@@ -72,8 +72,8 @@ interface FormState {
 const Sform = () => {
     const [formState, setFormState] = useState<FormState>({
         name: '',
-        university: 0,
-        department: '',
+        universityName: 0,
+        major: '',
         // generation: 0,
         // role: 0,
         // track: 0,
@@ -93,41 +93,40 @@ const Sform = () => {
             }
         };
 
+    const { provider } = useParams();
+    const [isSuccess, updateIsSuccess] = useState<boolean>(false);
 
-    const {provider} = useParams();
-    const [isSuccess , updateIsSuccess] = useState<boolean>(false);
-
-    const requestSignup = async () =>{
+    const requestSignup = async () => {
         const idtoken = localStorage.getItem('idtoken');
-        
+
         try {
-            const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
-            formState,
-             {
-                withCredentials : true,
-            });
-            
+            const response = await axios.post(
+                `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+                formState,
+                {
+                    withCredentials: true,
+                },
+            );
+
             //응답 성공 시
-            if(response.data.isSuccess){
+            if (response.data.isSuccess) {
                 localStorage.removeItem('idtoken');
                 updateIsSuccess(true);
+            } else {
+                alert('서버 통신 오류! 다시 시도해주세요!');
             }
-            else {
-                alert("서버 통신 오류! 다시 시도해주세요!");
-            }
+        } catch (error) {
+            console.error('요청 실패', error);
         }
-        catch(error) {
-            console.error("요청 실패" , error);
-        }
-    }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // 모든 필드 완성되었는지 검사하는 로직 추가함
         if (
             formState.name === '' ||
-            formState.university === 0 ||
-            formState.department === ''
+            formState.universityName === 0 ||
+            formState.major === ''
             // formState.generation === 0 ||
             // formState.role === 0 ||
             // formState.track === 0
@@ -142,38 +141,39 @@ const Sform = () => {
 
     return (
         <>
-        {
-        !isSuccess?
-            <form className="formDiv">
-                <div className="Stitle">내 정보</div>
-                <Ndiv>이름</Ndiv>
-                <Nform
-                    placeholder="자신의 이름을 작성해주세요."
-                    value={formState.name}
-                    onChange={e =>
-                        setFormState({ ...formState, name: e.target.value })
-                    }
-                />
-                <Ndiv>학교</Ndiv>
-                <SchoolDropDown onChange={handleSelectChange('university')} />
-                <Ndiv>학과</Ndiv>
-                <Nform
-                    placeholder="학과를 입력해주세요."
-                    value={formState.department}
-                    onChange={e =>
-                        setFormState({
-                            ...formState,
-                            department: e.target.value,
-                        })
-                    }
-                />
-                <button className="saveBtn" onClick={handleSubmit}>
-                    저장하기
-                </button>
-            </form>
-            :
-            <LoginComplete/>
-        }
+            {!isSuccess ? (
+                <form className="formDiv">
+                    <div className="Stitle">내 정보</div>
+                    <Ndiv>이름</Ndiv>
+                    <Nform
+                        placeholder="자신의 이름을 작성해주세요."
+                        value={formState.name}
+                        onChange={e =>
+                            setFormState({ ...formState, name: e.target.value })
+                        }
+                    />
+                    <Ndiv>학교</Ndiv>
+                    <SchoolDropDown
+                        onChange={handleSelectChange('universityName')}
+                    />
+                    <Ndiv>학과</Ndiv>
+                    <Nform
+                        placeholder="학과를 입력해주세요."
+                        value={formState.major}
+                        onChange={e =>
+                            setFormState({
+                                ...formState,
+                                major: e.target.value,
+                            })
+                        }
+                    />
+                    <button className="saveBtn" onClick={handleSubmit}>
+                        저장하기
+                    </button>
+                </form>
+            ) : (
+                <LoginComplete />
+            )}
         </>
     );
 };

@@ -1,21 +1,22 @@
 import Select, { components } from 'react-select';
 import { MypageOptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { sortOptionAtom } from '../../store/mypageData';
 
 interface SortType {
     select: string;
 }
 
-const options: MypageOptionType[] = [
-    { value: 'created_at', label: '최신순' },
+export const options: MypageOptionType[] = [
+    { value: 'created_date', label: '최신순' },
     { value: 'like', label: '좋아요순' },
     { value: 'comment', label: '댓글순' },
 ];
 
 const SortBox = (props: SortType) => {
-    const [selectedOption, setSelectedOption] =
-        useState<MypageOptionType | null>(null);
+    const [selectedOption, setSelectedOption] = useRecoilState(sortOptionAtom);
 
     useEffect(() => {
         setSelectedOption(null);

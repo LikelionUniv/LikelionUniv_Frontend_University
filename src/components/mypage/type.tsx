@@ -16,6 +16,21 @@ export interface PostCardProp {
     comment: number;
 }
 
+export interface MypagePostCardProp {
+    id: number;
+    thumbnail: string | null;
+    createdDate: string;
+    title: string;
+    body: string;
+    likeCount: number;
+    commentCount: number;
+    isAuthor: boolean;
+}
+
+export interface MypagePostCardPropType extends MypagePostCardProp {
+    type: string;
+}
+
 export interface PostCardPropType extends PostCardProp {
     type: string;
 }
