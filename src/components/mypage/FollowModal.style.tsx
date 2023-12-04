@@ -71,7 +71,8 @@ export const ModlalClose = styled.div`
 
 export const ModalContent = styled.div`
     width: 98%;
-    height: 338px;
+    height: 348px;
+    margin-bottom : 8px;
     border-radius: 0px 0px 20px 20px;
     overflow: auto;
     padding: 0 4px;
