@@ -91,9 +91,8 @@ const UserPostSelect = () => {
                     </>
                 ) : (
                     <>
-                        {Array.isArray(
-                            userData.data && userData.data.length !== 0,
-                        )
+                        {Array.isArray(userData.data) &&
+                        userData.data.length !== 0
                             ? userData.data.map(e => {
                                   if (e.thumbnail !== null) {
                                       return (

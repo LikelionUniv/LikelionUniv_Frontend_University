@@ -64,7 +64,7 @@ const useGetUserData = async (
         } else {
             getData(select);
         }
-    }, [select, page, likeOption, searchClick]);
+    }, [select, page, likeOption, searchClick, user.userId]);
 };
 
 export default useGetUserData;
