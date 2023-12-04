@@ -109,7 +109,7 @@ export const Info = styled.div`
                     }
                 }
             }
-            .section1 {
+            .section1{
                 .title {
                     color: #212224;
                     font-family: Pretendard;
@@ -117,21 +117,23 @@ export const Info = styled.div`
                     font-weight: 700;
                     padding-bottom: 16px;
                 }
-                .text {
-                    padding: 8px 0;
-                    display: flex;
-                    margin-bottom: 20px;
-                    align-items: center;
-                    color: #212224;
-                    font-family: Pretendard;
-                    font-size: 14px;
-                    font-weight: 500;
-                    text-decoration: none;
-                    cursor: pointer;
-                    &:hover {
-                    }
+                .logo1{
+                    width: 171px;
+                    height: 45px;
+                    flex-shrink: 0;
+                }
+                .logo2{
+                    width: 171px;
+                    height: 45px;
+                    flex-shrink: 0;
+                }
+                .logo3{
+                    width: 171px;
+                    height: 45px;
+                    flex-shrink: 0;
                 }
             }
+            
         }
     }
 `;

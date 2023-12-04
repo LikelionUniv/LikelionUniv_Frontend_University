@@ -8,10 +8,16 @@ import { ReactComponent as YoutubeIcon } from '../../img/landing/footer_youtube.
 import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.svg';
 import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
+import logo1 from '../../img/landing/logo.png';
+import logo2 from '../../img/landing/logo2.png';
+import logo3 from '../../img/landing/logo3.jpeg';
 
 import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
 
+export interface FooterData{
+    logo?: string;
+}
 function Footer(): JSX.Element {
     const downloadFile = (url: string, fileName: string): void => {
         const link = document.createElement('a');
@@ -126,32 +132,19 @@ function Footer(): JSX.Element {
                             </div>
                         </div>
                         <div className="section">
-                            <div className="title">관련사이트</div>
-                            <a
-                                href="https://www.acrc.go.kr/"
-                                target="_blank"
-                                className="link text"
-                                rel="noreferrer"
-                            >
-                                국민권익위원회 <ArrowIcon />
+                        <div className="title">관련사이트</div>
+                            <a href="https://www.acrc.go.kr/" target="_blank" rel="noreferrer">
+                                <img src={logo1} alt="국민권익위원회" style={{width: "171px", height: "45px",padding:"7px"}} />
                             </a>
-                            <a
-                                href="https://www.moj.go.kr/"
-                                target="_blank"
-                                className="link text"
-                                rel="noreferrer"
-                            >
-                                법무부 <ArrowIcon />
+                            <a href="https://www.moj.go.kr/" target="_blank" rel="noreferrer">
+                                <img src={logo2} alt="법무부" style={{width: "171px", height: "45px",padding: "7px"}} />
                             </a>
-                            <a
-                                href="https://www.nts.go.kr/"
-                                target="_blank"
-                                className="link text"
-                                rel="noreferrer"
-                            >
-                                국세청 <ArrowIcon />
+                            <a href="https://www.nts.go.kr/" target="_blank" rel="noreferrer">
+                                <img src={logo3} alt="국세청" style={{width: "171px", height: "45px",padding:"7px"}}/>
                             </a>
-                        </div>
+                    </div>
+
+
                     </div>
                 </div>
             </F.Info>
