@@ -16,7 +16,7 @@ interface IResponse<R> {
     data: R;
 }
 
-interface IError {
+export interface IError {
     timestamp: string;
     isSuccess: boolean;
     code: string;
@@ -53,8 +53,6 @@ async function request<T, R, P>({ uri, method, data, params }: IRequest<T, P>) {
         if (axios.isAxiosError(error)) {
             const serverError = error as AxiosError<IError>;
             if (serverError && serverError.response) {
-                console.log(serverError);
-
                 alert(serverError.response.data.message);
             }
         }
