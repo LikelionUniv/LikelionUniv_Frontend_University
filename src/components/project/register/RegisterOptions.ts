@@ -107,7 +107,7 @@ export class Tech {
 export class Univ {
     static async loadUniv(): Promise<IDropdown[]> {
         const response = await request<null, Universities[], null>({
-            uri: '/api/v1/project/university',
+            uri: '/api/v1/university/',
             method: 'get',
         });
 

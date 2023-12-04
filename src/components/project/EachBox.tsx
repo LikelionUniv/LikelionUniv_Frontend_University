@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import * as B from './EachBox.style';
-import { ProjectEach } from './register/ProjectRegister';
 import useInnerWidth from '../../hooks/useInnerWidth';
+import { Project } from './ProjectList';
+import { useNavigate } from 'react-router-dom';
 
 interface IEachBox {
-    project: ProjectEach;
+    project: Project;
 }
 
 function EachBox({ project }: IEachBox) {
     const [clicked, setClicked] = useState(false);
     const { innerWidth } = useInnerWidth();
 
+    const navigate = useNavigate();
+
+    const onClick = (id: number): void => {
+        setClicked(true);
+        navigate(`/project/${id}`);
+    };
+
     return (
-        <B.Box onClick={() => setClicked(true)}>
+        <B.Box onClick={() => onClick(project.id)}>
             <div style={{ position: 'relative' }}>
                 <B.SubBox width={innerWidth}>
                     <B.BlackBox

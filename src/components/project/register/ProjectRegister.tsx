@@ -19,6 +19,7 @@ import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
 import useFetch from '../../../hooks/useFetch';
 import request from '../../../utils/request';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 /* form type */
 interface FormState {
@@ -39,7 +40,7 @@ interface FormState {
     members: number[];
 }
 
-export interface ProjectEach {
+export interface ProjectRegisterType {
     activity: string;
     outPut: string;
     serviceName: string;
@@ -50,7 +51,7 @@ export interface ProjectEach {
     description: string;
     content: string;
     productionUrl: string;
-    projectTeches: string;
+    projectTeches: string[];
     imageUrl: string[];
     members: number[];
 }
@@ -79,6 +80,8 @@ const ProjectRegister = () => {
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
     const { userLength: memberLength, userIdList: memberIdList } =
         useEnrolledUser();
+
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState<FormState>({
         activity: '',
@@ -142,16 +145,16 @@ const ProjectRegister = () => {
         return Number(formState.ordinal.slice(0, -1));
     };
 
-    const processTech = (): string => {
+    const processTech = (): string[] => {
         if (etcCheck) {
             const teches = [
                 ...formState.projectTeches,
                 formState.projectTechEtc,
             ];
-            return teches.filter(tech => tech !== '').join(',');
+            return teches.filter(tech => tech !== '');
         }
 
-        return [...formState.projectTeches].join(',');
+        return formState.projectTeches;
     };
 
     const enrollImagesToS3 = async (file: File, presignedUrl: string) => {
@@ -198,13 +201,11 @@ const ProjectRegister = () => {
             presignedUrlImages.push(url);
         }
 
-        console.log(presignedUrlImages);
-
         return presignedUrlImages.map(image => image.imageUrl);
     };
 
     // 이거만 해결되면 끝날텐데...
-    const processSendData = async (): Promise<ProjectEach> => {
+    const processSendData = async (): Promise<ProjectRegisterType> => {
         return {
             activity: processActivityEtc(),
             outPut: formState.outPut,
@@ -228,14 +229,15 @@ const ProjectRegister = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-        console.log(data);
 
-        const response = await request<ProjectEach, PostId, null>({
-            uri: '/api/v1/project/post/',
+        const response = await request<ProjectRegisterType, PostId, null>({
+            uri: '/api/v1/project/',
             method: 'post',
             data,
         });
-        alert(response?.data);
+
+        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
+        navigate('/project');
     };
 
     const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());

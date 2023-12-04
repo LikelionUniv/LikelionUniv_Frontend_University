@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Header from './Header';
 import Projectbox from './Projectbox';
 import * as P from './ProjectList.style';
-import { ProjectEach } from './register/ProjectRegister';
 import { projectData } from './projectDummy';
 import useInnerWidth from '../../hooks/useInnerWidth';
 
@@ -11,8 +10,30 @@ export interface ProjectAPI {
     ordinal?: number;
 }
 
+export interface Project {
+    id: number;
+    activity: string;
+    outPut: string;
+    serviceName: string;
+    ordinal: number;
+    univ: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    content: string;
+    productionUrl: string;
+    projectTech: string[];
+    imageUrl: string[];
+    members: Member[];
+}
+
+export interface Member {
+    userId: number;
+    name: string;
+}
+
 function ProjectList() {
-    const data: ProjectEach[] = projectData;
+    const data: Project[] = projectData;
     const [projectApi, setProjectApi] = useState<ProjectAPI>({
         uri: '/api/v1/project',
         ordinal: undefined,
@@ -41,6 +62,7 @@ function ProjectList() {
         <P.Container>
             <Header setProjectApi={setProjectApi} />
             <Projectbox projects={data} />
+            {/* {renderPaginationBtn()} */}
         </P.Container>
     );
 }

@@ -33,6 +33,10 @@ export const SubBox = styled.div<{ width: number }>`
     @media screen and (min-width: 1025px) and (max-width: 1280px) {
         height: calc(${props => props.width} * 0.16875px);
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const BlackBox = styled.div<BoxProps>`
@@ -48,6 +52,9 @@ export const BlackBox = styled.div<BoxProps>`
     text-align: center;
     line-height: 150%; /* 21px */
     background: ${props => (props.clicked ? '#FF7710' : '#000000')};
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const SmallBox1 = styled.div<BoxProps>`
@@ -60,6 +67,10 @@ export const SmallBox1 = styled.div<BoxProps>`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 39.2px */
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const SmallBox2 = styled.div<BoxProps>`
@@ -75,6 +86,10 @@ export const SmallBox2 = styled.div<BoxProps>`
     font-style: normal;
     font-weight: 500;
     line-height: 150%; /* 24px */
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
 
 export const SmallBox3 = styled.div`
@@ -88,4 +103,8 @@ export const SmallBox3 = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 150%; /* 18px */
+
+    &:hover {
+        cursor: pointer;
+    }
 `;
