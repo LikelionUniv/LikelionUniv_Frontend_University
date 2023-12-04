@@ -3,15 +3,22 @@ import styled from 'styled-components';
 import eye from '../../img/donate/eye.svg';
 import comment from '../../img/community/comment16.svg';
 import { IPost } from './DonateComponent';
+import { useNavigate } from 'react-router-dom';
 
 interface DonatePostBoxProps {
     post: IPost
 }
 
 function DonatePostBox({post}: DonatePostBoxProps) {
+    const navigate = useNavigate();
+
+    const goDetail = (id: number) => {
+        navigate(`/donate/${id}`);
+    };
+
     return (
         <Wrapper>
-            <BoxWrapper>
+            <BoxWrapper onClick={() => goDetail(post.donationHistoryId)}>
                 <Box className="title">{post.title}</Box>
                 <Box className="nav">
                     <div className="wrapper">

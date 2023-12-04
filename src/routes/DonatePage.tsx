@@ -1,10 +1,10 @@
 import React from 'react';
-import DonateComponent from '../components/donate/DonateComponent';
+import { Outlet } from 'react-router-dom';
 
 const DonatePage = () => {
   return (
     <>
-      <DonateComponent />
+      <Outlet />
     </>
   )
 }

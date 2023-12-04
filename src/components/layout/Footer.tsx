@@ -10,7 +10,7 @@ import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg'
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
 import logo1 from '../../img/landing/logo.png';
 import logo2 from '../../img/landing/logo2.png';
-import logo3 from '../../img/landing/logo3.jpeg';
+import logo3 from '../../img/landing/logo3.jpg';
 
 import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
@@ -18,19 +18,20 @@ import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
 export interface FooterData{
     logo?: string;
 }
+
+export const downloadFile = (url: string, fileName: string): void => {
+    const link = document.createElement('a');
+    link.href = url;
+
+    link.download = fileName;
+
+    document.body.appendChild(link);
+    link.click();
+
+    document.body.removeChild(link);
+};
+
 function Footer(): JSX.Element {
-    const downloadFile = (url: string, fileName: string): void => {
-        const link = document.createElement('a');
-        link.href = url;
-
-        link.download = fileName;
-
-        document.body.appendChild(link);
-        link.click();
-
-        document.body.removeChild(link);
-    };
-
     const downloadRules = () => {
         downloadFile(
             rules,
