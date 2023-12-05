@@ -15,12 +15,12 @@ export const Box = styled.div`
     box-sizing: border-box;
 `;
 
-export const SubBox = styled.div<{ width: number }>`
+export const SubBox = styled.div<{ width: number, url: string }>`
     position: relative;
     width: 100%;
     height: 216px;
     box-sizing: border-box;
-    background: var(--Grey-400, #dcdfe3);
+    background-image: url(${props => props.url});
 
     @media screen and (max-width: 768px) {
         height: calc(${props => props.width} * 0.53px);

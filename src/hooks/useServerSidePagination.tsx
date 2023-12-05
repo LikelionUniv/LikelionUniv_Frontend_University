@@ -40,7 +40,7 @@ function useServerSidePagination<T>({
     search,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
-    const [, setPageLength] = useState<number>(0);
+    const [pageLength, setPageLength] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -79,7 +79,7 @@ function useServerSidePagination<T>({
     const renderPaginationBtn = (): JSX.Element => {
         return (
             <Pagination
-                totalPageNum={size}
+                totalPageNum={pageLength}
                 pageNum={currentPage}
                 setPageNum={setCurrentPage}
             />

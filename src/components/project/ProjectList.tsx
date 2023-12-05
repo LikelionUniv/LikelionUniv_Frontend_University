@@ -2,13 +2,19 @@ import { useState, useEffect } from 'react';
 import Header from './Header';
 import Projectbox from './Projectbox';
 import * as P from './ProjectList.style';
-import { projectData } from './projectDummy';
 import useInnerWidth from '../../hooks/useInnerWidth';
-import useServerSidePagination from '../../hooks/useServerSidePagination';
+import useServerSidePaginationTemp from '../../hooks/useServerSidePaginationTemp';
 
 export interface ProjectAPI {
     uri: string;
+    params?: PaginationParams
     ordinal?: number;
+}
+
+// 백엔드에서 고치면 사라져야함.
+interface PaginationParams {
+    pageNo: number
+    ordinal?: number
 }
 
 export interface Project {
@@ -33,37 +39,47 @@ export interface Member {
     name: string;
 }
 
+// 백엔드에서 12로 고정을 해둬서 지금은 12로하지만 나중에는 6이 되어야합니다.
+const PAGESIZE = {
+    FULL: 12,
+    HALF: 12,
+}
+
 function ProjectList() {
-    // const data: Project[] = projectData;
     const [projectApi, setProjectApi] = useState<ProjectAPI>({
-        uri: '/api/v1/project',
+        uri: '/api/v1/project/',
+        params: {
+            pageNo: 1,
+        },
         ordinal: undefined,
     });
 
-    const [pageSize, setPageSize] = useState<number>(12);
+    const [, setPageSize] = useState<number>(PAGESIZE.FULL);
     const { innerWidth } = useInnerWidth();
 
     // api 연동되면 아래 코드를 사용할 예정
-    const {curPageItem, renderPaginationBtn} = useServerSidePagination<Project>({
+    const {curPageItem: projects, renderPaginationBtn} = useServerSidePaginationTemp<Project, PaginationParams>({
         uri: projectApi.uri,
-        size: pageSize,
+        params: projectApi.params,
     });
 
     // 1024부터는 페이지 사이즈는 6
     useEffect(() => {
         if (innerWidth < 1024) {
-            setPageSize(6);
+            setPageSize(PAGESIZE.HALF);
             return;
         }
 
-        setPageSize(12);
+        setPageSize(PAGESIZE.FULL);
     }, [innerWidth]);
 
     return (
         <P.Container>
             <Header setProjectApi={setProjectApi} />
-            <Projectbox projects={curPageItem} />
-            {renderPaginationBtn()}
+            <Projectbox projects={projects} />
+            <P.PaginationWrapper>
+                {renderPaginationBtn()}
+            </P.PaginationWrapper>
         </P.Container>
     );
 }

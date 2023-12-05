@@ -17,3 +17,10 @@ export const Container = styled.div`
         padding: 0 40px;
     }
 `;
+
+export const PaginationWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 100px;
+`;

@@ -2,22 +2,9 @@ import { useState, useEffect } from 'react';
 import request from '../utils/request';
 import Pagination from '../components/mypage/Pagination';
 
-interface IuseServerSidePagination {
+interface IuseServerSidePagination<P> {
     uri: string;
-    size: number;
-    sort?: string;
-    search?: string;
-}
-
-interface ResponseServerSidePagination<T> {
-    totalPage: number;
-    totalElements: number;
-    pagingSize: number;
-    currentPage: number;
-    isFirst: boolean;
-    isLast: boolean;
-    isEmpty: boolean;
-    data: T[];
+    params?: P
 }
 
 interface ReturnuseServerSidePagination<T> {
@@ -26,33 +13,19 @@ interface ReturnuseServerSidePagination<T> {
     renderPaginationBtn: () => JSX.Element;
 }
 
-interface Pageable {
-    pageNo: number;
-}
-
-function useServerSidePaginationTemp<T>({
-    uri,
-    size,
-    sort,
-    search,
-}: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
+function useServerSidePaginationTemp<T, P>({uri, params}: IuseServerSidePagination<P>): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
-    const [, setPageLength] = useState<number>(0);
+    const [pageLength, setPageLength] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {        
         const fetchData = async (page: number): Promise<T[]> => {            
             setLoading(true);
-            const response = await request<null, ResponseServerSidePagination<T>, Pageable>({
+            const response = await request<null, T[], P>({
                 uri,
                 method: 'get',
-                params: {
-                    page,
-                    size,
-                    sort,
-                    search,
-                },
+                params,
             });
 
             if (response === undefined) {
@@ -60,9 +33,11 @@ function useServerSidePaginationTemp<T>({
                 throw Error('서버 에러');
             }
 
-            setPageLength(response.data.totalPage);
+            console.log(response);
+            
+            setPageLength(Math.ceil(response.data.length / 12));
             setLoading(false);
-            return response.data.data;
+            return response.data;
         };
 
         const loadData = async (): Promise<void> => {
@@ -71,12 +46,12 @@ function useServerSidePaginationTemp<T>({
         };
 
         loadData();
-    }, [currentPage, size, sort, uri, search]);
+    }, [currentPage, uri, params]);
 
     const renderPaginationBtn = (): JSX.Element => {
         return (
             <Pagination
-                totalPageNum={size}
+                totalPageNum={pageLength}
                 pageNum={currentPage}
                 setPageNum={setCurrentPage}
             />
