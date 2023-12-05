@@ -32,8 +32,6 @@ function useServerSidePaginationTemp<T, P>({uri, params}: IuseServerSidePaginati
                 setLoading(false);
                 throw Error('서버 에러');
             }
-
-            console.log(response);
             
             setPageLength(Math.ceil(response.data.length / 12));
             setLoading(false);
