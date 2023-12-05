@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { User } from '../UserFind';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import {
     backendStore,
     designStore,
@@ -22,10 +22,11 @@ interface RUseEnrolledUser {
     removeDesignUser: (user: User) => void;
     removeFrontendUser: (user: User) => void;
     removeBackendUser: (user: User) => void;
+    clearUser: () => void;
 }
 
 function useEnrolledUser(): RUseEnrolledUser {
-    const entire = useRecoilValue(userEnrolledStore);
+    const [entire, setEntire] = useRecoilState(userEnrolledStore);
 
     const entireEnrolledUser: User[] = Object.values(entire).flatMap(user =>
         Array.from(user),
@@ -89,6 +90,17 @@ function useEnrolledUser(): RUseEnrolledUser {
         [backend, setBackend],
     );
 
+    const clearUser = useCallback(() => {        
+        const users = entire;
+        
+        users.backend.clear();
+        users.frontend.clear();
+        users.plan.clear();
+        users.design.clear();
+
+        setEntire(users);
+    }, []);
+
     return {
         userLength,
         userIdList,
@@ -101,6 +113,7 @@ function useEnrolledUser(): RUseEnrolledUser {
         removeDesignUser,
         removeFrontendUser,
         removeBackendUser,
+        clearUser,
     };
 }
 

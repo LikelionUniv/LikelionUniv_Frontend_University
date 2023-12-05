@@ -78,7 +78,7 @@ interface PresignedUrlResponse {
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
-    const { userLength: memberLength, userIdList: memberIdList } =
+    const { userLength: memberLength, userIdList: memberIdList, clearUser } =
         useEnrolledUser();
 
     const navigate = useNavigate();
@@ -204,7 +204,6 @@ const ProjectRegister = () => {
         return presignedUrlImages.map(image => image.imageUrl);
     };
 
-    // 이거만 해결되면 끝날텐데...
     const processSendData = async (): Promise<ProjectRegisterType> => {
         return {
             activity: processActivityEtc(),
@@ -237,6 +236,7 @@ const ProjectRegister = () => {
         });
 
         alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
+        clearUser();
         navigate('/project');
     };
 
@@ -331,6 +331,12 @@ const ProjectRegister = () => {
             setIsFill(true);
         }
     }, [formState, etcCheck, memberLength]);
+
+    useEffect(() => {
+        return () => {
+            clearUser();
+        }
+    }, [clearUser]);
 
     return (
         <P.Container>
