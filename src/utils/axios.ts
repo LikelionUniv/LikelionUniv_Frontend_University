@@ -18,23 +18,23 @@ axiosInstance.interceptors.request.use(async config => {
     // // token 필요할 때
     // const token = await localStorage.getItem('access_token');
 
-    if (token !== null) {
+    if (token !== undefined) {
         config.headers.Authorization = `Bearer ${token}`;
-    }
 
-    // access token 만료 검증
-    const expiredAt = jwtDecode(token).exp as number;
-    const now = Math.floor(Date.now() / 1000);
+        // access token 만료 검증
+        const expiredAt = jwtDecode(token).exp as number;
+        const now = Math.floor(Date.now() / 1000);
 
-    // access token이 만료됐을 때
-    if (expiredAt < now) {        
-        const reissueToken = await reissue();
-        if (reissueToken === undefined) throw new Error('에러');
+        // access token이 만료됐을 때
+        if (expiredAt < now) {        
+            const reissueToken = await reissue();
+            if (reissueToken === undefined) throw new Error('에러');
 
-        localStorage.setItem('access_token', reissueToken.accessToken);
-        localStorage.setItem('refresh_token', reissueToken.refreshToken);
+            localStorage.setItem('access_token', reissueToken.accessToken);
+            localStorage.setItem('refresh_token', reissueToken.refreshToken);
 
-        config.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+            config.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+        }
     }
 
     return config;
