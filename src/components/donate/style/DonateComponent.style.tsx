@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -16,17 +16,16 @@ export const Nav = styled.div`
 
     width: 100%;
     margin: 100px 0 40px 0;
-`
+`;
 
 export const Divider = styled.div`
     height: 2px;
-    background-color: var(--Grey-400, #DCDFE3);
+    background-color: var(--Grey-400, #dcdfe3);
     width: 100%;
     margin-top: 20px;
 `;
 
 export const PageWrapper = styled.div`
     margin: 64px 0 100px 0;
-    border: 1
+    border: 1;
 `;
-

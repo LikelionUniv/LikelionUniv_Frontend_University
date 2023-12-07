@@ -2,11 +2,11 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 const DonatePage = () => {
-  return (
-    <>
-      <Outlet />
-    </>
-  )
-}
+    return (
+        <>
+            <Outlet />
+        </>
+    );
+};
 
-export default DonatePage
+export default DonatePage;

@@ -44,10 +44,14 @@ function useServerSidePagination<T>({
     const [loading, setLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    useEffect(() => {        
-        const fetchData = async (page: number): Promise<T[]> => {            
+    useEffect(() => {
+        const fetchData = async (page: number): Promise<T[]> => {
             setLoading(true);
-            const response = await request<null, ResponseServerSidePagination<T>, Pageable>({
+            const response = await request<
+                null,
+                ResponseServerSidePagination<T>,
+                Pageable
+            >({
                 uri,
                 method: 'get',
                 params: {

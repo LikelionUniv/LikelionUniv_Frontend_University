@@ -134,7 +134,9 @@ const Nav = () => {
                             <img src={navarrow} />
                         </Text>
                         <Text to="/donate">
-                            <p style={{whiteSpace: 'nowrap'}}>연간기부금모금액 및 활용실적</p>
+                            <p style={{ whiteSpace: 'nowrap' }}>
+                                연간기부금모금액 및 활용실적
+                            </p>
                             <img src={navarrow} />
                         </Text>
                     </div>

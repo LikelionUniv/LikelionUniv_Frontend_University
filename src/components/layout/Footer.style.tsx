@@ -109,7 +109,7 @@ export const Info = styled.div`
                     }
                 }
             }
-            .section1{
+            .section1 {
                 .title {
                     color: #212224;
                     font-family: Pretendard;
@@ -117,23 +117,22 @@ export const Info = styled.div`
                     font-weight: 700;
                     padding-bottom: 16px;
                 }
-                .logo1{
+                .logo1 {
                     width: 171px;
                     height: 45px;
                     flex-shrink: 0;
                 }
-                .logo2{
+                .logo2 {
                     width: 171px;
                     height: 45px;
                     flex-shrink: 0;
                 }
-                .logo3{
+                .logo3 {
                     width: 171px;
                     height: 45px;
                     flex-shrink: 0;
                 }
             }
-            
         }
     }
 `;

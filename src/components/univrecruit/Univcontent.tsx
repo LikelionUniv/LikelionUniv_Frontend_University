@@ -17,7 +17,6 @@ const Univcontent = () => {
     const [selected, setSelected] = useState(null);
     const [hovered, setHovered] = useState(false);
 
-
     const handleClick = (index: any) => {
         if (selected === index) {
             setSelected(null);
@@ -194,7 +193,7 @@ const Univcontent = () => {
                 </U.Qbody3>
                 <U.Ps2>
                     <p>더 궁금한 것이 있으신가요?</p>
-                    <img src={hovered ? Email2: Mail} alt="이미지" />
+                    <img src={hovered ? Email2 : Mail} alt="이미지" />
                     <p
                         onClick={goEmail}
                         style={{ color: hovered ? '#FF7710' : '#212224' }}

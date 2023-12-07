@@ -306,7 +306,7 @@ export const tabData: { [key: string]: ITabData[] } = {
     ],
     경기: [
         { school: '중부대학교', region: '충남', website: '', logo: joongbu },
-      
+
         {
             school: '성결대학교',
             region: '경기',
@@ -373,7 +373,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelion_smuc/',
             logo: sangmyung_cheonan,
         },
-      
+
         {
             school: '순천향대학교',
             region: '충남',
@@ -392,7 +392,6 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelion_hsu/',
             logo: hsu,
         },
-       
     ],
     전남: [{ school: '순천대학교', region: '전남', website: '' }],
     전북: [
@@ -451,7 +450,7 @@ export const regionTab: string[] = [
     '부산',
     '대구',
     '인천',
-    
+
     '대전',
 
     '경기',
