@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Footer from '../components/layout/Footer';
+import '../components/LoadScript'
 
 function root() {
     return (

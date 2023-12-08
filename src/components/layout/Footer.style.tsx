@@ -110,28 +110,17 @@ export const Info = styled.div`
                 }
             }
             .section1{
+          
                 .title {
                     color: #212224;
                     font-family: Pretendard;
                     font-size: 16px;
                     font-weight: 700;
                     padding-bottom: 16px;
+                    display: flex;
+                    flex-direction: column; 
                 }
-                .logo1{
-                    width: 171px;
-                    height: 45px;
-                    flex-shrink: 0;
-                }
-                .logo2{
-                    width: 171px;
-                    height: 45px;
-                    flex-shrink: 0;
-                }
-                .logo3{
-                    width: 171px;
-                    height: 45px;
-                    flex-shrink: 0;
-                }
+                
             }
             
         }
