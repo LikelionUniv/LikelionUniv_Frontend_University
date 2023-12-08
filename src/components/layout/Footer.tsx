@@ -133,12 +133,36 @@ function Footer(): JSX.Element {
                             </div>
                         </div>
                         <div className="section">
-                        <div className="title">관련사이트</div>
-                            <a href="https://www.acrc.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo1} alt="국민권익위원회" style={{display:"block" ,padding:"8px 0px", marginLeft:"-25px"}}/>
+                            <div className="title">관련사이트</div>
+                            <a
+                                href="https://www.acrc.go.kr/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={logo1}
+                                    alt="국민권익위원회"
+                                    style={{
+                                        display: 'block',
+                                        padding: '8px 0px',
+                                        marginLeft: '-25px',
+                                    }}
+                                />
                             </a>
-                            <a href="https://www.nts.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo2} alt="국세청" style={{display:"block ",padding:"2px 0px",marginLeft:"1.5px"}}/>
+                            <a
+                                href="https://www.nts.go.kr/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={logo2}
+                                    alt="국세청"
+                                    style={{
+                                        display: 'block ',
+                                        padding: '2px 0px',
+                                        marginLeft: '1.5px',
+                                    }}
+                                />
                             </a>
                         </div>
                     </div>
