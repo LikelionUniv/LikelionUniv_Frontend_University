@@ -140,7 +140,7 @@ function Footer(): JSX.Element {
                                 rel="noreferrer"
                             >
                                 <img
-                                    src={logo1}
+                                    src={logo2}
                                     alt="국민권익위원회"
                                     style={{
                                         display: 'block',
@@ -155,7 +155,7 @@ function Footer(): JSX.Element {
                                 rel="noreferrer"
                             >
                                 <img
-                                    src={logo2}
+                                    src={logo1}
                                     alt="국세청"
                                     style={{
                                         display: 'block ',
