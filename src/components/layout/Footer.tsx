@@ -161,7 +161,7 @@ function Footer(): JSX.Element {
                                     style={{
                                         display: 'block ',
                                         marginLeft: '-4px',
-                                        objectFit: 'contain'
+                                        objectFit: 'contain',
                                     }}
                                 />
                             </a>
