@@ -8,15 +8,9 @@ import { ReactComponent as YoutubeIcon } from '../../img/landing/footer_youtube.
 import { ReactComponent as BrunchIcon } from '../../img/landing/footer_brunch.svg';
 import { ReactComponent as ArrowIcon } from '../../img/landing/footer_arrow.svg';
 import { ReactComponent as DownloadIcon } from '../../img/landing/footer_download.svg';
-<<<<<<< HEAD
 import logo1 from '../../img/landing/logo1.svg';
 import logo2 from '../../img/landing/logo2.svg';
 //import logo3 from '../../img/landing/logo3.png';
-=======
-import logo1 from '../../img/landing/logo 1.png';
-import logo2 from '../../img/landing/logo2.png';
-import logo3 from '../../img/landing/logo3.png';
->>>>>>> 9367ea3c14168bca30cf5e1a076a7571f61783fc
 
 import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
@@ -139,52 +133,12 @@ function Footer(): JSX.Element {
                             </div>
                         </div>
                         <div className="section">
-<<<<<<< HEAD
-                            <div className="title">관련사이트</div>
-                            <a
-                                href="https://www.acrc.go.kr/"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img
-                                    src={logo2}
-                                    alt="국민권익위원회"
-                                    style={{
-                                        display: 'block',
-                                        padding: '8px 0px',
-                                        marginLeft: '-4px',
-                                    }}
-                                />
-                            </a>
-=======
                         <div className="title">관련사이트</div>
                             <a href="https://www.acrc.go.kr/" target="_blank" rel="noreferrer">
                                 <img src={logo1} alt="국민권익위원회" style={{display:"block" ,padding:"8px 0px", marginLeft:"-25px"}}/>
                             </a>
-                            <a href="https://www.moj.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo2} alt="법무부" style={{display:"block" ,marginLeft:"-18px"}} />
-                            </a>
                             <a href="https://www.nts.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo3} alt="국세청" style={{display:"block ",padding:"2px 0px",marginLeft:"1.5px"}}/>
-                            </a>
-                    </div>
-
->>>>>>> 9367ea3c14168bca30cf5e1a076a7571f61783fc
-
-                            <a
-                                href="https://www.nts.go.kr/"
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                <img
-                                    src={logo1}
-                                    alt="국세청"
-                                    style={{
-                                        display: 'block ',
-                                        marginLeft: '-4px',
-                                        objectFit: 'contain',
-                                    }}
-                                />
+                                <img src={logo2} alt="국세청" style={{display:"block ",padding:"2px 0px",marginLeft:"1.5px"}}/>
                             </a>
                         </div>
                     </div>
