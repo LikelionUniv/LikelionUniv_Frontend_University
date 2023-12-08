@@ -133,12 +133,12 @@ const Nav = () => {
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/donate">
+                       {/** <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
                             </p>
                             <img src={navarrow} />
-                        </Text>
+            </Text> */}
                     </div>
                     <div className="right">
                         {
