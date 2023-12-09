@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const targetDate = '2023-12-10 23:59:59';
+const targetDate = '2023-12-17 23:59:59';
 
 const getRemainTime = (countDown: number) => {
     const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
