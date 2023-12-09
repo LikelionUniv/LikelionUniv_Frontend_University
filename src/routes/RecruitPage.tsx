@@ -2,7 +2,7 @@ import React from 'react';
 import UnivRecruit from '../components/univrecruit/UnivRecruit';
 import Recruit from '../components/recruit/Recruit';
 import { Outlet } from 'react-router-dom';
-import '../components/LoadScript';
+//import '../components/LoadScript';
 
 const RecruitPage = () => {
     return (

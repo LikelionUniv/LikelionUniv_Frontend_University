@@ -1,5 +1,5 @@
 import Landing from '../components/landing/Landing';
-import '../components/LoadScript';
+//import '../components/LoadScript';
 
 const LandingPage = () => {
     return <Landing />;

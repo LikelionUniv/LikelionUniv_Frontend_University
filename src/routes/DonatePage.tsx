@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import '../components/LoadScript';
+//import '../components/LoadScript';
 
 const DonatePage = () => {
     return (

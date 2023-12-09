@@ -1,5 +1,5 @@
 import { Login } from '../components/login/Login';
-import '../components/LoadScript';
+//import '../components/LoadScript';
 
 const LoginPage = () => {
     return (
