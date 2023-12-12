@@ -10,6 +10,6 @@ export const userState = atom<UserInfo>({
     default: {
         name: '',
         profileImage: '',
-        userId: 1,
+        userId: 2,
     },
 });

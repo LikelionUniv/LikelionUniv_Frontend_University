@@ -1,14 +1,17 @@
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { mypageData, sortOptionAtom } from '../../store/mypageData';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+    myProjectData,
+    mypageData,
+    sortOptionAtom,
+} from '../../store/mypageData';
 import {
     myPageGetLikeApi,
     mypageGetCommentApi,
     mypageGetPostApi,
+    mypageGetProjectApi,
 } from '../../api/mypage/userpost';
 import { userState } from '../../store/user';
-import { useEffect, useState } from 'react';
-import { ProjectTestData } from './TestData';
-import { ProjectCardProp } from './type';
+import { useEffect } from 'react';
 
 const useGetUserData = async (
     select: string,
@@ -16,8 +19,8 @@ const useGetUserData = async (
     searchValue?: string,
     searchClick?: string,
 ) => {
-    const [testData, setTestData] = useState<Array<ProjectCardProp>>([]);
-    const [userData, setUserData] = useRecoilState(mypageData);
+    const setProjectData = useSetRecoilState(myProjectData);
+    const setUserData = useSetRecoilState(mypageData);
     const user = useRecoilValue(userState);
     const likeOption = useRecoilValue(sortOptionAtom);
     useEffect(() => {
@@ -52,18 +55,12 @@ const useGetUserData = async (
                               likeOption.value,
                           );
                 setUserData(data);
+            } else {
+                const data = await mypageGetProjectApi(user.userId, page);
+                setProjectData(data);
             }
         };
-        if (select === '프로젝트') {
-            setTestData(
-                ProjectTestData.slice(
-                    6 * Math.ceil(page) - 6,
-                    6 * Math.ceil(page),
-                ),
-            );
-        } else {
-            getData(select);
-        }
+        getData(select);
     }, [select, page, likeOption, searchClick, user.userId]);
 };
 

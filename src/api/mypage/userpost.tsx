@@ -75,7 +75,24 @@ export const myPageGetLikeApi = async (
     }
 };
 
-export const mypageGetProjectApi = async () => {
+export const mypageGetProjectApi = async (user_id: number, page: number) => {
     const token = localStorage.getItem('access-token');
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    try {
+        const response = await axios.get(
+            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/projects?page=${page}`,
+            {
+                headers: {
+                    withCredentials: true,
+                },
+            },
+        );
+        console.log(response.data.data);
+        return response.data.data;
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            const result = error.response?.data?.detail;
+            return result;
+        }
+    }
 };

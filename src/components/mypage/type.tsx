@@ -1,10 +1,12 @@
 export interface ProjectCardProp {
-    img: string;
-    title: string;
-    content: string;
-    cardinal: number;
-    school: string;
+    projectId: number;
+    serviceName: string;
+    outPut: string;
+    description: string;
+    ordinal: number;
+    universityName: string;
     activity: string;
+    thumbnail: string;
 }
 
 export interface PostCardProp {
@@ -45,18 +47,18 @@ export type MypageOptionType = {
     label: string;
 };
 
-export interface IuserProfile {    
-    followerNum : number,
-    followingNum : number,
-    id : number,
-    introduction : string,
-    isMine : boolean,
-    major : string,
-    name :string,
-    ordinal : number,
-    part : string,
-    phoneNum : string,
-    profileImage : string,
-    role : string,
-    universityName : string,
+export interface IuserProfile {
+    followerNum: number;
+    followingNum: number;
+    id: number;
+    introduction: string;
+    isMine: boolean;
+    major: string;
+    name: string;
+    ordinal: number;
+    part: string;
+    phoneNum: string;
+    profileImage: string;
+    role: string;
+    universityName: string;
 }

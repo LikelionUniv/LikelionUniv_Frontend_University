@@ -130,7 +130,7 @@ const UserInfoModify = () => {
                 <div className="Stitle">내 정보 수정</div>
 
                 <FlexBox>
-                    <Avatar_sm imgUrl={formState.profileImage} />
+                    <Avatar_sm imgurl={formState.profileImage} />
                     <ImageBtn onClick={handleImgBtn}>사진 변경하기</ImageBtn>
                     <input
                         type="file"

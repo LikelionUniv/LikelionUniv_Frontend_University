@@ -4,8 +4,6 @@ import ProjectCard from './ProjectCard';
 import PostCard from './PostCard';
 import Pagination from './Pagination';
 import PostCardWithPhoto from './PostCardWithPhoto';
-import { ProjectTestData } from './TestData';
-import { ProjectCardProp } from './type';
 import {
     SearchAndSortWrapper,
     SearchBoxWrapper,
@@ -14,12 +12,11 @@ import {
 } from './LikeCompoStyle';
 import SortBox from './SortBox';
 import { useRecoilValue } from 'recoil';
-import { mypageData } from '../../store/mypageData';
+import { myProjectData, mypageData } from '../../store/mypageData';
 import useGetUserData from './useGetUserData';
 
 const UserPostSelect = () => {
-    //현재는 이런 방식으로 testData를 받아오는 형식으로 하는중
-    const [testData, setTestData] = useState<Array<ProjectCardProp>>([]);
+    const userProject = useRecoilValue(myProjectData);
     const userData = useRecoilValue(mypageData);
     const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
     const [select, setSelect] = useState<string>('게시글');
@@ -76,14 +73,16 @@ const UserPostSelect = () => {
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
-                        {testData.map(e => {
+                        {userProject.data.map(e => {
                             return (
                                 <ProjectCard
-                                    img={e.img}
-                                    title={e.title}
-                                    content={e.content}
-                                    cardinal={e.cardinal}
-                                    school={e.school}
+                                    projectId={e.projectId}
+                                    thumbnail={e.thumbnail}
+                                    serviceName={e.serviceName}
+                                    universityName={e.universityName}
+                                    ordinal={e.ordinal}
+                                    outPut={e.outPut}
+                                    description={e.description}
                                     activity={e.activity}
                                 />
                             );
@@ -131,7 +130,7 @@ const UserPostSelect = () => {
             <Pagination
                 totalPageNum={
                     select === '프로젝트'
-                        ? Math.ceil(ProjectTestData.length / 6)
+                        ? userProject.totalPage
                         : userData.totalPage
                 }
                 pageNum={page}

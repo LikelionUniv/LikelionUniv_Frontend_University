@@ -9,17 +9,17 @@ const ProjectCard = (props: ProjectCardProp) => {
             <ProjectBox
                 className="img"
                 style={{
-                    backgroundImage: `url(${props.img})`,
+                    backgroundImage: `url(${props.thumbnail})`,
                 }}
             >
-                <Outputtag>WEB</Outputtag>
+                <Outputtag>{props.outPut}</Outputtag>
             </ProjectBox>
-            <ProjectBox className="title">{props.title}</ProjectBox>
-            <ProjectBox className="content">{props.content}</ProjectBox>
+            <ProjectBox className="title">{props.serviceName}</ProjectBox>
+            <ProjectBox className="content">{props.description}</ProjectBox>
             <ProjectBox className="teaminfo">
-                <div>{props.cardinal}</div>
+                <div>{props.ordinal}</div>
                 <div className="dot"></div>
-                <div>{props.school}</div>
+                <div>{props.universityName}</div>
                 <div className="dot"></div>
                 <div>{props.activity}</div>
             </ProjectBox>
