@@ -1,8 +1,12 @@
 import axios from 'axios'
 
 export const userProfileApi = async (user_id : number) =>{
+
+    //
+    const userid = 3
+
     return await axios
-            .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`)
+            .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${userid}/profile`)
             .then((response) => {
                 console.log("UserProfile",response.data.data);
                 return response.data.data;
@@ -14,28 +18,46 @@ export const userProfileApi = async (user_id : number) =>{
 } 
 
 //size 파라미터 수정 필요.
-export const userFollowingApi = async (user_id: number , page: number) => {
+export const userFollowApi = async (user_id: number , page: number , follow: string) => {
+    const userid = 3
+
     return await axios 
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/following?page=${page}&size=4`)
+        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${userid}/${follow}?page=${page}&size=16`)
         .then((response) => {
-            console.log("userFollowing ",response.data.data );
-            return response.data.data;
+            // console.log("userFollow ",response.data.data );
+            return response.data;
         })
         .catch((error)=>{
-            console.log("UserFollowingError ",error);
+            console.log("UserFollowError ",error);
             return error;
         })
 }
 
-export const userFollowerApi = async (user_id: number , page: number) => {
+export const followAddApi = async (user_id: number) => {
+
     return await axios 
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/follower?page=${page}&size=4`)
+        .post(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
         .then((response) => {
-            console.log("userFollowing ",response.data.data );
-            return response.data.data;
+            // console.log("followAdd ",response);
+            return response.data;
         })
         .catch((error)=>{
-            console.log("UserFollowingError ",error);
+            // console.log("followAddError ",error);
+            return error;
+        })
+}
+
+export const followDeleteApi = async (user_id: number) => {
+    const userid = 3
+
+    return await axios 
+        .delete(`${process.env.REACT_APP_BASE_URL}/v1/follow/${userid}`)
+        .then((response) => {
+            // console.log("followDelete ",response.data.data );
+            return response.data;
+        })
+        .catch((error)=>{
+            // console.log("followDeleteError ",error);
             return error;
         })
 }
