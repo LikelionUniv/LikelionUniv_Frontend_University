@@ -19,14 +19,20 @@ export const Redirect = () =>{
 
             const isUser = await requestLogin(provider,idtoken);
             
-            const userInfo = await requestUserInfo();
-            updateUserState(userInfo);
-
             // console.log(userInfo);
 
-            // console.log(isUser)
+            console.log(isUser)
+            if(isUser){
+                const userInfo = await requestUserInfo();
+                updateUserState(userInfo);
+                navigate("/")
+            }
+            else{
+                navigate(`/signup/${provider}`)
+            }
             
-            isUser ? navigate("/") : navigate(`/signup/${provider}`)
+            
+            // isUser ? navigate("/") : navigate(`/signup/${provider}`)
         }
 
         socialLogin();
