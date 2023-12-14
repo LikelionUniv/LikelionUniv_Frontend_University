@@ -20,6 +20,7 @@ import Recruit from './components/univrecruit/UnivRecruit';
 import UnivRecruit from './components/univrecruit/UnivRecruit';
 import { Redirect } from './components/login/Redirect';
 import UserModify from './routes/UserModify';
+import Userpage from './routes/Userpage';
 
 const router = createBrowserRouter([
     {
@@ -53,8 +54,12 @@ const router = createBrowserRouter([
                     {
                         path:'modify',
                         element : <UserModify/>
-                    }
+                    },
                 ]
+            },
+            {
+                path:'/userpage/:user_id',
+                element: <Userpage/>
             },
             {
                 path: '/project',
