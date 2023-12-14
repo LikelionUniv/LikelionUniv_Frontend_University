@@ -2,15 +2,19 @@ import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const PostCard = (props: MypagePostCardPropType) => {
     const [heart, setHeart] = useState(true);
+    const location = useLocation().pathname;
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료
         <PostCardBoxWrapper>
             <PostCardBox className="date">
                 <div>{props.createdDate}</div>
-                {props.type === '게시글' && props.isAuthor === true ? (
+                {props.type === '게시글' &&
+                props.isAuthor === true &&
+                location.includes('mypage') ? (
                     <PostModal />
                 ) : null}
             </PostCardBox>
@@ -18,7 +22,9 @@ const PostCard = (props: MypagePostCardPropType) => {
             <PostCardBox className="content">{props.body}</PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
-                    {props.type === '좋아요' && heart ? (
+                    {props.type === '좋아요' &&
+                    location.includes('mypage') &&
+                    heart ? (
                         <div
                             className="likeheart"
                             onClick={() => setHeart(!heart)}

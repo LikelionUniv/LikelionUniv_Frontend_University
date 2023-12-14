@@ -12,6 +12,7 @@ import {
 } from '../../api/mypage/userpost';
 import { userState } from '../../store/user';
 import { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 const useGetUserData = async (
     select: string,
@@ -21,47 +22,53 @@ const useGetUserData = async (
 ) => {
     const setProjectData = useSetRecoilState(myProjectData);
     const setUserData = useSetRecoilState(mypageData);
+    const location = useLocation().pathname;
+    const params = useParams();
     const user = useRecoilValue(userState);
+    const user_id =
+        location.includes('userpage') && params.user_id !== undefined
+            ? parseInt(params.user_id)
+            : user.userId;
     const likeOption = useRecoilValue(sortOptionAtom);
     useEffect(() => {
         const getData = async (select: string) => {
             if (select === '게시글') {
-                const data = await mypageGetPostApi(user.userId, page);
+                const data = await mypageGetPostApi(user_id, page);
                 setUserData(data);
             } else if (select === '댓글') {
-                const data = await mypageGetCommentApi(user.userId, page);
+                const data = await mypageGetCommentApi(user_id, page);
                 setUserData(data);
             } else if (select === '좋아요') {
                 const data =
                     searchValue !== ''
                         ? likeOption === null
                             ? await myPageGetLikeApi(
-                                  user.userId,
+                                  user_id,
                                   page,
                                   undefined,
                                   searchValue,
                               )
                             : await myPageGetLikeApi(
-                                  user.userId,
+                                  user_id,
                                   page,
                                   likeOption.value,
                                   searchValue,
                               )
                         : likeOption === null
-                        ? await myPageGetLikeApi(user.userId, page)
+                        ? await myPageGetLikeApi(user_id, page)
                         : await myPageGetLikeApi(
-                              user.userId,
+                              user_id,
                               page,
                               likeOption.value,
                           );
                 setUserData(data);
             } else {
-                const data = await mypageGetProjectApi(user.userId, page);
+                const data = await mypageGetProjectApi(user_id, page);
                 setProjectData(data);
             }
         };
         getData(select);
-    }, [select, page, likeOption, searchClick, user.userId]);
+    }, [select, page, likeOption, searchClick, user_id]);
 };
 
 export default useGetUserData;
