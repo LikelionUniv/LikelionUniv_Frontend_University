@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
-
-import { UserFollows } from './UserFollows'; //삭제예정
-
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue , useRecoilState} from 'recoil';
 import { userState } from '../../store/user';
 import {UserProfileAtom} from '../../store/mypageData'
 import useModal from '../../hooks/useModal';
 import axios from 'axios';
-import {userProfileApi, userFollowerApi,userFollowingApi } from '../../api/mypage/userinfo';
+import {userProfileApi, } from '../../api/mypage/userinfo';
 import { FollowModal } from './FollowModal';
+import {ImodalProps} from './type';
 
 export const UserInfo = () => {
     const navigate = useNavigate();
@@ -19,31 +17,46 @@ export const UserInfo = () => {
         navigate('modify');
     };
 
+    // 유저 프로필
     const UserLoginState = useRecoilValue(userState);
     const [userProfile , updateUserProfile] = useRecoilState(UserProfileAtom)
+    const userRole:{[id: string] : string }
+        = {'GUEST' : '게스트' , 'USER':'아기사자' ,'MANAGER':'운영진','UNIVERSITY_ADMIN':'대표','SUPER_ADMIN':'관리자'};
 
+    // 팔로우, 팔로잉 모달
     const { isModalOpen, openModal, closeModal } = useModal();
-    const [modalProps , setModalProps] = useState<string | undefined>('');
+    const [modalProps , setModalProps] = useState<ImodalProps>({
+        userid : -1 , 
+        follow : '',
+    });
+    //모달 창 오픈 시 스크롤 막기
+    useEffect(() => {
+        console.log(isModalOpen);
+        if (isModalOpen) {
+          document.body.style.overflow = 'hidden';
+        } else {
+          document.body.style.overflow = 'auto';
+        }
+      }, [isModalOpen]);   
+    //모달 창 핸들러 : 모달 창 열고 , props set
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        let follow = e.currentTarget.dataset.type;
+        let userid = UserLoginState.userId;
+        setModalProps({ userid , follow});
         openModal();
-        //팔로우 , 팔로잉 모달 정보 전달
-        setModalProps(e.currentTarget.dataset.type);
     };
 
-    //마운트 시 API(유저 프로필 , 팔로워/팔로잉 목록) 요청
+    //마운트 시 API(유저 프로필) 요청
     useEffect(()=>{
         const fetchData = async () => {
-
             if(UserLoginState.name != ""){
                 const userProfile = await userProfileApi(UserLoginState.userId);
                 updateUserProfile(userProfile);
             }
         }
-
         fetchData();
     },[UserLoginState])
 
-   
 
     return (
         <Wrapper>
@@ -53,7 +66,7 @@ export const UserInfo = () => {
                     {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
-                            <p>{UserLoginState.name}</p> <div>{userProfile.role}</div>{' '}
+                            <p>{UserLoginState.name}</p> <div>{userRole[userProfile.role]}</div>{' '}
                         </UserName>
                         <UserPart>
                             <p>{userProfile.universityName} {userProfile.part}</p>

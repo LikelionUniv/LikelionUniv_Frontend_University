@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled,{keyframes} from 'styled-components';
 import Cancel from '../../img/mypage/Cancel.svg';
 
 
@@ -95,3 +95,17 @@ export const ModalContent = styled.div`
     } 
 `;
 
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+export const Loading = styled.div`
+  border: 3px solid #f3f3f3; // 빛난 경계
+  border-top: 3px solid #ff7710; // 파란색 경계
+  border-radius: 50%; // 원으로 만들기
+  width: 10px;
+  height: 10px;
+  animation: ${spin} 2s linear infinite; // 애니메이션 적용
+  margin-left: 50%;
+`;
