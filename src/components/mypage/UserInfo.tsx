@@ -31,7 +31,6 @@ export const UserInfo = () => {
     });
     //모달 창 오픈 시 스크롤 막기
     useEffect(() => {
-        console.log(isModalOpen);
         if (isModalOpen) {
           document.body.style.overflow = 'hidden';
         } else {

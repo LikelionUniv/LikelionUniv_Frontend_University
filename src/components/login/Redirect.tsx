@@ -41,7 +41,7 @@ export const Redirect = () =>{
 
     return (
     <div>
-    Redirect,    Redirect    Redirect
+
     </div>
     )
 }

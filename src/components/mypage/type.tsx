@@ -62,3 +62,32 @@ export interface IuserProfile {
     role: string;
     universityName: string;
 }
+export interface IuserProfile {    
+    followerNum : number,
+    followingNum : number,
+    id : number,
+    introduction : string,
+    isMine : boolean,
+    major : string,
+    name :string,
+    ordinal : number,
+    part : string,
+    phoneNum : string,
+    profileImage : string,
+    role : string,
+    universityName : string,
+}
+
+export interface ImodalProps {
+    userid : number , 
+    follow : string|undefined,
+}
+
+export interface Ifollows {
+    userId : number,
+    name : string,
+    profileImage : string|null,
+    ordinal : number,
+    part : string,
+    isFollowed : boolean,
+}

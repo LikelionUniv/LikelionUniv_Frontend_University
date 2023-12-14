@@ -1,29 +1,48 @@
 import styled , {css} from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
-
+import {Ifollows} from './type'
+import {followAddApi, followDeleteApi} from '../../api/mypage/userinfo'
+import { useState } from 'react';
 
 interface IbuttonProps {
     delete: boolean;
 }
-interface IfollowProps {
 
-}
 //props로 팔로우 , 팔로잉 중인 사람 정보 내리기
 // 이름 , 기수 , 파트 , 이미지 
-export const FollowBox = () => {
+export const FollowBox = ({userId, name ,ordinal, part, profileImage , isFollowed}:Ifollows) => {
+
+    const [isFollow , setisFollow] = useState(isFollowed);
+    const handleFollowAddDelete = async (isFollowed: boolean) =>{
+        try{
+            if(!isFollowed){
+                const response = await followAddApi(userId);
+                // console.log(response);
+                response.isSuccess && setisFollow(!isFollow);
+            }else {
+                const response = await followDeleteApi(userId);
+                // console.log(response);
+                response.isSuccess && setisFollow(!isFollow);
+            }
+        }
+        catch(error){
+            console.log("팔로우 삭제 추가 요청 에러", error);
+        }
+
+    }
+
 
     return (
         <Follow>
             <FollowInfo>
-                <FollowAvatar/>
+                <FollowAvatar imgurl={profileImage}/>
                 <FollowProfile>
-                    <p className='inner_name'>안녕</p>
-                    <p className='inner_info'>11기 개발</p>
+                    <p className='inner_name'>{name}</p>
+                    <p className='inner_info'>{ordinal} {part}</p>
                 </FollowProfile>
             </FollowInfo>
-            <FollowBtn delete={false}>
-                {/* 팔로우 , 언팔 여부에 따라 내부 텍스트 변경 코드 */}
-                팔로우 
+            <FollowBtn delete={isFollow} onClick={()=>{handleFollowAddDelete(isFollowed)}}>
+                {isFollow ? '삭제':'팔로우'}
             </FollowBtn>
         </Follow>
     )
@@ -42,7 +61,7 @@ export const Follow = styled.div`
 
 
 export const FollowInfo = styled.div`
-    width : 161px;
+    width : 165px;
     height : 64px;
     display : flex;
 `;
