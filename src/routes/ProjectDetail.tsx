@@ -1,4 +1,5 @@
 import ProjectDetail from '../components/project/Detail/ProjectDetail';
+//import '../components/LoadScript';
 
 const Project = () => {
     return (

@@ -8,6 +8,12 @@ export const Container = styled.div`
     width: 792px;
     margin: 0 auto;
     margin-top: 64px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+        padding: 0 10px;
+    }
 `;
 
 export const Title = styled.header`
@@ -31,6 +37,7 @@ export const Caption = styled.div`
 `;
 
 export const Label = styled.div`
+    margin-bottom: 8px;
     color: #212224;
 
     font-family: 'Pretendard';
@@ -213,16 +220,13 @@ export const Field = styled.div`
     &:last-child {
         margin-bottom: 0;
     }
-
-    div {
-        margin-bottom: 8px;
-    }
 `;
 
 export const FlexField = styled.div`
     display: flex;
     justify-content: flex-start;
 `;
+
 export const Gap = styled.div`
     width: 8px;
     height: 8px;
@@ -307,6 +311,10 @@ export const Input = styled.input`
     &:focus {
         border: 1px solid var(--orange-600, #ff7710);
     }
+
+    &.etc {
+        margin-top: 8px;
+    }
 `;
 
 export const RegisterBtn = styled.button<{ active: boolean }>`
@@ -354,4 +362,8 @@ export const TechGrid = styled.div`
     grid-row-gap: 8px;
 
     margin-top: 16px;
+
+    @media screen and (max-width: 450px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 `;

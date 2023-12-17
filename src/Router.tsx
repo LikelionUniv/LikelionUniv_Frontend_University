@@ -20,6 +20,9 @@ import UnivRecruit from './components/univrecruit/UnivRecruit';
 import CommunityWrite from './components/community/write/CommunityWrite';
 import CommunityDetail from './components/community/detail/CommunityDetail';
 import CommunityPage from './routes/CommunityPage';
+import DonatePage from './routes/DonatePage';
+import DonateComponent from './components/donate/DonateComponent';
+import DonateDetail from './components/donate/DonateDetail';
 
 const router = createBrowserRouter([
     {
@@ -63,6 +66,20 @@ const router = createBrowserRouter([
             {
                 path: '/chat',
                 element: <Chat />,
+            },
+            {
+                path: '/donate',
+                element: <DonatePage />,
+                children: [
+                    {
+                        path: '',
+                        element: <DonateComponent />,
+                    },
+                    {
+                        path: ':donationHistoryId',
+                        element: <DonateDetail />,
+                    },
+                ],
             },
             {
                 path: '/recruit',

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import Notice from './Notice';
+//import SideBar from '../components/community/SideBar';
+//import Notice from '../components/community/Notice';
+//import '../components/LoadScript';
 
 const Community: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<string>('공지사항');
