@@ -3,6 +3,9 @@ import Header from './Header';
 import Like from './Like';
 import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
 import Comment from './Comment';
+import ParentBox from './ParentBox';
+import { CommentData as data} from './CommentData';
+import { ReactComponent as CommentIcon } from '../../../img/community/comment20_900.svg';
 
 const CommunityDetail = () => {
   
@@ -12,15 +15,35 @@ const CommunityDetail = () => {
             <ArrowIcon/> 플젝 모집
         </div>
         <Header />
-        {/*TextArea 본문의 경우 quill editor를 통해 글 작성자가 쓴 그대로 html형식으로 받아질 예정*/}
-        <D.TextArea> 
-        [디자이너 모집] 🦁멋사 플젝 디자이너 모집🦁
-        안녕하세요! 멋쟁이사자처럼 홍익대학교 11기 대표입니다.
-        멋쟁이사자처럼은 테크 기반 아이디어 실현을 위한 전국 규모의 창업 연합 동아리입니다.
-        멋쟁이사자처럼은 현재 60여개의 국내 대학의 연합으로 이루어져 있습니다.
+        <D.TextArea>
+          {data[0].post.body}
         </D.TextArea>
         <Like/>
+        <div className='count'>
+            <CommentIcon/> 댓글
+            <p style={{color: '#ff7710'}}>{data[0].post.commentCount}</p>
+        </div>
         <Comment />
+        {data[0].comments.map((e) => {
+          return (
+            <ParentBox key={e.commentId}
+            commentId= {e.commentId}
+            userId = {e.userId}
+            userName = {e.userName}
+            hasUserProfileImageUrl ={e.hasUserProfileImageUrl}
+            userProfileImageUrl ={e.userProfileImageUrl}
+            isLoginUserComment = {e.isLoginUserComment}
+            isAuthorComment ={e.isAuthorComment}
+            isLikedComment ={e.isLikedComment}
+            likeCount ={e.likeCount}
+            body ={e.body}
+            isDeleted ={e.isDeleted}
+            createdDate ={e.createdDate}
+            hasChildComments ={e.hasChildComments}
+            childComments ={e.childComments}
+            />
+          )
+        })}
     </D.Container>
   )
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import * as D from './DetailStyle';
+import { CommentData as data} from './CommentData';
 import { ReactComponent as UnlikedIcon } from '../../../img/community/unliked.svg';
 import { ReactComponent as LikedIcon } from '../../../img/community/liked.svg';
 
@@ -18,9 +19,9 @@ const Like = () => {
                 onMouseLeave={() => setHovering(false)}
                 onClick={toggleLike}>
                 {isLiked || hovering ? (
-                    <><LikedIcon /> 좋아요 16</>
+                    <><LikedIcon /> 좋아요 {data[0].post.likeCount}</>
                 ) : (
-                    <><UnlikedIcon /> 좋아요 16</>
+                    <><UnlikedIcon /> 좋아요 {data[0].post.likeCount}</>
                 )}
             </div>
         </D.Like>

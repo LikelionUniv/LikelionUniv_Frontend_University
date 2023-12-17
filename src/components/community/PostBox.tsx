@@ -72,7 +72,7 @@ const Dot = styled.div`
     border-radius: 50%;
 `;
 
-//디테일 수정 필요
+
 export const Box = styled.div<{ img?: string | null }>`
     line-height: 150%;
     font-weight: 500;

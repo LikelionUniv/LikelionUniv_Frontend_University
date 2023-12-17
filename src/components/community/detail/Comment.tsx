@@ -1,6 +1,9 @@
 import * as D from './DetailStyle';
 import { useRef, useCallback, useState } from 'react';
-import { ReactComponent as CommentIcon } from '../../../img/community/comment20_900.svg';
+
+export interface RegBtnProps {
+    inputEmpty: boolean;
+}
 
 const Comment = () => {
     const [inputValue, setInputValue] = useState<string>('');
@@ -14,10 +17,6 @@ const Comment = () => {
     }, []);
   return (
     <D.CommentWrapper>
-        <div className='count'>
-            <CommentIcon/> 댓글
-            <p style={{color: '#ff7710'}}> 3</p>
-        </div>
         <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
             <textarea 
             placeholder='댓글을 남겨보세요.'
@@ -30,7 +29,7 @@ const Comment = () => {
             }}
             className='text'/>
         </D.WriteComment>
-        <D.RegBtn>등록하기</D.RegBtn>
+        <D.RegBtn inputEmpty={inputValue === ''}>등록하기</D.RegBtn>
         
         
     </D.CommentWrapper>

@@ -1,11 +1,14 @@
 import Editor from './Editor';
 import * as W from './WriteStyle'
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const CommunityWrite = () => {
-
-    const [selectedBoard, setSelectedBoard] = useState<string>('');
-    const [selectedSubBoard, setSelectedSubBoard] = useState<string>('');
+    const location = useLocation();
+    const info = { ...location.state };
+    const [selectedBoard, setSelectedBoard] = useState<string>('' || info.main);
+    const [selectedSubBoard, setSelectedSubBoard] = useState<string>('' || info.sub);
+    console.log(info.title)
 
     const BoardClick = (boardName: string) => {
         setSelectedBoard(boardName);
@@ -18,7 +21,7 @@ const CommunityWrite = () => {
 
     const SubBoard = () => {
         switch (selectedBoard) {
-            case '멋사 중앙':
+            case '멋대 중앙':
                 return (
                     <div className='subBoard'>
                         <W.SubBoardItem onClick={() => SubBoardClick('공지사항')} isSelected={selectedSubBoard === '공지사항'}>공지사항</W.SubBoardItem>
@@ -56,13 +59,13 @@ const CommunityWrite = () => {
             <W.Tab>
                 <p className='sub'>게시판 선택</p>
                 <div className='board'>
-                    <W.BoardItem onClick={() => BoardClick('멋사 중앙')} isSelected={selectedBoard === '멋사 중앙'}>멋사 중앙</W.BoardItem>
+                    <W.BoardItem onClick={() => BoardClick('멋대 중앙')} isSelected={selectedBoard === '멋대 중앙'}>멋대 중앙</W.BoardItem>
                     <W.BoardItem onClick={() => BoardClick('자유게시판')} isSelected={selectedBoard === '자유게시판'}>자유게시판</W.BoardItem>
                     <W.BoardItem onClick={() => BoardClick('멋사 오버플로우')} isSelected={selectedBoard === '멋사 오버플로우'}>멋사 오버플로우</W.BoardItem>
                 </div>
                 {SubBoard()}
             </W.Tab>
-            <Editor />
+            <Editor contents={info.body} title={info.title}/>
             <div className='btns'>
                 <W.CancelBtn>취소하기</W.CancelBtn>
                 <W.RegBtn>등록하기</W.RegBtn>

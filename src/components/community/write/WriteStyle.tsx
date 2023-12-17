@@ -137,6 +137,10 @@ export const CancelBtn = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 30px */
+
+    &:hover {
+        background: var(--Grey-500, #D1D4D8);
+    }
 `
 
 export const RegBtn = styled.div`
@@ -153,4 +157,8 @@ export const RegBtn = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 30px */
+
+    &:hover {
+        background: var(--Grey-900, #212224);
+    }
 `
