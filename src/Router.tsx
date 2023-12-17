@@ -73,10 +73,10 @@ const router = createBrowserRouter([
                         element: <DonateComponent />,
                     },
                     {
-                        path: ":donationHistoryId",
+                        path: ':donationHistoryId',
                         element: <DonateDetail />,
-                    }
-                ]
+                    },
+                ],
             },
             {
                 path: '/recruit',

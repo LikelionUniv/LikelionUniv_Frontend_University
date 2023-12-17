@@ -7,17 +7,15 @@ interface DonatePostListProps {
     posts: IPost[];
 }
 
-const PostList: React.FC<DonatePostListProps> = ({posts}: DonatePostListProps) => {
+const PostList: React.FC<DonatePostListProps> = ({
+    posts,
+}: DonatePostListProps) => {
     return (
         <Wrapper>
             <>
-                {posts.map((e, index) => { // key prop 추가
-                    return (
-                        <DonatePostBox
-                            key={index}
-                            post={e}
-                        />
-                    );
+                {posts.map((e, index) => {
+                    // key prop 추가
+                    return <DonatePostBox key={index} post={e} />;
                 })}
             </>
         </Wrapper>

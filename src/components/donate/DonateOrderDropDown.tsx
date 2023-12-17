@@ -4,16 +4,16 @@ import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
 
 interface OrderDropDownProps {
-    setOrder: React.Dispatch<React.SetStateAction<string | undefined>>
+    setOrder: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const orderOptions = [
-    { value: 1, label: '날짜순'},
-    { value: 2, label: '조회순'},
+    { value: 1, label: '날짜순' },
+    { value: 2, label: '조회순' },
 ];
 
 //나중에 api 연결할 때 수정
-const OrderDropDown = ({setOrder}: OrderDropDownProps) => {
+const OrderDropDown = ({ setOrder }: OrderDropDownProps) => {
     const handleSortChange = (selectedOption: OptionType | null) => {
         if (!selectedOption) return;
 
@@ -87,7 +87,7 @@ const orderStyle = {
         height: state.isFocused ? '24px' : '24px',
         borderRadius: '6px',
         backgroundColor: 'white',
-        
+
         boxShadow: '0 0 0 0px transparent',
         '&:hover': {
             borderColor: 'transparent',

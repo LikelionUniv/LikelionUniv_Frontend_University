@@ -6,10 +6,10 @@ import { IPost } from './DonateComponent';
 import { useNavigate } from 'react-router-dom';
 
 interface DonatePostBoxProps {
-    post: IPost
+    post: IPost;
 }
 
-function DonatePostBox({post}: DonatePostBoxProps) {
+function DonatePostBox({ post }: DonatePostBoxProps) {
     const navigate = useNavigate();
 
     const goDetail = (id: number) => {
@@ -42,7 +42,7 @@ function DonatePostBox({post}: DonatePostBoxProps) {
             </BoxWrapper>
         </Wrapper>
     );
-};
+}
 
 export default DonatePostBox;
 
@@ -53,10 +53,10 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    border-top: 1px solid var(--Grey-400, #DCDFE3);
+    border-top: 1px solid var(--Grey-400, #dcdfe3);
 
     &:last-child {
-        border-bottom: 1px solid var(--Grey-400, #DCDFE3);
+        border-bottom: 1px solid var(--Grey-400, #dcdfe3);
     }
 `;
 
@@ -75,7 +75,7 @@ export const Box = styled.div<{ img?: string | null }>`
     line-height: 150%;
     font-weight: 500;
     &.date {
-        color: var(--Grey-700, #868C94);
+        color: var(--Grey-700, #868c94);
 
         /* Body/14_Medium */
         font-family: Pretendard;
@@ -83,7 +83,6 @@ export const Box = styled.div<{ img?: string | null }>`
         font-style: normal;
         font-weight: 500;
         line-height: 150%; /* 21px */
-
     }
     &.title {
         color: var(--Grey-900, #212224);
@@ -127,7 +126,7 @@ export const Box = styled.div<{ img?: string | null }>`
                     font-size: 14px;
                     font-style: normal;
                     font-weight: 700;
-                    line-height: 150%; 
+                    line-height: 150%;
                     width: 37px;
                     height: 21px;
                     gap: 6px;

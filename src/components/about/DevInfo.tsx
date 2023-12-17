@@ -24,6 +24,6 @@ const DevInfo: React.FC<InfoProp> = ({
             </div>
         </D.InfoBox>
     );
-};
+}
 
 export default DevInfo;
