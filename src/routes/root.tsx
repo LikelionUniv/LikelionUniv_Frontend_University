@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Footer from '../components/layout/Footer';
 import { AccessToken, RefreshToken } from '../config';
+//import '../components/LoadScript';
 
 function root() {
     // 로그인이 되지 않아서 제 액세스토큰과 리프래시토큰 넣어둡니다.

@@ -1,12 +1,13 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+//import '../components/LoadScript';
 
 const DonatePage = () => {
-  return (
-    <>
-      <Outlet />
-    </>
-  )
-}
+    return (
+        <>
+            <Outlet />
+        </>
+    );
+};
 
-export default DonatePage
+export default DonatePage;
