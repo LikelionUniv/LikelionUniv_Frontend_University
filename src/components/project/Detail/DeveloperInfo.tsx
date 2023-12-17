@@ -203,7 +203,7 @@ interface RoleMapping {
     백: string[];
 }
 
-const PeopleInfo: FunctionComponent = () => {
+const DeveloperInfo: FunctionComponent = () => {
     const [projectData, setProjectData] = useState<ProjectData | null>(null);
     const [membersData, setMembersData] = useState<ProjectMember[]>([]);
     const [userDetails, setUserDetails] = useState<UserDetail[]>([]);
@@ -298,4 +298,4 @@ const PeopleInfo: FunctionComponent = () => {
     );
 };
 
-export default PeopleInfo;
+export default DeveloperInfo;

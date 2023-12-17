@@ -1,7 +1,7 @@
 import { FunctionComponent, useCallback, useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import GoBackButton from './GoBackButton';
-import PeopleInfo from './PeopleInfo';
+import DeveloperInfo from './DeveloperInfo';
 import Styles from './Styles';
 import {
     LeftArrow,
@@ -753,7 +753,7 @@ const ProjectDetail: FunctionComponent = () => {
                         <HorizontalLine1/>
                         <HorizontalLine2/>
                     </LineContainer>
-                    <PeopleInfo />
+                    <DeveloperInfo />
                     <LineContainer>
                         <HorizontalLine3/>
                         <HorizontalLine4/>
