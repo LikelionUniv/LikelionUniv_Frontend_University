@@ -3,7 +3,7 @@ import { jwtDecode } from 'jwt-decode';
 import reissue from './reissue';
 
 export const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_SERVER,
+    baseURL: 'https://stag.likelionuniv.com'
 });
 
 axiosInstance.interceptors.request.use(async config => {
