@@ -125,7 +125,7 @@ const Nav = () => {
                             <p>참여대학</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/project" style={{ visibility: 'hidden' }}>
+                        <Text to="/project">
                             <p>프로젝트</p>
                             <img src={navarrow} />
                         </Text>

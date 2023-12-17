@@ -29,6 +29,9 @@ const roleTrackStyle = {
             borderColor: '#ff7710',
             border: '1px solid #ff7710',
         },
+        '@media screen and (max-width: 450px)': {
+            width: '130px',
+        },
     }),
     menu: (provided: any) => ({
         ...provided,
@@ -40,6 +43,9 @@ const roleTrackStyle = {
         flexDirection: 'column',
         alignItems: 'center',
         width: '180px',
+        '@media screen and (max-width: 450px)': {
+            width: '130px',
+        },
     }),
     menuList: (provided: any) => ({
         ...provided,
@@ -53,6 +59,9 @@ const roleTrackStyle = {
         overflowY: 'scroll',
         '&::-webkit-scrollbar': {
             display: 'none',
+        },
+        '@media screen and (max-width: 450px)': {
+            width: '130px',
         },
     }),
     option: (provided: any, state: any) => ({
@@ -76,6 +85,9 @@ const roleTrackStyle = {
             : provided.backgroundColor,
         '&:active': {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
+        },
+        '@media screen and (max-width: 450px)': {
+            width: '130px',
         },
     }),
 };

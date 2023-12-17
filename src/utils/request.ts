@@ -50,8 +50,6 @@ async function request<T, R, P>({ uri, method, data, params }: IRequest<T, P>) {
         );
         return response.data;
     } catch (error) {
-        console.log(error);
-
         if (axios.isAxiosError(error)) {
             const serverError = error as AxiosError<IError>;
             if (serverError && serverError.response) {
