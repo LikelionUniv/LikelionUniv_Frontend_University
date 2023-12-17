@@ -1,12 +1,13 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 //import '../components/LoadScript';
 
-const Project = () => {
+const DonatePage = () => {
     return (
-        <div className="pDiv">
+        <>
             <Outlet />
-        </div>
+        </>
     );
 };
 
-export default Project;
+export default DonatePage;
