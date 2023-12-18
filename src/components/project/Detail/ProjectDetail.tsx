@@ -673,7 +673,12 @@ const ProjectDetail: FunctionComponent = () => {
 
     // 서비스 바로가기 버튼 클릭 이벤트
     const onButton1Click = useCallback(() => {
-        if (projectData?.productionUrl) window.open(projectData.productionUrl);
+        if (projectData?.productionUrl) {
+            const fullUrl = projectData.productionUrl.startsWith('http://') || projectData.productionUrl.startsWith('https://') 
+                ? projectData.productionUrl 
+                : `http://${projectData.productionUrl}`;
+            window.open(fullUrl);
+        }
     }, [projectData]);
 
     // 모달 컨텐츠 클릭 시 이벤트 전파 방지
