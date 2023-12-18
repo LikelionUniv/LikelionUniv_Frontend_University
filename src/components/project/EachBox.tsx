@@ -22,7 +22,10 @@ function EachBox({ project }: IEachBox) {
     return (
         <B.Box onClick={() => onClick(project.id)}>
             <div style={{ position: 'relative' }}>
-                <B.SubBox width={innerWidth} url={`https://${project.imageUrl[0]}`}>
+                <B.SubBox
+                    width={innerWidth}
+                    url={`https://${project.imageUrl[0]}`}
+                >
                     <B.BlackBox
                         clicked={clicked}
                         style={{

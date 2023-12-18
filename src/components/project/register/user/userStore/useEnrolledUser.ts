@@ -90,9 +90,9 @@ function useEnrolledUser(): RUseEnrolledUser {
         [backend, setBackend],
     );
 
-    const clearUser = useCallback(() => {        
+    const clearUser = useCallback(() => {
         const users = entire;
-        
+
         users.backend.clear();
         users.frontend.clear();
         users.plan.clear();

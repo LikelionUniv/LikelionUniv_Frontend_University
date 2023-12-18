@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     }
 `;
 
-export const Background = styled.div`
+export const Background = styled.div<{ isCountDownView: boolean }>`
     width: 100%;
     background-color: #000;
     position: relative;
@@ -65,11 +65,17 @@ export const Background = styled.div`
             margin-top: 22%;
         }
         .new-text {
+            display: ${props => (props.isCountDownView ? 'block' : 'none')};
             font-family: Pretendard;
             font-size: 30px;
             font-weight: 700;
             color: #c6f959;
             margin-top: 8%;
+        }
+
+        .hide-text {
+            display: ${props => (props.isCountDownView ? 'none' : 'block')};
+            margin-top: 267px;
         }
 
         @media (max-width: 1280px) {

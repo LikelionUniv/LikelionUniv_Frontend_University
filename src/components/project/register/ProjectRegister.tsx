@@ -68,8 +68,11 @@ interface Image {
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
-    const { userLength: memberLength, userIdList: memberIdList, clearUser } =
-        useEnrolledUser();
+    const {
+        userLength: memberLength,
+        userIdList: memberIdList,
+        clearUser,
+    } = useEnrolledUser();
 
     const navigate = useNavigate();
 
@@ -292,7 +295,7 @@ const ProjectRegister = () => {
     useEffect(() => {
         return () => {
             clearUser();
-        }
+        };
     }, [clearUser]);
 
     return (

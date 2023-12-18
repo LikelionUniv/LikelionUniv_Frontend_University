@@ -15,7 +15,7 @@ export const Box = styled.div`
     box-sizing: border-box;
 `;
 
-export const SubBox = styled.div<{ width: number, url: string }>`
+export const SubBox = styled.div<{ width: number; url: string }>`
     position: relative;
     width: 100%;
     height: 216px;

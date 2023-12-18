@@ -3,14 +3,14 @@ import { jwtDecode } from 'jwt-decode';
 import reissue from './reissue';
 
 export const axiosInstance = axios.create({
-    baseURL: 'https://stag.likelionuniv.com'
+    baseURL: 'https://stag.likelionuniv.com',
 });
 
 axiosInstance.interceptors.request.use(async config => {
     if (!config.headers) {
         return config;
     }
-    
+
     const token = localStorage.getItem('access_token');
 
     if (token !== null) {
@@ -21,7 +21,7 @@ axiosInstance.interceptors.request.use(async config => {
         const now = Math.floor(Date.now() / 1000);
 
         // access token이 만료됐을 때
-        if (expiredAt < now) {        
+        if (expiredAt < now) {
             const reissueToken = await reissue();
             if (reissueToken === undefined) throw new Error('에러');
 

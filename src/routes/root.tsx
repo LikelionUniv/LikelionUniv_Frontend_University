@@ -12,7 +12,7 @@ function root() {
     localStorage.clear();
     localStorage.setItem('access_token', AccessToken);
     localStorage.setItem('refresh_token', RefreshToken);
-    
+
     return (
         <>
             <Nav />

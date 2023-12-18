@@ -7,14 +7,14 @@ import useServerSidePaginationTemp from '../../hooks/useServerSidePaginationTemp
 
 export interface ProjectAPI {
     uri: string;
-    params?: PaginationParams
+    params?: PaginationParams;
     ordinal?: number;
 }
 
 // 백엔드에서 고치면 사라져야함.
 interface PaginationParams {
-    pageNo: number
-    ordinal?: number
+    pageNo: number;
+    ordinal?: number;
 }
 
 export interface Project {
@@ -43,7 +43,7 @@ export interface Member {
 const PAGESIZE = {
     FULL: 12,
     HALF: 12,
-}
+};
 
 function ProjectList() {
     const [projectApi, setProjectApi] = useState<ProjectAPI>({
@@ -58,10 +58,11 @@ function ProjectList() {
     const { innerWidth } = useInnerWidth();
 
     // api 연동되면 아래 코드를 사용할 예정
-    const {curPageItem: projects, renderPaginationBtn} = useServerSidePaginationTemp<Project, PaginationParams>({
-        uri: projectApi.uri,
-        params: projectApi.params,
-    });
+    const { curPageItem: projects, renderPaginationBtn } =
+        useServerSidePaginationTemp<Project, PaginationParams>({
+            uri: projectApi.uri,
+            params: projectApi.params,
+        });
 
     // 1024부터는 페이지 사이즈는 6
     useEffect(() => {
@@ -77,9 +78,7 @@ function ProjectList() {
         <P.Container>
             <Header setProjectApi={setProjectApi} />
             <Projectbox projects={projects} />
-            <P.PaginationWrapper>
-                {renderPaginationBtn()}
-            </P.PaginationWrapper>
+            <P.PaginationWrapper>{renderPaginationBtn()}</P.PaginationWrapper>
         </P.Container>
     );
 }

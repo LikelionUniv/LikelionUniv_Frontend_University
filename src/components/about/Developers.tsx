@@ -189,7 +189,7 @@ const Developers = () => {
                 </D.PeopleBox>
             </D.Container>
         </D.Wrapper>
-    )
-}
+    );
+};
 
 export default Developers;

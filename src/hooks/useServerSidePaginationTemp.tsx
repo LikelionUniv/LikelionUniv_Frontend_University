@@ -4,7 +4,7 @@ import Pagination from '../components/mypage/Pagination';
 
 interface IuseServerSidePagination<P> {
     uri: string;
-    params?: P
+    params?: P;
 }
 
 interface ReturnuseServerSidePagination<T> {
@@ -13,14 +13,17 @@ interface ReturnuseServerSidePagination<T> {
     renderPaginationBtn: () => JSX.Element;
 }
 
-function useServerSidePaginationTemp<T, P>({uri, params}: IuseServerSidePagination<P>): ReturnuseServerSidePagination<T> {
+function useServerSidePaginationTemp<T, P>({
+    uri,
+    params,
+}: IuseServerSidePagination<P>): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [pageLength, setPageLength] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    useEffect(() => {        
-        const fetchData = async (page: number): Promise<T[]> => {            
+    useEffect(() => {
+        const fetchData = async (page: number): Promise<T[]> => {
             setLoading(true);
             const response = await request<null, T[], P>({
                 uri,
@@ -32,7 +35,7 @@ function useServerSidePaginationTemp<T, P>({uri, params}: IuseServerSidePaginati
                 setLoading(false);
                 throw Error('서버 에러');
             }
-            
+
             setPageLength(Math.ceil(response.data.length / 12));
             setLoading(false);
             return response.data;
