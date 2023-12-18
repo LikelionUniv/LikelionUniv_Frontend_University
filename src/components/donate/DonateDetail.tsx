@@ -78,7 +78,7 @@ function DonateDetail() {
                         <D.Nav>
                             <D.Left>
                                 <D.Profile
-                                    src={data.authorProfileImage}
+                                    src={`https://${data.authorProfileImage}`}
                                     alt="profile"
                                 />
                                 <D.User>{data.authorName}</D.User>

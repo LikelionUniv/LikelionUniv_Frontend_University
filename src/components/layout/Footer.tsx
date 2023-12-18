@@ -113,6 +113,14 @@ function Footer(): JSX.Element {
                             >
                                 MODERN LION <ArrowIcon />
                             </a>
+                            <a
+                                href="https://www.likelion.net"
+                                target="_blank"
+                                className="link text"
+                                rel="noreferrer"
+                            >
+                                LIKELION <ArrowIcon />
+                            </a>
                         </div>
                         <div className="section">
                             <div className="title">POLICY</div>
