@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const targetDate = '2023-12-17 23:59:59';
+export const targetDate = '2023-12-17 23:59:59';
 
 const getRemainTime = (countDown: number) => {
     const days = Math.floor(countDown / (1000 * 60 * 60 * 24));
@@ -18,8 +18,8 @@ const getRemainTime = (countDown: number) => {
     ];
 };
 
-type Props = { isFloating?: boolean };
-const CountDown = ({ isFloating }: Props) => {
+type Props = { isFloating?: boolean; isCountDownView?: boolean };
+const CountDown = ({ isFloating, isCountDownView }: Props) => {
     const [countDown, setCountDown] = useState(
         new Date(targetDate).getTime() - new Date().getTime(),
     );
@@ -49,29 +49,31 @@ const CountDown = ({ isFloating }: Props) => {
                     </div>
                 </FloatingContainer>
             ) : (
-                <Container>
-                    <div className="text">모집 종료까지</div>
-                    <div className="timer">
-                        <div className="time-container text-container">
-                            <div>DAYS</div>
-                            <p className="colon">:</p>
-                            <div>HOURS</div>
-                            <p className="colon">:</p>
-                            <div>MINS</div>
-                            <p className="colon">:</p>
-                            <div>SECS</div>
+                isCountDownView && (
+                    <Container>
+                        <div className="text">모집 종료까지</div>
+                        <div className="timer">
+                            <div className="time-container text-container">
+                                <div>DAYS</div>
+                                <p className="colon">:</p>
+                                <div>HOURS</div>
+                                <p className="colon">:</p>
+                                <div>MINS</div>
+                                <p className="colon">:</p>
+                                <div>SECS</div>
+                            </div>
+                            <div className="time-container">
+                                <div>{days}</div>
+                                <p className="colon">:</p>
+                                <div>{hours}</div>
+                                <p className="colon">:</p>
+                                <div>{minutes}</div>
+                                <p className="colon">:</p>
+                                <div>{seconds}</div>
+                            </div>
                         </div>
-                        <div className="time-container">
-                            <div>{days}</div>
-                            <p className="colon">:</p>
-                            <div>{hours}</div>
-                            <p className="colon">:</p>
-                            <div>{minutes}</div>
-                            <p className="colon">:</p>
-                            <div>{seconds}</div>
-                        </div>
-                    </div>
-                </Container>
+                    </Container>
+                )
             )}
         </>
     );
@@ -80,8 +82,8 @@ const CountDown = ({ isFloating }: Props) => {
 export default CountDown;
 
 const Container = styled.div`
-    width: calc(65% + 64px);
     display: flex;
+    width: calc(65% + 64px);
     justify-content: space-between;
     align-items: flex-end;
     margin-top: 8%;

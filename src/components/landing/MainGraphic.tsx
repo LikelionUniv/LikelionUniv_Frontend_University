@@ -12,7 +12,7 @@ import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_lo
 import { ReactComponent as PixelFireworksIcon } from '../../img/landing/pixel_fireworks.svg';
 import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_singing.svg';
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
-import CountDown from './CountDown';
+import CountDown, { targetDate } from './CountDown';
 
 export const recruitURL = ' https://forms.gle/j4CJ35VwWgePBEJX6';
 
@@ -63,17 +63,26 @@ const MainGraphic = () => {
         if (targetRef.current) io.observe(targetRef.current);
     }, []);
 
+    const [isCountDownView, setIsCountDownView] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsCountDownView(
+            new Date(targetDate).getTime() - new Date().getTime() > 0,
+        );
+    }, []);
+
     return (
         <MG.Wrapper>
             <div ref={targetRef} className="refDiv">
-                <MG.Background>
+                <MG.Background isCountDownView={isCountDownView}>
                     <div>
                         <div className="inner">
                             <img src={maintext} />
                             <div className="new-text">
                                 12기 신규 대학 모집 중!
                             </div>
-                            <CountDown />
+                            <div className="hide-text" />
+                            <CountDown isCountDownView={isCountDownView} />
                             <a
                                 className="btn"
                                 href={recruitURL}
@@ -116,7 +125,7 @@ const MainGraphic = () => {
                 <div className="container" ref={desRef1}>
                     <div className="title">국내 최대 규모 IT 창업 동아리</div>
                     <div className="title">
-                        <PixelLionIcon /> 멋쟁이사자처럼
+                        사단법인 멋쟁이사자처럼이 운영합니다. <PixelLionIcon />
                     </div>
                     <div className="subtitle">
                         ”내 아이디어를 내 손으로 실현하자!”

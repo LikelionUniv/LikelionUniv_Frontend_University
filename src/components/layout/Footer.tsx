@@ -15,7 +15,7 @@ import logo2 from '../../img/landing/logo2.svg';
 import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
 
-export interface FooterData{
+export interface FooterData {
     logo?: string;
 }
 
@@ -113,6 +113,14 @@ function Footer(): JSX.Element {
                             >
                                 MODERN LION <ArrowIcon />
                             </a>
+                            <a
+                                href="https://www.likelion.net"
+                                target="_blank"
+                                className="link text"
+                                rel="noreferrer"
+                            >
+                                LIKELION <ArrowIcon />
+                            </a>
                         </div>
                         <div className="section">
                             <div className="title">POLICY</div>
@@ -133,15 +141,38 @@ function Footer(): JSX.Element {
                             </div>
                         </div>
                         <div className="section">
-                        <div className="title">관련사이트</div>
-                            <a href="https://www.acrc.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo2} alt="국민권익위원회" style={{display:"block" ,padding:"8px 0px", marginLeft:"-4px"}}/>
+                            <div className="title">관련사이트</div>
+                            <a
+                                href="https://www.acrc.go.kr/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={logo2}
+                                    alt="국민권익위원회"
+                                    style={{
+                                        display: 'block',
+                                        padding: '8px 0px',
+                                        marginLeft: '-4px',
+                                    }}
+                                />
                             </a>
-                            
-                            <a href="https://www.nts.go.kr/" target="_blank" rel="noreferrer">
-                                <img src={logo1} alt="국세청" style={{display:"block ",marginLeft:"-4px"}}/>
+
+                            <a
+                                href="https://www.nts.go.kr/"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={logo1}
+                                    alt="국세청"
+                                    style={{
+                                        display: 'block ',
+                                        marginLeft: '-4px',
+                                    }}
+                                />
                             </a>
-                    </div>
+                        </div>
                     </div>
                 </div>
             </F.Info>

@@ -5,9 +5,18 @@ export const HeaderContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    width: 1200px;
+    width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
     margin-top: 64px;
+    box-sizing: border-box;
+
+    overflow: auto;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 export const TabContainer = styled.div`
@@ -55,6 +64,7 @@ export const Divider = styled.div`
 
 export const WriteBtn = styled.button`
     display: inline-flex;
+    margin-left: 20px;
     padding: 8px 20px 8px 14px;
     justify-content: center;
     align-items: center;
