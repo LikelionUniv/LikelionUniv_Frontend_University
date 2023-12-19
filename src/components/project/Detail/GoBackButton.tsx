@@ -1,8 +1,6 @@
-import { FunctionComponent,useCallback } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { Property } from 'csstype';
 import styled from 'styled-components';
-
-
 
 interface GoBackButtonType {
     ArrowLeft?: string;
@@ -27,14 +25,8 @@ const ArrowLeftImg = styled.img<{
     position: relative;
     width: 20px;
     height: 20px;
-    ${p =>
-        p.ArrowLeftWidth
-            ? `width: ${p.ArrowLeftWidth};`
-            : ''}
-    ${p =>
-        p.ArrowLeftHeight
-            ? `height: ${p.ArrowLeftHeight};`
-            : ''}
+    ${p => (p.ArrowLeftWidth ? `width: ${p.ArrowLeftWidth};` : '')}
+    ${p => (p.ArrowLeftHeight ? `height: ${p.ArrowLeftHeight};` : '')}
 `;
 
 const B = styled.b<{ bDisplay?: Property.Display }>`

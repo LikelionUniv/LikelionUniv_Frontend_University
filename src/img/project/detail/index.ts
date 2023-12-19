@@ -17,6 +17,4 @@ export { default as TransRightOn } from './icon-transparentRightOn.svg';
 export { default as Chevron_Left } from './Chevron_Left.svg';
 export { default as Chevron_Right } from './Chevron_Right.svg';
 
-
 export { default as Close } from './icon-close.svg';
-
