@@ -40,7 +40,7 @@ const Footer = () => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    
+
     // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
     const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
     const io = new IntersectionObserver(

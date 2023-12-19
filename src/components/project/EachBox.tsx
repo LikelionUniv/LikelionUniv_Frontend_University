@@ -9,25 +9,36 @@ interface IEachBox {
 }
 
 function EachBox({ project }: IEachBox) {
-    const [clicked, setClicked] = useState(false);
+    const [hovered, setHovered] = useState(false);
     const { innerWidth } = useInnerWidth();
 
     const navigate = useNavigate();
 
     const onClick = (id: number): void => {
-        setClicked(true);
         navigate(`/project/${id}`);
     };
 
+    const onMouseHover = () => {
+        setHovered(true);
+    };
+
+    const onMouseLeave = () => {
+        setHovered(false);
+    };
+
     return (
-        <B.Box onClick={() => onClick(project.id)}>
+        <B.Box
+            onMouseEnter={onMouseHover}
+            onMouseLeave={onMouseLeave}
+            onClick={() => onClick(project.id)}
+        >
             <div style={{ position: 'relative' }}>
                 <B.SubBox
                     width={innerWidth}
                     url={`https://${project.imageUrl[0]}`}
                 >
                     <B.BlackBox
-                        clicked={clicked}
+                        hovered={hovered}
                         style={{
                             position: 'absolute',
                             bottom: 0,
@@ -39,10 +50,10 @@ function EachBox({ project }: IEachBox) {
                 </B.SubBox>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <B.SmallBox1 clicked={clicked}>
+                <B.SmallBox1 hovered={hovered}>
                     {project.serviceName}
                 </B.SmallBox1>
-                <B.SmallBox2 clicked={clicked}>
+                <B.SmallBox2 hovered={hovered}>
                     {project.description}
                     <br />
                     {project.content}

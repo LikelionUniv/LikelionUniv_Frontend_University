@@ -105,10 +105,7 @@ const MainGraphic = () => {
                             </div>
                             <div className="hide-text" />
                             <CountDown isCountDownView={isCountDownView} />
-                            <button
-                                className="btn"
-                                onClick={openModal}
-                            >
+                            <button className="btn" onClick={openModal}>
                                 모집 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
                             </button>
@@ -121,7 +118,10 @@ const MainGraphic = () => {
                             closeModal={closeModal}
                         />
                     ) : (
-                        <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+                        <FooterModal
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
                     )}
                 </MG.Background>
                 <MG.Line ref={targetRef}>
