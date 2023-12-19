@@ -34,7 +34,7 @@ export const TransLeft = styled.img`
 export const TransRight = styled.img`
     position: absolute;
     top: 50%;
-    right: 15%;
+    right: 0%;
     z-index: 3;
     transform: translateY(-50%);
     display: none;
