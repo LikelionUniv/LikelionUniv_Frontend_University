@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import reissue from './reissue';
+import axios, { AxiosError } from 'axios';
+import { IError } from './request';
 
 export const axiosInstance = axios.create({
     baseURL: 'https://stag.likelionuniv.com',
@@ -15,22 +14,45 @@ axiosInstance.interceptors.request.use(async config => {
 
     if (token !== null) {
         config.headers.Authorization = `Bearer ${token}`;
-
-        // access token 만료 검증
-        const expiredAt = jwtDecode(token).exp as number;
-        const now = Math.floor(Date.now() / 1000);
-
-        // access token이 만료됐을 때
-        if (expiredAt < now) {
-            const reissueToken = await reissue();
-            if (reissueToken === undefined) throw new Error('에러');
-
-            localStorage.setItem('access_token', reissueToken.accessToken);
-            localStorage.setItem('refresh_token', reissueToken.refreshToken);
-
-            config.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
-        }
     }
 
     return config;
 });
+
+axiosInstance.interceptors.response.use(
+    response => {
+        return response;
+    },
+    error => {
+        const axiosError = getAxiosError(error);
+        // const {config} = error; 
+
+        // // 리프레시도 만료된 경우나 잘못된 토큰인 경우
+        // if (axiosError?.code === 'TOKEN_401_1') {
+        //     return Promise.reject(error);
+        // }
+
+        // // 액세스 토큰 만료
+        // if (axiosError?.code === 'TOKEN_401_4') {
+        //     const originRequest = config;
+        //     const reissueToken = await reissue();
+
+        //     setAccessAndRefresh(reissueToken.accessToken, reissueToken.refreshToken);
+        //     originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+
+        //     return axiosInstance(originRequest);
+        // }
+        alert(axiosError?.message);
+        return Promise.reject(error);
+    },
+);
+
+const getAxiosError = (error: AxiosError): IError | undefined => {
+    const serverError = error as AxiosError<IError>;
+    return serverError.response?.data;
+};
+
+// const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
+//     localStorage.setItem('access_token', accessToken);
+//     localStorage.setItem('refresh_token', refreshToken);
+// }

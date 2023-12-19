@@ -49,10 +49,6 @@ function DonateDetail() {
                 },
             });
 
-            if (response === undefined) {
-                throw new Error('서버 에러');
-            }
-
             setData(response.data);
         };
 

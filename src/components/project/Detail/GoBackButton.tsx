@@ -1,9 +1,9 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { Property } from 'csstype';
 import styled from 'styled-components';
 
 interface GoBackButtonType {
-    icon24PixelArrowLeft?: string;
+    ArrowLeft?: string;
     GoBackButtonCursor?: Property.Cursor;
     GoBackButtonBorder?: Property.Border;
     GoBackButtonPadding?: Property.Padding;
@@ -11,28 +11,22 @@ interface GoBackButtonType {
     GoBackButtonPosition?: Property.Position;
     GoBackButtonTop?: Property.Top;
     GoBackButtonLeft?: Property.Left;
-    icon24PixelArrowLeftWidth?: Property.Width;
-    icon24PixelArrowLeftHeight?: Property.Height;
+    ArrowLeftWidth?: Property.Width;
+    ArrowLeftHeight?: Property.Height;
     bDisplay?: Property.Display;
     marginTop?: Property.MarginTop;
     onClick?: () => void;
 }
 
-const Icon24pixelarrowLeft = styled.img<{
-    icon24PixelArrowLeftWidth?: Property.Width;
-    icon24PixelArrowLeftHeight?: Property.Height;
+const ArrowLeftImg = styled.img<{
+    ArrowLeftWidth?: Property.Width;
+    ArrowLeftHeight?: Property.Height;
 }>`
     position: relative;
     width: 20px;
     height: 20px;
-    ${p =>
-        p.icon24PixelArrowLeftWidth
-            ? `width: ${p.icon24PixelArrowLeftWidth};`
-            : ''}
-    ${p =>
-        p.icon24PixelArrowLeftHeight
-            ? `height: ${p.icon24PixelArrowLeftHeight};`
-            : ''}
+    ${p => (p.ArrowLeftWidth ? `width: ${p.ArrowLeftWidth};` : '')}
+    ${p => (p.ArrowLeftHeight ? `height: ${p.ArrowLeftHeight};` : '')}
 `;
 
 const B = styled.b<{ bDisplay?: Property.Display }>`
@@ -59,11 +53,15 @@ const GoBackButtonRoot = styled.div<GoBackButtonType>`
     top: ${p => p.GoBackButtonTop};
     left: ${p => p.GoBackButtonLeft};
     margin-top: ${p => p.marginTop};
+    margin-bottom: 2%;
     ${p => (p.onClick ? `cursor: pointer;` : '')}
+    @media (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const GoBackButton: FunctionComponent<GoBackButtonType> = ({
-    icon24PixelArrowLeft,
+    ArrowLeft,
     GoBackButtonCursor,
     GoBackButtonBorder,
     GoBackButtonPadding,
@@ -71,12 +69,15 @@ const GoBackButton: FunctionComponent<GoBackButtonType> = ({
     GoBackButtonPosition,
     GoBackButtonTop,
     GoBackButtonLeft,
-    icon24PixelArrowLeftWidth,
-    icon24PixelArrowLeftHeight,
+    ArrowLeftWidth,
+    ArrowLeftHeight,
     bDisplay,
     marginTop,
     onClick,
 }) => {
+    const onButtonClick = useCallback(() => {
+        window.location.href = '/project';
+    }, []);
     return (
         <GoBackButtonRoot
             GoBackButtonCursor={GoBackButtonCursor}
@@ -87,13 +88,13 @@ const GoBackButton: FunctionComponent<GoBackButtonType> = ({
             GoBackButtonTop={GoBackButtonTop}
             GoBackButtonLeft={GoBackButtonLeft}
             marginTop={marginTop}
-            onClick={onClick}
+            onClick={onButtonClick}
         >
-            <Icon24pixelarrowLeft
+            <ArrowLeftImg
                 alt=""
-                src={icon24PixelArrowLeft}
-                icon24PixelArrowLeftWidth={icon24PixelArrowLeftWidth}
-                icon24PixelArrowLeftHeight={icon24PixelArrowLeftHeight}
+                src={ArrowLeft}
+                ArrowLeftWidth={ArrowLeftWidth}
+                ArrowLeftHeight={ArrowLeftHeight}
             />
             <B bDisplay={bDisplay}>목록으로 돌아가기</B>
         </GoBackButtonRoot>

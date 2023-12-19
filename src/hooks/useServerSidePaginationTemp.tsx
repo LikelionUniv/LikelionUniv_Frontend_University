@@ -31,11 +31,6 @@ function useServerSidePaginationTemp<T, P>({
                 params,
             });
 
-            if (response === undefined) {
-                setLoading(false);
-                throw Error('서버 에러');
-            }
-
             setPageLength(Math.ceil(response.data.length / 12));
             setLoading(false);
             return response.data;
