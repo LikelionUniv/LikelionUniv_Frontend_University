@@ -44,7 +44,7 @@ function Carousel({ projectData }: CarouselProps) {
 
     return (
         <C.Wrapper>
-            <C.Image src={currentImageUrl}>
+            <C.Image src={currentImageUrl} width={innerWidth}>
                 <C.TransLeft
                     src={Chevron_Left}
                     alt="이전"
