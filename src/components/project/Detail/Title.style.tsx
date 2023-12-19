@@ -84,6 +84,7 @@ export const Button = styled.button<{width: number}>`
     @media screen and (max-width: 767px) {
       width: 240px;
       margin: 0 auto;
+      margin-top: 40px;
     }
 
     @media screen and (min-width: 767px) and (max-width: 1280px) {

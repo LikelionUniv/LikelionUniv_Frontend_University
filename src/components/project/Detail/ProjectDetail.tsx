@@ -50,7 +50,7 @@ const ProjectDetail: FunctionComponent = () => {
                 GoBackButtonBackgroundColor="transparent"
                 GoBackButtonPosition="relative"
                 GoBackButtonTop="calc(50% + 629px)"
-                GoBackButtonLeft="-7%"
+                GoBackButtonLeft="0"
                 ArrowLeftWidth="1.5rem"
                 ArrowLeftHeight="1.5rem"
                 bDisplay="inline-block"

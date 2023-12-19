@@ -1,166 +1,5 @@
 import { FunctionComponent, useState, useEffect, useMemo } from 'react';
-import styled from 'styled-components';
-
-const Div = styled.div`
-    position: absolute;
-    top: 1.75rem;
-    line-height: 150%;
-    font-weight: 500;
-    @media (max-width: 768px) {
-        top: 1.75rem;
-    }
-`;
-
-const B = styled.b`
-    position: absolute;
-    font-size: var(--subtitle-16-bold-size);
-    line-height: 150%;
-    color: var(--grey-900);
-    @media (max-width: 768px) {
-        font-size: var(--subtitle-14-bold-size);
-    }
-`;
-
-const OrdinalUniv = styled.div`
-    position: relative;
-    width: 10rem;
-    height: 3.06rem;
-    margin-top: 1.5rem;
-    @media (max-width: 768px) {
-        width: 20rem;
-        height: 3.5rem;
-    }
-`;
-const Calender = styled.div`
-    position: absolute;
-    top: 1.75rem;
-    line-height: 150%;
-    font-weight: 500;
-`;
-
-const CalenderParent = styled.div`
-    position: relative;
-    width: 15.75rem;
-    height: 3.06rem;
-    @media (max-width: 768px) {
-        width: 20rem;
-        height: 3.5rem;
-    }
-`;
-
-const B2 = styled.b`
-    position: absolute;
-    line-height: 150%;
-`;
-const B5 = styled.div`
-    position: absolute;
-    top: 1.75rem;
-    font-size: var(--body-14-medium-size);
-    line-height: 150%;
-    font-weight: 500;
-    color: var(--grey-800);
-`;
-const Tech = styled.div`
-    position: relative;
-    width: 15rem;
-    height: 3.06rem;
-    font-size: var(--subtitle-16-bold-size);
-    color: var(--grey-900);
-    @media (max-width: 768px) {
-        width: 10rem;
-    }
-`;
-
-const UnivTechContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: var(--white);
-    gap: var(--gap-base);
-    @media (max-width: 768px) {
-        gap: var(--gap-small);
-        margin-top: 5rem;
-    }
-`;
-
-const FrameWrapper = styled.div`
-    width: 100%;
-    height: auto;
-`;
-
-const LeftWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: auto;
-    margin-top: 1.5rem;
-`;
-
-const B3 = styled.b`
-    position: relative;
-    line-height: 150%;
-    margin-top: 2.75rem;
-`;
-const Span = styled.span`
-    display: block;
-    color: var(--grey-900);
-    margin-top: 0.3rem;
-`;
-const Span4 = styled.div`
-    display: inline-block;
-    padding: 0.05rem 0.8rem;
-    margin: 0.25rem 0.25rem;
-    border: 1px solid #dcdfe3;
-    border-radius: 1rem;
-    line-height: 180%;
-    font-weight: 500;
-    color: var(--grey-800);
-    background-color: white;
-`;
-
-const P = styled.p``;
-
-const Members = styled.div`
-    position: relative;
-    font-size: var(--body-14-medium-size);
-    line-height: 180%;
-    font-weight: 500;
-    width: 100%;
-    color: var(--grey-800);
-    padding-left: 0;
-`;
-const RightWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    background-color: var(--white);
-    gap: var(--gap-base);
-    margin-left: 0;
-    padding-left: 3.6rem;
-    width: 100%;
-    @media (max-width: 1024px) {
-        padding-left: 1.2rem;
-    }
-    @media (max-width: 768px) {
-        gap: var(--gap-small);
-        margin-bottom: 3rem;
-        padding-left: 0rem;
-    }
-`;
-
-const ParentRoot = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    padding: 0 1rem;
-    gap: 25%;
-    @media (max-width: 768px) {
-        flex-direction: column;
-        margin-top: 3rem;
-    }
-`;
+import * as D from './DeveloperInfo.style';
 
 interface ProjectData {
     id: number;
@@ -264,47 +103,38 @@ const DeveloperInfo: FunctionComponent = () => {
     }, [userDetails]);
 
     return (
-        <ParentRoot>
-            <LeftWrapper>
-                <FrameWrapper>
-                    <UnivTechContainer>
-                        <OrdinalUniv>
-                            <Div>
-                                {projectData?.ordinal}기 〡{projectData?.univ}
-                            </Div>
-                            <B>기수</B>
-                        </OrdinalUniv>
-                        <CalenderParent>
-                            <Calender>
-                                {projectData?.startDate} –{' '}
-                                {projectData?.endDate}
-                            </Calender>
-                            <B>기간</B>
-                        </CalenderParent>
-                        <Tech>
-                            <B2>기술 스택</B2>
-                            <B5>{projectData?.projectTech.join(', ')}</B5>
-                        </Tech>
-                    </UnivTechContainer>
-                </FrameWrapper>
-            </LeftWrapper>
-            <RightWrapper>
-                <B3>팀원 소개</B3>
-                <Members>
+        <D.ParentRoot>
+            <D.LeftWrapper>
+                    <D.Element>
+                        <D.Label>기수</D.Label>
+                        <D.Text>{projectData?.ordinal}기 〡{projectData?.univ}</D.Text>
+                    </D.Element>
+                    <D.Element>
+                        <D.Label>기간</D.Label>
+                        <D.Text>{`${projectData?.startDate} - ${projectData?.endDate}`}</D.Text>
+                    </D.Element>
+                    <D.Element>
+                        <D.Label>기술 스택</D.Label>
+                        <D.Text>{projectData?.projectTech.join(', ')}</D.Text>
+                    </D.Element>
+            </D.LeftWrapper>
+            <D.RightWrapper>
+                <D.Label>팀원 소개</D.Label>
+                <D.Members>
                     {Object.keys(mappedMembers).map(
                         part =>
                             mappedMembers[part].length > 0 && (
-                                <P key={part}>
-                                    <Span>{part}</Span>
+                                <p key={part}>
+                                    <D.Span>{part}</D.Span>
                                     {mappedMembers[part].map(name => (
-                                        <Span4 key={name}>{name}</Span4>
+                                        <D.Span4 key={name}>{name}</D.Span4>
                                     ))}
-                                </P>
+                                </p>
                             ),
                     )}
-                </Members>
-            </RightWrapper>
-        </ParentRoot>
+                </D.Members>
+            </D.RightWrapper>
+        </D.ParentRoot>
     );
 };
 
