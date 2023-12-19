@@ -5,12 +5,12 @@ export const Wrapper = styled.div`
     position: relative;
 `;
 
-export const Image = styled.div<{ src: string, width: number }>`
+export const Image = styled.div<{ src: string; width: number }>`
     position: relative;
     display: block;
     width: 100%;
     max-height: 690px;
-    height: ${props => props.width * 9 / 16}px;
+    height: ${props => (props.width * 9) / 16}px;
 
     background-image: url(${props => props.src});
     background-repeat: no-repeat;

@@ -41,7 +41,7 @@ const ProjectDetail: FunctionComponent = () => {
         <PD.ProjectDetailRoot>
             <Styles />
             <Caruosel projectData={projectData} />
-            <Title projectData={projectData}/> 
+            <Title projectData={projectData} />
             <DeveloperInfo />
             <GoBackButton
                 ArrowLeft={LeftArrow}

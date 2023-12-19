@@ -6,7 +6,7 @@ export const ParentRoot = styled.div`
     margin-top: 64px;
 
     @media screen and (max-width: 767px) {
-      flex-direction: column;
+        flex-direction: column;
     }
 `;
 
@@ -18,7 +18,7 @@ export const LeftWrapper = styled.div`
     border-bottom: 1px solid var(--Grey-900, #212224);
 
     @media screen and (max-width: 767px) {
-      flex: 1;
+        flex: 1;
     }
 `;
 
@@ -31,39 +31,39 @@ export const RightWrapper = styled.div`
     border-bottom: 1px solid var(--Grey-900, #212224);
 
     @media screen and (max-width: 767px) {
-      flex: 1;
-      margin: 0;
-      border-top: none;
+        flex: 1;
+        margin: 0;
+        border-top: none;
     }
 `;
 
 export const Element = styled.div`
-  margin-bottom: 16px;
+    margin-bottom: 16px;
 
-  &:last-child {
-    margin-bottom: 0;
-  }
+    &:last-child {
+        margin-bottom: 0;
+    }
 `;
 
 export const Label = styled.div`
-  color: var(--Grey-900, #212224);
+    color: var(--Grey-900, #212224);
 
-  font-family: Pretendard;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 150%;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
 `;
 
 export const Text = styled.div`
-  margin-top: 4px;
-  color: var(--Grey-800, #4D5359);
+    margin-top: 4px;
+    color: var(--Grey-800, #4d5359);
 
-  font-family: Pretendard;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 150%; 
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 `;
 
 export const Span = styled.span`

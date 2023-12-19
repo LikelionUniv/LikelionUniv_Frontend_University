@@ -1,28 +1,28 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
 
-  @media screen and (max-width: 767px) {
-    flex-direction: column;
-  }
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+    }
 `;
 
 export const Content = styled.div`
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const Tags = styled.div`
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-    color: var(--Orange-600, #FF7710);
+    color: var(--Orange-600, #ff7710);
 `;
 
 export const ProjectTitle = styled.b`
@@ -54,7 +54,7 @@ export const B = styled.b`
     line-height: 150%;
 
     &:last-child {
-      margin-left: 16px;
+        margin-left: 16px;
     }
 `;
 
@@ -62,9 +62,8 @@ export const P = styled.p`
     margin: 0;
 `;
 
-
 //서비스 바로가기 버튼
-export const Button = styled.button<{width: number}>`
+export const Button = styled.button<{ width: number }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,16 +81,15 @@ export const Button = styled.button<{width: number}>`
     cursor: pointer;
 
     @media screen and (max-width: 767px) {
-      width: 240px;
-      margin: 0 auto;
-      margin-top: 40px;
+        width: 240px;
+        margin: 0 auto;
+        margin-top: 40px;
     }
 
     @media screen and (min-width: 767px) and (max-width: 1280px) {
         width: ${props => props.width * 0.31}px;
     }
 `;
-
 
 export const ButtonText = styled.b`
     font-size: var(--subtitle-20-bold-size);

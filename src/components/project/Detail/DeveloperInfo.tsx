@@ -105,18 +105,20 @@ const DeveloperInfo: FunctionComponent = () => {
     return (
         <D.ParentRoot>
             <D.LeftWrapper>
-                    <D.Element>
-                        <D.Label>기수</D.Label>
-                        <D.Text>{projectData?.ordinal}기 〡{projectData?.univ}</D.Text>
-                    </D.Element>
-                    <D.Element>
-                        <D.Label>기간</D.Label>
-                        <D.Text>{`${projectData?.startDate} - ${projectData?.endDate}`}</D.Text>
-                    </D.Element>
-                    <D.Element>
-                        <D.Label>기술 스택</D.Label>
-                        <D.Text>{projectData?.projectTech.join(', ')}</D.Text>
-                    </D.Element>
+                <D.Element>
+                    <D.Label>기수</D.Label>
+                    <D.Text>
+                        {projectData?.ordinal}기 〡{projectData?.univ}
+                    </D.Text>
+                </D.Element>
+                <D.Element>
+                    <D.Label>기간</D.Label>
+                    <D.Text>{`${projectData?.startDate} - ${projectData?.endDate}`}</D.Text>
+                </D.Element>
+                <D.Element>
+                    <D.Label>기술 스택</D.Label>
+                    <D.Text>{projectData?.projectTech.join(', ')}</D.Text>
+                </D.Element>
             </D.LeftWrapper>
             <D.RightWrapper>
                 <D.Label>팀원 소개</D.Label>
