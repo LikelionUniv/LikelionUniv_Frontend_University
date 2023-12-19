@@ -1,6 +1,5 @@
-import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
-import reissue from './reissue';
+import axios, { AxiosError } from 'axios';
+import { IError } from './request';
 
 export const axiosInstance = axios.create({
     baseURL: 'https://stag.likelionuniv.com',
@@ -14,19 +13,30 @@ axiosInstance.interceptors.request.use(async config => {
     const token = localStorage.getItem('access_token');
 
     if (token !== null) {
-        // config.headers.Authorization = `Bearer ${token}`;
-        // // access token 만료 검증
-        // const expiredAt = jwtDecode(token).exp as number;
-        // const now = Math.floor(Date.now() / 1000);
-        // // access token이 만료됐을 때
-        // if (expiredAt < now) {
-        //     const reissueToken = await reissue();
-        //     if (reissueToken === undefined) throw new Error('에러');
-        //     localStorage.setItem('access_token', reissueToken.accessToken);
-        //     localStorage.setItem('refresh_token', reissueToken.refreshToken);
-        //     config.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
-        // }
+        config.headers.Authorization = `Bearer ${token}`;
     }
 
     return config;
 });
+
+axiosInstance.interceptors.response.use(
+    response => {
+        return response;
+    },
+    async error => {
+        // const axiosError = getAxiosError(error);
+
+        // // 액세스 토큰 만료
+        // if (axiosError?.code === 'TOKEN_401_1') {
+        //     const reissueToken = await reissue();
+        //     console.log(reissueToken);
+        //     return axiosInstance.request(error.config);
+        // }
+        return Promise.reject(error);
+    },
+);
+
+const getAxiosError = (error: AxiosError): IError | undefined => {
+    const serverError = error as AxiosError<IError>;
+    return serverError.response?.data;
+};

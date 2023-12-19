@@ -111,10 +111,6 @@ export class Univ {
             method: 'get',
         });
 
-        if (response === undefined) {
-            throw Error('조회 실패');
-        }
-
         const universities: IDropdown[] = response.data.map((univ, index) => ({
             value: index + 1,
             label: univ.name,
