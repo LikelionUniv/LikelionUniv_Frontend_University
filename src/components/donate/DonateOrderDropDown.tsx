@@ -70,6 +70,7 @@ const orderStyle = {
     }),
     valueContainer: () => ({
         display: 'flex',
+        paddingLeft: '10px',
     }),
     placeholder: () => ({
         color: 'var(--Grey-900, #212224)',
@@ -81,8 +82,8 @@ const orderStyle = {
         fontSize: '16px',
         fontWeight: '500',
         border: state.isFocused
-            ? ' 1px solid transparent'
-            : '1px solid transparent',
+            ? '1px solid var(--grey-400, #DCDFE3)'
+            : '1px solid var(--grey-400, #DCDFE3)',
         width: state.isFocused ? '114px' : '114px',
         height: state.isFocused ? '24px' : '24px',
         borderRadius: '6px',
@@ -91,7 +92,7 @@ const orderStyle = {
         boxShadow: '0 0 0 0px transparent',
         '&:hover': {
             borderColor: 'transparent',
-            border: '1px solid transparent',
+            border: '1px solid var(--grey-400, #DCDFE3)',
         },
     }),
     menu: (provided: any) => ({
