@@ -13,6 +13,8 @@ import { ReactComponent as PixelFireworksIcon } from '../../img/landing/pixel_fi
 import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_singing.svg';
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
 import CountDown, { targetDate } from './CountDown';
+import FooterModal from '../recruit/FooterModal';
+import FooterModalMobile from '../univrecruit//UnivModalMobile';
 
 export const recruitURL = ' https://forms.gle/j4CJ35VwWgePBEJX6';
 
@@ -71,6 +73,26 @@ const MainGraphic = () => {
         );
     }, []);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <MG.Wrapper>
             <div ref={targetRef} className="refDiv">
@@ -83,18 +105,24 @@ const MainGraphic = () => {
                             </div>
                             <div className="hide-text" />
                             <CountDown isCountDownView={isCountDownView} />
-                            <a
+                            <button
                                 className="btn"
-                                href={recruitURL}
-                                target="_blank"
-                                rel="noreferrer"
+                                onClick={openModal}
                             >
-                                신규 대학 지원하기
+                                모집 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <img src={mainimage} />
+                    {isMobileView ? (
+                        <FooterModalMobile
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
+                    ) : (
+                        <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+                    )}
                 </MG.Background>
                 <MG.Line ref={targetRef}>
                     {[1, 2].map(item => (
