@@ -10,7 +10,6 @@ const PostCard = (props: MypagePostCardPropType) => {
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
         e.stopPropagation();
         setHeart(!heart);
-        console.log(heart);
     };
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료

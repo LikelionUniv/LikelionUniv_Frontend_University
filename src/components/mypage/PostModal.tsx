@@ -9,7 +9,8 @@ const PostModal = () => {
         <>
             <div
                 className="edit"
-                onClick={() => {
+                onClick={(e: React.MouseEvent | React.TouchEvent) => {
+                    e.stopPropagation();
                     setModal(!modal);
                 }}
             ></div>
@@ -17,18 +18,24 @@ const PostModal = () => {
                 <>
                     <MyPostModal ref={modalRef}>
                         <div
-                            onClick={() => {
+                            onClick={(
+                                e: React.MouseEvent | React.TouchEvent,
+                            ) => {
+                                e.stopPropagation();
                                 setModal(!modal);
-                                console.log('수정');
+                                alert('수정하는 곳으로 이동');
                             }}
                             className="inner"
                         >
                             수정하기
                         </div>
                         <div
-                            onClick={() => {
+                            onClick={(
+                                e: React.MouseEvent | React.TouchEvent,
+                            ) => {
+                                e.stopPropagation();
                                 setModal(!modal);
-                                console.log('삭제');
+                                alert('삭제하기 기능 구현');
                             }}
                             className="inner"
                         >

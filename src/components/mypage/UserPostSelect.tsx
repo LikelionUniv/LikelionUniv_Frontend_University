@@ -96,6 +96,7 @@ const UserPostSelect = () => {
                                   if (e.thumbnail !== null) {
                                       return (
                                           <PostCardWithPhoto
+                                              key={e.id}
                                               id={e.id}
                                               isAuthor={e.isAuthor}
                                               thumbnail={e.thumbnail}
@@ -110,6 +111,7 @@ const UserPostSelect = () => {
                                   } else {
                                       return (
                                           <PostCard
+                                              key={e.id}
                                               id={e.id}
                                               isAuthor={e.isAuthor}
                                               thumbnail={e.thumbnail}
