@@ -7,6 +7,11 @@ import { useLocation } from 'react-router-dom';
 const PostCard = (props: MypagePostCardPropType) => {
     const [heart, setHeart] = useState(true);
     const location = useLocation().pathname;
+    const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
+        e.stopPropagation();
+        setHeart(!heart);
+        console.log(heart);
+    };
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료
         <PostCardBoxWrapper>
@@ -25,15 +30,9 @@ const PostCard = (props: MypagePostCardPropType) => {
                     {props.type === '좋아요' &&
                     location.includes('mypage') &&
                     heart ? (
-                        <div
-                            className="likeheart"
-                            onClick={() => setHeart(!heart)}
-                        />
+                        <div className="likeheart" onClick={heartControl} />
                     ) : (
-                        <div
-                            className="heart"
-                            onClick={() => setHeart(!heart)}
-                        />
+                        <div className="heart" onClick={heartControl} />
                     )}
                     <div>{props.likeCount}</div>
                 </div>
