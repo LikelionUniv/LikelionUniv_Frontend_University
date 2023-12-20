@@ -14,7 +14,7 @@ const PostCard = (props: MypagePostCardPropType) => {
     };
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료
-        <PostCardBoxWrapper>
+        <PostCardBoxWrapper onClick={() => alert('이동하기')}>
             <PostCardBox className="date">
                 <div>{props.createdDate}</div>
                 {props.type === '게시글' &&
@@ -27,12 +27,14 @@ const PostCard = (props: MypagePostCardPropType) => {
             <PostCardBox className="content">{props.body}</PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
-                    {props.type === '좋아요' &&
-                    location.includes('mypage') &&
-                    heart ? (
-                        <div className="likeheart" onClick={heartControl} />
+                    {props.type === '좋아요' && location.includes('mypage') ? (
+                        heart ? (
+                            <div className="likeheart" onClick={heartControl} />
+                        ) : (
+                            <div className="heart" onClick={heartControl} />
+                        )
                     ) : (
-                        <div className="heart" onClick={heartControl} />
+                        <div className="heart" />
                     )}
                     <div>{props.likeCount}</div>
                 </div>
