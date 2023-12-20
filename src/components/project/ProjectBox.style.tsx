@@ -32,6 +32,6 @@ export const Container = styled.div`
 `;
 
 export const Nothing = styled.div`
-  width: 100%;
-  height: 700px;
+    width: 100%;
+    height: 700px;
 `;
