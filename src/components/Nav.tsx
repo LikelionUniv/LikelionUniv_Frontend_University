@@ -152,6 +152,10 @@ const Nav = () => {
                             <p>참여대학</p>
                             <img src={navarrow} />
                         </Text>
+                        <Text to="/donate">
+                            <p style={{ whiteSpace: 'nowrap' }}>연간기부금모금액 및 활용실적</p>
+                            <img src={navarrow} />
+                        </Text>
                     </div>
                     <div className="right">
                         {
@@ -223,6 +227,10 @@ const Nav = () => {
                             </Text>
                             <Text to="/univ">
                                 <p>참여대학</p>
+                                <img src={navarrow} />
+                            </Text>
+                            <Text to="/donate">
+                                <p style={{ whiteSpace: 'nowrap' }}>연간기부금모금액 및 활용실적</p>
                                 <img src={navarrow} />
                             </Text>
                         </MMenuContainer>
