@@ -114,7 +114,8 @@ const Nav = () => {
             }
         >
             {isPC ? (
-                <Container>
+                
+                /*<Container>
                     <div className="left">
                         <Logo src={logo} onClick={() => navigate('/')} />
                         <Text to="/recruit" className="first">
@@ -137,6 +138,18 @@ const Nav = () => {
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
                             </p>
+                            <img src={navarrow} />
+                        </Text>
+                    </div>*/
+                    <Container>
+                    <div className="left">
+                        <Logo src={logo} onClick={() => navigate('/')} />
+                        <Text to="/recruit" className="first">
+                            <p>리크루팅</p>
+                            <img src={navarrow} />
+                        </Text>
+                        <Text to="/univ">
+                            <p>참여대학</p>
                             <img src={navarrow} />
                         </Text>
                     </div>
