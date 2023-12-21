@@ -47,21 +47,6 @@ export type MypageOptionType = {
     label: string;
 };
 
-export interface IuserProfile {
-    followerNum: number;
-    followingNum: number;
-    id: number;
-    introduction: string;
-    isMine: boolean;
-    major: string;
-    name: string;
-    ordinal: number;
-    part: string;
-    phoneNum: string;
-    profileImage: string;
-    role: string;
-    universityName: string;
-}
 export interface IuserProfile {    
     followerNum : number,
     followingNum : number,
@@ -90,4 +75,12 @@ export interface Ifollows {
     ordinal : number,
     part : string,
     isFollowed : boolean,
+}
+
+export interface IuserModify {
+    name : string,
+    introduction: string,
+    profileImage: string,
+    part: string
+      
 }

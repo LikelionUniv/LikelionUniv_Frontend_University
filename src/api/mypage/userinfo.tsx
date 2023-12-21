@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import {IuserModify} from '../../components/mypage/type'
 export const userProfileApi = async (user_id : number) =>{
 
     //
@@ -62,3 +62,15 @@ export const followDeleteApi = async (user_id: number) => {
         })
 }
 
+export const userInfoModifyApi = async (user_id: number , user_info:IuserModify) => {
+
+    return await axios 
+    .patch(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile` , user_info)
+    .then((response) => {
+        return response.data;
+    })
+    .catch((error)=>{
+        return error;
+    })
+
+}

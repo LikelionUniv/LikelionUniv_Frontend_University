@@ -1,10 +1,16 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button } from './Common';
 import SchoolDropDown from '../signUp/SchoolDropDown';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
+import {useRecoilState} from 'recoil'
+import {UserProfileAtom} from '../../store/mypageData'
+import {IuserModify} from './type'
+import {userInfoModifyApi} from '../../api/mypage/userinfo'
+import { useNavigate } from 'react-router-dom';
+
 /* dropdown option 부분 */
 
 const genOptions: { value: number; label: string }[] = [];
@@ -25,34 +31,33 @@ const roleOptions = [
     { value: 3, label: '아기사자' },
 ];
 
-/* form type */
-
-interface FormState {
-    profileImage: string;
-    name: string;
-    description: string;
-    phone: string;
-    university: number;
-    generation: number;
-    role: number;
-    track: number;
-}
-
 const UserInfoModify = () => {
     //초기 렌더링 시 유저 기본정보 받아와서 formState에 채워넣기
-    const [formState, setFormState] = useState<FormState>({
+    const [formState, setFormState] = useState<IuserModify>({
+        name : '',
+        introduction: '',
         profileImage: '',
-        name: '',
-        description: '',
-        phone: '',
-        university: 0,
-        generation: 0,
-        role: 0,
-        track: 0,
+        part: '',
     });
 
+    const navigate = useNavigate();
+    const [userProfile , updateUserProfile] = useRecoilState(UserProfileAtom);
+
+    useEffect( ()=>{
+        console.log("초기 렌더링 시 유저 정보 상태 저장")
+        console.log(userProfile);
+
+        setFormState({
+            name : userProfile.name,
+            introduction : userProfile.introduction,
+            profileImage : userProfile.profileImage ,
+            part : userProfile.part,
+        });
+    }
+    ,[])
+
     const handleSelectChange =
-        (field: keyof FormState) =>
+        (field: keyof IuserModify) =>
         (
             selectedOption: OptionType | null,
             actionMeta: ActionMeta<OptionType>,
@@ -106,21 +111,39 @@ const UserInfoModify = () => {
         });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (
             formState.name === '' ||
-            formState.university === 0 ||
-            formState.description === '' ||
-            formState.generation === 0 ||
-            formState.role === 0 ||
-            formState.track === 0
+            formState.introduction === '' ||
+            formState.profileImage === '' ||
+            formState.part === ''
         )
             alert('모든 항목을 입력했는지 확인해주세요.');
         else {
             /* button click으로 해서 정보 저장됨 확인 */
             console.log(formState);
+            //수정 API 요청
+            const res =  await userInfoModifyApi(userProfile.id , formState);
+            console.log(res.response.data.isSuccess)
+            //성공 시 마이페이지로 이동
+            if(res.response.data.isSuccess) {
+                alert("성공적으로 저장되었습니다.")
+                updateUserProfile({
+                    ...userProfile,
+                    name : formState.name,
+                    introduction : formState.introduction,
+                    profileImage : formState.profileImage,
+                    part : formState.part,
+                })
+                navigate(-1);
+            }
+            else{
+                alert("저장에 실패했습니다.")
+                navigate(-1);
+            }
+            //실패 시 마이페이지로 이동
         }
     };
 
@@ -154,19 +177,19 @@ const UserInfoModify = () => {
                     <Ndiv>한 줄 소개</Ndiv>
                     <Nformarea
                         placeholder="한 줄 소개글을 작성해보세요."
-                        value={formState.description}
+                        value={formState.introduction}
                         maxLength={49}
                         onChange={e =>
                             setFormState({
                                 ...formState,
-                                description: e.target.value,
+                                introduction: e.target.value,
                             })
                         }
                     />
 
-                    <p>{formState.description.length}/50</p>
+                    <p>{formState.introduction?.length}/50</p>
 
-                    <Ndiv>전화번호</Ndiv>
+                    {/* <Ndiv>전화번호</Ndiv>
                     <Nform
                         placeholder="전화번호"
                         value={formState.phone}
@@ -176,15 +199,15 @@ const UserInfoModify = () => {
                                 phone: e.target.value,
                             })
                         }
-                    />
+                    /> */}
 
-                    <Ndiv>학교</Ndiv>
+                    {/* <Ndiv>학교</Ndiv>
                     <SchoolDropDown
                         onChange={handleSelectChange('university')}
-                    />
+                    /> */}
 
                     <div className="SformDiv">
-                        <div className="SfromDiv2">
+                        {/* <div className="SfromDiv2">
                             <Ndiv>기수</Ndiv>
                             <DropDown
                                 options={genOptions}
@@ -198,13 +221,13 @@ const UserInfoModify = () => {
                                 options={roleOptions}
                                 onChange={handleSelectChange('role')}
                             />
-                        </div>
+                        </div> */}
 
                         <div className="SfromDiv2">
                             <Ndiv>트랙</Ndiv>
                             <DropDown
                                 options={trackOptions}
-                                onChange={handleSelectChange('track')}
+                                onChange={handleSelectChange('part')}
                             />
                         </div>
                     </div>
@@ -224,7 +247,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-    margin-top: 100px;
+    margin:100px 0 ;
 `;
 
 const Form = styled.form`
