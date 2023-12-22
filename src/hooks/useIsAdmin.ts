@@ -18,12 +18,16 @@ function useIsAdmin(): RuseIsAdmin {
 
   useEffect(() => {
     const fetchUserRole = async () => {
-      const response = await request<null, Userinfo, null>({
-        uri: '/api/v1/auth/userinfo',
-        method: 'get',
-      });
-
-      setIsAdmin(RolePriority.findIndex(role => role === response.data.role) >= 2);
+      try {
+        const response = await request<null, Userinfo, null>({
+          uri: '/api/v1/auth/userinfo',
+          method: 'get',
+        });
+        
+        setIsAdmin(RolePriority.findIndex(role => role === response.data.role) >= 2);
+      } catch (error) {
+        setIsAdmin(false);
+      }
     }
 
     fetchUserRole();
