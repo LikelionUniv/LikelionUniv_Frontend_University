@@ -539,7 +539,7 @@ const ProjectUpdate = () => {
                 <P.Field>
                     <P.Label>팀원</P.Label>
                     <UserFind />
-                    <UserEnrolled />
+                    <UserEnrolled defaultMembers={project.members} />
                 </P.Field>
                 <P.RegisterBtn type="submit" active={isFill}>
                     등록하기
