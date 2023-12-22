@@ -31,7 +31,6 @@ export interface Member {
     name: string;
 }
 
-// 백엔드에서 12로 고정을 해둬서 지금은 12로하지만 나중에는 6이 되어야합니다.
 const PAGESIZE = {
     FULL: 12,
     HALF: 6,
@@ -45,7 +44,6 @@ function ProjectList() {
     const [pageSize, setPageSize] = useState<number>(PAGESIZE.FULL);
     const { innerWidth } = useInnerWidth();
 
-    // api 연동되면 아래 코드를 사용할 예정
     const { curPageItem: projects, renderPaginationBtn } =
         useServerSidePagination<Project>({
             uri: projectApi.uri,

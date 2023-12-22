@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { IError } from './request';
+import reissue from './reissue';
 
 export const axiosInstance = axios.create({
     baseURL: 'https://stag.likelionuniv.com',
@@ -23,25 +24,33 @@ axiosInstance.interceptors.response.use(
     response => {
         return response;
     },
-    error => {
+    async error => {
         const axiosError = getAxiosError(error);
-        // const {config} = error;
+        const {config} = error;
 
-        // // 리프레시도 만료된 경우나 잘못된 토큰인 경우
-        // if (axiosError?.code === 'TOKEN_401_1') {
-        //     return Promise.reject(error);
-        // }
+        console.log(axiosError?.code);
+        
+        // 리프레시도 만료된 경우나 잘못된 토큰인 경우
+        if (axiosError?.code === 'TOKEN_401_1') {
+            return Promise.reject(error);
+        }
 
-        // // 액세스 토큰 만료
-        // if (axiosError?.code === 'TOKEN_401_4') {
-        //     const originRequest = config;
-        //     const reissueToken = await reissue();
+        // 리프레시 토큰 만료인 경우
+        if (axiosError?.code === 'REFRESH_TOKEN_401') {
+            alert('리프레시 만료');
+            return Promise.reject(error);
+        }
 
-        //     setAccessAndRefresh(reissueToken.accessToken, reissueToken.refreshToken);
-        //     originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+        // 액세스 토큰 만료
+        if (axiosError?.code === 'TOKEN_401_4') {
+            const originRequest = config;            
+            const reissueToken = await reissue();            
 
-        //     return axiosInstance(originRequest);
-        // }
+            setAccessAndRefresh(reissueToken.accessToken, reissueToken.refreshToken);
+            originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+
+            return axiosInstance(originRequest);
+        }
         alert(axiosError?.message);
         return Promise.reject(error);
     },
@@ -52,7 +61,7 @@ const getAxiosError = (error: AxiosError): IError | undefined => {
     return serverError.response?.data;
 };
 
-// const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
-//     localStorage.setItem('access_token', accessToken);
-//     localStorage.setItem('refresh_token', refreshToken);
-// }
+const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('access_token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
+}
