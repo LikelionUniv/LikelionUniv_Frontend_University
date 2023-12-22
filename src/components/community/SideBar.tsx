@@ -165,7 +165,6 @@ const Wrapper = styled.div`
     width: 25.5%;
     padding-right: 24px;
     min-width: 150px;
-    height: 90vh;
     margin: 0 auto;
 `;
 
@@ -174,6 +173,7 @@ const Title = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     margin-bottom: 8px;
+    line-height: 140%;
 `;
 
 const SubTitle = styled.div`
@@ -181,11 +181,13 @@ const SubTitle = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     margin: 8px 0;
+    line-height: 150%;
 `;
 
 const Tab = styled.div<{ $isSelected: boolean }>`
     font-size: 14px;
     font-weight: 500;
+    line-height: 150%; 
     color: var(--Grey-900, #212224);
     padding: 8px 0;
     cursor: pointer;
@@ -218,6 +220,6 @@ const TextInput = styled.div<{ borderColor: string }>`
     align-items: center;
     display: inline-flex;
     justify-content: space-between;
-    margin-top: 16px;
+    margin: 16px 0 100px 0;
     padding: 0 8px;
 `;

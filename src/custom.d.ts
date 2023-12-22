@@ -9,3 +9,8 @@ declare module '*.png';
 declare module '*.jpeg';
 declare module '*.gif';
 declare module '*.pdf';
+
+declare module '*.css' {
+    const value: Record<string, string>;
+    export default value;
+}
