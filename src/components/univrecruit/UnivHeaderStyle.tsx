@@ -90,10 +90,10 @@ export const T2 = styled.div`
 export const T3 = styled.div`
     color: var(--Orange-600, #ff7710);
 
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
-    font-weight: 700;
-    line-height: 150%; /* 36px */
+    font-weight: 600;
+    line-height: 100%; /* 36px */
 
     margin-bottom: 16px;
     white-space: nowrap;
@@ -131,9 +131,9 @@ export const Button = styled.button`
     /* layout */
     display: flex;
     padding: 16px 32px;
-    justify-content: center;
+    gap:130px;
     align-items: flex-start;
-    gap: 202px;
+    
 
     @media screen and (max-width: 768px) {
         margin: 0 auto;

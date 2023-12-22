@@ -114,6 +114,7 @@ const Nav = () => {
             }
         >
             {isPC ? (
+                
                 <Container>
                     <div className="left">
                         <Logo src={logo} onClick={() => navigate('/')} />
@@ -140,6 +141,7 @@ const Nav = () => {
                             <img src={navarrow} />
                         </Text>
                     </div>
+                    
                     <div className="right">
                         {
                             isLogin ? (

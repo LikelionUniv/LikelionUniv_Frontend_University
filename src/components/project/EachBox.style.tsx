@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-interface BoxProps {
-    clicked: boolean;
+interface BoxProp {
+    hovered: boolean;
 }
 
 export const Box = styled.div`
@@ -15,7 +15,7 @@ export const Box = styled.div`
     box-sizing: border-box;
 `;
 
-export const SubBox = styled.div<{ width: number, url: string }>`
+export const SubBox = styled.div<{ width: number; url: string }>`
     position: relative;
     width: 100%;
     height: 216px;
@@ -39,11 +39,11 @@ export const SubBox = styled.div<{ width: number, url: string }>`
     }
 `;
 
-export const BlackBox = styled.div<BoxProps>`
+export const BlackBox = styled.div<BoxProp>`
     height: 21px;
     padding: 4px 12px;
 
-    color: ${props => (props.clicked ? '#FFFFFF' : '#FFFFFF')};
+    color: #ffffff;
 
     font-family: Pretendard;
     font-size: 14px;
@@ -51,16 +51,16 @@ export const BlackBox = styled.div<BoxProps>`
     font-weight: 500;
     text-align: center;
     line-height: 150%; /* 21px */
-    background: ${props => (props.clicked ? '#FF7710' : '#000000')};
+    background: ${props => (props.hovered ? '#FF7710' : '#000000')};
     &:hover {
         cursor: pointer;
     }
 `;
 
-export const SmallBox1 = styled.div<BoxProps>`
+export const SmallBox1 = styled.div<BoxProp>`
     width: 100%;
     height: 100%;
-    color: ${props => (props.clicked ? '#FF7710' : '#000000')};
+    color: ${props => (props.hovered ? '#FF7710' : '#000000')};
 
     font-family: Pretendard;
     font-size: 28px;
@@ -73,12 +73,12 @@ export const SmallBox1 = styled.div<BoxProps>`
     }
 `;
 
-export const SmallBox2 = styled.div<BoxProps>`
+export const SmallBox2 = styled.div<BoxProp>`
     display: flex;
     gap: 16px;
     width: 100%;
     height: 48px;
-    color: ${props => (props.clicked ? '#FF7710' : '#000000')};
+    color: ${props => (props.hovered ? '#FF7710' : '#000000')};
 
     /* Body/16_Medium_150 */
     font-family: Pretendard;

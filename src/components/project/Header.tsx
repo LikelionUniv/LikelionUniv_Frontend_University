@@ -19,21 +19,12 @@ function Header({ setProjectApi }: IHeader) {
     useEffect(() => {
         // 전체를 클릭할 경우
         if (activeTab === undefined) {
-            setProjectApi({ uri: '/api/v1/project/', ordinal: undefined, params: {
-                pageNo: 1,
-            } });
+            setProjectApi({ uri: '/api/v1/project/' });
             return;
         }
 
         // 아닐 경우
-        setProjectApi({
-            uri: `/api/v1/project/ordinal/${activeTab}`,
-            params: {
-                pageNo: 1,
-                ordinal: activeTab,
-            },
-            ordinal: activeTab,
-        });
+        setProjectApi({ uri: `/api/v1/project/ordinal/${activeTab}` });
     }, [activeTab, setProjectApi]);
 
     const navigate = useNavigate();

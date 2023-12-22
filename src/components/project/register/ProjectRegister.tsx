@@ -18,8 +18,8 @@ import useEnrolledUser from './user/userStore/useEnrolledUser';
 import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
 import useFetch from '../../../hooks/useFetch';
 import request from '../../../utils/request';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 
 /* form type */
 interface FormState {
@@ -65,21 +65,14 @@ interface Image {
     src: string;
 }
 
-interface PresignedUrlParam {
-    fileNameExtension: string;
-}
-
-interface PresignedUrlResponse {
-    presignedUrl: string;
-    imageUrl: string;
-    fileName: string;
-}
-
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
-    const { userLength: memberLength, userIdList: memberIdList, clearUser } =
-        useEnrolledUser();
+    const {
+        userLength: memberLength,
+        userIdList: memberIdList,
+        clearUser,
+    } = useEnrolledUser();
 
     const navigate = useNavigate();
 
@@ -157,47 +150,14 @@ const ProjectRegister = () => {
         return formState.projectTeches;
     };
 
-    const enrollImagesToS3 = async (file: File, presignedUrl: string) => {
-        const response = await axios.put(presignedUrl, file);
-        if (response.status !== 200) {
-            console.log('S3 오류');
-            return;
-        }
-    };
-
-    // presigned url 발급
-    const getPresignedUrl = async (
-        file: File,
-    ): Promise<PresignedUrlResponse> => {
-        const fileName = file.name.split('.');
-        const extension = fileName[fileName.length - 1];
-        const response = await request<
-            null,
-            PresignedUrlResponse,
-            PresignedUrlParam
-        >({
-            uri: '/api/v1/image/project',
-            method: 'get',
-            params: {
-                fileNameExtension: extension,
-            },
-        });
-
-        if (response === undefined) {
-            throw Error('서버 에러');
-        }
-
-        return response.data;
-    };
-
     const processImages = async (): Promise<string[]> => {
         const imageFiles: File[] = formState.images.map(image => image.file);
         const presignedUrlImages: PresignedUrlResponse[] = [];
 
         // presigned url 얻어와서 S3에 등록
         for (const file of imageFiles) {
-            const url = await getPresignedUrl(file);
-            await enrollImagesToS3(file, url.presignedUrl);
+            const url = await ImageUpload.getPresignedUrl(file);
+            await ImageUpload.enrollImagesToS3(file, url.presignedUrl);
             presignedUrlImages.push(url);
         }
 
@@ -335,7 +295,7 @@ const ProjectRegister = () => {
     useEffect(() => {
         return () => {
             clearUser();
-        }
+        };
     }, [clearUser]);
 
     return (

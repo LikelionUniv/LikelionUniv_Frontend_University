@@ -30,3 +30,8 @@ export const Container = styled.div`
         margin-bottom: 68px;
     }
 `;
+
+export const Nothing = styled.div`
+    width: 100%;
+    height: 700px;
+`;

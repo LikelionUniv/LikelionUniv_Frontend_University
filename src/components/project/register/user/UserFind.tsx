@@ -67,10 +67,6 @@ function UserFind() {
             },
         });
 
-        if (response === undefined) {
-            throw Error('서버 에러');
-        }
-
         const users = response.data.data.filter(user =>
             user.name.includes(keyword),
         );

@@ -62,13 +62,6 @@ function useServerSidePagination<T>({
                 },
             });
 
-            if (response === undefined) {
-                setLoading(false);
-                throw Error('서버 에러');
-            }
-
-            console.log(response);
-            
             setPageLength(response.data.totalPage);
             setLoading(false);
             return response.data.data;

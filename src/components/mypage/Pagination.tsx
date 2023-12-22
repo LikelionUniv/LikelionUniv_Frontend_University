@@ -77,6 +77,7 @@ const PaginationWrapper = styled.div`
         font-weight: 700;
         line-height: 150%;
         text-align: center;
+        border: none;
         &.select {
             color: black;
         }
