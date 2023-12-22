@@ -21,7 +21,7 @@ function DonateComponent() {
 
     const { curPageItem: posts, renderPaginationBtn } =
         useServerSidePagination<IPost>({
-            uri: '/api/v1/donation_history',
+            uri: '/v1/donation_history/{donationHistoryId}',
             size: 10,
             sort: order,
             search: searchQuery,
