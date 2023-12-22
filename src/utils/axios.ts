@@ -4,7 +4,13 @@ import reissue from './reissue';
 
 export const axiosInstance = axios.create({
     baseURL: 'https://stag.likelionuniv.com',
+    withCredentials: true,
 });
+
+export const refreshInstance = axios.create({
+    baseURL: 'https://stag.likelionuniv.com',
+    withCredentials: true,
+})
 
 axiosInstance.interceptors.request.use(async config => {
     if (!config.headers) {
@@ -13,7 +19,7 @@ axiosInstance.interceptors.request.use(async config => {
 
     const token = localStorage.getItem('access_token');
 
-    if (token !== null) {
+    if (token !== null && config.url !== '/api/v1/auth/kakao/login') {
         config.headers.Authorization = `Bearer ${token}`;
     }
 
@@ -25,9 +31,12 @@ axiosInstance.interceptors.response.use(
         return response;
     },
     async error => {
-        const axiosError = getAxiosError(error);
-        const {config} = error;
+        const customError = error as AxiosError;
+        const axiosError = customError.response?.data as IError;
 
+        const {config} = error;
+        console.log(config);
+        
         console.log(axiosError?.code);
         
         // 리프레시도 만료된 경우나 잘못된 토큰인 경우
@@ -38,11 +47,12 @@ axiosInstance.interceptors.response.use(
         // 리프레시 토큰 만료인 경우
         if (axiosError?.code === 'REFRESH_TOKEN_401') {
             alert('리프레시 만료');
+            localStorage.clear();
             return Promise.reject(error);
         }
 
         // 액세스 토큰 만료
-        if (axiosError?.code === 'TOKEN_401_4') {
+        if (axiosError?.code === 'TOKEN_401_4') {            
             const originRequest = config;            
             const reissueToken = await reissue();            
 
@@ -55,11 +65,6 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     },
 );
-
-const getAxiosError = (error: AxiosError): IError | undefined => {
-    const serverError = error as AxiosError<IError>;
-    return serverError.response?.data;
-};
 
 const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('access_token', accessToken);
