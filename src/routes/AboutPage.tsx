@@ -6,7 +6,7 @@ const AboutPage = () => {
     return (
         <>
             <GlobalStyles />
-            <About />;
+            <About />
         </>
     );
 };
