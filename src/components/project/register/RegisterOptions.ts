@@ -41,6 +41,13 @@ export class Gen {
         gen.sort((a, b) => b - a);
         return gen.slice(0, 5);
     }
+
+    static loadCurrentGen(currentGen: number) {
+        const allGen = Gen.loadAllGen();
+
+        const current = allGen.find(gen => gen.value === currentGen) as IDropdown;
+        return current;
+    }
 }
 
 export class Thon {
@@ -54,6 +61,13 @@ export class Thon {
 
         return thon;
     }
+
+    static loadCurrentThon(currentTon: string): IDropdown {
+        const thons = Thon.loadThon();        
+
+        const current = thons.find(thon => thon.label === currentTon) as IDropdown;
+        return current;
+    }
 }
 
 export class Output {
@@ -66,6 +80,13 @@ export class Output {
         }));
 
         return output;
+    }
+
+    static loadCurrentOutput(currentOutput: string): IDropdown {
+        const outputs = Output.loadOutput();        
+
+        const current = outputs.find(output => output.label === currentOutput) as IDropdown;
+        return current;
     }
 }
 

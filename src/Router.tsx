@@ -20,6 +20,7 @@ import UnivRecruit from './components/univrecruit/UnivRecruit';
 import DonatePage from './routes/DonatePage';
 import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
+import ProjectUpdate from './components/project/update/ProjectUpdate';
 
 const router = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
                     {
                         path: ':projectId',
                         element: <ProjectDetail />,
+                    },
+                    {
+                        path: ':projectId/update',
+                        element: <ProjectUpdate />,
                     },
                 ],
             },

@@ -1,24 +1,27 @@
 import React, { useState, useEffect, useRef } from 'react';
-import * as P from './ProjectRegisterStyle';
+import * as P from '../register/ProjectRegisterStyle';
 import Gallery from '../../../img/project/gallery.svg';
 import Hyphen from '../../../img/project/hyphen.svg';
 import Cancel from '../../../img/project/cancel.svg';
 import Vertical from '../../../img/project/vertical.svg';
 import FirstVertical from '../../../img/project/firstVertical.svg';
 import { ActionMeta } from 'react-select';
-import DropDown, { OptionType } from './DropDown';
-import Checkbox from './Checkbox';
-import useCheckbox from './useCheckbox';
+import DropDown, { OptionType } from '../register/DropDown';
+import Checkbox from '../register/Checkbox';
+import useCheckbox from '../register/useCheckbox';
 
-import AutoHeightTextarea from './AutoHeightTextarea';
+import AutoHeightTextarea from '../register/AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
-import UserFind from './user/UserFind';
-import UserEnrolled from './user/UserEnrolled';
-import useEnrolledUser from './user/userStore/useEnrolledUser';
-import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
 import request from '../../../utils/request';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
+import useEnrolledUser from '../register/user/userStore/useEnrolledUser';
+import { Gen, IDropdown, Output, Tech, Thon, Univ } from '../register/RegisterOptions';
+import UserFind from '../register/user/UserFind';
+import UserEnrolled from '../register/user/UserEnrolled';
+import { ProjectRegisterType } from '../register/ProjectRegister';
+import { Project } from '../ProjectList';
+import useFetch from './../../../hooks/useFetch';
 import useFetchAsyncFunc from '../../../hooks/useFetchAsyncFunc';
 
 /* form type */
@@ -40,22 +43,6 @@ interface FormState {
     members: number[];
 }
 
-export interface ProjectRegisterType {
-    activity: string;
-    outPut: string;
-    serviceName: string;
-    ordinal: number;
-    univ: string;
-    startDate: string;
-    endDate: string;
-    description: string;
-    content: string;
-    productionUrl: string;
-    projectTeches: string[];
-    imageUrl: string[];
-    members: number[];
-}
-
 interface PostId {
     id: number;
 }
@@ -65,7 +52,35 @@ interface Image {
     src: string;
 }
 
-const ProjectRegister = () => {
+const ProjectUpdate = () => {
+    const {projectId} = useParams();
+
+    const {data: project} = useFetch<Project, null>({
+        uri: `/api/v1/project/${projectId}`
+    });
+
+    useEffect(() => {
+        if (project !== undefined) {
+            setFormState({
+                activity: project.activity,
+                activityEtc: '',
+                outPut: project.outPut,
+                serviceName: project.serviceName,
+                startDate: project.startDate,
+                endDate: project.endDate,
+                projectTeches: [],
+                projectTechEtc: '',
+                description: project.description,
+                content: project.content,
+                productionUrl: project.productionUrl,
+                images: [],
+                ordinal: project.ordinal.toString(),
+                univ: project.univ,
+                members: [],
+            });
+        }
+    }, [project]);
+    
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
     const {
@@ -268,6 +283,10 @@ const ProjectRegister = () => {
         asyncFunc: Univ.loadUniv,
     });
 
+    const getDefaultUniv = (): IDropdown => {
+        return univList.find(univ => project?.univ === univ.label) as IDropdown;
+    }
+
     useEffect(() => {
         if (
             formState.images.length === 0 ||
@@ -300,7 +319,9 @@ const ProjectRegister = () => {
 
     return (
         <P.Container>
-            <P.Title>프로젝트 등록</P.Title>
+            {project !== undefined && (
+                <>
+                <P.Title>프로젝트 등록</P.Title>
             <P.Caption>
                 <P.Label>이미지</P.Label>
                 <P.ImgRegisterBtn onClick={handleImgBtn}>
@@ -353,6 +374,7 @@ const ProjectRegister = () => {
                     <DropDown
                         placeholder="활동 선택"
                         options={Thon.loadThon()}
+                        defaultValue={Thon.loadCurrentThon(project.activity)}
                         onChange={handleSelectChange('activity')}
                     />
                     {activeThonEtc ? (
@@ -372,6 +394,7 @@ const ProjectRegister = () => {
                     <DropDown
                         placeholder="아웃풋 형태 선택"
                         options={Output.loadOutput()}
+                        defaultValue={Output.loadCurrentOutput(project.outPut)}
                         onChange={handleSelectChange('outPut')}
                     />
                 </P.Field>
@@ -497,12 +520,14 @@ const ProjectRegister = () => {
                         <DropDown
                             placeholder="기수 선택"
                             options={Gen.loadAllGen()}
+                            defaultValue={Gen.loadCurrentGen(project.ordinal)}
                             onChange={handleSelectChange('ordinal')}
                         />
                         <P.Gap />
                         <DropDown
                             placeholder="학교 선택"
                             options={univList}
+                            defaultValue={getDefaultUniv()}
                             onChange={handleSelectChange('univ')}
                         />
                     </P.FlexField>
@@ -516,8 +541,10 @@ const ProjectRegister = () => {
                     등록하기
                 </P.RegisterBtn>
             </P.Form>
+                </>
+            )}
         </P.Container>
     );
 };
 
-export default ProjectRegister;
+export default ProjectUpdate;

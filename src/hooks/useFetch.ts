@@ -1,45 +1,29 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react';
-import { AxiosError } from 'axios';
+import { useEffect, useState } from "react";
+import request from "../utils/request";
 
-interface IuseFetch<T> {
-    initValue: T;
-    asyncFunc: () => Promise<T>;
+interface IuseFetch<P> {
+  uri: string;
+  params?: P;
 }
 
-interface RuseFetch<T> {
-    data: T;
-    loading: boolean;
-    error: string;
-}
+function useFetch<T, P>({uri, params}: IuseFetch<P>) {
+  const [data, setData] = useState<T>();
 
-function useFetch<T>({ initValue, asyncFunc }: IuseFetch<T>): RuseFetch<T> {
-    const [data, setData] = useState<T>(initValue);
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string>('');
-
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-            setLoading(true);
-            const response = await asyncFunc();
-            setData(response);
-        } catch (error) {
-            const errorMessage = (error as AxiosError).message;
-            setError(errorMessage);
-        } finally {
-            setLoading(false);
-        }
-    };
+      const response = await request<null, T, P>({
+        uri,
+        method: 'get',
+        params,
+      });
 
-    useEffect(() => {
-        fetchData();
-    }, []);
+      setData(response.data);
+    }
 
-    return {
-        data,
-        loading,
-        error,
-    };
+    fetchData();
+  }, [params, uri]);
+
+  return {data}
 }
 
-export default useFetch;
+export default useFetch
