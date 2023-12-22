@@ -47,13 +47,13 @@ const MainGraphic = () => {
     }, [desRef1, desRef2, width]);
 
     // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
-   // const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
+    // const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
     const io = new IntersectionObserver(
         entries => {
             entries.forEach(entry => {
-              //  if (entry.intersectionRatio > 0)
-                 //   setIsView(prev => ({ top: true, bottom: prev.bottom }));
-              //  else setIsView(prev => ({ top: false, bottom: prev.bottom }));
+                //  if (entry.intersectionRatio > 0)
+                //   setIsView(prev => ({ top: true, bottom: prev.bottom }));
+                //  else setIsView(prev => ({ top: false, bottom: prev.bottom }));
             });
         },
         {

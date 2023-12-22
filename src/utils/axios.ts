@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
 export const refreshInstance = axios.create({
     baseURL: 'https://stag.likelionuniv.com',
     withCredentials: true,
-})
+});
 
 axiosInstance.interceptors.request.use(async config => {
     if (!config.headers) {
@@ -34,11 +34,11 @@ axiosInstance.interceptors.response.use(
         const customError = error as AxiosError;
         const axiosError = customError.response?.data as IError;
 
-        const {config} = error;
+        const { config } = error;
         console.log(config);
-        
+
         console.log(axiosError?.code);
-        
+
         // 리프레시도 만료된 경우나 잘못된 토큰인 경우
         if (axiosError?.code === 'TOKEN_401_1') {
             return Promise.reject(error);
@@ -52,11 +52,14 @@ axiosInstance.interceptors.response.use(
         }
 
         // 액세스 토큰 만료
-        if (axiosError?.code === 'TOKEN_401_4') {            
-            const originRequest = config;            
-            const reissueToken = await reissue();            
+        if (axiosError?.code === 'TOKEN_401_4') {
+            const originRequest = config;
+            const reissueToken = await reissue();
 
-            setAccessAndRefresh(reissueToken.accessToken, reissueToken.refreshToken);
+            setAccessAndRefresh(
+                reissueToken.accessToken,
+                reissueToken.refreshToken,
+            );
             originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
 
             return axiosInstance(originRequest);
@@ -69,4 +72,4 @@ axiosInstance.interceptors.response.use(
 const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('refresh_token', refreshToken);
-}
+};

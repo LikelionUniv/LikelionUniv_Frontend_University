@@ -10,7 +10,7 @@ import gra2 from '../../img/recruit/gra.svg';
 import RecruitModal from '../recruit/apply/RecruitModal';
 import FooterModal from '../recruit/FooterModal';
 import FooterModalMobile from '../univrecruit//UnivModalMobile';
-import { Button } from '../univrecruit/UnivHeaderStyle'
+import { Button } from '../univrecruit/UnivHeaderStyle';
 const Header = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [isPC, setIsPC] = useState<boolean>(true);
@@ -40,8 +40,7 @@ const Header = () => {
     }, [desRef1, desRef2, width]);
     const io = new IntersectionObserver(
         entries => {
-            entries.forEach(entry => {
-            });
+            entries.forEach(entry => {});
         },
         {
             rootMargin: '-150px',
@@ -51,7 +50,6 @@ const Header = () => {
     useEffect(() => {
         if (targetRef.current) io.observe(targetRef.current);
     }, []);
-
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
@@ -85,8 +83,8 @@ const Header = () => {
     // };
 
     //const onClick = (): void => {
-        //window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
-   // };
+    //window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
+    // };
 
     return (
         <U.BlackDiv>
@@ -94,26 +92,34 @@ const Header = () => {
                 <U.Content>
                     <U.T1>리크루팅 모집</U.T1>
                     <U.T2>
-                       전국 최대 규모의 IT 창업 동아리,<br />
-                       멋쟁이사자처럼 대학과 함께하고 싶으신가요? <br />
-                       아래 모집 일정을 참고해주세요! <br /> <br />
-                   
-                    <U.T3> <li> 운영진 모집 마감 기한 : ~24.01.15(월)</li></U.T3>
-                    <U.T3> <li> 중앙 운영단 모집 및 선발 기간 : 24.01.16(화)~24.01.31(수)</li>   </U.T3>
-                    <U.T3>  <li> 아기사자 모집 마감 기한 : ~24.03.17(일)</li></U.T3>
-                  
-
+                        전국 최대 규모의 IT 창업 동아리,
+                        <br />
+                        멋쟁이사자처럼 대학과 함께하고 싶으신가요? <br />
+                        아래 모집 일정을 참고해주세요! <br /> <br />
+                        <U.T3>
+                            {' '}
+                            <li> 운영진 모집 마감 기한 : ~24.01.15(월)</li>
+                        </U.T3>
+                        <U.T3>
+                            {' '}
+                            <li>
+                                {' '}
+                                중앙 운영단 모집 및 선발 기간 :
+                                24.01.16(화)~24.01.31(수)
+                            </li>{' '}
+                        </U.T3>
+                        <U.T3>
+                            {' '}
+                            <li> 아기사자 모집 마감 기한 : ~24.03.17(일)</li>
+                        </U.T3>
                     </U.T2>
-                    
+
                     <div>
                         <div className="inner">
-                    
-                        <Button onClick={openModal}>
-                                    모집 알림 신청하기
-                                    <PixelLongArrowIcon fill="#ffffff" />
-
-                                </Button>
-
+                            <Button onClick={openModal}>
+                                모집 알림 신청하기
+                                <PixelLongArrowIcon fill="#ffffff" />
+                            </Button>
                         </div>
                     </div>
                     {isMobileView ? (

@@ -30,34 +30,34 @@ const Univcontent = () => {
         window.open('mailto:univ_admin@likelion.net');
     };
 
-   // Define the table object
-const table: { [key: string]: string } = {
-    '’아기사자’가 무엇인가요?':
-        '멋쟁이사자처럼 대학에 들어온 구성원들을 지칭하는 말입니다.',
-    '대학 졸업생이나 직장인도 참여 가능한가요?':
-        '아니요, 대학 기반 동아리이니만큼 재학생, 휴학생에 한해 지원할 수 있습니다.',
+    // Define the table object
+    const table: { [key: string]: string } = {
+        '’아기사자’가 무엇인가요?':
+            '멋쟁이사자처럼 대학에 들어온 구성원들을 지칭하는 말입니다.',
+        '대학 졸업생이나 직장인도 참여 가능한가요?':
+            '아니요, 대학 기반 동아리이니만큼 재학생, 휴학생에 한해 지원할 수 있습니다.',
 
-    '운영진 및 아기사자 지원은 어떻게 하나요?':
-        '참여대학 페이지에 우리 학교가 있다면, 각 학교의 대표 페이지를 통해 문의해주세요. 만일 찾는 데에 어려움이 있다면, univ_admin@likelion.net 메일로 문의해주세요.',
-    '중앙 운영단은 어떤 조직이며, 어떻게 구성되나요?':
-        '중앙 운영단은 멋쟁이사자처럼 대학의 구성원 전체를 대표하는 조직으로, 운영팀, 콘텐츠팀으로 나뉘어 멋쟁이사자처럼과 직접적으로 소통하며 멋대를 이끌어나갈 예정입니다. 자세한 선발 내용은 1월 중순 중 발표될 모집 요강을 살펴봐 주세요.',
+        '운영진 및 아기사자 지원은 어떻게 하나요?':
+            '참여대학 페이지에 우리 학교가 있다면, 각 학교의 대표 페이지를 통해 문의해주세요. 만일 찾는 데에 어려움이 있다면, univ_admin@likelion.net 메일로 문의해주세요.',
+        '중앙 운영단은 어떤 조직이며, 어떻게 구성되나요?':
+            '중앙 운영단은 멋쟁이사자처럼 대학의 구성원 전체를 대표하는 조직으로, 운영팀, 콘텐츠팀으로 나뉘어 멋쟁이사자처럼과 직접적으로 소통하며 멋대를 이끌어나갈 예정입니다. 자세한 선발 내용은 1월 중순 중 발표될 모집 요강을 살펴봐 주세요.',
 
-    '교육과 행사는 오프라인으로 진행되나요?':
-        '학교별로 진행하는 교육은 각 학교 내부에서 자율적으로 진행하면 되며, 오프라인을 권장드립니다. 멋쟁이사자처럼에서 진행하는 행사의 경우 온/오프라인 행사가 혼합되어 있습니다.',
-};
+        '교육과 행사는 오프라인으로 진행되나요?':
+            '학교별로 진행하는 교육은 각 학교 내부에서 자율적으로 진행하면 되며, 오프라인을 권장드립니다. 멋쟁이사자처럼에서 진행하는 행사의 경우 온/오프라인 행사가 혼합되어 있습니다.',
+    };
 
-const question = '운영진 및 아기사자 지원은 어떻게 하나요?';
+    const question = '운영진 및 아기사자 지원은 어떻게 하나요?';
 
-const answer = table[question] || '';
+    const answer = table[question] || '';
 
-if (typeof document !== 'undefined') {
-    const answerElement = document.getElementById('answer');
-    if (answerElement) {
-        answerElement.innerHTML = answer;
+    if (typeof document !== 'undefined') {
+        const answerElement = document.getElementById('answer');
+        if (answerElement) {
+            answerElement.innerHTML = answer;
+        }
+    } else {
+        console.log(answer);
     }
-} else {
-    console.log(answer);
-}
 
     return (
         <U.ContentDiv>

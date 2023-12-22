@@ -11,9 +11,7 @@ interface IHeader {
 }
 
 function Header({ setProjectApi }: IHeader) {
-
-    const {isAdmin} = useIsAdmin();
-
+    const { isAdmin } = useIsAdmin();
     const [activeTab, setActiveTab] = useState<number | undefined>();
 
     const handleClick = (index?: number) => {

@@ -36,7 +36,12 @@ export interface IError {
  * @param {P} params - request parameter
  */
 
-async function refreshRequest<T, R, P>({ uri, method, data, params }: IRequest<T, P>) {
+async function refreshRequest<T, R, P>({
+    uri,
+    method,
+    data,
+    params,
+}: IRequest<T, P>) {
     const config: AxiosRequestConfig = {
         url: uri,
         method,

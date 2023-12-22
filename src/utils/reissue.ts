@@ -12,7 +12,7 @@ interface RefreshParam {
 
 async function reissue() {
     const refresh = localStorage.getItem('refresh_token') as string;
-    
+
     const response = await refreshRequest<null, Rissue, RefreshParam>({
         uri: '/api/v1/auth/refresh',
         method: 'post',

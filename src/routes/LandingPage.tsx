@@ -8,10 +8,10 @@ const LandingPage = () => {
     useEffect(() => {
         const loginDev = async () => {
             await login();
-        }
+        };
 
         loginDev();
-    }, [])
+    }, []);
     return <Landing />;
 };
 

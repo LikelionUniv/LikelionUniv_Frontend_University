@@ -131,9 +131,8 @@ export const Button = styled.button`
     /* layout */
     display: flex;
     padding: 16px 32px;
-    gap:130px;
+    gap: 130px;
     align-items: flex-start;
-    
 
     @media screen and (max-width: 768px) {
         margin: 0 auto;
