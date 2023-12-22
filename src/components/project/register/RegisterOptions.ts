@@ -123,6 +123,13 @@ export class Tech {
 
         return tech;
     }
+
+    static loadCurrentTech(currentTech: string[]) {
+        const allTech = Tech.loadTech();
+        const current = allTech.filter(tech => currentTech.includes(tech.label));
+
+        return current.map(current => current.id);
+    }
 }
 
 export class Univ {

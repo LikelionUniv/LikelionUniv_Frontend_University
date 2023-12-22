@@ -215,8 +215,12 @@ const ProjectUpdate = () => {
         navigate('/project');
     };
 
-    const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
+    const { checkboxList, checkHandler, checkDefaultHandler, defaultDone } = useCheckbox(Tech.loadTech());
     const [etcCheck, setEtcCheck] = useState<boolean>(false);
+
+    if (project !== undefined && !defaultDone) {
+        checkDefaultHandler(Tech.loadCurrentTech(project.projectTech));
+    }
 
     // 체크박스 선택을 관리하는 함수
     const handleCheckboxChange = (id: number, checked: boolean) => {
