@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PostCardProp } from '../mypage/type';
 import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
+import { useNavigate } from "react-router-dom";
 
 export interface PostBoxProp extends PostCardProp {
     user: string;
@@ -10,8 +11,14 @@ export interface PostBoxProp extends PostCardProp {
 }
 
 const PostBox: React.FC<PostBoxProp> = props => {
+    const navigate = useNavigate();
+
+    const onClick = () => {
+        navigate(`/community/1`);
+    };
+
     return (
-        <Wrapper>
+        <Wrapper onClick={onClick}>
             <BoxWrapper>
                 <Box className="title">{props.title}</Box>
                 <Box className="content">{props.content}</Box>
@@ -59,6 +66,7 @@ const Wrapper = styled.div`
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 `;
 
 const BoxWrapper = styled.div`
