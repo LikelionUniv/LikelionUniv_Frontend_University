@@ -14,7 +14,7 @@ import AutoHeightTextarea from '../register/AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
 import request from '../../../utils/request';
 import { useNavigate, useParams } from 'react-router-dom';
-import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
+import ImageUpload from '../../utils/ImageUpload';
 import useEnrolledUser from '../register/user/userStore/useEnrolledUser';
 import { Gen, IDropdown, Output, Tech, Thon, Univ } from '../register/RegisterOptions';
 import UserFind from '../register/user/UserFind';
@@ -48,12 +48,13 @@ interface PostId {
 }
 
 interface Image {
-    file: File;
+    file?: File;
     src: string;
 }
 
 const ProjectUpdate = () => {
     const {projectId} = useParams();
+    const httpUrl = 'https://';
 
     const {data: project} = useFetch<Project, null>({
         uri: `/api/v1/project/${projectId}`
@@ -63,26 +64,28 @@ const ProjectUpdate = () => {
         if (project !== undefined) {
             setFormState({
                 activity: project.activity,
-                activityEtc: '',
+                activityEtc: Thon.isEtcThon(project.activity) ? project.activity : '',
                 outPut: project.outPut,
                 serviceName: project.serviceName,
                 startDate: project.startDate,
                 endDate: project.endDate,
-                projectTeches: [],
-                projectTechEtc: '',
+                projectTeches: project.projectTech,
+                projectTechEtc: Tech.loadEtcTech(project.projectTech),
                 description: project.description,
                 content: project.content,
                 productionUrl: project.productionUrl,
-                images: [],
+                images: project.imageUrl.map(url => ({src: url})),
                 ordinal: project.ordinal.toString(),
                 univ: project.univ,
-                members: [],
+                members: project.members.map(member => member.userId),
             });
         }
+        
     }, [project]);
-    
+
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
+
     const {
         userLength: memberLength,
         userIdList: memberIdList,
@@ -110,6 +113,15 @@ const ProjectUpdate = () => {
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
+    const [initActive, setInitActive] = useState<boolean>(false);
+
+    // 액티비티 기타 처리
+    useEffect(() => {
+        if (formState.activityEtc !== '' && !initActive) {
+            setActiveThonEtc(true);
+            setInitActive(true);            
+        }
+    }, [formState.activityEtc, initActive]);
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -150,7 +162,10 @@ const ProjectUpdate = () => {
     };
 
     const processOrdinal = (): number => {
-        return Number(formState.ordinal.slice(0, -1));
+        if (Number.isNaN(formState.ordinal)) {
+            return Number(formState.ordinal.slice(0, -1));
+        }
+        return Number(formState.ordinal);
     };
 
     const processTech = (): string[] => {
@@ -159,24 +174,41 @@ const ProjectUpdate = () => {
                 ...formState.projectTeches,
                 formState.projectTechEtc,
             ];
-            return teches.filter(tech => tech !== '');
+
+            const duplicateDeletedTeches = Array.from(new Set(teches));
+            return duplicateDeletedTeches.filter(tech => tech !== '');
         }
 
         return formState.projectTeches;
     };
 
     const processImages = async (): Promise<string[]> => {
-        const imageFiles: File[] = formState.images.map(image => image.file);
-        const presignedUrlImages: PresignedUrlResponse[] = [];
+        const imageFiles: (string | File)[] = formState.images.map(image => {
+            if (image.file === undefined) return image.src;
+            return image.file;
+        });
+
+        const imageUrls: string[] = [];
 
         // presigned url 얻어와서 S3에 등록
-        for (const file of imageFiles) {
-            const url = await ImageUpload.getPresignedUrl(file);
-            await ImageUpload.enrollImagesToS3(file, url.presignedUrl);
-            presignedUrlImages.push(url);
+        for (const image of imageFiles) {
+            // 이미 등록되어있는 이미지면 다시 등록할 필요 없음.
+            if (typeof image === 'string') {
+                if (image.startsWith(httpUrl)) {
+                    imageUrls.push(image.slice(8));
+                    continue;
+                }
+                
+                imageUrls.push(image);
+                continue;
+            }
+
+            const url = await ImageUpload.getPresignedUrl(image);
+            await ImageUpload.enrollImagesToS3(image, url.presignedUrl);
+            imageUrls.push(url.imageUrl);
         }
 
-        return presignedUrlImages.map(image => image.imageUrl);
+        return imageUrls;
     };
 
     const processSendData = async (): Promise<ProjectRegisterType> => {
@@ -199,18 +231,21 @@ const ProjectUpdate = () => {
 
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
+        if (project === undefined) return;
+        
         e.preventDefault();
         if (!isFill) return;
-
+        
         const data = await processSendData();
+        console.log(data.projectTeches);
 
         const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
-            method: 'post',
+            uri: `/api/v1/project/${project.id}`,
+            method: 'patch',
             data,
         });
 
-        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
+        alert(`${response?.data.id}번의 게시글이 수정되었습니다.`);
         clearUser();
         navigate('/project');
     };
@@ -221,6 +256,16 @@ const ProjectUpdate = () => {
     if (project !== undefined && !defaultDone) {
         checkDefaultHandler(Tech.loadCurrentTech(project.projectTech));
     }
+
+    // 테크 초기 기타처리
+    const [initTechEtc, setInitTechEtc] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!initTechEtc && formState.projectTechEtc !== '') {
+            setEtcCheck(true);
+            setInitTechEtc(true);
+        }
+    }, [formState.projectTechEtc, initTechEtc]);
 
     // 체크박스 선택을 관리하는 함수
     const handleCheckboxChange = (id: number, checked: boolean) => {
@@ -281,6 +326,23 @@ const ProjectUpdate = () => {
         }));
     }, [images]);
 
+    // 초기 이미지 처리를 위해
+    const [imageDefault, setImageDefault] = useState<boolean>(false);
+
+    useEffect(() => {        
+        if (imageDefault || formState.images.length <= 0) return;
+        
+        const imageUrls = formState.images.map(image => {
+            return {
+                ...image,
+                src: `https://${image.src}`
+            }
+        });
+        
+        setImages(imageUrls);
+        setImageDefault(true);
+    }, [formState.images, imageDefault, setImages]);
+
     // 학교 목록을 불러오는 api
     const { data: univList } = useFetchAsyncFunc<IDropdown[]>({
         initValue: [],
@@ -291,7 +353,7 @@ const ProjectUpdate = () => {
         return univList.find(univ => project?.univ === univ.label) as IDropdown;
     }
 
-    useEffect(() => {
+    useEffect(() => {                
         if (
             formState.images.length === 0 ||
             formState.activity === '' ||
@@ -356,7 +418,7 @@ const ProjectUpdate = () => {
             ) : (
                 <P.Images>
                     {images.map((image, idx) => (
-                        <P.Img key={`img-${idx}`} src={image.src}>
+                        <P.Img key={`img-${idx}`} src={`${image.src}`}>
                             <P.DeleteBtn
                                 isFirst={idx === 0}
                                 onClick={() => remove(idx)}

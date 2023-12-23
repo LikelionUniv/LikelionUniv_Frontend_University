@@ -65,8 +65,15 @@ export class Thon {
     static loadCurrentThon(currentTon: string): IDropdown {
         const thons = Thon.loadThon();        
 
-        const current = thons.find(thon => thon.label === currentTon) as IDropdown;
-        return current;
+        const current = thons.find(thon => thon.label === currentTon);
+        if (current !== undefined) return current;
+        return thons[thons.length - 1];
+    }
+
+    static isEtcThon(thon: string) {
+        const labels = ['아이디어톤', '해커톤', '각 개별 해커톤'];
+
+        return labels.find(label => label === thon) === undefined;
     }
 }
 
@@ -129,6 +136,13 @@ export class Tech {
         const current = allTech.filter(tech => currentTech.includes(tech.label));
 
         return current.map(current => current.id);
+    }
+
+    static loadEtcTech(currentTech: string[]) {
+        const allTechLabels = Tech.loadTech().map(tech => tech.label);
+        const etcs = currentTech.filter(tech => !allTechLabels.includes(tech));  
+        if (etcs.length === 0) return '';      
+        return etcs.join(', ');
     }
 }
 
