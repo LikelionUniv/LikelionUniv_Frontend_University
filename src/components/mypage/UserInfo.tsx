@@ -6,7 +6,6 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { userState } from '../../store/user';
 import { UserProfileAtom } from '../../store/mypageData';
 import useModal from '../../hooks/useModal';
-import axios from 'axios';
 import { userProfileApi } from '../../api/mypage/userinfo';
 import { FollowModal } from './FollowModal';
 import { ImodalProps } from './type';
@@ -120,6 +119,7 @@ const UserProfile = styled.div`
 
     & > p {
         margin-top: 16px;
+        line-height : 150%;
         color: var(--Grey-900, #212224);
         font-size: 18px;
         font-weight: 500;
@@ -128,13 +128,12 @@ const UserProfile = styled.div`
 
 const UserName = styled.div`
     position: relative;
-
+    display : flex;
+    align-items : center;
+    line-height : 140%;
     & > p {
-        display: inline-flex;
         font-size: 28px;
         font-weight: 700;
-        line-height: 115%;
-        vertical-align: bottom;
     }
     & > div {
         display: inline-flex;
@@ -154,6 +153,7 @@ const UserName = styled.div`
 const UserPart = styled.div`
     display: flex;
     margin-top: 6px;
+    line-height : 150%;
     & > p {
         font-size: 16px;
         font-weight: 700;

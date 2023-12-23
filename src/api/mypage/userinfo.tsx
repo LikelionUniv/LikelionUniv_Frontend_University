@@ -1,12 +1,10 @@
 import axios from 'axios'
 import {IuserModify} from '../../components/mypage/type'
 export const userProfileApi = async (user_id : number) =>{
-
-    //
     const userid = 3
 
     return await axios
-            .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${userid}/profile`)
+            .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`)
             .then((response) => {
                 console.log("UserProfile",response.data.data);
                 return response.data.data;
@@ -22,7 +20,7 @@ export const userFollowApi = async (user_id: number , page: number , follow: str
     const userid = 3
 
     return await axios 
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${userid}/${follow}?page=${page}&size=16`)
+        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/${follow}?page=${page}&size=16`)
         .then((response) => {
             // console.log("userFollow ",response.data.data );
             return response.data;
@@ -51,7 +49,7 @@ export const followDeleteApi = async (user_id: number) => {
     const userid = 3
 
     return await axios 
-        .delete(`${process.env.REACT_APP_BASE_URL}/v1/follow/${userid}`)
+        .delete(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
         .then((response) => {
             // console.log("followDelete ",response.data.data );
             return response.data;
@@ -72,5 +70,40 @@ export const userInfoModifyApi = async (user_id: number , user_info:IuserModify)
     .catch((error)=>{
         return error;
     })
+}
 
+export const requestPresignedUrl = async ( user_id: number , extension: string ) => {
+
+    return await axios
+    .get(`${process.env.REACT_APP_BASE_URL}/v1/image/user/${user_id}`,{
+        params :{
+            fileNameExtension : extension,
+        }
+    })
+    .then((response) => {
+        return response.data.data;
+    })
+    .catch((error) => {
+        return error;
+    })
+}
+
+export const imageUploadToS3 = async (user_id: number , file:File) => {
+    
+    const fileName = file.name.split('.');
+    const extension = fileName[fileName.length - 1];
+
+    const url = await requestPresignedUrl(user_id , extension);
+    
+    if(url.presignedUrl === undefined) return "PresignedUrl Undefined";
+
+    return await axios
+    .put(url.presignedUrl , file)
+    .then((response) => {
+        console.log(response);
+        return url.imageUrl;
+    })
+    .catch((error) => {
+        return error;
+    })
 }

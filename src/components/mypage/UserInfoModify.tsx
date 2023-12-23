@@ -1,37 +1,25 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button } from './Common';
-import SchoolDropDown from '../signUp/SchoolDropDown';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
 import {useRecoilState} from 'recoil'
 import {UserProfileAtom} from '../../store/mypageData'
-import {IuserModify} from './type'
-import {userInfoModifyApi} from '../../api/mypage/userinfo'
+import {userInfoModifyApi ,imageUploadToS3, requestPresignedUrl } from '../../api/mypage/userinfo'
 import { useNavigate } from 'react-router-dom';
+import { IuserModify } from './type';
+
 
 /* dropdown option 부분 */
-
-const genOptions: { value: number; label: string }[] = [];
-
-for (let i = 11; i >= 1; i--) {
-    genOptions.push({ value: i, label: `${i}기` });
-}
-
 const trackOptions = [
     { value: 1, label: '기획디자인' },
     { value: 2, label: '프론트엔드' },
     { value: 3, label: '백엔드' },
 ];
 
-const roleOptions = [
-    { value: 1, label: '대표' },
-    { value: 2, label: '운영진' },
-    { value: 3, label: '아기사자' },
-];
-
 const UserInfoModify = () => {
+    const navigate = useNavigate();
     //초기 렌더링 시 유저 기본정보 받아와서 formState에 채워넣기
     const [formState, setFormState] = useState<IuserModify>({
         name : '',
@@ -39,14 +27,13 @@ const UserInfoModify = () => {
         profileImage: '',
         part: '',
     });
-
-    const navigate = useNavigate();
+    
     const [userProfile , updateUserProfile] = useRecoilState(UserProfileAtom);
+    //<img src = imgSrc/> 
+    const [imgSrc , setImgSrc] = useState(userProfile.profileImage);
 
+    // 초기 렌더링 시 유저 정보 뿌리기
     useEffect( ()=>{
-        console.log("초기 렌더링 시 유저 정보 상태 저장")
-        console.log(userProfile);
-
         setFormState({
             name : userProfile.name,
             introduction : userProfile.introduction,
@@ -72,32 +59,31 @@ const UserInfoModify = () => {
 
     // 이미지 파일 받아오기
     const fileRef = useRef<HTMLInputElement | null>(null);
-
     //사진 변경하기 클릭 -> 파일 선택창 띄움
-    const handleImgBtn = () => {
-        console.log(fileRef);
+    const handleImgBtn = (e: React.MouseEvent) => {
+        e.preventDefault();
+
         if (fileRef.current) {
             fileRef.current.click();
         }
     };
-
     const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files;
 
         if (file != null) {
-            const newUrl: string = await readUrl(file[0]);
+            const imgSrc: string = await readUrl(file[0]);
+            const imageUrl = await imageUploadToS3(userProfile.id , file[0]);
+            console.log(imageUrl);
 
-            // console.log(newUrl)
-
-            //setImgUrl(newUrl)
-
+            setImgSrc(imgSrc);
             setFormState(prev => ({
                 ...prev,
-                profileImage: newUrl,
+                profileImage: imageUrl,
             }));
+
+
         }
     };
-
     //이미지 URL읽는 함수
     const readUrl = async (file: File): Promise<string> => {
         return await new Promise<string>(resolve => {
@@ -113,38 +99,25 @@ const UserInfoModify = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        if (
-            formState.name === '' ||
-            formState.introduction === '' ||
-            formState.profileImage === '' ||
-            formState.part === ''
-        )
-            alert('모든 항목을 입력했는지 확인해주세요.');
-        else {
-            /* button click으로 해서 정보 저장됨 확인 */
-            console.log(formState);
-            //수정 API 요청
-            const res =  await userInfoModifyApi(userProfile.id , formState);
-            console.log(res.response.data.isSuccess)
-            //성공 시 마이페이지로 이동
-            if(res.response.data.isSuccess) {
-                alert("성공적으로 저장되었습니다.")
-                updateUserProfile({
-                    ...userProfile,
-                    name : formState.name,
-                    introduction : formState.introduction,
-                    profileImage : formState.profileImage,
-                    part : formState.part,
-                })
-                navigate(-1);
-            }
-            else{
-                alert("저장에 실패했습니다.")
-                navigate(-1);
-            }
-            //실패 시 마이페이지로 이동
+        //수정 API 요청
+        const response =  await userInfoModifyApi(userProfile.id , formState);
+        //성공 시 마이페이지로 이동
+        if(response.isSuccess) {
+            alert("성공적으로 저장되었습니다.")
+            updateUserProfile({
+                ...userProfile,
+                name : formState.name,
+                introduction : formState.introduction,
+                profileImage : imgSrc,
+                part : formState.part,
+            })
+            navigate(-1);
         }
+        else{
+            alert("저장에 실패했습니다.")
+            navigate(-1);
+        }
+        //실패 시 마이페이지로 이동
     };
 
     return (
@@ -152,19 +125,17 @@ const UserInfoModify = () => {
             <Container>
                 <div className="Stitle">내 정보 수정</div>
 
-                <FlexBox>
-                    <Avatar_sm imgurl={formState.profileImage} />
-                    <ImageBtn onClick={handleImgBtn}>사진 변경하기</ImageBtn>
-                    <input
-                        type="file"
-                        style={{ display: 'none' }}
-                        ref={fileRef}
-                        onChange={handleFileSelect}
-                    />
-                    {/* <img src={imgUrl} /> */}
-                </FlexBox>
-
                 <Form>
+                    <FlexBox>
+                        <Avatar_sm imgurl={imgSrc} />
+                        <ImageBtn onClick={handleImgBtn}>사진 변경하기</ImageBtn>
+                        <input
+                            type="file"
+                            style={{ display: 'none' }}
+                            ref={fileRef}
+                            onChange={handleFileSelect}
+                        />
+                    </FlexBox>
                     <Ndiv>이름</Ndiv>
                     <Nform
                         placeholder="자신의 이름을 작성해주세요."
@@ -189,40 +160,7 @@ const UserInfoModify = () => {
 
                     <p>{formState.introduction?.length}/50</p>
 
-                    {/* <Ndiv>전화번호</Ndiv>
-                    <Nform
-                        placeholder="전화번호"
-                        value={formState.phone}
-                        onChange={e =>
-                            setFormState({
-                                ...formState,
-                                phone: e.target.value,
-                            })
-                        }
-                    /> */}
-
-                    {/* <Ndiv>학교</Ndiv>
-                    <SchoolDropDown
-                        onChange={handleSelectChange('university')}
-                    /> */}
-
                     <div className="SformDiv">
-                        {/* <div className="SfromDiv2">
-                            <Ndiv>기수</Ndiv>
-                            <DropDown
-                                options={genOptions}
-                                onChange={handleSelectChange('generation')}
-                            />
-                        </div>
-
-                        <div className="SfromDiv2">
-                            <Ndiv>역할</Ndiv>
-                            <DropDown
-                                options={roleOptions}
-                                onChange={handleSelectChange('role')}
-                            />
-                        </div> */}
-
                         <div className="SfromDiv2">
                             <Ndiv>트랙</Ndiv>
                             <DropDown
@@ -325,8 +263,9 @@ const Nform = styled.input`
 `;
 
 const Nformarea = styled.textarea`
+    box-sizing : border-box;
     width: 464px;
-    height: 100px;
+    height: 148px;
     font-size: 16px;
     color: var(--grey-900, #212224);
     resize: none;
