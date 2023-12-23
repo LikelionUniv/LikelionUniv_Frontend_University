@@ -129,7 +129,7 @@ const Nav = () => {
                             <p>프로젝트</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/community" style={{ visibility: 'hidden' }}>
+                        <Text to="/community">
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
