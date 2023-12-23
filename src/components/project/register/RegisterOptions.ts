@@ -45,7 +45,9 @@ export class Gen {
     static loadCurrentGen(currentGen: number) {
         const allGen = Gen.loadAllGen();
 
-        const current = allGen.find(gen => gen.value === currentGen) as IDropdown;
+        const current = allGen.find(
+            gen => gen.value === currentGen,
+        ) as IDropdown;
         return current;
     }
 }
@@ -63,7 +65,7 @@ export class Thon {
     }
 
     static loadCurrentThon(currentTon: string): IDropdown {
-        const thons = Thon.loadThon();        
+        const thons = Thon.loadThon();
 
         const current = thons.find(thon => thon.label === currentTon);
         if (current !== undefined) return current;
@@ -90,9 +92,11 @@ export class Output {
     }
 
     static loadCurrentOutput(currentOutput: string): IDropdown {
-        const outputs = Output.loadOutput();        
+        const outputs = Output.loadOutput();
 
-        const current = outputs.find(output => output.label === currentOutput) as IDropdown;
+        const current = outputs.find(
+            output => output.label === currentOutput,
+        ) as IDropdown;
         return current;
     }
 }
@@ -133,15 +137,17 @@ export class Tech {
 
     static loadCurrentTech(currentTech: string[]) {
         const allTech = Tech.loadTech();
-        const current = allTech.filter(tech => currentTech.includes(tech.label));
+        const current = allTech.filter(tech =>
+            currentTech.includes(tech.label),
+        );
 
         return current.map(current => current.id);
     }
 
     static loadEtcTech(currentTech: string[]) {
         const allTechLabels = Tech.loadTech().map(tech => tech.label);
-        const etcs = currentTech.filter(tech => !allTechLabels.includes(tech));  
-        if (etcs.length === 0) return '';      
+        const etcs = currentTech.filter(tech => !allTechLabels.includes(tech));
+        if (etcs.length === 0) return '';
         return etcs.join(', ');
     }
 }

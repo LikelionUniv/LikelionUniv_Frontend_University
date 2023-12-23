@@ -1,7 +1,7 @@
 import React from 'react';
 import * as B from './ProjectBox.style';
 import EachBox from './EachBox';
-import { Project } from './ProjectList';
+import { Project } from './ProjectListInner';
 
 interface IProjectBox {
     projects: Project[];

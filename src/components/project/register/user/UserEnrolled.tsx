@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import * as UE from './UserEnrolled.style';
 import Part from './Part';
 import useEnrolledUser from './userStore/useEnrolledUser';
-import { Member } from '../../ProjectList';
+import { Member } from '../../ProjectListInner';
 import request from '../../../../utils/request';
 import { User } from './UserFind';
 
@@ -11,19 +11,19 @@ interface UserEnrolledProps {
 }
 
 interface UserInfo {
-    id: number
-    profileImage: string
-    name: string
-    role: string
-    phoneNum: string
-    universityName: string
-    major: string
-    ordinal: number
-    part: string
-    followerNum: number
-    followingNum: number
-    introduction: string
-    isMine: boolean
+    id: number;
+    profileImage: string;
+    name: string;
+    role: string;
+    phoneNum: string;
+    universityName: string;
+    major: string;
+    ordinal: number;
+    part: string;
+    followerNum: number;
+    followingNum: number;
+    introduction: string;
+    isMine: boolean;
 }
 
 const ENUM_PART = {
@@ -37,7 +37,7 @@ interface EnumPart {
     [key: string]: string;
 }
 
-function UserEnrolled({defaultMembers}: UserEnrolledProps) {
+function UserEnrolled({ defaultMembers }: UserEnrolledProps) {
     const {
         userLength,
         planUser,
@@ -68,19 +68,18 @@ function UserEnrolled({defaultMembers}: UserEnrolledProps) {
                 universityName: response.data.universityName,
                 ordinal: response.data.ordinal,
                 part: wholePart[response.data.part],
-            }
+            };
 
             enrollUser(userinfo);
-        }
+        };
 
         const enrolledDefaultMembers = async () => {
-            for (const member of defaultMembers) {                
+            for (const member of defaultMembers) {
                 await initDefaultMember(member.userId);
             }
-        }
+        };
 
         enrolledDefaultMembers();
-        
     }, [defaultMembers, enrollUser]);
 
     return (

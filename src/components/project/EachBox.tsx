@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as B from './EachBox.style';
 import useInnerWidth from '../../hooks/useInnerWidth';
-import { Project } from './ProjectList';
+import { Project } from './ProjectListInner';
 import { useNavigate } from 'react-router-dom';
 
 interface IEachBox {

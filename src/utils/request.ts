@@ -42,7 +42,7 @@ async function request<T, R, P>({ uri, method, data, params }: IRequest<T, P>) {
         method,
         data,
         params,
-    };    
+    };
 
     const response = await axiosInstance<T, AxiosResponse<IResponse<R>>>(
         config,

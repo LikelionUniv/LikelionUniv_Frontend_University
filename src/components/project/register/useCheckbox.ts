@@ -28,7 +28,7 @@ function useCheckbox(initialList: ICheckbox[]) {
         setDefaultDone(true);
 
         return updatedList;
-    }
+    };
 
     return {
         checkboxList,
@@ -36,7 +36,6 @@ function useCheckbox(initialList: ICheckbox[]) {
         checkDefaultHandler,
         defaultDone,
     };
-
 }
 
 export default useCheckbox;

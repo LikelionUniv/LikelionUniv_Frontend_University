@@ -13,7 +13,10 @@ interface RuseFetch<T> {
     error: string;
 }
 
-function useFetchAsyncFunc<T>({ initValue, asyncFunc }: IuseFetch<T>): RuseFetch<T> {
+function useFetchAsyncFunc<T>({
+    initValue,
+    asyncFunc,
+}: IuseFetch<T>): RuseFetch<T> {
     const [data, setData] = useState<T>(initValue);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>('');

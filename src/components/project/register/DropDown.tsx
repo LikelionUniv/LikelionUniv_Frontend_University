@@ -17,7 +17,12 @@ type DropDownProps = {
     defaultValue?: OptionType;
 };
 
-const DropDown = ({ placeholder, options, onChange, defaultValue }: DropDownProps) => {
+const DropDown = ({
+    placeholder,
+    options,
+    onChange,
+    defaultValue,
+}: DropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
     const DropdownIndicator = (props: any) => {
         return (

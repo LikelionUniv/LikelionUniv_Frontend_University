@@ -1,29 +1,29 @@
-import { useEffect, useState } from "react";
-import request from "../utils/request";
+import { useEffect, useState } from 'react';
+import request from '../utils/request';
 
 interface IuseFetch<P> {
-  uri: string;
-  params?: P;
+    uri: string;
+    params?: P;
 }
 
-function useFetch<T, P>({uri, params}: IuseFetch<P>) {
-  const [data, setData] = useState<T>();
+function useFetch<T, P>({ uri, params }: IuseFetch<P>) {
+    const [data, setData] = useState<T>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await request<null, T, P>({
-        uri,
-        method: 'get',
-        params,
-      });
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await request<null, T, P>({
+                uri,
+                method: 'get',
+                params,
+            });
 
-      setData(response.data);
-    }
+            setData(response.data);
+        };
 
-    fetchData();
-  }, [params, uri]);
+        fetchData();
+    }, [params, uri]);
 
-  return {data}
+    return { data };
 }
 
-export default useFetch
+export default useFetch;
