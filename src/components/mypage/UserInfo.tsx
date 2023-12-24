@@ -9,6 +9,7 @@ import useModal from '../../hooks/useModal';
 import { userProfileApi } from '../../api/mypage/userinfo';
 import { FollowModal } from './FollowModal';
 import { ImodalProps } from './type';
+import {useAuth} from '../../hooks/useAuth';
 
 export const UserInfo = () => {
     const navigate = useNavigate();
@@ -17,7 +18,8 @@ export const UserInfo = () => {
     };
 
     // 유저 프로필
-    const UserLoginState = useRecoilValue(userState);
+    const UserLoginState = useAuth();
+    // const UserLoginState = useRecoilValue(userState);
     const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
     const userRole: { [id: string]: string } = {
         GUEST: '게스트',

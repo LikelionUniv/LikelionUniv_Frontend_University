@@ -27,11 +27,6 @@ export const requestIdtoken = async (authorizationCode :any ,provider : string|u
     return await axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/login?idtoken=${idtoken}`,{
-            // headers : {
-            //   'Authorization': `Bearer ${idtoken}`,
-            //   'Accept': '*/*'
-            // },
-            // withCredentials: true 
         })
       .then((response) => {
         const isUser = response.data.data.isRegistered;
@@ -40,8 +35,8 @@ export const requestIdtoken = async (authorizationCode :any ,provider : string|u
 
           // axios header에 accessToken 정보 포함.
           axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-          localStorage.setItem('access-token', accessToken);
-          localStorage.setItem('refresh-token',refreshToken);
+          localStorage.setItem('access_token', accessToken);
+          localStorage.setItem('refresh_token',refreshToken);
         }
         
         return isUser;
@@ -56,7 +51,7 @@ export const requestIdtoken = async (authorizationCode :any ,provider : string|u
   // 유저정보 GET
   export const requestUserInfo = async () =>{
 
-    const token = localStorage.getItem('access-token');
+    const token = localStorage.getItem('access_token');
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     return await axios
       .get(`${process.env.REACT_APP_BASE_URL}/v1/auth/userinfo`,
