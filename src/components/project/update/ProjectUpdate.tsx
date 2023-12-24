@@ -245,7 +245,7 @@ const ProjectUpdate = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-        console.log(data.projectTeches);
+        console.log(data);
 
         const response = await request<ProjectRegisterType, PostId, null>({
             uri: `/api/v1/project/${project.id}`,
