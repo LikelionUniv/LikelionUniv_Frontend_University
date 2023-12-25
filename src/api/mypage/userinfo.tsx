@@ -1,9 +1,10 @@
 import axios from 'axios'
 import {IuserModify} from '../../components/mypage/type'
+import { axiosInstance } from '../../utils/axios'
 export const userProfileApi = async (user_id : number) =>{
     const userid = 3
 
-    return await axios
+    return await axiosInstance
             .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`)
             .then((response) => {
                 console.log("UserProfile",response.data.data);
