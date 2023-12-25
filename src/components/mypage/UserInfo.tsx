@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState } from '../../store/user';
+import { useRecoilState } from 'recoil';
 import { UserProfileAtom } from '../../store/mypageData';
 import useModal from '../../hooks/useModal';
 import { userProfileApi } from '../../api/mypage/userinfo';
@@ -18,7 +17,7 @@ export const UserInfo = () => {
     };
 
     // 유저 프로필
-    const UserLoginState = useAuth();
+    const {userinfo} = useAuth();
     // const UserLoginState = useRecoilValue(userState);
     const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
     const userRole: { [id: string]: string } = {
@@ -46,7 +45,7 @@ export const UserInfo = () => {
     //모달 창 핸들러 : 모달 창 열고 , props set
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
         let follow = e.currentTarget.dataset.type;
-        let userid = UserLoginState.userId;
+        let userid = userinfo.userId;
         setModalProps({ userid, follow });
         openModal();
     };
@@ -54,13 +53,13 @@ export const UserInfo = () => {
     //마운트 시 API(유저 프로필) 요청
     useEffect(() => {
         const fetchData = async () => {
-            if (UserLoginState.name != '') {
-                const userProfile = await userProfileApi(UserLoginState.userId);
+            if (userinfo.name != '') {
+                const userProfile = await userProfileApi(userinfo.userId);
                 updateUserProfile(userProfile);
             }
         };
         fetchData();
-    }, [UserLoginState]);
+    }, [userinfo]);
 
     return (
         <Wrapper>
@@ -70,7 +69,7 @@ export const UserInfo = () => {
                     {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
-                            <p>{UserLoginState.name}</p>{' '}
+                            <p>{userProfile.name}</p>{' '}
                             <div>{userRole[userProfile.role]}</div>{' '}
                         </UserName>
                         <UserPart>

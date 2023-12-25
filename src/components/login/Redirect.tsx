@@ -19,12 +19,10 @@ export const Redirect = () =>{
 
             const isUser = await requestLogin(provider,idtoken);
             
-            // console.log(userInfo);
-
             console.log(isUser)
             if(isUser){
-                const userInfo = await requestUserInfo();
-                updateUserState(userInfo);
+                const response = await requestUserInfo();
+                updateUserState({...response.data,isLogin: true});
                 navigate("/")
             }
             else{

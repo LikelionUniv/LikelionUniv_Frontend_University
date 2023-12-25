@@ -2,26 +2,28 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../store/user';
 import { requestUserInfo } from '../api/auth/auth';
 import { useEffect } from 'react';
+import { AxiosError } from 'axios';
 
 
 export const useAuth = () => {
     const [userinfo, setUserinfo] = useRecoilState(userState);
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
         const fetchUser = async () => {
-            const userInfo = await requestUserInfo();
-            console.log(userInfo);
-            setUserinfo(userInfo);
+            
+            const response = await requestUserInfo()
+            if(response instanceof AxiosError){
+                setUserinfo({...userinfo , isLogin: false})
+                console.log("로그인 상태 X");
+            }
+            else{
+                setUserinfo({...response.data,isLogin: true});
+            }
         };
-        if (token != null) {
-            fetchUser();
-        } else {
-            console.error('NO ACCESS-TOKEN');
-            //refresh token으로 accesstoken 재발급
-        }
+
+        fetchUser();
     }, []);
     
-    return userinfo;
+    return {userinfo, setUserinfo};
 }
 

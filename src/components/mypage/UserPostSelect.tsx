@@ -90,7 +90,7 @@ const UserPostSelect = () => {
                     </>
                 ) : (
                     <>
-                        {Array.isArray(userData.data) &&
+                        {Array.isArray(userData?.data) &&
                         userData.data.length !== 0
                             ? userData.data.map(e => {
                                   if (e.thumbnail !== null) {
@@ -132,8 +132,8 @@ const UserPostSelect = () => {
             <Pagination
                 totalPageNum={
                     select === '프로젝트'
-                        ? userProject.totalPage
-                        : userData.totalPage
+                        ? userProject?.totalPage
+                        : userData?.totalPage
                 }
                 pageNum={page}
                 setPageNum={setPage}

@@ -5,13 +5,13 @@ import login from '../dev/login';
 
 const LandingPage = () => {
     // login dev
-    useEffect(() => {
-        const loginDev = async () => {
-            await login();
-        };
+    // useEffect(() => {
+    //     const loginDev = async () => {
+    //         await login();
+    //     };
 
-        loginDev();
-    }, []);
+    //     loginDev();
+    // }, []);
     return <Landing />;
 };
 

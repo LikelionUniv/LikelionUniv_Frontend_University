@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { axiosInstance } from '../../utils/axios';
+import { useAuth } from '../../hooks/useAuth';
 
 // 인가코드 서버로 전송 , idtoken return 
 export const requestIdtoken = async (authorizationCode :any ,provider : string|undefined) => {
@@ -51,44 +53,54 @@ export const requestIdtoken = async (authorizationCode :any ,provider : string|u
   // 유저정보 GET
   export const requestUserInfo = async () =>{
 
-    const token = localStorage.getItem('access_token');
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    return await axios
+    // const token = localStorage.getItem('access_token');
+    // axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    return await axiosInstance
       .get(`${process.env.REACT_APP_BASE_URL}/v1/auth/userinfo`,
       {
         withCredentials: true,
       })
       .then((response) => {
-        return response.data.data;
+        return response.data;
       })
-      .catch((e) => {
-        return "회원정보 요청 실패";
+      .catch((error) => {
+        return error;
       })
   }
 
-  const requestSignup = async (provider : string|undefined) =>{
-    const idtoken = localStorage.getItem('idtoken');
-    console.log(idtoken);
+  // export const userLogout = () => {
+  //   localStorage.clear();
+  //   const {userinfo,setUserinfo} = useAuth();
+  //   setUserinfo({
+  //     name: '',
+  //     profileImage: '',
+  //     userId: -1,
+  //   });
+  // }
+
+//  const requestSignup = async (provider : string|undefined) =>{
+//     const idtoken = localStorage.getItem('idtoken');
+//     console.log(idtoken);
     
-    try {
-        const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
-         FormData,
-         {
-            withCredentials : true,
-        });
+//     try {
+//         const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+//          FormData,
+//          {
+//             withCredentials : true,
+//         });
         
-        //응답 성공 시
-        if(response.data.isSuccess){
-            localStorage.removeItem('idtoken');
-            return true;
-        }
-        else {
-            alert("서버 통신 오류! 다시 시도해주세요!");
-        }
-    }
-    catch(error) {
-        console.error("요청 실패" , error);
-    }
-}
+//         //응답 성공 시
+//         if(response.data.isSuccess){
+//             localStorage.removeItem('idtoken');
+//             return true;
+//         }
+//         else {
+//             alert("서버 통신 오류! 다시 시도해주세요!");
+//         }
+//     }
+//     catch(error) {
+//         console.error("요청 실패" , error);
+//     }
+// }
 
   
