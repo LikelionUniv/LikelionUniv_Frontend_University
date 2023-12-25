@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useRecoilState } from 'recoil';
 import { currentWidthState } from '../../store/landing';
-import { viewFloatingCountDownState } from '../../store/landing';
+//import { viewFloatingCountDownState } from '../../store/landing';
 
 import maintext from '../../img/landing/main_text.png';
 import mainimage from '../../img/landing/main_image.png';
@@ -12,7 +12,9 @@ import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_lo
 import { ReactComponent as PixelFireworksIcon } from '../../img/landing/pixel_fireworks.svg';
 import { ReactComponent as PixelSingingIcon } from '../../img/landing/pixel_singing.svg';
 import { ReactComponent as PixelLionIcon } from '../../img/landing/pixel_lion.svg';
-import CountDown from './CountDown';
+import CountDown, { targetDate } from './CountDown';
+import FooterModal from '../recruit/FooterModal';
+import FooterModalMobile from '../univrecruit//UnivModalMobile';
 
 export const recruitURL = ' https://forms.gle/j4CJ35VwWgePBEJX6';
 
@@ -45,13 +47,13 @@ const MainGraphic = () => {
     }, [desRef1, desRef2, width]);
 
     // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
-    const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
+    // const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
     const io = new IntersectionObserver(
         entries => {
             entries.forEach(entry => {
-                if (entry.intersectionRatio > 0)
-                    setIsView(prev => ({ top: true, bottom: prev.bottom }));
-                else setIsView(prev => ({ top: false, bottom: prev.bottom }));
+                //  if (entry.intersectionRatio > 0)
+                //   setIsView(prev => ({ top: true, bottom: prev.bottom }));
+                //  else setIsView(prev => ({ top: false, bottom: prev.bottom }));
             });
         },
         {
@@ -63,29 +65,64 @@ const MainGraphic = () => {
         if (targetRef.current) io.observe(targetRef.current);
     }, []);
 
+    const [isCountDownView, setIsCountDownView] = useState<boolean>(false);
+
+    useEffect(() => {
+        setIsCountDownView(
+            new Date(targetDate).getTime() - new Date().getTime() > 0,
+        );
+    }, []);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isMobileView, setIsMobileView] = useState(window.innerWidth < 767);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileView(window.innerWidth < 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <MG.Wrapper>
             <div ref={targetRef} className="refDiv">
-                <MG.Background>
+                <MG.Background isCountDownView={isCountDownView}>
                     <div>
                         <div className="inner">
                             <img src={maintext} />
                             <div className="new-text">
                                 12기 신규 대학 모집 중!
                             </div>
-                            <CountDown />
-                            <a
-                                className="btn"
-                                href={recruitURL}
-                                target="_blank"
-                                rel="noreferrer"
-                            >
-                                신규 대학 지원하기
+                            <div className="hide-text" />
+                            <CountDown isCountDownView={isCountDownView} />
+                            <button className="btn" onClick={openModal}>
+                                모집 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <img src={mainimage} />
+                    {isMobileView ? (
+                        <FooterModalMobile
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
+                    ) : (
+                        <FooterModal
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
+                    )}
                 </MG.Background>
                 <MG.Line ref={targetRef}>
                     {[1, 2].map(item => (
@@ -116,7 +153,7 @@ const MainGraphic = () => {
                 <div className="container" ref={desRef1}>
                     <div className="title">국내 최대 규모 IT 창업 동아리</div>
                     <div className="title">
-                        <PixelLionIcon /> 멋쟁이사자처럼
+                        사단법인 멋쟁이사자처럼이 운영합니다. <PixelLionIcon />
                     </div>
                     <div className="subtitle">
                         ”내 아이디어를 내 손으로 실현하자!”

@@ -14,9 +14,15 @@ type DropDownProps = {
         selectedOption: OptionType | null,
         actionMeta: ActionMeta<OptionType>,
     ) => void;
+    defaultValue?: OptionType;
 };
 
-const DropDown = ({ placeholder, options, onChange }: DropDownProps) => {
+const DropDown = ({
+    placeholder,
+    options,
+    onChange,
+    defaultValue,
+}: DropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
     const DropdownIndicator = (props: any) => {
         return (
@@ -38,6 +44,7 @@ const DropDown = ({ placeholder, options, onChange }: DropDownProps) => {
     return (
         <Select
             options={options}
+            defaultValue={defaultValue}
             styles={options.length > 5 ? genStyle : roleTrackStyle}
             isSearchable={false}
             placeholder={placeholder}

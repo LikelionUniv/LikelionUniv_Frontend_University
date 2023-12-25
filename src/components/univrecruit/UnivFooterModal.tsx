@@ -58,10 +58,13 @@ const UnivFooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                     <M.ModalText>
                         <M.ModalGraphic />
                         <M.Text>
-                            멋대의 새로운 소식을<br />
+                            멋대의 새로운 소식을
+                            <br />
                             이메일로 알려드려요.
                             <M.Text>
-                                * 입력하신 개인정보는 멋쟁이사자처럼 대학 홈페이지의 개인정보처리방침에 의거하여 관리됩니다.
+                                * 입력하신 개인정보는 멋쟁이사자처럼 대학
+                                홈페이지의 개인정보처리방침에 의거하여
+                                관리됩니다.
                             </M.Text>
                         </M.Text>
                     </M.ModalText>

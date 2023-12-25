@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDropDown from './SchoolDropDown';
+import SchoolDropDown,{findLabelByValue} from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { LoginComplete } from '../login/LoginComplete';
+
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -62,21 +63,15 @@ const roleOptions = [
 /* form type */
 interface FormState {
     name: string;
-    universityName: number;
+    universityName: string;
     major: string;
-    // generation: number;
-    // role: number;
-    // track: number;
 }
 
 const Sform = () => {
     const [formState, setFormState] = useState<FormState>({
         name: '',
-        universityName: 0,
+        universityName: '',
         major: '',
-        // generation: 0,
-        // role: 0,
-        // track: 0,
     });
 
     const handleSelectChange =
@@ -86,9 +81,13 @@ const Sform = () => {
             actionMeta: ActionMeta<OptionType>,
         ) => {
             if (selectedOption) {
+                let label: string;
+                if(field == 'universityName'){
+                    label = findLabelByValue(selectedOption.value);
+                }
                 setFormState(prev => ({
                     ...prev,
-                    [field]: selectedOption.value,
+                    [field]: label,
                 }));
             }
         };
@@ -125,7 +124,7 @@ const Sform = () => {
         // 모든 필드 완성되었는지 검사하는 로직 추가함
         if (
             formState.name === '' ||
-            formState.universityName === 0 ||
+            formState.universityName === '' ||
             formState.major === ''
             // formState.generation === 0 ||
             // formState.role === 0 ||

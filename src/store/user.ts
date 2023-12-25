@@ -4,12 +4,14 @@ type UserInfo = {
     name: string;
     profileImage: string;
     userId: number;
+    isLogin : boolean;
 };
 export const userState = atom<UserInfo>({
     key: 'userInfo',
     default: {
         name: '',
         profileImage: '',
-        userId: 2,
+        userId: -1,
+        isLogin: false,
     },
 });
