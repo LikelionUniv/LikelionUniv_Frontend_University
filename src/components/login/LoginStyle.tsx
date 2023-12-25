@@ -5,10 +5,10 @@ import kakaoIcon from '../../img/login/kakao-icon.svg';
 export const Container = styled.div`
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 0 40px;
-    margin-top: 241px;
+    margin: 241px 0;
 
     @media (max-width: 1920px) {
         margin-top: 241px;
