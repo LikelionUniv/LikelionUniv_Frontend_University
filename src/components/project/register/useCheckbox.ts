@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
-function useCheckbox(
-    initialList: { id: number; isChecked: boolean; label: string }[],
-) {
-    const [checkboxList, setCheckboxList] =
-        useState<{ id: number; isChecked: boolean; label: string }[]>(
-            initialList,
-        );
+interface ICheckbox {
+    id: number;
+    isChecked: boolean;
+    label: string;
+}
+
+function useCheckbox(initialList: ICheckbox[]) {
+    const [checkboxList, setCheckboxList] = useState<ICheckbox[]>(initialList);
+    const [defaultDone, setDefaultDone] = useState<boolean>(false);
 
     // 체크를 했을 때 실행되는 함수
     const checkHandler = (id: number, checked: boolean) => {
@@ -18,9 +20,21 @@ function useCheckbox(
         return updatedList;
     };
 
+    const checkDefaultHandler = (idList: number[]) => {
+        const updatedList = checkboxList.map(item =>
+            idList.includes(item.id) ? { ...item, isChecked: true } : item,
+        );
+        setCheckboxList(updatedList);
+        setDefaultDone(true);
+
+        return updatedList;
+    };
+
     return {
         checkboxList,
         checkHandler,
+        checkDefaultHandler,
+        defaultDone,
     };
 }
 

@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import SideBar from '../components/community/SideBar';
-import Notice from '../components/community/Notice';
+import SideBar from './SideBar';
+import Notice from './Notice';
+//import SideBar from '../components/community/SideBar';
+//import Notice from '../components/community/Notice';
+//import '../components/LoadScript';
 
 const Community: React.FC = () => {
     const [selectedItem, setSelectedItem] = useState<string>('공지사항');
@@ -23,13 +26,15 @@ const Community: React.FC = () => {
 export default Community;
 
 const Container = styled.div`
-    max-width: 1280px;
+    max-width: 1200px;
     padding: 0 40px;
     min-width: 768px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 100px;
+    font-family: Pretendard;
+    height: auto;
 `;

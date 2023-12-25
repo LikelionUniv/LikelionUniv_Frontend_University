@@ -5,66 +5,96 @@ import Hyphen from '../../../img/project/hyphen.svg';
 import Cancel from '../../../img/project/cancel.svg';
 import Vertical from '../../../img/project/vertical.svg';
 import FirstVertical from '../../../img/project/firstVertical.svg';
-import { checkboxes, genOptions, output, thon } from './RegisterOptions';
 import { ActionMeta } from 'react-select';
 import DropDown, { OptionType } from './DropDown';
-import SchoolDropDown from './SchoolDropDown';
 import Checkbox from './Checkbox';
 import useCheckbox from './useCheckbox';
 
 import AutoHeightTextarea from './AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
+import UserFind from './user/UserFind';
+import UserEnrolled from './user/UserEnrolled';
+import useEnrolledUser from './user/userStore/useEnrolledUser';
+import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
+import request from '../../../utils/request';
+import { useNavigate } from 'react-router-dom';
+import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
+import useFetchAsyncFunc from '../../../hooks/useFetchAsyncFunc';
 
 /* form type */
 interface FormState {
-    thon: string;
-    thonEtc: string;
+    activity: string;
+    activityEtc: string;
     outPut: string;
-    outPutEtc: string;
     serviceName: string;
-    startDate: Date | null;
-    endDate: Date | null;
-    tech: string[];
-    techEtc: string;
+    ordinal: string;
+    univ: string;
+    startDate: string;
+    endDate: string;
+    projectTeches: string[];
+    projectTechEtc: string;
     description: string;
     content: string;
-    projectUrl: string;
+    productionUrl: string;
     images: Image[];
-    generation: number;
-    university: string;
-    members: string;
+    members: number[];
+}
+
+export interface ProjectRegisterType {
+    activity: string;
+    outPut: string;
+    serviceName: string;
+    ordinal: number;
+    univ: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    content: string;
+    productionUrl: string;
+    projectTeches: string[];
+    imageUrl: string[];
+    members: number[];
+}
+
+interface PostId {
+    id: number;
 }
 
 interface Image {
-    name: string;
-    saved: string;
+    file: File;
+    src: string;
 }
 
 const ProjectRegister = () => {
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
+    const {
+        userLength: memberLength,
+        userIdList: memberIdList,
+        clearUser,
+    } = useEnrolledUser();
+
+    const navigate = useNavigate();
 
     const [formState, setFormState] = useState<FormState>({
-        thon: '',
-        thonEtc: '',
+        activity: '',
+        activityEtc: '',
         outPut: '',
-        outPutEtc: '',
         serviceName: '',
-        startDate: null,
-        endDate: null,
-        tech: [],
-        techEtc: '',
+        startDate: '',
+        endDate: '',
+        projectTeches: [],
+        projectTechEtc: '',
         description: '',
         content: '',
-        projectUrl: '',
-        images: images,
-        generation: 0,
-        university: '',
-        members: '',
+        productionUrl: '',
+        images: [],
+        ordinal: '',
+        univ: '',
+        members: memberIdList,
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
-    const [activeOutPutEtc, setActiveOutPutEtc] = useState<boolean>(false);
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -80,12 +110,8 @@ const ProjectRegister = () => {
                     [field]: selectedOption.label,
                 }));
 
-                if (field === 'thon') {
+                if (field === 'activity') {
                     setActiveThonEtc(selectedOption.label === '기타');
-                }
-
-                if (field === 'outPut') {
-                    setActiveOutPutEtc(selectedOption.label === '기타');
                 }
             }
         };
@@ -100,15 +126,81 @@ const ProjectRegister = () => {
             [field]: event.target.value,
         }));
 
+    const processActivityEtc = (): string => {
+        if (activeThonEtc) {
+            return formState.activityEtc;
+        }
+
+        return formState.activity;
+    };
+
+    const processOrdinal = (): number => {
+        return Number(formState.ordinal.slice(0, -1));
+    };
+
+    const processTech = (): string[] => {
+        if (etcCheck) {
+            const teches = [
+                ...formState.projectTeches,
+                formState.projectTechEtc,
+            ];
+            return teches.filter(tech => tech !== '');
+        }
+
+        return formState.projectTeches;
+    };
+
+    const processImages = async (): Promise<string[]> => {
+        const imageFiles: File[] = formState.images.map(image => image.file);
+        const presignedUrlImages: PresignedUrlResponse[] = [];
+
+        // presigned url 얻어와서 S3에 등록
+        for (const file of imageFiles) {
+            const url = await ImageUpload.getPresignedUrl(file);
+            await ImageUpload.enrollImagesToS3(file, url.presignedUrl);
+            presignedUrlImages.push(url);
+        }
+
+        return presignedUrlImages.map(image => image.imageUrl);
+    };
+
+    const processSendData = async (): Promise<ProjectRegisterType> => {
+        return {
+            activity: processActivityEtc(),
+            outPut: formState.outPut,
+            serviceName: formState.serviceName,
+            ordinal: processOrdinal(),
+            univ: formState.univ,
+            startDate: formState.startDate,
+            endDate: formState.endDate,
+            description: formState.description,
+            content: formState.content,
+            productionUrl: formState.productionUrl,
+            projectTeches: processTech(),
+            imageUrl: await processImages(),
+            members: memberIdList,
+        };
+    };
+
     // 폼 제출할 때 실행되는 함수
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
-        console.log(formState);
+        const data = await processSendData();
+
+        const response = await request<ProjectRegisterType, PostId, null>({
+            uri: '/api/v1/project/',
+            method: 'post',
+            data,
+        });
+
+        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
+        clearUser();
+        navigate('/project');
     };
 
-    const { checkboxList, checkHandler } = useCheckbox(checkboxes);
+    const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
     const [etcCheck, setEtcCheck] = useState<boolean>(false);
 
     // 체크박스 선택을 관리하는 함수
@@ -117,7 +209,7 @@ const ProjectRegister = () => {
 
         setFormState(prev => ({
             ...prev,
-            tech: state
+            projectTeches: state
                 .filter(checkbox => checkbox.isChecked)
                 .map(checkbox => checkbox.label),
         }));
@@ -136,9 +228,8 @@ const ProjectRegister = () => {
 
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
-                const name = file.name;
-                const saved = await readUrl(file);
-                imageMeta.push({ name, saved });
+                const url = await readUrl(file);
+                imageMeta.push({ file: files[i], src: url });
             }
             setImages(imageMeta);
         }
@@ -167,37 +258,45 @@ const ProjectRegister = () => {
     useEffect(() => {
         setFormState(prev => ({
             ...prev,
-            images: images,
+            images,
         }));
     }, [images]);
+
+    // 학교 목록을 불러오는 api
+    const { data: univList } = useFetchAsyncFunc<IDropdown[]>({
+        initValue: [],
+        asyncFunc: Univ.loadUniv,
+    });
 
     useEffect(() => {
         if (
             formState.images.length === 0 ||
-            formState.thon === '' ||
+            formState.activity === '' ||
             formState.outPut === '' ||
-            formState.startDate === null ||
-            formState.endDate === null ||
+            formState.startDate === '' ||
+            formState.endDate === '' ||
             formState.serviceName === '' ||
             formState.description === '' ||
             formState.content === '' ||
-            formState.tech.length === 0 ||
-            formState.generation === 0 ||
-            formState.university === '' ||
-            formState.members === '' ||
-            (formState.thon === '기타' && formState.thonEtc === '') ||
-            (formState.outPut === '기타' && formState.outPutEtc === '') ||
-            (etcCheck && formState.techEtc === '')
+            formState.projectTeches.length === 0 ||
+            formState.productionUrl === '' ||
+            formState.ordinal === '' ||
+            formState.univ === '' ||
+            memberLength === 0 ||
+            (formState.activity === '기타' && formState.activityEtc === '') ||
+            (etcCheck && formState.projectTechEtc === '')
         ) {
             setIsFill(false);
         } else {
             setIsFill(true);
         }
-    }, [formState, etcCheck]);
+    }, [formState, etcCheck, memberLength]);
 
     useEffect(() => {
-        console.log(formState);
-    }, [formState]);
+        return () => {
+            clearUser();
+        };
+    }, [clearUser]);
 
     return (
         <P.Container>
@@ -232,7 +331,7 @@ const ProjectRegister = () => {
             ) : (
                 <P.Images>
                     {images.map((image, idx) => (
-                        <P.Img key={`img-${idx}`} src={image.saved}>
+                        <P.Img key={`img-${idx}`} src={image.src}>
                             <P.DeleteBtn
                                 isFirst={idx === 0}
                                 onClick={() => remove(idx)}
@@ -253,16 +352,17 @@ const ProjectRegister = () => {
                     <P.Label>활동유형</P.Label>
                     <DropDown
                         placeholder="활동 선택"
-                        options={thon}
-                        onChange={handleSelectChange('thon')}
+                        options={Thon.loadThon()}
+                        onChange={handleSelectChange('activity')}
                     />
                     {activeThonEtc ? (
                         <P.Input
                             type="text"
+                            className="etc"
                             placeholder="활동 이름을 입력해주세요."
-                            value={formState.thonEtc}
+                            value={formState.activityEtc}
                             onChange={event =>
-                                handleInputChange('thonEtc', event)
+                                handleInputChange('activityEtc', event)
                             }
                         />
                     ) : null}
@@ -271,19 +371,9 @@ const ProjectRegister = () => {
                     <P.Label>아웃풋 형태</P.Label>
                     <DropDown
                         placeholder="아웃풋 형태 선택"
-                        options={output}
+                        options={Output.loadOutput()}
                         onChange={handleSelectChange('outPut')}
                     />
-                    {activeOutPutEtc ? (
-                        <P.Input
-                            type="text"
-                            placeholder="아웃풋 형태를 입력해주세요."
-                            value={formState.outPutEtc}
-                            onChange={event =>
-                                handleInputChange('outPutEtc', event)
-                            }
-                        />
-                    ) : null}
                 </P.Field>
                 <P.Field>
                     <P.Label>제작 기간</P.Label>
@@ -354,9 +444,9 @@ const ProjectRegister = () => {
                     <P.Input
                         type="text"
                         placeholder="서비스로 연결되는 링크를 입력해주세요."
-                        value={formState.projectUrl}
+                        value={formState.productionUrl}
                         onChange={event =>
-                            handleInputChange('projectUrl', event)
+                            handleInputChange('productionUrl', event)
                         }
                     />
                 </P.Field>
@@ -392,10 +482,11 @@ const ProjectRegister = () => {
                     {etcCheck ? (
                         <P.Input
                             type="text"
+                            className="etc"
                             placeholder="기술 스택을 입력해주세요."
-                            value={formState.techEtc}
+                            value={formState.projectTechEtc}
                             onChange={event =>
-                                handleInputChange('techEtc', event)
+                                handleInputChange('projectTechEtc', event)
                             }
                         />
                     ) : null}
@@ -405,23 +496,21 @@ const ProjectRegister = () => {
                     <P.FlexField>
                         <DropDown
                             placeholder="기수 선택"
-                            options={genOptions}
-                            onChange={handleSelectChange('generation')}
+                            options={Gen.loadAllGen()}
+                            onChange={handleSelectChange('ordinal')}
                         />
                         <P.Gap />
-                        <SchoolDropDown
-                            onChange={handleSelectChange('university')}
+                        <DropDown
+                            placeholder="학교 선택"
+                            options={univList}
+                            onChange={handleSelectChange('univ')}
                         />
                     </P.FlexField>
                 </P.Field>
                 <P.Field>
                     <P.Label>팀원</P.Label>
-                    <P.Input
-                        type="text"
-                        placeholder="팀원 이름을 작성해주세요."
-                        value={formState.members}
-                        onChange={event => handleInputChange('members', event)}
-                    />
+                    <UserFind />
+                    <UserEnrolled />
                 </P.Field>
                 <P.RegisterBtn type="submit" active={isFill}>
                     등록하기

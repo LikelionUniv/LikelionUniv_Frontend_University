@@ -125,15 +125,22 @@ const Nav = () => {
                             <p>참여대학</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/project" style={{ visibility: 'hidden' }}>
+                        <Text to="/project">
                             <p>프로젝트</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/community" style={{ visibility: 'hidden' }}>
+                        <Text to="/community">
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
+                        <Text to="/donate">
+                            <p style={{ whiteSpace: 'nowrap' }}>
+                                연간기부금모금액 및 활용실적
+                            </p>
+                            <img src={navarrow} />
+                        </Text>
                     </div>
+
                     <div className="right">
                         {
                             isLogin ? (
@@ -204,6 +211,12 @@ const Nav = () => {
                             </Text>
                             <Text to="/univ">
                                 <p>참여대학</p>
+                                <img src={navarrow} />
+                            </Text>
+                            <Text to="/donate">
+                                <p style={{ whiteSpace: 'nowrap' }}>
+                                    연간기부금모금액 및 활용실적
+                                </p>
                                 <img src={navarrow} />
                             </Text>
                         </MMenuContainer>

@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     }
 `;
 
-export const Background = styled.div`
+export const Background = styled.div<{ isCountDownView: boolean }>`
     width: 100%;
     background-color: #000;
     position: relative;
@@ -40,7 +40,7 @@ export const Background = styled.div`
         position: absolute;
         height: 110%;
         top: 0;
-        right: 3%;
+        right: 6%;
         @media (max-width: 1280px) {
             height: 103%;
             right: -7%;
@@ -62,14 +62,20 @@ export const Background = styled.div`
         align-items: center;
         img {
             width: 100%;
-            margin-top: 22%;
+            margin-top: 17%;
         }
         .new-text {
+            display: ${props => (props.isCountDownView ? 'block' : 'none')};
             font-family: Pretendard;
             font-size: 30px;
             font-weight: 700;
             color: #c6f959;
             margin-top: 8%;
+        }
+
+        .hide-text {
+            display: ${props => (props.isCountDownView ? 'none' : 'block')};
+            margin-top: 120px;
         }
 
         @media (max-width: 1280px) {
@@ -102,7 +108,7 @@ export const Background = styled.div`
         align-items: center;
         padding: 12px 32px;
         margin-top: 25px;
-        margin-bottom: 15%;
+        margin-bottom: 265px;
 
         background-color: #ff7710;
         border-radius: 8px;

@@ -1,91 +1,80 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as P from './HeaderStyle';
 import WriteIcon from '../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
+import { ProjectAPI } from './ProjectList';
+import { Gen } from './register/RegisterOptions';
+import useIsAdmin from '../../hooks/useIsAdmin';
 
-const Header = () => {
-    const [activeTab, setActiveTab] = useState(0);
+interface IHeader {
+    setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
+}
 
-    const handleClick = (index: number) => {
+function Header({ setProjectApi }: IHeader) {
+    const { isAdmin } = useIsAdmin();
+    const [activeTab, setActiveTab] = useState<number | undefined>();
+
+    const handleClick = (index?: number) => {
         setActiveTab(index);
     };
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        // 전체를 클릭할 경우
+        if (activeTab === undefined) {
+            setProjectApi({ uri: '/api/v1/project/' });
+            return;
+        }
 
+        // 아닐 경우
+        setProjectApi({ uri: `/api/v1/project/ordinal/${activeTab}` });
+    }, [activeTab, setProjectApi]);
+
+    const navigate = useNavigate();
     const goRegister = (): void => {
         navigate('register');
     };
+
+    const recentFiveGen = Gen.loadRecentFiveGen();
+    const sixYearsAgoGen = recentFiveGen[recentFiveGen.length - 1] - 1;
 
     return (
         <P.HeaderContainer>
             <P.TabContainer>
                 <P.Tab
-                    onClick={() => handleClick(0)}
-                    className={activeTab === 0 ? 'selected' : ''}
+                    onClick={() => handleClick(undefined)}
+                    className={activeTab === undefined ? 'selected' : ''}
                 >
                     전체
-                    {activeTab === 0 && <P.Divider>_</P.Divider>}{' '}
+                    {activeTab === undefined && <P.Divider>_</P.Divider>}{' '}
                     {/* 수정된 부분 */}
                 </P.Tab>
 
+                {recentFiveGen !== undefined &&
+                    recentFiveGen.map(gen => (
+                        <P.Tab
+                            key={gen}
+                            onClick={() => handleClick(gen)}
+                            className={activeTab === gen ? 'selected' : ''}
+                        >
+                            {gen}기
+                            {activeTab === gen && <P.Divider>_</P.Divider>}{' '}
+                        </P.Tab>
+                    ))}
                 <P.Tab
-                    onClick={() => handleClick(1)}
-                    className={activeTab === 1 ? 'selected' : ''}
+                    onClick={() => handleClick(sixYearsAgoGen)}
+                    className={activeTab === sixYearsAgoGen ? 'selected' : ''}
                 >
-                    11기
-                    {activeTab === 1 && <P.Divider>_</P.Divider>}{' '}
-                    {/* 수정된 부분 */}
-                </P.Tab>
-
-                <P.Tab
-                    onClick={() => handleClick(2)}
-                    className={activeTab === 2 ? 'selected' : ''}
-                >
-                    10기
-                    {activeTab === 2 && <P.Divider>_</P.Divider>}{' '}
-                    {/* 수정된 부분 */}
-                </P.Tab>
-
-                <P.Tab
-                    onClick={() => handleClick(3)}
-                    className={activeTab === 3 ? 'selected' : ''}
-                >
-                    9기
-                    {activeTab === 3 && <P.Divider>_</P.Divider>}{' '}
-                    {/* 수정된 부분 */}
-                </P.Tab>
-
-                <P.Tab
-                    onClick={() => handleClick(4)} // 8기 탭
-                    className={activeTab === 4 ? 'selected' : ''}
-                >
-                    8기
-                    {activeTab === 4 && <P.Divider>_</P.Divider>}
-                </P.Tab>
-
-                <P.Tab
-                    onClick={() => handleClick(5)} // 7기 탭
-                    className={activeTab === 5 ? 'selected' : ''}
-                >
-                    7기
-                    {activeTab === 5 && <P.Divider>_</P.Divider>}
-                </P.Tab>
-
-                <P.Tab
-                    onClick={() => handleClick(6)} // 6기 이전 탭
-                    className={activeTab === 6 ? 'selected' : ''}
-                >
-                    6기 이전
-                    {activeTab === 6 && <P.Divider>_</P.Divider>}
+                    {sixYearsAgoGen}기 이전
+                    {activeTab === sixYearsAgoGen && <P.Divider>_</P.Divider>}
                 </P.Tab>
             </P.TabContainer>
 
-            <P.WriteBtn onClick={goRegister}>
+            <P.WriteBtn isAdmin={isAdmin} onClick={goRegister}>
                 <img src={WriteIcon} alt="write" />
                 글쓰기
             </P.WriteBtn>
         </P.HeaderContainer>
     );
-};
+}
 
 export default Header;
