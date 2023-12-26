@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDropDown from './SchoolDropDown';
+import SchoolDropDown,{findLabelByValue} from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { LoginComplete } from '../login/LoginComplete';
+
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -59,21 +63,15 @@ const roleOptions = [
 /* form type */
 interface FormState {
     name: string;
-    university: number;
-    department: string;
-    // generation: number;
-    // role: number;
-    // track: number;
+    universityName: string;
+    major: string;
 }
 
 const Sform = () => {
     const [formState, setFormState] = useState<FormState>({
         name: '',
-        university: 0,
-        department: '',
-        // generation: 0,
-        // role: 0,
-        // track: 0,
+        universityName: '',
+        major: '',
     });
 
     const handleSelectChange =
@@ -83,20 +81,51 @@ const Sform = () => {
             actionMeta: ActionMeta<OptionType>,
         ) => {
             if (selectedOption) {
+                let label: string;
+                if(field == 'universityName'){
+                    label = findLabelByValue(selectedOption.value);
+                }
                 setFormState(prev => ({
                     ...prev,
-                    [field]: selectedOption.value,
+                    [field]: label,
                 }));
             }
         };
+
+    const { provider } = useParams();
+    const [isSuccess, updateIsSuccess] = useState<boolean>(false);
+
+    const requestSignup = async () => {
+        const idtoken = localStorage.getItem('idtoken');
+
+        try {
+            const response = await axios.post(
+                `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+                formState,
+                {
+                    withCredentials: true,
+                },
+            );
+
+            //응답 성공 시
+            if (response.data.isSuccess) {
+                localStorage.removeItem('idtoken');
+                updateIsSuccess(true);
+            } else {
+                alert('서버 통신 오류! 다시 시도해주세요!');
+            }
+        } catch (error) {
+            console.error('요청 실패', error);
+        }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // 모든 필드 완성되었는지 검사하는 로직 추가함
         if (
             formState.name === '' ||
-            formState.university === 0 ||
-            formState.department === ''
+            formState.universityName === '' ||
+            formState.major === ''
             // formState.generation === 0 ||
             // formState.role === 0 ||
             // formState.track === 0
@@ -105,62 +134,45 @@ const Sform = () => {
         else {
             /* button click으로 해서 정보 저장됨 확인 */
             console.log(formState);
+            requestSignup();
         }
     };
 
     return (
         <>
-            <form className="formDiv">
-                <div className="Stitle">내 정보</div>
-                <Ndiv>이름</Ndiv>
-                <Nform
-                    placeholder="자신의 이름을 작성해주세요."
-                    value={formState.name}
-                    onChange={e =>
-                        setFormState({ ...formState, name: e.target.value })
-                    }
-                />
-                <Ndiv>학교</Ndiv>
-                <SchoolDropDown onChange={handleSelectChange('university')} />
-                <Ndiv>학과</Ndiv>
-                <Nform
-                    placeholder="학과를 입력해주세요."
-                    value={formState.department}
-                    onChange={e =>
-                        setFormState({
-                            ...formState,
-                            department: e.target.value,
-                        })
-                    }
-                />
-
-                {/* <div className="SformDiv">
-                    <div className="SfromDiv2">
-                        <Ndiv>기수</Ndiv>
-                        <DropDown
-                            options={genOptions}
-                            onChange={handleSelectChange('generation')}
-                        />
-                    </div>
-                    <div className="SfromDiv2">
-                        <Ndiv>역할</Ndiv>
-                        <DropDown
-                            options={roleOptions}
-                            onChange={handleSelectChange('role')}
-                        />
-                    </div>
-                    <div className="SfromDiv2">
-                        <Ndiv>트랙</Ndiv>
-                        <DropDown
-                            options={trackOptions}
-                            onChange={handleSelectChange('track')}
-                        />
-                    </div>
-                </div> */}
-                <button className="saveBtn" onClick={handleSubmit}>
-                    저장하기
-                </button>
-            </form>
+            {!isSuccess ? (
+                <form className="formDiv">
+                    <div className="Stitle">내 정보</div>
+                    <Ndiv>이름</Ndiv>
+                    <Nform
+                        placeholder="자신의 이름을 작성해주세요."
+                        value={formState.name}
+                        onChange={e =>
+                            setFormState({ ...formState, name: e.target.value })
+                        }
+                    />
+                    <Ndiv>학교</Ndiv>
+                    <SchoolDropDown
+                        onChange={handleSelectChange('universityName')}
+                    />
+                    <Ndiv>학과</Ndiv>
+                    <Nform
+                        placeholder="학과를 입력해주세요."
+                        value={formState.major}
+                        onChange={e =>
+                            setFormState({
+                                ...formState,
+                                major: e.target.value,
+                            })
+                        }
+                    />
+                    <button className="saveBtn" onClick={handleSubmit}>
+                        저장하기
+                    </button>
+                </form>
+            ) : (
+                <LoginComplete />
+            )}
         </>
     );
 };

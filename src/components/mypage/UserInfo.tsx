@@ -1,55 +1,98 @@
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, UserBox } from './Common';
-import { UserFollows } from './UserFollows';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { UserProfileAtom } from '../../store/mypageData';
+import useModal from '../../hooks/useModal';
+import { userProfileApi } from '../../api/mypage/userinfo';
+import { FollowModal } from './FollowModal';
+import { ImodalProps } from './type';
+import {useAuth} from '../../hooks/useAuth';
 
 export const UserInfo = () => {
-    const [isModal, setIsModal] = useState<string | undefined>('');
-
-    const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
-        setIsModal(e.currentTarget.dataset.type);
-    };
-
     const navigate = useNavigate();
     const goToModify = (): void => {
         navigate('modify');
     };
 
+    // 유저 프로필
+    const {userinfo} = useAuth();
+    // const UserLoginState = useRecoilValue(userState);
+    const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
+    const userRole: { [id: string]: string } = {
+        GUEST: '게스트',
+        USER: '아기사자',
+        MANAGER: '운영진',
+        UNIVERSITY_ADMIN: '대표',
+        SUPER_ADMIN: '관리자',
+    };
+
+    // 팔로우, 팔로잉 모달
+    const { isModalOpen, openModal, closeModal } = useModal();
+    const [modalProps, setModalProps] = useState<ImodalProps>({
+        userid: -1,
+        follow: '',
+    });
+    //모달 창 오픈 시 스크롤 막기
+    useEffect(() => {
+        if (isModalOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [isModalOpen]);
+    //모달 창 핸들러 : 모달 창 열고 , props set
+    const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        let follow = e.currentTarget.dataset.type;
+        let userid = userinfo.userId;
+        setModalProps({ userid, follow });
+        openModal();
+    };
+
+    //마운트 시 API(유저 프로필) 요청
+    useEffect(() => {
+        const fetchData = async () => {
+            if (userinfo.name != '') {
+                const userProfile = await userProfileApi(userinfo.userId);
+                updateUserProfile(userProfile);
+            }
+        };
+        fetchData();
+    }, [userinfo]);
+
     return (
         <Wrapper>
             <Container>
                 <UserBox>
-                    <Avatar />
+                    <Avatar imgurl={userProfile.profileImage} />
                     {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
-                            {' '}
-                            <p>박혜준</p> <div>아기사자</div>{' '}
+                            <p>{userProfile.name}</p>{' '}
+                            <div>{userRole[userProfile.role]}</div>{' '}
                         </UserName>
                         <UserPart>
-                            {' '}
-                            <p>홍익대학교 기획디자인</p>
+                            <p>
+                                {userProfile.universityName} {userProfile.part}
+                            </p>
                             <FItem data-type="팔로워" onClick={handleModal}>
-                                {' '}
-                                팔로워 200
+                                팔로워 {userProfile.followerNum}
                             </FItem>
                             <FItem data-type="팔로잉" onClick={handleModal}>
-                                {' '}
-                                팔로잉 200
+                                팔로잉 {userProfile.followingNum}
                             </FItem>
                         </UserPart>
-                        <p>
-                            행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요행복하세요
-                        </p>
+                        <p>{userProfile.introduction}</p>
                     </UserProfile>
                 </UserBox>
                 <Button onClick={goToModify}>내 정보 수정</Button>
-                {isModal ? (
-                    <UserFollows modal={isModal} setter={setIsModal} />
-                ) : (
-                    ''
+                {isModalOpen && (
+                    <FollowModal
+                        isOpen={isModalOpen}
+                        modalProps={modalProps}
+                        closeModal={closeModal}
+                    />
                 )}
             </Container>
         </Wrapper>
@@ -77,6 +120,7 @@ const UserProfile = styled.div`
 
     & > p {
         margin-top: 16px;
+        line-height : 150%;
         color: var(--Grey-900, #212224);
         font-size: 18px;
         font-weight: 500;
@@ -85,13 +129,12 @@ const UserProfile = styled.div`
 
 const UserName = styled.div`
     position: relative;
-
+    display : flex;
+    align-items : center;
+    line-height : 140%;
     & > p {
-        display: inline-flex;
         font-size: 28px;
         font-weight: 700;
-        line-height: 115%;
-        vertical-align: bottom;
     }
     & > div {
         display: inline-flex;
@@ -111,6 +154,7 @@ const UserName = styled.div`
 const UserPart = styled.div`
     display: flex;
     margin-top: 6px;
+    line-height : 150%;
     & > p {
         font-size: 16px;
         font-weight: 700;

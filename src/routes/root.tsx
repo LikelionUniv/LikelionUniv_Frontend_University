@@ -4,7 +4,8 @@ import Nav from '../components/Nav';
 import Footer from '../components/layout/Footer';
 //import '../components/LoadScript';
 
-function root() {
+function Root() {
+
     return (
         <>
             <Nav />
@@ -17,7 +18,7 @@ function root() {
     );
 }
 
-export default root;
+export default Root;
 
 const Padding = styled.div`
     height: 56px;

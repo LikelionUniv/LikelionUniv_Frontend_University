@@ -6,6 +6,7 @@ import Project from './routes/Project';
 import Chat from './routes/Chat';
 import Root from './routes/root';
 import Mypage from './routes/Mypage';
+import MypageRoot from './routes/MypageRoot';
 
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
@@ -16,6 +17,9 @@ import RecruitPage from './routes/RecruitPage';
 import AboutPage from './routes/AboutPage';
 import BabyLion from './components/recruit/apply/mobile/BabyLion';
 import UnivRecruit from './components/univrecruit/UnivRecruit';
+import { Redirect } from './components/login/Redirect';
+import UserModify from './routes/UserModify';
+import Userpage from './routes/Userpage';
 import CommunityWrite from './components/community/write/CommunityWrite';
 import CommunityDetail from './components/community/detail/CommunityDetail';
 import CommunityPage from './routes/CommunityPage';
@@ -34,7 +38,7 @@ const router = createBrowserRouter([
                 element: <LandingPage />,
             },
             {
-                path: '/signup',
+                path: '/signup/:provider',
                 element: <SignUp />,
             },
             {
@@ -42,8 +46,26 @@ const router = createBrowserRouter([
                 element: <LoginPage />,
             },
             {
+                path : '/oauth/:provider/redirect',
+                element : <Redirect/>
+            },
+            {
                 path: '/mypage',
-                element: <Mypage />,
+                element: <MypageRoot />,
+                children : [
+                    {
+                        path: '',
+                        element: <Mypage/>
+                    },
+                    {
+                        path:'modify',
+                        element : <UserModify/>
+                    },
+                ]
+            },
+            {
+                path:'/userpage/:user_id',
+                element: <Userpage/>
             },
             {
                 path: '/project',

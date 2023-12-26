@@ -10,11 +10,27 @@ import logout from '../img/nav/logout.svg';
 import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
+import { useAuth } from '../hooks/useAuth';
 
 const Nav = () => {
     const navigate = useNavigate();
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
+    const {userinfo, setUserinfo} = useAuth();
+    useEffect(()=>{
+        console.log(userinfo);
+        console.log(isLogin);
+        setIsLogin(userinfo.isLogin)
+    },[userinfo]);
+    const onClickLogout = () => {
+        localStorage.clear();
+        setUserinfo({
+            name: '',
+            profileImage: '',
+            userId: -1,
+            isLogin: false,
+        })
+    }
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
@@ -172,12 +188,12 @@ const Nav = () => {
                                         />
                                     </ProfileBtn>
                                 </>
-                            ) : null
-                            // (
-                            //     <LoginBtn onClick={() => navigate('/login')}>
-                            //         로그인
-                            //     </LoginBtn>
-                            // )
+                            ) : 
+                            (
+                                <LoginBtn onClick={() => navigate('/login')}>
+                                    로그인
+                                </LoginBtn>
+                            )
                         }
                     </div>
                     {profileModal && (
@@ -190,7 +206,7 @@ const Nav = () => {
                                 마이페이지
                             </div>
                             <div
-                                onClick={() => console.log('로그아웃')}
+                                onClick={onClickLogout}
                                 className="inner"
                             >
                                 <img src={logout} />
