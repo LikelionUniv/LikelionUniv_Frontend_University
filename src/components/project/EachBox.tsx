@@ -32,7 +32,7 @@ function EachBox({ project, isAdmin }: IEachBox) {
 
     const layerRef = useRef(null);
     const { popupOpen, openPopup } = useLayerPopup(layerRef);
-    
+
     return (
         <B.Box onMouseEnter={onMouseHover} onMouseLeave={onMouseLeave}>
             <div style={{ position: 'relative' }}>
@@ -68,7 +68,10 @@ function EachBox({ project, isAdmin }: IEachBox) {
                 </B.SmallBox1>
                 {popupOpen && (
                     <div ref={layerRef} style={{ position: 'relative' }}>
-                        <AdminPopup id={project.id} serviceName={project.serviceName} />
+                        <AdminPopup
+                            id={project.id}
+                            serviceName={project.serviceName}
+                        />
                     </div>
                 )}
                 <B.SmallBox2

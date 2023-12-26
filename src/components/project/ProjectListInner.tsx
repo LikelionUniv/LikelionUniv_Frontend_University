@@ -2,8 +2,7 @@ import React from 'react';
 import * as P from './ProjectList.style';
 import Projectbox from './Projectbox';
 import { ProjectAPI } from './ProjectList';
-import useServerSidePagination from '../../hooks/useServerSidePagination';
-import BoxSkeleton from './loading/BoxSkeleton';
+import useServerSidePagination from '../../query/get/useServerSidePagination';
 
 export interface Project {
     id: number;
@@ -33,22 +32,15 @@ interface ProjectListInnerProps {
 }
 
 function ProjectListInner({ projectApi, pageSize }: ProjectListInnerProps) {
-    const {
-        loading,
-        curPageItem: projects,
-        renderPaginationBtn,
-    } = useServerSidePagination<Project>({
-        uri: projectApi.uri,
-        size: pageSize,
-    });
+    const { curPageItem: projects, renderPaginationBtn } =
+        useServerSidePagination<Project>({
+            uri: projectApi.uri,
+            size: pageSize,
+        });
 
     return (
         <>
-            {loading ? (
-                <BoxSkeleton pageSize={pageSize} />
-            ) : (
-                <Projectbox projects={projects} />
-            )}
+            <Projectbox projects={projects} />
             <P.PaginationWrapper>{renderPaginationBtn()}</P.PaginationWrapper>
         </>
     );

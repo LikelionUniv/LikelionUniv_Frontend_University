@@ -22,7 +22,7 @@ import CommunityPage from './routes/CommunityPage';
 import DonatePage from './routes/DonatePage';
 import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
-import ProjectUpdate from './components/project/update/ProjectUpdate';
+import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
 
 const router = createBrowserRouter([
     {
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':projectId/update',
-                        element: <ProjectUpdate />,
+                        element: <ProjectUpdateWrapper />,
                     },
                 ],
             },
@@ -121,7 +121,7 @@ const router = createBrowserRouter([
                     },
                 ],
             },
-            
+
             {
                 path: '/chat',
                 element: <Chat />,

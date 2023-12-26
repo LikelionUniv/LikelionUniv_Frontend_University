@@ -187,7 +187,7 @@ const SubTitle = styled.div`
 const Tab = styled.div<{ $isSelected: boolean }>`
     font-size: 14px;
     font-weight: 500;
-    line-height: 150%; 
+    line-height: 150%;
     color: var(--Grey-900, #212224);
     padding: 8px 0;
     cursor: pointer;

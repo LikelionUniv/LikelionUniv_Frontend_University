@@ -15,26 +15,26 @@ const Comment = () => {
             textarea.style.height = `${textarea.scrollHeight}px`;
         }
     }, []);
-  return (
-    <D.CommentWrapper>
-        <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
-            <textarea 
-            placeholder='댓글을 남겨보세요.'
-            rows={1}
-            value={inputValue}
-            ref={textRef}
-            onInput={handleResizeHeight}
-            onChange={e => {
-                setInputValue(e.target.value);
-            }}
-            className='text'/>
-        </D.WriteComment>
-        <D.RegBtn inputEmpty={inputValue === ''}>등록하기</D.RegBtn>
-        
-        
-    </D.CommentWrapper>
-    
-  )
-}
+    return (
+        <D.CommentWrapper>
+            <D.WriteComment
+                borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}
+            >
+                <textarea
+                    placeholder="댓글을 남겨보세요."
+                    rows={1}
+                    value={inputValue}
+                    ref={textRef}
+                    onInput={handleResizeHeight}
+                    onChange={e => {
+                        setInputValue(e.target.value);
+                    }}
+                    className="text"
+                />
+            </D.WriteComment>
+            <D.RegBtn inputEmpty={inputValue === ''}>등록하기</D.RegBtn>
+        </D.CommentWrapper>
+    );
+};
 
-export default Comment
+export default Comment;
