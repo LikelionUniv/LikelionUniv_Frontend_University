@@ -1,9 +1,9 @@
-import UserInfoModify from "../components/mypage/UserInfoModify";
+import UserInfoModify from '../components/mypage/UserInfoModify';
 
 const UserModify = () => {
     return (
         <>
-            <UserInfoModify/>
+            <UserInfoModify />
         </>
     );
 };

@@ -46,26 +46,26 @@ const router = createBrowserRouter([
                 element: <LoginPage />,
             },
             {
-                path : '/oauth/:provider/redirect',
-                element : <Redirect/>
+                path: '/oauth/:provider/redirect',
+                element: <Redirect />,
             },
             {
                 path: '/mypage',
                 element: <MypageRoot />,
-                children : [
+                children: [
                     {
                         path: '',
-                        element: <Mypage/>
+                        element: <Mypage />,
                     },
                     {
-                        path:'modify',
-                        element : <UserModify/>
+                        path: 'modify',
+                        element: <UserModify />,
                     },
-                ]
+                ],
             },
             {
-                path:'/userpage/:user_id',
-                element: <Userpage/>
+                path: '/userpage/:user_id',
+                element: <Userpage />,
             },
             {
                 path: '/project',

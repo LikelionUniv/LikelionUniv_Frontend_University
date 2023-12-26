@@ -8,7 +8,7 @@ import useModal from '../../hooks/useModal';
 import { userProfileApi } from '../../api/mypage/userinfo';
 import { FollowModal } from './FollowModal';
 import { ImodalProps } from './type';
-import {useAuth} from '../../hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
 export const UserInfo = () => {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const UserInfo = () => {
     };
 
     // 유저 프로필
-    const {userinfo} = useAuth();
+    const { userinfo } = useAuth();
     // const UserLoginState = useRecoilValue(userState);
     const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
     const userRole: { [id: string]: string } = {
@@ -120,7 +120,7 @@ const UserProfile = styled.div`
 
     & > p {
         margin-top: 16px;
-        line-height : 150%;
+        line-height: 150%;
         color: var(--Grey-900, #212224);
         font-size: 18px;
         font-weight: 500;
@@ -129,9 +129,9 @@ const UserProfile = styled.div`
 
 const UserName = styled.div`
     position: relative;
-    display : flex;
-    align-items : center;
-    line-height : 140%;
+    display: flex;
+    align-items: center;
+    line-height: 140%;
     & > p {
         font-size: 28px;
         font-weight: 700;
@@ -154,7 +154,7 @@ const UserName = styled.div`
 const UserPart = styled.div`
     display: flex;
     margin-top: 6px;
-    line-height : 150%;
+    line-height: 150%;
     & > p {
         font-size: 16px;
         font-weight: 700;

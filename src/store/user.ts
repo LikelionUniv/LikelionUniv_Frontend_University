@@ -4,7 +4,7 @@ type UserInfo = {
     name: string;
     profileImage: string;
     userId: number;
-    isLogin : boolean;
+    isLogin: boolean;
 };
 export const userState = atom<UserInfo>({
     key: 'userInfo',

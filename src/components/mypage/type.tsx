@@ -47,40 +47,39 @@ export type MypageOptionType = {
     label: string;
 };
 
-export interface IuserProfile {    
-    followerNum : number,
-    followingNum : number,
-    id : number,
-    introduction : string,
-    isMine : boolean,
-    major : string,
-    name :string,
-    ordinal : number,
-    part : string,
-    phoneNum : string,
-    profileImage : string,
-    role : string,
-    universityName : string,
+export interface IuserProfile {
+    followerNum: number;
+    followingNum: number;
+    id: number;
+    introduction: string;
+    isMine: boolean;
+    major: string;
+    name: string;
+    ordinal: number;
+    part: string;
+    phoneNum: string;
+    profileImage: string;
+    role: string;
+    universityName: string;
 }
 
 export interface ImodalProps {
-    userid : number , 
-    follow : string|undefined,
+    userid: number;
+    follow: string | undefined;
 }
 
 export interface Ifollows {
-    userId : number,
-    name : string,
-    profileImage : string|null,
-    ordinal : number,
-    part : string,
-    isFollowed : boolean,
+    userId: number;
+    name: string;
+    profileImage: string | null;
+    ordinal: number;
+    part: string;
+    isFollowed: boolean;
 }
 
 export interface IuserModify {
-    name : string,
-    introduction: string,
-    profileImage: string,
-    part: string
-      
+    name: string;
+    introduction: string;
+    profileImage: string;
+    part: string;
 }

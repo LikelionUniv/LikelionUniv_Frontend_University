@@ -20,6 +20,7 @@ import request from '../../../utils/request';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 import useGetUnivList from '../../../query/get/useGetUnivList';
+import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
 
 /* form type */
 interface FormState {
@@ -183,22 +184,15 @@ const ProjectRegister = () => {
         };
     };
 
+    const { mutate: registerProject } = usePostProjectRegister();
+
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
         const data = await processSendData();
-
-        const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
-            method: 'post',
-            data,
-        });
-
-        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
-        clearUser();
-        navigate('/project');
+        registerProject(data);
     };
 
     const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());

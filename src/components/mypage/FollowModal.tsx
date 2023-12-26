@@ -30,7 +30,11 @@ export const FollowModal = ({
     // 팔로우 목록 호출 콜백 함수
     const loadFollows = useCallback(async () => {
         try {
-            const { data } = await userFollowApi(modalProps.userid, page , follow);
+            const { data } = await userFollowApi(
+                modalProps.userid,
+                page,
+                follow,
+            );
             setfollowList(followList.concat(data.data));
             setPage(data.currentPage + 1);
             setnextPage(data.hasNext); //API 확인되면 수정

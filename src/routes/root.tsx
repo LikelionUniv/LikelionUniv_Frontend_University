@@ -5,7 +5,6 @@ import Footer from '../components/layout/Footer';
 //import '../components/LoadScript';
 
 function Root() {
-
     return (
         <>
             <Nav />

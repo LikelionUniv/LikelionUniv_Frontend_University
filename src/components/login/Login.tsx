@@ -4,19 +4,16 @@ import LoginImage from '../../img/login/Login.png';
 import MLogin from './mobile/MLogin';
 
 export const Login = () => {
-
     const kakaoLoginURL = `
     https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}
-    `
+    `;
 
     const googleLoginURL = ``;
 
-    const google_login = () => {
-        
-    }
-    const kakao_login=() => {
-        window.open(kakaoLoginURL , "_self")
-    }
+    const google_login = () => {};
+    const kakao_login = () => {
+        window.open(kakaoLoginURL, '_self');
+    };
 
     return (
         <>

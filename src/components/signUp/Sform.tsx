@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDropDown,{findLabelByValue} from './SchoolDropDown';
+import SchoolDropDown, { findLabelByValue } from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { LoginComplete } from '../login/LoginComplete';
-
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -82,7 +81,7 @@ const Sform = () => {
         ) => {
             if (selectedOption) {
                 let label: string;
-                if(field == 'universityName'){
+                if (field == 'universityName') {
                     label = findLabelByValue(selectedOption.value);
                 }
                 setFormState(prev => ({

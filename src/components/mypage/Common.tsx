@@ -7,7 +7,7 @@ export const UserBox = styled.div`
     display: flex;
 `;
 
-export const Avatar = styled.div<{ imgurl?: string|null }>`
+export const Avatar = styled.div<{ imgurl?: string | null }>`
     width: 124px;
     height: 124px;
     flex-shrink: 0;

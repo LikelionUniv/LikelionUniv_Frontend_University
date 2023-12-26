@@ -16,12 +16,12 @@ const Nav = () => {
     const navigate = useNavigate();
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
-    const {userinfo, setUserinfo} = useAuth();
-    useEffect(()=>{
+    const { userinfo, setUserinfo } = useAuth();
+    useEffect(() => {
         console.log(userinfo);
         console.log(isLogin);
-        setIsLogin(userinfo.isLogin)
-    },[userinfo]);
+        setIsLogin(userinfo.isLogin);
+    }, [userinfo]);
     const onClickLogout = () => {
         localStorage.clear();
         setUserinfo({
@@ -29,8 +29,8 @@ const Nav = () => {
             profileImage: '',
             userId: -1,
             isLogin: false,
-        })
-    }
+        });
+    };
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
@@ -158,43 +158,40 @@ const Nav = () => {
                     </div>
 
                     <div className="right">
-                        {
-                            isLogin ? (
-                                <>
-                                    <ChatBtn to="/chat">
-                                        <img src={chat} />
-                                    </ChatBtn>
-                                    <ProfileBtn
-                                        ref={buttonRef}
-                                        onClick={() =>
-                                            setProfileModal(!profileModal)
-                                        }
+                        {isLogin ? (
+                            <>
+                                <ChatBtn to="/chat">
+                                    <img src={chat} />
+                                </ChatBtn>
+                                <ProfileBtn
+                                    ref={buttonRef}
+                                    onClick={() =>
+                                        setProfileModal(!profileModal)
+                                    }
+                                    style={{
+                                        backgroundColor: profileModal
+                                            ? 'var(--grey-300, #eaecee)'
+                                            : '',
+                                    }}
+                                >
+                                    <div className="profile-img">
+                                        <img src={defaultprofile} />
+                                    </div>
+                                    <Arrow
                                         style={{
-                                            backgroundColor: profileModal
-                                                ? 'var(--grey-300, #eaecee)'
-                                                : '',
+                                            transform: profileModal
+                                                ? 'rotate(0deg)'
+                                                : 'rotate(180deg)',
+                                            stroke: '#868C94',
                                         }}
-                                    >
-                                        <div className="profile-img">
-                                            <img src={defaultprofile} />
-                                        </div>
-                                        <Arrow
-                                            style={{
-                                                transform: profileModal
-                                                    ? 'rotate(0deg)'
-                                                    : 'rotate(180deg)',
-                                                stroke: '#868C94',
-                                            }}
-                                        />
-                                    </ProfileBtn>
-                                </>
-                            ) : 
-                            (
-                                <LoginBtn onClick={() => navigate('/login')}>
-                                    로그인
-                                </LoginBtn>
-                            )
-                        }
+                                    />
+                                </ProfileBtn>
+                            </>
+                        ) : (
+                            <LoginBtn onClick={() => navigate('/login')}>
+                                로그인
+                            </LoginBtn>
+                        )}
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
@@ -205,10 +202,7 @@ const Nav = () => {
                                 <img src={mypage} />
                                 마이페이지
                             </div>
-                            <div
-                                onClick={onClickLogout}
-                                className="inner"
-                            >
+                            <div onClick={onClickLogout} className="inner">
                                 <img src={logout} />
                                 로그아웃
                             </div>

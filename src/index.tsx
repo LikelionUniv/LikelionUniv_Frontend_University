@@ -4,6 +4,7 @@ import { RouterProvider } from 'react-router-dom';
 import router from './Router';
 import { RecoilRoot } from 'recoil';
 import './styles/font.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 // stale time 10분으로 설정
@@ -25,6 +26,7 @@ root.render(
             <RecoilRoot>
                 <RouterProvider router={router}></RouterProvider>
             </RecoilRoot>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     </React.StrictMode>,
 );

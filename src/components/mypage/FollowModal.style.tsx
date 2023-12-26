@@ -1,6 +1,5 @@
-import styled,{keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Cancel from '../../img/mypage/Cancel.svg';
-
 
 export const ModalWrapper = styled.div`
     position: absolute;
@@ -15,8 +14,8 @@ export const ModalWrapper = styled.div`
 
 export const ModalBackground = styled.div`
     position: fixed;
-    top : 0;
-    left : 0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.5);
@@ -24,23 +23,22 @@ export const ModalBackground = styled.div`
 `;
 
 export const ModalContainer = styled.div`
-    z-index : 1000;
-    width : 464px;
-    height : 420px;
-    display : flex;
-    flex-direction : column;
-    justify-content : center;
-    align-items : center;
+    z-index: 1000;
+    width: 464px;
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    border-radius : 20px;
-    background-color : #fff;
-    box-shadow : 0px 12px 20px 0px rgba(0, 0, 0, 0.07);
-    
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.07);
 
     @media (max-width: 767px) {
-        width : 320px;
-        height : 400px;
-    } 
+        width: 320px;
+        height: 400px;
+    }
 `;
 
 export const ModalHeader = styled.div`
@@ -60,26 +58,26 @@ export const ModalHeader = styled.div`
 `;
 
 export const ModlalClose = styled.div`
-        background-image: url(${Cancel});
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        position: absolute;
-        right: 16px;
-        justify-self: flex-end;
+    background-image: url(${Cancel});
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    position: absolute;
+    right: 16px;
+    justify-self: flex-end;
 `;
 
 export const ModalContent = styled.div`
     width: 98%;
     height: 348px;
-    margin-bottom : 8px;
+    margin-bottom: 8px;
     border-radius: 0px 0px 20px 20px;
     overflow: auto;
     padding: 0 4px;
     border-top: 1px solid #dcdfe3;
     &::-webkit-scrollbar {
         width: 5px;
-        overflow : hidden;
+        overflow: hidden;
     }
     &::-webkit-scrollbar-track {
         background: transparent;
@@ -92,7 +90,7 @@ export const ModalContent = styled.div`
     @media (max-width: 767px) {
         width: 97%;
         height: 320px;
-    } 
+    }
 `;
 
 const spin = keyframes`
@@ -101,11 +99,11 @@ const spin = keyframes`
 `;
 
 export const Loading = styled.div`
-  border: 3px solid #f3f3f3; // 빛난 경계
-  border-top: 3px solid #ff7710; // 파란색 경계
-  border-radius: 50%; // 원으로 만들기
-  width: 10px;
-  height: 10px;
-  animation: ${spin} 2s linear infinite; // 애니메이션 적용
-  margin-left: 50%;
+    border: 3px solid #f3f3f3; // 빛난 경계
+    border-top: 3px solid #ff7710; // 파란색 경계
+    border-radius: 50%; // 원으로 만들기
+    width: 10px;
+    height: 10px;
+    animation: ${spin} 2s linear infinite; // 애니메이션 적용
+    margin-left: 50%;
 `;

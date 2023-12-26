@@ -1,7 +1,7 @@
 import React from 'react';
 import * as A from './AdminPopup.style';
 import { useNavigate } from 'react-router-dom';
-import request from '../../utils/request';
+import useDeleteProject from '../../query/delete/useDeleteProject';
 
 interface AdminPopupProps {
     id: number;
@@ -15,15 +15,13 @@ function AdminPopup({ id, serviceName }: AdminPopupProps) {
         navigate(`/project/${id}/update`);
     };
 
-    const deleteProject = async () => {
-        if (window.confirm(`${serviceName} 프로젝트를 삭제하시겠습니까?`)) {
-            await request<null, null, null>({
-                uri: `/api/v1/project/${id}`,
-                method: 'delete',
-            });
+    const { mutate } = useDeleteProject({
+        projectId: id,
+    });
 
-            alert(`${serviceName} 프로젝트가 삭제되었습니다.`);
-            window.location.reload();
+    const deleteProject = () => {
+        if (window.confirm(`${serviceName} 프로젝트를 삭제하시겠습니까?`)) {
+            mutate();
         }
     };
 

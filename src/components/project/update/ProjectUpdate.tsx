@@ -12,7 +12,6 @@ import useCheckbox from '../register/useCheckbox';
 
 import AutoHeightTextarea from '../register/AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
-import request from '../../../utils/request';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImageUpload from '../../utils/ImageUpload';
 import useEnrolledUser from '../register/user/userStore/useEnrolledUser';
@@ -29,6 +28,7 @@ import { ProjectRegisterType } from '../register/ProjectRegister';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import useGetProjectDetail from '../../../query/get/useGetProjectDetail';
 import useUpdateInitializer from './useUpdateInitializer';
+import usePatchProjectUpdate from '../../../query/patch/usePatchProjectUpdate';
 
 /* form type */
 export interface FormState {
@@ -47,10 +47,6 @@ export interface FormState {
     productionUrl: string;
     images: Image[];
     members: number[];
-}
-
-interface PostId {
-    id: number;
 }
 
 interface Image {
@@ -229,6 +225,10 @@ const ProjectUpdate = () => {
         };
     };
 
+    const { mutate: updateProject } = usePatchProjectUpdate({
+        projectId: project.id,
+    });
+
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         if (project === undefined) return;
@@ -237,17 +237,7 @@ const ProjectUpdate = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-        console.log(data);
-
-        const response = await request<ProjectRegisterType, PostId, null>({
-            uri: `/api/v1/project/${project.id}`,
-            method: 'patch',
-            data,
-        });
-
-        alert(`${response?.data.id}번의 게시글이 수정되었습니다.`);
-        clearUser();
-        navigate('/project');
+        updateProject(data);
     };
 
     const { checkboxList, checkHandler, checkDefaultHandler, defaultDone } =

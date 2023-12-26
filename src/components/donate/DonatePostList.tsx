@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import DonatePostBox from './DonatePostBox'; // 추가된 부분
-import { IPost } from './DonateComponent';
+import { IPost } from './DonateComponentInner';
 
 interface DonatePostListProps {
     posts: IPost[];
