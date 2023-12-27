@@ -11,17 +11,19 @@ import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
-import default_profile from '../img/mypage/default_profile.svg'
+import default_profile from '../img/mypage/default_profile.svg';
 
 const Nav = () => {
     const navigate = useNavigate();
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
-    const {userinfo, setUserinfo} = useAuth();
-    const profileSrc = !userinfo.profileImage ? default_profile : userinfo.profileImage;
-    useEffect(()=>{
-        setIsLogin(userinfo.isLogin)
-    },[userinfo]);
+    const { userinfo, setUserinfo } = useAuth();
+    const profileSrc = !userinfo.profileImage
+        ? default_profile
+        : userinfo.profileImage;
+    useEffect(() => {
+        setIsLogin(userinfo.isLogin);
+    }, [userinfo]);
     const onClickLogout = () => {
         localStorage.clear();
         setUserinfo({
@@ -149,14 +151,14 @@ const Nav = () => {
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
-                        {
-                            (width > 992)&&<Text to="/donate">
+                        {width > 992 && (
+                            <Text to="/donate">
                                 <p style={{ whiteSpace: 'nowrap' }}>
                                     연간기부금모금액 및 활용실적
                                 </p>
                                 <img src={navarrow} />
-                                </Text>
-                        }
+                            </Text>
+                        )}
                         {/* <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
@@ -193,15 +195,13 @@ const Nav = () => {
                                             stroke: '#868C94',
                                         }}
                                     />
-                                    </ProfileBtn>
-                                </>
-                            ) : 
-                            (
-                                <LoginBtn onClick={() => navigate('/login')}>
-                                    로그인
-                                </LoginBtn>
-                            )
-                        }
+                                </ProfileBtn>
+                            </>
+                        ) : (
+                            <LoginBtn onClick={() => navigate('/login')}>
+                                로그인
+                            </LoginBtn>
+                        )}
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
