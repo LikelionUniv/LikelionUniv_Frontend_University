@@ -28,7 +28,7 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
     };
 
     const { mutate, data } = useMutation({
-        mutationKey: ['projectUpdate'],
+        mutationKey: ['project-update'],
         mutationFn: updateProject,
         onSuccess: data => {
             queryClient.invalidateQueries({

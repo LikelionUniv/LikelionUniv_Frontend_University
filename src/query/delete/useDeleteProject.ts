@@ -16,7 +16,7 @@ function useDeleteProject({ projectId }: useDeleteProjectProps) {
     };
 
     const { mutate } = useMutation({
-        mutationKey: ['projectDelete'],
+        mutationKey: ['project-delete'],
         mutationFn: deleteProject,
         onSuccess: () => {
             queryClient.invalidateQueries({

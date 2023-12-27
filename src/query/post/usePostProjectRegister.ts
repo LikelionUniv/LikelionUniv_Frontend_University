@@ -39,7 +39,7 @@ function usePostProjectRegister() {
     };
 
     const { mutate, isSuccess, data } = useMutation({
-        mutationKey: ['projectRegister'],
+        mutationKey: ['project-register'],
         mutationFn: registerProject,
         onSuccess: data => {
             alert(`${data}번의 게시글이 생성되었습니다.`);
