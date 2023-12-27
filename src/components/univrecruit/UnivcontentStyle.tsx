@@ -190,6 +190,267 @@ export const Ps = styled.div`
     margin-bottom: 160px;
 `;
 
+/* 부분*/
+export const StyledButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 100px;
+
+  .button1 {
+    width: 588px;
+    height: 280px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--Orange-600, #FF7710);
+    border: 0px;
+
+    @media screen and (max-width: 768px) {
+        width: 336px;
+    }
+    @media screen and (max-width: 767px) {
+        width: 727px;
+        height: 112px;
+        flex-shrink: 0;
+    }
+    @media screen and (max-width: 360px) {
+        width: 320px;
+    }
+  }
+
+  .button2 {
+    width: 588px;
+    height: 280px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: var(--Grey-500, #D1D4D8);
+    border: 0px;
+    
+    @media screen and (max-width: 768px) {
+        width: 336px;
+    }
+    @media screen and (max-width: 767px) {
+        width: 727px;
+        height: 112px;
+        flex-shrink: 0;
+    }
+    @media screen and (max-width: 360px) {
+        width: 320px;
+    }
+  }
+`;
+export const StyledImg = styled.img`
+
+
+@media screen and (max-width: 767px) {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    padding: 5.333px 5.493px 5.333px 5.174px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+}
+@media screen and (max-width: 360px) {
+    display: flex;
+    width: 64px;
+    height: 64px;
+    padding: 5.333px 5.493px 5.333px 5.174px;
+    justify-content: center;
+    align-items: center;
+}
+}
+`;
+export const Text1 = styled.p`
+color: var(--White, #FFF);
+text-align: center;
+
+/* Title/32_Bold */
+font-family: Pretendard;
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 48px */
+@media screen and (max-width: 768px) {
+    color: var(--White, #FFF);
+    text-align: center;
+    
+    /* Title/32_Bold */
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 48px */
+}
+@media screen and (max-width: 767px) {
+    color: var(--White, #FFF);
+    text-align: center;
+    
+    /* Title/24_Bold */
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 36px */
+
+}
+@media screen and (max-width: 360px) {
+color: var(--White, #FFF);
+text-align: center;
+
+/* Title/24_Bold */
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 36px */
+}
+
+`;
+
+export const Text2 = styled.p`
+color: var(--White, #FFF);
+text-align: center;
+
+/* Subtitle/20_Bold */
+font-family: Pretendard;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 30px */
+
+@media screen and (max-width: 768px) {
+    color: var(--White, #FFF);
+    text-align: center;
+    
+    /* Subtitle/20_Bold */
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 30px */
+}
+@media screen and (max-width: 767px) {
+    color: var(--White, #FFF);
+    text-align: center;
+    
+    /* Subtitle/14_Bold */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+
+}
+@media screen and (max-width: 360px) {
+    color: var(--White, #FFF);
+text-align: center;
+
+/* Subtitle/14_Bold */
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+
+}
+`;
+export const Text3 = styled.p`
+color: var(--Grey-700, #868C94);
+text-align: center;
+
+/* Title/32_Bold */
+font-family: Pretendard;
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 48px */
+
+@media screen and (max-width: 768px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+    
+    /* Title/32_Bold */
+    font-family: Pretendard;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 48px */
+}
+@media screen and (max-width: 767px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+    
+    /* Title/24_Bold */
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 36px */
+
+}
+@media screen and (max-width: 360px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+
+/* Title/24_Bold */
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 36px */
+}
+
+`;
+export const Text4 = styled.p`
+color: var(--Grey-700, #868C94);
+text-align: center;
+
+/* Subtitle/20_Bold */
+font-family: Pretendard;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 30px */
+
+@media screen and (max-width: 768px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+    
+    /* Subtitle/20_Bold */
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 30px */
+}
+@media screen and (max-width: 767px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+    
+    /* Subtitle/14_Bold */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+
+}
+@media screen and (max-width: 360px) {
+    color: var(--Grey-700, #868C94);
+    text-align: center;
+
+/* Subtitle/14_Bold */
+font-family: Pretendard;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 150%; /* 21px */
+
+}
+`;
+
 /*FAQ 부분*/
 export const Qbody3 = styled.div`
     div:first-of-type {

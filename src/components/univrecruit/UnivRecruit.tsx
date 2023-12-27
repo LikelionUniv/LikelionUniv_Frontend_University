@@ -1,15 +1,14 @@
 import React from 'react';
-
 import Header from './UnivHeader';
-import Univcontent from './Univcontent';
+import { Univcontent } from './Univcontent';
 
 function UnivRecruit() {
-    return (
-        <>
-            <Header />
-            <Univcontent />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <Univcontent />
+    </>
+  );
 }
 
 export default UnivRecruit;
