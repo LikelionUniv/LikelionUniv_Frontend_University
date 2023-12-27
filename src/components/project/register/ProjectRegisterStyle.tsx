@@ -7,7 +7,6 @@ export const Container = styled.div`
 
     width: 792px;
     margin: 0 auto;
-    margin-top: 64px;
     box-sizing: border-box;
 
     @media screen and (max-width: 800px) {
@@ -18,6 +17,7 @@ export const Container = styled.div`
 
 export const Title = styled.header`
     margin-bottom: 40px;
+    margin-top: 64px;
 
     color: #212224;
     font-family: 'Pretendard';
