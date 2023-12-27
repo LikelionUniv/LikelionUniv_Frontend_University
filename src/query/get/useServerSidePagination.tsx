@@ -63,7 +63,7 @@ function useServerSidePagination<T>({
     };
 
     const { data } = useSuspenseQuery({
-        queryKey: ['getPagiable', { uri, size, sort, search, currentPage }],
+        queryKey: ['get-pagiable', { uri, size, sort, search, currentPage }],
         queryFn: fetchPagiableData,
     });
 

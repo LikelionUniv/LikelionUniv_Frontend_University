@@ -20,7 +20,10 @@ function useDeleteProject({ projectId }: useDeleteProjectProps) {
         mutationFn: deleteProject,
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: ['getPagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['project-detail', projectId],
             });
 
             alert(`${projectId} 프로젝트가 삭제되었습니다.`);

@@ -32,7 +32,10 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
         mutationFn: updateProject,
         onSuccess: data => {
             queryClient.invalidateQueries({
-                queryKey: ['getPagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['project-detail', projectId],
             });
 
             alert(`${data}번의 게시글이 수정되었습니다.`);

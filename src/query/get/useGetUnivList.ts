@@ -22,7 +22,7 @@ function useGetUnivList() {
     };
 
     const { data: univList } = useSuspenseQuery({
-        queryKey: ['getUnivList'],
+        queryKey: ['get-univlist'],
         queryFn: fetchUnivList,
     });
 
