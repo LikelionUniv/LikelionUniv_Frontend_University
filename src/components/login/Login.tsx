@@ -16,25 +16,25 @@ export const Login = () => {
     };
 
     return (
-        <>
+        <L.Wrapper>
             <L.Container>
-                <L.Item src={LoginImage} alt="login" />
+                    <L.Item src={LoginImage} alt="login" />
 
-                <L.Box>
-                    <L.Text>
-                        멋쟁이사자처럼에
-                        <br />
-                        오신 걸 환영합니다.
-                    </L.Text>
-                    <L.GoogleBtn>
-                        <span>Google 계정으로 로그인</span>
-                    </L.GoogleBtn>
-                    <L.KakaoBtn onClick={kakao_login}>
-                        <span>카카오 로그인</span>
-                    </L.KakaoBtn>
-                </L.Box>
+                    <L.Box>
+                        <L.Text>
+                            멋쟁이사자처럼에
+                            <br />
+                            오신 걸 환영합니다.
+                        </L.Text>
+                        <L.GoogleBtn>
+                            <span>Google 계정으로 로그인</span>
+                        </L.GoogleBtn>
+                        <L.KakaoBtn onClick={kakao_login}>
+                            <span>카카오 로그인</span>
+                        </L.KakaoBtn>
+                    </L.Box>
             </L.Container>
             {/* <MLogin /> */}
-        </>
+        </L.Wrapper>
     );
 };

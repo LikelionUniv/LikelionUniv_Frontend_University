@@ -11,17 +11,17 @@ import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
+import default_profile from '../img/mypage/default_profile.svg'
 
 const Nav = () => {
     const navigate = useNavigate();
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
-    const { userinfo, setUserinfo } = useAuth();
-    useEffect(() => {
-        console.log(userinfo);
-        console.log(isLogin);
-        setIsLogin(userinfo.isLogin);
-    }, [userinfo]);
+    const {userinfo, setUserinfo} = useAuth();
+    const profileSrc = !userinfo.profileImage ? default_profile : userinfo.profileImage;
+    useEffect(()=>{
+        setIsLogin(userinfo.isLogin)
+    },[userinfo]);
     const onClickLogout = () => {
         localStorage.clear();
         setUserinfo({
@@ -149,12 +149,20 @@ const Nav = () => {
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/donate">
+                        {
+                            (width > 992)&&<Text to="/donate">
+                                <p style={{ whiteSpace: 'nowrap' }}>
+                                    연간기부금모금액 및 활용실적
+                                </p>
+                                <img src={navarrow} />
+                                </Text>
+                        }
+                        {/* <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
                             </p>
                             <img src={navarrow} />
-                        </Text>
+                        </Text> */}
                     </div>
 
                     <div className="right">
@@ -185,13 +193,15 @@ const Nav = () => {
                                             stroke: '#868C94',
                                         }}
                                     />
-                                </ProfileBtn>
-                            </>
-                        ) : (
-                            <LoginBtn onClick={() => navigate('/login')}>
-                                로그인
-                            </LoginBtn>
-                        )}
+                                    </ProfileBtn>
+                                </>
+                            ) : 
+                            (
+                                <LoginBtn onClick={() => navigate('/login')}>
+                                    로그인
+                                </LoginBtn>
+                            )
+                        }
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
@@ -246,16 +256,12 @@ const Wrapper = styled.div`
     z-index: 998;
     width: 100%;
     height: 55px;
-    padding: 0 20px;
-    @media (max-width: 768px) {
-        padding: 0;
-    }
     border-bottom: 1px solid var(--grey-300, #eaecee);
     background: var(--white, #fff);
     display: flex;
     justify-content: center;
     align-items: center;
-    &.fade-in {
+    /* &.fade-in {
         animation: show 0.8s;
         @keyframes show {
             from {
@@ -281,18 +287,20 @@ const Wrapper = styled.div`
                 margin-top: -60px;
             }
         }
-    }
+    } */
 `;
 
 const Container = styled.div`
+    box-sizing: border-box;
     position: relative;
-    width: 60%;
+    width: 1280px;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 1120px) {
+    /* @media (max-width: 1120px) {
         width: 672px;
-    }
+    } */
     .left {
         width: 60%;
         display: flex;
@@ -365,7 +373,7 @@ const LoginBtn = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px 20px;
-    border-radius: 6px;
+    border-radius: 20px;
     background-color: var(--grey-900, #212224);
     color: var(--white, #fff);
     font-family: Pretendard;
@@ -428,7 +436,7 @@ const ProfileBtn = styled.div`
 
 const ProfileModal = styled.div`
     position: absolute;
-    top: 47px;
+    top: 46px;
     right: 2px;
     z-index: 999;
     width: 128px;

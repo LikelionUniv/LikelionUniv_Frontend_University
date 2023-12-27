@@ -8,7 +8,6 @@ function Root() {
     return (
         <>
             <Nav />
-            <Padding />
             <div>
                 <Outlet />
             </div>
@@ -18,7 +17,3 @@ function Root() {
 }
 
 export default Root;
-
-const Padding = styled.div`
-    height: 56px;
-`;
