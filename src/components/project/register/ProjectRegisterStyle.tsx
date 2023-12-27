@@ -17,7 +17,7 @@ export const Container = styled.div`
 
 export const Title = styled.header`
     margin-bottom: 40px;
-    margin-top: 64px;
+    margin-top: 120px;
 
     color: #212224;
     font-family: 'Pretendard';
