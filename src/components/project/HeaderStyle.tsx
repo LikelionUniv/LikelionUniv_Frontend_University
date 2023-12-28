@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 64px;
+    margin-top: 120px;
     box-sizing: border-box;
 
     overflow: auto;

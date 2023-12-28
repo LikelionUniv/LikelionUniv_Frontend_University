@@ -96,32 +96,7 @@ const Header = () => {
                         <br />
                         멋쟁이사자처럼 대학과 함께하고 싶으신가요? <br />
                         아래 모집 일정을 참고해주세요! <br /> <br />
-                        <U.T3>
-                            {' '}
-                            <li> 운영진 모집 마감 기한 : ~24.01.15(월)</li>
-                        </U.T3>
-                        <U.T3>
-                            {' '}
-                            <li>
-                                {' '}
-                                중앙 운영단 모집 및 선발 기간 :
-                                24.01.16(화)~24.01.31(수)
-                            </li>{' '}
-                        </U.T3>
-                        <U.T3>
-                            {' '}
-                            <li> 아기사자 모집 마감 기한 : ~24.03.17(일)</li>
-                        </U.T3>
                     </U.T2>
-
-                    <div>
-                        <div className="inner">
-                            <Button onClick={openModal}>
-                                모집 알림 신청하기
-                                <PixelLongArrowIcon fill="#ffffff" />
-                            </Button>
-                        </div>
-                    </div>
                     {isMobileView ? (
                         <FooterModalMobile
                             isOpen={isModalOpen}

@@ -64,15 +64,17 @@ const universityOptions: UniversityOptionType[] = [
     { value: 2902, label: '세종대학교2' },
 ];
 
- export function findLabelByValue(value: number) {
-    const foundOption = universityOptions.find(option => option.value === value);
-  
+export function findLabelByValue(value: number) {
+    const foundOption = universityOptions.find(
+        option => option.value === value,
+    );
+
     if (!foundOption) {
-      return "해당하는 대학이 없습니다.";
+        return '해당하는 대학이 없습니다.';
     }
-  
+
     return foundOption.label;
-  }
+}
 
 const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)

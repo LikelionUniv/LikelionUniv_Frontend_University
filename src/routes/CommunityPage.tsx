@@ -5,11 +5,11 @@ import GlobalStyles from '../styles/GlobalStyle';
 const CommunityPage = () => {
     return (
         <>
-        <GlobalStyles/>
-        <Container>
-            <Outlet />
-        </Container>
-    </>
+            <GlobalStyles />
+            <Container>
+                <Outlet />
+            </Container>
+        </>
     );
 };
 
@@ -27,4 +27,3 @@ const Container = styled.div`
     font-family: Pretendard;
     height: auto;
 `;
-

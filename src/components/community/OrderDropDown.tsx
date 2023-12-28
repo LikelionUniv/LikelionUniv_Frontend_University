@@ -39,7 +39,7 @@ const OrderDropDown = () => {
                             : 'rotate(180deg)',
                         stroke: props.selectProps.menuIsOpen
                             ? '#212224'
-                            : '#212224'
+                            : '#212224',
                     }}
                 ></Arrow>
             </components.DropdownIndicator>

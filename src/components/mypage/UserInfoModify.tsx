@@ -4,12 +4,15 @@ import { Avatar, Button } from './Common';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
-import {useRecoilState} from 'recoil'
-import {UserProfileAtom} from '../../store/mypageData'
-import {userInfoModifyApi ,imageUploadToS3, requestPresignedUrl } from '../../api/mypage/userinfo'
+import { useRecoilState } from 'recoil';
+import { UserProfileAtom } from '../../store/mypageData';
+import {
+    userInfoModifyApi,
+    imageUploadToS3,
+    requestPresignedUrl,
+} from '../../api/mypage/userinfo';
 import { useNavigate } from 'react-router-dom';
 import { IuserModify } from './type';
-
 
 /* dropdown option 부분 */
 const trackOptions = [
@@ -22,26 +25,25 @@ const UserInfoModify = () => {
     const navigate = useNavigate();
     //초기 렌더링 시 유저 기본정보 받아와서 formState에 채워넣기
     const [formState, setFormState] = useState<IuserModify>({
-        name : '',
+        name: '',
         introduction: '',
         profileImage: '',
         part: '',
     });
-    
-    const [userProfile , updateUserProfile] = useRecoilState(UserProfileAtom);
-    //<img src = imgSrc/> 
-    const [imgSrc , setImgSrc] = useState(userProfile.profileImage);
+
+    const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
+    //<img src = imgSrc/>
+    const [imgSrc, setImgSrc] = useState(userProfile.profileImage);
 
     // 초기 렌더링 시 유저 정보 뿌리기
-    useEffect( ()=>{
+    useEffect(() => {
         setFormState({
-            name : userProfile.name,
-            introduction : userProfile.introduction,
-            profileImage : userProfile.profileImage ,
-            part : userProfile.part,
+            name: userProfile.name,
+            introduction: userProfile.introduction,
+            profileImage: userProfile.profileImage,
+            part: userProfile.part,
         });
-    }
-    ,[])
+    }, []);
 
     const handleSelectChange =
         (field: keyof IuserModify) =>
@@ -72,7 +74,7 @@ const UserInfoModify = () => {
 
         if (file != null) {
             const imgSrc: string = await readUrl(file[0]);
-            const imageUrl = await imageUploadToS3(userProfile.id , file[0]);
+            const imageUrl = await imageUploadToS3(userProfile.id, file[0]);
             console.log(imageUrl);
 
             setImgSrc(imgSrc);
@@ -80,8 +82,6 @@ const UserInfoModify = () => {
                 ...prev,
                 profileImage: imageUrl,
             }));
-
-
         }
     };
     //이미지 URL읽는 함수
@@ -100,21 +100,20 @@ const UserInfoModify = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         //수정 API 요청
-        const response =  await userInfoModifyApi(userProfile.id , formState);
+        const response = await userInfoModifyApi(userProfile.id, formState);
         //성공 시 마이페이지로 이동
-        if(response.isSuccess) {
-            alert("성공적으로 저장되었습니다.")
+        if (response.isSuccess) {
+            alert('성공적으로 저장되었습니다.');
             updateUserProfile({
                 ...userProfile,
-                name : formState.name,
-                introduction : formState.introduction,
-                profileImage : imgSrc,
-                part : formState.part,
-            })
+                name: formState.name,
+                introduction: formState.introduction,
+                profileImage: imgSrc,
+                part: formState.part,
+            });
             navigate(-1);
-        }
-        else{
-            alert("저장에 실패했습니다.")
+        } else {
+            alert('저장에 실패했습니다.');
             navigate(-1);
         }
         //실패 시 마이페이지로 이동
@@ -128,7 +127,9 @@ const UserInfoModify = () => {
                 <Form>
                     <FlexBox>
                         <Avatar_sm imgurl={imgSrc} />
-                        <ImageBtn onClick={handleImgBtn}>사진 변경하기</ImageBtn>
+                        <ImageBtn onClick={handleImgBtn}>
+                            사진 변경하기
+                        </ImageBtn>
                         <input
                             type="file"
                             style={{ display: 'none' }}
@@ -185,7 +186,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-    margin:100px 0 ;
+    margin: 100px 0;
 `;
 
 const Form = styled.form`
@@ -263,7 +264,7 @@ const Nform = styled.input`
 `;
 
 const Nformarea = styled.textarea`
-    box-sizing : border-box;
+    box-sizing: border-box;
     width: 464px;
     height: 148px;
     font-size: 16px;

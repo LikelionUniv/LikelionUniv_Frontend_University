@@ -12,7 +12,6 @@ import useCheckbox from '../register/useCheckbox';
 
 import AutoHeightTextarea from '../register/AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
-import request from '../../../utils/request';
 import { useNavigate, useParams } from 'react-router-dom';
 import ImageUpload from '../../utils/ImageUpload';
 import useEnrolledUser from '../register/user/userStore/useEnrolledUser';
@@ -22,17 +21,17 @@ import {
     Output,
     Tech,
     Thon,
-    Univ,
 } from '../register/RegisterOptions';
 import UserFind from '../register/user/UserFind';
 import UserEnrolled from '../register/user/UserEnrolled';
 import { ProjectRegisterType } from '../register/ProjectRegister';
-import { Project } from '../ProjectListInner';
-import useFetch from './../../../hooks/useFetch';
-import useFetchAsyncFunc from '../../../hooks/useFetchAsyncFunc';
+import useGetUnivList from '../../../query/get/useGetUnivList';
+import useGetProjectDetail from '../../../query/get/useGetProjectDetail';
+import useUpdateInitializer from './useUpdateInitializer';
+import usePatchProjectUpdate from '../../../query/patch/usePatchProjectUpdate';
 
 /* form type */
-interface FormState {
+export interface FormState {
     activity: string;
     activityEtc: string;
     outPut: string;
@@ -50,10 +49,6 @@ interface FormState {
     members: number[];
 }
 
-interface PostId {
-    id: number;
-}
-
 interface Image {
     file?: File;
     src: string;
@@ -63,36 +58,16 @@ const ProjectUpdate = () => {
     const { projectId } = useParams();
     const httpUrl = 'https://';
 
-    const { data: project } = useFetch<Project, null>({
-        uri: `/api/v1/project/${projectId}`,
-    });
-
-    useEffect(() => {
-        if (project !== undefined) {
-            setFormState({
-                activity: project.activity,
-                activityEtc: Thon.isEtcThon(project.activity)
-                    ? project.activity
-                    : '',
-                outPut: project.outPut,
-                serviceName: project.serviceName,
-                startDate: project.startDate,
-                endDate: project.endDate,
-                projectTeches: project.projectTech,
-                projectTechEtc: Tech.loadEtcTech(project.projectTech),
-                description: project.description,
-                content: project.content,
-                productionUrl: project.productionUrl,
-                images: project.imageUrl.map(url => ({ src: url })),
-                ordinal: project.ordinal.toString(),
-                univ: project.univ,
-                members: project.members.map(member => member.userId),
-            });
-        }
-    }, [project]);
+    const { project } = useGetProjectDetail({ id: Number(projectId) });
+    const { initState } = useUpdateInitializer({ project });
 
     const [isFill, setIsFill] = useState<boolean>(false); // 필드가 다 채워졌는지를 체크하는 state
-    const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
+    const {
+        array: images,
+        pushMany: setImages,
+        remove,
+        set,
+    } = useArray<Image>([]); // image 배열
 
     const {
         userLength: memberLength,
@@ -119,6 +94,19 @@ const ProjectUpdate = () => {
         univ: '',
         members: memberIdList,
     });
+
+    useEffect(() => {
+        setFormState(initState);
+
+        const imageUrls = initState.images.map(image => {
+            return {
+                ...image,
+                src: `https://${image.src}`,
+            };
+        });
+
+        set(imageUrls);
+    }, [initState, set]);
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
     const [initActive, setInitActive] = useState<boolean>(false);
@@ -237,6 +225,10 @@ const ProjectUpdate = () => {
         };
     };
 
+    const { mutate: updateProject } = usePatchProjectUpdate({
+        projectId: project.id,
+    });
+
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         if (project === undefined) return;
@@ -245,24 +237,15 @@ const ProjectUpdate = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-        console.log(data);
-
-        const response = await request<ProjectRegisterType, PostId, null>({
-            uri: `/api/v1/project/${project.id}`,
-            method: 'patch',
-            data,
-        });
-
-        alert(`${response?.data.id}번의 게시글이 수정되었습니다.`);
-        clearUser();
-        navigate('/project');
+        updateProject(data);
     };
 
     const { checkboxList, checkHandler, checkDefaultHandler, defaultDone } =
         useCheckbox(Tech.loadTech());
+
     const [etcCheck, setEtcCheck] = useState<boolean>(false);
 
-    if (project !== undefined && !defaultDone) {
+    if (!defaultDone) {
         checkDefaultHandler(Tech.loadCurrentTech(project.projectTech));
     }
 
@@ -335,28 +318,7 @@ const ProjectUpdate = () => {
         }));
     }, [images]);
 
-    // 초기 이미지 처리를 위해
-    const [imageDefault, setImageDefault] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (imageDefault || formState.images.length <= 0) return;
-
-        const imageUrls = formState.images.map(image => {
-            return {
-                ...image,
-                src: `https://${image.src}`,
-            };
-        });
-
-        setImages(imageUrls);
-        setImageDefault(true);
-    }, [formState.images, imageDefault, setImages]);
-
-    // 학교 목록을 불러오는 api
-    const { data: univList } = useFetchAsyncFunc<IDropdown[]>({
-        initValue: [],
-        asyncFunc: Univ.loadUniv,
-    });
+    const { univList } = useGetUnivList();
 
     const getDefaultUniv = (): IDropdown => {
         return univList.find(univ => project?.univ === univ.label) as IDropdown;
@@ -394,251 +356,226 @@ const ProjectUpdate = () => {
 
     return (
         <P.Container>
-            {project !== undefined && (
-                <>
-                    <P.Title>프로젝트 등록</P.Title>
-                    <P.Caption>
-                        <P.Label>이미지</P.Label>
-                        <P.ImgRegisterBtn onClick={handleImgBtn}>
-                            <img src={Gallery} alt="gallery" />
-                            이미지 추가
-                        </P.ImgRegisterBtn>
-                    </P.Caption>
-                    <input
-                        type="file"
-                        style={{ display: 'none' }}
-                        ref={fileRef}
-                        onChange={handleFileSelect}
-                        multiple
+            <P.Title>프로젝트 등록</P.Title>
+            <P.Caption>
+                <P.Label>이미지</P.Label>
+                <P.ImgRegisterBtn onClick={handleImgBtn}>
+                    <img src={Gallery} alt="gallery" />
+                    이미지 추가
+                </P.ImgRegisterBtn>
+            </P.Caption>
+            <input
+                type="file"
+                style={{ display: 'none' }}
+                ref={fileRef}
+                onChange={handleFileSelect}
+                multiple
+            />
+
+            <P.ImgRegisterGuide>
+                <P.Li>
+                    <P.Accent>썸네일은 첫번째 이미지</P.Accent>로 등록됩니다.
+                </P.Li>
+                <P.Li>
+                    이미지의 해상도는 <P.Accent>1920X1080</P.Accent> 사이즈를
+                    권장하며, 더 작은 이미지는 깨져서 보일 수 있습니다.
+                </P.Li>
+            </P.ImgRegisterGuide>
+
+            {images.length === 0 ? (
+                <P.ImageMent>프로젝트 이미지를 추가해주세요</P.ImageMent>
+            ) : (
+                <P.Images>
+                    {images.map((image, idx) => (
+                        <P.Img key={`img-${idx}`} src={`${image.src}`}>
+                            <P.DeleteBtn
+                                isFirst={idx === 0}
+                                onClick={() => remove(idx)}
+                            >
+                                <P.ImgNumber>{idx + 1}</P.ImgNumber>
+                                <img
+                                    src={idx === 0 ? FirstVertical : Vertical}
+                                    alt="vertical"
+                                />
+                                <img src={Cancel} alt="cancel" />
+                            </P.DeleteBtn>
+                        </P.Img>
+                    ))}
+                </P.Images>
+            )}
+            <P.Form onSubmit={handleSubmit}>
+                <P.Field>
+                    <P.Label>활동유형</P.Label>
+                    <DropDown
+                        placeholder="활동 선택"
+                        options={Thon.loadThon()}
+                        defaultValue={Thon.loadCurrentThon(project.activity)}
+                        onChange={handleSelectChange('activity')}
                     />
-
-                    <P.ImgRegisterGuide>
-                        <P.Li>
-                            <P.Accent>썸네일은 첫번째 이미지</P.Accent>로
-                            등록됩니다.
-                        </P.Li>
-                        <P.Li>
-                            이미지의 해상도는 <P.Accent>1920X1080</P.Accent>{' '}
-                            사이즈를 권장하며, 더 작은 이미지는 깨져서 보일 수
-                            있습니다.
-                        </P.Li>
-                    </P.ImgRegisterGuide>
-
-                    {images.length === 0 ? (
-                        <P.ImageMent>
-                            프로젝트 이미지를 추가해주세요
-                        </P.ImageMent>
-                    ) : (
-                        <P.Images>
-                            {images.map((image, idx) => (
-                                <P.Img key={`img-${idx}`} src={`${image.src}`}>
-                                    <P.DeleteBtn
-                                        isFirst={idx === 0}
-                                        onClick={() => remove(idx)}
-                                    >
-                                        <P.ImgNumber>{idx + 1}</P.ImgNumber>
-                                        <img
-                                            src={
-                                                idx === 0
-                                                    ? FirstVertical
-                                                    : Vertical
-                                            }
-                                            alt="vertical"
-                                        />
-                                        <img src={Cancel} alt="cancel" />
-                                    </P.DeleteBtn>
-                                </P.Img>
-                            ))}
-                        </P.Images>
-                    )}
-                    <P.Form onSubmit={handleSubmit}>
-                        <P.Field>
-                            <P.Label>활동유형</P.Label>
-                            <DropDown
-                                placeholder="활동 선택"
-                                options={Thon.loadThon()}
-                                defaultValue={Thon.loadCurrentThon(
-                                    project.activity,
-                                )}
-                                onChange={handleSelectChange('activity')}
+                    {activeThonEtc ? (
+                        <P.Input
+                            type="text"
+                            className="etc"
+                            placeholder="활동 이름을 입력해주세요."
+                            value={formState.activityEtc}
+                            onChange={event =>
+                                handleInputChange('activityEtc', event)
+                            }
+                        />
+                    ) : null}
+                </P.Field>
+                <P.Field>
+                    <P.Label>아웃풋 형태</P.Label>
+                    <DropDown
+                        placeholder="아웃풋 형태 선택"
+                        options={Output.loadOutput()}
+                        defaultValue={Output.loadCurrentOutput(project.outPut)}
+                        onChange={handleSelectChange('outPut')}
+                    />
+                </P.Field>
+                <P.Field>
+                    <P.Label>제작 기간</P.Label>
+                    <P.FlexField>
+                        <P.PeriodInput
+                            type="date"
+                            placeholder="YYYY-MM-DD"
+                            value={
+                                formState.startDate
+                                    ? formState.startDate
+                                          .toString()
+                                          .substring(0, 10)
+                                    : ''
+                            }
+                            onChange={event =>
+                                handleInputChange('startDate', event)
+                            }
+                        />
+                        <img src={Hyphen} alt="hyphen" />
+                        <P.PeriodInput
+                            type="date"
+                            placeholder="YYYY-MM-DD"
+                            value={
+                                formState.endDate
+                                    ? formState.endDate
+                                          .toString()
+                                          .substring(0, 10)
+                                    : ''
+                            }
+                            onChange={event =>
+                                handleInputChange('endDate', event)
+                            }
+                        />
+                    </P.FlexField>
+                </P.Field>
+                <P.Field>
+                    <P.Label>서비스 이름</P.Label>
+                    <P.Input
+                        type="text"
+                        placeholder="서비스의 이름을 입력해주세요."
+                        value={formState.serviceName}
+                        onChange={event =>
+                            handleInputChange('serviceName', event)
+                        }
+                    />
+                </P.Field>
+                <P.Field>
+                    <P.Label>한줄 소개</P.Label>
+                    <P.Input
+                        type="text"
+                        placeholder="서비스의 한줄 소개를 입력해주세요."
+                        value={formState.description}
+                        onChange={event =>
+                            handleInputChange('description', event)
+                        }
+                    />
+                </P.Field>
+                <P.Field>
+                    <P.Label>상세 소개</P.Label>
+                    <AutoHeightTextarea
+                        placeholder="서비스의 상세 소개를 입력해주세요."
+                        value={formState.content}
+                        onChange={event => handleInputChange('content', event)}
+                    />
+                </P.Field>
+                <P.Field>
+                    <P.Label>서비스 링크</P.Label>
+                    <P.Input
+                        type="text"
+                        placeholder="서비스로 연결되는 링크를 입력해주세요."
+                        value={formState.productionUrl}
+                        onChange={event =>
+                            handleInputChange('productionUrl', event)
+                        }
+                    />
+                </P.Field>
+                <P.Field>
+                    <P.Label>기술 스택</P.Label>
+                    <P.CheckBoxDiv>
+                        <P.CheckEtc>
+                            <Checkbox
+                                checkboxId={0}
+                                label={'기타 직접 입력'}
+                                value={0}
+                                checked={etcCheck}
+                                onChange={() => setEtcCheck(prev => !prev)}
                             />
-                            {activeThonEtc ? (
-                                <P.Input
-                                    type="text"
-                                    className="etc"
-                                    placeholder="활동 이름을 입력해주세요."
-                                    value={formState.activityEtc}
+                        </P.CheckEtc>
+                        <P.TechGrid>
+                            {checkboxList.map(checkbox => (
+                                <Checkbox
+                                    checkboxId={checkbox.id}
+                                    label={checkbox.label}
+                                    value={checkbox.id}
+                                    checked={checkbox.isChecked}
                                     onChange={event =>
-                                        handleInputChange('activityEtc', event)
-                                    }
-                                />
-                            ) : null}
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>아웃풋 형태</P.Label>
-                            <DropDown
-                                placeholder="아웃풋 형태 선택"
-                                options={Output.loadOutput()}
-                                defaultValue={Output.loadCurrentOutput(
-                                    project.outPut,
-                                )}
-                                onChange={handleSelectChange('outPut')}
-                            />
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>제작 기간</P.Label>
-                            <P.FlexField>
-                                <P.PeriodInput
-                                    type="date"
-                                    placeholder="YYYY-MM-DD"
-                                    value={
-                                        formState.startDate
-                                            ? formState.startDate
-                                                  .toString()
-                                                  .substring(0, 10)
-                                            : ''
-                                    }
-                                    onChange={event =>
-                                        handleInputChange('startDate', event)
-                                    }
-                                />
-                                <img src={Hyphen} alt="hyphen" />
-                                <P.PeriodInput
-                                    type="date"
-                                    placeholder="YYYY-MM-DD"
-                                    value={
-                                        formState.endDate
-                                            ? formState.endDate
-                                                  .toString()
-                                                  .substring(0, 10)
-                                            : ''
-                                    }
-                                    onChange={event =>
-                                        handleInputChange('endDate', event)
-                                    }
-                                />
-                            </P.FlexField>
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>서비스 이름</P.Label>
-                            <P.Input
-                                type="text"
-                                placeholder="서비스의 이름을 입력해주세요."
-                                value={formState.serviceName}
-                                onChange={event =>
-                                    handleInputChange('serviceName', event)
-                                }
-                            />
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>한줄 소개</P.Label>
-                            <P.Input
-                                type="text"
-                                placeholder="서비스의 한줄 소개를 입력해주세요."
-                                value={formState.description}
-                                onChange={event =>
-                                    handleInputChange('description', event)
-                                }
-                            />
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>상세 소개</P.Label>
-                            <AutoHeightTextarea
-                                placeholder="서비스의 상세 소개를 입력해주세요."
-                                value={formState.content}
-                                onChange={event =>
-                                    handleInputChange('content', event)
-                                }
-                            />
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>서비스 링크</P.Label>
-                            <P.Input
-                                type="text"
-                                placeholder="서비스로 연결되는 링크를 입력해주세요."
-                                value={formState.productionUrl}
-                                onChange={event =>
-                                    handleInputChange('productionUrl', event)
-                                }
-                            />
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>기술 스택</P.Label>
-                            <P.CheckBoxDiv>
-                                <P.CheckEtc>
-                                    <Checkbox
-                                        checkboxId={0}
-                                        label={'기타 직접 입력'}
-                                        value={0}
-                                        checked={etcCheck}
-                                        onChange={() =>
-                                            setEtcCheck(prev => !prev)
-                                        }
-                                    />
-                                </P.CheckEtc>
-                                <P.TechGrid>
-                                    {checkboxList.map(checkbox => (
-                                        <Checkbox
-                                            checkboxId={checkbox.id}
-                                            label={checkbox.label}
-                                            value={checkbox.id}
-                                            checked={checkbox.isChecked}
-                                            onChange={event =>
-                                                handleCheckboxChange(
-                                                    checkbox.id,
-                                                    event.target.checked,
-                                                )
-                                            }
-                                        />
-                                    ))}
-                                </P.TechGrid>
-                            </P.CheckBoxDiv>
-                            {etcCheck ? (
-                                <P.Input
-                                    type="text"
-                                    className="etc"
-                                    placeholder="기술 스택을 입력해주세요."
-                                    value={formState.projectTechEtc}
-                                    onChange={event =>
-                                        handleInputChange(
-                                            'projectTechEtc',
-                                            event,
+                                        handleCheckboxChange(
+                                            checkbox.id,
+                                            event.target.checked,
                                         )
                                     }
                                 />
-                            ) : null}
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>기수/학교</P.Label>
-                            <P.FlexField>
-                                <DropDown
-                                    placeholder="기수 선택"
-                                    options={Gen.loadAllGen()}
-                                    defaultValue={Gen.loadCurrentGen(
-                                        project.ordinal,
-                                    )}
-                                    onChange={handleSelectChange('ordinal')}
-                                />
-                                <P.Gap />
-                                <DropDown
-                                    placeholder="학교 선택"
-                                    options={univList}
-                                    defaultValue={getDefaultUniv()}
-                                    onChange={handleSelectChange('univ')}
-                                />
-                            </P.FlexField>
-                        </P.Field>
-                        <P.Field>
-                            <P.Label>팀원</P.Label>
-                            <UserFind />
-                            <UserEnrolled defaultMembers={project.members} />
-                        </P.Field>
-                        <P.RegisterBtn type="submit" active={isFill}>
-                            등록하기
-                        </P.RegisterBtn>
-                    </P.Form>
-                </>
-            )}
+                            ))}
+                        </P.TechGrid>
+                    </P.CheckBoxDiv>
+                    {etcCheck ? (
+                        <P.Input
+                            type="text"
+                            className="etc"
+                            placeholder="기술 스택을 입력해주세요."
+                            value={formState.projectTechEtc}
+                            onChange={event =>
+                                handleInputChange('projectTechEtc', event)
+                            }
+                        />
+                    ) : null}
+                </P.Field>
+                <P.Field>
+                    <P.Label>기수/학교</P.Label>
+                    <P.FlexField>
+                        <DropDown
+                            placeholder="기수 선택"
+                            options={Gen.loadAllGen()}
+                            defaultValue={Gen.loadCurrentGen(project.ordinal)}
+                            onChange={handleSelectChange('ordinal')}
+                        />
+                        <P.Gap />
+                        <DropDown
+                            placeholder="학교 선택"
+                            options={univList}
+                            defaultValue={getDefaultUniv()}
+                            onChange={handleSelectChange('univ')}
+                        />
+                    </P.FlexField>
+                </P.Field>
+                <P.Field>
+                    <P.Label>팀원</P.Label>
+                    <UserFind />
+                    <UserEnrolled defaultMembers={project.members} />
+                </P.Field>
+                <P.RegisterBtn type="submit" active={isFill}>
+                    등록하기
+                </P.RegisterBtn>
+            </P.Form>
         </P.Container>
     );
 };

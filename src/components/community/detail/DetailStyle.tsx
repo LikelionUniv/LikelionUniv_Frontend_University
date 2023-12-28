@@ -28,17 +28,15 @@ export const Container = styled.div`
         cursor: pointer;
 
         &:hover {
-            color: var(--Orange-600, #FF7710);
+            color: var(--Orange-600, #ff7710);
         }
     }
 
     .count {
-
         display: flex;
         align-items: center;
         gap: 6px;
         margin: 66px 0 16px 0;
-
 
         color: var(--Grey-900, #212224);
         font-family: Pretendard;
@@ -47,7 +45,6 @@ export const Container = styled.div`
         font-weight: 700;
         line-height: 150%; /* 24px */
     }
-
 `;
 
 /*Header 헤더*/
@@ -66,7 +63,7 @@ export const Title = styled.div`
 export const Dot = styled.div`
     width: 2px;
     height: 2px;
-    background-color: var(--Grey-800, #4D5359);
+    background-color: var(--Grey-800, #4d5359);
     border-radius: 50%;
 `;
 
@@ -75,9 +72,7 @@ export const User = styled.div`
     width: 100%;
     justify-content: space-between;
     padding-bottom: 24px;
-    border-bottom: 1px solid var(--Grey-300, #EAECEE);;
-    
-    
+    border-bottom: 1px solid var(--Grey-300, #eaecee);
 
     .left {
         display: flex;
@@ -116,9 +111,9 @@ export const User = styled.div`
             justify-content: center;
             align-items: center;
             border-radius: 4px;
-            background: var(--Orange-600, #FF7710);
+            background: var(--Orange-600, #ff7710);
 
-            color: var(--White, #FFF);
+            color: var(--White, #fff);
             text-align: center;
             font-family: Pretendard;
             font-size: 12px;
@@ -141,7 +136,7 @@ export const User = styled.div`
                 &:hover::after {
                     display: flex;
                     content: '언팔로우';
-                    color: #FF7710;
+                    color: #ff7710;
                 }
             }
         }
@@ -154,7 +149,7 @@ export const User = styled.div`
         gap: 4px;
 
         p {
-            color: var(--Grey-800, #4D5359);
+            color: var(--Grey-800, #4d5359);
             font-family: Pretendard;
             font-size: 14px;
             font-style: normal;
@@ -174,7 +169,7 @@ export const User = styled.div`
             display: flex;
             align-items: center;
 
-            color: var(--Grey-800, #4D5359);
+            color: var(--Grey-800, #4d5359);
             font-family: Pretendard;
             font-size: 14px;
             font-style: normal;
@@ -194,7 +189,7 @@ export const User = styled.div`
                 justify-content: center;
                 align-items: center;
                 border-radius: 6px;
-                border: 1px solid var(--Grey-400, #DCDFE3);
+                border: 1px solid var(--Grey-400, #dcdfe3);
 
                 text-align: center;
                 font-family: Pretendard;
@@ -205,23 +200,22 @@ export const User = styled.div`
             }
 
             .modify {
-                color: var(--Grey-800, #4D5359);
+                color: var(--Grey-800, #4d5359);
 
-                &:hover{
-                    background: var(--Grey-200, #F2F4F6);
+                &:hover {
+                    background: var(--Grey-200, #f2f4f6);
                 }
             }
 
             .delete {
-                color: var(--Orange-600, #FF7710);
+                color: var(--Orange-600, #ff7710);
 
-                &:hover{
-                    background: var(--Grey-200, #F2F4F6);
+                &:hover {
+                    background: var(--Grey-200, #f2f4f6);
                 }
             }
         }
     }
-
 `;
 
 /*TextArea 본문*/
@@ -242,7 +236,7 @@ export const Like = styled.div`
         gap: 8px;
         cursor: pointer;
 
-        color: var(--Grey-600, #ADB3BA);
+        color: var(--Grey-600, #adb3ba);
         text-align: center;
         font-family: Pretendard;
         font-size: 16px;
@@ -262,8 +256,6 @@ export const Like = styled.div`
     .likeBtn:hover {
         color: #212224;
     }
-
-    
 `;
 
 /*Comment 댓글입력창*/
@@ -275,7 +267,7 @@ export const CommentWrapper = styled.div`
 export const WriteComment = styled.div<{ borderColor: string }>`
     border-radius: 6px;
     border: 1px solid ${props => props.borderColor};
-    background: var(--White, #FFF);
+    background: var(--White, #fff);
     width: 100%;
     padding: 12px 24px;
     height: fit-content;
@@ -305,12 +297,12 @@ export const RegBtn = styled.div<RegBtnProps>`
     align-items: center;
     gap: 10px;
     border-radius: 6px;
-    background: var(--Orange-600, #FF7710);
+    background: var(--Orange-600, #ff7710);
     margin: 8px 0 32px 0;
     float: inline-end;
     cursor: pointer;
 
-    color: var(--White, #FFF);
+    color: var(--White, #fff);
     text-align: center;
     font-family: Pretendard;
     font-size: 14px;
@@ -318,13 +310,12 @@ export const RegBtn = styled.div<RegBtnProps>`
     font-weight: 700;
     line-height: 150%; /* 21px */
 
-    background: ${props => props.inputEmpty ? '#ADB3BA' : 'var(--Orange-600, #FF7710)'};
+    background: ${props =>
+        props.inputEmpty ? '#ADB3BA' : 'var(--Orange-600, #FF7710)'};
 
     &:hover {
-        background: ${props => props.inputEmpty ? '#ADB3BA' : '#212224'};
+        background: ${props => (props.inputEmpty ? '#ADB3BA' : '#212224')};
     }
-
-    
 `;
 
 /*ParentBox 댓글*/
@@ -336,7 +327,7 @@ export const BoxWrapper = styled.div`
     padding: 16px 0px;
     align-items: flex-start;
     justify-content: space-between;
-    border-top: 1px solid var(--Grey-300, #EAECEE);
+    border-top: 1px solid var(--Grey-300, #eaecee);
     position: relative;
 
     .menu {
@@ -347,7 +338,6 @@ export const BoxWrapper = styled.div`
         justify-content: center;
         cursor: pointer;
     }
-
 `;
 
 export const BoxLeft = styled.div`
@@ -383,7 +373,7 @@ export const BoxLeft = styled.div`
             gap: 6px;
             align-items: center;
 
-            color: var(--Grey-700, #868C94);
+            color: var(--Grey-700, #868c94);
             font-family: Pretendard;
             font-size: 12px;
             font-style: normal;
@@ -406,9 +396,9 @@ export const BoxLeft = styled.div`
                 align-items: center;
                 gap: 10px;
                 border-radius: 10px;
-                background: var(--Orange-600, #FF7710);
+                background: var(--Orange-600, #ff7710);
 
-                color: var(--White, #FFF);
+                color: var(--White, #fff);
                 text-align: center;
                 font-family: Pretendard;
                 font-size: 10px;
@@ -430,14 +420,14 @@ export const BoxLeft = styled.div`
 export const Dot2 = styled.div`
     width: 2px;
     height: 2px;
-    background-color: var(--Grey-700, #868C94);
+    background-color: var(--Grey-700, #868c94);
     border-radius: 50%;
 `;
 
 export const MenuBtn = styled.div`
     border-radius: 6px;
-    border: 1px solid var(--Grey-400, #DCDFE3);
-    background: var(--White, #FFF);
+    border: 1px solid var(--Grey-400, #dcdfe3);
+    background: var(--White, #fff);
     padding: 4px;
     flex-shrink: 0;
     position: absolute;
@@ -445,7 +435,7 @@ export const MenuBtn = styled.div`
     right: 0;
     z-index: 1;
 
-    .btns{
+    .btns {
         padding: 8px 20px;
         border-radius: 4px;
         background: #fff;
@@ -459,7 +449,7 @@ export const MenuBtn = styled.div`
         line-height: 150%; /* 24px */
 
         &:hover {
-            background: var(--Grey-300, #EAECEE);
+            background: var(--Grey-300, #eaecee);
         }
     }
 `;
@@ -471,5 +461,5 @@ export const ReplyBox = styled.div`
     padding: 16px 0 16px 48px;
     align-items: flex-start;
     justify-content: space-between;
-    border-top: 1px solid var(--Grey-300, #EAECEE);
+    border-top: 1px solid var(--Grey-300, #eaecee);
 `;

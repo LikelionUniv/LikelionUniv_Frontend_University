@@ -23,7 +23,7 @@ export const Item = styled.img`
     height: 486px;
     border-radius: 8px;
     margin-right: 126px;
-    @media (max-width: 768px)  {
+    @media (max-width: 768px) {
         width: 332px;
         height: 332px;
         background-position: contain;
@@ -58,7 +58,7 @@ export const SocialBtn = styled.button`
         font-weight: 600;
     }
 
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
         width: 332px;
     }
 `;
@@ -74,7 +74,7 @@ export const GoogleBtn = styled(SocialBtn)`
             position: absolute;
             left: -67px;
 
-            @media (max-width: 768px){
+            @media (max-width: 768px) {
                 left: -45px;
             }
         }
@@ -92,11 +92,9 @@ export const KakaoBtn = styled(SocialBtn)`
             position: absolute;
             left: -112px;
 
-            @media (max-width: 768px){
+            @media (max-width: 768px) {
                 left: -89px;
             }
         }
-
-       
     }
 `;

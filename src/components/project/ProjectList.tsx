@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Header from './Header';
 import * as P from './ProjectList.style';
 import useInnerWidth from '../../hooks/useInnerWidth';
 import ProjectListInner from './ProjectListInner';
+import BoxSkeleton from './loading/BoxSkeleton';
 
 export interface ProjectAPI {
     uri: string;
@@ -34,7 +35,9 @@ function ProjectList() {
     return (
         <P.Container>
             <Header setProjectApi={setProjectApi} />
-            <ProjectListInner projectApi={projectApi} pageSize={pageSize} />
+            <Suspense fallback={<BoxSkeleton pageSize={pageSize} />}>
+                <ProjectListInner projectApi={projectApi} pageSize={pageSize} />
+            </Suspense>
         </P.Container>
     );
 }

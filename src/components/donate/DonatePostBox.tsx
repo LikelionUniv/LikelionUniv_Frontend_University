@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import eye from '../../img/donate/eye.svg';
 import comment from '../../img/community/comment16.svg';
-import { IPost } from './DonateComponent';
 import { useNavigate } from 'react-router-dom';
+import { IPost } from './DonateComponentInner';
 
 interface DonatePostBoxProps {
     post: IPost;

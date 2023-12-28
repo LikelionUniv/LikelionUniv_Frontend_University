@@ -26,7 +26,7 @@ import CommunityPage from './routes/CommunityPage';
 import DonatePage from './routes/DonatePage';
 import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
-import ProjectUpdate from './components/project/update/ProjectUpdate';
+import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
 
 const router = createBrowserRouter([
     {
@@ -46,26 +46,26 @@ const router = createBrowserRouter([
                 element: <LoginPage />,
             },
             {
-                path : '/oauth/:provider/redirect',
-                element : <Redirect/>
+                path: '/oauth/:provider/redirect',
+                element: <Redirect />,
             },
             {
                 path: '/mypage',
                 element: <MypageRoot />,
-                children : [
+                children: [
                     {
                         path: '',
-                        element: <Mypage/>
+                        element: <Mypage />,
                     },
                     {
-                        path:'modify',
-                        element : <UserModify/>
+                        path: 'modify',
+                        element: <UserModify />,
                     },
-                ]
+                ],
             },
             {
-                path:'/userpage/:user_id',
-                element: <Userpage/>
+                path: '/userpage/:user_id',
+                element: <Userpage />,
             },
             {
                 path: '/project',
@@ -85,7 +85,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':projectId/update',
-                        element: <ProjectUpdate />,
+                        element: <ProjectUpdateWrapper />,
                     },
                 ],
             },
@@ -143,7 +143,7 @@ const router = createBrowserRouter([
                     },
                 ],
             },
-            
+
             {
                 path: '/chat',
                 element: <Chat />,

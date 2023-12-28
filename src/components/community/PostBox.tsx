@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PostCardProp } from '../mypage/type';
 import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 export interface PostBoxProp extends PostCardProp {
     user: string;
@@ -79,7 +79,6 @@ const Dot = styled.div`
     background-color: var(--Grey-500, #d1d4d8);
     border-radius: 50%;
 `;
-
 
 export const Box = styled.div<{ img?: string | null }>`
     line-height: 150%;

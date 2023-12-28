@@ -1,5 +1,3 @@
-import request from '../../../utils/request';
-
 export interface IDropdown {
     value: number;
     label: string;
@@ -9,10 +7,6 @@ interface ICheckbox {
     id: number;
     isChecked: boolean;
     label: string;
-}
-
-interface Universities {
-    name: string;
 }
 
 export class Gen {
@@ -149,21 +143,5 @@ export class Tech {
         const etcs = currentTech.filter(tech => !allTechLabels.includes(tech));
         if (etcs.length === 0) return '';
         return etcs.join(', ');
-    }
-}
-
-export class Univ {
-    static async loadUniv(): Promise<IDropdown[]> {
-        const response = await request<null, Universities[], null>({
-            uri: '/api/v1/university/',
-            method: 'get',
-        });
-
-        const universities: IDropdown[] = response.data.map((univ, index) => ({
-            value: index + 1,
-            label: univ.name,
-        }));
-
-        return universities;
     }
 }

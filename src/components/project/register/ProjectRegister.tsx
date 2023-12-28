@@ -15,11 +15,12 @@ import useArray from '../../../hooks/useArray';
 import UserFind from './user/UserFind';
 import UserEnrolled from './user/UserEnrolled';
 import useEnrolledUser from './user/userStore/useEnrolledUser';
-import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
+import { Gen, Output, Tech, Thon } from './RegisterOptions';
 import request from '../../../utils/request';
 import { useNavigate } from 'react-router-dom';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
-import useFetchAsyncFunc from '../../../hooks/useFetchAsyncFunc';
+import useGetUnivList from '../../../query/get/useGetUnivList';
+import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
 
 /* form type */
 interface FormState {
@@ -95,6 +96,7 @@ const ProjectRegister = () => {
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
+    const { univList } = useGetUnivList();
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -182,22 +184,15 @@ const ProjectRegister = () => {
         };
     };
 
+    const { mutate: registerProject } = usePostProjectRegister();
+
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isFill) return;
 
         const data = await processSendData();
-
-        const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
-            method: 'post',
-            data,
-        });
-
-        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
-        clearUser();
-        navigate('/project');
+        registerProject(data);
     };
 
     const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
@@ -261,12 +256,6 @@ const ProjectRegister = () => {
             images,
         }));
     }, [images]);
-
-    // 학교 목록을 불러오는 api
-    const { data: univList } = useFetchAsyncFunc<IDropdown[]>({
-        initValue: [],
-        asyncFunc: Univ.loadUniv,
-    });
 
     useEffect(() => {
         if (
