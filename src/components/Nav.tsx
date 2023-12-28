@@ -11,16 +11,15 @@ import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
-import default_profile from '../img/mypage/default_profile.svg';
+// import default_profile from '../img/mypage/default_profile.svg';
 
 const Nav = () => {
     const navigate = useNavigate();
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
     const { userinfo, setUserinfo } = useAuth();
-    const profileSrc = !userinfo.profileImage
-        ? default_profile
-        : userinfo.profileImage;
+    // const profileSrc =
+    //     userinfo.profileImage === '' ? defaultprofile : userinfo.profileImage;
     useEffect(() => {
         setIsLogin(userinfo.isLogin);
     }, [userinfo]);
@@ -30,6 +29,7 @@ const Nav = () => {
             name: '',
             profileImage: '',
             userId: -1,
+            role: '',
             isLogin: false,
         });
     };
@@ -167,9 +167,7 @@ const Nav = () => {
                                 </ChatBtn>
                                 <ProfileBtn
                                     ref={buttonRef}
-                                    onClick={() =>
-                                        setProfileModal(!profileModal)
-                                    }
+                                    onClick={() => setProfileModal(pre => !pre)}
                                     style={{
                                         backgroundColor: profileModal
                                             ? 'var(--grey-300, #eaecee)'
@@ -198,13 +196,23 @@ const Nav = () => {
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
                             <div
-                                onClick={() => navigate('/mypage')}
+                                onClick={() => {
+                                    setProfileModal(pre => !pre);
+                                    navigate('/mypage');
+                                }}
                                 className="inner"
                             >
                                 <img src={mypage} />
                                 마이페이지
                             </div>
-                            <div onClick={onClickLogout} className="inner">
+                            <div
+                                onClick={() => {
+                                    setProfileModal(pre => !pre);
+                                    onClickLogout();
+                                    navigate('/');
+                                }}
+                                className="inner"
+                            >
                                 <img src={logout} />
                                 로그아웃
                             </div>
@@ -341,7 +349,7 @@ const Text = styled(NavLink)`
         margin-left: 10%;
     }
     &:last-child {
-        @media (max-width: 992px){
+        @media (max-width: 992px) {
             display: none;
         }
     }
@@ -456,6 +464,7 @@ const ProfileModal = styled.div`
         font-weight: 500;
         display: flex;
         align-items: center;
+        cursor: pointer;
         &:hover {
             background-color: var(--grey-300, #eaecee);
         }
