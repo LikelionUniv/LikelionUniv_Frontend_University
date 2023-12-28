@@ -149,20 +149,12 @@ const Nav = () => {
                             <p>커뮤니티</p>
                             <img src={navarrow} />
                         </Text>
-                        {
-                            (width > 992)&&<Text to="/donate">
-                                <p style={{ whiteSpace: 'nowrap' }}>
-                                    연간기부금모금액 및 활용실적
-                                </p>
-                                <img src={navarrow} />
-                                </Text>
-                        }
-                        {/* <Text to="/donate">
+                        <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
                             </p>
                             <img src={navarrow} />
-                        </Text> */}
+                        </Text>
                     </div>
 
                     <div className="right">
@@ -257,6 +249,7 @@ export default Nav;
 
 const Wrapper = styled.div`
     position: fixed;
+    top: 0;
     z-index: 998;
     width: 100%;
     height: 55px;
@@ -350,6 +343,11 @@ const Text = styled(NavLink)`
 
     &.first {
         margin-left: 10%;
+    }
+    &:last-child {
+        @media (max-width: 992px){
+            display: none;
+        }
     }
     img {
         width: 12px;
