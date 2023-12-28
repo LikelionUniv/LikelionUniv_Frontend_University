@@ -46,10 +46,6 @@ const router = createBrowserRouter([
                 element: <LoginPage />,
             },
             {
-                path: '/oauth/:provider/redirect',
-                element: <Redirect />,
-            },
-            {
                 path: '/mypage',
                 element: <MypageRoot />,
                 children: [
@@ -153,6 +149,11 @@ const router = createBrowserRouter([
                 element: <AboutPage />,
             },
         ],
+       
+    },
+    {
+        path: '/oauth/:provider/redirect',
+        element: <Redirect />,
     },
 ]);
 
