@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Button, UserBox } from './Common';
+import { Avatar, Button, UserBox,convertRole } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserProfileAtom } from '../../store/mypageData';
@@ -12,13 +12,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 export const UserInfo = () => {
     const navigate = useNavigate();
-    const goToModify = (): void => {
-        navigate('modify');
-    };
-
-    // 유저 프로필
     const { userinfo } = useAuth();
-    // const UserLoginState = useRecoilValue(userState);
     const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
     const userRole: { [id: string]: string } = {
         GUEST: '게스트',
@@ -53,7 +47,7 @@ export const UserInfo = () => {
     //마운트 시 API(유저 프로필) 요청
     useEffect(() => {
         const fetchData = async () => {
-            if (userinfo.name != '') {
+            if (userinfo.name != '' && userProfile.id === -1) {
                 const userProfile = await userProfileApi(userinfo.userId);
                 updateUserProfile(userProfile);
             }
@@ -61,11 +55,12 @@ export const UserInfo = () => {
         fetchData();
     }, [userinfo]);
 
+
     return (
         <Wrapper>
             <Container>
                 <UserBox>
-                    <Avatar imgurl={userProfile.profileImage} />
+                    <Avatar imgurl={`https://${userProfile.profileImage}`} />
                     {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
@@ -74,7 +69,7 @@ export const UserInfo = () => {
                         </UserName>
                         <UserPart>
                             <p>
-                                {userProfile.universityName} {userProfile.part}
+                                {userProfile.universityName} {convertRole(userProfile.part)}
                             </p>
                             <FItem data-type="팔로워" onClick={handleModal}>
                                 팔로워 {userProfile.followerNum}
@@ -86,7 +81,7 @@ export const UserInfo = () => {
                         <p>{userProfile.introduction}</p>
                     </UserProfile>
                 </UserBox>
-                <Button onClick={goToModify}>내 정보 수정</Button>
+                <Button onClick={()=>navigate('modify')}>내 정보 수정</Button>
                 {isModalOpen && (
                     <FollowModal
                         isOpen={isModalOpen}
@@ -110,7 +105,7 @@ const Container = styled.div`
     /* max-width : 1200px; */
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    margin-top: 156px;
 `;
 
 const UserProfile = styled.div`
@@ -153,7 +148,7 @@ const UserName = styled.div`
 `;
 const UserPart = styled.div`
     display: flex;
-    margin-top: 6px;
+    margin-top: 12px;
     line-height: 150%;
     & > p {
         font-size: 16px;

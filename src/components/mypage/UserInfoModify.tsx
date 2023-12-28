@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Button } from './Common';
+import { Avatar, Button, convertRole } from './Common';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
@@ -8,11 +8,10 @@ import { useRecoilState } from 'recoil';
 import { UserProfileAtom } from '../../store/mypageData';
 import {
     userInfoModifyApi,
-    imageUploadToS3,
-    requestPresignedUrl,
 } from '../../api/mypage/userinfo';
 import { useNavigate } from 'react-router-dom';
 import { IuserModify } from './type';
+import ImageUpload from '../utils/ImageUpload';
 
 /* dropdown option 부분 */
 const trackOptions = [
@@ -20,6 +19,19 @@ const trackOptions = [
     { value: 2, label: '프론트엔드' },
     { value: 3, label: '백엔드' },
 ];
+
+
+function findLabelByValue(value: number) {
+    const foundOption = trackOptions.find(
+        option => option.value === value,
+    );
+
+    if (!foundOption) {
+        return '해당하는 트랙이 없습니다.';
+    }
+    return foundOption.label;
+}
+
 
 const UserInfoModify = () => {
     const navigate = useNavigate();
@@ -33,7 +45,7 @@ const UserInfoModify = () => {
 
     const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
     //<img src = imgSrc/>
-    const [imgSrc, setImgSrc] = useState(userProfile.profileImage);
+    const [imgSrc, setImgSrc] = useState('');
 
     // 초기 렌더링 시 유저 정보 뿌리기
     useEffect(() => {
@@ -52,9 +64,13 @@ const UserInfoModify = () => {
             actionMeta: ActionMeta<OptionType>,
         ) => {
             if (selectedOption) {
+                let label: string;
+                if(field === 'part') {
+                    label = findLabelByValue(selectedOption.value)
+                }
                 setFormState(prev => ({
                     ...prev,
-                    [field]: selectedOption.value,
+                    [field]: convertRole(label),
                 }));
             }
         };
@@ -74,13 +90,13 @@ const UserInfoModify = () => {
 
         if (file != null) {
             const imgSrc: string = await readUrl(file[0]);
-            const imageUrl = await imageUploadToS3(userProfile.id, file[0]);
-            console.log(imageUrl);
-
+            const urls = await ImageUpload.getPresignedUrl(file[0]);
+            await ImageUpload.enrollImagesToS3(file[0], urls.presignedUrl);
+            
             setImgSrc(imgSrc);
             setFormState(prev => ({
                 ...prev,
-                profileImage: imageUrl,
+                profileImage: urls.imageUrl,
             }));
         }
     };
@@ -102,6 +118,7 @@ const UserInfoModify = () => {
         //수정 API 요청
         const response = await userInfoModifyApi(userProfile.id, formState);
         //성공 시 마이페이지로 이동
+
         if (response.isSuccess) {
             alert('성공적으로 저장되었습니다.');
             updateUserProfile({
@@ -126,7 +143,11 @@ const UserInfoModify = () => {
 
                 <Form>
                     <FlexBox>
-                        <Avatar_sm imgurl={imgSrc} />
+                        <Avatar_sm imgurl={
+                            imgSrc === '' ? 
+                            `https://${userProfile.profileImage}`
+                            : imgSrc
+                        } />
                         <ImageBtn onClick={handleImgBtn}>
                             사진 변경하기
                         </ImageBtn>
