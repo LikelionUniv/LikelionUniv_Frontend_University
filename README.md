@@ -37,7 +37,7 @@
 | 양화영                                                                               | 한영준                                                                              | 김진호                                                                              |
 |:---------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:| -------------------------------------------------------------------------------- |
 | <img width="160px" src="https://avatars.githubusercontent.com/u/110398814?v=4" /> | <img width="160px" src="https://avatars.githubusercontent.com/u/86956991?v=4" /> | <img width="160px" src="https://avatars.githubusercontent.com/u/81083461?v=4" /> |
-| [@hwayeong](https://github.com/sanchaehwa)                                        | [@zizonyoungjun](https://github.com/zizonyoungjun)                               | [@jinokim98](https://github.com/jinhokim98)                                      |
+| [@hwayeong](https://github.com/sanchaehwa)                                        | [@zizonyoungjun](https://github.com/zizonyoungjun)                               | [@jinhokim98](https://github.com/jinhokim98)                                      |
 
 ### 🧑🏻‍💻 Recruiting Page Developer
 
