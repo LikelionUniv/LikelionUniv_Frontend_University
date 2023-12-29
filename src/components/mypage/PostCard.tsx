@@ -2,9 +2,10 @@ import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const PostCard = (props: MypagePostCardPropType) => {
+    const navigate = useNavigate();
     const [heart, setHeart] = useState(true);
     const location = useLocation().pathname;
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
@@ -13,7 +14,7 @@ const PostCard = (props: MypagePostCardPropType) => {
     };
     return (
         //Wrapper에다가 PageRouting 기능 추가하면 완료
-        <PostCardBoxWrapper onClick={() => alert('이동하기')}>
+        <PostCardBoxWrapper onClick={() => navigate(`/community/${props.id}`)}>
             <PostCardBox className="date">
                 <div>{props.createdDate}</div>
                 {props.type === '게시글' &&

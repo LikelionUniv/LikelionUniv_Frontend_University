@@ -1,10 +1,12 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 const PostModal = () => {
     //이거는 하나하나 만드는 거기 때문에 모달을 통합해서 하나로 하는 건 불가능... 수정할때는 해당 페이지로 가고 삭제할때는 리다이렉트가 필요
     const [modal, setModal] = useState<Boolean>(false);
     const modalRef = useRef<HTMLDivElement>(null);
+    const navigate = useNavigate();
     return (
         <>
             <div
@@ -23,7 +25,7 @@ const PostModal = () => {
                             ) => {
                                 e.stopPropagation();
                                 setModal(!modal);
-                                alert('수정하는 곳으로 이동');
+                                navigate(`/community/write`);
                             }}
                             className="inner"
                         >

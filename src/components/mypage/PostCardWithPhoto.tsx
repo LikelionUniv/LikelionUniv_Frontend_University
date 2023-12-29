@@ -1,10 +1,11 @@
 import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const PostCardWithPhoto = (props: MypagePostCardPropType) => {
+    const navigate = useNavigate();
     const [heart, setHeart] = useState(true);
     const location = useLocation().pathname;
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
@@ -12,7 +13,11 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
         setHeart(!heart);
     };
     return (
-        <PostCardBoxWrapper className="photo" photoTitle>
+        <PostCardBoxWrapper
+            className="photo"
+            photoTitle
+            onClick={() => navigate(`/community/${props.id}`)}
+        >
             <PostCardBox
                 className="photo"
                 style={{

@@ -2,10 +2,14 @@ import dot from '../../img/mypage/dot.svg';
 import { styled } from 'styled-components';
 import { ProjectCardProp } from './type';
 import { ProjectBoxWrapper } from './PostCardStyle';
+import { useNavigate } from 'react-router-dom';
 
 const ProjectCard = (props: ProjectCardProp) => {
+    const navigate = useNavigate();
     return (
-        <ProjectBoxWrapper>
+        <ProjectBoxWrapper
+            onClick={() => navigate(`/project/${props.projectId}`)}
+        >
             <ProjectBox
                 className="img"
                 style={{
@@ -102,7 +106,7 @@ const Outputtag = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: auto;
-    width: 55px;
+    padding: 4px 12px;
     height: 29px;
     background-color: black;
     color: white;
