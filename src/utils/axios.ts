@@ -1,14 +1,15 @@
 import axios, { AxiosError } from 'axios';
 import { IError } from './request';
 import reissue from './reissue';
+import BASE_URL from '../config';
 
 export const axiosInstance = axios.create({
-    baseURL: 'https://stag.likelionuniv.com',
+    baseURL: BASE_URL,
     withCredentials: true,
 });
 
 export const refreshInstance = axios.create({
-    baseURL: 'https://stag.likelionuniv.com',
+    baseURL: BASE_URL,
     withCredentials: true,
 });
 
