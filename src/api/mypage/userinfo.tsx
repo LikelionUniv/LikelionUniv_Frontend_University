@@ -4,7 +4,7 @@ export const userProfileApi = async (user_id: number) => {
     const userid = 3;
 
     return await axiosInstance
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`)
+        .get(`${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/profile`)
         .then(response => {
             // console.log('UserProfile', response.data.data);
             return response.data.data;
@@ -24,7 +24,7 @@ export const userFollowApi = async (
 
     return await axiosInstance
         .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/${follow}?page=${page}&size=16`,
+            `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/${follow}?page=${page}&size=16`,
         )
         .then(response => {
             return response.data;
@@ -37,7 +37,7 @@ export const userFollowApi = async (
 
 export const followAddApi = async (user_id: number) => {
     return await axiosInstance
-        .post(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
+        .post(`${process.env.REACT_APP_BASE_URL}/api/v1/follow/${user_id}`)
         .then(response => {
             // console.log("followAdd ",response);
             return response.data;
@@ -52,7 +52,7 @@ export const followDeleteApi = async (user_id: number) => {
     const userid = 3;
 
     return await axiosInstance
-        .delete(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
+        .delete(`${process.env.REACT_APP_BASE_URL}/api/v1/follow/${user_id}`)
         .then(response => {
             // console.log("followDelete ",response.data.data );
             return response.data;
@@ -69,7 +69,7 @@ export const userInfoModifyApi = async (
 ) => {
     return await axiosInstance
         .patch(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`,
+            `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/profile`,
             user_info,
         )
         .then(response => {
