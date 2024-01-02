@@ -20,7 +20,7 @@ const roleTrackStyle = {
         border: state.isFocused
             ? ' 1px solid #ff7710'
             : '1px solid var(--grey-400, #DCDFE3)',
-        width: state.isFocused ? '180px' : '180px',
+        width: state.isFocused ? '200px' : '200px',
         height: state.isFocused ? '48px' : '48px',
         borderRadius: '6px',
         backgroundColor: 'white',
@@ -42,7 +42,7 @@ const roleTrackStyle = {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '180px',
+        width: '200px',
         '@media screen and (max-width: 450px)': {
             width: '130px',
         },
@@ -51,7 +51,7 @@ const roleTrackStyle = {
         ...provided,
         backgroundColor: 'transparent',
         maxHeight: '133px', // gap을 반영한 스크롤 없는 최소 높이
-        width: '180px', // 너비 조정
+        width: '200px', // 너비 조정
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -71,7 +71,7 @@ const roleTrackStyle = {
         fontFamily: 'Pretendard',
         fontSize: '16px',
         fontWeight: '500',
-        width: '172px',
+        width: '192px',
         height: '40px',
         color: 'var(--grey-900, #212224)',
         borderRadius: '4px',
