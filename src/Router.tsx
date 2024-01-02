@@ -27,6 +27,7 @@ import DonatePage from './routes/DonatePage';
 import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
 import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
+import ProtectedRouter from './components/ProtectedRouter';
 
 const router = createBrowserRouter([
     {
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
             },
             {
                 path: '/mypage',
-                element: <MypageRoot />,
+                element: 
+                    <ProtectedRouter>
+                        <MypageRoot />
+                    </ProtectedRouter>,
                 children: [
                     {
                         path: '',
