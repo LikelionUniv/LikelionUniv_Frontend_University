@@ -5,10 +5,11 @@ export const Container = styled.div`
 
     width: 100%;
     max-width: 1200px;
+    min-height: 700px;
     margin-top: 64px;
 
     align-items: center;
-    align-content: center;
+    align-content: start;
     flex-wrap: wrap;
     box-sizing: border-box;
 
