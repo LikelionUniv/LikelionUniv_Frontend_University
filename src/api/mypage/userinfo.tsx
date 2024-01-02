@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { IuserModify } from '../../components/mypage/type';
 import { axiosInstance } from '../../utils/axios';
 export const userProfileApi = async (user_id: number) => {
@@ -7,11 +6,11 @@ export const userProfileApi = async (user_id: number) => {
     return await axiosInstance
         .get(`${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`)
         .then(response => {
-            console.log('UserProfile', response.data.data);
+            // console.log('UserProfile', response.data.data);
             return response.data.data;
         })
         .catch(error => {
-            console.log('userProflieError', error);
+            // console.log('userProflieError', error);
             return error;
         });
 };
@@ -22,24 +21,22 @@ export const userFollowApi = async (
     page: number,
     follow: string,
 ) => {
-    const userid = 3;
 
-    return await axios
+    return await axiosInstance
         .get(
             `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/${follow}?page=${page}&size=16`,
         )
         .then(response => {
-            // console.log("userFollow ",response.data.data );
             return response.data;
         })
         .catch(error => {
-            console.log('UserFollowError ', error);
+            // console.log('UserFollowError ', error);
             return error;
         });
 };
 
 export const followAddApi = async (user_id: number) => {
-    return await axios
+    return await axiosInstance
         .post(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
         .then(response => {
             // console.log("followAdd ",response);
@@ -54,7 +51,7 @@ export const followAddApi = async (user_id: number) => {
 export const followDeleteApi = async (user_id: number) => {
     const userid = 3;
 
-    return await axios
+    return await axiosInstance
         .delete(`${process.env.REACT_APP_BASE_URL}/v1/follow/${user_id}`)
         .then(response => {
             // console.log("followDelete ",response.data.data );
@@ -70,7 +67,7 @@ export const userInfoModifyApi = async (
     user_id: number,
     user_info: IuserModify,
 ) => {
-    return await axios
+    return await axiosInstance
         .patch(
             `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/profile`,
             user_info,
@@ -83,39 +80,3 @@ export const userInfoModifyApi = async (
         });
 };
 
-export const requestPresignedUrl = async (
-    user_id: number,
-    extension: string,
-) => {
-    return await axios
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/image/user/${user_id}`, {
-            params: {
-                fileNameExtension: extension,
-            },
-        })
-        .then(response => {
-            return response.data.data;
-        })
-        .catch(error => {
-            return error;
-        });
-};
-
-export const imageUploadToS3 = async (user_id: number, file: File) => {
-    const fileName = file.name.split('.');
-    const extension = fileName[fileName.length - 1];
-
-    const url = await requestPresignedUrl(user_id, extension);
-
-    if (url.presignedUrl === undefined) return 'PresignedUrl Undefined';
-
-    return await axios
-        .put(url.presignedUrl, file)
-        .then(response => {
-            console.log(response);
-            return url.imageUrl;
-        })
-        .catch(error => {
-            return error;
-        });
-};

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { userState } from '../../store/user';
 import { useSetRecoilState } from 'recoil';
@@ -7,7 +7,6 @@ import {
     requestLogin,
     requestUserInfo,
 } from '../../api/auth/auth';
-import axios from 'axios';
 
 export const Redirect = () => {
     const navigate = useNavigate();
@@ -19,10 +18,8 @@ export const Redirect = () => {
     useEffect(() => {
         const socialLogin = async () => {
             const idtoken = await requestIdtoken(authorizationCode, provider);
-
             const isUser = await requestLogin(provider, idtoken);
-
-            console.log(isUser);
+    
             if (isUser) {
                 const response = await requestUserInfo();
                 updateUserState({ ...response.data, isLogin: true });
@@ -30,12 +27,12 @@ export const Redirect = () => {
             } else {
                 navigate(`/signup/${provider}`);
             }
-
-            // isUser ? navigate("/") : navigate(`/signup/${provider}`)
         };
-
+ 
         socialLogin();
     }, []);
 
-    return <div></div>;
+    return <div>
+
+    </div>;
 };

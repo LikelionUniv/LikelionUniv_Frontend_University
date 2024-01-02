@@ -9,15 +9,10 @@ export const useAuth = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const response = await requestUserInfo();
-            if (response instanceof AxiosError) {
-                setUserinfo({ ...userinfo, isLogin: false });
-                console.log('로그인 상태 X');
-            } else {
-                setUserinfo({ ...response.data, isLogin: true });
-            }
+            let accessToken = localStorage.getItem('access_token');
+            const response = accessToken && await requestUserInfo();
+            response && setUserinfo({ ...response.data, isLogin: true });
         };
-
         fetchUser();
     }, []);
 
