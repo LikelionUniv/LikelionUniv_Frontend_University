@@ -8,7 +8,7 @@ export const requestIdtoken = async (
 ) => {
     return await axios
         .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/idtoken?code=${authorizationCode}`
+            `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`
         )
         .then(response => {
             //idtoken return
@@ -27,7 +27,7 @@ export const requestLogin = async (
 ) => {
     return await axios
         .post(
-            `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/login?idtoken=${idtoken}`
+            `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/login?idtoken=${idtoken}`
         )
         .then(response => {
             const isUser = response.data.data.isRegistered;
@@ -47,7 +47,7 @@ export const requestLogin = async (
 // 유저정보 GET
 export const requestUserInfo = async () => {
     return await axiosInstance
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/auth/userinfo`, {
+        .get(`${process.env.REACT_APP_BASE_URL}/api/v1/auth/userinfo`, {
             withCredentials: true,
         })
         .then(response => {

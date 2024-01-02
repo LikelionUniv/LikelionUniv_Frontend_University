@@ -4,7 +4,7 @@ export const mypageGetPostApi = async (user_id: number, page: number) => {
     const token = localStorage.getItem('access-token');
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts?page=${page}`,
+            `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/posts?page=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -26,7 +26,7 @@ export const mypageGetCommentApi = async (user_id: number, page: number) => {
     const token = localStorage.getItem('access-token');
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts/comment?page=${page}`,
+            `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/posts/comment?page=${page}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -52,7 +52,7 @@ export const myPageGetLikeApi = async (
 ) => {
     const token = localStorage.getItem('access-token');
     try {
-        let url = `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts/like?page=${page}`;
+        let url = `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/posts/like?page=${page}`;
         if (sort) {
             url += `&sort=${sort}`;
         }
@@ -80,7 +80,7 @@ export const mypageGetProjectApi = async (user_id: number, page: number) => {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     try {
         const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/projects?page=${page}`,
+            `${process.env.REACT_APP_BASE_URL}/api/v1/user/${user_id}/projects?page=${page}`,
             {
                 headers: {
                     withCredentials: true,
