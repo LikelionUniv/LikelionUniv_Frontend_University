@@ -8,7 +8,7 @@ export const requestIdtoken = async (
 ) => {
     return await axios
         .get(
-            `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`
+            `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`
         )
         .then(response => {
             //idtoken return
