@@ -13,7 +13,6 @@ const Landing = () => {
             <MainGraphic />
             <Information />
             <Footer />
-            <FloatingCountDown />
         </>
     );
 };
