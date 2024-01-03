@@ -17,7 +17,7 @@ export const Recruit = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ff7700;
+    background-color: #212224;
 
     .container {
         position: relative;
@@ -85,7 +85,8 @@ export const Recruit = styled.div`
                 padding: 16px 32px;
                 background-color: #fff;
                 border-radius: 8px;
-                color: #212224;
+                background-color: #ff7710;
+                color: #ffffff;
                 font-family: Pretendard;
                 font-size: 20px;
                 font-weight: 600;
@@ -95,7 +96,7 @@ export const Recruit = styled.div`
                 outline: none;
                 cursor: pointer;
                 &:hover {
-                    background-color: #fff2e8;
+                    background-color: #eb6500;
                 }
                 @media (max-width: 957px) {
                     font-size: 2vw;

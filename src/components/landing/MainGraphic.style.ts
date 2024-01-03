@@ -38,12 +38,12 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
 
     & > img {
         position: absolute;
-        height: 110%;
-        top: 0;
-        right: 6%;
+        height: 100%;
+        top: 8%;
+        right: 4%;
         @media (max-width: 1280px) {
-            height: 103%;
-            right: -7%;
+            height: 100%;
+            right: 2%;
         }
         @media (max-width: 768px) {
             position: relative;
@@ -55,14 +55,14 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
     }
 
     .inner {
-        width: 43%;
-        margin-left: 10%;
+        width: 42%;
+        margin-left: 8%;
         display: flex;
         flex-direction: column;
         align-items: center;
         img {
             width: 100%;
-            margin-top: 17%;
+            margin-top: 210px;
         }
         .new-text {
             display: ${props => (props.isCountDownView ? 'block' : 'none')};
@@ -79,11 +79,8 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
         }
 
         @media (max-width: 1280px) {
-            width: 55%;
-            margin-left: 3%;
-            img {
-                margin-top: 18%;
-            }
+            width: 50%;
+            margin-left: 40px;
             .new-text {
                 font-size: 2.5vw;
             }
@@ -93,7 +90,7 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
             margin-left: 0;
             img {
                 width: 80%;
-                margin-top: 10%;
+                margin-top: 136px;
             }
             .new-text {
                 font-size: 5vw;
@@ -107,8 +104,8 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
         justify-content: space-between;
         align-items: center;
         padding: 12px 32px;
-        margin-top: 25px;
-        margin-bottom: 265px;
+        margin-top: 170px;
+        margin-bottom: 250px;
 
         background-color: #ff7710;
         border-radius: 8px;
@@ -127,7 +124,7 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
         }
         @media (max-width: 1280px) {
             padding: 12px 32px;
-            margin-top: 15px;
+            margin-top: 72px;
         }
         @media (max-width: 957px) {
             font-size: 2.1vw;
@@ -137,8 +134,8 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
             font-size: 20px;
             padding: 16px 32px;
             border-radius: 1vw;
-            margin-top: 3vw;
-            margin-bottom: 0;
+            margin-top: 72px;
+            margin-bottom: 20px;
         }
 
         svg {
@@ -268,9 +265,11 @@ export const Description = styled.div`
         color: #212224;
         font-family: Pretendard;
         font-weight: 700;
-        margin-bottom: 5px;
         font-size: 48px;
+        line-height: 130%;
         word-break: keep-all;
+        white-space: nowrap;
+        shape-outside: url('../../img/landing/pixel_lion.svg');
         @media (max-width: 1280px) {
             font-size: 3.6vw;
         }
@@ -281,13 +280,14 @@ export const Description = styled.div`
         svg {
             margin-right: 10px;
             @media (max-width: 1280px) {
-                width: 4vw;
-                height: 4vw;
+                width: 3.8vw;
+                height: 3.8vw;
                 margin-right: 1.5%;
             }
             @media (max-width: 768px) {
-                width: 20px;
-                height: 20px;
+                width: 24px;
+                height: 24px;
+                margin-right: 5px;
             }
         }
     }

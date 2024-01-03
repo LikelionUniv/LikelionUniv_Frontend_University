@@ -6,9 +6,9 @@ export const requestIdtoken = async (
     authorizationCode: any,
     provider: string | undefined,
 ) => {
-    return await axios
+    return await axiosInstance
         .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/idtoken?code=${authorizationCode}`
+            `/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`
         )
         .then(response => {
             //idtoken return
@@ -25,14 +25,15 @@ export const requestLogin = async (
     provider: string | undefined,
     idtoken: any,
 ) => {
-    return await axios
+    return await axiosInstance
         .post(
-            `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/login?idtoken=${idtoken}`
+            `/api/v1/auth/${provider}/login?idtoken=${idtoken}`
         )
         .then(response => {
             const isUser = response.data.data.isRegistered;
             if (isUser) {
                 const { accessToken, refreshToken } = response.data.data;
+                localStorage.removeItem('idtoken');
                 localStorage.setItem('access_token', accessToken);
                 localStorage.setItem('refresh_token', refreshToken);
             }
@@ -40,16 +41,14 @@ export const requestLogin = async (
             return isUser;
         })
         .catch(e => {
-            return '로그인 요청 실패';
+            return e;
         });
 };
 
 // 유저정보 GET
 export const requestUserInfo = async () => {
     return await axiosInstance
-        .get(`${process.env.REACT_APP_BASE_URL}/v1/auth/userinfo`, {
-            withCredentials: true,
-        })
+        .get(`/api/v1/auth/userinfo`)
         .then(response => {
             return response.data;
         })
