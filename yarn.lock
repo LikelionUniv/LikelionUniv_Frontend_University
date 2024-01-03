@@ -1977,6 +1977,7 @@
     "@svgr/plugin-svgo" "^5.5.0"
     loader-utils "^2.0.0"
 
+<<<<<<< Updated upstream
 "@tanstack/query-core@5.14.2":
   version "5.14.2"
   resolved "https://registry.npmjs.org/@tanstack/query-core/-/query-core-5.14.2.tgz"
@@ -2001,6 +2002,8 @@
   dependencies:
     "@tanstack/query-core" "5.14.2"
 
+=======
+>>>>>>> Stashed changes
 "@testing-library/dom@^8.5.0", "@testing-library/dom@>=7.21.4":
   version "8.20.1"
   resolved "https://registry.npmjs.org/@testing-library/dom/-/dom-8.20.1.tgz"

@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import * as D from './DetailStyle';
-import { CommentData as data } from './CommentData';
+import { Post } from './CommentData';
 import { ReactComponent as UnlikedIcon } from '../../../img/community/unliked.svg';
 import { ReactComponent as LikedIcon } from '../../../img/community/liked.svg';
 
-const Like = () => {
+interface LikeProps {
+    postData: Post;
+}
+
+
+const Like:React.FC<LikeProps> = ({postData}) => {
     const [isLiked, setIsLiked] = useState(false);
     const [hovering, setHovering] = useState(false);
 
@@ -21,13 +26,9 @@ const Like = () => {
                 onClick={toggleLike}
             >
                 {isLiked || hovering ? (
-                    <>
-                        <LikedIcon /> 좋아요 {data[0].post.likeCount}
-                    </>
+                    <><LikedIcon /> 좋아요 {postData.likeCount}</>
                 ) : (
-                    <>
-                        <UnlikedIcon /> 좋아요 {data[0].post.likeCount}
-                    </>
+                    <><UnlikedIcon /> 좋아요 {postData.likeCount}</>
                 )}
             </div>
         </D.Like>

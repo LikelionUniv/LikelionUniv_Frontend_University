@@ -2,17 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as D from './DetailStyle';
 import profileImage from '../../../img/community/profile.svg';
-import { CommentData as data } from './CommentData';
+import { Post} from './CommentData';
 import { ReactComponent as HeartIcon } from '../../../img/community/heart20.svg';
 import { ReactComponent as CommentIcon } from '../../../img/community/comment20.svg';
 
-const Header = () => {
+interface HeaderProps {
+    postData: Post;
+}
+const Header: React.FC<HeaderProps> = ({postData}) => {
     const navigate = useNavigate();
-    const [isFollowed, setIsFollowed] = useState(data[0].post.isFollowedAuthor);
-    const isMyPost = data[0].post.isMyPost;
-    const profileImageUrl = data[0].post.hasAuthorProfileImageUrl
-        ? data[0].post.authorProfileImageUrl
-        : profileImage;
+    const [isFollowed, setIsFollowed] = useState(postData.isFollowedAuthor);
+    const isMyPost = postData.isMyPost;
+    const profileImageUrl = postData.hasAuthorProfileImageUrl ? postData.authorProfileImageUrl : profileImage;
 
     const toggleFollow = () => {
         setIsFollowed(!isFollowed);
@@ -21,23 +22,25 @@ const Header = () => {
     const goModify = () => {
         navigate('/community/write', {
             state: {
-                title: `${data[0].post.title}`,
-                main: `자유게시판`,
-                sub: `플젝모집`,
-                body: `${data[0].post.body}`,
-            },
-        });
-    };
+              title: `${postData.title}`,
+              main: `자유게시판`,
+              sub: `플젝모집`,
+              body: `${postData.body}`
+            }
+          });
+    }
 
     return (
         <>
-            <D.Title>{data[0].post.title}</D.Title>
+            <D.Title>
+                {postData.title}
+            </D.Title>
             <D.User>
                 <div className="left">
                     <img src={profileImageUrl} alt="" className="image" />
                     <div>
-                        <div className="userBox">
-                            <p className="name">{data[0].post.authorName}</p>
+                        <div className='userBox'>
+                            <p className='name'>{postData.authorName}</p>
                             {!isMyPost && (
                                 <div
                                     className={`followBtn ${
@@ -53,23 +56,19 @@ const Header = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="userInfo">
-                            <p>{data[0].post.authorOrdinal}기</p>
-                            <D.Dot />
-                            <p>{data[0].post.universityName}</p>
-                            <D.Dot />
-                            <p>2023. 7. 18</p>
+                        <div className='userInfo'>
+                            <p>{postData.authorOrdinal}기</p><D.Dot />
+                            <p>{postData.universityName}</p><D.Dot />
+                            <p>{postData.createdDate}</p>
                         </div>
                     </div>
                 </div>
-                <div className="right">
-                    <div className="icons">
-                        <HeartIcon />
-                        {data[0].post.likeCount}
+                <div className='right'>
+                    <div className='icons'>
+                        <HeartIcon />{postData.likeCount}
                     </div>
-                    <div className="icons">
-                        <CommentIcon />
-                        {data[0].post.commentCount}
+                    <div className='icons'>
+                        <CommentIcon />{postData.commentCount}
                     </div>
                     {isMyPost && (
                         <div className="btns">

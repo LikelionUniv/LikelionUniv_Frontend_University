@@ -262,6 +262,12 @@ export const Like = styled.div`
 
 export const CommentWrapper = styled.div`
     width: 100%;
+
+    .btnwrapper {
+        display: flex;
+        gap: 8px;
+        justify-content: end;
+    }
 `;
 
 export const WriteComment = styled.div<{ borderColor: string }>`
@@ -290,16 +296,37 @@ export const WriteComment = styled.div<{ borderColor: string }>`
     }
 `;
 
+export const CancelBtn = styled.div<RegBtnProps>`
+    display: inline-flex;
+    padding: 5.5px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin: 8px 0 0 0;
+    cursor: pointer;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 21px */
+
+    color: ${props => props.inputEmpty ? '#FFF' : '#212224'};
+    background: ${props => props.inputEmpty ? '#F2F4F6' : '#EAECEE'};
+
+    &:hover {
+        background: ${props => props.inputEmpty ? '#F2F4F6' : '#D1D4D8'};
+    }
+
+    
+`;
 export const RegBtn = styled.div<RegBtnProps>`
     display: inline-flex;
     padding: 5.5px 16px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     border-radius: 6px;
-    background: var(--Orange-600, #ff7710);
-    margin: 8px 0 32px 0;
-    float: inline-end;
+    margin: 8px 0 0 0;
     cursor: pointer;
 
     color: var(--White, #fff);
@@ -323,7 +350,6 @@ export const RegBtn = styled.div<RegBtnProps>`
 export const BoxWrapper = styled.div`
     width: 100%;
     display: flex;
-    height: 110px;
     padding: 16px 0px;
     align-items: flex-start;
     justify-content: space-between;
@@ -338,6 +364,16 @@ export const BoxWrapper = styled.div`
         justify-content: center;
         cursor: pointer;
     }
+
+    .deleted {
+        color: var(--Grey-600, #ADB3BA);
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 25.6px */
+    }
+
 `;
 
 export const BoxLeft = styled.div`
@@ -366,6 +402,7 @@ export const BoxLeft = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: 160%; /* 25.6px */
+            white-space: pre-wrap;
         }
 
         .wrapper {
@@ -456,7 +493,17 @@ export const MenuBtn = styled.div`
 
 export const ReplyBox = styled.div`
     width: 100%;
-    height: 120px;
+    min-height: 120px;
+    display: flex;
+    padding: 16px 0 16px 48px;
+    align-items: flex-start;
+    justify-content: space-between;
+    border-top: 1px solid var(--Grey-300, #EAECEE);
+`;
+
+export const ModiBox = styled.div`
+    width: 100%;
+    min-height: 120px;
     display: flex;
     padding: 16px 0 16px 48px;
     align-items: flex-start;

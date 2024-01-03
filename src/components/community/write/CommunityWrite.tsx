@@ -2,15 +2,38 @@ import Editor from './Editor';
 import * as W from './WriteStyle';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import request from '../../../utils/request';
+import { useNavigate } from 'react-router-dom';
+
+interface CommunityRegisterType {
+    title: string;
+    body: string;
+    thumbnail: string | null;
+    mainCategory: string;
+    subCategory: string;
+}
+
+interface PostId {
+    postId: number;
+}
 
 const CommunityWrite = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const info = { ...location.state };
     const [selectedBoard, setSelectedBoard] = useState<string>('' || info.main);
-    const [selectedSubBoard, setSelectedSubBoard] = useState<string>(
-        '' || info.sub,
-    );
-    console.log(info.title);
+    const [selectedSubBoard, setSelectedSubBoard] = useState<string>('' || info.sub);
+    const [editorTitle, setEditorTitle] = useState(info.title || '');
+    const [editorContent, setEditorContent] = useState(info.body || '');
+
+    const handleTitleChange = (title:string) => {
+        setEditorTitle(title);
+    };
+    
+    const handleContentChange = (content:string) => {
+        setEditorContent(content);
+    };
+    
 
     const BoardClick = (boardName: string) => {
         setSelectedBoard(boardName);
@@ -20,6 +43,30 @@ const CommunityWrite = () => {
     const SubBoardClick = (subBoardName: string) => {
         setSelectedSubBoard(subBoardName);
     };
+
+    const processSendData = async (): Promise<CommunityRegisterType> => {
+        return {
+            title: editorTitle,
+            body: editorContent,
+            thumbnail: null,
+            mainCategory: "FREE_BOARD",
+            subCategory: "FREE_INFO"
+        };
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        const data = await processSendData();
+
+        const response = await request<CommunityRegisterType, PostId, null>({
+            uri: '/api/v1/community/posts/new',
+            method: 'post',
+            data,
+        });
+
+        navigate('/community');
+        console.log(response)
+    };
+    
 
     const SubBoard = () => {
         switch (selectedBoard) {
@@ -142,10 +189,15 @@ const CommunityWrite = () => {
                 </div>
                 {SubBoard()}
             </W.Tab>
-            <Editor contents={info.body} title={info.title} />
-            <div className="btns">
+            <Editor 
+                contents={info.body} 
+                title={info.title} 
+                onTitleChange={handleTitleChange}
+                onContentChange={handleContentChange}
+            />
+            <div className='btns'>
                 <W.CancelBtn>취소하기</W.CancelBtn>
-                <W.RegBtn>등록하기</W.RegBtn>
+                <W.RegBtn onClick={handleSubmit}>등록하기</W.RegBtn>
             </div>
         </W.Container>
     );
