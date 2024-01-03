@@ -33,6 +33,7 @@ export const requestLogin = async (
             const isUser = response.data.data.isRegistered;
             if (isUser) {
                 const { accessToken, refreshToken } = response.data.data;
+                localStorage.removeItem('idtoken');
                 localStorage.setItem('access_token', accessToken);
                 localStorage.setItem('refresh_token', refreshToken);
             }
@@ -47,9 +48,7 @@ export const requestLogin = async (
 // 유저정보 GET
 export const requestUserInfo = async () => {
     return await axiosInstance
-        .get(`${process.env.REACT_APP_BASE_URL}/api/v1/auth/userinfo`, {
-            withCredentials: true,
-        })
+        .get(`/api/v1/auth/userinfo`)
         .then(response => {
             return response.data;
         })
