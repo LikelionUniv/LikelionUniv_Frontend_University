@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 import {
     myProjectData,
     mypageData,
@@ -22,6 +22,8 @@ const useGetUserData = async (
 ) => {
     const setProjectData = useSetRecoilState(myProjectData);
     const setUserData = useSetRecoilState(mypageData);
+    const resetUserData = useResetRecoilState(mypageData);
+    const resetProjectData = useResetRecoilState(myProjectData);
     const location = useLocation().pathname;
     const params = useParams();
     const user = useRecoilValue(userState);
@@ -34,10 +36,18 @@ const useGetUserData = async (
         const getData = async (select: string) => {
             if (select === '게시글') {
                 const data = await mypageGetPostApi(user_id, page);
-                setUserData(data);
+                if (data === undefined) {
+                    resetUserData();
+                } else {
+                    setUserData(data);
+                }
             } else if (select === '댓글') {
                 const data = await mypageGetCommentApi(user_id, page);
-                setUserData(data);
+                if (data === undefined) {
+                    resetUserData();
+                } else {
+                    setUserData(data);
+                }
             } else if (select === '좋아요') {
                 const data =
                     searchValue !== ''
@@ -61,10 +71,18 @@ const useGetUserData = async (
                               page,
                               likeOption.value,
                           );
-                setUserData(data);
+                if (data === undefined) {
+                    resetUserData();
+                } else {
+                    setUserData(data);
+                }
             } else {
                 const data = await mypageGetProjectApi(user_id, page);
-                setProjectData(data);
+                if (data === undefined) {
+                    resetProjectData();
+                } else {
+                    setProjectData(data);
+                }
             }
         };
         getData(select);
