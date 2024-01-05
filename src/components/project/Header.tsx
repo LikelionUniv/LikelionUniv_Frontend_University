@@ -69,7 +69,7 @@ function Header({ setProjectApi }: IHeader) {
                 </P.Tab>
             </P.TabContainer>
 
-            <P.WriteBtn isAdmin={isAdmin} onClick={goRegister}>
+            <P.WriteBtn isAdmin={true} onClick={goRegister}>
                 <img src={WriteIcon} alt="write" />
                 글쓰기
             </P.WriteBtn>

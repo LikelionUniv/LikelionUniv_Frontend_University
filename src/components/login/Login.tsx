@@ -8,9 +8,13 @@ export const Login = () => {
     https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}
     `;
 
-    const googleLoginURL = ``;
+    const GoogleLoginUrl = `
+    https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?response_type=code&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&scope=openid email profile
+    `;
 
-    const google_login = () => {};
+    const google_login = () => {
+        window.open(GoogleLoginUrl, '_self');
+    };
     const kakao_login = () => {
         window.open(kakaoLoginURL, '_self');
     };
@@ -26,7 +30,7 @@ export const Login = () => {
                         <br />
                         오신 걸 환영합니다.
                     </L.Text>
-                    <L.GoogleBtn>
+                    <L.GoogleBtn onClick={google_login}>
                         <span>Google 계정으로 로그인</span>
                     </L.GoogleBtn>
                     <L.KakaoBtn onClick={kakao_login}>

@@ -6,8 +6,8 @@ import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { LoginComplete } from '../login/LoginComplete';
+import { axiosInstance } from '../../utils/axios';
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -96,16 +96,14 @@ const Sform = () => {
 
     const requestSignup = async () => {
         const idtoken = localStorage.getItem('idtoken');
-
         try {
-            const response = await axios.post(
-                `${process.env.REACT_APP_BASE_URL}/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+            const response = await axiosInstance.post(
+                `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
                 formState,
                 {
                     withCredentials: true,
                 },
             );
-
             //응답 성공 시
             if (response.data.isSuccess) {
                 localStorage.removeItem('idtoken');
@@ -132,7 +130,7 @@ const Sform = () => {
             alert('모든 항목을 입력했는지 확인해주세요.');
         else {
             /* button click으로 해서 정보 저장됨 확인 */
-            console.log(formState);
+            // console.log(formState);
             requestSignup();
         }
     };
