@@ -23,7 +23,7 @@ const UnivHeader = () => {
     return (
         <H.TopDiv>
             <H.Content>
-                <H.T1>참여 대학</H.T1>
+                <H.T1>12기 참여 대학</H.T1>
                 <H.T2>
                     <H.Num>{univCount}</H.Num>개 대학이 함께하고 있어요!
                 </H.T2>
