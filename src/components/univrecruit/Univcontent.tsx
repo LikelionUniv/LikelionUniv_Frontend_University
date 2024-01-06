@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as U from './UnivcontentStyle';
-import Arrow1 from '../../img/recruit/1arrow.svg';
-import Arrow2 from '../../img/recruit/2arrow.svg';
-import Arrow3 from '../../img/recruit/3arrow.svg';
-import Arrow4 from '../../img/recruit/4arrow.svg';
-import Arrow5 from '../../img/recruit/5arrow.svg';
-import Arrow6 from '../../img/recruit/6arrow.svg';
-import Oarrow from '../../img/recruit/Oarrow.svg';
 import Email2 from '../../img/recruit/Email2.svg';
 import Mail from '../../img/recruit/mail.svg';
 import Plus from '../../img/recruit/plus.svg';
@@ -19,19 +12,19 @@ import Apply2 from '../../img/recruit/apply2.svg';
 const Univcontent = () => {
     const [selected, setSelected] = useState(null);
     const [hovered, setHovered] = useState(false);
-  
-    const handleClick = (index:any) => {
-      if (selected === index) {
-        setSelected(null);
-      } else {
-        setSelected(index);
-      }
+
+    const handleClick = (index: any) => {
+        if (selected === index) {
+            setSelected(null);
+        } else {
+            setSelected(index);
+        }
     };
-  
+
     const goEmail = () => {
-      window.open('mailto:univ_admin@likelion.net');
+        window.open('mailto:univ_admin@likelion.net');
     };
-  
+
     // Define the table object
     const table: { [key: string]: string } = {
         '’아기사자’가 무엇인가요?':
@@ -61,76 +54,102 @@ const Univcontent = () => {
         console.log(answer);
     }
 
+    const handleBtn1Click = () => {
+        alert('중앙 운영단 모집 기간이 아닙니다!');
+    };
+
+    const handleBtn2Click = () => {
+        alert('아기사자 모집 기간이 아닙니다!');
+    };
+
     return (
         <U.ContentDiv>
-          <U.ContentSection>
-            <U.StyledButton>
-              <button className="button1">
-      <U.StyledImg src={Apply1} alt="지원용이미지1" />
-      
-      <U.Text1>학교별 운영진 지원</U.Text1>
-      
-      <U.Text2>2024. 1. 15까지 모집</U.Text2>
-  </button>
-  
-              
-              
-                <button className="button2">
-                   <U.StyledImg src={Apply2} alt="지원용이미지2" />
-                   
-                  <U.Text3>중앙 운영진 지원</U.Text3>
-                  <U.Text4>2024. 1. 16 ~ 1. 31 모집 예정</U.Text4>
-                  </button>
-            
-            </U.StyledButton>
-    
-            <U.Title>
-              <U.TD>FAQ</U.TD>
-              <U.TD>자주 묻는 질문</U.TD>
-            </U.Title>
-    
-            <U.Qbody3>
-              {Object.entries(table).map(([key, value], index) => (
-                <React.Fragment key={index}>
-                  <U.Table
-                    onClick={() => handleClick(index)}
-                    style={{
-                      background: selected === index ? 'white' : '#f2f4f6',
-                      borderBottom: selected === index ? 'none' : '1px solid #212224',
-                    }}
-                  >
-                    <div className="left-container">
-                      <div>Q</div>
-                      <div>{key}</div>
-                    </div>
-                    {selected === index ? <img src={Min} alt="이미지" /> : <img src={Plus} alt="이미지" />}
-                  </U.Table>
-    
-                  {selected === index ? (
-                    <U.AnsTable>
-                      <div>A</div>
-                      <div>{value}</div>
-                    </U.AnsTable>
-                  ) : null}
-                </React.Fragment>
-              ))}
-            </U.Qbody3>
-            <U.Ps2>
-              <p>더 궁금한 것이 있으신가요?</p>
-              <img src={hovered ? Email2 : Mail} alt="이미지" />
-              <p
-                onClick={goEmail}
-                style={{ color: hovered ? '#FF7710' : '#212224' }}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-              >
-                이메일로 문의하기
-              </p>
-            </U.Ps2>
-          </U.ContentSection>
+            <U.ContentSection>
+                <U.StyledButton>
+                    {/* <button className="button1">
+                        <U.StyledImg src={Apply1} alt="지원용이미지1" />
+
+                        <U.Text1>중앙 운영단 지원</U.Text1>
+
+                        <U.Text2>2024. 1. 16 ~ 1. 31 모집 예정</U.Text2>
+                    </button> */}
+
+                    {/* <button className="button2">
+                        <U.StyledImg src={Apply2} alt="지원용이미지2" />
+
+                        <U.Text3>아기사자 지원</U.Text3>
+                        <U.Text4>~ 3. 17 모집 예정</U.Text4>
+                    </button> */}
+
+                    <U.Btn1 onClick={handleBtn1Click}>
+                        <U.StyledImg src={Apply1} alt="지원용이미지1" />
+                        <U.Text1>중앙 운영단 지원</U.Text1>
+                        <U.Text2>2024. 1. 16 ~ 1. 31 모집 예정</U.Text2>
+                    </U.Btn1>
+
+                    <U.Btn2 onClick={handleBtn2Click}>
+                        <U.StyledImg src={Apply2} alt="지원용이미지2" />{' '}
+                        <U.Text3>아기사자 지원</U.Text3>
+                        <U.Text4>~ 3. 17 모집 예정</U.Text4>
+                    </U.Btn2>
+                </U.StyledButton>
+
+                <U.Title>
+                    <U.TD>FAQ</U.TD>
+                    <U.TD>자주 묻는 질문</U.TD>
+                </U.Title>
+
+                <U.Qbody3>
+                    {Object.entries(table).map(([key, value], index) => (
+                        <React.Fragment key={index}>
+                            <U.Table
+                                onClick={() => handleClick(index)}
+                                style={{
+                                    background:
+                                        selected === index
+                                            ? 'white'
+                                            : '#f2f4f6',
+                                    borderBottom:
+                                        selected === index
+                                            ? 'none'
+                                            : '1px solid #212224',
+                                }}
+                            >
+                                <div className="left-container">
+                                    <div>Q</div>
+                                    <div>{key}</div>
+                                </div>
+                                {selected === index ? (
+                                    <img src={Min} alt="이미지" />
+                                ) : (
+                                    <img src={Plus} alt="이미지" />
+                                )}
+                            </U.Table>
+
+                            {selected === index ? (
+                                <U.AnsTable>
+                                    <div>A</div>
+                                    <div>{value}</div>
+                                </U.AnsTable>
+                            ) : null}
+                        </React.Fragment>
+                    ))}
+                </U.Qbody3>
+                <U.Ps2>
+                    <p>더 궁금한 것이 있으신가요?</p>
+                    <img src={hovered ? Email2 : Mail} alt="이미지" />
+                    <p
+                        onClick={goEmail}
+                        style={{ color: hovered ? '#FF7710' : '#212224' }}
+                        onMouseEnter={() => setHovered(true)}
+                        onMouseLeave={() => setHovered(false)}
+                    >
+                        이메일로 문의하기
+                    </p>
+                </U.Ps2>
+            </U.ContentSection>
         </U.ContentDiv>
-      );
-    };
-    
-    export { Univcontent };
-    
+    );
+};
+
+export { Univcontent };

@@ -24,6 +24,8 @@ export const Inner = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+
+    align-items: center;
     width: 100%;
     max-width: 1200px;
     box-sizing: border-box;
@@ -38,6 +40,8 @@ export const Inner = styled.div`
 export const Content = styled.div`
     width: 100%;
     max-width: 588px;
+    position: relative;
+    top: 50px;
 `;
 
 export const T1 = styled.div`
@@ -154,6 +158,8 @@ export const Button = styled.button`
 
 export const Gra = styled.img`
     width: 35em;
+    position: relative;
+    top: 50px;
 
     @media screen and (max-width: 1280px) {
         max-width: 332px;
