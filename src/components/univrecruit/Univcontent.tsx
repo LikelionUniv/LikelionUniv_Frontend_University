@@ -88,7 +88,7 @@ const Univcontent = () => {
                     </U.Btn1>
 
                     <U.Btn2 onClick={handleBtn2Click}>
-                        <U.StyledImg src={Apply2} alt="2" />{' '}
+                        <U.StyledImg2 src={Apply2} alt="2" />{' '}
                         <U.Text3>아기사자 지원</U.Text3>
                         <U.Text4>~ 3. 17 모집 예정</U.Text4>
                     </U.Btn2>
