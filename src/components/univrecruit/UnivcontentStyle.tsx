@@ -257,6 +257,7 @@ export const Btn1 = styled.button`
     padding: 10px;
     flex-shrink: 0;
     border-radius: 8px;
+    word-break: keep-all;
 
     cursor: pointer;
 
@@ -277,35 +278,6 @@ export const Btn1 = styled.button`
 `;
 
 export const Btn2 = styled.button`
-    /* width: 588px;
-    height: 280px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    background: var(--Grey-500, #d1d4d8);
-    border: 0px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    @media screen and (max-width: 768px) {
-        width: 336px;
-        flex-direction: row;
-    }
-
-    @media screen and (max-width: 767px) {
-        width: 720px;
-        height: 112px;
-        flex-shrink: 0;
-        flex-direction: row;
-    }
-
-    @media screen and (max-width: 360px) {
-        width: 320px;
-        flex-direction: row;
-    } */
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -313,6 +285,9 @@ export const Btn2 = styled.button`
     padding: 10px;
     flex-shrink: 0;
     background: var(--Grey-500, #d1d4d8);
+
+    word-break: keep-all;
+    border-radius: 8px;
     border: 0px;
 
     cursor: pointer;
@@ -344,6 +319,27 @@ export const StyledImg = styled.img`
         display: flex;
         width: 64px;
         height: 64px;
+        padding: 5.333px 5.493px 5.333px 5.174px;
+        /* justify-content: center; */
+        /* align-items: center; */
+    }
+`;
+
+export const StyledImg2 = styled.img`
+    @media screen and (max-width: 767px) {
+        display: flex;
+        width: 60px;
+        height: 60px;
+        padding: 5.333px 5.493px 5.333px 5.174px;
+        /* justify-content: center; */
+        /* align-items: center; */
+        flex-shrink: 0;
+    }
+
+    @media screen and (max-width: 360px) {
+        display: flex;
+        width: 60px;
+        height: 60px;
         padding: 5.333px 5.493px 5.333px 5.174px;
         /* justify-content: center; */
         /* align-items: center; */
@@ -389,7 +385,7 @@ export const Text1 = styled.div`
 
         /* Title/24_Bold */
         font-family: Pretendard;
-        font-size: 20px;
+        font-size: 15px;
         font-style: normal;
         font-weight: 700;
         line-height: 150%; /* 36px */
@@ -480,7 +476,7 @@ export const Text3 = styled.div`
         text-align: center;
         /* Title/24_Bold */
         font-family: Pretendard;
-        font-size: 20px;
+        font-size: 15px;
         font-style: normal;
         font-weight: 700;
         line-height: 150%; /* 36px */
