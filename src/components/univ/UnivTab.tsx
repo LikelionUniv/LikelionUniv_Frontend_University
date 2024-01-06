@@ -81,9 +81,12 @@ const Tab = () => {
                 {/* 참여 버튼  */}
                 <T.BtnWrapper>
                     <div>우리 학교에는 아직 멋쟁이 사자처럼이 없다면?</div>
-                    <T.Btn onClick={onButtonClick}>
-                        내년 12월에 있을 13기 참여 대학 모집을 기다려주세요!
+                    {/* <T.Btn onClick={onButtonClick}>
+                        우리 학교도 멋쟁이사자처럼 참여하기
                         <img src={BtnArrow} alt="버튼화살표" />
+                    </T.Btn> */}
+                    <T.Btn>
+                        내년 12월에 있을 13기 참여 대학 모집을 기다려주세요!
                     </T.Btn>
                 </T.BtnWrapper>
             </T.Content>

@@ -3,9 +3,7 @@ import { axiosInstance } from '../../utils/axios';
 
 export const mypageGetPostApi = async (user_id: number, page: number) => {
     return await axiosInstance
-        .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts?page=${page}`,
-        )
+        .get(`/api/v1/user/${user_id}/posts?page=${page}`)
         .then(response => {
             return response.data.data;
         })
@@ -19,9 +17,7 @@ export const mypageGetPostApi = async (user_id: number, page: number) => {
 
 export const mypageGetCommentApi = async (user_id: number, page: number) => {
     return await axiosInstance
-        .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts/comment?page=${page}`,
-        )
+        .get(`/api/v1/user/${user_id}/posts/comment?page=${page}`)
         .then(response => {
             return response.data.data;
         })
@@ -39,7 +35,7 @@ export const myPageGetLikeApi = async (
     sort?: string,
     search?: string,
 ) => {
-    let url = `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/posts/like?page=${page}`;
+    let url = `/api/v1/user/${user_id}/posts/like?page=${page}`;
     if (sort) {
         url += `&sort=${sort}`;
     }
@@ -61,9 +57,7 @@ export const myPageGetLikeApi = async (
 
 export const mypageGetProjectApi = async (user_id: number, page: number) => {
     return await axiosInstance
-        .get(
-            `${process.env.REACT_APP_BASE_URL}/v1/user/${user_id}/projects?page=${page}`,
-        )
+        .get(`/api/v1/user/${user_id}/projects?page=${page}`)
         .then(response => {
             return response.data.data;
         })
