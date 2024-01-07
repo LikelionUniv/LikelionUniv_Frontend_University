@@ -90,7 +90,7 @@ const Header = () => {
         <U.BlackDiv>
             <U.Inner>
                 <U.Content>
-                    <U.T1>리크루팅 모집</U.T1>
+                    <U.T1>리크루팅</U.T1>
                     <U.T2>
                         전국 최대 규모의 IT 창업 동아리,
                         <br />
