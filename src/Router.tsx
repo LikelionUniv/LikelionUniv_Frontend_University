@@ -10,7 +10,6 @@ import MypageRoot from './routes/MypageRoot';
 
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
-import ProjectRegister from './components/project/register/ProjectRegister';
 import ProjectList from './components/project/ProjectList';
 import Community from './components/community/Community';
 import RecruitPage from './routes/RecruitPage';
@@ -28,6 +27,7 @@ import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
 import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
 import ProtectedRouter from './components/ProtectedRouter';
+import ProjectRegisterWrapper from './components/project/register/ProjectRegisterWrapper';
 
 const router = createBrowserRouter([
     {
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: 'register',
-                        element: <ProjectRegister />,
+                        element: <ProjectRegisterWrapper />,
                     },
                     {
                         path: ':projectId',

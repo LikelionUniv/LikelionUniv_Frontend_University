@@ -16,8 +16,6 @@ import UserFind from './user/UserFind';
 import UserEnrolled from './user/UserEnrolled';
 import useEnrolledUser from './user/userStore/useEnrolledUser';
 import { Gen, Output, Tech, Thon } from './RegisterOptions';
-import request from '../../../utils/request';
-import { useNavigate } from 'react-router-dom';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
@@ -57,10 +55,6 @@ export interface ProjectRegisterType {
     members: number[];
 }
 
-interface PostId {
-    id: number;
-}
-
 interface Image {
     file: File;
     src: string;
@@ -74,8 +68,6 @@ const ProjectRegister = () => {
         userIdList: memberIdList,
         clearUser,
     } = useEnrolledUser();
-
-    const navigate = useNavigate();
 
     const [formState, setFormState] = useState<FormState>({
         activity: '',
