@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Button, UserBox,convertRole } from './Common';
+import { Avatar, Button, UserBox, convertRole } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { UserProfileAtom } from '../../store/mypageData';
@@ -55,7 +55,6 @@ export const UserInfo = () => {
         fetchData();
     }, [userinfo]);
 
-
     return (
         <Wrapper>
             <Container>
@@ -69,7 +68,8 @@ export const UserInfo = () => {
                         </UserName>
                         <UserPart>
                             <p>
-                                {userProfile.universityName} {convertRole(userProfile.part)}
+                                {userProfile.universityName}{' '}
+                                {convertRole(userProfile.part)}
                             </p>
                             <FItem data-type="팔로워" onClick={handleModal}>
                                 팔로워 {userProfile.followerNum}
@@ -81,7 +81,7 @@ export const UserInfo = () => {
                         <p>{userProfile.introduction}</p>
                     </UserProfile>
                 </UserBox>
-                <Button onClick={()=>navigate('modify')}>내 정보 수정</Button>
+                <Button onClick={() => navigate('modify')}>내 정보 수정</Button>
                 {isModalOpen && (
                     <FollowModal
                         isOpen={isModalOpen}

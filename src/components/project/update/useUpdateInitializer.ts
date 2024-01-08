@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { Project } from '../ProjectListInner';
-import { FormState } from './ProjectUpdate';
+import { FormState, ProjectDetail } from './ProjectUpdate';
 import { Tech, Thon } from '../register/RegisterOptions';
 
 interface updateInitializerProps {
-    project: Project;
+    project: ProjectDetail;
 }
 
 function useUpdateInitializer({ project }: updateInitializerProps) {
@@ -23,10 +22,15 @@ function useUpdateInitializer({ project }: updateInitializerProps) {
         images: project.imageUrl.map(url => ({ src: url })),
         ordinal: project.ordinal.toString(),
         univ: project.univ,
-        members: project.members.map(member => member.userId),
+        projectMembers: project.members.map(member => {
+            return {
+                userId: member.userId,
+                part: member.part,
+            };
+        }),
     });
 
-    return { initState, isAlreadyInit: initState.members.length > 0 };
+    return { initState, isAlreadyInit: initState.projectMembers.length > 0 };
 }
 
 export default useUpdateInitializer;

@@ -36,7 +36,7 @@ function EachSearchUser({ user, selectMember }: IEachSearchUser) {
     };
 
     const showUserInfo = () => {
-        return `${user.name} (${user.universityName}, ${user.ordinal}기, ${user.part})`;
+        return `${user.name} (${user.universityName}, ${user.ordinal}기)`;
     };
 
     return (

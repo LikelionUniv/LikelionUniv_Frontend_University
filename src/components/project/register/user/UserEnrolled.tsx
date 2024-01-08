@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import * as UE from './UserEnrolled.style';
 import Part from './Part';
 import useEnrolledUser from './userStore/useEnrolledUser';
-import { Member } from '../../ProjectListInner';
 import request from '../../../../utils/request';
 import { User } from './UserFind';
+import { Member } from '../ProjectRegister';
 
 interface UserEnrolledProps {
     defaultMembers?: Member[];
@@ -26,17 +26,6 @@ interface UserInfo {
     isMine: boolean;
 }
 
-const ENUM_PART = {
-    FRONTEND: '프론트엔드',
-    PLAN: '기획',
-    DESIGN: '디자인',
-    BACKEND: '백엔드',
-} as const;
-
-interface EnumPart {
-    [key: string]: string;
-}
-
 function UserEnrolled({ defaultMembers }: UserEnrolledProps) {
     const {
         userLength,
@@ -44,38 +33,38 @@ function UserEnrolled({ defaultMembers }: UserEnrolledProps) {
         designUser,
         frontendUser,
         backendUser,
+        noPartUser,
         removePlanUser,
         removeDesignUser,
         removeFrontendUser,
         removeBackendUser,
+        removeNoPartUser,
         enrollUser,
     } = useEnrolledUser();
 
     useEffect(() => {
         if (defaultMembers === undefined) return;
 
-        const initDefaultMember = async (userId: number) => {
+        const initDefaultMember = async (userId: number, part: string) => {
             const response = await request<null, UserInfo, null>({
                 uri: `/api/v1/user/${userId}/profile`,
                 method: 'get',
             });
-
-            const wholePart: EnumPart = ENUM_PART;
 
             const userinfo: User = {
                 userId: response.data.id,
                 name: response.data.name,
                 universityName: response.data.universityName,
                 ordinal: response.data.ordinal,
-                part: wholePart[response.data.part],
+                part,
             };
 
-            enrollUser(userinfo);
+            enrollUser(userinfo, part);
         };
 
         const enrolledDefaultMembers = async () => {
             for (const member of defaultMembers) {
-                await initDefaultMember(member.userId);
+                await initDefaultMember(member.userId, member.part);
             }
         };
 
@@ -92,6 +81,7 @@ function UserEnrolled({ defaultMembers }: UserEnrolledProps) {
                 remove={removeFrontendUser}
             />
             <Part name="백엔드" user={backendUser} remove={removeBackendUser} />
+            <Part name="기타" user={noPartUser} remove={removeNoPartUser} />
         </UE.Container>
     );
 }

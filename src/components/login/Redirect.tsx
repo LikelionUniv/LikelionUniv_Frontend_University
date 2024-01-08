@@ -17,7 +17,8 @@ export const Redirect = () => {
     const isEffectRun = useRef(false);
 
     useEffect(() => {
-        if (isEffectRun.current) {  // 이미 실행되었다면 더 이상 실행하지 않도록 함
+        if (isEffectRun.current) {
+            // 이미 실행되었다면 더 이상 실행하지 않도록 함
             return;
         }
         const socialLogin = async () => {
@@ -32,12 +33,10 @@ export const Redirect = () => {
                 navigate(`/signup/${provider}`);
             }
         };
- 
+
         socialLogin();
         isEffectRun.current = true;
     }, []);
 
-    return <div>
-
-    </div>;
+    return <div></div>;
 };

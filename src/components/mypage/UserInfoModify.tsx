@@ -6,9 +6,7 @@ import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
 import { useRecoilState } from 'recoil';
 import { UserProfileAtom } from '../../store/mypageData';
-import {
-    userInfoModifyApi,
-} from '../../api/mypage/userinfo';
+import { userInfoModifyApi } from '../../api/mypage/userinfo';
 import { useNavigate } from 'react-router-dom';
 import { IuserModify } from './type';
 import ImageUpload from '../utils/ImageUpload';
@@ -20,18 +18,14 @@ const trackOptions = [
     { value: 3, label: '백엔드' },
 ];
 
-
 function findLabelByValue(value: number) {
-    const foundOption = trackOptions.find(
-        option => option.value === value,
-    );
+    const foundOption = trackOptions.find(option => option.value === value);
 
     if (!foundOption) {
         return '해당하는 트랙이 없습니다.';
     }
     return foundOption.label;
 }
-
 
 const UserInfoModify = () => {
     const navigate = useNavigate();
@@ -65,8 +59,8 @@ const UserInfoModify = () => {
         ) => {
             if (selectedOption) {
                 let label: string;
-                if(field === 'part') {
-                    label = findLabelByValue(selectedOption.value)
+                if (field === 'part') {
+                    label = findLabelByValue(selectedOption.value);
                 }
                 setFormState(prev => ({
                     ...prev,
@@ -92,7 +86,7 @@ const UserInfoModify = () => {
             const imgSrc: string = await readUrl(file[0]);
             const urls = await ImageUpload.getPresignedUrl(file[0]);
             await ImageUpload.enrollImagesToS3(file[0], urls.presignedUrl);
-            
+
             setImgSrc(imgSrc);
             setFormState(prev => ({
                 ...prev,
@@ -143,11 +137,13 @@ const UserInfoModify = () => {
 
                 <Form>
                     <FlexBox>
-                        <Avatar_sm imgurl={
-                            imgSrc === '' ? 
-                            `https://${userProfile.profileImage}`
-                            : imgSrc
-                        } />
+                        <Avatar_sm
+                            imgurl={
+                                imgSrc === ''
+                                    ? `https://${userProfile.profileImage}`
+                                    : imgSrc
+                            }
+                        />
                         <ImageBtn onClick={handleImgBtn}>
                             사진 변경하기
                         </ImageBtn>

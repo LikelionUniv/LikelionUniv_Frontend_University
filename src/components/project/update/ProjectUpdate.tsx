@@ -12,7 +12,7 @@ import useCheckbox from '../register/useCheckbox';
 
 import AutoHeightTextarea from '../register/AutoHeightTextarea';
 import useArray from '../../../hooks/useArray';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ImageUpload from '../../utils/ImageUpload';
 import useEnrolledUser from '../register/user/userStore/useEnrolledUser';
 import {
@@ -24,7 +24,7 @@ import {
 } from '../register/RegisterOptions';
 import UserFind from '../register/user/UserFind';
 import UserEnrolled from '../register/user/UserEnrolled';
-import { ProjectRegisterType } from '../register/ProjectRegister';
+import { Member, ProjectRegisterType } from '../register/ProjectRegister';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import useGetProjectDetail from '../../../query/get/useGetProjectDetail';
 import useUpdateInitializer from './useUpdateInitializer';
@@ -46,7 +46,24 @@ export interface FormState {
     content: string;
     productionUrl: string;
     images: Image[];
-    members: number[];
+    projectMembers: Member[];
+}
+
+export interface ProjectDetail {
+    id: number;
+    activity: string;
+    outPut: string;
+    serviceName: string;
+    ordinal: number;
+    univ: string;
+    startDate: string;
+    endDate: string;
+    description: string;
+    content: string;
+    productionUrl: string;
+    projectTech: string[];
+    imageUrl: string[];
+    members: Member[];
 }
 
 interface Image {
@@ -71,11 +88,9 @@ const ProjectUpdate = () => {
 
     const {
         userLength: memberLength,
-        userIdList: memberIdList,
+        userList: memberList,
         clearUser,
     } = useEnrolledUser();
-
-    const navigate = useNavigate();
 
     const [formState, setFormState] = useState<FormState>({
         activity: '',
@@ -92,7 +107,7 @@ const ProjectUpdate = () => {
         images: [],
         ordinal: '',
         univ: '',
-        members: memberIdList,
+        projectMembers: memberList,
     });
 
     useEffect(() => {
@@ -221,7 +236,7 @@ const ProjectUpdate = () => {
             productionUrl: formState.productionUrl,
             projectTeches: processTech(),
             imageUrl: await processImages(),
-            members: memberIdList,
+            projectMembers: memberList,
         };
     };
 
