@@ -13,12 +13,13 @@ import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
 // import default_profile from '../img/mypage/default_profile.svg';
 
-
-
 const Nav = () => {
     const navigate = useNavigate();
+    // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
     const { userinfo, setUserinfo } = useAuth();
+    // const profileSrc =
+    //     userinfo.profileImage === '' ? defaultprofile : userinfo.profileImage;
     useEffect(() => {
         setIsLogin(userinfo.isLogin);
     }, [userinfo]);
@@ -32,9 +33,14 @@ const Nav = () => {
             isLogin: false,
         });
     };
+
+    // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
+    // 프로필 버튼 참조
     const buttonRef = useRef<HTMLDivElement>(null);
+    // 프로필 모달 참조
     const modalRef = useRef<HTMLDivElement>(null);
+    // 프로필 모달이 아닌 곳을 누르면 (버튼 포함) 모달이 꺼짐
     useEffect(() => {
         const clickOutside = (e: any) => {
             if (
@@ -53,6 +59,7 @@ const Nav = () => {
         };
     }, [profileModal]);
 
+    // 모바일 뷰 감지
     const [width, setWidth] = useState<number>(window.innerWidth);
     const [isPC, setIsPC] = useState<boolean>(true);
     useEffect(() => {
@@ -69,12 +76,17 @@ const Nav = () => {
         else setIsPC(false);
     }, [width]);
 
+    // 모바일 네브바 메뉴 상태
     const [mobileMenu, setMobileMenu] = useState<boolean>(false);
+    // 경로 변경 시 메뉴 닫기
     useEffect(() => {
         setMobileMenu(false);
     }, [window.location.href]);
+    // 네브바 메뉴 참조
     const menuRef = useRef<HTMLDivElement>(null);
+    // 네브바 참조
     const containerRef = useRef<HTMLDivElement>(null);
+    // 네브바가 아닌 곳 또는 버튼을 누르면 메뉴가 꺼짐
     useEffect(() => {
         const clickOutside = (e: any) => {
             if (
@@ -93,11 +105,13 @@ const Nav = () => {
         };
     }, [mobileMenu]);
 
+    // 네비게이션 바 스크롤 감지에 따른 상태
     const [position, setPosition] = useState(window.pageYOffset);
     const [visible, setVisible] = useState<Boolean | undefined>(undefined);
     useEffect(() => {
         const handleScroll = () => {
             const moving = window.pageYOffset;
+            // 프로필 모달(마이페이지, 로그아웃 창)이 켜져 있거나 모바일 메뉴 바가 열려 있으면 스크롤 내려도 없어지지 않음
             if (!profileModal && !mobileMenu) setVisible(position > moving);
             setPosition(moving);
         };
@@ -133,16 +147,16 @@ const Nav = () => {
                             <p>프로젝트</p>
                             <img src={navarrow} />
                         </Text>
-                        {/* <Text to="/community">
+                      {  /** <Text to="/community">
                             <p>커뮤니티</p>
                             <img src={navarrow} />
-                        </Text>
-                        <Text to="/donate">
+                        </Text> */ }
+                        {  /** <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
                             </p>
                             <img src={navarrow} />
-                        </Text> */}
+                        </Text>  */ }
                     </div>
 
                     <div className="right">
@@ -181,18 +195,20 @@ const Nav = () => {
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
-                            {/* <div
+                            <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
+                                    
                                 }}
                                 className="inner"
                             >
                                 <img src={mypage} />
                                 마이페이지
-                            </div> */}
+                            </div>
                             <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
+                              
                                     onClickLogout();
                                     navigate('/');
                                 }}
@@ -218,10 +234,6 @@ const Nav = () => {
                                 <p>참여대학</p>
                                 <img src={navarrow} />
                             </Text>
-                            <Text to="/project">
-                            <p>프로젝트</p>
-                            <img src={navarrow} />
-                        </Text>
                             <Text to="/donate">
                                 <p style={{ whiteSpace: 'nowrap' }}>
                                     연간기부금모금액 및 활용실적
@@ -237,9 +249,6 @@ const Nav = () => {
 };
 
 export default Nav;
-
-// ... (이후 코드 생략)
-
 
 // 커스텀 styled-components
 
