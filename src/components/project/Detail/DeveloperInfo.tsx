@@ -38,6 +38,7 @@ interface RoleMapping {
     디자인: string[];
     프론트: string[];
     백: string[];
+    풀스텍: string[];
 }
 
 const DeveloperInfo: FunctionComponent = () => {
@@ -80,6 +81,7 @@ const DeveloperInfo: FunctionComponent = () => {
             디자인: [],
             프론트: [],
             백: [],
+            풀스텍: [],
         };
 
         userDetails.forEach(user => {
@@ -95,6 +97,9 @@ const DeveloperInfo: FunctionComponent = () => {
                     break;
                 case '백엔드':
                     roleMapping.백.push(user.name);
+                    break;
+                case '풀스텍':
+                    roleMapping.풀스텍.push(user.name);
                     break;
             }
         });

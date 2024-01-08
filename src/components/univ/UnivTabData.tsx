@@ -38,7 +38,7 @@ import sungkyunkwan from '../../img/univ/sungkyunkwan.png';
 import sungshin from '../../img/univ/sungshin.png';
 import yeungnam from '../../img/univ/yeungnam.png';
 import yonsei from '../../img/univ/yonsei.png';
-import hallym from '../../img/univ/hallym.png';
+//import hallym from '../../img/univ/hallym.png';
 import korea from '../../img/univ/korea.png';
 import catholic from '../../img/univ/catholic.png';
 import konkuk from '../../img/univ/konkuk.png';
@@ -53,6 +53,7 @@ import gyeongsang from '../../img/univ/gyeongsang.png';
 import koreatransport from '../../img/univ/koreatransport.jpeg';
 import kit from '../../img/univ/kit.png';
 import seoultech from '../../img/univ/seoultech.png';
+import yeung from '../../img/univ/yeung.png'
 
 export interface ITabData {
     school: string;
@@ -264,6 +265,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             school: '영남이공대학교',
             region: '대구',
             website: 'https://www.instagram.com/likelion_ync/',
+            logo: yeung,
         },
     ],
     인천: [
@@ -352,11 +354,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://mju-likelion.org/',
             logo: myongji_nat,
         },
-        {
-            school: '아주대학교',
-            region: '경기',
-            website: 'https://www.instagram.com/likelion.ajou/',
-        },
+       
     ],
     강원: [
         {
@@ -387,12 +385,7 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelionnsu/',
             logo: namseoul,
         },
-        {
-            school: '한서대학교',
-            region: '충남',
-            website: 'https://www.instagram.com/likelion_hsu/',
-            logo: hsu,
-        },
+  
     ],
     전북: [
         {
