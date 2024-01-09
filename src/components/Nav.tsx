@@ -15,6 +15,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const Nav = () => {
     const navigate = useNavigate();
+    
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
     const { userinfo, setUserinfo } = useAuth();
