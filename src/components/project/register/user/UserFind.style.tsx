@@ -9,8 +9,13 @@ export const Container = styled.div`
     box-sizing: border-box;
 `;
 
-export const Input = styled.input`
+export const InputContainer = styled.div`
+    display: flex;
     width: 680px;
+`;
+
+export const Input = styled.input`
+    width: 60%;
     height: 48px;
     margin-right: 8px;
     padding: 12px 24px;

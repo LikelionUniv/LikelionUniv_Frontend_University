@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 64px;
+    margin-top: 120px;
     box-sizing: border-box;
 
     overflow: auto;
@@ -62,8 +62,8 @@ export const Divider = styled.div`
     display: none;
 `;
 
-export const WriteBtn = styled.button`
-    display: inline-flex;
+export const WriteBtn = styled.button<{ isAdmin: boolean }>`
+    display: ${props => (props.isAdmin ? 'inline-flex' : 'none')};
     margin-left: 20px;
     padding: 8px 20px 8px 14px;
     justify-content: center;

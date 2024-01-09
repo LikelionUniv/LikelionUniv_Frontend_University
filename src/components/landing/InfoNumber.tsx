@@ -76,7 +76,7 @@ const InfoNumber = () => {
     };
 
     const duration = 2000;
-    const count1 = useCountUp(11, duration, true);
+    const count1 = useCountUp(12, duration, true);
     const count11 = useCountDown(2013, duration - 500);
     const count2 = useCountUp(10000, duration - 800);
     const count3 = useCountUp(1500, duration - 500, true);

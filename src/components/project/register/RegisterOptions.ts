@@ -1,5 +1,3 @@
-import request from '../../../utils/request';
-
 export interface IDropdown {
     value: number;
     label: string;
@@ -9,10 +7,6 @@ interface ICheckbox {
     id: number;
     isChecked: boolean;
     label: string;
-}
-
-interface Universities {
-    name: string;
 }
 
 export class Gen {
@@ -41,6 +35,15 @@ export class Gen {
         gen.sort((a, b) => b - a);
         return gen.slice(0, 5);
     }
+
+    static loadCurrentGen(currentGen: number) {
+        const allGen = Gen.loadAllGen();
+
+        const current = allGen.find(
+            gen => gen.value === currentGen,
+        ) as IDropdown;
+        return current;
+    }
 }
 
 export class Thon {
@@ -54,6 +57,20 @@ export class Thon {
 
         return thon;
     }
+
+    static loadCurrentThon(currentTon: string): IDropdown {
+        const thons = Thon.loadThon();
+
+        const current = thons.find(thon => thon.label === currentTon);
+        if (current !== undefined) return current;
+        return thons[thons.length - 1];
+    }
+
+    static isEtcThon(thon: string) {
+        const labels = ['아이디어톤', '해커톤', '각 개별 해커톤'];
+
+        return labels.find(label => label === thon) === undefined;
+    }
 }
 
 export class Output {
@@ -66,6 +83,15 @@ export class Output {
         }));
 
         return output;
+    }
+
+    static loadCurrentOutput(currentOutput: string): IDropdown {
+        const outputs = Output.loadOutput();
+
+        const current = outputs.find(
+            output => output.label === currentOutput,
+        ) as IDropdown;
+        return current;
     }
 }
 
@@ -102,20 +128,20 @@ export class Tech {
 
         return tech;
     }
-}
 
-export class Univ {
-    static async loadUniv(): Promise<IDropdown[]> {
-        const response = await request<null, Universities[], null>({
-            uri: '/api/v1/university/',
-            method: 'get',
-        });
+    static loadCurrentTech(currentTech: string[]) {
+        const allTech = Tech.loadTech();
+        const current = allTech.filter(tech =>
+            currentTech.includes(tech.label),
+        );
 
-        const universities: IDropdown[] = response.data.map((univ, index) => ({
-            value: index + 1,
-            label: univ.name,
-        }));
+        return current.map(current => current.id);
+    }
 
-        return universities;
+    static loadEtcTech(currentTech: string[]) {
+        const allTechLabels = Tech.loadTech().map(tech => tech.label);
+        const etcs = currentTech.filter(tech => !allTechLabels.includes(tech));
+        if (etcs.length === 0) return '';
+        return etcs.join(', ');
     }
 }

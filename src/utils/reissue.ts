@@ -1,5 +1,4 @@
-import axios, { AxiosError } from 'axios';
-import request, { IError } from './request';
+import refreshRequest from './refreshRequest';
 
 interface Rissue {
     accessToken: string;
@@ -14,15 +13,13 @@ interface RefreshParam {
 async function reissue() {
     const refresh = localStorage.getItem('refresh_token') as string;
 
-    const response = await request<null, Rissue, RefreshParam>({
+    const response = await refreshRequest<null, Rissue, RefreshParam>({
         uri: '/api/v1/auth/refresh',
         method: 'post',
         params: {
             token: refresh,
         },
     });
-
-    console.log(response);
 
     return response.data;
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import * as B from './ProjectBox.style';
 import EachBox from './EachBox';
-import { Project } from './ProjectList';
+import { Project } from './ProjectListInner';
 
 interface IProjectBox {
     projects: Project[];
@@ -14,7 +14,7 @@ function Projectbox({ projects }: IProjectBox) {
                 <B.Nothing />
             ) : (
                 projects.map((project, i) => (
-                    <EachBox key={i} project={project} />
+                    <EachBox key={i} project={project} isAdmin={true} />
                 ))
             )}
         </B.Container>

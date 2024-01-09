@@ -2,7 +2,7 @@ export const PostTestData = [
     {
         img: 'https://cms-cdn.placeholder.co/Vancouver_87c09f1b29.png?width=750',
         date: '2022.08.03',
-        title: '제목',
+        title: '제목여기서 만약 1줄이 더 길어진다면 어떤 형태로 나오는지 테스트를 해봐야한다',
         content:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis odio tortor. Mauris nibh tellus, semper non sagittis vitae,fringilla vitae ante. Nunc porttitor nulla arcu, sollicitudinimperdiet risus mattis et. Lorem ipsum dolor',
         like: 23,
@@ -11,9 +11,9 @@ export const PostTestData = [
     {
         img: null,
         date: '2022.08.03',
-        title: '제목',
+        title: '제목여기서 만약 1줄이 더 길어진다면 어떤 형태로 나오는지 테스트를 해봐야한다',
         content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis odio tortor. Mauris nibh tellus, semper non sagittis vitae,fringilla vitae ante. Nunc porttitor nulla arcu, sollicitudinimperdiet risus mattis et. Lorem ipsum dolor',
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis odio tortor. Mauris nibh tellus, semper non sagittis vitae,fringilla vitae ante. Nunc porttitor nulla arcu, sollicitudinimperdiet risus mattis et. Lorem ipsum dolor, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis odio tortor. Mauris nibh tellus, semper non sagittis vitae,fringilla vitae ante. Nunc porttitor nulla arcu, sollicitudinimperdiet risus mattis et. Lorem ipsum dolor, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis odio tortor. Mauris nibh tellus, semper non sagittis vitae,fringilla vitae ante. Nunc porttitor nulla arcu, sollicitudinimperdiet risus mattis et. Lorem ipsum dolor',
         like: 23,
         comment: 7,
     },

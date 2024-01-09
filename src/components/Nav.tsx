@@ -10,11 +10,30 @@ import logout from '../img/nav/logout.svg';
 import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
+import { useAuth } from '../hooks/useAuth';
+// import default_profile from '../img/mypage/default_profile.svg';
 
 const Nav = () => {
     const navigate = useNavigate();
+    
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
+    const { userinfo, setUserinfo } = useAuth();
+    // const profileSrc =
+    //     userinfo.profileImage === '' ? defaultprofile : userinfo.profileImage;
+    useEffect(() => {
+        setIsLogin(userinfo.isLogin);
+    }, [userinfo]);
+    const onClickLogout = () => {
+        localStorage.clear();
+        setUserinfo({
+            name: '',
+            profileImage: '',
+            userId: -1,
+            role: '',
+            isLogin: false,
+        });
+    };
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
@@ -114,7 +133,6 @@ const Nav = () => {
             }
         >
             {isPC ? (
-                
                 <Container>
                     <div className="left">
                         <Logo src={logo} onClick={() => navigate('/')} />
@@ -126,59 +144,75 @@ const Nav = () => {
                             <p>참여대학</p>
                             <img src={navarrow} />
                         </Text>
-                      
+                        <Text to="/project">
+                            <p>프로젝트</p>
+                            <img src={navarrow} />
+                        </Text>
+                      {  /** <Text to="/community">
+                            <p>커뮤니티</p>
+                            <img src={navarrow} />
+                        </Text> */ }
+                        {  /** <Text to="/donate">
+                            <p style={{ whiteSpace: 'nowrap' }}>
+                                연간기부금모금액 및 활용실적
+                            </p>
+                            <img src={navarrow} />
+                        </Text>  */ }
                     </div>
-                    
+
                     <div className="right">
-                        {
-                            isLogin ? (
-                                <>
-                                    <ChatBtn to="/chat">
-                                        <img src={chat} />
-                                    </ChatBtn>
-                                    <ProfileBtn
-                                        ref={buttonRef}
-                                        onClick={() =>
-                                            setProfileModal(!profileModal)
-                                        }
+                        {isLogin ? (
+                            <>
+                                <ChatBtn to="/chat">
+                                    <img src={chat} />
+                                </ChatBtn>
+                                <ProfileBtn
+                                    ref={buttonRef}
+                                    onClick={() => setProfileModal(pre => !pre)}
+                                    style={{
+                                        backgroundColor: profileModal
+                                            ? 'var(--grey-300, #eaecee)'
+                                            : '',
+                                    }}
+                                >
+                                    <div className="profile-img">
+                                        <img src={defaultprofile} />
+                                    </div>
+                                    <Arrow
                                         style={{
-                                            backgroundColor: profileModal
-                                                ? 'var(--grey-300, #eaecee)'
-                                                : '',
+                                            transform: profileModal
+                                                ? 'rotate(0deg)'
+                                                : 'rotate(180deg)',
+                                            stroke: '#868C94',
                                         }}
-                                    >
-                                        <div className="profile-img">
-                                            <img src={defaultprofile} />
-                                        </div>
-                                        <Arrow
-                                            style={{
-                                                transform: profileModal
-                                                    ? 'rotate(0deg)'
-                                                    : 'rotate(180deg)',
-                                                stroke: '#868C94',
-                                            }}
-                                        />
-                                    </ProfileBtn>
-                                </>
-                            ) : null
-                            // (
-                            //     <LoginBtn onClick={() => navigate('/login')}>
-                            //         로그인
-                            //     </LoginBtn>
-                            // )
-                        }
+                                    />
+                                </ProfileBtn>
+                            </>
+                        ) : (
+                            <LoginBtn onClick={() => navigate('/login')}>
+                                로그인
+                            </LoginBtn>
+                        )}
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>
                             <div
-                                onClick={() => navigate('/mypage')}
+                                onClick={() => {
+                                    setProfileModal(pre => !pre);
+                                    
+                                }}
                                 className="inner"
                             >
                                 <img src={mypage} />
                                 마이페이지
                             </div>
                             <div
-                                onClick={() => console.log('로그아웃')}
+                                onClick={() => {
+                                    setProfileModal(pre => !pre);
+                              
+                                    onClickLogout();
+                                    navigate('/');
+                                }}
                                 className="inner"
                             >
                                 <img src={logout} />
@@ -201,6 +235,12 @@ const Nav = () => {
                                 <p>참여대학</p>
                                 <img src={navarrow} />
                             </Text>
+                            <Text to="/donate">
+                                <p style={{ whiteSpace: 'nowrap' }}>
+                                    연간기부금모금액 및 활용실적
+                                </p>
+                                <img src={navarrow} />
+                            </Text>
                         </MMenuContainer>
                     )}
                 </MContainer>
@@ -215,19 +255,16 @@ export default Nav;
 
 const Wrapper = styled.div`
     position: fixed;
+    top: 0;
     z-index: 998;
     width: 100%;
     height: 55px;
-    padding: 0 20px;
-    @media (max-width: 768px) {
-        padding: 0;
-    }
     border-bottom: 1px solid var(--grey-300, #eaecee);
     background: var(--white, #fff);
     display: flex;
     justify-content: center;
     align-items: center;
-    &.fade-in {
+    /* &.fade-in {
         animation: show 0.8s;
         @keyframes show {
             from {
@@ -253,18 +290,20 @@ const Wrapper = styled.div`
                 margin-top: -60px;
             }
         }
-    }
+    } */
 `;
 
 const Container = styled.div`
+    box-sizing: border-box;
     position: relative;
-    width: 60%;
+    width: 1280px;
+    padding: 0 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 1120px) {
+    /* @media (max-width: 1120px) {
         width: 672px;
-    }
+    } */
     .left {
         width: 60%;
         display: flex;
@@ -311,6 +350,11 @@ const Text = styled(NavLink)`
     &.first {
         margin-left: 10%;
     }
+    &:last-child {
+        @media (max-width: 992px) {
+            display: none;
+        }
+    }
     img {
         width: 12px;
         display: none;
@@ -337,7 +381,7 @@ const LoginBtn = styled.div`
     justify-content: center;
     align-items: center;
     padding: 8px 20px;
-    border-radius: 6px;
+    border-radius: 20px;
     background-color: var(--grey-900, #212224);
     color: var(--white, #fff);
     font-family: Pretendard;
@@ -400,7 +444,7 @@ const ProfileBtn = styled.div`
 
 const ProfileModal = styled.div`
     position: absolute;
-    top: 47px;
+    top: 46px;
     right: 2px;
     z-index: 999;
     width: 128px;
@@ -422,6 +466,7 @@ const ProfileModal = styled.div`
         font-weight: 500;
         display: flex;
         align-items: center;
+        cursor: pointer;
         &:hover {
             background-color: var(--grey-300, #eaecee);
         }

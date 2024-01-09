@@ -15,11 +15,15 @@ import useArray from '../../../hooks/useArray';
 import UserFind from './user/UserFind';
 import UserEnrolled from './user/UserEnrolled';
 import useEnrolledUser from './user/userStore/useEnrolledUser';
-import { Gen, IDropdown, Output, Tech, Thon, Univ } from './RegisterOptions';
-import useFetch from '../../../hooks/useFetch';
-import request from '../../../utils/request';
-import { useNavigate } from 'react-router-dom';
+import { Gen, Output, Tech, Thon } from './RegisterOptions';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
+import useGetUnivList from '../../../query/get/useGetUnivList';
+import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
+
+export interface Member {
+    userId: number;
+    part: string;
+}
 
 /* form type */
 interface FormState {
@@ -37,7 +41,7 @@ interface FormState {
     content: string;
     productionUrl: string;
     images: Image[];
-    members: number[];
+    projectMembers: Member[];
 }
 
 export interface ProjectRegisterType {
@@ -53,11 +57,7 @@ export interface ProjectRegisterType {
     productionUrl: string;
     projectTeches: string[];
     imageUrl: string[];
-    members: number[];
-}
-
-interface PostId {
-    id: number;
+    projectMembers: Member[];
 }
 
 interface Image {
@@ -70,11 +70,9 @@ const ProjectRegister = () => {
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
     const {
         userLength: memberLength,
-        userIdList: memberIdList,
+        userList: memberList,
         clearUser,
     } = useEnrolledUser();
-
-    const navigate = useNavigate();
 
     const [formState, setFormState] = useState<FormState>({
         activity: '',
@@ -91,10 +89,11 @@ const ProjectRegister = () => {
         images: [],
         ordinal: '',
         univ: '',
-        members: memberIdList,
+        projectMembers: memberList,
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
+    const { univList } = useGetUnivList();
 
     // 드롭다운을 관리하는 함수
     // 카테고리와 아웃풋에서 기타를 눌렀을 때 추가 입력창 생성
@@ -178,9 +177,11 @@ const ProjectRegister = () => {
             productionUrl: formState.productionUrl,
             projectTeches: processTech(),
             imageUrl: await processImages(),
-            members: memberIdList,
+            projectMembers: memberList,
         };
     };
+
+    const { mutate: registerProject } = usePostProjectRegister();
 
     // 폼 제출할 때 실행되는 함수
     const handleSubmit = async (e: React.FormEvent) => {
@@ -188,16 +189,7 @@ const ProjectRegister = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-
-        const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
-            method: 'post',
-            data,
-        });
-
-        alert(`${response?.data.id}번의 게시글이 생성되었습니다.`);
-        clearUser();
-        navigate('/project');
+        registerProject(data);
     };
 
     const { checkboxList, checkHandler } = useCheckbox(Tech.loadTech());
@@ -261,12 +253,6 @@ const ProjectRegister = () => {
             images,
         }));
     }, [images]);
-
-    // 학교 목록을 불러오는 api
-    const { data: univList } = useFetch<IDropdown[]>({
-        initValue: [],
-        asyncFunc: Univ.loadUniv,
-    });
 
     useEffect(() => {
         if (

@@ -47,13 +47,13 @@ const MainGraphic = () => {
     }, [desRef1, desRef2, width]);
 
     // 카운트다운 플로팅 버튼을 띄우기 위한 옵저버
-   // const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
+    // const [isView, setIsView] = useRecoilState(viewFloatingCountDownState);
     const io = new IntersectionObserver(
         entries => {
             entries.forEach(entry => {
-              //  if (entry.intersectionRatio > 0)
-                 //   setIsView(prev => ({ top: true, bottom: prev.bottom }));
-              //  else setIsView(prev => ({ top: false, bottom: prev.bottom }));
+                //  if (entry.intersectionRatio > 0)
+                //   setIsView(prev => ({ top: true, bottom: prev.bottom }));
+                //  else setIsView(prev => ({ top: false, bottom: prev.bottom }));
             });
         },
         {
@@ -100,11 +100,11 @@ const MainGraphic = () => {
                     <div>
                         <div className="inner">
                             <img src={maintext} />
-                            <div className="new-text">
+                            {/* <div className="new-text">
                                 12기 신규 대학 모집 중!
                             </div>
                             <div className="hide-text" />
-                            <CountDown isCountDownView={isCountDownView} />
+                            <CountDown isCountDownView={isCountDownView} /> */}
                             <button className="btn" onClick={openModal}>
                                 모집 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
@@ -153,8 +153,10 @@ const MainGraphic = () => {
                 <div className="container" ref={desRef1}>
                     <div className="title">국내 최대 규모 IT 창업 동아리</div>
                     <div className="title">
-                        사단법인 멋쟁이사자처럼이 운영합니다. <PixelLionIcon />
+                        <PixelLionIcon />
+                        사단법인 멋쟁이사자처럼이
                     </div>
+                    <div className="title">운영합니다.</div>
                     <div className="subtitle">
                         ”내 아이디어를 내 손으로 실현하자!”
                     </div>

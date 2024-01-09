@@ -13,7 +13,20 @@ import FooterModal from '../recruit/FooterModal';
 import FooterModalMobile from '../univrecruit//UnivModalMobile';
 import { recruitURL } from './MainGraphic';
 
-const recruitNotice = {
+type RecruitType = { title: string; paragraph: string; btn: string };
+const newUnivRecruit: RecruitType = {
+    title: '12기 신규 대학 모집 중!',
+    paragraph: `우리 학교에 ‘멋쟁이사자처럼 대학’ 동아리를 새롭게
+    만들고 싶다면, 아래 버튼을 눌러 지원해주세요!
+    (~2023. 12. 10)`,
+    btn: '신규 대학 지원하기',
+};
+const newRecruit: RecruitType = {
+    title: '아기사자 모집 알림 신청',
+    paragraph: '모집이 시작되면 이메일로 안내해드려요.',
+    btn: '모집 알림 신청하기',
+};
+const recruitNotice: RecruitType = {
     title: '멋대 알림 신청',
     paragraph: `아기사자 모집 및 홈페이지 기능 추가 등
     멋대의 새로운 소식을 이메일로 알려드려요.`,
@@ -65,28 +78,27 @@ const Footer = () => {
             <F.Recruit>
                 <div className="container">
                     <div className="left">
-                        <div className="title">12기 신규 대학 모집 중!</div>
-                        <div className="text">
-                            우리 학교에 ‘멋쟁이사자처럼 대학’ 동아리를 새롭게
-                            만들고 싶다면, 아래 버튼을 눌러 지원해주세요!
-                            (~2023. 12. 10)
+                        <div className="title">{newRecruit.title}</div>
+                        <div className="text">{newRecruit.paragraph}</div>
+                        <div className="btn" onClick={openModal}>
+                            {newRecruit.btn}
+                            <PixelLongArrowIcon fill="#ffffff" />
                         </div>
-                        <a
-                            className="btn"
-                            href={recruitURL}
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            신규 대학 지원하기
-                            <PixelLongArrowIcon fill="#212224" />
-                        </a>
                     </div>
                     <div className="img-rect">
-                        <img src={newrecruitimage} />
+                        <img src={recruitimage} />
                     </div>
                 </div>
+                {isMobileView ? (
+                    <FooterModalMobile
+                        isOpen={isModalOpen}
+                        closeModal={closeModal}
+                    />
+                ) : (
+                    <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
+                )}
             </F.Recruit>
-            <F.Notification>
+            {/* <F.Notification>
                 <div className="container">
                     <div className="left">
                         <div className="title">
@@ -100,15 +112,7 @@ const Footer = () => {
                         <PixelLongArrowIcon fill="#212224" />
                     </div>
                 </div>
-                {isMobileView ? (
-                    <FooterModalMobile
-                        isOpen={isModalOpen}
-                        closeModal={closeModal}
-                    />
-                ) : (
-                    <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
-                )}
-            </F.Notification>
+            </F.Notification> */}
             <F.Makers>
                 <img src={makersbackground} />
                 <div className="makers-container">

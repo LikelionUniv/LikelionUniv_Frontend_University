@@ -83,7 +83,7 @@ const orderStyle = {
         border: state.isFocused
             ? ' 1px solid transparent'
             : '1px solid transparent',
-        width: state.isFocused ? '114px' : '114px',
+        width: state.isFocused ? '106px' : '106px',
         height: state.isFocused ? '24px' : '24px',
         borderRadius: '6px',
         backgroundColor: 'white',
@@ -108,7 +108,7 @@ const orderStyle = {
         ...provided,
         backgroundColor: 'transparent',
         maxHeight: '136px',
-        width: '100px',
+        width: '98px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -117,11 +117,11 @@ const orderStyle = {
     option: (provided: any, state: any) => ({
         ...provided,
         padding: '4px',
-        paddingLeft: '12px',
+        paddingLeft: '20px',
         fontFamily: 'Pretendard',
         fontSize: '16px',
         fontWeight: '500',
-        width: '100px',
+        width: '98px',
         height: '40px',
         color: 'var(--grey-900, #212224)',
         borderRadius: '4px',

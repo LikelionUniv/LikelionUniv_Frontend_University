@@ -1,8 +1,16 @@
 import axios, { AxiosError } from 'axios';
 import { IError } from './request';
+import reissue from './reissue';
+import BASE_URL from '../config';
 
 export const axiosInstance = axios.create({
-    baseURL: 'https://stag.likelionuniv.com',
+    baseURL: BASE_URL,
+    withCredentials: true,
+});
+
+export const refreshInstance = axios.create({
+    baseURL: BASE_URL,
+    withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(async config => {
@@ -12,7 +20,7 @@ axiosInstance.interceptors.request.use(async config => {
 
     const token = localStorage.getItem('access_token');
 
-    if (token !== null) {
+    if (token !== null && config.url !== '/api/v1/auth/kakao/login') {
         config.headers.Authorization = `Bearer ${token}`;
     }
 
@@ -23,36 +31,44 @@ axiosInstance.interceptors.response.use(
     response => {
         return response;
     },
-    error => {
-        const axiosError = getAxiosError(error);
-        // const {config} = error;
+    async error => {
+        const customError = error as AxiosError;
+        const axiosError = customError.response?.data as IError;
 
-        // // 리프레시도 만료된 경우나 잘못된 토큰인 경우
-        // if (axiosError?.code === 'TOKEN_401_1') {
-        //     return Promise.reject(error);
-        // }
+        const { config } = error;
 
-        // // 액세스 토큰 만료
-        // if (axiosError?.code === 'TOKEN_401_4') {
-        //     const originRequest = config;
-        //     const reissueToken = await reissue();
+        // 리프레시도 만료된 경우나 잘못된 토큰인 경우
+        if (axiosError?.code === 'TOKEN_401_1') {
+            return Promise.reject(error);
+        }
 
-        //     setAccessAndRefresh(reissueToken.accessToken, reissueToken.refreshToken);
-        //     originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+        // 리프레시 토큰 만료인 경우
+        if (axiosError?.code === 'REFRESH_TOKEN_401') {
+            alert('리프레시 만료');
+            localStorage.clear();
+            return Promise.reject(error);
+        }
 
-        //     return axiosInstance(originRequest);
-        // }
+        // 액세스 토큰 만료
+        if (axiosError?.code === 'TOKEN_401_4') {
+            const originRequest = config;
+            const reissueToken = await reissue();
+
+            setAccessAndRefresh(
+                reissueToken.accessToken,
+                reissueToken.refreshToken,
+            );
+            originRequest.headers.Authorization = `Bearer ${reissueToken.accessToken}`;
+
+            return axiosInstance(originRequest);
+        }
+
         alert(axiosError?.message);
         return Promise.reject(error);
     },
 );
 
-const getAxiosError = (error: AxiosError): IError | undefined => {
-    const serverError = error as AxiosError<IError>;
-    return serverError.response?.data;
+const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
+    localStorage.setItem('access_token', accessToken);
+    localStorage.setItem('refresh_token', refreshToken);
 };
-
-// const setAccessAndRefresh = (accessToken: string, refreshToken: string) => {
-//     localStorage.setItem('access_token', accessToken);
-//     localStorage.setItem('refresh_token', refreshToken);
-// }

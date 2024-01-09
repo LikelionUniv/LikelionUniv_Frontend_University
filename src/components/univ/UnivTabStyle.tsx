@@ -200,10 +200,10 @@ export const Btn = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 30px */
-    cursor: pointer;
+    cursor: default;
 
     &:hover {
-        background: var(--Orange-600, #ff7710);
+        /* background: var(--Orange-600, #ff7710); */
     }
 
     @media screen and (max-width: 767px) {

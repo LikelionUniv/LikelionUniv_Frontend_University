@@ -4,15 +4,30 @@ import { RouterProvider } from 'react-router-dom';
 import router from './Router';
 import { RecoilRoot } from 'recoil';
 import './styles/font.css';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+// stale time 10분으로 설정
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            refetchOnWindowFocus: false,
+            staleTime: 600 * 1000,
+        },
+    },
+});
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,
 );
 root.render(
     <React.StrictMode>
-        <RecoilRoot>
-            <RouterProvider router={router}></RouterProvider>
-        </RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+            <RecoilRoot>
+                <RouterProvider router={router}></RouterProvider>
+            </RecoilRoot>
+            <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
     </React.StrictMode>,
 );
 

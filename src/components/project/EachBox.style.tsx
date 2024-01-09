@@ -57,9 +57,15 @@ export const BlackBox = styled.div<BoxProp>`
     }
 `;
 
-export const SmallBox1 = styled.div<BoxProp>`
+export const SmallBox1 = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 100%;
+`;
+
+export const ServiceName = styled.div<BoxProp>`
     color: ${props => (props.hovered ? '#FF7710' : '#000000')};
 
     font-family: Pretendard;
@@ -67,7 +73,18 @@ export const SmallBox1 = styled.div<BoxProp>`
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 39.2px */
+    &:hover {
+        cursor: pointer;
+    }
+`;
 
+export const AdminBtn = styled.div<{ isAdmin: boolean }>`
+    display: ${props => (props.isAdmin ? 'block' : 'none')};
+    position: relative;
+`;
+
+export const MoreImage = styled.img`
+    margin-right: 10px;
     &:hover {
         cursor: pointer;
     }

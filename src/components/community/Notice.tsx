@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import OrderDropDown from './OrderDropDown';
 import WriteIcon from '../../img/community/write.svg';
 import PostList from './PostList';
+import { useNavigate } from 'react-router-dom';
 import { PostBoxProp } from './PostBox';
 
 interface NoticeProps {
@@ -25,6 +26,7 @@ const contentSubtitles: Record<string, string> = {
 };
 
 const Notice: React.FC<NoticeProps> = ({ selectedItem, searchQuery }) => {
+    const navigate = useNavigate();
     const content = selectedItem;
     const subtitle = contentSubtitles[content];
 
@@ -36,7 +38,7 @@ const Notice: React.FC<NoticeProps> = ({ selectedItem, searchQuery }) => {
             <Divider />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <OrderDropDown />
-                <Button>
+                <Button onClick={() => navigate('/community/write')}>
                     <img src={WriteIcon} alt="펜" />
                     글쓰기
                 </Button>
@@ -49,19 +51,20 @@ export default Notice;
 
 const Wrapper = styled.div`
     width: 74.5%;
-    height: 90vh;
 `;
 
 const Title = styled.div`
     font-size: 40px;
     font-weight: 700;
     color: var(--Grey-900, #212224);
+    line-height: 150%;
 `;
 
 const SubTitle = styled.div`
     color: var(--Grey-700, #868c94);
     font-size: 18px;
     font-weight: 500;
+    line-height: 150%;
 `;
 
 const Divider = styled.div`
