@@ -13,7 +13,7 @@ const ProjectCard = (props: ProjectCardProp) => {
             <ProjectBox
                 className="img"
                 style={{
-                    backgroundImage: `url(${props.thumbnail})`,
+                    backgroundImage: `url(https://${props.thumbnail})`,
                 }}
             >
                 <Outputtag>{props.outPut}</Outputtag>
