@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import * as FM from './FollowModal.style';
 import { FollowBox } from './FollowBox';
 import { ImodalProps } from './type';
 import { useLoadFollow } from '../../api/mypage/useLoadFollow';
-import { useInfiniteScroll } from '../../api/mypage/useInfiniteScroll';
+import { useIntersect } from '../../api/mypage/useIntersect';
 
 interface FollowModalProps {
     isOpen: boolean;
@@ -21,11 +21,11 @@ export const FollowModal = ({
     const follow = modalProps.follow === '팔로워' ? 'follower' : 'following';
     const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
         useLoadFollow(follow);
-    useInfiniteScroll({ modalRef, hasNextPage, fetchNextPage });
-    // 초기 팔로우 정보 받기
-    useEffect(() => {
-        fetchNextPage();
-    }, []);
+
+    const ref = useIntersect(async (entry, observer) => {
+        observer.unobserve(entry.target);
+        if (hasNextPage && !isFetchingNextPage) fetchNextPage();
+    });
 
     return (
         <FM.ModalWrapper>
@@ -51,6 +51,7 @@ export const FollowModal = ({
                         )),
                     )}
                     {isFetchingNextPage && <FM.Loading />}
+                    <FM.Target ref={ref} />
                 </FM.ModalContent>
             </FM.ModalContainer>
         </FM.ModalWrapper>

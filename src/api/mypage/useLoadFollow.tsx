@@ -16,7 +16,7 @@ async function userFollowApi(
     follow: string,
 ): Promise<Follow> {
     const response = await axiosInstance.get(
-        `/api/v1/user/${user_id}/${follow}?page=${page}&size=5`,
+        `/api/v1/user/${user_id}/${follow}?page=${page}&size=4`,
     );
     return response.data.data;
 }
@@ -32,7 +32,6 @@ export function useLoadFollow(follow: string) {
                 userFollowApi(userId, pageParam, follow),
             initialPageParam: 1,
             getNextPageParam: lastPage => {
-                console.log(lastPage);
                 return lastPage.hasNext ? lastPage.currentPage + 1 : undefined;
             },
         });

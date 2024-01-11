@@ -107,3 +107,7 @@ export const Loading = styled.div`
     animation: ${spin} 2s linear infinite; // 애니메이션 적용
     margin-left: 50%;
 `;
+
+export const Target = styled.div`
+    height: 1px;
+`;
