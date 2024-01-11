@@ -10,7 +10,10 @@ export const useAuth = () => {
     useEffect(() => {
         const fetchUser = async () => {
             let accessToken = localStorage.getItem('access_token');
-            const response = accessToken && (await requestUserInfo());
+            const response =
+                accessToken &&
+                userinfo.userId === -1 &&
+                (await requestUserInfo());
             response && setUserinfo({ ...response.data, isLogin: true });
             setIsLoading(false);
         };

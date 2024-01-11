@@ -4,12 +4,13 @@ import { Avatar, Button, convertRole } from './Common';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
-import { useRecoilState } from 'recoil';
-import { UserProfileAtom } from '../../store/mypageData';
-import { userInfoModifyApi } from '../../api/mypage/userinfo';
-import { useNavigate } from 'react-router-dom';
 import { IuserModify } from './type';
 import ImageUpload from '../utils/ImageUpload';
+
+import {
+    useUpdateUserProfile,
+    useCachedUserProfile,
+} from '../../api/mypage/useUserProfile';
 
 /* dropdown option 부분 */
 const trackOptions = [
@@ -28,7 +29,6 @@ function findLabelByValue(value: number) {
 }
 
 const UserInfoModify = () => {
-    const navigate = useNavigate();
     //초기 렌더링 시 유저 기본정보 받아와서 formState에 채워넣기
     const [formState, setFormState] = useState<IuserModify>({
         name: '',
@@ -36,20 +36,23 @@ const UserInfoModify = () => {
         profileImage: '',
         part: '',
     });
-
-    const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
+    const { mutate: userProfileUpdate } = useUpdateUserProfile();
+    //const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
+    const userProfile = useCachedUserProfile();
     //<img src = imgSrc/>
     const [imgSrc, setImgSrc] = useState('');
 
     // 초기 렌더링 시 유저 정보 뿌리기
     useEffect(() => {
-        setFormState({
-            name: userProfile.name,
-            introduction: userProfile.introduction,
-            profileImage: userProfile.profileImage,
-            part: userProfile.part,
-        });
-    }, []);
+        if (userProfile) {
+            setFormState({
+                name: userProfile.name,
+                introduction: userProfile?.introduction,
+                profileImage: userProfile.profileImage,
+                part: userProfile.part,
+            });
+        }
+    }, [userProfile]);
 
     const handleSelectChange =
         (field: keyof IuserModify) =>
@@ -110,24 +113,7 @@ const UserInfoModify = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         //수정 API 요청
-        const response = await userInfoModifyApi(userProfile.id, formState);
-        //성공 시 마이페이지로 이동
-
-        if (response.isSuccess) {
-            alert('성공적으로 저장되었습니다.');
-            updateUserProfile({
-                ...userProfile,
-                name: formState.name,
-                introduction: formState.introduction,
-                profileImage: imgSrc,
-                part: formState.part,
-            });
-            navigate(-1);
-        } else {
-            alert('저장에 실패했습니다.');
-            navigate(-1);
-        }
-        //실패 시 마이페이지로 이동
+        userProfileUpdate(formState);
     };
 
     return (
@@ -137,10 +123,10 @@ const UserInfoModify = () => {
 
                 <Form>
                     <FlexBox>
-                        <Avatar_sm
+                        <AvatarSmall
                             imgurl={
                                 imgSrc === ''
-                                    ? `https://${userProfile.profileImage}`
+                                    ? `https://${userProfile?.profileImage}`
                                     : imgSrc
                             }
                         />
@@ -187,7 +173,7 @@ const UserInfoModify = () => {
                             />
                         </div>
                     </div>
-                    <Button_sm onClick={handleSubmit}>저장하기</Button_sm>
+                    <ButtonSmall onClick={handleSubmit}>저장하기</ButtonSmall>
                 </Form>
             </Container>
         </Wrapper>
@@ -226,7 +212,7 @@ const FlexBox = styled.div`
     margin-bottom: 40px;
 `;
 
-const Avatar_sm = styled(Avatar)`
+const AvatarSmall = styled(Avatar)`
     width: 80px;
     height: 80px;
     margin-right: 8px;
@@ -304,7 +290,7 @@ const Nformarea = styled.textarea`
     }
 `;
 
-const Button_sm = styled(Button)`
+const ButtonSmall = styled(Button)`
     width: 100px;
     height: 44px;
     margin-top: 64px;
