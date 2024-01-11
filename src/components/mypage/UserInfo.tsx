@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Button, UserBox,convertRole } from './Common';
+import { Avatar, Button, UserBox, convertRole } from './Common';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
-import { UserProfileAtom } from '../../store/mypageData';
 import useModal from '../../hooks/useModal';
-import { userProfileApi } from '../../api/mypage/userinfo';
 import { FollowModal } from './FollowModal';
 import { ImodalProps } from './type';
 import { useAuth } from '../../hooks/useAuth';
+import { useUserProfile } from '../../api/mypage/useUserProfile';
+
+const USER_ROLE: { [id: string]: string } = {
+    GUEST: '게스트',
+    USER: '아기사자',
+    MANAGER: '운영진',
+    UNIVERSITY_ADMIN: '대표',
+    SUPER_ADMIN: '관리자',
+};
 
 export const UserInfo = () => {
     const navigate = useNavigate();
     const { userinfo } = useAuth();
-    const [userProfile, updateUserProfile] = useRecoilState(UserProfileAtom);
-    const userRole: { [id: string]: string } = {
-        GUEST: '게스트',
-        USER: '아기사자',
-        MANAGER: '운영진',
-        UNIVERSITY_ADMIN: '대표',
-        SUPER_ADMIN: '관리자',
-    };
+    const userProfile = useUserProfile();
 
     // 팔로우, 팔로잉 모달
     const { isModalOpen, openModal, closeModal } = useModal();
@@ -28,7 +27,7 @@ export const UserInfo = () => {
         userid: -1,
         follow: '',
     });
-    //모달 창 오픈 시 스크롤 막기
+    // 모달 창 오픈 시 스크롤 막기
     useEffect(() => {
         if (isModalOpen) {
             document.body.style.overflow = 'hidden';
@@ -36,7 +35,7 @@ export const UserInfo = () => {
             document.body.style.overflow = 'auto';
         }
     }, [isModalOpen]);
-    //모달 창 핸들러 : 모달 창 열고 , props set
+    // 모달 창 핸들러 : 모달 창 열고 , props set
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
         let follow = e.currentTarget.dataset.type;
         let userid = userinfo.userId;
@@ -44,32 +43,20 @@ export const UserInfo = () => {
         openModal();
     };
 
-    //마운트 시 API(유저 프로필) 요청
-    useEffect(() => {
-        const fetchData = async () => {
-            if (userinfo.name != '' && userProfile.id === -1) {
-                const userProfile = await userProfileApi(userinfo.userId);
-                updateUserProfile(userProfile);
-            }
-        };
-        fetchData();
-    }, [userinfo]);
-
-
     return (
         <Wrapper>
             <Container>
                 <UserBox>
                     <Avatar imgurl={`https://${userProfile.profileImage}`} />
-                    {/* 유저 정보 넣기 */}
                     <UserProfile>
                         <UserName>
                             <p>{userProfile.name}</p>{' '}
-                            <div>{userRole[userProfile.role]}</div>{' '}
+                            <div>{USER_ROLE[userProfile.role]}</div>{' '}
                         </UserName>
                         <UserPart>
                             <p>
-                                {userProfile.universityName} {convertRole(userProfile.part)}
+                                {userProfile.universityName}{' '}
+                                {convertRole(userProfile.part)}
                             </p>
                             <FItem data-type="팔로워" onClick={handleModal}>
                                 팔로워 {userProfile.followerNum}
@@ -81,7 +68,7 @@ export const UserInfo = () => {
                         <p>{userProfile.introduction}</p>
                     </UserProfile>
                 </UserBox>
-                <Button onClick={()=>navigate('modify')}>내 정보 수정</Button>
+                <Button onClick={() => navigate('modify')}>내 정보 수정</Button>
                 {isModalOpen && (
                     <FollowModal
                         isOpen={isModalOpen}
