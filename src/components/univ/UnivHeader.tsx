@@ -1,9 +1,15 @@
 // 참여 대학 Header
+
 import React, { useState, useEffect } from 'react';
 import * as H from './UnivHeaderStyle';
 import { tabData, ITabData } from './UnivTabData';
 
 const UnivHeader = () => {
+    const foundingYear = 2013;
+    const currentYear = new Date().getFullYear();
+
+    const calculateYear = currentYear - foundingYear + 1;
+
     const totalCount = ([] as ITabData[]).concat(
         ...Object.values(tabData),
     ).length;
@@ -23,7 +29,7 @@ const UnivHeader = () => {
     return (
         <H.TopDiv>
             <H.Content>
-                <H.T1>12기 참여 대학</H.T1>
+                <H.T1>{calculateYear}기 참여 대학</H.T1>
                 <H.T2>
                     <H.Num>{univCount}</H.Num>개 대학이 함께하고 있어요!
                 </H.T2>
