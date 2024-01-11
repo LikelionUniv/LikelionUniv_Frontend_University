@@ -150,7 +150,7 @@ const DeveloperInfo: FunctionComponent = () => {
                                         // 해당 사용자의 상세 정보 찾기
                                         const user = userDetails.find(u => u.name === name);
                                         return (
-                                            <D.Span4 key={name} onClick={() => user && goToUserProfile(user.userId)}>
+                                            <D.Span4 isLoggedIn={userinfo.isLogin} key={name} onClick={() => user && goToUserProfile(user.userId)}>
                                                 {name}
                                             </D.Span4>
                                         );
