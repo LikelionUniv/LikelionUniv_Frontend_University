@@ -85,9 +85,7 @@ const Tab = () => {
                         우리 학교도 멋쟁이사자처럼 참여하기
                         <img src={BtnArrow} alt="버튼화살표" />
                     </T.Btn> */}
-                    <T.Btn>
-                         13기 참여 대학 모집을 기다려주세요!
-                    </T.Btn>
+                    <T.Btn>13기 참여 대학 모집을 기다려주세요!</T.Btn>
                 </T.BtnWrapper>
             </T.Content>
         </T.Container>

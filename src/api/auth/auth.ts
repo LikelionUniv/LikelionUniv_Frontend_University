@@ -6,9 +6,7 @@ export const requestIdtoken = async (
     provider: string | undefined,
 ) => {
     return await axiosInstance
-        .get(
-            `/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`
-        )
+        .get(`/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`)
         .then(response => {
             //idtoken return
             localStorage.setItem('idtoken', response.data.data.idToken);
@@ -25,9 +23,7 @@ export const requestLogin = async (
     idtoken: any,
 ) => {
     return await axiosInstance
-        .post(
-            `/api/v1/auth/${provider}/login?idtoken=${idtoken}`
-        )
+        .post(`/api/v1/auth/${provider}/login?idtoken=${idtoken}`)
         .then(response => {
             const isUser = response.data.data.isRegistered;
             if (isUser) {

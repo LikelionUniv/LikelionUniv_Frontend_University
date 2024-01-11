@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import Pagination from '../../components/mypage/Pagination';
+import { useState, useEffect } from 'react';
 import request from '../../utils/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 
 interface IuseServerSidePagination {
     uri: string;
@@ -39,7 +39,8 @@ function useServerSidePagination<T>({
     sort,
     search,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
-    const [pageLength, setPageLength] = useState<number>(0);
+    const [data, setData] = useState<T[]>([]);
+    const [totalElements, setTotalElements] = useState<number>(0);
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     const fetchPagiableData = async () => {
@@ -58,21 +59,31 @@ function useServerSidePagination<T>({
             },
         });
 
-        setPageLength(response.data.totalPage);
-        return response.data.data;
+        return response.data;
     };
 
-    const { data } = useSuspenseQuery({
+    const { data: cachingData } = useSuspenseQuery({
         queryKey: ['get-pagiable', { uri, size, sort, search, currentPage }],
         queryFn: fetchPagiableData,
     });
 
+    useEffect(() => {
+        setData(cachingData.data);
+        setTotalElements(cachingData.totalElements);
+    }, [cachingData]);
+
+    const setPage = (page: number): void => {
+        setCurrentPage(page);
+    };
+
     const renderPaginationBtn = (): JSX.Element => {
         return (
-            <Pagination
-                totalPageNum={pageLength}
-                pageNum={currentPage}
-                setPageNum={setCurrentPage}
+            <PaginationComponent
+                page={currentPage}
+                size={size}
+                count={totalElements}
+                pageRange={5}
+                setPage={setPage}
             />
         );
     };
