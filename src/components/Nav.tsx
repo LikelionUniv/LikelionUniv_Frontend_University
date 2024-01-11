@@ -15,6 +15,7 @@ import { useAuth } from '../hooks/useAuth';
 
 const Nav = () => {
     const navigate = useNavigate();
+
     // 로그인 상태
     const [isLogin, setIsLogin] = useState<Boolean>(false);
     const { userinfo, setUserinfo } = useAuth();
@@ -147,10 +148,10 @@ const Nav = () => {
                             <p>프로젝트</p>
                             <img src={navarrow} />
                         </Text>
-                        <Text to="/community">
+                        {/** <Text to="/community">
                             <p>커뮤니티</p>
                             <img src={navarrow} />
-                        </Text>
+                        </Text> */}
                         <Text to="/donate">
                             <p style={{ whiteSpace: 'nowrap' }}>
                                 연간기부금모금액 및 활용실적
@@ -198,7 +199,6 @@ const Nav = () => {
                             <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
-                                    navigate('/mypage');
                                 }}
                                 className="inner"
                             >
@@ -208,6 +208,7 @@ const Nav = () => {
                             <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
+
                                     onClickLogout();
                                     navigate('/');
                                 }}

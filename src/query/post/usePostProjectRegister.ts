@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import request from '../../utils/request';
 import { useNavigate } from 'react-router-dom';
 import useEnrolledUser from '../../components/project/register/user/userStore/useEnrolledUser';
+import { Member } from '../../components/project/register/ProjectRegister';
 
 interface ProjectRegisterType {
     activity: string;
@@ -16,7 +17,7 @@ interface ProjectRegisterType {
     productionUrl: string;
     projectTeches: string[];
     imageUrl: string[];
-    members: number[];
+    projectMembers: Member[];
 }
 
 interface PostId {

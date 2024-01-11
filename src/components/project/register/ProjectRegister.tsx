@@ -20,6 +20,11 @@ import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
 
+export interface Member {
+    userId: number;
+    part: string;
+}
+
 /* form type */
 interface FormState {
     activity: string;
@@ -36,7 +41,7 @@ interface FormState {
     content: string;
     productionUrl: string;
     images: Image[];
-    members: number[];
+    projectMembers: Member[];
 }
 
 export interface ProjectRegisterType {
@@ -52,7 +57,7 @@ export interface ProjectRegisterType {
     productionUrl: string;
     projectTeches: string[];
     imageUrl: string[];
-    members: number[];
+    projectMembers: Member[];
 }
 
 interface Image {
@@ -65,7 +70,7 @@ const ProjectRegister = () => {
     const { array: images, pushMany: setImages, remove } = useArray<Image>([]); // image 배열
     const {
         userLength: memberLength,
-        userIdList: memberIdList,
+        userList: memberList,
         clearUser,
     } = useEnrolledUser();
 
@@ -84,7 +89,7 @@ const ProjectRegister = () => {
         images: [],
         ordinal: '',
         univ: '',
-        members: memberIdList,
+        projectMembers: memberList,
     });
 
     const [activeThonEtc, setActiveThonEtc] = useState<boolean>(false);
@@ -172,7 +177,7 @@ const ProjectRegister = () => {
             productionUrl: formState.productionUrl,
             projectTeches: processTech(),
             imageUrl: await processImages(),
-            members: memberIdList,
+            projectMembers: memberList,
         };
     };
 

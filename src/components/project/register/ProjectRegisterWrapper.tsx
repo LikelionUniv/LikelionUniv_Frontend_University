@@ -1,12 +1,12 @@
-import React, { Suspense } from "react";
-import ProjectRegister from "./ProjectRegister";
+import React, { Suspense } from 'react';
+import ProjectRegister from './ProjectRegister';
 
 function ProjectRegisterWrapper() {
-  return (
-    <Suspense fallback={<div>loading...</div>}>
-      <ProjectRegister />
-    </Suspense>
-  )
+    return (
+        <Suspense fallback={<div>loading...</div>}>
+            <ProjectRegister />
+        </Suspense>
+    );
 }
 
-export default ProjectRegisterWrapper
+export default ProjectRegisterWrapper;

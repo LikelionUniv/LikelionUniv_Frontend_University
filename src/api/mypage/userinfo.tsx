@@ -2,7 +2,6 @@ import { IuserModify } from '../../components/mypage/type';
 import { axiosInstance } from '../../utils/axios';
 
 export const userProfileApi = async (user_id: number) => {
-
     return await axiosInstance
         .get(`/api/v1/user/${user_id}/profile`)
         .then(response => {
@@ -21,11 +20,8 @@ export const userFollowApi = async (
     page: number,
     follow: string,
 ) => {
-
     return await axiosInstance
-        .get(
-            `/api/v1/user/${user_id}/${follow}?page=${page}&size=16`,
-        )
+        .get(`/api/v1/user/${user_id}/${follow}?page=${page}&size=16`)
         .then(response => {
             return response.data;
         })
@@ -36,7 +32,6 @@ export const userFollowApi = async (
 };
 
 export const followAddApi = async (user_id: number) => {
-    
     return await axiosInstance
         .post(`/api/v1/follow/${user_id}`)
         .then(response => {
@@ -50,7 +45,6 @@ export const followAddApi = async (user_id: number) => {
 };
 
 export const followDeleteApi = async (user_id: number) => {
-
     return await axiosInstance
         .delete(`/api/v1/follow/${user_id}`)
         .then(response => {
@@ -68,10 +62,7 @@ export const userInfoModifyApi = async (
     user_info: IuserModify,
 ) => {
     return await axiosInstance
-        .patch(
-            `/api/v1/user/${user_id}/profile`,
-            user_info,
-        )
+        .patch(`/api/v1/user/${user_id}/profile`, user_info)
         .then(response => {
             return response.data;
         })
@@ -79,4 +70,3 @@ export const userInfoModifyApi = async (
             return error;
         });
 };
-

@@ -17,7 +17,7 @@ export interface Project {
     content: string;
     productionUrl: string;
     projectTech: string[];
-    imageUrl: string[];
+    imageUrl: string;
     members: Member[];
 }
 

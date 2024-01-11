@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { axiosInstance } from '../../utils/axios';
 
 // 인가코드 서버로 전송 , idtoken return

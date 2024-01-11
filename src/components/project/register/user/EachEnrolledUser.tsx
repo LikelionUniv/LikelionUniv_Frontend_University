@@ -1,16 +1,16 @@
 import React from 'react';
-import { User } from './UserFind';
 import * as EU from './EachEnrolledUser.style';
 import Delete from '../../../../img/project/delete.svg';
+import { UserAndPart } from '../../../../store/projectUser';
 
 interface IEachEnrolledUser {
-    user: User;
-    remove: (user: User) => void;
+    user: UserAndPart;
+    remove: (user: UserAndPart) => void;
 }
 
 function EachEnrolledUser({ user, remove }: IEachEnrolledUser) {
     const showUserName = () => {
-        return `${user.name} (${user.universityName} ${user.ordinal}기)`;
+        return `${user.user.name} (${user.user.universityName} ${user.user.ordinal}기)`;
     };
     return (
         <EU.Container>

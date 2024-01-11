@@ -21,7 +21,7 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
             <PostCardBox
                 className="photo"
                 style={{
-                    backgroundImage: `url(${props.thumbnail})`,
+                    backgroundImage: `url(https://${props.thumbnail})`,
                 }}
             ></PostCardBox>
             <PostCardBox className="date">

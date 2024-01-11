@@ -23,7 +23,7 @@ const newUnivRecruit: RecruitType = {
 };
 const newRecruit: RecruitType = {
     title: '아기사자 모집 알림 신청',
-    paragraph: '모집이 시작되면 이메일과 문자로 안내해드려요.',
+    paragraph: '모집이 시작되면 이메일로 안내해드려요.',
     btn: '모집 알림 신청하기',
 };
 const recruitNotice: RecruitType = {

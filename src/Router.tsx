@@ -48,10 +48,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/mypage',
-                element: 
+                element: (
                     <ProtectedRouter>
                         <MypageRoot />
-                    </ProtectedRouter>,
+                    </ProtectedRouter>
+                ),
                 children: [
                     {
                         path: '',
@@ -153,7 +154,6 @@ const router = createBrowserRouter([
                 element: <AboutPage />,
             },
         ],
-       
     },
     {
         path: '/oauth/:provider/redirect',

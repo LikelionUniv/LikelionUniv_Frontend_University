@@ -9,6 +9,7 @@ import { StyledButton } from './UnivcontentStyle';
 import Apply1 from '../../img/recruit/apply1.svg';
 import Apply2 from '../../img/recruit/apply2.svg';
 
+
 const Univcontent = () => {
     const [selected, setSelected] = useState(null);
     const [hovered, setHovered] = useState(false);

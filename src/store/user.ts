@@ -4,7 +4,7 @@ type UserInfo = {
     name: string;
     profileImage: string;
     userId: number;
-    role: string,
+    role: string;
     isLogin: boolean;
 };
 
@@ -14,7 +14,7 @@ export const userState = atom<UserInfo>({
         name: '',
         profileImage: '',
         userId: -1,
-        role:'',
+        role: '',
         isLogin: false,
     },
 });

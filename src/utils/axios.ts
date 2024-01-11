@@ -36,9 +36,18 @@ axiosInstance.interceptors.response.use(
         const axiosError = customError.response?.data as IError;
 
         const { config } = error;
+        console.log(axiosError.code);
+        
 
         // 리프레시도 만료된 경우나 잘못된 토큰인 경우
         if (axiosError?.code === 'TOKEN_401_1') {
+            return Promise.reject(error);
+        }
+
+        // 인가되지 않은 사용자인 경우 로그인으로 돌려버림
+        if (axiosError?.code === 'SECURITY_401') {
+            alert(axiosError.message);
+            window.location.replace('/login');
             return Promise.reject(error);
         }
 

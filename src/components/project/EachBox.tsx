@@ -38,7 +38,7 @@ function EachBox({ project, isAdmin }: IEachBox) {
             <div style={{ position: 'relative' }}>
                 <B.SubBox
                     width={innerWidth}
-                    url={`https://${project.imageUrl[0]}`}
+                    url={`https://${project.imageUrl}`}
                     onClick={() => onClick(project.id)}
                 >
                     <B.BlackBox
