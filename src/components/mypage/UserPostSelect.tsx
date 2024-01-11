@@ -14,6 +14,7 @@ import SortBox from './SortBox';
 import { useRecoilValue } from 'recoil';
 import { myProjectData, mypageData } from '../../store/mypageData';
 import useGetUserData from './useGetUserData';
+import EmptyBox from './EmptyBox';
 
 const UserPostSelect = () => {
     const userProject = useRecoilValue(myProjectData);
@@ -73,59 +74,66 @@ const UserPostSelect = () => {
             <PostBoxWrapper>
                 {select === '프로젝트' ? (
                     <>
-                        {userProject.data.map(e => {
-                            return (
-                                <ProjectCard
-                                    projectId={e.projectId}
-                                    thumbnail={e.thumbnail}
-                                    serviceName={e.serviceName}
-                                    universityName={e.universityName}
-                                    ordinal={e.ordinal}
-                                    outPut={e.outPut}
-                                    description={e.description}
-                                    activity={e.activity}
-                                />
-                            );
-                        })}
+                        {Array.isArray(userProject?.data) &&
+                        userProject.data.length !== 0 ? (
+                            userProject.data.map(e => {
+                                return (
+                                    <ProjectCard
+                                        projectId={e.projectId}
+                                        thumbnail={e.thumbnail}
+                                        serviceName={e.serviceName}
+                                        universityName={e.universityName}
+                                        ordinal={e.ordinal}
+                                        outPut={e.outPut}
+                                        description={e.description}
+                                        activity={e.activity}
+                                    />
+                                );
+                            })
+                        ) : (
+                            <EmptyBox name={select} />
+                        )}
                     </>
                 ) : (
                     <>
                         {Array.isArray(userData?.data) &&
-                        userData.data.length !== 0
-                            ? userData.data.map(e => {
-                                  if (e.thumbnail !== null) {
-                                      return (
-                                          <PostCardWithPhoto
-                                              key={e.id}
-                                              id={e.id}
-                                              isAuthor={e.isAuthor}
-                                              thumbnail={e.thumbnail}
-                                              title={e.title}
-                                              createdDate={e.createdDate}
-                                              body={e.body}
-                                              likeCount={e.likeCount}
-                                              commentCount={e.commentCount}
-                                              type={select}
-                                          />
-                                      );
-                                  } else {
-                                      return (
-                                          <PostCard
-                                              key={e.id}
-                                              id={e.id}
-                                              isAuthor={e.isAuthor}
-                                              thumbnail={e.thumbnail}
-                                              title={e.title}
-                                              createdDate={e.createdDate}
-                                              body={e.body}
-                                              likeCount={e.likeCount}
-                                              commentCount={e.commentCount}
-                                              type={select}
-                                          />
-                                      );
-                                  }
-                              })
-                            : null}
+                        userData.data.length !== 0 ? (
+                            userData.data.map(e => {
+                                if (e.thumbnail !== null) {
+                                    return (
+                                        <PostCardWithPhoto
+                                            key={e.id}
+                                            id={e.id}
+                                            isAuthor={e.isAuthor}
+                                            thumbnail={e.thumbnail}
+                                            title={e.title}
+                                            createdDate={e.createdDate}
+                                            body={e.body}
+                                            likeCount={e.likeCount}
+                                            commentCount={e.commentCount}
+                                            type={select}
+                                        />
+                                    );
+                                } else {
+                                    return (
+                                        <PostCard
+                                            key={e.id}
+                                            id={e.id}
+                                            isAuthor={e.isAuthor}
+                                            thumbnail={e.thumbnail}
+                                            title={e.title}
+                                            createdDate={e.createdDate}
+                                            body={e.body}
+                                            likeCount={e.likeCount}
+                                            commentCount={e.commentCount}
+                                            type={select}
+                                        />
+                                    );
+                                }
+                            })
+                        ) : (
+                            <EmptyBox name={select} />
+                        )}
                     </>
                 )}
             </PostBoxWrapper>
@@ -192,6 +200,7 @@ const PostBoxWrapper = styled.div`
     align-content: flex-start;
     gap: 24px;
     flex-wrap: wrap;
+    position: relative;
     margin: 40.5px 0px 80px;
     @media (max-width: 1920px) {
         width: 1200px;
