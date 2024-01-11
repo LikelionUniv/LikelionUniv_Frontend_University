@@ -20,14 +20,6 @@ interface ProjectData {
     imageUrl: string[];
     members: { userId: number; name: string }[];
 }
-interface UserDetail {
-    userId: number;
-    name: string;
-    profileImage: string | null;
-    universityName: string;
-    ordinal: number;
-    part: string;
-}
 
 interface ProjectMember {
     userId: number;
@@ -35,20 +27,23 @@ interface ProjectMember {
     part: string;
 }
 
-// 역할별로 이름을 저장하는 객체 타입 정의
+interface MemberDetail {
+    name: string;
+    userId: number;
+}
+
 interface RoleMapping {
-    [key: string]: string[];
-    기획: string[];
-    디자인: string[];
-    프론트: string[];
-    백: string[];
-    풀스텍: string[];
+    [key: string]: MemberDetail[];
+    기획: MemberDetail[];
+    디자인: MemberDetail[];
+    프론트: MemberDetail[];
+    백: MemberDetail[];
+    풀스텍: MemberDetail[];
 }
 
 const DeveloperInfo: FunctionComponent = () => {
     const [projectData, setProjectData] = useState<ProjectData | null>(null);
     const [membersData, setMembersData] = useState<ProjectMember[]>([]);
-    const [userDetails, setUserDetails] = useState<UserDetail[]>([]);
 
     const { userinfo } = useAuth();
 
@@ -67,13 +62,6 @@ const DeveloperInfo: FunctionComponent = () => {
             .catch(error => console.error('Fetching error:', error));
     }, [projectId]);
 
-    // 사용자 상세 정보 API에서 데이터 불러오기
-    useEffect(() => {
-        axiosInstance.get('/api/v1/user/search?page=0&size=4')
-            .then(response => setUserDetails(response.data.data.data))
-            .catch(error => console.error('Error fetching user details:', error));
-    }, []);
-
     const navigate = useNavigate(); // useNavigate 사용
 
     const goToUserProfile = useCallback((userId: number) => {
@@ -85,7 +73,6 @@ const DeveloperInfo: FunctionComponent = () => {
 
     // 각 역할별 멤버 매핑
     const mappedMembers = useMemo(() => {
-        // 초기화 시 모든 키에 대해 빈 배열 할당
         const roleMapping: RoleMapping = {
             기획: [],
             디자인: [],
@@ -95,24 +82,26 @@ const DeveloperInfo: FunctionComponent = () => {
             팀원: [], //트랙 미기재
         };
         membersData.forEach(member => {
+            const memberDetail = { name: member.name, userId: member.userId };
+            // 각 팀원을 해당하는 역할별로 분류
             switch (member.part) {
                 case 'PM':
-                    roleMapping.기획.push(member.name);
+                    roleMapping.기획.push(memberDetail);
                     break;
                 case 'DESIGNER':
-                    roleMapping.디자인.push(member.name);
+                    roleMapping.디자인.push(memberDetail);
                     break;
                 case 'FRONTEND':
-                    roleMapping.프론트.push(member.name);
+                    roleMapping.프론트.push(memberDetail);
                     break;
                 case 'BACKEND':
-                    roleMapping.백.push(member.name);
+                    roleMapping.백.push(memberDetail);
                     break;
                 case 'FULL_STACK':
-                    roleMapping.풀스텍.push(member.name);
+                    roleMapping.풀스텍.push(memberDetail);
                     break;
                 case 'NO_PART':
-                    roleMapping.팀원.push(member.name);
+                    roleMapping.팀원.push(memberDetail);
                     break;
             }
         });
@@ -141,22 +130,21 @@ const DeveloperInfo: FunctionComponent = () => {
             <D.RightWrapper>
                 <D.Label>팀원 소개</D.Label>
                 <D.Members>
-                    {Object.keys(mappedMembers).map(
-                        part =>
-                            mappedMembers[part].length > 0 && (
-                                <p key={part}>
-                                    <D.Span>{part}</D.Span>
-                                    {mappedMembers[part].map(name => {
-                                        // 해당 사용자의 상세 정보 찾기
-                                        const user = userDetails.find(u => u.name === name);
-                                        return (
-                                            <D.Span4 isLoggedIn={userinfo.isLogin} key={name} onClick={() => user && goToUserProfile(user.userId)}>
-                                                {name}
-                                            </D.Span4>
-                                        );
-                                    })}
-                                </p>
-                            ),
+                    {Object.keys(mappedMembers).map(part =>
+                        mappedMembers[part].length > 0 && (
+                            <p key={part}>
+                                <D.Span>{part}</D.Span>
+                                {mappedMembers[part].map(member => (
+                                    <D.Span4
+                                        isLoggedIn={userinfo.isLogin}
+                                        key={member.name}
+                                        onClick={() => goToUserProfile(member.userId)}
+                                    >
+                                        {member.name}
+                                    </D.Span4>
+                                ))}
+                            </p>
+                        )
                     )}
                 </D.Members>
             </D.RightWrapper>
