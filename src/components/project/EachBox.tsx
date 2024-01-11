@@ -79,8 +79,6 @@ function EachBox({ project, isAdmin }: IEachBox) {
                     onClick={() => onClick(project.id)}
                 >
                     {project.description}
-                    <br />
-                    {project.content}
                 </B.SmallBox2>
                 <B.SmallBox3 onClick={() => onClick(project.id)}>
                     {project.ordinal}기 {project.univ} {project.activity}

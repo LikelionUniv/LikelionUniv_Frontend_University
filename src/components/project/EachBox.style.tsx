@@ -21,6 +21,8 @@ export const SubBox = styled.div<{ width: number; url: string }>`
     height: 216px;
     box-sizing: border-box;
     background-image: url(${props => props.url});
+    background-size: contain;
+    background-repeat: no-repeat;
 
     @media screen and (max-width: 768px) {
         height: calc(${props => props.width} * 0.53px);
@@ -62,7 +64,6 @@ export const SmallBox1 = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 100%;
 `;
 
 export const ServiceName = styled.div<BoxProp>`
