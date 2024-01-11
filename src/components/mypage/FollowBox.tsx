@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { Avatar, Button, UserBox } from './Common';
+import { Avatar, Button } from './Common';
 import { Ifollows } from './type';
-import { followAddApi, followDeleteApi } from '../../api/mypage/userinfo';
 import { useState } from 'react';
+import { useFollowAddDelete } from '../../api/mypage/useFollowAddDelete';
 
 interface IbuttonProps {
     delete: boolean;
@@ -17,21 +17,10 @@ export const FollowBox = ({
     isFollowed,
 }: Ifollows) => {
     const [isFollow, setisFollow] = useState(isFollowed);
-    const handleFollowAddDelete = async (isFollowed: boolean) => {
-        try {
-            if (!isFollowed) {
-                const response = await followAddApi(userId);
-                // console.log(response);
-                response.isSuccess && setisFollow(pre => !pre);
-            } else {
-                const response = await followDeleteApi(userId);
-                // console.log(response);
-                response.isSuccess && setisFollow(pre => !pre);
-            }
-        } catch (error) {
-            console.log('팔로우 삭제 추가 요청 에러', error);
-        }
-    };
+    const { mutate: handleFollowAddDelete } = useFollowAddDelete(
+        userId,
+        setisFollow,
+    );
 
     return (
         <Follow>
@@ -47,7 +36,7 @@ export const FollowBox = ({
             <FollowBtn
                 delete={isFollow}
                 onClick={() => {
-                    handleFollowAddDelete(isFollowed);
+                    handleFollowAddDelete(isFollow);
                 }}
             >
                 {isFollow ? '삭제' : '팔로우'}
