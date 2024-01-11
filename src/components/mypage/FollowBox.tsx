@@ -8,8 +8,6 @@ interface IbuttonProps {
     delete: boolean;
 }
 
-//props로 팔로우 , 팔로잉 중인 사람 정보 내리기
-// 이름 , 기수 , 파트 , 이미지
 export const FollowBox = ({
     userId,
     name,
@@ -24,11 +22,11 @@ export const FollowBox = ({
             if (!isFollowed) {
                 const response = await followAddApi(userId);
                 // console.log(response);
-                response.isSuccess && setisFollow(!isFollow);
+                response.isSuccess && setisFollow(pre => !pre);
             } else {
                 const response = await followDeleteApi(userId);
                 // console.log(response);
-                response.isSuccess && setisFollow(!isFollow);
+                response.isSuccess && setisFollow(pre => !pre);
             }
         } catch (error) {
             console.log('팔로우 삭제 추가 요청 에러', error);
