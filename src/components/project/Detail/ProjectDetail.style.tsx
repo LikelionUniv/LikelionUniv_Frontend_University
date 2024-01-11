@@ -14,6 +14,7 @@ export const ProjectDetailRoot = styled.div`
     margin: 0 auto;
     padding: 40px;
     box-sizing: border-box;
+    margin-top: 40px;
 
     @media screen and (max-width: 767px) {
         padding: 20px;

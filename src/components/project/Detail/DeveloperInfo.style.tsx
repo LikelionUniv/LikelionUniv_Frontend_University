@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+
+interface Span4Props {
+    isLoggedIn: boolean;
+}
 
 export const ParentRoot = styled.div`
     display: flex;
@@ -71,7 +76,7 @@ export const Span = styled.span`
     color: var(--grey-900);
     margin-top: 0.3rem;
 `;
-export const Span4 = styled.div`
+export const Span4 = styled.span<Span4Props>`
     display: inline-block;
     padding: 0.05rem 0.8rem;
     margin: 0.25rem 0.25rem;
@@ -81,6 +86,11 @@ export const Span4 = styled.div`
     font-weight: 500;
     color: var(--grey-800);
     background-color: white;
+    ${props => props.isLoggedIn && css`
+        &:hover {
+            background-color: #f2f2f2;
+        }
+    `}
 `;
 
 export const Members = styled.div`

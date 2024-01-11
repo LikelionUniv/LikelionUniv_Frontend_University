@@ -7,7 +7,7 @@ export default createGlobalStyle`
 :root {
 
 /* fonts */
---subtitle-20-bold: Roboto;
+--subtitle-20-bold: Pretendard;
 
 /* font sizes */
 --subtitle-16-bold-size: 1rem;
@@ -17,6 +17,8 @@ export default createGlobalStyle`
 --title-24-bold-size: 1.5rem;
 --title-48-bold-size: 3rem;
 --title-28-bold-size: 1.75rem;
+--title-18-bold-size: 1.25rem;
+
 
 /* Colors */
 --white: #fff;

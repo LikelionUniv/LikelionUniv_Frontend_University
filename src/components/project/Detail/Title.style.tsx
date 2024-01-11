@@ -33,15 +33,6 @@ export const ProjectTitle = styled.b`
     }
 `;
 
-export const ProjectSummary = styled.b`
-    font-size: var(--title-24-bold-size);
-    line-height: 150%;
-
-    @media (max-width: 768px) {
-        font-size: var(--title-18-bold-size);
-    }
-`;
-
 export const ProjectContainer = styled.div`
     line-height: 160%;
     font-weight: 500;
@@ -62,7 +53,6 @@ export const P = styled.p`
     margin: 0;
 `;
 
-//서비스 바로가기 버튼
 export const Button = styled.button<{ width: number }>`
     display: flex;
     justify-content: space-between;
@@ -73,10 +63,12 @@ export const Button = styled.button<{ width: number }>`
     border: none;
     border-radius: var(--br-5xs);
     width: 384px;
+    min-width: 384px;
     height: 3.5rem;
     margin-top: 40px;
     overflow: hidden;
     font-size: var(--body-14-bold-size);
+    white-space: nowrap;
 
     cursor: pointer;
 
