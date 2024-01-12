@@ -6,6 +6,7 @@ export const Swiper = styled.div`
     bottom: 8px;
     left: 50%;
     transform: translate(-50%, 0%);
+    display: block;
 
     width: 90px;
     height: 36px;
@@ -16,6 +17,9 @@ export const Swiper = styled.div`
 
     border-radius: 8px;
     background: var(--Grey-900, #212224);
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
 export const IconLeft = styled.img``;
