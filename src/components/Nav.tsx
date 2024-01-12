@@ -163,9 +163,9 @@ const Nav = () => {
                     <div className="right">
                         {isLogin ? (
                             <>
-                                <ChatBtn to="/chat">
+                                {/* <ChatBtn to="/chat">
                                     <img src={chat} />
-                                </ChatBtn>
+                                </ChatBtn> */}
                                 <ProfileBtn
                                     ref={buttonRef}
                                     onClick={() => setProfileModal(pre => !pre)}
