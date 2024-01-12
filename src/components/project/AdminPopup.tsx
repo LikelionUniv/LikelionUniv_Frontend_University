@@ -2,6 +2,7 @@ import React from 'react';
 import * as A from './AdminPopup.style';
 import { useNavigate } from 'react-router-dom';
 import useDeleteProject from '../../query/delete/useDeleteProject';
+import { requestUserInfo } from '../../api/auth/auth';
 
 interface AdminPopupProps {
     id: number;
@@ -10,8 +11,15 @@ interface AdminPopupProps {
 
 function AdminPopup({ id, serviceName }: AdminPopupProps) {
     const navigate = useNavigate();
+    
+    const getAdminInfo = async() => {
+        return await requestUserInfo();
+    }
 
-    const goUpdate = () => {
+    const goUpdate = async () => {
+        const admin = await getAdminInfo();
+        console.log(admin);
+        
         navigate(`/project/${id}/update`);
     };
 

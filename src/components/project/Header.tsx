@@ -4,6 +4,7 @@ import WriteIcon from '../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
 import { ProjectAPI } from './ProjectList';
 import { Gen } from './register/RegisterOptions';
+import useIsAdmin from '../../hooks/useIsAdmin';
 
 interface IHeader {
     setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
@@ -15,6 +16,8 @@ function Header({ setProjectApi }: IHeader) {
     const handleClick = (index?: number) => {
         setActiveTab(index);
     };
+
+    const {isAdmin} = useIsAdmin();
 
     useEffect(() => {
         // 전체를 클릭할 경우
@@ -67,7 +70,7 @@ function Header({ setProjectApi }: IHeader) {
                 </P.Tab>
             </P.TabContainer>
 
-            <P.WriteBtn isAdmin={true} onClick={goRegister} style={{display: 'none'}}>
+            <P.WriteBtn isAdmin={isAdmin} onClick={goRegister}>
                 <img src={WriteIcon} alt="write" />
                 글쓰기
             </P.WriteBtn>

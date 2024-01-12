@@ -62,7 +62,7 @@ function EachBox({ project, isAdmin }: IEachBox) {
                     >
                         {project.serviceName}
                     </B.ServiceName>
-                    <B.AdminBtn ref={layerRef} isAdmin={false}>
+                    <B.AdminBtn ref={layerRef} isAdmin={isAdmin}>
                         <B.MoreImage src={More} onClick={openPopup} />
                     </B.AdminBtn>
                 </B.SmallBox1>

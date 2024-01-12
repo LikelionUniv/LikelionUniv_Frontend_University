@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
-import Line from '../../img/recruit/linemobile.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './UnivFooterModalMobileStyle';
-import axios, { AxiosError } from 'axios';
+import { axiosInstance } from '../../utils/axios';
 import ModalComplete from '../recruit/modal-complete/ModalComplete';
 import { EMAIL } from '../../constants/regEx/regEx';
 
@@ -45,7 +44,6 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
 
     const CommitSubmit = async (e: any) => {
         e.preventDefault();
-        const url = `https://likelion.university/api/v1/alarm/12/register`;
 
         // 이메일 형식에 맞지 않는 경우
         if (!EMAIL.test(email)) {
@@ -54,17 +52,15 @@ const UnivModalMobile = ({ isOpen, closeModal }: FooterModalProps) => {
         }
 
         try {
-            const response = await axios.post(url, {
-                email: email,
-            });
+            const response = await axiosInstance.post(
+                `/api/v1/alarm/12/register`,
+                { email: email },
+            );
 
             console.log(response.data);
             setSuccess(response.data.isSuccess);
         } catch (error) {
             console.error('Error submitting form:', error);
-            const errorMessage = (error as AxiosError).response
-                ?.data as AxiosError;
-            alert(errorMessage.message);
         }
     };
 

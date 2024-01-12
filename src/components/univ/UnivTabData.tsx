@@ -200,7 +200,7 @@ export const tabData: { [key: string]: ITabData[] } = {
         {
             school: '서울대학교',
             region: '서울',
-            website: 'https://snulion.vercel.app/',
+            website: 'https://www.instagram.com/likelion_snu/',
             logo: seoul,
         },
         {

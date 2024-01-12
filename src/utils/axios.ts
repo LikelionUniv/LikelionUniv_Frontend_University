@@ -45,7 +45,6 @@ axiosInstance.interceptors.response.use(
 
         // 인가되지 않은 사용자인 경우 로그인으로 돌려버림
         if (axiosError?.code === 'SECURITY_401') {
-            alert(axiosError.message);
             // window.location.replace('/login');
             return Promise.reject(error);
         }

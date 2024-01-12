@@ -395,8 +395,6 @@ export const Text1 = styled.div`
 export const Text2 = styled.div`
     color: var(--White, #fff);
     text-align: center;
-
-    margin-left: 20px;
     /* Subtitle/20_Bold */
     font-family: Pretendard;
     font-size: 20px;
@@ -485,7 +483,6 @@ export const Text3 = styled.div`
 export const Text4 = styled.div`
     color: var(--Grey-700, #868c94);
     text-align: center;
-    margin-left: 20px;
 
     /* Subtitle/20_Bold */
     font-family: Pretendard;
@@ -612,6 +609,7 @@ export const AnsTable = styled.div`
     width: 1200px;
     box-sizing: border-box;
     padding: 25px 25px;
+    white-space: pre-line;
 
     color: #4d5359;
     font-family: Pretendard;
