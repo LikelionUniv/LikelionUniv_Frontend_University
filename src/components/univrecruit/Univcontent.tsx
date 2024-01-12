@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as U from './UnivcontentStyle';
 import Email2 from '../../img/recruit/Email2.svg';
@@ -63,7 +63,9 @@ const Univcontent = () => {
     };
 
     const navigate = useNavigate();
+
     const handleBtn2Click = useCallback(() => {
+        window.scrollTo(0, 0);
         navigate('/univ');
     }, [navigate]);
 
@@ -95,7 +97,7 @@ const Univcontent = () => {
                     <U.Btn2 onClick={handleBtn2Click}>
                         <U.StyledImg2 src={Apply2} alt="2" />{' '}
                         <U.Text3>아기사자 지원</U.Text3>
-                        <U.Text4>~ 3. 17</U.Text4>
+                        <U.Text4>~ 03. 17</U.Text4>
                     </U.Btn2>
                 </U.StyledButton>
 
