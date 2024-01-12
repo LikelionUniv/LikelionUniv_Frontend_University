@@ -79,7 +79,7 @@ const DeveloperInfo: FunctionComponent = () => {
             프론트: [],
             백: [],
             풀스텍: [],
-            팀원: [], //트랙 미기재
+            기타: [], //트랙 미기재
         };
         membersData.forEach(member => {
             const memberDetail = { name: member.name, userId: member.userId };
@@ -101,7 +101,7 @@ const DeveloperInfo: FunctionComponent = () => {
                     roleMapping.풀스텍.push(memberDetail);
                     break;
                 case 'NO_PART':
-                    roleMapping.팀원.push(memberDetail);
+                    roleMapping.기타.push(memberDetail);
                     break;
             }
         });
