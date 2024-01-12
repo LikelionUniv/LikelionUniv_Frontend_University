@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 
+
 interface Span4Props {
     isLoggedIn: boolean;
 }
@@ -85,13 +86,11 @@ export const Span4 = styled.span<Span4Props>`
     font-weight: 500;
     color: var(--grey-800);
     background-color: white;
-    ${props =>
-        props.isLoggedIn &&
-        css`
-            &:hover {
-                background-color: #f2f2f2;
-            }
-        `}
+    ${props => props.isLoggedIn && css`
+        &:hover {
+            background-color: #f2f2f2;
+        }
+    `}
 `;
 
 export const Members = styled.div`
