@@ -1,10 +1,4 @@
-import {
-    FunctionComponent,
-    useState,
-    useEffect,
-    useMemo,
-    useCallback,
-} from 'react';
+import { FunctionComponent, useState, useEffect, useMemo, useCallback } from 'react';
 import * as D from './DeveloperInfo.style';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
@@ -60,8 +54,7 @@ const DeveloperInfo: FunctionComponent = () => {
 
     // 프로젝트 데이터 불러오기
     useEffect(() => {
-        axiosInstance
-            .get(`/api/v1/project/${projectId}`)
+        axiosInstance.get(`/api/v1/project/${projectId}`)
             .then(response => {
                 setProjectData(response.data.data);
                 setMembersData(response.data.data.members);
@@ -71,15 +64,12 @@ const DeveloperInfo: FunctionComponent = () => {
 
     const navigate = useNavigate(); // useNavigate 사용
 
-    const goToUserProfile = useCallback(
-        (userId: number) => {
-            // 로그인 상태일 때만 프로필 페이지로 이동
-            if (userinfo.isLogin) {
-                navigate(`/userpage/${userId}`);
-            }
-        },
-        [userinfo, navigate],
-    );
+    const goToUserProfile = useCallback((userId: number) => {
+        // 로그인 상태일 때만 프로필 페이지로 이동
+        if (userinfo.isLogin) {
+            navigate(`/userpage/${userId}`);
+        }
+    }, [userinfo, navigate]);
 
     // 각 역할별 멤버 매핑
     const mappedMembers = useMemo(() => {
@@ -89,7 +79,7 @@ const DeveloperInfo: FunctionComponent = () => {
             프론트: [],
             백: [],
             풀스텍: [],
-            팀원: [], //트랙 미기재
+            기타: [], //트랙 미기재
         };
         membersData.forEach(member => {
             const memberDetail = { name: member.name, userId: member.userId };
@@ -111,7 +101,7 @@ const DeveloperInfo: FunctionComponent = () => {
                     roleMapping.풀스텍.push(memberDetail);
                     break;
                 case 'NO_PART':
-                    roleMapping.팀원.push(memberDetail);
+                    roleMapping.기타.push(memberDetail);
                     break;
             }
         });
@@ -140,24 +130,21 @@ const DeveloperInfo: FunctionComponent = () => {
             <D.RightWrapper>
                 <D.Label>팀원 소개</D.Label>
                 <D.Members>
-                    {Object.keys(mappedMembers).map(
-                        part =>
-                            mappedMembers[part].length > 0 && (
-                                <p key={part}>
-                                    <D.Span>{part}</D.Span>
-                                    {mappedMembers[part].map(member => (
-                                        <D.Span4
-                                            isLoggedIn={userinfo.isLogin}
-                                            key={member.name}
-                                            onClick={() =>
-                                                goToUserProfile(member.userId)
-                                            }
-                                        >
-                                            {member.name}
-                                        </D.Span4>
-                                    ))}
-                                </p>
-                            ),
+                    {Object.keys(mappedMembers).map(part =>
+                        mappedMembers[part].length > 0 && (
+                            <p key={part}>
+                                <D.Span>{part}</D.Span>
+                                {mappedMembers[part].map(member => (
+                                    <D.Span4
+                                        isLoggedIn={userinfo.isLogin}
+                                        key={member.name}
+                                        onClick={() => goToUserProfile(member.userId)}
+                                    >
+                                        {member.name}
+                                    </D.Span4>
+                                ))}
+                            </p>
+                        )
                     )}
                 </D.Members>
             </D.RightWrapper>
