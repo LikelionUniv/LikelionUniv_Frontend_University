@@ -26,7 +26,7 @@ export const Login = () => {
 
                 <L.Box>
                     <L.Text>
-                        멋쟁이사자처럼에
+                        멋쟁이사자처럼 대학에
                         <br />
                         오신 걸 환영합니다.
                     </L.Text>
