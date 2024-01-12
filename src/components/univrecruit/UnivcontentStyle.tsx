@@ -612,6 +612,7 @@ export const AnsTable = styled.div`
     width: 1200px;
     box-sizing: border-box;
     padding: 25px 25px;
+    white-space: pre-line;
 
     color: #4d5359;
     font-family: Pretendard;
