@@ -152,7 +152,7 @@ const ProjectRegister = () => {
     const processTechEtcToStringList = () => {
         const splitTeches = formState.projectTechEtc.split(',');
         return splitTeches.map(tech => tech.trim());
-    }
+    };
 
     const processImages = async (): Promise<string[]> => {
         const imageFiles: File[] = formState.images.map(image => image.file);
@@ -194,8 +194,7 @@ const ProjectRegister = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-        console.log(data);
-        
+
         registerProject(data);
     };
 

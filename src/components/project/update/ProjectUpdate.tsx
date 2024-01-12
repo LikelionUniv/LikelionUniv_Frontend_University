@@ -196,7 +196,7 @@ const ProjectUpdate = () => {
     const processTechEtcToStringList = () => {
         const splitTeches = formState.projectTechEtc.split(',');
         return splitTeches.map(tech => tech.trim());
-    }
+    };
 
     const processImages = async (): Promise<string[]> => {
         const imageFiles: (string | File)[] = formState.images.map(image => {

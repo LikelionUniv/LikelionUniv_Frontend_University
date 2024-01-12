@@ -27,11 +27,13 @@ const ProjectDetail: FunctionComponent = () => {
         const pathParts = path.split('/');
         const projectId = pathParts[pathParts.length - 1];
 
-        axiosInstance.get(`/api/v1/project/${projectId}`)
+        axiosInstance
+            .get(`/api/v1/project/${projectId}`)
             .then(response => setProjectData(response.data.data))
-            .catch(error => console.error('Error fetching project data:', error));
+            .catch(error =>
+                console.error('Error fetching project data:', error),
+            );
     }, []);
-
 
     // 로딩 상태 확인
     if (!projectData) return <div>Loading...</div>;

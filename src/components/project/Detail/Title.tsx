@@ -1,10 +1,9 @@
-import React, { useCallback,useState,useEffect } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import * as T from './Title.style';
 import { ProjectData } from './ProjectDetail';
 import { RightArrow } from '../../../img/project/detail';
 import useInnerWidth from '../../../hooks/useInnerWidth';
 import styled from 'styled-components';
-
 
 interface TitleProps {
     projectData: ProjectData;
@@ -20,7 +19,9 @@ const ProjectSummary = styled.b<{ fontSize: string }>`
 `;
 
 function Title({ projectData }: TitleProps) {
-    const [summaryFontSize, setSummaryFontSize] = useState('var(--title-24-bold-size)'); // 초기 폰트 크기 설정
+    const [summaryFontSize, setSummaryFontSize] = useState(
+        'var(--title-24-bold-size)',
+    ); // 초기 폰트 크기 설정
 
     useEffect(() => {
         // 프로젝트 요약 길이에 따라 폰트 크기 조절
@@ -56,7 +57,8 @@ function Title({ projectData }: TitleProps) {
                 <T.ProjectTitle>{projectData.serviceName}</T.ProjectTitle>
                 <ProjectSummary fontSize={summaryFontSize}>
                     {projectData.description}
-                </ProjectSummary>                <T.ProjectContainer>
+                </ProjectSummary>{' '}
+                <T.ProjectContainer>
                     <T.P>{projectData.content}</T.P>
                 </T.ProjectContainer>
             </T.Content>
