@@ -4,12 +4,14 @@ import WriteIcon from '../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
 import { ProjectAPI } from './ProjectList';
 import { Gen } from './register/RegisterOptions';
+import useIsAdmin from '../../hooks/useIsAdmin';
 
 interface IHeader {
     setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
 }
 
 function Header({ setProjectApi }: IHeader) {
+    const { isAdmin } = useIsAdmin();
     const [activeTab, setActiveTab] = useState<number | undefined>();
 
     const handleClick = (index?: number) => {

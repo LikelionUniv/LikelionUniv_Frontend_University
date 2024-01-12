@@ -64,6 +64,10 @@ export const SmallBox1 = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+<<<<<<< HEAD
+=======
+    height: 100%;
+>>>>>>> 7259cb6c5a33e48ebaffde6002408f91c0b5ac39
 `;
 
 export const ServiceName = styled.div<BoxProp>`
