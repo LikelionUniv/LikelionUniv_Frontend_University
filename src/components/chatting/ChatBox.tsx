@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import ChatList from './ChatList';
 import Pannel from './Pannel';
 import React, { useEffect, useState } from 'react';
-import SockJS from 'sockjs-client';
-import StompJs from '@stomp/stompjs';
+// import SockJS from 'sockjs-client';
+import StompJs from 'stompjs';
 import axios from 'axios';
 
 const ChatBox = () => {

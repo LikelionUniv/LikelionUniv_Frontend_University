@@ -1,6 +1,6 @@
 import * as L from './ChatListStyle';
 import { useState, useEffect } from 'react';
-import dummy from './db/userdata.json';
+import dummy from './dummy/userdata.json';
 import ProfileImg from '../../img/chatting/user_profile.svg';
 import SplitDot from '../../img/chatting/split_dot.svg';
 import { useRecoilState } from 'recoil';
