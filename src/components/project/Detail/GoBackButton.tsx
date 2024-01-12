@@ -1,6 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
 import { Property } from 'csstype';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 interface GoBackButtonType {
     ArrowLeft?: string;
@@ -75,9 +76,10 @@ const GoBackButton: FunctionComponent<GoBackButtonType> = ({
     marginTop,
     onClick,
 }) => {
+    const navigate = useNavigate();
     const onButtonClick = useCallback(() => {
-        window.location.href = '/project';
-    }, []);
+        navigate('/project'); // 페이지 전환
+    }, [navigate]);
     return (
         <GoBackButtonRoot
             GoBackButtonCursor={GoBackButtonCursor}

@@ -6,6 +6,7 @@ import Styles from './Styles';
 import { LeftArrow } from '../../../img/project/detail';
 import Caruosel from './carousel/Carousel';
 import Title from './Title';
+import { axiosInstance } from '../../../utils/axios';
 
 export interface ProjectData {
     activity: string;
@@ -26,9 +27,9 @@ const ProjectDetail: FunctionComponent = () => {
         const pathParts = path.split('/');
         const projectId = pathParts[pathParts.length - 1];
 
-        fetch(`https://stag.likelionuniv.com/api/v1/project/${projectId}`)
-            .then(response => response.json())
-            .then(data => setProjectData(data.data))
+        axiosInstance
+            .get(`/api/v1/project/${projectId}`)
+            .then(response => setProjectData(response.data.data))
             .catch(error =>
                 console.error('Error fetching project data:', error),
             );

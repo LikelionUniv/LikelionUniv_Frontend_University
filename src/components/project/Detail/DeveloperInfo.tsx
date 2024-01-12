@@ -1,5 +1,14 @@
-import { FunctionComponent, useState, useEffect, useMemo } from 'react';
+import {
+    FunctionComponent,
+    useState,
+    useEffect,
+    useMemo,
+    useCallback,
+} from 'react';
 import * as D from './DeveloperInfo.style';
+import { useAuth } from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+import { axiosInstance } from '../../../utils/axios';
 
 interface ProjectData {
     id: number;
@@ -17,95 +26,98 @@ interface ProjectData {
     imageUrl: string[];
     members: { userId: number; name: string }[];
 }
-interface UserDetail {
-    userId: number;
-    name: string;
-    profileImage: string | null;
-    universityName: string;
-    ordinal: number;
-    part: string;
-}
 
 interface ProjectMember {
     userId: number;
     name: string;
+    part: string;
 }
 
-// 역할별로 이름을 저장하는 객체 타입 정의
+interface MemberDetail {
+    name: string;
+    userId: number;
+}
+
 interface RoleMapping {
-    [key: string]: string[];
-    기획: string[];
-    디자인: string[];
-    프론트: string[];
-    백: string[];
-    풀스텍: string[];
+    [key: string]: MemberDetail[];
+    기획: MemberDetail[];
+    디자인: MemberDetail[];
+    프론트: MemberDetail[];
+    백: MemberDetail[];
+    풀스텍: MemberDetail[];
 }
 
 const DeveloperInfo: FunctionComponent = () => {
     const [projectData, setProjectData] = useState<ProjectData | null>(null);
     const [membersData, setMembersData] = useState<ProjectMember[]>([]);
-    const [userDetails, setUserDetails] = useState<UserDetail[]>([]);
 
+    const { userinfo } = useAuth();
+
+    // 현재 URL에서 projectId 추출
+    const path = window.location.pathname;
+    const pathParts = path.split('/');
+    const projectId = pathParts[pathParts.length - 1];
+
+    // 프로젝트 데이터 불러오기
     useEffect(() => {
-        fetch('https://stag.likelionuniv.com/api/v1/project/1')
-            .then(response => response.json())
-            .then(data => setProjectData(data.data))
+        axiosInstance
+            .get(`/api/v1/project/${projectId}`)
+            .then(response => {
+                setProjectData(response.data.data);
+                setMembersData(response.data.data.members);
+            })
             .catch(error => console.error('Fetching error:', error));
-    }, []);
+    }, [projectId]);
 
-    // 프로젝트 API에서 멤버 데이터 불러오기
-    useEffect(() => {
-        fetch('https://stag.likelionuniv.com/api/v1/project/1')
-            .then(response => response.json())
-            .then(data => setMembersData(data.data.members))
-            .catch(error =>
-                console.error('Error fetching project members:', error),
-            );
-    }, []);
+    const navigate = useNavigate(); // useNavigate 사용
 
-    // 사용자 상세 정보 API에서 데이터 불러오기
-    useEffect(() => {
-        fetch('https://stag.likelionuniv.com/api/v1/user/search?page=0&size=4')
-            .then(response => response.json())
-            .then(data => setUserDetails(data.data.data))
-            .catch(error =>
-                console.error('Error fetching user details:', error),
-            );
-    }, []);
+    const goToUserProfile = useCallback(
+        (userId: number) => {
+            // 로그인 상태일 때만 프로필 페이지로 이동
+            if (userinfo.isLogin) {
+                navigate(`/userpage/${userId}`);
+            }
+        },
+        [userinfo, navigate],
+    );
 
     // 각 역할별 멤버 매핑
     const mappedMembers = useMemo(() => {
-        // 초기화 시 모든 키에 대해 빈 배열 할당
         const roleMapping: RoleMapping = {
             기획: [],
             디자인: [],
             프론트: [],
             백: [],
             풀스텍: [],
+            팀원: [], //트랙 미기재
         };
-
-        userDetails.forEach(user => {
-            switch (user.part) {
-                case '기획':
-                    roleMapping.기획.push(user.name);
+        membersData.forEach(member => {
+            const memberDetail = { name: member.name, userId: member.userId };
+            // 각 팀원을 해당하는 역할별로 분류
+            switch (member.part) {
+                case 'PM':
+                    roleMapping.기획.push(memberDetail);
                     break;
-                case '디자인':
-                    roleMapping.디자인.push(user.name);
+                case 'DESIGNER':
+                    roleMapping.디자인.push(memberDetail);
                     break;
-                case '프론트엔드':
-                    roleMapping.프론트.push(user.name);
+                case 'FRONTEND':
+                    roleMapping.프론트.push(memberDetail);
                     break;
-                case '백엔드':
-                    roleMapping.백.push(user.name);
+                case 'BACKEND':
+                    roleMapping.백.push(memberDetail);
                     break;
-                case '풀스텍':
-                    roleMapping.풀스텍.push(user.name);
+                case 'FULL_STACK':
+                    roleMapping.풀스텍.push(memberDetail);
+                    break;
+                case 'NO_PART':
+                    roleMapping.팀원.push(memberDetail);
                     break;
             }
         });
 
         return roleMapping;
-    }, [userDetails]);
+    }, [membersData]);
 
     return (
         <D.ParentRoot>
@@ -133,8 +145,16 @@ const DeveloperInfo: FunctionComponent = () => {
                             mappedMembers[part].length > 0 && (
                                 <p key={part}>
                                     <D.Span>{part}</D.Span>
-                                    {mappedMembers[part].map(name => (
-                                        <D.Span4 key={name}>{name}</D.Span4>
+                                    {mappedMembers[part].map(member => (
+                                        <D.Span4
+                                            isLoggedIn={userinfo.isLogin}
+                                            key={member.name}
+                                            onClick={() =>
+                                                goToUserProfile(member.userId)
+                                            }
+                                        >
+                                            {member.name}
+                                        </D.Span4>
                                     ))}
                                 </p>
                             ),

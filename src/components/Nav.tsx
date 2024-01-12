@@ -198,6 +198,7 @@ const Nav = () => {
                         <ProfileModal ref={modalRef}>
                             <div
                                 onClick={() => {
+                                    navigate('/mypage');
                                     setProfileModal(pre => !pre);
                                 }}
                                 className="inner"

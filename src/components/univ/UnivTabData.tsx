@@ -53,7 +53,7 @@ import gyeongsang from '../../img/univ/gyeongsang.png';
 import koreatransport from '../../img/univ/koreatransport.jpeg';
 import kit from '../../img/univ/kit.png';
 import seoultech from '../../img/univ/seoultech.png';
-import yeung from '../../img/univ/yeung.png'
+import yeung from '../../img/univ/yeung.png';
 
 export interface ITabData {
     school: string;
@@ -354,7 +354,6 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://mju-likelion.org/',
             logo: myongji_nat,
         },
-       
     ],
     강원: [
         {
@@ -385,7 +384,6 @@ export const tabData: { [key: string]: ITabData[] } = {
             website: 'https://www.instagram.com/likelionnsu/',
             logo: namseoul,
         },
-  
     ],
     전북: [
         {

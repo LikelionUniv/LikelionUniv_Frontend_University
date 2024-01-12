@@ -13,7 +13,6 @@ import FooterModalMobile from '../univrecruit//UnivModalMobile';
 import { Button } from '../univrecruit/UnivHeaderStyle';
 const Header = () => {
     const [width, setWidth] = useState<number>(window.innerWidth);
-    const [isPC, setIsPC] = useState<boolean>(true);
     const desRef1 = useRef<HTMLDivElement>(null);
     const desRef2 = useRef<HTMLImageElement>(null);
     const [desWidth, setDesWidth] = useRecoilState(currentWidthState);
@@ -26,10 +25,7 @@ const Header = () => {
             window.removeEventListener(`resize`, handleResize);
         };
     }, []);
-    useEffect(() => {
-        if (width > 768) setIsPC(true);
-        else setIsPC(false);
-    }, [width]);
+
     useEffect(() => {
         if (!desRef1.current || !desRef2.current) return;
         setDesWidth(
