@@ -13,13 +13,13 @@ import { useNavigate } from 'react-router-dom';
 const Univcontent = () => {
     const [selected, setSelected] = useState(null);
     const [hovered, setHovered] = useState(false);
-
-    const handleClick = (index: any) => {
-        if (selected === index) {
-            setSelected(null);
-        } else {
-            setSelected(index);
-        }
+  
+    const handleClick = (index:any) => {
+      if (selected === index) {
+        setSelected(null);
+      } else {
+        setSelected(index);
+      }
     };
 
     const goEmail = () => {

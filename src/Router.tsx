@@ -7,7 +7,6 @@ import Chat from './routes/Chat';
 import Root from './routes/root';
 import Mypage from './routes/Mypage';
 import MypageRoot from './routes/MypageRoot';
-
 import UnivPage from './routes/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectList from './components/project/ProjectList';
@@ -145,6 +144,7 @@ const router = createBrowserRouter([
                 ],
             },
 
+
             {
                 path: '/chat',
                 element: <Chat />,
@@ -154,6 +154,7 @@ const router = createBrowserRouter([
                 element: <AboutPage />,
             },
         ],
+       
     },
     {
         path: '/oauth/:provider/redirect',
