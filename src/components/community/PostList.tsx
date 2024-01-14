@@ -1,47 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostBox from './PostBox';
-import { TestData } from './DummyData';
 import Pagination from '../mypage/Pagination';
 import { PostBoxProp } from './PostBox';
+import { axiosInstance } from '../../utils/axios';
 
 interface PostListProps {
     searchQuery: string;
+    order: string;
+    mainCategory: string;
+    subCategory: string;
 }
 
-const PostList: React.FC<PostListProps> = ({ searchQuery }) => {
+const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, subCategory }) => {
+    const [posts, setPosts] = useState<Array<PostBoxProp>>([]);
     const [page, setPage] = useState(1);
-    const [testData, setTestData] = useState<Array<PostBoxProp>>([]);
-    const [totalPage, setTotalPage] = useState<number>(1);
+    const isSearching = searchQuery !== '';
 
     useEffect(() => {
-        const filteredData = TestData.filter(post =>
-            post.title.includes(searchQuery),
-        );
-        setTestData(
-            filteredData.slice(5 * Math.ceil(page) - 5, 5 * Math.ceil(page)),
-        );
+        const fetchData = async () => {
+            let response;
+            if (searchQuery) {
+                const searchParams = {
+                    mc: mainCategory,
+                    sc: subCategory,
+                    st: searchQuery,
+                    page: 1,
+                    size: 5
+                };
+                response = await axiosInstance.get(`/api/v1/community/posts/search`, { params: searchParams });
+            } else {
+                const params = {
+                    oc: order,
+                    mc: mainCategory,
+                    sc: subCategory,
+                    page: page,
+                    size: 5
+                };
+                response = await axiosInstance.get(`/api/v1/community/posts`, { params: params });
+            }
+            console.log(response.data.data.data);
+            setPosts(response.data.data.data);
+        };
+    
+        fetchData();
+    }, [searchQuery, order, mainCategory, subCategory, page]);
+    
 
-        setTotalPage(Math.ceil(filteredData.length / 5));
-    }, [page, searchQuery]);
+    
+    const [totalPage, setTotalPage] = useState<number>(1);
+
 
     return (
         <Wrapper>
             <>
-                {testData.map(e => {
-                    return (
+                {Array.isArray(posts) && (
+                    posts.map(e => (
                         <PostBox
-                            img={e.img}
                             title={e.title}
-                            content={e.content}
-                            like={e.like}
-                            comment={e.comment}
-                            date={e.date}
-                            user={e.user}
-                            profile={e.profile}
+                            bodySummary={e.bodySummary}
+                            likeCount={e.likeCount}
+                            commentCount={e.commentCount}
+                            createdDate={e.createdDate}
+                            authorName={e.authorName}
+                            thumbnailUrl={e.thumbnailUrl}
+                            authorProfileImageUrl={e.authorProfileImageUrl}
+                            postId={e.postId}
+                            hasAuthorProfileImage={e.hasAuthorProfileImage}
+                            hasThumbnailUrl={e.hasThumbnailUrl}
+                            mainCategory={e.mainCategory}
+                            isSearching={isSearching}
+                            
                         />
-                    );
-                })}
+                    ))
+                )}
             </>
             <PageWrapper>
                 <Pagination

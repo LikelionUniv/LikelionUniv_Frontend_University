@@ -39,6 +39,7 @@ export interface PostComment {
     hasChildComments?: boolean;
     childComments?: PostComment[];
     parentId?: number;
+    onCommentUpdate : () => void;
 }
 
 

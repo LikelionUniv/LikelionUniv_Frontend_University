@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import OrderDropDown from './OrderDropDown';
 import WriteIcon from '../../img/community/write.svg';
 import PostList from './PostList';
 import { useNavigate } from 'react-router-dom';
-import { PostBoxProp } from './PostBox';
+import CategoryDropDown from './CategoryDropDown';
+import search from '../../img/community/search.svg';
 
 interface NoticeProps {
-    selectedItem: string;
     searchQuery: string;
+    mainCategory: string;
+    subCategory: string;
+    onSearch: (query: string) => void;
 }
 
 const contentSubtitles: Record<string, string> = {
@@ -25,25 +28,77 @@ const contentSubtitles: Record<string, string> = {
     기타: '미정.',
 };
 
-const Notice: React.FC<NoticeProps> = ({ selectedItem, searchQuery }) => {
+const Notice: React.FC<NoticeProps> = ({ mainCategory, subCategory, searchQuery, onSearch }) => {
     const navigate = useNavigate();
-    const content = selectedItem;
+    const content = subCategory;
     const subtitle = contentSubtitles[content];
+    const [inputValue, setInputValue] = useState<string>(searchQuery);
+    const [order, setOrder] = useState('CREATED_DATE_ORDER'); 
 
-    //api 연결할때 PostList에 props 추가해서 카테고리에 맞는 data 받아서 구성하도록 수정할 예정
+    const [selectedMainCategory, setSelectedMainCategory] = useState(mainCategory);
+    const [selectedSubCategory, setSelectedSubCategory] = useState(subCategory);
+
+
+    const handleCategoryChange = (newMainCategory: string, newSubCategory: string) => {
+        setSelectedMainCategory(newMainCategory);
+        setSelectedSubCategory(newSubCategory);
+    };
+
+    const handleOrderChange = (newOrder:string) => {
+        setOrder(newOrder);
+    };
+
+    useEffect(() => {
+        setInputValue(searchQuery);
+    }, [searchQuery]);
+
     return (
         <Wrapper>
-            <Title>{content}</Title>
-            <SubTitle>{subtitle}</SubTitle>
+            {searchQuery ? (
+                <div style={{display: 'flex', gap: '8px'}}>
+                <CategoryDropDown onCategoryChange={handleCategoryChange} />
+                <TextInput borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+                <input
+                    className='textInput'
+                    type="text"
+                    placeholder=" 검색"
+                    value={inputValue}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (e.key === 'Enter') {
+                            onSearch(inputValue);
+                        }
+                    }}
+                    onChange={e => {
+                        setInputValue(e.target.value);
+                    }}
+                />
+                <img
+                    style={{ marginLeft: '8px' }}
+                    src={search}
+                    onClick={() => onSearch(inputValue)}
+                    alt="검색"
+                />
+            </TextInput>
+            </div>
+            ) : (
+                <>
+                    <Title>{content}</Title>
+                    <SubTitle>{subtitle}</SubTitle>
+                </>
+            )}
             <Divider />
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <OrderDropDown />
+                <OrderDropDown onOrderChange={handleOrderChange} />
                 <Button onClick={() => navigate('/community/write')}>
                     <img src={WriteIcon} alt="펜" />
                     글쓰기
                 </Button>
             </div>
-            <PostList searchQuery={searchQuery} />
+            {searchQuery ? (
+                <PostList searchQuery={searchQuery} order={order} mainCategory={selectedMainCategory} subCategory={selectedSubCategory}/>
+                ) : (
+                    <PostList searchQuery={searchQuery} order={order} mainCategory={mainCategory} subCategory={subCategory}/>
+                )}
         </Wrapper>
     );
 };
@@ -90,4 +145,28 @@ const Button = styled.div`
     color: #fff;
     font-weight: 700;
     cursor: pointer;
+`;
+
+const TextInput = styled.div<{ borderColor: string }>`
+    height: 40px;
+    width: 400px;
+    border-radius: 6px;
+    border: 1px solid ${props => props.borderColor};
+    align-items: center;
+    display: inline-flex;
+    justify-content: space-between;
+    padding: 0 8px 0 16px;
+
+    .textInput{
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+
+        width: 100%;
+        outline: none;
+        border: none;
+    }
 `;

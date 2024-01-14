@@ -1,6 +1,23 @@
 import styled from 'styled-components';
 import { RegBtnProps } from './Comment';
 
+export const Back = styled.div`
+    display: none;
+
+    @media screen and (max-width: 767px) {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 4px;
+        width: 100%;
+        float: inline-end;
+        justify-content: space-between;
+        padding-right: 12px;
+        height: 44px;
+        border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+    }
+`
+
 export const Container = styled.div`
     max-width: 792px;
     width: 100%;
@@ -10,13 +27,34 @@ export const Container = styled.div`
     margin-top: 100px;
     font-family: Pretendard;
     flex-direction: column;
-    margin-bottom: 200px;
+
+    @media screen and (max-width: 767px) {
+        margin-top: 58px;
+        padding: 0 16px;
+    }
+
+    .link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--Grey-900, #212224);
+        text-align: center;
+        align-self: center;
+        font-family: Pretendard;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%; /* 30px */
+        margin: 100px 0;
+    }
 
     .back {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         gap: 4px;
+        width: fit-content;
 
         color: var(--Grey-900, #212224);
         text-align: center;
@@ -29,6 +67,18 @@ export const Container = styled.div`
 
         &:hover {
             color: var(--Orange-600, #ff7710);
+        }
+
+        @media screen and (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    .menu {
+        display: none;
+        @media screen and (max-width: 767px) {
+            display: flex;
+            float: inline-end;
         }
     }
 
@@ -44,6 +94,19 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 150%; /* 24px */
+
+        @media screen and (max-width: 767px) {
+            font-size: 14px;
+        }
+
+    }
+
+    .empty {
+        margin-top: 32px;
+
+        @media screen and (max-width: 767px) {
+            margin: 24px 0 40PX 0;
+        }
     }
 `;
 
@@ -58,6 +121,11 @@ export const Title = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+
+    @media screen and (max-width: 767px) {  
+        font-size: 20px;
+        margin: 24px 0 16px 0;
+    }
 `;
 
 export const Dot = styled.div`
@@ -73,6 +141,10 @@ export const User = styled.div`
     justify-content: space-between;
     padding-bottom: 24px;
     border-bottom: 1px solid var(--Grey-300, #eaecee);
+
+    @media screen and (max-width: 767px) {  
+        padding-bottom: 16px;
+    }
 
     .left {
         display: flex;
@@ -102,6 +174,10 @@ export const User = styled.div`
             font-style: normal;
             font-weight: 700;
             line-height: 150%; /* 24px */
+
+            @media screen and (max-width: 767px) {  
+                font-size: 14px;
+            }
         }
 
         .followBtn {
@@ -155,6 +231,10 @@ export const User = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: 150%; /* 21px */
+
+            @media screen and (max-width: 767px) {  
+                font-size: 12px;
+            }
         }
     }
 
@@ -163,6 +243,10 @@ export const User = styled.div`
         gap: 16px;
         align-self: flex-end;
         align-items: center;
+
+        @media screen and (max-width: 767px) {  
+            gap: 8px;
+        }
 
         .icons {
             gap: 4px;
@@ -175,6 +259,11 @@ export const User = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: 150%; /* 21px */
+
+            @media screen and (max-width: 767px) {  
+                font-size: 12px;
+            }
+            
         }
 
         .btns {
@@ -222,6 +311,10 @@ export const User = styled.div`
 export const TextArea = styled.div`
     width: 100%;
     margin: 48px 0 64px 0;
+
+    img {
+        width: 100%;
+    }
 `;
 
 /*Like 좋아요*/
@@ -260,8 +353,9 @@ export const Like = styled.div`
 
 /*Comment 댓글입력창*/
 
-export const CommentWrapper = styled.div`
+export const CommentWrapper = styled.div<{ isChildComment: boolean; isModify: boolean }>`
     width: 100%;
+    padding-left: ${props => (props.isChildComment && props.isModify ? '48px' : '0')};
 
     .btnwrapper {
         display: flex;
@@ -280,6 +374,10 @@ export const WriteComment = styled.div<{ borderColor: string }>`
     display: flex;
     align-items: center;
 
+    @media screen and (max-width: 767px) {
+        padding: 12px;
+    }
+
     .text {
         width: 100%;
         outline: none;
@@ -293,6 +391,10 @@ export const WriteComment = styled.div<{ borderColor: string }>`
         font-style: normal;
         font-weight: 500;
         line-height: 150%; /* 24px */
+
+        @media screen and (max-width: 767px) {
+            font-size: 14px;
+        }
     }
 `;
 

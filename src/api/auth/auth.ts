@@ -8,7 +8,7 @@ export const requestIdtoken = async (
 ) => {
     return await axiosInstance
         .get(
-            `/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`
+            `/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`
         )
         .then(response => {
             //idtoken return

@@ -1,56 +1,68 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PostCardProp } from '../mypage/type';
 import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
 import { useNavigate } from 'react-router-dom';
 
-export interface PostBoxProp extends PostCardProp {
-    user: string;
-    profile: string | null;
+export interface PostBoxProp {
+    authorName: string;
+    postId: number;
+    mainCategory?: string;
+    subCategory?: string;
+    hasAuthorProfileImage: boolean;
+    authorProfileImageUrl?: string;
+    title: string;
+    bodySummary: string;
+    hasThumbnailUrl: boolean;
+    thumbnailUrl?: string;
+    likeCount: number;
+    commentCount: number;
+    createdDate: string;
+    isSearching: boolean;
 }
 
 const PostBox: React.FC<PostBoxProp> = props => {
     const navigate = useNavigate();
 
     const onClick = () => {
-        navigate(`/community/1`);
+        navigate(`/community/${props.postId}`);
     };
 
     return (
-        <Wrapper onClick={onClick}>
-            <BoxWrapper>
+        <Wrapper onClick={onClick} isSearching={props.isSearching}>
+            <BoxWrapper isSearching={props.isSearching}>
+                {props.isSearching && (<Mc className="mc">{props.mainCategory}</Mc>)}
                 <Box className="title">{props.title}</Box>
-                <Box className="content">{props.content}</Box>
+                <Box className="content" dangerouslySetInnerHTML={{ __html: props.bodySummary }}></Box>
                 <Box className="nav">
                     <div className="wrapper">
                         <Box
                             className="profile"
                             style={{
-                                backgroundImage: `url(${props.profile})`,
+                                backgroundImage: `url(${props.authorProfileImageUrl})`,
                             }}
                         ></Box>
-                        <div className="user">{props.user}</div>
+                        <div className="user">{props.authorName}</div>
                     </div>
                     <Dot />
-                    <Box className="date">{props.date}</Box>
+                    <Box className="date">{props.createdDate}</Box>
                     <Dot />
                     <div className="wrapper">
                         <div className="heart" />
-                        <div>{props.like}</div>
+                        <div>{props.likeCount}</div>
                     </div>
                     <Dot />
                     <div className="wrapper">
                         <div className="comment" />
-                        <div>{props.comment}</div>
+                        <div>{props.commentCount}</div>
                     </div>
                 </Box>
             </BoxWrapper>
             <Box
                 className="photo"
-                img={props.img}
+                img={props.thumbnailUrl}
                 style={{
-                    backgroundImage: props.img ? `url(${props.img})` : 'none',
+                    backgroundImage: props.thumbnailUrl ? `url(${props.thumbnailUrl})` : 'none',
                 }}
             ></Box>
         </Wrapper>
@@ -59,9 +71,9 @@ const PostBox: React.FC<PostBoxProp> = props => {
 
 export default PostBox;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{isSearching: boolean}>`
     width: 100%;
-    height: 216px;
+    height: ${props => props.isSearching ? '237px' : '216px'};
     border-bottom: 1px solid #dcdfe3;
     display: inline-flex;
     align-items: center;
@@ -69,8 +81,8 @@ const Wrapper = styled.div`
     cursor: pointer;
 `;
 
-const BoxWrapper = styled.div`
-    padding: 28px 32px 28px 0;
+const BoxWrapper = styled.div<{isSearching: boolean}>`
+    padding: ${props => props.isSearching ? '0px 32px 24px 0' : '28px 32px 28px 0'};
 `;
 
 const Dot = styled.div`
@@ -80,9 +92,21 @@ const Dot = styled.div`
     border-radius: 50%;
 `;
 
+const Mc = styled.div`
+    color: var(--Orange-600, #FF7710);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    width: 320px;
+    margin: 24px 0 8px 0;
+`
+
 export const Box = styled.div<{ img?: string | null }>`
     line-height: 150%;
     font-weight: 500;
+
     &.date {
         color: var(--Grey-700, #868c94);
         font-size: 14px;
@@ -101,6 +125,7 @@ export const Box = styled.div<{ img?: string | null }>`
     }
     &.content {
         font-size: 16px;
+        height: 72px;
         overflow: hidden;
         line-height: 150%;
         text-overflow: ellipsis;

@@ -24,10 +24,11 @@ interface CommentProps {
     isModify?: boolean;
     id: number;
     cancel? : () => void;
+    onCommentUpdate : () => void;
 }
 
-const Comment:React.FC<CommentProps> = ({contents, isChildComment = false, isModify = false, id, cancel}) => {
-    console.log(isChildComment, isModify, id)
+const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComment = false, isModify = false, id, cancel}) => {
+    console.log(isChildComment, isModify)
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
     const handleResizeHeight = useCallback(() => {
@@ -54,7 +55,10 @@ const Comment:React.FC<CommentProps> = ({contents, isChildComment = false, isMod
             data: commentData,
             params: commentParams
         });
-        console.log(response.data)
+        console.log(response.data);
+        onCommentUpdate();
+        setInputValue('');
+        
     };
 
     //대댓글 생성
@@ -65,15 +69,18 @@ const Comment:React.FC<CommentProps> = ({contents, isChildComment = false, isMod
             data: commentData
         });
         console.log(response)
+        window.location.reload();
     }
 
     //댓글, 대댓글 수정
     const modify = async () => {
-        const response = await request<CommentRegisterType, CommentId, null>({
+        await request<CommentRegisterType, CommentId, null>({
             uri: `/api/v1/community/${id}`,
             method: 'patch',
             data: commentData
         });
+        window.location.reload();
+        
     }
 
     const handleSubmit = () => {
@@ -87,7 +94,7 @@ const Comment:React.FC<CommentProps> = ({contents, isChildComment = false, isMod
     };
 
   return (
-    <D.CommentWrapper>
+    <D.CommentWrapper isChildComment={isChildComment} isModify={isModify}>
         <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
             <textarea 
             placeholder='댓글을 남겨보세요.'
@@ -101,7 +108,7 @@ const Comment:React.FC<CommentProps> = ({contents, isChildComment = false, isMod
             className='text'/>
         </D.WriteComment>
         <div className='btnwrapper'>
-        {isChildComment && (
+        {(isChildComment || isModify) && (
             <D.CancelBtn inputEmpty={inputValue === ''} onClick={cancel}>취소하기</D.CancelBtn>
         )}
         <D.RegBtn inputEmpty={inputValue === ''}  onClick={handleSubmit}>등록하기</D.RegBtn>

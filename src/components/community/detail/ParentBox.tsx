@@ -1,5 +1,5 @@
 import * as D from './DetailStyle';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import profileImage from '../../../img/community/profile.svg';
 import { ReactComponent as HeartIcon } from '../../../img/community/heart16.svg';
 import { ReactComponent as LikedHeartIcon } from '../../../img/community/heart16_liked.svg';
@@ -25,6 +25,7 @@ interface CommentProps {
     childComments?: CommentProps[];
     parentId?: number;
     isChildComment?: boolean;
+    onCommentUpdate : () => void;
 }
 
 interface CommentId {
@@ -52,33 +53,51 @@ const ParentBox: React.FC<CommentProps> = props => {
         setIsReplyBoxVisible(!isReplyBoxVisible);
     };
 
-    const toggleLike = () => {
-        setIsLiked(!isLiked);
-    };
-
     const modify = () => {
         setIsModifying(!isModifying);
     };
 
+    const menuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+                setIsMenuVisible(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [menuRef]);
+
+    // 좋아요 생성 & 삭제
     const createLike = async () => {
-        toggleLike();
-        setLikeNum(likeNum + 1);
 
         const Data: LikeCreateType = {
             commentId: props.commentId,
         };
 
-        const response = await request<LikeCreateType, CommentId, null>({
-            uri: '/api/v1/community/comment-likes',
-            method: 'post',
-            data: Data
-        });
+        try {
+            await request<LikeCreateType, CommentId, null>({
+                uri: '/api/v1/community/comment-likes',
+                method: 'post',
+                data: Data
+            });
+            setIsLiked(!isLiked); 
+            setLikeNum(isLiked ? likeNum - 1 : likeNum + 1); 
+    
+        } catch (error) {
+            console.error(error);
+        }
     }
+
       
     const deleteComments = async () => {
-        const token = 'eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJMaWtlbGlvblVuaXYiLCJzdWIiOiIyIiwiaWF0IjoxNzAyOTk5NDYzLCJleHAiOjE3MDQyMDkwNjMsInR5cGUiOiJBY2Nlc3NUb2tlbiIsInJvbGUiOiJHVUVTVCJ9.c6ijvuhIluD_PWw8S8xGT-2IO5uAvO-_fd30RqNalTj43fny99ieQEn5yrZLXTa4qw-Ln_S-iZ1VoCgfwLi4Ig'
         try {
-            const response = await axiosInstance.patch(`/api/v1/community/disable/${props.commentId}`,{headers: {Authorization : `Bearer ${token}`}}); 
+            const response = await axiosInstance.patch(`/api/v1/community/disable/${props.commentId}`); 
             setIsDeleted(true);
         } catch (error) {
         console.error(error);
@@ -117,6 +136,7 @@ const ParentBox: React.FC<CommentProps> = props => {
                 body ={e.body}
                 isDeleted ={e.isDeleted}
                 createdDate ={e.createdDate}
+                onCommentUpdate={props.onCommentUpdate}
             />
         )
         })}
@@ -128,7 +148,7 @@ const ParentBox: React.FC<CommentProps> = props => {
     <>
     <D.BoxWrapper>
         {isModifying ? (
-            <Comment isChildComment isModify contents={props.body} id={props.commentId} cancel={modify}/>
+            <Comment isChildComment={props.isChildComment} isModify contents={props.body} id={props.commentId} cancel={modify} onCommentUpdate={props.onCommentUpdate}/>
         ) : (
         <>
         <D.BoxLeft style={{ paddingLeft: props.isChildComment ? '48px' : '0' }}>
@@ -143,8 +163,8 @@ const ParentBox: React.FC<CommentProps> = props => {
                 <p className='body'>{props.body}</p>
                 <div className="wrapper">
                     <div className='icons'>
-                        {props.isLikedByLoginUser || isLiked ? (
-                            <><LikedHeartIcon />{likeNum}</>
+                        {isLiked ? (
+                            <><LikedHeartIcon onClick={createLike}/>{likeNum}</>
                         ) : (
                             <><HeartIcon onClick={createLike}/>{likeNum}</>
                         )}
@@ -160,7 +180,7 @@ const ParentBox: React.FC<CommentProps> = props => {
         </div>
         )}
         {isMenuVisible && (
-        <D.MenuBtn>
+        <D.MenuBtn ref={menuRef}>
           <p className='btns' onClick={modify}>수정하기</p>
           <p className='btns' onClick={deleteComments}>삭제하기</p>
         </D.MenuBtn>
@@ -170,7 +190,7 @@ const ParentBox: React.FC<CommentProps> = props => {
     </D.BoxWrapper>
     {isReplyBoxVisible && (
         <D.ReplyBox>
-          <Comment isChildComment id={props.parentId || props.commentId} cancel={replyBoxVisibility}/>
+          <Comment isChildComment id={props.parentId || props.commentId} cancel={replyBoxVisibility} onCommentUpdate={props.onCommentUpdate}/>
         </D.ReplyBox>
     )}
     {props.hasChildComments && props.childComments?.map((e) => {
@@ -190,6 +210,7 @@ const ParentBox: React.FC<CommentProps> = props => {
                 body ={e.body}
                 isDeleted ={e.isDeleted}
                 createdDate ={e.createdDate}
+                onCommentUpdate={props.onCommentUpdate}
             />
         )
     })}

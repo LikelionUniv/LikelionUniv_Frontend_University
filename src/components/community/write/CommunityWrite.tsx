@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import request from '../../../utils/request';
 import { useNavigate } from 'react-router-dom';
+import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 
 interface CommunityRegisterType {
     title: string;
@@ -26,6 +27,10 @@ const CommunityWrite = () => {
     const [editorTitle, setEditorTitle] = useState(info.title || '');
     const [editorContent, setEditorContent] = useState(info.body || '');
 
+    const isSubmitEnabled = () => {
+        return selectedBoard && selectedSubBoard && editorTitle && editorContent;
+    };
+
     const handleTitleChange = (title:string) => {
         setEditorTitle(title);
     };
@@ -44,19 +49,45 @@ const CommunityWrite = () => {
         setSelectedSubBoard(subBoardName);
     };
 
+    const replaceBase64WithS3Urls = (originalHtml:any, base64Urls:any, s3Urls:any) => {
+        let newHtml = originalHtml;
+      
+        base64Urls.forEach((base64Url:any, index:any) => {
+          newHtml = newHtml.replace(base64Url, s3Urls[index]);
+        });
+      
+        return newHtml;
+      };
+
     const processSendData = async (): Promise<CommunityRegisterType> => {
+
+        const editorHtml = editorContent;
+        const base64Urls = extractBase64Images(editorHtml);
+        let thumbnailUrl = null;
+        
+        let newEditorHtml = editorHtml;
+        if (base64Urls.length > 0) {
+            const s3Urls = await uploadImagesAndGetUrls(base64Urls);
+            newEditorHtml = replaceBase64WithS3Urls(editorHtml, base64Urls, s3Urls);
+
+            if (s3Urls.length > 0) {
+                thumbnailUrl = s3Urls[0];
+            }
+        }
+
+
         return {
             title: editorTitle,
-            body: editorContent,
-            thumbnail: null,
-            mainCategory: "FREE_BOARD",
-            subCategory: "FREE_INFO"
+            body: newEditorHtml,
+            thumbnail: thumbnailUrl,
+            mainCategory: selectedBoard,
+            subCategory: selectedSubBoard
         };
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    // 게시글 등록
+    const handleSubmit = async () => {
         const data = await processSendData();
-
         const response = await request<CommunityRegisterType, PostId, null>({
             uri: '/api/v1/community/posts/new',
             method: 'post',
@@ -66,7 +97,68 @@ const CommunityWrite = () => {
         navigate('/community');
         console.log(response)
     };
+
+    // 게시글 수정
+    const handleModify = async () => {
+        const data = await processSendData();
+        const response = await request<CommunityRegisterType, null, PostId>({
+            uri: `/api/v1/community/posts/${info.id}`,
+            method: 'patch',
+            data,
+        });
+
+        navigate('/community');
+        console.log(response)
+    };
+
+    const submit = () => {
+        if(info.mod){
+            handleSubmit();
+        }else {
+            handleModify();
+        }
+    }
+
+    //quill editor 내용 중 img 태그만 골라서 src 뽑아내기
+    const extractBase64Images = (editorContent:any) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(editorContent, 'text/html');
+        const images = doc.querySelectorAll('img');
+        const urls = Array.from(images).map(img => img.src);
+        return urls;
+    };
+
+    const base64ToFile = (dataurl:any, filename:string) => {
+        let arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
     
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+    
+        return new File([u8arr], filename, { type: mime });
+    };
+    
+    
+    const uploadImagesAndGetUrls = async (base64Urls:any) => {
+        const s3Urls = [];
+      
+        for (const base64Url of base64Urls) {
+          const file = base64ToFile(base64Url, "image.jpg");
+          const { presignedUrl, imageUrl } = await ImageUpload.getPresignedUrl(file);
+          await ImageUpload.enrollImagesToS3(file, presignedUrl);
+          s3Urls.push('https://' + imageUrl);
+        }
+      
+        return s3Urls;
+    };
+
+    const goMain = () => {
+        navigate("/community")
+    }
 
     const SubBoard = () => {
         switch (selectedBoard) {
@@ -196,8 +288,10 @@ const CommunityWrite = () => {
                 onContentChange={handleContentChange}
             />
             <div className='btns'>
-                <W.CancelBtn>취소하기</W.CancelBtn>
-                <W.RegBtn onClick={handleSubmit}>등록하기</W.RegBtn>
+                <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
+                <W.RegBtn
+                isActive={isSubmitEnabled()}
+                onClick={isSubmitEnabled() ? handleSubmit : undefined} >등록하기</W.RegBtn>
             </div>
         </W.Container>
     );
