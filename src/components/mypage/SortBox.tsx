@@ -1,7 +1,7 @@
 import Select, { components } from 'react-select';
 import { MypageOptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
-import { useEffect } from 'react';
+import { startTransition, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { sortOptionAtom } from '../../store/mypageData';
 
@@ -17,29 +17,16 @@ export const options: MypageOptionType[] = [
 
 const SortBox = (props: SortType) => {
     const [selectedOption, setSelectedOption] = useRecoilState(sortOptionAtom);
-
     useEffect(() => {
         setSelectedOption(null);
     }, [props.select]);
 
     const handleSortChange = (selectedOption: MypageOptionType | null) => {
-        setSelectedOption(selectedOption);
+        startTransition(() => {
+            setSelectedOption(selectedOption);
+        });
 
         if (!selectedOption) return;
-
-        switch (selectedOption.value) {
-            case 'created_at':
-                console.log('최신순');
-                break;
-            case 'like':
-                console.log('좋아요순');
-                break;
-            case 'comment':
-                console.log('댓글순');
-                break;
-            default:
-                break;
-        }
     };
 
     const DropdownIndicator = (props: any) => {
