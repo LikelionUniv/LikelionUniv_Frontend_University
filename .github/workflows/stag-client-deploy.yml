@@ -34,6 +34,6 @@ jobs:
           script: |
             sudo docker rm -f ${{ secrets.DOCKER_CLIENT_STAG_CONTAINER }}
             sudo docker rmi ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
-            docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
-            docker image prune -f
+            sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
+            sudo docker image prune -f
 
