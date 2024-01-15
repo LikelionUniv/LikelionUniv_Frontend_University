@@ -14,6 +14,7 @@ import { axiosInstance } from '../../../utils/axios';
 import useIsPC from '../../../hooks/useIsPC';
 import { ReactComponent as Arrow } from '../../../img/about/arrow_left.svg';
 import { ReactComponent as Menu } from '../../../img/community/menu_900.svg';
+import DOMPurify from 'dompurify';
 
 
 const CommunityDetail = () => {
@@ -79,7 +80,7 @@ const CommunityDetail = () => {
             <ArrowIcon/> {postData?.subCategory}
         </div>
         {postData && <Header postData={postData}/>}
-        <D.TextArea dangerouslySetInnerHTML={{ __html: postData?.body || '' }}/>
+        <D.TextArea dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(postData?.body || '' )}}/>
         {postData && <Like postData={postData}/>}
         <div className='count'>
           {isPC ? <CommentIcon /> : <CommentIconMobile />} 댓글

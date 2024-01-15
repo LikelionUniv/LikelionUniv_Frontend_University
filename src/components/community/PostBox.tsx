@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
 import { useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 export interface PostBoxProp {
     authorName: string;
@@ -33,7 +34,8 @@ const PostBox: React.FC<PostBoxProp> = props => {
             <BoxWrapper isSearching={props.isSearching}>
                 {props.isSearching && (<Mc className="mc">{props.mainCategory}</Mc>)}
                 <Box className="title">{props.title}</Box>
-                <Box className="content" dangerouslySetInnerHTML={{ __html: props.bodySummary }}></Box>
+                <Box className="content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.bodySummary) }}></Box>
+                
                 <Box className="nav">
                     <div className="wrapper">
                         <Box
