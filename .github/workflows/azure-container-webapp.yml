@@ -1,0 +1,39 @@
+name: stag-client-deploy
+
+on: 
+  push: 
+    branches: [ "stag" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Docker login
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_EMAIL }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
+
+      - name: client-deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker rm -f ${{ secrets.DOCKER_CLIENT_STAG_CONTAINER }}
+            sudo docker rmi ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
+            docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
+            docker image prune -f
+
