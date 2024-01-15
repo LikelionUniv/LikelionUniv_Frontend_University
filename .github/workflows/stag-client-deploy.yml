@@ -3,6 +3,7 @@ name: stag-client-deploy
 on: 
   push: 
     branches: [ "stag" ]
+  workflow_dispatch:
 
 jobs:
   deploy:
