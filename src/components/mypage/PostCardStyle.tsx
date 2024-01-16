@@ -5,7 +5,7 @@ import editdots from '../../img/mypage/editdots.svg';
 import likeheart from '../../img/mypage/likeheart.svg';
 
 interface PhotoCheck {
-    photoTitle?: boolean;
+    phototitle?: string;
 }
 
 export const PostCardBoxWrapper = styled.div<PhotoCheck>`
@@ -40,7 +40,7 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
     }
     @media (max-width: 479px) {
         width: 100%;
-        /* height: ${({ photoTitle }) => (photoTitle ? '358px' : '160px')}; */
+        /* height: ${({ phototitle }) => (phototitle ? '358px' : '160px')}; */
         height: 358px;
     }
     //여기 부분은 나중에 바꾸면 된다
@@ -111,8 +111,8 @@ export const PostCardBox = styled.div<PhotoCheck>`
     &.title {
         font-size: 20px;
         font-weight: 700;
-        margin: ${({ photoTitle }) =>
-            photoTitle ? '8px 0px' : '11px 0px 8px'};
+        margin: ${({ phototitle }) =>
+            phototitle === 'true' ? '8px 0px' : '11px 0px 8px'};
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -127,18 +127,20 @@ export const PostCardBox = styled.div<PhotoCheck>`
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: ${({ photoTitle }) => (photoTitle ? 1 : 4)};
+        -webkit-line-clamp: ${({ phototitle }) =>
+            phototitle === 'true' ? 1 : 4};
         -webkit-box-orient: vertical;
         margin: 8px 0px 16px;
         @media (max-width: 479px) {
             margin: 0px 0px 8px;
             font-size: 14px;
-            -webkit-line-clamp: ${({ photoTitle }) => (photoTitle ? 1 : 4)};
+            -webkit-line-clamp: ${({ phototitle }) =>
+                phototitle === 'true' ? 1 : 4};
         }
         @media (max-width: 360px) {
             margin: 0px 0px 16px;
             font-size: 14px;
-            -webkit-line-clamp: ${({ photoTitle }) => (photoTitle ? 1 : 4)};
+            -webkit-line-clamp: ${({ phototitle }) => (phototitle ? 1 : 4)};
         }
     }
     &.photo {

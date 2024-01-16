@@ -3,43 +3,41 @@ import styled, { css } from 'styled-components';
 import search from '../../img/community/search.svg';
 
 interface SideBarProps {
-    onItemSelect: (item: string) => void;
+    onCategorySelect: (mainCategory: string, subCategory: string) => void;
     onSearch: (query: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onItemSelect, onSearch }) => {
-    const [selectedTab, setSelectedTab] = useState<string>('공지사항');
+const SideBar: React.FC<SideBarProps> = ({ onCategorySelect, onSearch }) => {
+    const [selectedMainCategory, setSelectedMainCategory] = useState<string>('멋대 중앙');
+    const [selectedSubCategory, setSelectedSubCategory] = useState<string>('공지사항');
     const [inputValue, setInputValue] = useState<string>('');
+
+    const handleTabClick = (mainCategory: string, subCategory: string) => {
+        setSelectedMainCategory(mainCategory);
+        setSelectedSubCategory(subCategory);
+        onCategorySelect(mainCategory, subCategory);
+        onSearch('');
+    };
 
     return (
         <Wrapper>
             <Title>커뮤니티</Title>
             <Content>
-                <SubTitle>멋대중앙</SubTitle>
-                <Tab
-                    $isSelected={selectedTab === '공지사항'}
-                    onClick={() => {
-                        onItemSelect('공지사항');
-                        setSelectedTab('공지사항');
-                    }}
+                <SubTitle>멋대 중앙</SubTitle>
+                <Tab $isSelected={selectedMainCategory === '멋대 중앙' && selectedSubCategory === '공지사항'}
+                    onClick={() => handleTabClick('멋대 중앙', '공지사항')}
                 >
                     공지사항
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '질문건의'}
-                    onClick={() => {
-                        onItemSelect('질문건의');
-                        setSelectedTab('질문건의');
-                    }}
+                    $isSelected={selectedMainCategory === '멋대 중앙' && selectedSubCategory === '질문건의'}
+                    onClick={() => handleTabClick('멋대 중앙', '질문건의')}
                 >
                     질문건의
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '정보공유'}
-                    onClick={() => {
-                        onItemSelect('정보공유');
-                        setSelectedTab('정보공유');
-                    }}
+                    $isSelected={selectedMainCategory === '멋대 중앙' && selectedSubCategory === '정보공유'}
+                    onClick={() => handleTabClick('멋대 중앙', '정보공유')}
                 >
                     정보공유
                 </Tab>
@@ -48,38 +46,26 @@ const SideBar: React.FC<SideBarProps> = ({ onItemSelect, onSearch }) => {
             <Content>
                 <SubTitle>자유게시판</SubTitle>
                 <Tab
-                    $isSelected={selectedTab === '정보공유2'}
-                    onClick={() => {
-                        onItemSelect('정보공유');
-                        setSelectedTab('정보공유2');
-                    }}
+                    $isSelected={selectedMainCategory === '자유게시판' && selectedSubCategory === '정보공유'}
+                    onClick={() => handleTabClick('자유게시판', '정보공유')}
                 >
                     정보공유
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '팀원모집'}
-                    onClick={() => {
-                        onItemSelect('팀원모집');
-                        setSelectedTab('팀원모집');
-                    }}
+                    $isSelected={selectedMainCategory === '자유게시판' && selectedSubCategory === '팀원모집'}
+                    onClick={() => handleTabClick('자유게시판', '팀원모집')}
                 >
                     팀원모집
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '플젝모집'}
-                    onClick={() => {
-                        onItemSelect('플젝모집');
-                        setSelectedTab('플젝모집');
-                    }}
+                    $isSelected={selectedMainCategory === '자유게시판' && selectedSubCategory === '플젝모집'}
+                    onClick={() => handleTabClick('자유게시판', '플젝모집')}
                 >
                     플젝모집
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '플젝자랑'}
-                    onClick={() => {
-                        onItemSelect('플젝자랑');
-                        setSelectedTab('플젝자랑');
-                    }}
+                    $isSelected={selectedMainCategory === '자유게시판' && selectedSubCategory === '플젝자랑'}
+                    onClick={() => handleTabClick('자유게시판', '플젝자랑')}
                 >
                     플젝자랑
                 </Tab>
@@ -88,59 +74,46 @@ const SideBar: React.FC<SideBarProps> = ({ onItemSelect, onSearch }) => {
             <Content>
                 <SubTitle>멋사 오버플로우</SubTitle>
                 <Tab
-                    $isSelected={selectedTab === '프론트'}
-                    onClick={() => {
-                        onItemSelect('프론트');
-                        setSelectedTab('프론트');
-                    }}
+                    $isSelected={selectedMainCategory === '멋사 오버플로우' && selectedSubCategory === '프론트'}
+                    onClick={() => handleTabClick('멋사 오버플로우', '프론트')}
                 >
                     프론트
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '백'}
-                    onClick={() => {
-                        onItemSelect('백');
-                        setSelectedTab('백');
-                    }}
+                    $isSelected={selectedMainCategory === '멋사 오버플로우' && selectedSubCategory === '백'}
+                    onClick={() => handleTabClick('멋사 오버플로우', '백')}
                 >
                     백
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '기획'}
-                    onClick={() => {
-                        onItemSelect('기획');
-                        setSelectedTab('기획');
-                    }}
+                    $isSelected={selectedMainCategory === '멋사 오버플로우' && selectedSubCategory === '기획'}
+                    onClick={() => handleTabClick('멋사 오버플로우', '기획')}
                 >
                     기획
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '디자인'}
-                    onClick={() => {
-                        onItemSelect('디자인');
-                        setSelectedTab('디자인');
-                    }}
+                    $isSelected={selectedMainCategory === '멋사 오버플로우' && selectedSubCategory === '디자인'}
+                    onClick={() => handleTabClick('멋사 오버플로우', '디자인')}
                 >
                     디자인
                 </Tab>
                 <Tab
-                    $isSelected={selectedTab === '기타'}
-                    onClick={() => {
-                        onItemSelect('기타');
-                        setSelectedTab('기타');
-                    }}
+                    $isSelected={selectedMainCategory === '멋사 오버플로우' && selectedSubCategory === '기타'}
+                    onClick={() => handleTabClick('멋사 오버플로우', '기타')}
                 >
                     기타
                 </Tab>
             </Content>
             <TextInput borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
                 <input
-                    style={{ width: '100%', outline: 'none', border: 'none' }}
+                    className='textInput'
                     type="text"
                     placeholder=" 검색"
                     value={inputValue}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
                         if (e.key === 'Enter') {
+                            setSelectedMainCategory('');
+                            setSelectedSubCategory('');
                             onSearch(inputValue);
                         }
                     }}
@@ -221,5 +194,18 @@ const TextInput = styled.div<{ borderColor: string }>`
     display: inline-flex;
     justify-content: space-between;
     margin: 16px 0 100px 0;
-    padding: 0 8px;
+    padding: 0 8px 0 16px;
+
+    .textInput{
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+
+        width: 100%;
+        outline: none;
+        border: none;
+    }
 `;

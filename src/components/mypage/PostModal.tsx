@@ -1,12 +1,30 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { usePostDelete } from '../../api/mypage/usePostDelete';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/user';
 
-const PostModal = () => {
+const PostModal = ({ id }: { id: number }) => {
     //이거는 하나하나 만드는 거기 때문에 모달을 통합해서 하나로 하는 건 불가능... 수정할때는 해당 페이지로 가고 삭제할때는 리다이렉트가 필요
     const [modal, setModal] = useState<Boolean>(false);
     const modalRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+    const user = useRecoilValue(userState);
+    const { mutate } = usePostDelete({
+        postId: id,
+        user_id: user.userId,
+    });
+
+    const deletePost = (e: React.MouseEvent | React.TouchEvent) => {
+        e.stopPropagation();
+        if (window.confirm(`해당 게시글을 삭제하시겠습니까?`)) {
+            mutate();
+            setModal(!modal);
+        } else {
+            setModal(!modal);
+        }
+    };
     return (
         <>
             <div
@@ -31,16 +49,7 @@ const PostModal = () => {
                         >
                             수정하기
                         </div>
-                        <div
-                            onClick={(
-                                e: React.MouseEvent | React.TouchEvent,
-                            ) => {
-                                e.stopPropagation();
-                                setModal(!modal);
-                                alert('삭제하기 기능 구현');
-                            }}
-                            className="inner"
-                        >
+                        <div onClick={deletePost} className="inner">
                             삭제하기
                         </div>
                     </MyPostModal>

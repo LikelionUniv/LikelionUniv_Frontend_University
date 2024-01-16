@@ -9,7 +9,7 @@ interface IProjectBox {
 }
 
 function Projectbox({ projects }: IProjectBox) {
-    const {isAdmin} = useIsAdmin();
+    const { isAdmin } = useIsAdmin();
 
     return (
         <B.Container>

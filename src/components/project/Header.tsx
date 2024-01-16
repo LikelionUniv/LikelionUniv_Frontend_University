@@ -17,7 +17,7 @@ function Header({ setProjectApi }: IHeader) {
         setActiveTab(index);
     };
 
-    const {isAdmin} = useIsAdmin();
+    const { isAdmin } = useIsAdmin();
 
     useEffect(() => {
         // 전체를 클릭할 경우

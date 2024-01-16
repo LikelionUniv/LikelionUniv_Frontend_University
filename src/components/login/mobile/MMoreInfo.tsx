@@ -15,9 +15,7 @@ function MMoreInfo() {
         formState: { isValid },
     } = useForm<IForm>();
 
-    const onSubmit = (data: IForm) => {
-        console.log(data);
-    };
+    const onSubmit = (data: IForm) => {};
 
     return (
         <>

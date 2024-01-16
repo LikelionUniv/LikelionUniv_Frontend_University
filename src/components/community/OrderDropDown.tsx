@@ -9,24 +9,32 @@ const orderOptions = [
     { value: 3, label: '댓글순' },
 ];
 
-//나중에 api 연결할 때 수정
-const OrderDropDown = () => {
+interface OrderProp {
+    onOrderChange: any;
+}
+
+
+const OrderDropDown:React.FC<OrderProp> = ({ onOrderChange }) => {
     const handleSortChange = (selectedOption: OptionType | null) => {
         if (!selectedOption) return;
 
+        let orderValue;
         switch (selectedOption.value) {
             case 1:
-                console.log('최신순');
+                orderValue = 'CREATED_DATE_ORDER';
                 break;
             case 2:
-                console.log('좋아요순');
+                orderValue = 'LIKE_COUNT_ORDER';
                 break;
             case 3:
-                console.log('댓글순');
+                orderValue = 'COMMENT_COUNT_ORDER';
                 break;
             default:
+                orderValue = 'CREATED_DATE_ORDER';
                 break;
         }
+
+        onOrderChange(orderValue);
     };
 
     const DropdownIndicator = (props: any) => {
