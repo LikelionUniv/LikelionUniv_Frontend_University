@@ -6,7 +6,7 @@ export const requestIdtoken = async (
     provider: string | undefined,
 ) => {
     return await axiosInstance
-        .get(`/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`)
+        .get(`/api/v1/auth/${provider}/local?code=${authorizationCode}`)
         .then(response => {
             //idtoken return
             localStorage.setItem('idtoken', response.data.data.idToken);
