@@ -13,10 +13,12 @@ type DropDownProps = {
         selectedOption: OptionType | null,
         actionMeta: ActionMeta<OptionType>,
     ) => void;
+    placeholder?: string;
 };
 
-const DropDown = ({ options, onChange }: DropDownProps) => {
+const DropDown = ({ options, onChange,placeholder = "선택" }: DropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
+
     const DropdownIndicator = (props: any) => {
         return (
             <components.DropdownIndicator {...props}>
@@ -39,7 +41,7 @@ const DropDown = ({ options, onChange }: DropDownProps) => {
             options={options}
             styles={options.length > 3 ? genStyle : roleTrackStyle}
             isSearchable={false}
-            placeholder="선택"
+            placeholder={placeholder}
             components={{ DropdownIndicator }}
             maxMenuHeight={138}
             onChange={onChange}

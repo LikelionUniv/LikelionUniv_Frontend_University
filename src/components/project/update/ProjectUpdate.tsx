@@ -183,7 +183,7 @@ const ProjectUpdate = () => {
         if (etcCheck) {
             const teches = [
                 ...formState.projectTeches,
-                formState.projectTechEtc,
+                ...processTechEtcToStringList(),
             ];
 
             const duplicateDeletedTeches = Array.from(new Set(teches));
@@ -191,6 +191,11 @@ const ProjectUpdate = () => {
         }
 
         return formState.projectTeches;
+    };
+
+    const processTechEtcToStringList = () => {
+        const splitTeches = formState.projectTechEtc.split(',');
+        return splitTeches.map(tech => tech.trim());
     };
 
     const processImages = async (): Promise<string[]> => {

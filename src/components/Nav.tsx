@@ -161,11 +161,11 @@ const Nav = () => {
                     </div>
 
                     <div className="right">
-                        {isLogin ? (
+                        {/* {isLogin ? (
                             <>
-                                {/* <ChatBtn to="/chat">
+                                <ChatBtn to="/chat">
                                     <img src={chat} />
-                                </ChatBtn> */}
+                                </ChatBtn>
                                 <ProfileBtn
                                     ref={buttonRef}
                                     onClick={() => setProfileModal(pre => !pre)}
@@ -192,7 +192,7 @@ const Nav = () => {
                             <LoginBtn onClick={() => navigate('/login')}>
                                 로그인
                             </LoginBtn>
-                        )}
+                        )} */}
                     </div>
                     {profileModal && (
                         <ProfileModal ref={modalRef}>

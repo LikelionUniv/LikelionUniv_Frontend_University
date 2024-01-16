@@ -72,7 +72,7 @@ export const mypageGetProjectApi = async (user_id: number, page: number) => {
 //이거는 좋아요 취소까지 다 하는 건지 물어봤으니 만약에 아니라면 delete만 추가하면 될 것 같다.
 export const mypageLikePostApi = async (postId: number) => {
     return await axiosInstance
-        .post(`${process.env.REACT_APP_BASE_URL}/v1/community/post-likes`, {
+        .post(`/api/v1/community/post-likes`, {
             postId,
         })
         .then(response => {
@@ -87,15 +87,12 @@ export const mypageLikePostApi = async (postId: number) => {
 
 export const mypageDeletePostApi = async (postId: number) => {
     return await axiosInstance
-        .delete(
-            `${process.env.REACT_APP_BASE_URL}/v1/community/posts/${postId}`,
-        )
+        .delete(`/api/v1/community/posts/${postId}`)
         .then(response => {
-            return response.data.data;
+            return response.data;
         })
         .catch(error => {
             if (axios.isAxiosError(error)) {
-                const result = error.response?.data?.detail;
                 return undefined;
             }
         });

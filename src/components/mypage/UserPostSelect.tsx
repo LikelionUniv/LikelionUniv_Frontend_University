@@ -1,42 +1,17 @@
-import { useEffect, useState } from 'react';
+import { Suspense, startTransition, useState } from 'react';
 import { styled } from 'styled-components';
-import ProjectCard from './ProjectCard';
-import PostCard from './PostCard';
-import Pagination from './Pagination';
-import PostCardWithPhoto from './PostCardWithPhoto';
-import {
-    SearchAndSortWrapper,
-    SearchBoxWrapper,
-    SearchInput,
-    SearchSVG,
-} from './LikeCompoStyle';
-import SortBox from './SortBox';
-import { useRecoilValue } from 'recoil';
-import { myProjectData, mypageData } from '../../store/mypageData';
-import useGetUserData from './useGetUserData';
-import EmptyBox from './EmptyBox';
+import ProjectSelect from './ProjectSelect';
+import LikeSelect from './LikeSelect';
+import PostSelect from './PostSelect';
 
 const UserPostSelect = () => {
-    const userProject = useRecoilValue(myProjectData);
-    const userData = useRecoilValue(mypageData);
     const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
     const [select, setSelect] = useState<string>('게시글');
-    const [searchValue, setSearchValue] = useState<string>('');
-    const [searchClick, setSearchClick] = useState<string>('');
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value);
-    };
     const optionClickFn = (option: string) => {
-        setSelect(option);
-        //나중에 해당 option에 따른 api호출을 해야되므로 따로 함수로 분리
+        startTransition(() => {
+            setSelect(option);
+        });
     };
-    const [page, setPage] = useState(1);
-    useGetUserData(select, page, searchValue, searchClick);
-    useEffect(() => {
-        setSearchValue('');
-        setSearchClick('');
-    }, [select]);
-
     return (
         <>
             <ButtonSelectWrapper>
@@ -46,8 +21,8 @@ const UserPostSelect = () => {
                             className={select === e ? 'select' : ''}
                             onClick={() => {
                                 optionClickFn(e);
-                                setPage(1);
                             }}
+                            key={e}
                         >
                             {e}
                         </button>
@@ -55,97 +30,21 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
-            {select === '좋아요' ? (
-                <SearchAndSortWrapper>
-                    <SearchBoxWrapper>
-                        <SearchInput
-                            type="text"
-                            placeholder="검색"
-                            onChange={handleInputChange}
-                            value={searchValue}
-                        />
-                        <SearchSVG
-                            onClick={() => setSearchClick(searchValue)}
-                        ></SearchSVG>
-                    </SearchBoxWrapper>
-                    <SortBox select={select} />
-                </SearchAndSortWrapper>
-            ) : null}
-            <PostBoxWrapper>
-                {select === '프로젝트' ? (
-                    <>
-                        {Array.isArray(userProject?.data) &&
-                        userProject.data.length !== 0 ? (
-                            userProject.data.map(e => {
-                                return (
-                                    <ProjectCard
-                                        projectId={e.projectId}
-                                        thumbnail={e.thumbnail}
-                                        serviceName={e.serviceName}
-                                        universityName={e.universityName}
-                                        ordinal={e.ordinal}
-                                        outPut={e.outPut}
-                                        description={e.description}
-                                        activity={e.activity}
-                                    />
-                                );
-                            })
-                        ) : (
-                            <EmptyBox name={select} />
-                        )}
-                    </>
-                ) : (
-                    <>
-                        {Array.isArray(userData?.data) &&
-                        userData.data.length !== 0 ? (
-                            userData.data.map(e => {
-                                if (e.thumbnail !== null) {
-                                    return (
-                                        <PostCardWithPhoto
-                                            key={e.id}
-                                            id={e.id}
-                                            isAuthor={e.isAuthor}
-                                            thumbnail={e.thumbnail}
-                                            title={e.title}
-                                            createdDate={e.createdDate}
-                                            body={e.body}
-                                            likeCount={e.likeCount}
-                                            commentCount={e.commentCount}
-                                            type={select}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <PostCard
-                                            key={e.id}
-                                            id={e.id}
-                                            isAuthor={e.isAuthor}
-                                            thumbnail={e.thumbnail}
-                                            title={e.title}
-                                            createdDate={e.createdDate}
-                                            body={e.body}
-                                            likeCount={e.likeCount}
-                                            commentCount={e.commentCount}
-                                            type={select}
-                                        />
-                                    );
-                                }
-                            })
-                        ) : (
-                            <EmptyBox name={select} />
-                        )}
-                    </>
-                )}
-            </PostBoxWrapper>
-            <Pagination
-                totalPageNum={
-                    select === '프로젝트'
-                        ? userProject?.totalPage
-                        : userData?.totalPage
-                }
-                pageNum={page}
-                setPageNum={setPage}
-            />
+            {select === '프로젝트' ? (
+                <>
+                    <Suspense fallback={<div>loading...</div>}>
+                        <ProjectSelect select={select} />
+                    </Suspense>
+                </>
+            ) : select === '좋아요' ? (
+                <Suspense fallback={<div>loading...</div>}>
+                    <LikeSelect select={select} />
+                </Suspense>
+            ) : (
+                <Suspense fallback={<div>loading...</div>}>
+                    <PostSelect select={select} />
+                </Suspense>
+            )}
         </>
     );
 };
@@ -194,7 +93,7 @@ const SelectBorder = styled.div`
     }
 `;
 
-const PostBoxWrapper = styled.div`
+export const PostBoxWrapper = styled.div`
     display: flex;
     align-items: flex-start;
     align-content: flex-start;

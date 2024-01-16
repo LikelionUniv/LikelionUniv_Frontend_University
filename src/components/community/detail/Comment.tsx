@@ -1,12 +1,35 @@
 import * as D from './DetailStyle';
 import { useRef, useCallback, useState } from 'react';
+import request from '../../../utils/request';
 
 export interface RegBtnProps {
     inputEmpty: boolean;
 }
 
-const Comment = () => {
-    const [inputValue, setInputValue] = useState<string>('');
+interface CommentId {
+    commentId: number;
+}
+
+interface CommentRegisterType {
+    body: string;
+}
+
+interface CommentParams {
+    postId: number;
+}
+
+interface CommentProps {
+    contents?: string;
+    isChildComment?: boolean;
+    isModify?: boolean;
+    id: number;
+    cancel? : () => void;
+    onCommentUpdate : () => void;
+}
+
+const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComment = false, isModify = false, id, cancel}) => {
+    console.log(isChildComment, isModify)
+    const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
     const handleResizeHeight = useCallback(() => {
         const textarea = textRef.current;
@@ -15,26 +38,85 @@ const Comment = () => {
             textarea.style.height = `${textarea.scrollHeight}px`;
         }
     }, []);
-    return (
-        <D.CommentWrapper>
-            <D.WriteComment
-                borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}
-            >
-                <textarea
-                    placeholder="댓글을 남겨보세요."
-                    rows={1}
-                    value={inputValue}
-                    ref={textRef}
-                    onInput={handleResizeHeight}
-                    onChange={e => {
-                        setInputValue(e.target.value);
-                    }}
-                    className="text"
-                />
-            </D.WriteComment>
-            <D.RegBtn inputEmpty={inputValue === ''}>등록하기</D.RegBtn>
-        </D.CommentWrapper>
-    );
-};
+
+    const commentData: CommentRegisterType = {
+        body: inputValue,
+    };
+
+    //댓글 생성
+    const commentSubmit = async () => {
+        const commentParams: CommentParams = {
+            postId: id
+        };
+
+        const response = await request<CommentRegisterType, CommentId, CommentParams>({
+            uri: '/api/v1/community/comments/parent',
+            method: 'post',
+            data: commentData,
+            params: commentParams
+        });
+        console.log(response.data);
+        onCommentUpdate();
+        setInputValue('');
+        
+    };
+
+    //대댓글 생성
+    const childCommentSubmit = async () => {
+        const response = await request<CommentRegisterType, CommentId, null>({
+            uri: `/api/v1/community/comments/${id}/child`,
+            method: 'post',
+            data: commentData
+        });
+        console.log(response)
+        window.location.reload();
+    }
+
+    //댓글, 대댓글 수정
+    const modify = async () => {
+        await request<CommentRegisterType, CommentId, null>({
+            uri: `/api/v1/community/${id}`,
+            method: 'patch',
+            data: commentData
+        });
+        window.location.reload();
+        
+    }
+
+    const handleSubmit = () => {
+        if (isChildComment && !isModify) {
+            childCommentSubmit();
+        } else if ((isModify && isChildComment) || (isModify && !isChildComment)) {
+            modify();
+        } else {
+            commentSubmit();
+        }
+    };
+
+  return (
+    <D.CommentWrapper isChildComment={isChildComment} isModify={isModify}>
+        <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+            <textarea 
+            placeholder='댓글을 남겨보세요.'
+            rows={1}
+            value={inputValue}
+            ref={textRef}
+            onInput={handleResizeHeight}
+            onChange={e => {
+                setInputValue(e.target.value);
+            }}
+            className='text'/>
+        </D.WriteComment>
+        <div className='btnwrapper'>
+        {(isChildComment || isModify) && (
+            <D.CancelBtn inputEmpty={inputValue === ''} onClick={cancel}>취소하기</D.CancelBtn>
+        )}
+        <D.RegBtn inputEmpty={inputValue === ''}  onClick={handleSubmit}>등록하기</D.RegBtn>
+        </div>
+        
+    </D.CommentWrapper>
+    
+  )
+}
 
 export default Comment;

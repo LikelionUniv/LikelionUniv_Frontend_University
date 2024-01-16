@@ -36,8 +36,11 @@ export const ProjectTitle = styled.b`
 export const ProjectContainer = styled.div`
     line-height: 160%;
     font-weight: 500;
-    width: 60%;
+    width: 90%;
     margin-top: 1rem;
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
 `;
 
 export const B = styled.b`
@@ -76,6 +79,7 @@ export const Button = styled.button<{ width: number }>`
         width: 240px;
         margin: 0 auto;
         margin-top: 40px;
+        min-width: 20px;
     }
 
     @media screen and (min-width: 767px) and (max-width: 1280px) {

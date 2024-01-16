@@ -7,14 +7,17 @@ import { useState, useRef } from 'react';
 import imgSvg from '../../../img/community/addImage.svg';
 
 interface EditorProps {
-    contents?: string;
-    title?: string;
+  contents?: string;
+  title?: string;
+  onContentChange?: (content: string) => void;
+  onTitleChange?: (title: string) => void;
 }
 
-const Editor: React.FC<EditorProps> = ({ contents, title }) => {
-    const [value, setValue] = useState(contents || '');
-    const [input, setInput] = useState(title || '');
-    const quillRef = useRef<ReactQuill>(null);
+const Editor: React.FC<EditorProps> = ({ contents, title, onContentChange, onTitleChange }) => {
+
+  const [value, setValue] = useState(contents || "");
+  const [input, setInput] = useState(title || "");
+  const quillRef = useRef<ReactQuill>(null);
 
     const svgIcon = `<img src="${imgSvg}" alt="이미지" />이미지 추가`;
 
@@ -31,25 +34,32 @@ const Editor: React.FC<EditorProps> = ({ contents, title }) => {
         },
     };
 
-    return (
-        <>
-            <W.WriteTitle
-                placeholder="제목을 입력해주세요."
-                value={input}
-                onChange={e => setInput(e.target.value)}
-            />
-            <ReactQuill
-                className={styles.quill}
-                ref={quillRef}
-                theme="snow"
-                value={value}
-                onChange={setValue}
-                modules={modules}
-                formats={formats}
-                placeholder="내용을 입력해주세요."
-            />
-        </>
-    );
-};
+
+
+  return (
+    <>
+      <W.WriteTitle 
+        placeholder="제목을 입력해주세요."
+        value={input}
+        onChange={e => {
+          setInput(e.target.value);
+          if (onTitleChange) onTitleChange(e.target.value)}}
+      />
+      <ReactQuill
+        className={styles.quill}
+        ref={quillRef}
+        theme="snow"
+        value={value}
+        onChange={(content) => {
+          setValue(content);
+          if (onContentChange) onContentChange(content);
+        }}
+        modules={modules}
+        formats={formats}
+        placeholder="내용을 입력해주세요."
+      />
+    </>
+  )
+}
 
 export default Editor;

@@ -109,12 +109,7 @@ export const Info = styled.div`
                     }
                 }
             }
-<<<<<<< HEAD
             .section1 {
-=======
-            .section1{
-          
->>>>>>> 9367ea3c14168bca30cf5e1a076a7571f61783fc
                 .title {
                     color: #212224;
                     font-family: Pretendard;
@@ -122,9 +117,8 @@ export const Info = styled.div`
                     font-weight: 700;
                     padding-bottom: 16px;
                     display: flex;
-                    flex-direction: column; 
+                    flex-direction: column;
                 }
-<<<<<<< HEAD
                 .logo1 {
                     width: 171px;
                     height: 45px;
@@ -140,9 +134,6 @@ export const Info = styled.div`
                     height: 45px;
                     flex-shrink: 0;
                 }
-=======
-                
->>>>>>> 9367ea3c14168bca30cf5e1a076a7571f61783fc
             }
         }
     }

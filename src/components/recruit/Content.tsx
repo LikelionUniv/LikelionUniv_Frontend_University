@@ -138,9 +138,11 @@ const Content = () => {
                                 onClick={() => handleClick(index)}
                                 style={{
                                     background:
-                                        selected == index ? 'white' : '#f2f4f6',
+                                        selected === index
+                                            ? 'white'
+                                            : '#f2f4f6',
                                     borderBottom:
-                                        selected == index
+                                        selected === index
                                             ? 'none'
                                             : '1px solid #212224',
                                 }}
@@ -149,14 +151,14 @@ const Content = () => {
                                     <div>Q</div>
                                     <div>{key}</div>
                                 </div>
-                                {selected == index ? (
+                                {selected === index ? (
                                     <img src={Min}></img>
                                 ) : (
                                     <img src={Plus}></img>
                                 )}
                             </R.Table>
 
-                            {selected == index ? (
+                            {selected === index ? (
                                 <R.AnsTable>
                                     <div>A</div>
                                     <div>{value}</div>

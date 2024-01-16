@@ -33,7 +33,6 @@ export const Redirect = () => {
                 navigate(`/signup/${provider}`);
             }
         };
-
         socialLogin();
         isEffectRun.current = true;
     }, []);

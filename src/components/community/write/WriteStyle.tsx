@@ -7,10 +7,14 @@ export const Container = styled.div`
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    margin-top: 80px;
+    margin-top: 136px;
     font-family: Pretendard;
     flex-direction: column;
     margin-bottom: 200px;
+
+    @media screen and (max-width: 767px) {
+        padding: 0 16px;
+    }
 
     .btns {
         display: flex;
@@ -124,6 +128,7 @@ export const WriteTitle = styled.input`
 `;
 
 export const CancelBtn = styled.div`
+    cursor: pointer;
     display: flex;
     padding: 13px 28px;
     justify-content: center;
@@ -142,13 +147,18 @@ export const CancelBtn = styled.div`
     }
 `;
 
-export const RegBtn = styled.div`
+interface RegBtnProps {
+    isActive: boolean;
+}
+
+export const RegBtn = styled.div<RegBtnProps>`
+    cursor: pointer;
     display: flex;
     padding: 13px 28px;
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: var(--Grey-600, #adb3ba);
+    background: ${({ isActive }) => isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
     color: var(--White, #fff);
     text-align: center;
     font-family: Pretendard;
@@ -158,6 +168,6 @@ export const RegBtn = styled.div`
     line-height: 150%; /* 30px */
 
     &:hover {
-        background: var(--Grey-900, #212224);
+        background: ${({ isActive }) => isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
     }
 `;
