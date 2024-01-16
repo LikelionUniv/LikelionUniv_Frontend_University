@@ -1,27 +1,44 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import * as T from './UnivTabStyle';
-import Logo from '../../img/recruit/logo.svg';
-import BtnArrow from '../../img/recruit/btnArrow.svg';
 import default_image from '../../img/univ/_default.png';
-import { tabData, regionTab } from './UnivTabData';
+import { regionTab, IUnivTab } from './UnivTabData';
+import { axiosInstance } from '../../utils/axios';
 
 const Tab = () => {
     const [activeTab, setActiveTab] = useState<string>('전체');
+    const [universities, setUniversities] = useState<IUnivTab[]>([]);
 
     const onTabClick = useCallback((tab: string) => {
         setActiveTab(tab);
     }, []);
 
+    const fetchUniversities = useCallback(async () => {
+        const url = `/api/v1/university/${
+            activeTab === '전체' ? 'all' : activeTab
+        }`;
+        try {
+            const response = await axiosInstance.get(url);
+            setUniversities(response.data.data);
+        } catch (error) {
+            console.error('에러 : ', error);
+        }
+    }, [activeTab]);
+
+    useEffect(() => {
+        fetchUniversities();
+    }, [fetchUniversities]);
+
     // 학교명 가나다 정렬
     const getFilteredUniversities = () => {
+        const sortedUniversities = universities.sort((a, b) =>
+            a.universityName.localeCompare(b.universityName),
+        );
+
         if (activeTab === '전체') {
-            const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
+            return sortedUniversities;
         } else {
-            return tabData[activeTab].sort((a, b) =>
-                a.school.localeCompare(b.school),
+            return sortedUniversities.filter(
+                university => university.location === activeTab,
             );
         }
     };
@@ -32,6 +49,7 @@ const Tab = () => {
         }
         // Add any other actions you want to perform if there is no website link.
     };
+
     const onButtonClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
     };
@@ -57,22 +75,17 @@ const Tab = () => {
                     {getFilteredUniversities().map((school, index) => (
                         <T.TabContent
                             key={index}
-                            onClick={() => popupUnivSite(school.website)}
+                            onClick={() => popupUnivSite(school.recuriteUrl)}
                         >
-                            {/* 학교 로고 추가 */}
                             <T.SchoolLogo>
                                 <img
-                                    src={
-                                        school.logo
-                                            ? school.logo
-                                            : default_image
-                                    }
+                                    src={school.image || default_image}
+                                    alt={default_image}
                                 />
                             </T.SchoolLogo>
-                            {/* 학교 텍스트 */}
                             <T.SchoolText>
-                                {school.school}
-                                <div>{school.region}</div>
+                                {school.universityName}
+                                <div>{school.location}</div>
                             </T.SchoolText>
                         </T.TabContent>
                     ))}

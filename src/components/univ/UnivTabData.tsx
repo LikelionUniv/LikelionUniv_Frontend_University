@@ -62,6 +62,13 @@ export interface ITabData {
     logo?: string;
 }
 
+export interface IUnivTab {
+    universityName: string;
+    location: string;
+    image?: string;
+    recuriteUrl?: string;
+}
+
 export const tabData: { [key: string]: ITabData[] } = {
     서울: [
         {
