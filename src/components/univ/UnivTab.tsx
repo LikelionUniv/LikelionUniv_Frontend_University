@@ -1,47 +1,19 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, Suspense, startTransition } from 'react';
 import * as T from './UnivTabStyle';
 import default_image from '../../img/univ/_default.png';
-import { regionTab, IUnivTab } from './UnivTabData';
-import { axiosInstance } from '../../utils/axios';
+import { regionTab } from './UnivTabData';
+import useGetLocationUniv from '../../query/get/useGetLocationUniv';
+import { IUniversity } from '../../query/get/useGetLocationUniv';
 
 const Tab = () => {
     const [activeTab, setActiveTab] = useState<string>('전체');
-    const [universities, setUniversities] = useState<IUnivTab[]>([]);
+    const universities: IUniversity[] = useGetLocationUniv({ activeTab });
 
     const onTabClick = useCallback((tab: string) => {
-        setActiveTab(tab);
+        startTransition(() => {
+            setActiveTab(tab);
+        });
     }, []);
-
-    const fetchUniversities = useCallback(async () => {
-        const url = `/api/v1/university/${
-            activeTab === '전체' ? 'all' : activeTab
-        }`;
-        try {
-            const response = await axiosInstance.get(url);
-            setUniversities(response.data.data);
-        } catch (error) {
-            console.error('에러 : ', error);
-        }
-    }, [activeTab]);
-
-    useEffect(() => {
-        fetchUniversities();
-    }, [fetchUniversities]);
-
-    // 학교명 가나다 정렬
-    const getFilteredUniversities = () => {
-        const sortedUniversities = universities.sort((a, b) =>
-            a.universityName.localeCompare(b.universityName),
-        );
-
-        if (activeTab === '전체') {
-            return sortedUniversities;
-        } else {
-            return sortedUniversities.filter(
-                university => university.location === activeTab,
-            );
-        }
-    };
 
     const popupUnivSite = (siteUrl?: string): void => {
         if (siteUrl) {
@@ -71,25 +43,29 @@ const Tab = () => {
                 </T.TabWrapper>
 
                 {/* 학교명  */}
-                <T.SchoolWrapper>
-                    {getFilteredUniversities().map((school, index) => (
-                        <T.TabContent
-                            key={index}
-                            onClick={() => popupUnivSite(school.recuriteUrl)}
-                        >
-                            <T.SchoolLogo>
-                                <img
-                                    src={school.image || default_image}
-                                    alt={default_image}
-                                />
-                            </T.SchoolLogo>
-                            <T.SchoolText>
-                                {school.universityName}
-                                <div>{school.location}</div>
-                            </T.SchoolText>
-                        </T.TabContent>
-                    ))}
-                </T.SchoolWrapper>
+                <Suspense fallback={<div>로딩중..</div>}>
+                    <T.SchoolWrapper>
+                        {universities?.map((university, index) => (
+                            <T.TabContent
+                                key={index}
+                                onClick={() =>
+                                    popupUnivSite(university.recruitUrl)
+                                }
+                            >
+                                <T.SchoolLogo>
+                                    <img
+                                        src={university.image || default_image}
+                                        alt={university.universityName}
+                                    />
+                                </T.SchoolLogo>
+                                <T.SchoolText>
+                                    {university.universityName}
+                                    <div>{university.location}</div>
+                                </T.SchoolText>
+                            </T.TabContent>
+                        ))}
+                    </T.SchoolWrapper>
+                </Suspense>
 
                 {/* 참여 버튼  */}
                 <T.BtnWrapper>
