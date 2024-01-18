@@ -6,13 +6,13 @@ export const Wrapper = styled.div`
     height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 
 export const Container = styled.div`
     box-sizing: border-box;
     width: 100%;
     max-width: 1280px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     padding: 0 40px;
@@ -23,7 +23,7 @@ export const Item = styled.img`
     height: 486px;
     border-radius: 8px;
     margin-right: 126px;
-    @media (max-width: 768px) {
+    @media (max-width: 1072px) {
         width: 332px;
         height: 332px;
         background-position: contain;
@@ -40,6 +40,10 @@ export const Text = styled.div`
     font-size: 40px;
     line-height: 60px;
     margin-bottom: 48px;
+
+    @media (max-width: 817px) {
+        font-size: 37px;
+    }
 `;
 
 export const SocialBtn = styled.button`
@@ -58,7 +62,7 @@ export const SocialBtn = styled.button`
         font-weight: 600;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 817px) {
         width: 332px;
     }
 `;
@@ -74,7 +78,7 @@ export const GoogleBtn = styled(SocialBtn)`
             position: absolute;
             left: -67px;
 
-            @media (max-width: 768px) {
+            @media (max-width: 817px) {
                 left: -45px;
             }
         }
@@ -92,7 +96,7 @@ export const KakaoBtn = styled(SocialBtn)`
             position: absolute;
             left: -112px;
 
-            @media (max-width: 768px) {
+            @media (max-width: 817px) {
                 left: -89px;
             }
         }
