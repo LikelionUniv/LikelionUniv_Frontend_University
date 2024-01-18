@@ -45,11 +45,11 @@ const Tab = () => {
                 {/* 학교명  */}
                 <Suspense fallback={<div>로딩중..</div>}>
                     <T.SchoolWrapper>
-                        {universities?.map((university, index) => (
+                        {universities.map((university, index) => (
                             <T.TabContent
                                 key={index}
                                 onClick={() =>
-                                    popupUnivSite(university.recruitUrl)
+                                    popupUnivSite(university.recuriteUrl)
                                 }
                             >
                                 <T.SchoolLogo>

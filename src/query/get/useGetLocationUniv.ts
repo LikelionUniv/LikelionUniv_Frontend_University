@@ -4,7 +4,7 @@ import request from '../../utils/request';
 export interface IUniversity {
     universityName: string;
     location: string;
-    recruitUrl?: string;
+    recuriteUrl?: string;
     image?: string;
 }
 
@@ -29,13 +29,13 @@ function useGetLocationUniv({
     };
 
     const { data: univList } = useSuspenseQuery({
-        queryKey: ['activeTab', activeTab],
+        queryKey: ['getLocationUniv', activeTab],
         queryFn: fetchUniversites,
     });
 
     // 가나다순 정렬
     const filteredAndSortedUniversities = univList
-        ?.sort((a, b) => a.universityName.localeCompare(b.universityName))
+        .sort((a, b) => a.universityName.localeCompare(b.universityName))
         .filter(
             university =>
                 activeTab === '전체' || university.location === activeTab,
