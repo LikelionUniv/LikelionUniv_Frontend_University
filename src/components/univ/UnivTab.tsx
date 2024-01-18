@@ -1,30 +1,19 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, Suspense, startTransition } from 'react';
 import * as T from './UnivTabStyle';
-import Logo from '../../img/recruit/logo.svg';
-import BtnArrow from '../../img/recruit/btnArrow.svg';
 import default_image from '../../img/univ/_default.png';
-import { tabData, regionTab } from './UnivTabData';
+import { regionTab } from './UnivTabData';
+import useGetLocationUniv from '../../query/get/useGetLocationUniv';
+import { IUniversity } from '../../query/get/useGetLocationUniv';
 
 const Tab = () => {
     const [activeTab, setActiveTab] = useState<string>('전체');
+    const universities: IUniversity[] = useGetLocationUniv({ activeTab });
 
     const onTabClick = useCallback((tab: string) => {
-        setActiveTab(tab);
+        startTransition(() => {
+            setActiveTab(tab);
+        });
     }, []);
-
-    // 학교명 가나다 정렬
-    const getFilteredUniversities = () => {
-        if (activeTab === '전체') {
-            const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
-        } else {
-            return tabData[activeTab].sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
-        }
-    };
 
     const popupUnivSite = (siteUrl?: string): void => {
         if (siteUrl) {
@@ -32,6 +21,7 @@ const Tab = () => {
         }
         // Add any other actions you want to perform if there is no website link.
     };
+
     const onButtonClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
     };
@@ -53,30 +43,29 @@ const Tab = () => {
                 </T.TabWrapper>
 
                 {/* 학교명  */}
-                <T.SchoolWrapper>
-                    {getFilteredUniversities().map((school, index) => (
-                        <T.TabContent
-                            key={index}
-                            onClick={() => popupUnivSite(school.website)}
-                        >
-                            {/* 학교 로고 추가 */}
-                            <T.SchoolLogo>
-                                <img
-                                    src={
-                                        school.logo
-                                            ? school.logo
-                                            : default_image
-                                    }
-                                />
-                            </T.SchoolLogo>
-                            {/* 학교 텍스트 */}
-                            <T.SchoolText>
-                                {school.school}
-                                <div>{school.region}</div>
-                            </T.SchoolText>
-                        </T.TabContent>
-                    ))}
-                </T.SchoolWrapper>
+                <Suspense fallback={<div>로딩중..</div>}>
+                    <T.SchoolWrapper>
+                        {universities.map((university, index) => (
+                            <T.TabContent
+                                key={index}
+                                onClick={() =>
+                                    popupUnivSite(university.recuriteUrl)
+                                }
+                            >
+                                <T.SchoolLogo>
+                                    <img
+                                        src={university.image || default_image}
+                                        alt={university.universityName}
+                                    />
+                                </T.SchoolLogo>
+                                <T.SchoolText>
+                                    {university.universityName}
+                                    <div>{university.location}</div>
+                                </T.SchoolText>
+                            </T.TabContent>
+                        ))}
+                    </T.SchoolWrapper>
+                </Suspense>
 
                 {/* 참여 버튼  */}
                 <T.BtnWrapper>
