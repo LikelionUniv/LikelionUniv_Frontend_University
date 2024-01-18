@@ -2,24 +2,35 @@
 
 import React, { useState, useEffect } from 'react';
 import * as H from './UnivHeaderStyle';
-import { tabData, ITabData } from './UnivTabData';
+import { axiosInstance } from '../../utils/axios';
 
 const UnivHeader = () => {
     const foundingYear = 2013;
     const currentYear = new Date().getFullYear();
-
     const calculateYear = currentYear - foundingYear + 1;
 
-    const totalCount = ([] as ITabData[]).concat(
-        ...Object.values(tabData),
-    ).length;
-
     const [univCount, setUnivCount] = useState<number>(0);
+    const [totalCount, setTotalCount] = useState<number>(0);
+
+    useEffect(() => {
+        const fetchTotalUniversities = async () => {
+            try {
+                const response = await axiosInstance.get(
+                    '/api/v1/university/all',
+                );
+                setTotalCount(response.data.data.length);
+            } catch (error) {
+                console.error('에러 : ', error);
+            }
+        };
+
+        fetchTotalUniversities();
+    }, []);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setUnivCount(currentCount =>
-                currentCount < totalCount ? currentCount + 1 : currentCount,
+                currentCount < totalCount ? currentCount + 1 : totalCount,
             );
         }, 30);
 
