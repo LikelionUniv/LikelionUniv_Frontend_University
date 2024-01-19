@@ -8,12 +8,11 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media screen and (min-width: 768px){ㄴ
+    @media screen and (min-width: 768px) {
         padding: 0 40px;
     }
 
-    @media screen and (max-width: 768px){
-        padding: 0 20px
-
+    @media screen and (max-width: 768px) {
+        padding: 0 20px;
     }
 `;
