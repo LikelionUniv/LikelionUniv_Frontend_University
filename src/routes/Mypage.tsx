@@ -1,11 +1,10 @@
-import { UserInfo } from '../components/mypage/UserInfo';
+import UserInfomation from '../components/mypage/UserInfomation';
 import UserPost from '../components/mypage/UserPost';
-//import '../components/LoadScript';
 
 const Mypage = () => {
     return (
         <>
-            <UserInfo />
+            <UserInfomation />
             <UserPost />
         </>
     );
