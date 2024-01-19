@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { Avatar, Button, convertRole } from './Common';
+import { Avatar, Button, convertPart } from './Common';
 import DropDown from '../signUp/DropDown';
 import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
@@ -66,11 +66,11 @@ const UserInfoModify = () => {
                 let label: string;
                 if (field === 'part') {
                     label = findLabelByValue(selectedOption.value);
-                    console.log(label)
+                    console.log(label);
                 }
                 setFormState(prev => ({
                     ...prev,
-                    [field]: convertRole(label),
+                    [field]: convertPart(label),
                 }));
             }
         };
@@ -173,7 +173,7 @@ const UserInfoModify = () => {
                             <DropDown
                                 options={trackOptions}
                                 onChange={handleSelectChange('part')}
-                                placeholder={convertRole(formState.part)}
+                                placeholder={convertPart(formState.part)}
                             />
                         </div>
                     </div>

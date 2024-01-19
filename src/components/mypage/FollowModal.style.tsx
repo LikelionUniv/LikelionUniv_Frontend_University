@@ -28,7 +28,6 @@ export const ModalContainer = styled.div`
     height: 420px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 
     border-radius: 20px;
@@ -55,6 +54,10 @@ export const ModalHeader = styled.div`
     font-size: 20px;
     font-weight: 700;
     line-height: 150%; /* 30px */
+
+    @media (max-width: 767px) {
+        height: 48px;
+    }
 `;
 
 export const ModlalClose = styled.div`
@@ -63,8 +66,7 @@ export const ModlalClose = styled.div`
     height: 24px;
     cursor: pointer;
     position: absolute;
-    right: 16px;
-    justify-self: flex-end;
+    right: 26px;
 `;
 
 export const ModalContent = styled.div`

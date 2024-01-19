@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import profile from '../../img/mypage/default_profile.svg';
 
-export function convertRole(role: string) {
+export function convertPart(role: string) {
     const roleDict: { [key: string]: string } = {
         ADMIN: '관리자',
         PM: '기획',
