@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Wrapper = styled.div`
     box-sizing: border-box;
     height: 100vh;
@@ -9,11 +8,12 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media screen and (min-width: 768px){
+    @media screen and (min-width: 768px){ㄴ
         padding: 0 40px;
     }
 
     @media screen and (max-width: 768px){
         padding: 0 20px
+
     }
 `;
