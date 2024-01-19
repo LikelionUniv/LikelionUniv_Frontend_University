@@ -1,7 +1,8 @@
 import React from 'react';
 import * as ML from './MLoginComplete.style';
+import { NavigateFunction } from 'react-router-dom';
 
-function MLoginComplete() {
+function MLoginComplete({navigate}:NavigateFunction|any) {
     return (
         <ML.Container>
             <ML.ItemBox>
@@ -11,7 +12,7 @@ function MLoginComplete() {
                     <br />
                     운영진의 승인을 기다려주세요.
                 </p>
-                <ML.LButton>홈으로 돌아가기</ML.LButton>
+                <ML.LButton onClick={navigate('/')}>홈으로 돌아가기</ML.LButton>
             </ML.ItemBox>
         </ML.Container>
     );
