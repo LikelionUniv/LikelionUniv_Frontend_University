@@ -11,10 +11,10 @@ import Apply2 from '../../img/recruit/apply2.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Univcontent = () => {
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<number | null>(null);
     const [hovered, setHovered] = useState(false);
 
-    const handleClick = (index: any) => {
+    const handleClick = (index: number) => {
         if (selected === index) {
             setSelected(null);
         } else {
