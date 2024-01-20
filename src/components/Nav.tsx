@@ -17,23 +17,9 @@ const Nav = () => {
     const navigate = useNavigate();
 
     // 로그인 상태
-    const [isLogin, setIsLogin] = useState<Boolean>(false);
-    const { userinfo, setUserinfo } = useAuth();
+    const { userinfo, handleLogout } = useAuth();
     // const profileSrc =
     //     userinfo.profileImage === '' ? defaultprofile : userinfo.profileImage;
-    useEffect(() => {
-        setIsLogin(userinfo.isLogin);
-    }, [userinfo]);
-    const onClickLogout = () => {
-        localStorage.clear();
-        setUserinfo({
-            name: '',
-            profileImage: '',
-            userId: -1,
-            role: '',
-            isLogin: false,
-        });
-    };
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
@@ -161,7 +147,7 @@ const Nav = () => {
                     </div>
 
                     <div className="right">
-                        {/* {isLogin ? (
+                        {/* {userinfo?.isLogin ? (
                             <>
                                 <ChatBtn to="/chat">
                                     <img src={chat} />
@@ -209,8 +195,7 @@ const Nav = () => {
                             <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
-
-                                    onClickLogout();
+                                    handleLogout();
                                     navigate('/');
                                 }}
                                 className="inner"
