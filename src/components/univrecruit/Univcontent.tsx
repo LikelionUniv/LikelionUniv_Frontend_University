@@ -11,15 +11,15 @@ import Apply2 from '../../img/recruit/apply2.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Univcontent = () => {
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<number | null>(null);
     const [hovered, setHovered] = useState(false);
-  
-    const handleClick = (index:any) => {
-      if (selected === index) {
-        setSelected(null);
-      } else {
-        setSelected(index);
-      }
+
+    const handleClick = (index: number) => {
+        if (selected === index) {
+            setSelected(null);
+        } else {
+            setSelected(index);
+        }
     };
 
     const goEmail = () => {
@@ -59,7 +59,9 @@ const Univcontent = () => {
     }
 
     const handleBtn1Click = (): void => {
-        window.open('https://forms.gle/xJh2XzaHP7veFHV96');
+        window.open(
+            'https://likelion.notion.site/12-1-28-0619e6f40a8a492aa1a1ba826712ff11',
+        );
     };
 
     const navigate = useNavigate();
