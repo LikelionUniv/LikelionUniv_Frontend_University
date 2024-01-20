@@ -18,7 +18,11 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
     });
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
         e.stopPropagation();
-        mutate();
+        if (window.confirm(`해당 게시글의 좋아요를 취소하시겠습니까?`)) {
+            mutate();
+        } else {
+            return;
+        }
     };
     return (
         <PostCardBoxWrapper
