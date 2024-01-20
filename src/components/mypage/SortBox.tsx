@@ -3,7 +3,7 @@ import { MypageOptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
 import { startTransition, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { sortOptionAtom } from '../../store/mypageData';
+import { likeOptionAtom } from '../../store/mypageData';
 
 interface SortType {
     select: string;
@@ -16,14 +16,20 @@ export const options: MypageOptionType[] = [
 ];
 
 const SortBox = (props: SortType) => {
-    const [selectedOption, setSelectedOption] = useRecoilState(sortOptionAtom);
+    const [selectOption, setSelectedOption] = useRecoilState(likeOptionAtom);
     useEffect(() => {
-        setSelectedOption(null);
+        setSelectedOption({
+            ...selectOption,
+            sortData: null,
+        });
     }, [props.select]);
 
     const handleSortChange = (selectedOption: MypageOptionType | null) => {
         startTransition(() => {
-            setSelectedOption(selectedOption);
+            setSelectedOption({
+                ...selectOption,
+                sortData: selectedOption,
+            });
         });
 
         if (!selectedOption) return;
@@ -50,7 +56,7 @@ const SortBox = (props: SortType) => {
         <>
             <Select
                 options={options}
-                value={selectedOption}
+                value={selectOption.sortData}
                 styles={orderStyle}
                 isSearchable={false}
                 placeholder="최신순"

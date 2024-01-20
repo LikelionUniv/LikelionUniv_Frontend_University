@@ -12,50 +12,53 @@ import PostCard from './PostCard';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
 import { MypagePostCardPropType } from './type';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
-import { sortOptionAtom } from '../../store/mypageData';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { likeOptionAtom } from '../../store/mypageData';
 import { useLocation, useParams } from 'react-router-dom';
 import { userState } from '../../store/user';
 import { PaginationWrapper } from '../project/ProjectList.style';
-import { useQueryClient } from '@tanstack/react-query';
 
 const LikeSelect = ({ select }: { select: string }) => {
     const [searchValue, setSearchValue] = useState<string>('');
-    const [searchClick, setSearchClick] = useState<string | undefined>(
-        undefined,
-    );
-    const likeOption = useRecoilValue(sortOptionAtom);
+    const [searchOption, setSearchOption] = useRecoilState(likeOptionAtom);
     const location = useLocation().pathname;
     const params = useParams();
     const user = useRecoilValue(userState);
-    const resetSelectOption = useResetRecoilState(sortOptionAtom);
+    const resetSearchOption = useResetRecoilState(likeOptionAtom);
     const user_id =
         location.includes('userpage') && params.user_id !== undefined
             ? parseInt(params.user_id)
             : user.userId;
-    const queryClient = useQueryClient();
     useEffect(() => {
         setSearchValue('');
-        setSearchClick('');
-        resetSelectOption();
+        resetSearchOption();
     }, [select]);
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
     };
     const handleInputClick = () => {
         if (searchValue === '') {
-            setSearchClick(undefined);
+            setSearchOption({
+                ...searchOption,
+                searchData: undefined,
+            });
         } else {
-            setSearchClick(searchValue);
+            setSearchOption({
+                ...searchOption,
+                searchData: searchValue,
+            });
         }
     };
-    const { curPageItem: posts, renderPaginationBtn } =
-        useServerSidePagination<MypagePostCardPropType>({
-            uri: `/api/v1/user/${user_id}/posts/like`,
-            size: 6,
-            sort: likeOption?.value,
-            search: searchClick,
-        });
+    const {
+        curPageItem: posts,
+        renderPaginationBtn,
+        pageNum,
+    } = useServerSidePagination<MypagePostCardPropType>({
+        uri: `/api/v1/user/${user_id}/posts/like`,
+        size: 6,
+        sort: searchOption.sortData?.value,
+        search: searchOption.searchData,
+    });
     // useEffect(() => {
     //     select === '좋아요'
     //         ? queryClient.invalidateQueries({
@@ -100,6 +103,8 @@ const LikeSelect = ({ select }: { select: string }) => {
                                     likeCount={e.likeCount}
                                     commentCount={e.commentCount}
                                     type={select}
+                                    isLiked={e.isLiked}
+                                    currentPage={pageNum}
                                 />
                             );
                         } else {
@@ -115,6 +120,8 @@ const LikeSelect = ({ select }: { select: string }) => {
                                     likeCount={e.likeCount}
                                     commentCount={e.commentCount}
                                     type={select}
+                                    isLiked={e.isLiked}
+                                    currentPage={pageNum}
                                 />
                             );
                         }

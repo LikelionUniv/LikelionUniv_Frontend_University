@@ -52,9 +52,17 @@ export const myProjectData = atom<myprojectDataType>({
     },
 });
 
-export const sortOptionAtom = atom<MypageOptionType | null>({
-    key: 'sortOptionAtom',
-    default: null,
+type likeOptionType = {
+    sortData: MypageOptionType | null;
+    searchData: string | undefined;
+};
+
+export const likeOptionAtom = atom<likeOptionType>({
+    key: 'likeOptionAtom',
+    default: {
+        sortData: null,
+        searchData: undefined,
+    },
 });
 
 export const UserProfileAtom = atom<IuserProfile>({
