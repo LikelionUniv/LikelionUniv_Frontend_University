@@ -2,18 +2,23 @@ import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { mypageLikePostApi } from '../../api/mypage/userpost';
 import DOMPurify from 'dompurify';
+import { usePostLike } from '../../api/mypage/usePostLike';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/user';
 
 const PostCardWithPhoto = (props: MypagePostCardPropType) => {
     const navigate = useNavigate();
-    const [heart, setHeart] = useState(true);
     const location = useLocation().pathname;
+    const user = useRecoilValue(userState);
+    const { mutate } = usePostLike({
+        postId: props.id,
+        user_id: user.userId,
+        currentPage: props.currentPage,
+    });
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
         e.stopPropagation();
-        mypageLikePostApi(props.id);
-        setHeart(!heart);
+        mutate();
     };
     return (
         <PostCardBoxWrapper
@@ -47,7 +52,7 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
             <PostCardBox className="nav">
                 <div className="wrapper">
                     {props.type === '좋아요' && location.includes('mypage') ? (
-                        heart ? (
+                        props.isLiked === true ? (
                             <div className="likeheart" onClick={heartControl} />
                         ) : (
                             <div className="heart" onClick={heartControl} />
@@ -55,7 +60,7 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
                     ) : (
                         <div className="heart" />
                     )}
-                    <div>{heart ? props.likeCount : props.likeCount - 1}</div>
+                    <div>{props.likeCount}</div>
                 </div>
                 <div className="wrapper">
                     <div className="comment" />

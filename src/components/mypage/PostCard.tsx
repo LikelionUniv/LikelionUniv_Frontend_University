@@ -1,22 +1,24 @@
 import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { usePostLike } from '../../api/mypage/usePostLike';
 import DOMPurify from 'dompurify';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../store/user';
 
 const PostCard = (props: MypagePostCardPropType) => {
     const navigate = useNavigate();
-    const [heart, setHeart] = useState(true);
     const location = useLocation().pathname;
+    const user = useRecoilValue(userState);
     const { mutate } = usePostLike({
         postId: props.id,
+        user_id: user.userId,
+        currentPage: props.currentPage,
     });
     const heartControl = (e: React.MouseEvent | React.TouchEvent) => {
         e.stopPropagation();
         mutate();
-        setHeart(!heart);
     };
 
     return (
@@ -41,7 +43,7 @@ const PostCard = (props: MypagePostCardPropType) => {
             <PostCardBox className="nav">
                 <div className="wrapper">
                     {props.type === '좋아요' && location.includes('mypage') ? (
-                        heart ? (
+                        props.isLiked === true ? (
                             <div className="likeheart" onClick={heartControl} />
                         ) : (
                             <div className="heart" onClick={heartControl} />
@@ -49,7 +51,7 @@ const PostCard = (props: MypagePostCardPropType) => {
                     ) : (
                         <div className="heart" />
                     )}
-                    <div>{heart ? props.likeCount : props.likeCount - 1}</div>
+                    <div>{props.likeCount}</div>
                 </div>
                 <div className="wrapper">
                     <div className="comment" />
