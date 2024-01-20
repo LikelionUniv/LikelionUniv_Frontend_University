@@ -104,6 +104,7 @@ export const PostCardBox = styled.div<PhotoCheck>`
             justify-content: center;
             align-items: center;
             flex-shrink: 0;
+            cursor: pointer;
             background-repeat: no-repeat;
             background-image: url(${editdots});
         }

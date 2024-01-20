@@ -43,7 +43,11 @@ const PostModal = ({ id }: { id: number }) => {
                             ) => {
                                 e.stopPropagation();
                                 setModal(!modal);
-                                navigate(`/community/write`);
+                                navigate(`/community/write`, {
+                                    state: {
+                                        id: id,
+                                    },
+                                });
                             }}
                             className="inner"
                         >

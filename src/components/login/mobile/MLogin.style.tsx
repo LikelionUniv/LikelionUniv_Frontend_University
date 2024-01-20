@@ -6,6 +6,7 @@ import kakaoIcon from '../../../img/login/kakao-icon.svg';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @media screen and (min-width: 769px) {
         display: none;
@@ -15,11 +16,11 @@ export const Container = styled.div`
 export const Item = styled.img`
     max-width: 388px;
     max-height: 388px;
-
+    border-radius: 8px;
     margin: 32px auto;
 
     @media screen and (max-width: 428px) {
-        margin: 32px 20px;
+        margin: 32px 0;
     }
 `;
 
@@ -40,7 +41,6 @@ export const Box = styled.div`
     flex-direction: column;
 
     min-height: 176px;
-    margin: 0 13px;
 `;
 
 export const SocialBtn = styled.button`
@@ -50,6 +50,7 @@ export const SocialBtn = styled.button`
     border-radius: 12px;
     margin-bottom: 20px;
     cursor: pointer;
+    position: relative;
 
     & > span {
         text-align: center;
