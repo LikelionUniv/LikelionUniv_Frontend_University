@@ -347,7 +347,7 @@ const Text = styled(NavLink)`
     img {
         width: 12px;
         display: none;
-        position: relative;
+        position: absolute;
         left: -17px;
         margin-bottom: 1px;
     }
