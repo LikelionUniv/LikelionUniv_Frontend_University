@@ -212,24 +212,24 @@ const Nav = () => {
                     <MenuIcon onClick={() => setMobileMenu(!mobileMenu)} />
                     {mobileMenu && (
                         <MMenuContainer ref={menuRef}>
-                            <Text to="/recruit">
+                            <MText to="/recruit">
                                 <p>리크루팅</p>
                                 <img src={navarrow} />
-                            </Text>
-                            <Text to="/univ">
+                            </MText>
+                            <MText to="/univ">
                                 <p>참여대학</p>
                                 <img src={navarrow} />
-                            </Text>
-                            <Text to="/project">
+                            </MText>
+                            <MText to="/project">
                                 <p>프로젝트</p>
                                 <img src={navarrow} />
-                            </Text>
-                            <Text to="/donate">
+                            </MText>
+                            <MText to="/donate">
                                 <p style={{ whiteSpace: 'nowrap' }}>
                                     연간기부금모금액 및 활용실적
                                 </p>
                                 <img src={navarrow} />
-                            </Text>
+                            </MText>
                         </MMenuContainer>
                     )}
                 </MContainer>
@@ -326,6 +326,7 @@ const Logo = styled.img`
 const Text = styled(NavLink)`
     position: relative;
     flex-shrink: 0;
+    min-width: 100px;
     color: var(--grey-900, #212224);
     font-family: Pretendard;
     font-size: 16px;
@@ -498,6 +499,48 @@ const MMenuContainer = styled.div`
 
         img {
             left: -20px;
+        }
+    }
+`;
+
+
+const MText = styled(NavLink)`
+    position: relative;
+    flex-shrink: 0;
+    color: var(--grey-900, #212224);
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: default;
+
+    &.first {
+        margin-left: 10%;
+    }
+    &:last-child {
+        @media (max-width: 767px) {
+            // display: none;
+        }
+    }
+    img {
+        width: 12px;
+        display: none;
+        position: absolute;
+        left: -17px;
+        margin-bottom: 1px;
+    }
+    p {
+        cursor: pointer;
+    }
+    p:hover + img {
+        display: flex;
+    }
+    &.active {
+        font-weight: 700;
+        img {
+            display: flex;
         }
     }
 `;
