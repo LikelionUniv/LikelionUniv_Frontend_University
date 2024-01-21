@@ -12,7 +12,7 @@ const ProtectedRouter = ({ children }: ProtectedRouterProp) => {
 
     useEffect(() => {
         if (!userinfo.isLogin && !isLoading) navigate('/login');
-    }, [userinfo.isLogin, isLoading]);
+    }, [userinfo.isLogin, isLoading, navigate]);
 
     return userinfo.isLogin ? <>{children}</> : null;
 };
