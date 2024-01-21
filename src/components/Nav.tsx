@@ -326,7 +326,6 @@ const Logo = styled.img`
 const Text = styled(NavLink)`
     position: relative;
     flex-shrink: 0;
-    width: 100px;
     color: var(--grey-900, #212224);
     font-family: Pretendard;
     font-size: 16px;
@@ -493,10 +492,12 @@ const MMenuContainer = styled.div`
     align-items: center;
 
     a {
+        position: relative;
         justify-content: center;
         padding: 12px 0;
+
         img {
-            left: 0px;
+            left: -20px;
         }
     }
 `;
