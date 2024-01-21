@@ -1,6 +1,6 @@
 FROM node:20.7.0
 
-COPY package.json .
+COPY package* ./
 
 RUN npm install -g serve
 
