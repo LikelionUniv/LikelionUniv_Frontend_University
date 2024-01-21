@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-type UserInfo = {
+type User = {
     name: string;
     profileImage: string;
     userId: number;
@@ -8,7 +8,7 @@ type UserInfo = {
     isLogin: boolean;
 };
 
-export const userState = atom<UserInfo>({
+export const userState = atom<User>({
     key: 'userInfo',
     default: {
         name: '',

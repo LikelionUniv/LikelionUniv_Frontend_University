@@ -10,6 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.5.2
+        with:
+          node-version: lts/Hydrogen
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
 
       - name: Docker login
         uses: docker/login-action@v2

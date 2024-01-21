@@ -17,23 +17,9 @@ const Nav = () => {
     const navigate = useNavigate();
 
     // 로그인 상태
-    const [isLogin, setIsLogin] = useState<Boolean>(false);
-    const { userinfo, setUserinfo } = useAuth();
+    const { userinfo, handleLogout } = useAuth();
     // const profileSrc =
     //     userinfo.profileImage === '' ? defaultprofile : userinfo.profileImage;
-    useEffect(() => {
-        setIsLogin(userinfo.isLogin);
-    }, [userinfo]);
-    const onClickLogout = () => {
-        localStorage.clear();
-        setUserinfo({
-            name: '',
-            profileImage: '',
-            userId: -1,
-            role: '',
-            isLogin: false,
-        });
-    };
 
     // 프로필 버튼 창 상태
     const [profileModal, setProfileModal] = useState<Boolean>(false);
@@ -161,7 +147,7 @@ const Nav = () => {
                     </div>
 
                     <div className="right">
-                        {/* {isLogin ? (
+                        {/* {userinfo?.isLogin ? (
                             <>
                                 <ChatBtn to="/chat">
                                     <img src={chat} />
@@ -209,8 +195,7 @@ const Nav = () => {
                             <div
                                 onClick={() => {
                                     setProfileModal(pre => !pre);
-
-                                    onClickLogout();
+                                    handleLogout();
                                     navigate('/');
                                 }}
                                 className="inner"
@@ -227,20 +212,24 @@ const Nav = () => {
                     <MenuIcon onClick={() => setMobileMenu(!mobileMenu)} />
                     {mobileMenu && (
                         <MMenuContainer ref={menuRef}>
-                            <Text to="/recruit">
+                            <MText to="/recruit">
                                 <p>리크루팅</p>
                                 <img src={navarrow} />
-                            </Text>
-                            <Text to="/univ">
+                            </MText>
+                            <MText to="/univ">
                                 <p>참여대학</p>
                                 <img src={navarrow} />
-                            </Text>
-                            <Text to="/donate">
+                            </MText>
+                            <MText to="/project">
+                                <p>프로젝트</p>
+                                <img src={navarrow} />
+                            </MText>
+                            <MText to="/donate">
                                 <p style={{ whiteSpace: 'nowrap' }}>
                                     연간기부금모금액 및 활용실적
                                 </p>
                                 <img src={navarrow} />
-                            </Text>
+                            </MText>
                         </MMenuContainer>
                     )}
                 </MContainer>
@@ -337,7 +326,7 @@ const Logo = styled.img`
 const Text = styled(NavLink)`
     position: relative;
     flex-shrink: 0;
-    width: 100px;
+    min-width: 100px;
     color: var(--grey-900, #212224);
     font-family: Pretendard;
     font-size: 16px;
@@ -351,8 +340,8 @@ const Text = styled(NavLink)`
         margin-left: 10%;
     }
     &:last-child {
-        @media (max-width: 992px) {
-            display: none;
+        @media (max-width: 767px) {
+            // display: none;
         }
     }
     img {
@@ -504,10 +493,54 @@ const MMenuContainer = styled.div`
     align-items: center;
 
     a {
+        position: relative;
         justify-content: center;
         padding: 12px 0;
+
         img {
-            left: 0px;
+            left: -20px;
+        }
+    }
+`;
+
+
+const MText = styled(NavLink)`
+    position: relative;
+    flex-shrink: 0;
+    color: var(--grey-900, #212224);
+    font-family: Pretendard;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    cursor: default;
+
+    &.first {
+        margin-left: 10%;
+    }
+    &:last-child {
+        @media (max-width: 767px) {
+            // display: none;
+        }
+    }
+    img {
+        width: 12px;
+        display: none;
+        position: absolute;
+        left: -17px;
+        margin-bottom: 1px;
+    }
+    p {
+        cursor: pointer;
+    }
+    p:hover + img {
+        display: flex;
+    }
+    &.active {
+        font-weight: 700;
+        img {
+            display: flex;
         }
     }
 `;
