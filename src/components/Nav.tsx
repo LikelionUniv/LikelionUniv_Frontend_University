@@ -220,6 +220,10 @@ const Nav = () => {
                                 <p>참여대학</p>
                                 <img src={navarrow} />
                             </Text>
+                            <Text to="/project">
+                                <p>프로젝트</p>
+                                <img src={navarrow} />
+                            </Text>
                             <Text to="/donate">
                                 <p style={{ whiteSpace: 'nowrap' }}>
                                     연간기부금모금액 및 활용실적
@@ -336,14 +340,14 @@ const Text = styled(NavLink)`
         margin-left: 10%;
     }
     &:last-child {
-        @media (max-width: 992px) {
-            display: none;
+        @media (max-width: 767px) {
+            // display: none;
         }
     }
     img {
         width: 12px;
         display: none;
-        position: absolute;
+        position: relative;
         left: -17px;
         margin-bottom: 1px;
     }
