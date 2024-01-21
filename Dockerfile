@@ -4,9 +4,7 @@ COPY package.json .
 
 RUN npm install -g serve
 
-COPY . /app
-
-RUN /app
+COPY . .
 
 RUN npm run build
 
