@@ -1,37 +1,26 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, startTransition } from 'react';
 import * as T from './UnivTabStyle';
-import Logo from '../../img/recruit/logo.svg';
-import BtnArrow from '../../img/recruit/btnArrow.svg';
 import default_image from '../../img/univ/_default.png';
-import { tabData, regionTab } from './UnivTabData';
+import { regionTab } from './UnivTabData';
+import useGetLocationUniv from '../../query/get/useGetLocationUniv';
+import { IUniversity } from '../../query/get/useGetLocationUniv';
 
 const Tab = () => {
     const [activeTab, setActiveTab] = useState<string>('전체');
+    const universities: IUniversity[] = useGetLocationUniv({ activeTab });
 
     const onTabClick = useCallback((tab: string) => {
-        setActiveTab(tab);
+        startTransition(() => {
+            setActiveTab(tab);
+        });
     }, []);
-
-    // 학교명 가나다 정렬
-    const getFilteredUniversities = () => {
-        if (activeTab === '전체') {
-            const allUniversities = Object.values(tabData).flat();
-            return allUniversities.sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
-        } else {
-            return tabData[activeTab].sort((a, b) =>
-                a.school.localeCompare(b.school),
-            );
-        }
-    };
 
     const popupUnivSite = (siteUrl?: string): void => {
         if (siteUrl) {
             window.open(siteUrl, '_blank');
         }
-        // Add any other actions you want to perform if there is no website link.
     };
+
     const onButtonClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
     };
@@ -54,25 +43,22 @@ const Tab = () => {
 
                 {/* 학교명  */}
                 <T.SchoolWrapper>
-                    {getFilteredUniversities().map((school, index) => (
+                    {universities.map((university, index) => (
                         <T.TabContent
                             key={index}
-                            onClick={() => popupUnivSite(school.website)}
+                            onClick={() =>
+                                popupUnivSite(university.recuriteUrl)
+                            }
                         >
-                            {/* 학교 로고 추가 */}
                             <T.SchoolLogo>
                                 <img
-                                    src={
-                                        school.logo
-                                            ? school.logo
-                                            : default_image
-                                    }
+                                    src={university.image || default_image}
+                                    alt={university.universityName}
                                 />
                             </T.SchoolLogo>
-                            {/* 학교 텍스트 */}
                             <T.SchoolText>
-                                {school.school}
-                                <div>{school.region}</div>
+                                {university.universityName}
+                                <div>{university.location}</div>
                             </T.SchoolText>
                         </T.TabContent>
                     ))}

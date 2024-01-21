@@ -17,14 +17,17 @@ const PostSelect = ({ select }: { select: string }) => {
         location.includes('userpage') && params.user_id !== undefined
             ? parseInt(params.user_id)
             : user.userId;
-    const { curPageItem: posts, renderPaginationBtn } =
-        useServerSidePagination<MypagePostCardPropType>({
-            uri:
-                select === '게시글'
-                    ? `/api/v1/user/${user_id}/posts`
-                    : `/api/v1/user/${user_id}/posts/comment`,
-            size: 6,
-        });
+    const {
+        curPageItem: posts,
+        renderPaginationBtn,
+        pageNum,
+    } = useServerSidePagination<MypagePostCardPropType>({
+        uri:
+            select === '게시글'
+                ? `/api/v1/user/${user_id}/posts`
+                : `/api/v1/user/${user_id}/posts/comment`,
+        size: 6,
+    });
     return (
         <>
             <PostBoxWrapper>
@@ -42,7 +45,9 @@ const PostSelect = ({ select }: { select: string }) => {
                                     body={e.body}
                                     likeCount={e.likeCount}
                                     commentCount={e.commentCount}
+                                    isLiked={e.isLiked}
                                     type={select}
+                                    currentPage={pageNum}
                                 />
                             );
                         } else {
@@ -51,6 +56,7 @@ const PostSelect = ({ select }: { select: string }) => {
                                     key={e.id}
                                     id={e.id}
                                     isAuthor={e.isAuthor}
+                                    isLiked={e.isLiked}
                                     thumbnail={e.thumbnail}
                                     title={e.title}
                                     createdDate={e.createdDate}
@@ -58,6 +64,7 @@ const PostSelect = ({ select }: { select: string }) => {
                                     likeCount={e.likeCount}
                                     commentCount={e.commentCount}
                                     type={select}
+                                    currentPage={pageNum}
                                 />
                             );
                         }

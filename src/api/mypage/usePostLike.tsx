@@ -5,13 +5,20 @@ type PostId = {
     postId: number;
 };
 
-export const usePostLike = ({ postId }: { postId: number }) => {
+type userPostLikeType = {
+    postId: number;
+    user_id: number;
+    currentPage: number;
+};
+
+export const usePostLike = (props: userPostLikeType) => {
+    const queryClient = useQueryClient();
     const controlPostLike = async () => {
         await request<PostId, null, null>({
             uri: `/api/v1/community/post-likes`,
             method: 'post',
             data: {
-                postId: postId,
+                postId: props.postId,
             },
         });
     };
@@ -19,7 +26,15 @@ export const usePostLike = ({ postId }: { postId: number }) => {
     const { mutate } = useMutation({
         mutationKey: ['post-like-control'],
         mutationFn: controlPostLike,
-        onSuccess: () => {},
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: [
+                    'get-pagiable',
+                    { uri: `/api/v1/user/${props.user_id}/posts/like` },
+                ],
+            });
+            alert(`해당 게시글의 좋아요를 취소합니다.`);
+        },
     });
 
     return {

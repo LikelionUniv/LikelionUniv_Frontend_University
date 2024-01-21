@@ -79,6 +79,7 @@ export const TabContent = styled.div`
     background: var(--White, #fff);
     overflow: hidden;
 
+    cursor: pointer;
     /* @media screen and (min-width: 768px) {
         width: calc(50% - 24px);
     }
@@ -94,7 +95,6 @@ export const TabContent = styled.div`
     @media screen and (min-width: 1281px) and (max-width: 1920px) {
         width: 282px;
     } */
-
     @media screen and (max-width: 767px) {
         flex-direction: column;
         align-items: center;

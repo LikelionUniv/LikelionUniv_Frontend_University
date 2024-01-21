@@ -5,20 +5,24 @@ import { Button } from '../../mypage/Common';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    margin-bottom: 40px;
 
     width: 100%;
     height: 100%;
+
+    @media screen and (min-width: 768px){
+        display: none;
+    }
 `;
 
 export const ItemBox = styled.div`
-    width: 290px;
-    margin: 0 auto;
-    margin-top: 128px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    margin-top: 10px;
     & > .img {
         width: 200px;
         height: 200px;
@@ -38,8 +42,8 @@ export const ItemBox = styled.div`
 `;
 
 export const LButton = styled(Button)`
-    margin-top: 56px;
-    width: 182px;
+    margin-top: 237px;
+    width: 100%;
     height: 56px;
     font-size: 20px;
 `;

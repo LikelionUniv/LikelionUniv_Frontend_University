@@ -1,71 +1,35 @@
 import styled from 'styled-components';
-import Check from '../../img/login/Check.svg';
-import { Button } from '../mypage/Common';
 import { useNavigate } from 'react-router-dom';
+
+import MLoginComplete from './mobile/MLoginComplete';
+import WLoginComplete from './WLoginComplete';
 
 export const LoginComplete = () => {
     const navigate = useNavigate();
 
     return (
         <Wrapper>
-            <Container>
-                <ItemBox>
-                    <div className="img"></div>
-                    <p>
-                        회원가입이 완료되었습니다!
-                        <br />
-                        운영진의 승인을 기다려주세요.
-                    </p>
-                    <LButton
-                        onClick={() => {
-                            navigate('/');
-                        }}
-                    >
-                        홈으로 돌아가기
-                    </LButton>
-                </ItemBox>
-            </Container>
+            <WLoginComplete navigate={navigate}/>
+            <MLoginComplete navigate={navigate}/>
         </Wrapper>
     );
 };
 
 const Wrapper = styled.div`
-    max-width: 1200px;
-    height: 90vh;
-    margin: 0 auto;
-`;
-
-const Container = styled.div`
+    box-sizing: border-box;
+    width : 100%;
+    height: 100vh;
     display: flex;
-    height: 100%;
     justify-content: center;
     align-items: center;
-`;
 
-const ItemBox = styled.div`
-    width: 290px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    & > .img {
-        width: 200px;
-        height: 200px;
-        background-image: url(${Check});
+    @media screen and (min-width: 768px){
+        padding: 0 40px;
     }
-    & > p {
-        margin-top: 24px;
-        color: var(--Grey-900, #212224);
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        line-height: 150%; /* 36px */
+
+    @media screen and (max-width: 768px){
+        padding: 0 20px
     }
 `;
 
-const LButton = styled(Button)`
-    margin-top: 56px;
-    width: 182px;
-    height: 56px;
-    font-size: 20px;
-`;
+
