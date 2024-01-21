@@ -1,12 +1,12 @@
 FROM node:20.7.0
 
-WORKDIR /usr/src/app
-
 COPY package.json .
 
 RUN npm install -g serve
 
-COPY ./ ./
+COPY . /app
+
+RUN /app
 
 RUN npm run build
 
