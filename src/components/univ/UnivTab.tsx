@@ -1,4 +1,4 @@
-import { useState, useCallback, Suspense, startTransition } from 'react';
+import { useState, useCallback, startTransition } from 'react';
 import * as T from './UnivTabStyle';
 import default_image from '../../img/univ/_default.png';
 import { regionTab } from './UnivTabData';
@@ -19,7 +19,6 @@ const Tab = () => {
         if (siteUrl) {
             window.open(siteUrl, '_blank');
         }
-        // Add any other actions you want to perform if there is no website link.
     };
 
     const onButtonClick = (): void => {
@@ -43,29 +42,27 @@ const Tab = () => {
                 </T.TabWrapper>
 
                 {/* 학교명  */}
-                <Suspense fallback={<div>로딩중..</div>}>
-                    <T.SchoolWrapper>
-                        {universities.map((university, index) => (
-                            <T.TabContent
-                                key={index}
-                                onClick={() =>
-                                    popupUnivSite(university.recuriteUrl)
-                                }
-                            >
-                                <T.SchoolLogo>
-                                    <img
-                                        src={university.image || default_image}
-                                        alt={university.universityName}
-                                    />
-                                </T.SchoolLogo>
-                                <T.SchoolText>
-                                    {university.universityName}
-                                    <div>{university.location}</div>
-                                </T.SchoolText>
-                            </T.TabContent>
-                        ))}
-                    </T.SchoolWrapper>
-                </Suspense>
+                <T.SchoolWrapper>
+                    {universities.map((university, index) => (
+                        <T.TabContent
+                            key={index}
+                            onClick={() =>
+                                popupUnivSite(university.recuriteUrl)
+                            }
+                        >
+                            <T.SchoolLogo>
+                                <img
+                                    src={university.image || default_image}
+                                    alt={university.universityName}
+                                />
+                            </T.SchoolLogo>
+                            <T.SchoolText>
+                                {university.universityName}
+                                <div>{university.location}</div>
+                            </T.SchoolText>
+                        </T.TabContent>
+                    ))}
+                </T.SchoolWrapper>
 
                 {/* 참여 버튼  */}
                 <T.BtnWrapper>
