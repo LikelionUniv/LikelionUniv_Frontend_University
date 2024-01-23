@@ -52,7 +52,9 @@ const Tab = () => {
                         >
                             <T.SchoolLogo>
                                 <img
-                                    src={university.image || default_image}
+                                    src={`https://${
+                                        university.image || default_image
+                                    }`}
                                     alt={university.universityName}
                                 />
                             </T.SchoolLogo>
