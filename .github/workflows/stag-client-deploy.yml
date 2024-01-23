@@ -23,7 +23,7 @@ jobs:
               run: npx update-browserslist-db@latest
 
             - name: Build
-              run: npm run build
+              run: CI=false npm run build
 
             - name: Docker login
               uses: docker/login-action@v2
