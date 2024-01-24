@@ -1,7 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { axiosInstance } from '../../utils/axios';
-import { useAuth } from '../../hooks/useAuth';
 
 interface Follow {
     currentPage: number;
@@ -21,10 +20,7 @@ async function userFollowApi(
     return response.data.data;
 }
 
-export function useLoadFollow(follow: string) {
-    const {
-        userinfo: { userId },
-    } = useAuth();
+export function useLoadFollow(userId: number, follow: string) {
     const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
         useInfiniteQuery({
             queryKey: [follow, userId],
