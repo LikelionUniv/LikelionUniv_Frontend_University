@@ -34,8 +34,10 @@ const PostBox: React.FC<PostBoxProp> = props => {
             <BoxWrapper isSearching={props.isSearching}>
                 {props.isSearching && (<Mc className="mc">{props.mainCategory}</Mc>)}
                 <Box className="title">{props.title}</Box>
-                <Box className="content" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.bodySummary) }}></Box>
-                
+                <Box 
+                    className="content" 
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.bodySummary) }}
+                />
                 <Box className="nav">
                     <div className="wrapper">
                         <Box
@@ -43,7 +45,7 @@ const PostBox: React.FC<PostBoxProp> = props => {
                             style={{
                                 backgroundImage: `url(${props.authorProfileImageUrl})`,
                             }}
-                        ></Box>
+                        />
                         <div className="user">{props.authorName}</div>
                     </div>
                     <Dot />
@@ -81,10 +83,18 @@ const Wrapper = styled.div<{isSearching: boolean}>`
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+
+    @media screen and (max-width: 767px) {
+        height: ${props => props.isSearching ? '160px' : '138px'};
+    }
 `;
 
 const BoxWrapper = styled.div<{isSearching: boolean}>`
     padding: ${props => props.isSearching ? '0px 32px 24px 0' : '28px 32px 28px 0'};
+    
+    @media screen and (max-width: 767px) {
+        padding: ${props => props.isSearching ? '0px 8px 20px 0' : '20px 8px 20px 0'};
+    }
 `;
 
 const Dot = styled.div`
@@ -101,18 +111,29 @@ const Mc = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
-    width: 320px;
+    width: 100%;
     margin: 24px 0 8px 0;
-`
+
+    @media screen and (max-width: 767px) {
+        margin: 20px 0 4px 0;
+        font-size: 12px;
+    }
+`;
 
 export const Box = styled.div<{ img?: string | null }>`
     line-height: 150%;
     font-weight: 500;
+    font-family: Pretendard;
 
     &.date {
         color: var(--Grey-700, #868c94);
         font-size: 14px;
         line-height: 150%;
+
+        @media screen and (max-width: 767px) {
+            font-size: 12px;
+        }
+
     }
     &.title {
         font-size: 20px;
@@ -124,18 +145,38 @@ export const Box = styled.div<{ img?: string | null }>`
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+
+        @media screen and (max-width: 767px) {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
     }
     &.content {
-        font-size: 16px;
         height: 72px;
         overflow: hidden;
-        line-height: 150%;
         text-overflow: ellipsis;
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
         margin-bottom: 22px;
         white-space: pre-line;
+
+        p {
+            font-size: 16px;
+            line-height: 150%;
+            font-weight: 500;
+            color: var(--Grey-800, #4D5359);
+
+            @media screen and (max-width: 767px) {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            height: 42px;
+            margin-bottom: 9px;
+            -webkit-line-clamp: 2;
+        }
     }
     &.photo {
         background-repeat: no-repeat;
@@ -143,6 +184,11 @@ export const Box = styled.div<{ img?: string | null }>`
         width: ${props => (props.img ? '180px' : '0')};
         height: ${props => (props.img ? '180px' : '0')};
         background-size: cover;
+
+        @media screen and (max-width: 767px) {
+            width: ${props => (props.img ? '70px' : '0')};
+            height: ${props => (props.img ? '70px' : '0')};
+        }
     }
     &.nav {
         display: inline-flex;
@@ -184,8 +230,18 @@ export const Box = styled.div<{ img?: string | null }>`
                     border-radius: 50%;
                     border: 0.5px solid #eaecee;
                     margin-right: 2px;
+
+                    @media screen and (max-width: 767px) {
+                        width: 20px;
+                        height: 20px;
+                    }
                 }
             }
         }
+
+        @media screen and (max-width: 767px) {
+            font-size: 12px;
+        }
+
     }
 `;

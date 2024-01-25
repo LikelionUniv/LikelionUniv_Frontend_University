@@ -1,25 +1,26 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import * as D from './DetailStyle';
-import profileImage from '../../../img/community/profile.svg';
 import { Post} from './CommentData';
+import profileImage from '../../../img/community/profile.svg';
 import { ReactComponent as HeartIcon } from '../../../img/community/heart20.svg';
 import { ReactComponent as CommentIcon } from '../../../img/community/comment20.svg';
-import { ReactComponent as HeartIconMobile } from '../../../img/community/heart16_mob.svg'; // Replace with your mobile icon
+import { ReactComponent as HeartIconMobile } from '../../../img/community/heart16_mob.svg';
 import { ReactComponent as CommentIconMobile } from '../../../img/community/comment16_mob.svg';
 import { axiosInstance } from '../../../utils/axios';
 import useIsPC from '../../../hooks/useIsPC';
 
 interface HeaderProps {
     postData: Post;
+    onDeletePost: () => void;
+    onModifyPost: () => void;
 }
-const Header: React.FC<HeaderProps> = ({postData}) => {
+const Header: React.FC<HeaderProps> = ({postData, onDeletePost, onModifyPost}) => {
     const isPC = useIsPC();
-    const navigate = useNavigate();
     const [isFollowed, setIsFollowed] = useState(postData.isFollowedAuthor);
     const isMyPost = postData.isMyPost;
     const profileImageUrl = postData.hasAuthorProfileImageUrl ? postData.authorProfileImageUrl : profileImage;
 
+    //팔로우 기능
     const handleFollow = async () => {
         try {
             if (isFollowed) {
@@ -32,31 +33,6 @@ const Header: React.FC<HeaderProps> = ({postData}) => {
             console.error(error);
         }
     };
-
-
-    const goModify = () => {
-        navigate('/community/write', {
-            state: {
-              title: `${postData.title}`,
-              main: `${postData.mainCategory}`,
-              sub: `${postData.subCategory}`,
-              body: `${postData.body}`,
-              mod: true,
-              id: `${postData.postId}`
-            }
-          });
-    }
-
-    const deletePost = async() => {
-        try {
-            const response = await axiosInstance.delete(`/api/v1/community/posts/${postData.postId}`); 
-            navigate(-1)
-        } catch (error) {
-          console.error(error);
-        }
-    };
-
-
 
     return (
         <>
@@ -102,10 +78,8 @@ const Header: React.FC<HeaderProps> = ({postData}) => {
                     </div>
                     {isMyPost && (
                         <div className="btns">
-                            <p className="delete" onClick={deletePost}>삭제하기</p>
-                            <p className="modify" onClick={goModify}>
-                                수정하기
-                            </p>
+                            <p className="delete" onClick={onDeletePost}>삭제하기</p>
+                            <p className="modify" onClick={onModifyPost}>수정하기</p>
                         </div>
                     )}
                 </div>

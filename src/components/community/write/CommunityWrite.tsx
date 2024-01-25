@@ -1,10 +1,12 @@
 import Editor from './Editor';
 import * as W from './WriteStyle';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import {Back} from '../detail/DetailStyle'
+import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import request from '../../../utils/request';
-import { useNavigate } from 'react-router-dom';
-import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
+import { axiosInstance } from '../../../utils/axios';
+import ImageUpload from '../../utils/ImageUpload';
+import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
 
 interface CommunityRegisterType {
     title: string;
@@ -22,13 +24,32 @@ const CommunityWrite = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const info = { ...location.state };
-    const [selectedBoard, setSelectedBoard] = useState<string>('' || info.main);
-    const [selectedSubBoard, setSelectedSubBoard] = useState<string>('' || info.sub);
-    const [editorTitle, setEditorTitle] = useState(info.title || '');
-    const [editorContent, setEditorContent] = useState(info.body || '');
+    const [selectedBoard, setSelectedBoard] = useState<string>('');
+    const [selectedSubBoard, setSelectedSubBoard] = useState<string>('');
+    const [editorTitle, setEditorTitle] = useState('');
+    const [editorContent, setEditorContent] = useState('');
 
+    //수정모드일때 기존 데이터 불러오기
+    const fetchData = async () => {
+        try {
+        const response = await axiosInstance.get(`/api/v1/community/posts/${info.id}/simple`);
+        setSelectedBoard(response.data.data.mainCategory);
+        setSelectedSubBoard(response.data.data.subCategory);
+        setEditorContent(response.data.data.body);
+        setEditorTitle(response.data.data.title);
+        } catch (error) {
+        console.error(error);
+        }
+    };
+        
+    useEffect(() => {
+        if (info.mod) {
+          fetchData();
+        }
+    }, [info.mod]);
+  
     const isSubmitEnabled = () => {
-        return selectedBoard && selectedSubBoard && editorTitle && editorContent;
+        return selectedBoard !== '' && selectedSubBoard !== '' && editorTitle !== '' && editorContent !== '';
     };
 
     const handleTitleChange = (title:string) => {
@@ -38,7 +59,6 @@ const CommunityWrite = () => {
     const handleContentChange = (content:string) => {
         setEditorContent(content);
     };
-    
 
     const BoardClick = (boardName: string) => {
         setSelectedBoard(boardName);
@@ -55,27 +75,38 @@ const CommunityWrite = () => {
         base64Urls.forEach((base64Url:any, index:any) => {
           newHtml = newHtml.replace(base64Url, s3Urls[index]);
         });
-      
         return newHtml;
-      };
+    };
+
+    // 수정할때 이미 있던 s3이미지는 처리 x
+    const isS3Url = (url: string) => {
+        return url.startsWith('https://storage.likelionuniv.com'); 
+    };
 
     const processSendData = async (): Promise<CommunityRegisterType> => {
-
         const editorHtml = editorContent;
-        const base64Urls = extractBase64Images(editorHtml);
-        let thumbnailUrl = null;
-        
+        const extractedUrls = extractBase64Images(editorHtml);
         let newEditorHtml = editorHtml;
+        let thumbnailUrl = null;
+    
+        // Base64 URL이랑 S3 URL 구분
+        const base64Urls = extractedUrls.filter(url => !isS3Url(url));
+        const s3Urls = extractedUrls.filter(isS3Url);
+    
+        // S3에 업로드하고 URL 변경
+        let uploadedS3Urls:any = [];
         if (base64Urls.length > 0) {
-            const s3Urls = await uploadImagesAndGetUrls(base64Urls);
-            newEditorHtml = replaceBase64WithS3Urls(editorHtml, base64Urls, s3Urls);
-
-            if (s3Urls.length > 0) {
-                thumbnailUrl = s3Urls[0];
-            }
+            uploadedS3Urls = await uploadImagesAndGetUrls(base64Urls);
+            newEditorHtml = replaceBase64WithS3Urls(newEditorHtml, base64Urls, uploadedS3Urls);
         }
-
-
+    
+        // 썸네일 첫번째 사진으로
+        if (s3Urls.length > 0) {
+            thumbnailUrl = s3Urls[0];
+        } else if (uploadedS3Urls.length > 0) {
+            thumbnailUrl = uploadedS3Urls[0];
+        }
+    
         return {
             title: editorTitle,
             body: newEditorHtml,
@@ -84,38 +115,36 @@ const CommunityWrite = () => {
             subCategory: selectedSubBoard
         };
     };
-
+    
     // 게시글 등록
     const handleSubmit = async () => {
         const data = await processSendData();
-        const response = await request<CommunityRegisterType, PostId, null>({
+        await request<CommunityRegisterType, PostId, null>({
             uri: '/api/v1/community/posts/new',
             method: 'post',
             data,
         });
 
-        navigate('/community');
-        console.log(response)
+        window.location.replace("/community");
     };
 
     // 게시글 수정
     const handleModify = async () => {
         const data = await processSendData();
-        const response = await request<CommunityRegisterType, null, PostId>({
+        await request<CommunityRegisterType, null, PostId>({
             uri: `/api/v1/community/posts/${info.id}`,
             method: 'patch',
             data,
         });
 
-        navigate('/community');
-        console.log(response)
+        window.location.replace("/community");
     };
 
     const submit = () => {
         if(info.mod){
-            handleSubmit();
-        }else {
             handleModify();
+        }else {
+            handleSubmit();
         }
     }
 
@@ -152,7 +181,6 @@ const CommunityWrite = () => {
           await ImageUpload.enrollImagesToS3(file, presignedUrl);
           s3Urls.push('https://' + imageUrl);
         }
-      
         return s3Urls;
     };
 
@@ -255,6 +283,16 @@ const CommunityWrite = () => {
     };
 
     return (
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+        <Back>
+            <ArrowIcon onClick={() => {navigate(-1)}} />
+            <W.Reg
+                isActive={isSubmitEnabled()}
+                onClick={isSubmitEnabled() ? submit : undefined} 
+            >
+                등록
+            </W.Reg>
+        </Back>
         <W.Container>
             <W.Title>커뮤니티 글쓰기</W.Title>
             <W.Tab>
@@ -282,18 +320,22 @@ const CommunityWrite = () => {
                 {SubBoard()}
             </W.Tab>
             <Editor 
-                contents={info.body} 
-                title={info.title} 
+                contents={editorContent} 
+                title={editorTitle} 
                 onTitleChange={handleTitleChange}
                 onContentChange={handleContentChange}
             />
             <div className='btns'>
                 <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
                 <W.RegBtn
-                isActive={isSubmitEnabled()}
-                onClick={isSubmitEnabled() ? handleSubmit : undefined} >등록하기</W.RegBtn>
+                    isActive={isSubmitEnabled()}
+                    onClick={isSubmitEnabled() ? submit : undefined}
+                >
+                    등록하기
+                </W.RegBtn>
             </div>
         </W.Container>
+        </div>
     );
 };
 

@@ -17,7 +17,7 @@ export default CommunityPage;
 
 const Container = styled.div`
     max-width: 1200px;
-    padding: 0 40px;
+    padding: 0;
     //min-width: 768px;
     width: 100%;
     margin: 0 auto;
@@ -26,6 +26,10 @@ const Container = styled.div`
     align-items: flex-start;
     font-family: Pretendard;
     height: auto;
+
+    @media screen and (max-width: 1024px) {
+        padding: 0 40px;
+    }
 
     @media screen and (max-width: 767px) {
         padding: 0;

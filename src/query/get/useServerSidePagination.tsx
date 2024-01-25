@@ -3,11 +3,16 @@ import request from '../../utils/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 
+
 interface IuseServerSidePagination {
     uri: string;
     size: number;
     sort?: string;
     search?: string;
+    mc?: string;
+    sc?: string;
+    st?: string;
+    oc?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -31,6 +36,11 @@ interface Pageable {
     size: number;
     sort?: string;
     search?: string;
+    mc?: string;
+    sc?: string;
+    st?: string;
+    oc?: string;
+
 }
 
 function useServerSidePagination<T>({
@@ -38,6 +48,10 @@ function useServerSidePagination<T>({
     size,
     sort,
     search,
+    mc,
+    sc,
+    st,
+    oc,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
@@ -56,6 +70,10 @@ function useServerSidePagination<T>({
                 size,
                 sort,
                 search,
+                mc,
+                sc,
+                st,
+                oc,
             },
         });
 
@@ -63,7 +81,7 @@ function useServerSidePagination<T>({
     };
 
     const { data: cachingData } = useSuspenseQuery({
-        queryKey: ['get-pagiable', { uri, size, sort, search, currentPage }],
+        queryKey: ['get-pagiable', { uri, size, sort, search, currentPage, mc, sc, st, oc }],
         queryFn: fetchPagiableData,
     });
 

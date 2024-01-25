@@ -20,7 +20,6 @@ const Like:React.FC<LikeProps> = ({postData}) => {
 
     // 좋아요 생성 & 삭제
     const createLike = async () => {
-
         const Data: LikeCreateType = {
             postId: postData.postId,
         };

@@ -22,7 +22,7 @@ function useIsPC(): boolean {
     }, []);
 
     useEffect(() => {
-        setIsPC(width > 768);
+        setIsPC(width >= 768);
     }, [width]);
 
     return isPC;
