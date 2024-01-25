@@ -29,6 +29,7 @@ interface ResponseServerSidePagination<T> {
 interface ReturnuseServerSidePagination<T> {
     curPageItem: T[];
     renderPaginationBtn: () => JSX.Element;
+    pageNum: number;
 }
 
 interface Pageable {
@@ -109,6 +110,7 @@ function useServerSidePagination<T>({
     return {
         curPageItem: data,
         renderPaginationBtn,
+        pageNum: currentPage,
     };
 }
 

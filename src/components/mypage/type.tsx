@@ -27,10 +27,23 @@ export interface MypagePostCardProp {
     likeCount: number;
     commentCount: number;
     isAuthor: boolean;
+    isLiked: boolean;
+}
+
+export interface MypageQueryPropType {
+    currentPage: number;
+    data: Array<MypagePostCardProp>;
+    isEmpty: boolean;
+    isLast: boolean;
+    isFirst: boolean;
+    pagingSize: number;
+    totalElements: number;
+    totalPage: number;
 }
 
 export interface MypagePostCardPropType extends MypagePostCardProp {
     type: string;
+    currentPage: number;
 }
 
 export interface PostCardPropType extends PostCardProp {

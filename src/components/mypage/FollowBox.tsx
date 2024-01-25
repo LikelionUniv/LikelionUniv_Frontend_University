@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { Avatar, Button } from './Common';
+import { Avatar, Button, convertPart } from './Common';
 import { Ifollows } from './type';
 import { useState } from 'react';
 import { useFollowAddDelete } from '../../api/mypage/useFollowAddDelete';
@@ -25,11 +25,11 @@ export const FollowBox = ({
     return (
         <Follow>
             <FollowInfo>
-                <FollowAvatar imgurl={profileImage} />
+                <FollowAvatar imgurl={`https://${profileImage}`} />
                 <FollowProfile>
                     <p className="inner_name">{name}</p>
                     <p className="inner_info">
-                        {ordinal} {part}
+                        {ordinal}기 · {convertPart(part)}
                     </p>
                 </FollowProfile>
             </FollowInfo>
@@ -49,14 +49,14 @@ export const Follow = styled.div`
     /* width: 100%; // 줄어들어야함. */
     height: 64px;
     margin-top: 16px;
-    padding: 0 24px 0 16px;
+    padding: 0 12px 0 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 `;
 
 export const FollowInfo = styled.div`
-    width: 165px;
+    width: 175px;
     height: 64px;
     display: flex;
 `;
@@ -96,4 +96,8 @@ export const FollowBtn = styled(Button)<IbuttonProps>`
             background-color: #eaecee;
             color: #4d5359;
         `}
+
+    @media (max-width: 767px) {
+        width: 64px;
+    }
 `;

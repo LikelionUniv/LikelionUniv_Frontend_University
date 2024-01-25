@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { axiosInstance } from '../../utils/axios';
 
 // 인가코드 서버로 전송 , idtoken return
@@ -8,12 +10,11 @@ export const requestIdtoken = async (
     return await axiosInstance
         .get(`/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`)
         .then(response => {
-            //idtoken return
             localStorage.setItem('idtoken', response.data.data.idToken);
-            return Promise.resolve(response.data.data.idToken);
+            return response.data.data.idToken;
         })
-        .catch(e => {
-            return '인가 코드 인증 오류';
+        .catch(error => {
+            if (axios.isAxiosError(error)) return undefined;
         });
 };
 
@@ -35,19 +36,13 @@ export const requestLogin = async (
 
             return isUser;
         })
-        .catch(e => {
-            return e;
+        .catch(error => {
+            if (axios.isAxiosError(error)) return undefined;
         });
 };
 
-// 유저정보 GET
+// 유저정보 GET - 실패하거나 에러가 나면 response = undefined
 export const requestUserInfo = async () => {
-    return await axiosInstance
-        .get(`/api/v1/auth/userinfo`)
-        .then(response => {
-            return response.data;
-        })
-        .catch(error => {
-            return error;
-        });
+    const response = await axiosInstance.get(`/api/v1/auth/userinfo`);
+    return response.data;
 };

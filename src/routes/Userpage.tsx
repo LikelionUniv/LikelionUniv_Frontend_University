@@ -1,10 +1,10 @@
-import { UserInfo } from '../components/mypage/UserInfo';
+import UserInfomation from '../components/mypage/UserInfomation';
 import UserPost from '../components/mypage/UserPost';
 
 const Userpage = () => {
     return (
         <>
-            <UserInfo />
+            <UserInfomation />
             <UserPost />
         </>
     );
