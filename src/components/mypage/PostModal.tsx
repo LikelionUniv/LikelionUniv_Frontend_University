@@ -45,6 +45,7 @@ const PostModal = ({ id }: { id: number }) => {
                                 setModal(!modal);
                                 navigate(`/community/write`, {
                                     state: {
+                                        mod: true,
                                         id: id,
                                     },
                                 });

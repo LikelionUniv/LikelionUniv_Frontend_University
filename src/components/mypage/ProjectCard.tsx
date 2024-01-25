@@ -21,11 +21,10 @@ const ProjectCard = (props: ProjectCardProp) => {
             <ProjectBox className="title">{props.serviceName}</ProjectBox>
             <ProjectBox className="content">{props.description}</ProjectBox>
             <ProjectBox className="teaminfo">
-                <div>{props.ordinal}</div>
-                <div className="dot"></div>
-                <div>{props.universityName}</div>
-                <div className="dot"></div>
-                <div>{props.activity}</div>
+                <div>
+                    {props.ordinal}기 · {props.universityName} ·{' '}
+                    {props.activity}
+                </div>
             </ProjectBox>
         </ProjectBoxWrapper>
     );
@@ -84,7 +83,7 @@ const ProjectBox = styled.div`
     &.teaminfo {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 6px;
         font-size: 14px;
         line-height: 150%;
         color: var(--Grey-700, #868c94);
