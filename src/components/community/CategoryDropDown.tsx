@@ -12,8 +12,8 @@ interface OptionType {
 }
 
 const orderOptions: OptionType[] = [
-    { value: 1, label: '전체 게시판', isDisabled: false, mainCategory: '전체', subCategory: '전체' },
-    { value: 2, label: '멋대 중앙', isDisabled: true, mainCategory: '전체', subCategory: '전체'},
+    { value: 1, label: '전체 게시판', isDisabled: false, mainCategory: '전체 게시판', subCategory: '전체 게시판' },
+    { value: 2, label: '멋대 중앙', isDisabled: true, mainCategory: '전체 게시판', subCategory: '전체 게시판'},
     { value: 3, label: '공지사항', isDisabled: false, mainCategory: '멋대 중앙', subCategory: '공지사항' },
     { value: 4, label: '질문건의', isDisabled: false, mainCategory: '멋대 중앙', subCategory: '질문건의' },
     { value: 5, label: '정보공유', isDisabled: false, mainCategory: '멋대 중앙', subCategory: '정보공유' },
@@ -32,6 +32,8 @@ const orderOptions: OptionType[] = [
 
 interface OrderProp {
     onCategoryChange: (mainCategory: string, subCategory: string) => void;
+    mainCategory : string;
+    subCategory : string;
 }
 
 const DropdownDivider = styled.div`
@@ -69,10 +71,13 @@ const DropdownIndicator = (props: any) => {
     );
 };
 
-const CategoryDropDown: React.FC<OrderProp> = ({ onCategoryChange }) => {
+const CategoryDropDown: React.FC<OrderProp> = ({ onCategoryChange, mainCategory, subCategory }) => {
+    const selectedOption = orderOptions.find(option => 
+        option.mainCategory === mainCategory && option.subCategory === subCategory
+    );
+
     const handleCategoryChange = (selectedOption: OptionType | null) => {
         if (!selectedOption || selectedOption.isDisabled) return;
-
         onCategoryChange(selectedOption.mainCategory, selectedOption.subCategory);
     };
 
@@ -81,7 +86,7 @@ const CategoryDropDown: React.FC<OrderProp> = ({ onCategoryChange }) => {
             options={orderOptions}
             styles={orderStyle}
             isSearchable={false}
-            placeholder="전체 게시판"
+            value={selectedOption}
             components={{ DropdownIndicator, MenuList: CustomMenuList }}
             maxMenuHeight={136}
             onChange={handleCategoryChange}
@@ -92,9 +97,6 @@ const CategoryDropDown: React.FC<OrderProp> = ({ onCategoryChange }) => {
 };
 
 export default CategoryDropDown;
-
-
-
 
 const orderStyle = {
     indicatorSeparator: () => ({

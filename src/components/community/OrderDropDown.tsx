@@ -13,7 +13,6 @@ interface OrderProp {
     onOrderChange: any;
 }
 
-
 const OrderDropDown:React.FC<OrderProp> = ({ onOrderChange }) => {
     const handleSortChange = (selectedOption: OptionType | null) => {
         if (!selectedOption) return;
@@ -87,6 +86,7 @@ const orderStyle = {
         ...provided,
         fontFamily: 'Pretendard',
         fontSize: '16px',
+        color: 'var(--Grey-900, #212224)',
         fontWeight: '500',
         border: state.isFocused
             ? ' 1px solid transparent'
@@ -100,6 +100,8 @@ const orderStyle = {
             borderColor: 'transparent',
             border: '1px solid transparent',
         },
+        
+        
     }),
     menu: (provided: any) => ({
         ...provided,

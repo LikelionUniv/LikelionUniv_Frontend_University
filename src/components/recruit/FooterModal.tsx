@@ -111,7 +111,7 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
             ) : (
                 <M.ModalContent>
                     <M.ModalHeader>
-                        <M.ModalTitle>멋대 알림 신청하기</M.ModalTitle>
+                        <M.ModalTitle>모집 알림 신청하기</M.ModalTitle>
                         <M.ModalCloseButton
                             onClick={closeModal}
                             close={Close}
@@ -122,12 +122,10 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                         <M.ModalText>
                             <M.ModalGraphic />
                             <M.Text>
-                                멋대의 새로운 소식을 이메일로 알려드려요.
+                                모집이 시작되었을 때 이메일과 알려드려요. 
                                 <br />
                                 <M.Text>
-                                    * 입력하신 개인정보는 멋쟁이사자처럼 대학
-                                    홈페이지의 개인정보처리방침에 의거하여
-                                    관리됩니다.
+                                    * 입력하신 개인정보는 모집 알림 발송 후 파기됩니다. 
                                 </M.Text>
                             </M.Text>
                         </M.ModalText>

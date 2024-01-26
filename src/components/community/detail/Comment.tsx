@@ -23,12 +23,11 @@ interface CommentProps {
     isChildComment?: boolean;
     isModify?: boolean;
     id: number;
-    cancel? : () => void;
-    onCommentUpdate : () => void;
+    cancel?: () => void;
+    onCommentUpdate: () => void;
 }
 
-const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComment = false, isModify = false, id, cancel}) => {
-    console.log(isChildComment, isModify)
+const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComment = false, isModify = false, id, cancel }) => {
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
     const handleResizeHeight = useCallback(() => {
@@ -58,7 +57,6 @@ const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComm
         console.log(response.data);
         onCommentUpdate();
         setInputValue('');
-        
     };
 
     //대댓글 생성
@@ -80,9 +78,9 @@ const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComm
             data: commentData
         });
         window.location.reload();
-        
     }
 
+    //등록 or 수정
     const handleSubmit = () => {
         if (isChildComment && !isModify) {
             childCommentSubmit();
@@ -93,30 +91,33 @@ const Comment:React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComm
         }
     };
 
-  return (
-    <D.CommentWrapper isChildComment={isChildComment} isModify={isModify}>
-        <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
-            <textarea 
-            placeholder='댓글을 남겨보세요.'
-            rows={1}
-            value={inputValue}
-            ref={textRef}
-            onInput={handleResizeHeight}
-            onChange={e => {
-                setInputValue(e.target.value);
-            }}
-            className='text'/>
-        </D.WriteComment>
-        <div className='btnwrapper'>
-        {(isChildComment || isModify) && (
-            <D.CancelBtn inputEmpty={inputValue === ''} onClick={cancel}>취소하기</D.CancelBtn>
-        )}
-        <D.RegBtn inputEmpty={inputValue === ''}  onClick={handleSubmit}>등록하기</D.RegBtn>
-        </div>
-        
-    </D.CommentWrapper>
-    
-  )
+    return (
+        <D.CommentWrapper isChildComment={isChildComment} isModify={isModify}>
+            <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+                <textarea
+                    placeholder='댓글을 남겨보세요.'
+                    rows={1}
+                    value={inputValue}
+                    ref={textRef}
+                    onInput={handleResizeHeight}
+                    onChange={e => {
+                        setInputValue(e.target.value);
+                    }}
+                    className='text'
+                />
+            </D.WriteComment>
+            <div className='btnwrapper'>
+                {(isChildComment || isModify) && (
+                    <D.CancelBtn inputEmpty={inputValue === ''} onClick={cancel}>
+                        취소하기
+                    </D.CancelBtn>
+                )}
+                <D.RegBtn inputEmpty={inputValue === ''} onClick={handleSubmit}>
+                    등록하기
+                </D.RegBtn>
+            </div>
+        </D.CommentWrapper>
+    )
 }
 
 export default Comment;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import styled from 'styled-components';
 import OrderDropDown from './OrderDropDown';
 import WriteIcon from '../../img/community/write.svg';
@@ -6,19 +6,24 @@ import PostList from './PostList';
 import { useNavigate } from 'react-router-dom';
 import CategoryDropDown from './CategoryDropDown';
 import search from '../../img/community/search.svg';
+import Tab from './Tab';
+import useIsPC from '../../hooks/useIsPC';
+import Search from './Search';
+import CategoryModal from './CategoryModal';
 
 interface NoticeProps {
     searchQuery: string;
     mainCategory: string;
     subCategory: string;
     onSearch: (query: string) => void;
+    onCategoryChange: (mainCategory: string, subCategory: string) => void;
 }
 
 const contentSubtitles: Record<string, string> = {
     공지사항: '멋대 중앙의 공지사항을 확인할 수 있어요.',
     질문건의: '미정.',
     정보공유: '미정.',
-    팀원모짐: '미정.',
+    팀원모집: '미정.',
     플젝모집: '미정.',
     플젝자랑: '미정.',
     프론트: '미정.',
@@ -28,77 +33,126 @@ const contentSubtitles: Record<string, string> = {
     기타: '미정.',
 };
 
-const Notice: React.FC<NoticeProps> = ({ mainCategory, subCategory, searchQuery, onSearch }) => {
+const Notice: React.FC<NoticeProps> = ({ mainCategory, subCategory, searchQuery, onSearch, onCategoryChange }) => {
     const navigate = useNavigate();
-    const content = subCategory;
-    const subtitle = contentSubtitles[content];
+    const isPC = useIsPC();
+    const isSearching = searchQuery !== undefined && searchQuery !== '';
     const [inputValue, setInputValue] = useState<string>(searchQuery);
-    const [order, setOrder] = useState('CREATED_DATE_ORDER'); 
-
-    const [selectedMainCategory, setSelectedMainCategory] = useState(mainCategory);
-    const [selectedSubCategory, setSelectedSubCategory] = useState(subCategory);
-
+    const [order, setOrder] = useState('CREATED_DATE_ORDER');
+    const [selectedMainCategory, setSelectedMainCategory] = useState('전체 게시판');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('전체 게시판');
+    const [tabCategoryChanged, setTabCategoryChanged] = useState(false);
+    const content = tabCategoryChanged? selectedSubCategory : subCategory;
+    const subtitle = contentSubtitles[content];
 
     const handleCategoryChange = (newMainCategory: string, newSubCategory: string) => {
         setSelectedMainCategory(newMainCategory);
         setSelectedSubCategory(newSubCategory);
+        onCategoryChange(newMainCategory, newSubCategory);
     };
 
-    const handleOrderChange = (newOrder:string) => {
+    const handleTabCategoryChange = (newMainCategory: string, newSubCategory: string) => {
+        setSelectedMainCategory(newMainCategory);
+        setSelectedSubCategory(newSubCategory);
+        setTabCategoryChanged(true);
+        onCategoryChange(newMainCategory, newSubCategory);
+    };
+
+    const handleOrderChange = (newOrder: string) => {
         setOrder(newOrder);
     };
 
     useEffect(() => {
         setInputValue(searchQuery);
-    }, [searchQuery]);
+    }, [searchQuery]);    
+
+    useEffect(() => {
+        setTabCategoryChanged(false); 
+    }, [subCategory]); 
+
 
     return (
         <Wrapper>
             {searchQuery ? (
-                <div style={{display: 'flex', gap: '8px'}}>
-                <CategoryDropDown onCategoryChange={handleCategoryChange} />
-                <TextInput borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
-                <input
-                    className='textInput'
-                    type="text"
-                    placeholder=" 검색"
-                    value={inputValue}
-                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (e.key === 'Enter') {
-                            onSearch(inputValue);
-                        }
-                    }}
-                    onChange={e => {
-                        setInputValue(e.target.value);
-                    }}
-                />
-                <img
-                    style={{ marginLeft: '8px' }}
-                    src={search}
-                    onClick={() => onSearch(inputValue)}
-                    alt="검색"
-                />
-            </TextInput>
-            </div>
+                <>
+                    {!isPC && 
+                        <Search 
+                            onSearch={onSearch}
+                            searchQuery={searchQuery}
+                        />
+                    }
+                    {!isPC && 
+                        <CategoryModal 
+                            onCategoryChange={handleCategoryChange} 
+                            mainCategory={selectedMainCategory} 
+                            subCategory={selectedSubCategory} 
+                        />
+                    }
+                    <div className='afterSearch'>
+                        <CategoryDropDown 
+                            onCategoryChange={handleCategoryChange} 
+                            mainCategory={selectedMainCategory} 
+                            subCategory={selectedSubCategory} 
+                        />
+                        <TextInput borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+                            <input
+                                className='textInput'
+                                type="text"
+                                placeholder=" 검색"
+                                value={inputValue}
+                                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                                    if (e.key === 'Enter') {
+                                        onSearch(inputValue);
+                                    }
+                                }}
+                                onChange={e => {
+                                    setInputValue(e.target.value);
+                                }}
+                            />
+                            <img
+                                style={{ marginLeft: '8px' }}
+                                src={search}
+                                onClick={() => onSearch(inputValue)}
+                                alt="검색"
+                            />
+                        </TextInput>
+                    </div>
+                </>
             ) : (
                 <>
                     <Title>{content}</Title>
                     <SubTitle>{subtitle}</SubTitle>
+                    {!isPC && 
+                        <Tab 
+                            onSearch={onSearch} 
+                            onCategoryChange={handleTabCategoryChange} 
+                            mainCategory={mainCategory} 
+                            subCategory={subCategory}
+                        />
+                    }
                 </>
             )}
             <Divider />
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Header isSearching={isSearching}>
                 <OrderDropDown onOrderChange={handleOrderChange} />
-                <Button onClick={() => navigate('/community/write')}>
+                <Button onClick={() => navigate('/community/write')} isSearching={isSearching}>
                     <img src={WriteIcon} alt="펜" />
                     글쓰기
                 </Button>
-            </div>
+            </Header>
             {searchQuery ? (
-                <PostList searchQuery={searchQuery} order={order} mainCategory={selectedMainCategory} subCategory={selectedSubCategory}/>
-                ) : (
-                    <PostList searchQuery={searchQuery} order={order} mainCategory={mainCategory} subCategory={subCategory}/>
-                )}
+                <Suspense fallback={<div></div>}>
+                    <PostList searchQuery={searchQuery} order={order} mainCategory={selectedMainCategory} subCategory={selectedSubCategory} />
+                </Suspense>
+            ) : tabCategoryChanged && !isPC ? (
+                <Suspense fallback={<div></div>}>
+                    <PostList searchQuery={searchQuery} order={order} mainCategory={selectedMainCategory} subCategory={selectedSubCategory} />
+                </Suspense>
+            ) : (
+                <Suspense fallback={<div></div>}>
+                    <PostList searchQuery={searchQuery} order={order} mainCategory={mainCategory} subCategory={subCategory} />
+                </Suspense>
+            )}
         </Wrapper>
     );
 };
@@ -106,6 +160,19 @@ export default Notice;
 
 const Wrapper = styled.div`
     width: 74.5%;
+
+    .afterSearch{
+        display: flex;
+        gap: 8px;
+
+        @media screen and (max-width: 767px) {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
 `;
 
 const Title = styled.div`
@@ -113,6 +180,10 @@ const Title = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     line-height: 150%;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
 const SubTitle = styled.div`
@@ -120,6 +191,10 @@ const SubTitle = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 150%;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
 const Divider = styled.div`
@@ -128,14 +203,28 @@ const Divider = styled.div`
     width: 100%;
     margin-top: 26px;
     margin-bottom: 4px;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
-const Button = styled.div`
+const Header = styled.div<{isSearching : boolean}>`
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 767px) {
+        margin-top: ${props => props.isSearching ? '0' : '100px'};
+        padding: 0 20px;
+    }
+`;
+
+const Button = styled.div<{isSearching : boolean}>`
     padding: 8px 20px 8px 14px;
     border-radius: 6px;
     background-color: #ff7710;
     flex-shrink: 0;
-    display: inline-flex;
+    display: ${props => props.isSearching ? 'none' : 'inline-flex'};
     align-items: center;
     justify-content: center;
     gap: 6px;
@@ -145,6 +234,15 @@ const Button = styled.div`
     color: #fff;
     font-weight: 700;
     cursor: pointer;
+
+    @media screen and (max-width: 767px) {
+        padding: 7.5px 18px 7.5px 14px;
+        margin-top: 0;
+        font-size: 14px;
+        position: fixed;
+        bottom: 34px;
+        right: 20px;
+    }
 `;
 
 const TextInput = styled.div<{ borderColor: string }>`

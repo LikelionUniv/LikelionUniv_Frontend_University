@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import Notice from './Notice';
+import useIsPC from '../../hooks/useIsPC';
 
 const Community: React.FC = () => {
+    const isPC = useIsPC();
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [selectedMainCategory, setSelectedMainCategory] = useState('멋대 중앙');
     const [selectedSubCategory, setSelectedSubCategory] = useState('공지사항');
@@ -14,14 +16,26 @@ const Community: React.FC = () => {
         setSearchQuery('');
     };
 
+    const handleCategoryChange = (mainCategory:string, subCategory:string) => {
+        setSelectedMainCategory(mainCategory);
+        setSelectedSubCategory(subCategory);
+    };
+
     return (
         <>
             <Container>
+                {isPC && 
                 <SideBar
                     onCategorySelect={handleCategorySelect}
                     onSearch={(query: string) => setSearchQuery(query)}
-                />
-                <Notice onSearch={(query: string) => setSearchQuery(query)} mainCategory={selectedMainCategory} subCategory={selectedSubCategory} searchQuery={searchQuery} />
+                    mainCategory={selectedMainCategory} subCategory={selectedSubCategory}
+                />}
+                <Notice 
+                    onSearch={(query: string) => setSearchQuery(query)} 
+                    mainCategory={selectedMainCategory} 
+                    subCategory={selectedSubCategory} 
+                    searchQuery={searchQuery}
+                    onCategoryChange={handleCategoryChange} />
             </Container>
         </>
     );
@@ -31,7 +45,7 @@ export default Community;
 
 const Container = styled.div`
     max-width: 1200px;
-    padding: 0 40px;
+    padding: 0;
     min-width: 768px;
     width: 100%;
     margin: 0 auto;
@@ -41,4 +55,14 @@ const Container = styled.div`
     margin-top: 128px;
     font-family: Pretendard;
     height: auto;
+
+    @media screen and (max-width: 1200px) {
+        padding: 0 40px;
+    }
+
+    @media screen and (max-width: 767px) {
+        margin-top: 55px;
+        padding: 0;
+        min-width: 0;
+    }
 `;
