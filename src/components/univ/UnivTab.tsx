@@ -18,11 +18,20 @@ const Tab = () => {
     const popupUnivSite = (siteUrl?: string): void => {
         if (siteUrl) {
             window.open(siteUrl, '_blank');
+        } else {
+            alert('정보를 제공하지 않은 대학입니다.');
         }
     };
 
     const onButtonClick = (): void => {
         window.open('https://forms.gle/j4CJ35VwWgePBEJX6');
+    };
+
+    const getImageUrl = (imagePath?: string) => {
+        if (!imagePath || imagePath === '') {
+            return default_image;
+        }
+        return `https://${imagePath}`;
     };
 
     return (
@@ -52,10 +61,8 @@ const Tab = () => {
                         >
                             <T.SchoolLogo>
                                 <img
-                                    src={`https://${
-                                        university.image || default_image
-                                    }`}
-                                    alt={university.universityName}
+                                    src={getImageUrl(university.image)}
+                                    alt={default_image}
                                 />
                             </T.SchoolLogo>
                             <T.SchoolText>
