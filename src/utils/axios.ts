@@ -53,6 +53,7 @@ axiosInstance.interceptors.response.use(
         if (axiosError?.code === 'REFRESH_TOKEN_401') {
             alert('리프레시 만료');
             localStorage.clear();
+            window.location.href = '/login'
             return Promise.reject(error);
         }
 
