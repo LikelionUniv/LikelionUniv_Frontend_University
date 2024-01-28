@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import Check from '../../img/login/Check.svg';
 import { Button } from '../mypage/Common';
 
@@ -8,7 +8,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: 767px) {
         display: none;
     }
 `;

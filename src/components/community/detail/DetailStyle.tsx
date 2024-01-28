@@ -3,6 +3,41 @@ import { RegBtnProps } from './Comment';
 
 export const Back = styled.div`
     display: none;
+    position: fixed;
+    top: 0;
+    z-index: 998;
+    background-color: #fff;
+    padding: 0 16px;
+
+    .btns {
+        border-radius: 6px;
+        border: 1px solid var(--Grey-400, #dcdfe3);
+        background: var(--White, #fff);
+        padding: 4px;
+        flex-shrink: 0;
+        position: absolute;
+        top: 44px;
+        right: 0;
+        z-index: 1;
+
+        p {
+            padding: 8px 20px;
+            border-radius: 4px;
+            background: #fff;
+            cursor: pointer;
+
+            color: var(--Grey-900, #212224);
+            font-family: Pretendard;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 150%; /* 24px */
+
+            &:hover {
+                background: var(--Grey-300, #eaecee);
+            }
+        }
+    }
 
     @media screen and (max-width: 767px) {
         display: flex;
@@ -14,9 +49,9 @@ export const Back = styled.div`
         justify-content: space-between;
         padding-right: 12px;
         height: 44px;
-        border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
     }
-`
+`;
 
 export const Container = styled.div`
     max-width: 792px;
@@ -29,8 +64,8 @@ export const Container = styled.div`
     flex-direction: column;
 
     @media screen and (max-width: 767px) {
-        margin-top: 58px;
-        padding: 0 16px;
+        margin-top: 0px;
+        padding: 0 28px 0 16px;
     }
 
     .link {
@@ -98,14 +133,13 @@ export const Container = styled.div`
         @media screen and (max-width: 767px) {
             font-size: 14px;
         }
-
     }
 
     .empty {
         margin-top: 32px;
 
         @media screen and (max-width: 767px) {
-            margin: 24px 0 40PX 0;
+            margin: 24px 0 40px 0;
         }
     }
 `;
@@ -122,9 +156,9 @@ export const Title = styled.div`
     font-weight: 700;
     line-height: 150%;
 
-    @media screen and (max-width: 767px) {  
+    @media screen and (max-width: 767px) {
         font-size: 20px;
-        margin: 24px 0 16px 0;
+        margin: 68px 0 16px 0;
     }
 `;
 
@@ -142,7 +176,7 @@ export const User = styled.div`
     padding-bottom: 24px;
     border-bottom: 1px solid var(--Grey-300, #eaecee);
 
-    @media screen and (max-width: 767px) {  
+    @media screen and (max-width: 767px) {
         padding-bottom: 16px;
     }
 
@@ -175,7 +209,7 @@ export const User = styled.div`
             font-weight: 700;
             line-height: 150%; /* 24px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 14px;
             }
         }
@@ -232,7 +266,7 @@ export const User = styled.div`
             font-weight: 500;
             line-height: 150%; /* 21px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 12px;
             }
         }
@@ -244,8 +278,9 @@ export const User = styled.div`
         align-self: flex-end;
         align-items: center;
 
-        @media screen and (max-width: 767px) {  
+        @media screen and (max-width: 767px) {
             gap: 8px;
+            margin-bottom: 6px;
         }
 
         .icons {
@@ -260,10 +295,9 @@ export const User = styled.div`
             font-weight: 500;
             line-height: 150%; /* 21px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 12px;
             }
-            
         }
 
         .btns {
@@ -271,6 +305,10 @@ export const User = styled.div`
             display: flex;
             cursor: pointer;
             margin-left: 16px;
+
+            @media screen and (max-width: 767px) {
+                display: none;
+            }
 
             p {
                 display: inline-flex;
@@ -315,6 +353,15 @@ export const TextArea = styled.div`
     img {
         width: 100%;
     }
+
+    p {
+        color: var(--Grey-900, #212224);
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 160%; /* 25.6px */
+    }
 `;
 
 /*Like 좋아요*/
@@ -353,9 +400,13 @@ export const Like = styled.div`
 
 /*Comment 댓글입력창*/
 
-export const CommentWrapper = styled.div<{ isChildComment: boolean; isModify: boolean }>`
+export const CommentWrapper = styled.div<{
+    isChildComment: boolean;
+    isModify: boolean;
+}>`
     width: 100%;
-    padding-left: ${props => (props.isChildComment && props.isModify ? '48px' : '0')};
+    padding-left: ${props =>
+        props.isChildComment && props.isModify ? '48px' : '0'};
 
     .btnwrapper {
         display: flex;
@@ -413,15 +464,14 @@ export const CancelBtn = styled.div<RegBtnProps>`
     font-weight: 700;
     line-height: 150%; /* 21px */
 
-    color: ${props => props.inputEmpty ? '#FFF' : '#212224'};
-    background: ${props => props.inputEmpty ? '#F2F4F6' : '#EAECEE'};
+    color: ${props => (props.inputEmpty ? '#FFF' : '#212224')};
+    background: ${props => (props.inputEmpty ? '#F2F4F6' : '#EAECEE')};
 
     &:hover {
-        background: ${props => props.inputEmpty ? '#F2F4F6' : '#D1D4D8'};
+        background: ${props => (props.inputEmpty ? '#F2F4F6' : '#D1D4D8')};
     }
-
-    
 `;
+
 export const RegBtn = styled.div<RegBtnProps>`
     display: inline-flex;
     padding: 5.5px 16px;
@@ -458,6 +508,10 @@ export const BoxWrapper = styled.div`
     border-top: 1px solid var(--Grey-300, #eaecee);
     position: relative;
 
+    @media screen and (max-width: 767px) {
+        padding: 16px 0px 15px 0;
+    }
+
     .menu {
         width: 24px;
         height: 24px;
@@ -468,19 +522,23 @@ export const BoxWrapper = styled.div`
     }
 
     .deleted {
-        color: var(--Grey-600, #ADB3BA);
+        color: var(--Grey-600, #adb3ba);
         font-family: Pretendard;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
         line-height: 160%; /* 25.6px */
-    }
 
+        @media screen and (max-width: 767px) {
+            font-size: 14px;
+        }
+    }
 `;
 
 export const BoxLeft = styled.div`
     gap: 8px;
     display: flex;
+    width: 100%;
 
     .profile {
         background-color: transparent;
@@ -490,12 +548,20 @@ export const BoxLeft = styled.div`
         flex-shrink: 0;
         border: 0.625px solid #eaecee;
         object-fit: cover;
+
+        @media screen and (max-width: 767px) {
+            width: 32px;
+            height: 32px;
+            border-radius: 32px;
+        }
     }
 
     .info {
         display: flex;
         flex-direction: column;
         gap: 4px;
+        width: 100%;
+        overflow: auto;
 
         .body {
             color: var(--Grey-900, #212224);
@@ -505,6 +571,13 @@ export const BoxLeft = styled.div`
             font-weight: 500;
             line-height: 160%; /* 25.6px */
             white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            width: 100%;
+
+            @media screen and (max-width: 767px) {
+                font-size: 14px;
+            }
         }
 
         .wrapper {
@@ -526,6 +599,10 @@ export const BoxLeft = styled.div`
                 font-style: normal;
                 font-weight: 700;
                 line-height: 150%; /* 24px */
+
+                @media screen and (max-width: 767px) {
+                    font-size: 14px;
+                }
             }
 
             .author {
@@ -600,7 +677,7 @@ export const ReplyBox = styled.div`
     padding: 16px 0 16px 48px;
     align-items: flex-start;
     justify-content: space-between;
-    border-top: 1px solid var(--Grey-300, #EAECEE);
+    border-top: 1px solid var(--Grey-300, #eaecee);
 `;
 
 export const ModiBox = styled.div`

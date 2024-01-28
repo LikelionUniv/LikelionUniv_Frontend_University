@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 import ResponsiveUserBox from './ResponsiveUserBox';
 import { Button } from './Common';
 
-function UserInfomation() {
+type UserInfoProps = {
+    otherUserId?: number | null;
+};
+
+function UserInfomation({ otherUserId = null }: UserInfoProps) {
     const navigate = useNavigate();
 
     return (
         <Container>
-            <ResponsiveUserBox />
-            <ResponsiveButton onClick={() => navigate('modify')}>
-                내 정보 수정
-            </ResponsiveButton>
+            <Suspense fallback={<div>Loading...</div>}>
+                <ResponsiveUserBox otherUserId={otherUserId} />
+            </Suspense>
+            {!otherUserId && (
+                <ResponsiveButton onClick={() => navigate('modify')}>
+                    내 정보 수정
+                </ResponsiveButton>
+            )}
         </Container>
     );
 }

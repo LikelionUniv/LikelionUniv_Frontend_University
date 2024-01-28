@@ -19,8 +19,8 @@ export interface Post {
     title: string;
     body: string;
     mainCategory: string;
-    subCategory : string;
-    createdDate : string;
+    subCategory: string;
+    createdDate: string;
 }
 
 export interface PostComment {
@@ -39,8 +39,5 @@ export interface PostComment {
     hasChildComments?: boolean;
     childComments?: PostComment[];
     parentId?: number;
-    onCommentUpdate : () => void;
+    onCommentUpdate: () => void;
 }
-
-
-

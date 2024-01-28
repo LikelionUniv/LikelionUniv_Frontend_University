@@ -17,11 +17,10 @@ const kakao_login = () => {
 };
 
 export const Login = () => {
-
     return (
         <L.Wrapper>
-            <WLogin google_login={google_login} kakao_login={kakao_login}/>
-            <MLogin google_login={google_login} kakao_login={kakao_login}/>
-        </L.Wrapper>  
+            <WLogin google_login={google_login} kakao_login={kakao_login} />
+            <MLogin google_login={google_login} kakao_login={kakao_login} />
+        </L.Wrapper>
     );
 };

@@ -1,4 +1,3 @@
-import exp from 'constants';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -13,7 +12,8 @@ export const Container = styled.div`
     margin-bottom: 200px;
 
     @media screen and (max-width: 767px) {
-        padding: 0 16px;
+        padding: 0;
+        margin-top: 44px;
     }
 
     .btns {
@@ -22,6 +22,10 @@ export const Container = styled.div`
         align-items: center;
         gap: 8px;
         margin-top: 40px;
+
+        @media screen and (max-width: 767px) {
+            display: none;
+        }
     }
 `;
 
@@ -32,8 +36,11 @@ export const Title = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 140%;
-
     margin-bottom: 24px;
+
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
 `;
 
 export const Tab = styled.div`
@@ -44,6 +51,11 @@ export const Tab = styled.div`
     gap: 10px;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 767px) {
+        border: none;
+        padding: 16px 20px;
+    }
 
     p,
     div {
@@ -58,6 +70,10 @@ export const Tab = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 150%;
+
+        @media screen and (max-width: 767px) {
+            font-size: 12px;
+        }
     }
 
     .board {
@@ -87,6 +103,10 @@ export const BoardItem = styled.p<BoardItemProps>`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+
+    @media screen and (max-width: 767px) {
+        font-size: 16px;
+    }
 `;
 
 interface SubBoardItemProps {
@@ -101,14 +121,22 @@ export const SubBoardItem = styled.p<SubBoardItemProps>`
     font-style: normal;
     font-weight: ${props => (props.isSelected ? '700' : '500')};
     line-height: 150%;
+
+    @media screen and (max-width: 767px) {
+        font-size: 14px;
+    }
 `;
 
-export const WriteTitle = styled.input`
+export const WriteTitle = styled.textarea`
     border-radius: 6px;
     border: 1px solid var(--Grey-400, #dcdfe3);
     background: var(--White, #fff);
     padding: 14px 24px;
     margin: 8px 0;
+    width: 100%;
+    outline: none;
+    resize: none;
+    overflow: hidden;
 
     color: var(--Grey-900, #212224);
     font-family: Pretendard;
@@ -124,6 +152,16 @@ export const WriteTitle = styled.input`
 
     &:focus {
         outline: none;
+    }
+
+    @media screen and (max-width: 767px) {
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        font-size: 20px;
+        padding: 13px 20px;
+        border-top: 1px solid var(--Grey-200, #f2f4f6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
     }
 `;
 
@@ -158,7 +196,8 @@ export const RegBtn = styled.div<RegBtnProps>`
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: ${({ isActive }) => isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
+    background: ${({ isActive }) =>
+        isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
     color: var(--White, #fff);
     text-align: center;
     font-family: Pretendard;
@@ -168,6 +207,31 @@ export const RegBtn = styled.div<RegBtnProps>`
     line-height: 150%; /* 30px */
 
     &:hover {
-        background: ${({ isActive }) => isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
+        background: ${({ isActive }) =>
+            isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
+    }
+`;
+
+export const Reg = styled.div<RegBtnProps>`
+    cursor: pointer;
+    display: flex;
+    padding: 3px 12px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background: ${({ isActive }) =>
+        isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
+    color: var(--White, #fff);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; /* 30px */
+    margin-right: 4px;
+
+    &:hover {
+        background: ${({ isActive }) =>
+            isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
     }
 `;

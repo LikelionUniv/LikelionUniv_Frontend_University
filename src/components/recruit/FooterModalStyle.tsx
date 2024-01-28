@@ -86,18 +86,28 @@ export const Text = styled.div`
     @media (max-width: 480px) {
         font-size: 22px;
     }
+    white-space: pre-line;
 
     :nth-child(2) {
         margin-top: 24px;
         color: var(--Grey-700, #868c94);
-        font-size: 16px;
+        font-size: 13px;
         font-weight: 500;
         line-height: 150%; /* 24px */
 
-        @media (max-width: 768px) {
-            font-size: 16px;
-            margin-top: 12px;
+        @media (max-width: 480px) {
+            font-size: 13px;
+            margin-top: 8px;
         }
+    }
+
+    :nth-child(3) {
+        margin-top: 10px;
+        color: var(--Grey-700, #868c94);
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+
         @media (max-width: 480px) {
             font-size: 13px;
             margin-top: 8px;

@@ -58,6 +58,14 @@ export const Text = styled.div`
         font-weight: 500;
         line-height: 150%; /* 24px */
     }
+
+    :nth-child(3) {
+        margin-top: 8px;
+        color: var(--Grey-700, #868c94);
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 150%; /* 24px */
+    }
 `;
 
 export const InputWrapper = styled.div`

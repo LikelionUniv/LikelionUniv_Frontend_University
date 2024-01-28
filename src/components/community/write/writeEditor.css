@@ -4,25 +4,49 @@
     border-radius: 6px 6px 0px 0px;
     border: 1px solid var(--Grey-400, #dcdfe3);
     background: var(--Grey-100, #f6f8f9);
+
+    @media screen and (max-width: 767px) {
+        position: fixed;
+        bottom: 0;
+        z-index: 99;
+        width: 100%;
+        border: none;
+        border-radius: 0;
+        background: #fff;
+        border-top: 1px solid var(--Grey-200, #f2f4f6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
+    }
+}
+
+.quill {
+    position: relative;
 }
 
 .ql-container.ql-snow {
     border-radius: 0px 0px 6px 6px;
     border: 1px solid var(--Grey-400, #dcdfe3);
     background: var(--White, #fff);
+
+    @media screen and (max-width: 767px) {
+        border: none;
+    }
 }
 
 .ql-editor.ql-blank::before {
     font-family: Pretendard;
     font-style: normal;
     content: attr(data-placeholder);
-    left: 24px;
+    left: 20px;
     pointer-events: none;
     position: absolute;
     color: var(--Grey-500, #d1d4d8);
     font-size: 16px;
     font-weight: 500;
     line-height: 160%;
+
+    @media screen and (max-width: 767px) {
+        font-size: 14px;
+    }
 }
 
 .ql-editor {
@@ -34,6 +58,11 @@
     line-height: 160%;
     padding: 24px;
     min-height: 438px;
+
+    @media screen and (max-width: 767px) {
+        font-size: 14px;
+        padding: 20px;
+    }
 }
 
 .ql-image {
@@ -53,4 +82,8 @@
     display: flex;
     align-items: center;
     gap: 4px;
+
+    @media screen and (max-width: 767px) {
+        font-size: 0;
+    }
 }

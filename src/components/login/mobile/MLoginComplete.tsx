@@ -2,7 +2,7 @@ import React from 'react';
 import * as ML from './MLoginComplete.style';
 import { NavigateFunction } from 'react-router-dom';
 
-function MLoginComplete({navigate}:NavigateFunction|any) {
+function MLoginComplete({ navigate }: NavigateFunction | any) {
     return (
         <ML.Container>
             <ML.ItemBox>

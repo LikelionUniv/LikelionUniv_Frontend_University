@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PostBox from './PostBox';
-import Pagination from '../mypage/Pagination';
 import { PostBoxProp } from './PostBox';
-import { axiosInstance } from '../../utils/axios';
+import useServerSidePagination from '../../query/get/useServerSidePagination';
+import useIsPC from '../../hooks/useIsPC';
 
 interface PostListProps {
     searchQuery: string;
@@ -12,49 +12,42 @@ interface PostListProps {
     subCategory: string;
 }
 
-const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, subCategory }) => {
-    const [posts, setPosts] = useState<Array<PostBoxProp>>([]);
-    const [page, setPage] = useState(1);
+const PostList: React.FC<PostListProps> = ({
+    searchQuery,
+    order,
+    mainCategory,
+    subCategory,
+}) => {
+    const isPC = useIsPC();
     const isSearching = searchQuery !== '';
+    let paginationParams;
 
-    useEffect(() => {
-        const fetchData = async () => {
-            let response;
-            if (searchQuery) {
-                const searchParams = {
-                    mc: mainCategory,
-                    sc: subCategory,
-                    st: searchQuery,
-                    page: 1,
-                    size: 5
-                };
-                response = await axiosInstance.get(`/api/v1/community/posts/search`, { params: searchParams });
-            } else {
-                const params = {
-                    oc: order,
-                    mc: mainCategory,
-                    sc: subCategory,
-                    page: page,
-                    size: 5
-                };
-                response = await axiosInstance.get(`/api/v1/community/posts`, { params: params });
-            }
-            console.log(response.data.data.data);
-            setPosts(response.data.data.data);
+    if (isSearching) {
+        paginationParams = {
+            uri: `/api/v1/community/posts/search`,
+            size: isPC ? 5 : 10,
+            st: searchQuery,
+            mc: mainCategory,
+            sc: subCategory,
+            oc: order,
         };
-    
-        fetchData();
-    }, [searchQuery, order, mainCategory, subCategory, page]);
-    
+    } else {
+        paginationParams = {
+            uri: `/api/v1/community/posts`,
+            size: isPC ? 5 : 10,
+            oc: order,
+            mc: mainCategory,
+            sc: subCategory,
+        };
+    }
 
-    
-    const [totalPage, setTotalPage] = useState<number>(1);
-
+    const { curPageItem: posts, renderPaginationBtn } =
+        useServerSidePagination<PostBoxProp>(paginationParams);
 
     return (
         <Wrapper>
             <>
-                {Array.isArray(posts) && (
+                {Array.isArray(posts) &&
                     posts.map(e => (
                         <PostBox
                             title={e.title}
@@ -70,17 +63,11 @@ const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, s
                             hasThumbnailUrl={e.hasThumbnailUrl}
                             mainCategory={e.mainCategory}
                             isSearching={isSearching}
-                            
                         />
-                    ))
-                )}
+                    ))}
             </>
             <PageWrapper>
-                <Pagination
-                    totalPageNum={totalPage}
-                    pageNum={page}
-                    setPageNum={setPage}
-                />
+                <PaginationWrapper>{renderPaginationBtn()}</PaginationWrapper>
             </PageWrapper>
         </Wrapper>
     );
@@ -92,8 +79,22 @@ const Wrapper = styled.div`
     align-items: center;
     display: flex;
     flex-direction: column;
+
+    @media screen and (max-width: 767px) {
+        padding: 0 20px;
+    }
 `;
 
 const PageWrapper = styled.div`
     margin: 64px 0 100px 0;
+
+    @media screen and (max-width: 767px) {
+        margin: 64px 0;
+    }
+`;
+
+export const PaginationWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    width: 100%;
 `;

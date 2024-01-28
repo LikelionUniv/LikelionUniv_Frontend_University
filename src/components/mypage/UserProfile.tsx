@@ -21,14 +21,18 @@ const USER_ROLE: { [id: string]: string } = {
 
 function UserProfile({ userProfile }: UserProfileProps) {
     const { isModalOpen, openModal, closeModal } = useModal();
-    const [modalProps, setModalProps] = useState<ImodalProps>({
-        userid: -1,
+    const [modalProps, setModalProps] = useState<ImodalProps>(() => ({
+        userid: userProfile.id,
         follow: '',
-    });
+        isMine: userProfile.isMine,
+    }));
+
+    console.log(userProfile);
+
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
         let follow = e.currentTarget.dataset.type;
-        let userid = userProfile.id;
-        setModalProps({ userid, follow });
+        setModalProps(() => ({ ...modalProps, follow }));
+        console.log(modalProps);
         openModal();
     };
 

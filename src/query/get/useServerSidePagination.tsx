@@ -2,12 +2,17 @@ import { useState, useEffect } from 'react';
 import request from '../../utils/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
+import { useSearchParams } from 'react-router-dom';
 
 interface IuseServerSidePagination {
     uri: string;
     size: number;
     sort?: string;
     search?: string;
+    mc?: string;
+    sc?: string;
+    st?: string;
+    oc?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -32,6 +37,10 @@ interface Pageable {
     size: number;
     sort?: string;
     search?: string;
+    mc?: string;
+    sc?: string;
+    st?: string;
+    oc?: string;
 }
 
 function useServerSidePagination<T>({
@@ -39,10 +48,43 @@ function useServerSidePagination<T>({
     size,
     sort,
     search,
+    mc,
+    sc,
+    st,
+    oc,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
-    const [currentPage, setCurrentPage] = useState<number>(1);
+
+    const [pageInfo, setPageInfo] = useSearchParams();
+
+    // 페이지 정보가 없을 때 pageInfo를 채워넣음
+    useEffect(() => {
+        if (pageInfo.get('page') === null) {
+            pageInfo.set('page', '1');
+            setPageInfo(pageInfo);
+        }
+    }, []);
+
+    // 현재 페이지 정보를 불러옴
+    const getCurrentPageInfo = () => {
+        if (pageInfo.get('page') === null) {
+            return 1;
+        }
+
+        return Number(pageInfo.get('page'));
+    };
+
+    const setCurrentPageInfo = (pageNum: number) => {
+        pageInfo.set('page', pageNum.toString());
+        setPageInfo(pageInfo);
+    };
+
+    const [currentPage, setCurrentPage] = useState<number>(
+        getCurrentPageInfo(),
+    );
+
+    useEffect(() => {}, [pageInfo]);
 
     const fetchPagiableData = async () => {
         const response = await request<
@@ -57,6 +99,10 @@ function useServerSidePagination<T>({
                 size,
                 sort,
                 search,
+                mc,
+                sc,
+                st,
+                oc,
             },
         });
 
@@ -64,7 +110,10 @@ function useServerSidePagination<T>({
     };
 
     const { data: cachingData } = useSuspenseQuery({
-        queryKey: ['get-pagiable', { uri, size, sort, search, currentPage }],
+        queryKey: [
+            'get-pagiable',
+            { uri, size, sort, search, currentPage, mc, sc, st, oc },
+        ],
         queryFn: fetchPagiableData,
     });
 
@@ -74,6 +123,7 @@ function useServerSidePagination<T>({
     }, [cachingData]);
 
     const setPage = (page: number): void => {
+        setCurrentPageInfo(page);
         setCurrentPage(page);
     };
 

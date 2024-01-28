@@ -16,6 +16,15 @@ interface FooterModalProps {
     closeModal: () => void;
 }
 
+const UnivText = {
+    title: '멋대 알림 신청하기',
+    paragraph: '멋대의 새로운 소식을 이메일로 알려드려요.',
+    detail1:
+        '* 아기사자 모집 또는 아이디어톤, 해커톤 등의 멋대 행사 정보를 받아볼 수 있습니다.',
+    detail2:
+        '* 입력하신 개인정보는 멋쟁이사자처럼 대학 홈페이지의 개인정보처리\n방침에 의거하여 관리됩니다.',
+};
+
 const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [success, setSuccess] = useState<boolean>(false);
@@ -111,7 +120,7 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
             ) : (
                 <M.ModalContent>
                     <M.ModalHeader>
-                        <M.ModalTitle>멋대 알림 신청하기</M.ModalTitle>
+                        <M.ModalTitle>{UnivText.title}</M.ModalTitle>
                         <M.ModalCloseButton
                             onClick={closeModal}
                             close={Close}
@@ -122,13 +131,10 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                         <M.ModalText>
                             <M.ModalGraphic />
                             <M.Text>
-                                멋대의 새로운 소식을 이메일로 알려드려요.
+                                {UnivText.paragraph}
                                 <br />
-                                <M.Text>
-                                    * 입력하신 개인정보는 멋쟁이사자처럼 대학
-                                    홈페이지의 개인정보처리방침에 의거하여
-                                    관리됩니다.
-                                </M.Text>
+                                <M.Text>{UnivText.detail1}</M.Text>
+                                <M.Text>{UnivText.detail2}</M.Text>
                             </M.Text>
                         </M.ModalText>
                         <M.InputWrapper>

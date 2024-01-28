@@ -65,7 +65,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/userpage/:user_id',
-                element: <Userpage />,
+                element: (
+                    <ProtectedRouter>
+                        <Userpage />
+                    </ProtectedRouter>
+                ),
             },
             {
                 path: '/project',
@@ -144,7 +148,6 @@ const router = createBrowserRouter([
                 ],
             },
 
-
             {
                 path: '/chat',
                 element: <Chat />,
@@ -154,7 +157,6 @@ const router = createBrowserRouter([
                 element: <AboutPage />,
             },
         ],
-       
     },
     {
         path: '/oauth/:provider/redirect',

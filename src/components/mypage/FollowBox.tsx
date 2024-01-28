@@ -1,11 +1,21 @@
-import styled, { css } from 'styled-components';
-import { Avatar, Button, convertPart } from './Common';
-import { Ifollows } from './type';
 import { useState } from 'react';
+import styled, { css } from 'styled-components';
+
+import { Avatar, Button, convertPart } from './Common';
 import { useFollowAddDelete } from '../../api/mypage/useFollowAddDelete';
 
 interface IbuttonProps {
     delete: boolean;
+}
+
+export interface Ifollows {
+    userId: number;
+    name: string;
+    profileImage: string | null;
+    ordinal: number;
+    part: string;
+    isFollowed: boolean;
+    isMine: boolean;
 }
 
 export const FollowBox = ({
@@ -15,6 +25,7 @@ export const FollowBox = ({
     part,
     profileImage,
     isFollowed,
+    isMine,
 }: Ifollows) => {
     const [isFollow, setisFollow] = useState(isFollowed);
     const { mutate: handleFollowAddDelete } = useFollowAddDelete(
@@ -33,14 +44,16 @@ export const FollowBox = ({
                     </p>
                 </FollowProfile>
             </FollowInfo>
-            <FollowBtn
-                delete={isFollow}
-                onClick={() => {
-                    handleFollowAddDelete(isFollow);
-                }}
-            >
-                {isFollow ? '삭제' : '팔로우'}
-            </FollowBtn>
+            {isMine && (
+                <FollowBtn
+                    delete={isFollow}
+                    onClick={() => {
+                        handleFollowAddDelete(isFollow);
+                    }}
+                >
+                    {isFollow ? '삭제' : '팔로우'}
+                </FollowBtn>
+            )}
         </Follow>
     );
 };
