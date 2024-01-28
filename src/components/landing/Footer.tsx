@@ -75,18 +75,15 @@ const Footer = () => {
 
     return (
         <F.Wrapper ref={targetRef}>
-            <F.Recruit>
+            {/* <F.Recruit>
                 <div className="container">
                     <div className="left">
-                        <div className="title">{newRecruit.title}</div>
-                        <div className="text">{newRecruit.paragraph}</div>
-                        <div className="btn" onClick={openModal}>
-                            {newRecruit.btn}
-                            <PixelLongArrowIcon fill="#ffffff" />
-                        </div>
+                        <div className="title">{recruitNotice.title}</div>
+                        <div className="text">{recruitNotice.paragraph}</div>
                     </div>
-                    <div className="img-rect">
-                        <img src={recruitimage} />
+                    <div className="btn" onClick={openModal}>
+                        {recruitNotice.btn}
+                        <PixelLongArrowIcon fill="#ffffff" />
                     </div>
                 </div>
                 {isMobileView ? (
@@ -97,12 +94,12 @@ const Footer = () => {
                 ) : (
                     <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                 )}
-            </F.Recruit>
-            {/* <F.Notification>
+            </F.Recruit> */}
+            <F.Notification>
                 <div className="container">
                     <div className="left">
                         <div className="title">
-                            <img src={notiicon} />
+                            <img src={notiicon} alt="noti" />
                             <div>{recruitNotice.title}</div>
                         </div>
                         <div className="text">{recruitNotice.paragraph}</div>
@@ -111,8 +108,19 @@ const Footer = () => {
                         {recruitNotice.btn}
                         <PixelLongArrowIcon fill="#212224" />
                     </div>
+                    {isMobileView ? (
+                        <FooterModalMobile
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
+                    ) : (
+                        <FooterModal
+                            isOpen={isModalOpen}
+                            closeModal={closeModal}
+                        />
+                    )}
                 </div>
-            </F.Notification> */}
+            </F.Notification>
             <F.Makers>
                 <img src={makersbackground} />
                 <div className="makers-container">
