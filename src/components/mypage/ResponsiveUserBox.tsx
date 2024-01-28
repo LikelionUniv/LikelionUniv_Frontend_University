@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import useIsPC from '../../hooks/useIsPC';
@@ -8,12 +8,21 @@ import { Avatar } from './Common';
 import UserProfile from './UserProfile';
 import MUserProfile from './MUserProfile';
 import { UserDescription } from './UserProfile.style';
-import { IuserProfile } from './type';
+import { useAuth } from '../../hooks/useAuth';
 
-function ResponsiveUserBox() {
-    // 프로필 정보 받기
+type ResponsiveUserBoxProps = {
+    otherUserId?: number | null;
+};
+
+function ResponsiveUserBox({ otherUserId = null }: ResponsiveUserBoxProps) {
     const isPC = useIsPC();
-    const userProfile: IuserProfile = useUserProfile();
+    //prettier-ignore
+    const { userinfo: { userId } } = useAuth();
+
+    const requestId = otherUserId || userId;
+
+    // 등록되지 않은 유저인 경우 axios.ts에서 에러 처리하여 이전 페이지로 되돌리고 있음.
+    const { userProfile } = useUserProfile(requestId);
 
     return (
         <>

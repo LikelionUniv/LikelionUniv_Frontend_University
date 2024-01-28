@@ -79,15 +79,7 @@ export interface IuserProfile {
 export interface ImodalProps {
     userid: number;
     follow: string | undefined;
-}
-
-export interface Ifollows {
-    userId: number;
-    name: string;
-    profileImage: string | null;
-    ordinal: number;
-    part: string;
-    isFollowed: boolean;
+    isMine: boolean;
 }
 
 export interface IuserModify {

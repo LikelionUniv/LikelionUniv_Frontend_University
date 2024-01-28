@@ -20,7 +20,7 @@ export const FollowModal = ({
     const modalRef = useRef<HTMLDivElement>(null);
     const follow = modalProps.follow === '팔로워' ? 'follower' : 'following';
     const { data, fetchNextPage, isFetchingNextPage, hasNextPage } =
-        useLoadFollow(follow);
+        useLoadFollow(modalProps.userid, follow);
 
     const ref = useIntersect(async (entry, observer) => {
         observer.unobserve(entry.target);
@@ -47,6 +47,7 @@ export const FollowModal = ({
                                 part={item['part']}
                                 profileImage={item['profileImage']}
                                 isFollowed={item['isFollowed']}
+                                isMine={modalProps.isMine}
                             />
                         )),
                     )}

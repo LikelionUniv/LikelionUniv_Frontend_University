@@ -71,6 +71,13 @@ axiosInstance.interceptors.response.use(
             return axiosInstance(originRequest);
         }
 
+        // 등록되지 않은 유저에 대한 요청일 시 바로 이전 페이지로 이동
+        if (axiosError?.code === 'USER_404') {
+            alert(axiosError.message);
+            window.history.back();
+            return Promise.reject(error);
+        }
+
         alert(axiosError?.message);
         return Promise.reject(error);
     },
