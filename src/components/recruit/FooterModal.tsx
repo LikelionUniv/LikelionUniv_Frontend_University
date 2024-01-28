@@ -122,10 +122,11 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                         <M.ModalText>
                             <M.ModalGraphic />
                             <M.Text>
-                                모집이 시작되었을 때 이메일과 알려드려요. 
+                                모집이 시작되었을 때 이메일과 알려드려요.
                                 <br />
                                 <M.Text>
-                                    * 입력하신 개인정보는 모집 알림 발송 후 파기됩니다. 
+                                    * 입력하신 개인정보는 모집 알림 발송 후
+                                    파기됩니다.
                                 </M.Text>
                             </M.Text>
                         </M.ModalText>

@@ -7,16 +7,23 @@ import useIsPC from '../../hooks/useIsPC';
 const Community: React.FC = () => {
     const isPC = useIsPC();
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const [selectedMainCategory, setSelectedMainCategory] = useState('멋대 중앙');
+    const [selectedMainCategory, setSelectedMainCategory] =
+        useState('멋대 중앙');
     const [selectedSubCategory, setSelectedSubCategory] = useState('공지사항');
 
-    const handleCategorySelect = (mainCategory:string, subCategory:string) => {
+    const handleCategorySelect = (
+        mainCategory: string,
+        subCategory: string,
+    ) => {
         setSelectedMainCategory(mainCategory);
         setSelectedSubCategory(subCategory);
         setSearchQuery('');
     };
 
-    const handleCategoryChange = (mainCategory:string, subCategory:string) => {
+    const handleCategoryChange = (
+        mainCategory: string,
+        subCategory: string,
+    ) => {
         setSelectedMainCategory(mainCategory);
         setSelectedSubCategory(subCategory);
     };
@@ -24,18 +31,21 @@ const Community: React.FC = () => {
     return (
         <>
             <Container>
-                {isPC && 
-                <SideBar
-                    onCategorySelect={handleCategorySelect}
+                {isPC && (
+                    <SideBar
+                        onCategorySelect={handleCategorySelect}
+                        onSearch={(query: string) => setSearchQuery(query)}
+                        mainCategory={selectedMainCategory}
+                        subCategory={selectedSubCategory}
+                    />
+                )}
+                <Notice
                     onSearch={(query: string) => setSearchQuery(query)}
-                    mainCategory={selectedMainCategory} subCategory={selectedSubCategory}
-                />}
-                <Notice 
-                    onSearch={(query: string) => setSearchQuery(query)} 
-                    mainCategory={selectedMainCategory} 
-                    subCategory={selectedSubCategory} 
+                    mainCategory={selectedMainCategory}
+                    subCategory={selectedSubCategory}
                     searchQuery={searchQuery}
-                    onCategoryChange={handleCategoryChange} />
+                    onCategoryChange={handleCategoryChange}
+                />
             </Container>
         </>
     );

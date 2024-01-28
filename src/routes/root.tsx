@@ -7,7 +7,10 @@ import useIsPC from '../hooks/useIsPC';
 function Root() {
     const isPC = useIsPC();
     const location = useLocation();
-    const hideNavAndFooter = !isPC && (location.pathname.includes("/community/write") || location.pathname.match(/^\/community\/\d+$/));
+    const hideNavAndFooter =
+        !isPC &&
+        (location.pathname.includes('/community/write') ||
+            location.pathname.match(/^\/community\/\d+$/));
 
     return (
         <>

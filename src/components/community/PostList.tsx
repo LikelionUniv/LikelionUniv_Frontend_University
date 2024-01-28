@@ -12,7 +12,12 @@ interface PostListProps {
     subCategory: string;
 }
 
-const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, subCategory }) => {
+const PostList: React.FC<PostListProps> = ({
+    searchQuery,
+    order,
+    mainCategory,
+    subCategory,
+}) => {
     const isPC = useIsPC();
     const isSearching = searchQuery !== '';
     let paginationParams;
@@ -36,12 +41,13 @@ const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, s
         };
     }
 
-    const { curPageItem: posts, renderPaginationBtn } = useServerSidePagination<PostBoxProp>(paginationParams);
+    const { curPageItem: posts, renderPaginationBtn } =
+        useServerSidePagination<PostBoxProp>(paginationParams);
 
     return (
         <Wrapper>
             <>
-                {Array.isArray(posts) && (
+                {Array.isArray(posts) &&
                     posts.map(e => (
                         <PostBox
                             title={e.title}
@@ -57,10 +63,8 @@ const PostList: React.FC<PostListProps> = ({ searchQuery, order, mainCategory, s
                             hasThumbnailUrl={e.hasThumbnailUrl}
                             mainCategory={e.mainCategory}
                             isSearching={isSearching}
-                            
                         />
-                    ))
-                )}
+                    ))}
             </>
             <PageWrapper>
                 <PaginationWrapper>{renderPaginationBtn()}</PaginationWrapper>

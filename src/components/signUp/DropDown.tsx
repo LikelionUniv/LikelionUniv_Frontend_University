@@ -16,7 +16,11 @@ type DropDownProps = {
     placeholder?: string;
 };
 
-const DropDown = ({ options, onChange,placeholder = "선택" }: DropDownProps) => {
+const DropDown = ({
+    options,
+    onChange,
+    placeholder = '선택',
+}: DropDownProps) => {
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
 
     const DropdownIndicator = (props: any) => {

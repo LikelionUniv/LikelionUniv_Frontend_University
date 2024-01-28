@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import * as T from './TabStyle';
-import { ReactComponent as SearchImg } from '../../img/community/search_mob.svg'
+import { ReactComponent as SearchImg } from '../../img/community/search_mob.svg';
 import Search from './Search';
 
 interface TabProps {
@@ -10,9 +10,15 @@ interface TabProps {
     subCategory: string;
 }
 
-const Tab: React.FC<TabProps> = ({ onSearch, onCategoryChange, mainCategory, subCategory }) => {
+const Tab: React.FC<TabProps> = ({
+    onSearch,
+    onCategoryChange,
+    mainCategory,
+    subCategory,
+}) => {
     const [selectedBoard, setSelectedBoard] = useState<string>(mainCategory);
-    const [selectedSubBoard, setSelectedSubBoard] = useState<string>(subCategory);
+    const [selectedSubBoard, setSelectedSubBoard] =
+        useState<string>(subCategory);
     const [searching, setSearching] = useState<boolean>(false);
 
     const BoardClick = (boardName: string) => {
@@ -26,7 +32,7 @@ const Tab: React.FC<TabProps> = ({ onSearch, onCategoryChange, mainCategory, sub
 
     const SearchClick = () => {
         setSearching(!searching);
-    }
+    };
 
     useEffect(() => {
         onCategoryChange(selectedBoard, selectedSubBoard);
@@ -126,13 +132,12 @@ const Tab: React.FC<TabProps> = ({ onSearch, onCategoryChange, mainCategory, sub
         }
     };
 
-
     return (
         <>
             {!searching ? (
                 <T.Tab>
                     <div className="board">
-                        <div className='boards'>
+                        <div className="boards">
                             <T.BoardItem
                                 onClick={() => BoardClick('멋대 중앙')}
                                 isSelected={selectedBoard === '멋대 중앙'}
@@ -155,11 +160,12 @@ const Tab: React.FC<TabProps> = ({ onSearch, onCategoryChange, mainCategory, sub
                         <SearchImg onClick={SearchClick} />
                     </div>
                     {SubBoard()}
-                </T.Tab>) : (
+                </T.Tab>
+            ) : (
                 <Search onSearch={onSearch} />
             )}
         </>
-    )
-}
+    );
+};
 
-export default Tab
+export default Tab;

@@ -27,7 +27,14 @@ interface CommentProps {
     onCommentUpdate: () => void;
 }
 
-const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildComment = false, isModify = false, id, cancel }) => {
+const Comment: React.FC<CommentProps> = ({
+    onCommentUpdate,
+    contents,
+    isChildComment = false,
+    isModify = false,
+    id,
+    cancel,
+}) => {
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
     const handleResizeHeight = useCallback(() => {
@@ -45,14 +52,18 @@ const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildCom
     //댓글 생성
     const commentSubmit = async () => {
         const commentParams: CommentParams = {
-            postId: id
+            postId: id,
         };
 
-        const response = await request<CommentRegisterType, CommentId, CommentParams>({
+        const response = await request<
+            CommentRegisterType,
+            CommentId,
+            CommentParams
+        >({
             uri: '/api/v1/community/comments/parent',
             method: 'post',
             data: commentData,
-            params: commentParams
+            params: commentParams,
         });
         console.log(response.data);
         onCommentUpdate();
@@ -64,27 +75,30 @@ const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildCom
         const response = await request<CommentRegisterType, CommentId, null>({
             uri: `/api/v1/community/comments/${id}/child`,
             method: 'post',
-            data: commentData
+            data: commentData,
         });
-        console.log(response)
+        console.log(response);
         window.location.reload();
-    }
+    };
 
     //댓글, 대댓글 수정
     const modify = async () => {
         await request<CommentRegisterType, CommentId, null>({
             uri: `/api/v1/community/${id}`,
             method: 'patch',
-            data: commentData
+            data: commentData,
         });
         window.location.reload();
-    }
+    };
 
     //등록 or 수정
     const handleSubmit = () => {
         if (isChildComment && !isModify) {
             childCommentSubmit();
-        } else if ((isModify && isChildComment) || (isModify && !isChildComment)) {
+        } else if (
+            (isModify && isChildComment) ||
+            (isModify && !isChildComment)
+        ) {
             modify();
         } else {
             commentSubmit();
@@ -93,9 +107,11 @@ const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildCom
 
     return (
         <D.CommentWrapper isChildComment={isChildComment} isModify={isModify}>
-            <D.WriteComment borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}>
+            <D.WriteComment
+                borderColor={inputValue !== '' ? '#FF7710' : '#D1D4D8'}
+            >
                 <textarea
-                    placeholder='댓글을 남겨보세요.'
+                    placeholder="댓글을 남겨보세요."
                     rows={1}
                     value={inputValue}
                     ref={textRef}
@@ -103,12 +119,15 @@ const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildCom
                     onChange={e => {
                         setInputValue(e.target.value);
                     }}
-                    className='text'
+                    className="text"
                 />
             </D.WriteComment>
-            <div className='btnwrapper'>
+            <div className="btnwrapper">
                 {(isChildComment || isModify) && (
-                    <D.CancelBtn inputEmpty={inputValue === ''} onClick={cancel}>
+                    <D.CancelBtn
+                        inputEmpty={inputValue === ''}
+                        onClick={cancel}
+                    >
                         취소하기
                     </D.CancelBtn>
                 )}
@@ -117,7 +136,7 @@ const Comment: React.FC<CommentProps> = ({ onCommentUpdate, contents, isChildCom
                 </D.RegBtn>
             </div>
         </D.CommentWrapper>
-    )
-}
+    );
+};
 
 export default Comment;

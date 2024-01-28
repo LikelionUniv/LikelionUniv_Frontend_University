@@ -9,27 +9,25 @@ export const LoginComplete = () => {
 
     return (
         <Wrapper>
-            <WLoginComplete navigate={navigate}/>
-            <MLoginComplete navigate={navigate}/>
+            <WLoginComplete navigate={navigate} />
+            <MLoginComplete navigate={navigate} />
         </Wrapper>
     );
 };
 
 const Wrapper = styled.div`
     box-sizing: border-box;
-    width : 100%;
+    width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    @media screen and (min-width: 768px){
+    @media screen and (min-width: 768px) {
         padding: 0 40px;
     }
 
-    @media screen and (max-width: 768px){
-        padding: 0 20px
+    @media screen and (max-width: 768px) {
+        padding: 0 20px;
     }
 `;
-
-

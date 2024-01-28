@@ -49,7 +49,7 @@ export const Back = styled.div`
         justify-content: space-between;
         padding-right: 12px;
         height: 44px;
-        border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
     }
 `;
 
@@ -139,7 +139,7 @@ export const Container = styled.div`
         margin-top: 32px;
 
         @media screen and (max-width: 767px) {
-            margin: 24px 0 40PX 0;
+            margin: 24px 0 40px 0;
         }
     }
 `;
@@ -156,7 +156,7 @@ export const Title = styled.div`
     font-weight: 700;
     line-height: 150%;
 
-    @media screen and (max-width: 767px) {  
+    @media screen and (max-width: 767px) {
         font-size: 20px;
         margin: 68px 0 16px 0;
     }
@@ -176,7 +176,7 @@ export const User = styled.div`
     padding-bottom: 24px;
     border-bottom: 1px solid var(--Grey-300, #eaecee);
 
-    @media screen and (max-width: 767px) {  
+    @media screen and (max-width: 767px) {
         padding-bottom: 16px;
     }
 
@@ -209,7 +209,7 @@ export const User = styled.div`
             font-weight: 700;
             line-height: 150%; /* 24px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 14px;
             }
         }
@@ -266,7 +266,7 @@ export const User = styled.div`
             font-weight: 500;
             line-height: 150%; /* 21px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 12px;
             }
         }
@@ -278,7 +278,7 @@ export const User = styled.div`
         align-self: flex-end;
         align-items: center;
 
-        @media screen and (max-width: 767px) {  
+        @media screen and (max-width: 767px) {
             gap: 8px;
             margin-bottom: 6px;
         }
@@ -295,7 +295,7 @@ export const User = styled.div`
             font-weight: 500;
             line-height: 150%; /* 21px */
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 font-size: 12px;
             }
         }
@@ -306,7 +306,7 @@ export const User = styled.div`
             cursor: pointer;
             margin-left: 16px;
 
-            @media screen and (max-width: 767px) {  
+            @media screen and (max-width: 767px) {
                 display: none;
             }
 
@@ -400,9 +400,13 @@ export const Like = styled.div`
 
 /*Comment 댓글입력창*/
 
-export const CommentWrapper = styled.div<{ isChildComment: boolean; isModify: boolean }>`
+export const CommentWrapper = styled.div<{
+    isChildComment: boolean;
+    isModify: boolean;
+}>`
     width: 100%;
-    padding-left: ${props => (props.isChildComment && props.isModify ? '48px' : '0')};
+    padding-left: ${props =>
+        props.isChildComment && props.isModify ? '48px' : '0'};
 
     .btnwrapper {
         display: flex;
@@ -460,12 +464,12 @@ export const CancelBtn = styled.div<RegBtnProps>`
     font-weight: 700;
     line-height: 150%; /* 21px */
 
-    color: ${props => props.inputEmpty ? '#FFF' : '#212224'};
-    background: ${props => props.inputEmpty ? '#F2F4F6' : '#EAECEE'};
+    color: ${props => (props.inputEmpty ? '#FFF' : '#212224')};
+    background: ${props => (props.inputEmpty ? '#F2F4F6' : '#EAECEE')};
 
     &:hover {
-        background: ${props => props.inputEmpty ? '#F2F4F6' : '#D1D4D8'};
-    } 
+        background: ${props => (props.inputEmpty ? '#F2F4F6' : '#D1D4D8')};
+    }
 `;
 
 export const RegBtn = styled.div<RegBtnProps>`
@@ -518,7 +522,7 @@ export const BoxWrapper = styled.div`
     }
 
     .deleted {
-        color: var(--Grey-600, #ADB3BA);
+        color: var(--Grey-600, #adb3ba);
         font-family: Pretendard;
         font-size: 16px;
         font-style: normal;
@@ -570,7 +574,7 @@ export const BoxLeft = styled.div`
             word-wrap: break-word;
             overflow-wrap: break-word;
             width: 100%;
-            
+
             @media screen and (max-width: 767px) {
                 font-size: 14px;
             }
@@ -673,7 +677,7 @@ export const ReplyBox = styled.div`
     padding: 16px 0 16px 48px;
     align-items: flex-start;
     justify-content: space-between;
-    border-top: 1px solid var(--Grey-300, #EAECEE);
+    border-top: 1px solid var(--Grey-300, #eaecee);
 `;
 
 export const ModiBox = styled.div`

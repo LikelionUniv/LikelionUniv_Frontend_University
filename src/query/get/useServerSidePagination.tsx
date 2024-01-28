@@ -4,7 +4,6 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 import { useSearchParams } from 'react-router-dom';
 
-
 interface IuseServerSidePagination {
     uri: string;
     size: number;
@@ -42,7 +41,6 @@ interface Pageable {
     sc?: string;
     st?: string;
     oc?: string;
-
 }
 
 function useServerSidePagination<T>({
@@ -63,7 +61,7 @@ function useServerSidePagination<T>({
     // 페이지 정보가 없을 때 pageInfo를 채워넣음
     useEffect(() => {
         if (pageInfo.get('page') === null) {
-            pageInfo.set('page', '1')
+            pageInfo.set('page', '1');
             setPageInfo(pageInfo);
         }
     }, []);
@@ -80,13 +78,13 @@ function useServerSidePagination<T>({
     const setCurrentPageInfo = (pageNum: number) => {
         pageInfo.set('page', pageNum.toString());
         setPageInfo(pageInfo);
-    }
+    };
 
-    const [currentPage, setCurrentPage] = useState<number>(getCurrentPageInfo());
+    const [currentPage, setCurrentPage] = useState<number>(
+        getCurrentPageInfo(),
+    );
 
-    useEffect(() => {
-
-    }, [pageInfo]);
+    useEffect(() => {}, [pageInfo]);
 
     const fetchPagiableData = async () => {
         const response = await request<
@@ -112,7 +110,10 @@ function useServerSidePagination<T>({
     };
 
     const { data: cachingData } = useSuspenseQuery({
-        queryKey: ['get-pagiable', { uri, size, sort, search, currentPage, mc, sc, st, oc }],
+        queryKey: [
+            'get-pagiable',
+            { uri, size, sort, search, currentPage, mc, sc, st, oc },
+        ],
         queryFn: fetchPagiableData,
     });
 

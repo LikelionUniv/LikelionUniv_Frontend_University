@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-
 export const Tab = styled.div`
     display: flex;
     flex-direction: column;
@@ -22,20 +21,19 @@ export const Tab = styled.div`
         justify-content: space-between;
     }
 
-    .boards{
+    .boards {
         display: flex;
         gap: 24px;
     }
 
     .subBoard {
-        border-top: 1px solid #EAECEE;
-        background: var(--Grey-100, #F6F8F9);
+        border-top: 1px solid #eaecee;
+        background: var(--Grey-100, #f6f8f9);
         display: inline-flex;
         padding: 10px 20px;
         align-items: center;
         gap: 16px;
     }
-
 `;
 
 interface BoardItemProps {

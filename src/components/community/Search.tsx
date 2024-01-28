@@ -1,19 +1,20 @@
 import styled from 'styled-components';
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { ReactComponent as ArrowIcon } from '../../img/community/arrow_left.svg';
 import search from '../../img/community/search.svg';
 
 interface SearchProps {
-    onSearch : (query:string) => void;
-    searchQuery? : string;
+    onSearch: (query: string) => void;
+    searchQuery?: string;
 }
 
-const Search:React.FC<SearchProps> = ({onSearch, searchQuery}) => {
+const Search: React.FC<SearchProps> = ({ onSearch, searchQuery }) => {
     const isSearching = searchQuery !== undefined && searchQuery !== '';
-    const [searchCompleted, setSearchCompleted] = useState<boolean>(isSearching);
+    const [searchCompleted, setSearchCompleted] =
+        useState<boolean>(isSearching);
     const [inputValue, setInputValue] = useState<string>(searchQuery || '');
-    
-    const handleSearch = async() => {
+
+    const handleSearch = async () => {
         await setSearchCompleted(true);
         onSearch(inputValue);
     };
@@ -23,17 +24,22 @@ const Search:React.FC<SearchProps> = ({onSearch, searchQuery}) => {
         setSearchCompleted(false);
     };
 
-
     return (
         <Wrapper searchCompleted={searchCompleted}>
             <SearchBox>
-                <ArrowIcon onClick={()=> {window.location.reload()}}/>
+                <ArrowIcon
+                    onClick={() => {
+                        window.location.reload();
+                    }}
+                />
                 <TextInput>
                     <input
-                        className='textInput'
+                        className="textInput"
                         type="text"
                         value={inputValue}
-                        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                        onKeyDown={(
+                            e: React.KeyboardEvent<HTMLInputElement>,
+                        ) => {
                             if (e.key === 'Enter') {
                                 handleSearch();
                             }
@@ -49,33 +55,32 @@ const Search:React.FC<SearchProps> = ({onSearch, searchQuery}) => {
                 </TextInput>
             </SearchBox>
         </Wrapper>
-    )
-}
+    );
+};
 
-export default Search
+export default Search;
 
-const Wrapper = styled.div<{searchCompleted : boolean}>`
+const Wrapper = styled.div<{ searchCompleted: boolean }>`
     width: 100%;
     background-color: #fff;
-    height: ${props => props.searchCompleted ? '0' : '100vh'};
+    height: ${props => (props.searchCompleted ? '0' : '100vh')};
     z-index: 1000;
     position: fixed;
     top: 56px;
-`
+`;
 
 const SearchBox = styled.div`
     width: 100%;
-    background: var(--Orange-600, #FF7710);
+    background: var(--Orange-600, #ff7710);
     z-index: 1000;
     position: fixed;
     height: 56px;
-    top:0;
+    top: 0;
     display: flex;
     padding: 8px 20px 8px 16px;
     align-items: center;
     gap: 8px;
-`
-
+`;
 
 const TextInput = styled.div`
     height: 40px;
@@ -85,9 +90,9 @@ const TextInput = styled.div`
     display: inline-flex;
     justify-content: space-between;
     padding: 0 8px 0 16px;
-    background: var(--White, #FFF);
+    background: var(--White, #fff);
 
-    .textInput{
+    .textInput {
         color: var(--Grey-900, #212224);
         font-family: Pretendard;
         font-size: 16px;

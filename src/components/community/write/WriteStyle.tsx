@@ -160,8 +160,8 @@ export const WriteTitle = styled.textarea`
         border-radius: 0;
         font-size: 20px;
         padding: 13px 20px;
-        border-top: 1px solid var(--Grey-200, #F2F4F6);
-        border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+        border-top: 1px solid var(--Grey-200, #f2f4f6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
     }
 `;
 
@@ -196,7 +196,8 @@ export const RegBtn = styled.div<RegBtnProps>`
     justify-content: center;
     align-items: center;
     border-radius: 8px;
-    background: ${({ isActive }) => isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
+    background: ${({ isActive }) =>
+        isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
     color: var(--White, #fff);
     text-align: center;
     font-family: Pretendard;
@@ -206,7 +207,8 @@ export const RegBtn = styled.div<RegBtnProps>`
     line-height: 150%; /* 30px */
 
     &:hover {
-        background: ${({ isActive }) => isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
+        background: ${({ isActive }) =>
+            isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
     }
 `;
 
@@ -217,7 +219,8 @@ export const Reg = styled.div<RegBtnProps>`
     justify-content: center;
     align-items: center;
     border-radius: 4px;
-    background: ${({ isActive }) => isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
+    background: ${({ isActive }) =>
+        isActive ? '#ff7710' : 'var(--Grey-600, #adb3ba)'};
     color: var(--White, #fff);
     text-align: center;
     font-family: Pretendard;
@@ -228,6 +231,7 @@ export const Reg = styled.div<RegBtnProps>`
     margin-right: 4px;
 
     &:hover {
-        background: ${({ isActive }) => isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
+        background: ${({ isActive }) =>
+            isActive ? 'var(--Grey-900, #212224)' : 'var(--Grey-600, #adb3ba)'};
     }
 `;

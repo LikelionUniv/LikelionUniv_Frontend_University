@@ -4,11 +4,11 @@ import * as ML from './MLogin.style';
 import MMoreInfo from './MMoreInfo';
 
 interface LoginProps {
-    google_login: () => void,
-    kakao_login: () => void
-  }
+    google_login: () => void;
+    kakao_login: () => void;
+}
 
-const MLogin = ({google_login, kakao_login}:LoginProps) => {
+const MLogin = ({ google_login, kakao_login }: LoginProps) => {
     return (
         <>
             <ML.Container>

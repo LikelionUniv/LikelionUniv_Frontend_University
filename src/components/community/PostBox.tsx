@@ -32,11 +32,15 @@ const PostBox: React.FC<PostBoxProp> = props => {
     return (
         <Wrapper onClick={onClick} isSearching={props.isSearching}>
             <BoxWrapper isSearching={props.isSearching}>
-                {props.isSearching && (<Mc className="mc">{props.mainCategory}</Mc>)}
+                {props.isSearching && (
+                    <Mc className="mc">{props.mainCategory}</Mc>
+                )}
                 <Box className="title">{props.title}</Box>
-                <Box 
-                    className="content" 
-                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(props.bodySummary) }}
+                <Box
+                    className="content"
+                    dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(props.bodySummary),
+                    }}
                 />
                 <Box className="nav">
                     <div className="wrapper">
@@ -66,7 +70,9 @@ const PostBox: React.FC<PostBoxProp> = props => {
                 className="photo"
                 img={props.thumbnailUrl}
                 style={{
-                    backgroundImage: props.thumbnailUrl ? `url(${props.thumbnailUrl})` : 'none',
+                    backgroundImage: props.thumbnailUrl
+                        ? `url(${props.thumbnailUrl})`
+                        : 'none',
                 }}
             ></Box>
         </Wrapper>
@@ -75,9 +81,9 @@ const PostBox: React.FC<PostBoxProp> = props => {
 
 export default PostBox;
 
-const Wrapper = styled.div<{isSearching: boolean}>`
+const Wrapper = styled.div<{ isSearching: boolean }>`
     width: 100%;
-    height: ${props => props.isSearching ? '237px' : '216px'};
+    height: ${props => (props.isSearching ? '237px' : '216px')};
     border-bottom: 1px solid #dcdfe3;
     display: inline-flex;
     align-items: center;
@@ -85,15 +91,17 @@ const Wrapper = styled.div<{isSearching: boolean}>`
     cursor: pointer;
 
     @media screen and (max-width: 767px) {
-        height: ${props => props.isSearching ? '160px' : '138px'};
+        height: ${props => (props.isSearching ? '160px' : '138px')};
     }
 `;
 
-const BoxWrapper = styled.div<{isSearching: boolean}>`
-    padding: ${props => props.isSearching ? '0px 32px 24px 0' : '28px 32px 28px 0'};
-    
+const BoxWrapper = styled.div<{ isSearching: boolean }>`
+    padding: ${props =>
+        props.isSearching ? '0px 32px 24px 0' : '28px 32px 28px 0'};
+
     @media screen and (max-width: 767px) {
-        padding: ${props => props.isSearching ? '0px 8px 20px 0' : '20px 8px 20px 0'};
+        padding: ${props =>
+            props.isSearching ? '0px 8px 20px 0' : '20px 8px 20px 0'};
     }
 `;
 
@@ -105,7 +113,7 @@ const Dot = styled.div`
 `;
 
 const Mc = styled.div`
-    color: var(--Orange-600, #FF7710);
+    color: var(--Orange-600, #ff7710);
     font-family: Pretendard;
     font-size: 14px;
     font-style: normal;
@@ -133,7 +141,6 @@ export const Box = styled.div<{ img?: string | null }>`
         @media screen and (max-width: 767px) {
             font-size: 12px;
         }
-
     }
     &.title {
         font-size: 20px;
@@ -165,7 +172,7 @@ export const Box = styled.div<{ img?: string | null }>`
             font-size: 16px;
             line-height: 150%;
             font-weight: 500;
-            color: var(--Grey-800, #4D5359);
+            color: var(--Grey-800, #4d5359);
 
             @media screen and (max-width: 767px) {
                 font-size: 14px;
@@ -242,6 +249,5 @@ export const Box = styled.div<{ img?: string | null }>`
         @media screen and (max-width: 767px) {
             font-size: 12px;
         }
-
     }
 `;

@@ -1,6 +1,6 @@
 import Editor from './Editor';
 import * as W from './WriteStyle';
-import {Back} from '../detail/DetailStyle'
+import { Back } from '../detail/DetailStyle';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import request from '../../../utils/request';
@@ -32,31 +32,38 @@ const CommunityWrite = () => {
     //수정모드일때 기존 데이터 불러오기
     const fetchData = async () => {
         try {
-        const response = await axiosInstance.get(`/api/v1/community/posts/${info.id}/simple`);
-        setSelectedBoard(response.data.data.mainCategory);
-        setSelectedSubBoard(response.data.data.subCategory);
-        setEditorContent(response.data.data.body);
-        setEditorTitle(response.data.data.title);
+            const response = await axiosInstance.get(
+                `/api/v1/community/posts/${info.id}/simple`,
+            );
+            setSelectedBoard(response.data.data.mainCategory);
+            setSelectedSubBoard(response.data.data.subCategory);
+            setEditorContent(response.data.data.body);
+            setEditorTitle(response.data.data.title);
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
-    };
-        
-    useEffect(() => {
-        if (info.mod) {
-          fetchData();
-        }
-    }, [info.mod]);
-  
-    const isSubmitEnabled = () => {
-        return selectedBoard !== '' && selectedSubBoard !== '' && editorTitle !== '' && editorContent !== '';
     };
 
-    const handleTitleChange = (title:string) => {
+    useEffect(() => {
+        if (info.mod) {
+            fetchData();
+        }
+    }, [info.mod]);
+
+    const isSubmitEnabled = () => {
+        return (
+            selectedBoard !== '' &&
+            selectedSubBoard !== '' &&
+            editorTitle !== '' &&
+            editorContent !== ''
+        );
+    };
+
+    const handleTitleChange = (title: string) => {
         setEditorTitle(title);
     };
-    
-    const handleContentChange = (content:string) => {
+
+    const handleContentChange = (content: string) => {
         setEditorContent(content);
     };
 
@@ -69,18 +76,22 @@ const CommunityWrite = () => {
         setSelectedSubBoard(subBoardName);
     };
 
-    const replaceBase64WithS3Urls = (originalHtml:any, base64Urls:any, s3Urls:any) => {
+    const replaceBase64WithS3Urls = (
+        originalHtml: any,
+        base64Urls: any,
+        s3Urls: any,
+    ) => {
         let newHtml = originalHtml;
-      
-        base64Urls.forEach((base64Url:any, index:any) => {
-          newHtml = newHtml.replace(base64Url, s3Urls[index]);
+
+        base64Urls.forEach((base64Url: any, index: any) => {
+            newHtml = newHtml.replace(base64Url, s3Urls[index]);
         });
         return newHtml;
     };
 
     // 수정할때 이미 있던 s3이미지는 처리 x
     const isS3Url = (url: string) => {
-        return url.startsWith('https://storage.likelionuniv.com'); 
+        return url.startsWith('https://storage.likelionuniv.com');
     };
 
     const processSendData = async (): Promise<CommunityRegisterType> => {
@@ -88,34 +99,38 @@ const CommunityWrite = () => {
         const extractedUrls = extractBase64Images(editorHtml);
         let newEditorHtml = editorHtml;
         let thumbnailUrl = null;
-    
+
         // Base64 URL이랑 S3 URL 구분
         const base64Urls = extractedUrls.filter(url => !isS3Url(url));
         const s3Urls = extractedUrls.filter(isS3Url);
-    
+
         // S3에 업로드하고 URL 변경
-        let uploadedS3Urls:any = [];
+        let uploadedS3Urls: any = [];
         if (base64Urls.length > 0) {
             uploadedS3Urls = await uploadImagesAndGetUrls(base64Urls);
-            newEditorHtml = replaceBase64WithS3Urls(newEditorHtml, base64Urls, uploadedS3Urls);
+            newEditorHtml = replaceBase64WithS3Urls(
+                newEditorHtml,
+                base64Urls,
+                uploadedS3Urls,
+            );
         }
-    
+
         // 썸네일 첫번째 사진으로
         if (s3Urls.length > 0) {
             thumbnailUrl = s3Urls[0];
         } else if (uploadedS3Urls.length > 0) {
             thumbnailUrl = uploadedS3Urls[0];
         }
-    
+
         return {
             title: editorTitle,
             body: newEditorHtml,
             thumbnail: thumbnailUrl,
             mainCategory: selectedBoard,
-            subCategory: selectedSubBoard
+            subCategory: selectedSubBoard,
         };
     };
-    
+
     // 게시글 등록
     const handleSubmit = async () => {
         const data = await processSendData();
@@ -125,7 +140,7 @@ const CommunityWrite = () => {
             data,
         });
 
-        window.location.replace("/community");
+        window.location.replace('/community');
     };
 
     // 게시글 수정
@@ -137,19 +152,19 @@ const CommunityWrite = () => {
             data,
         });
 
-        window.location.replace("/community");
+        window.location.replace('/community');
     };
 
     const submit = () => {
-        if(info.mod){
+        if (info.mod) {
             handleModify();
-        }else {
+        } else {
             handleSubmit();
         }
-    }
+    };
 
     //quill editor 내용 중 img 태그만 골라서 src 뽑아내기
-    const extractBase64Images = (editorContent:any) => {
+    const extractBase64Images = (editorContent: any) => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(editorContent, 'text/html');
         const images = doc.querySelectorAll('img');
@@ -157,36 +172,36 @@ const CommunityWrite = () => {
         return urls;
     };
 
-    const base64ToFile = (dataurl:any, filename:string) => {
+    const base64ToFile = (dataurl: any, filename: string) => {
         let arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
             bstr = atob(arr[1]),
             n = bstr.length,
             u8arr = new Uint8Array(n);
-    
+
         while (n--) {
             u8arr[n] = bstr.charCodeAt(n);
         }
-    
+
         return new File([u8arr], filename, { type: mime });
     };
-    
-    
-    const uploadImagesAndGetUrls = async (base64Urls:any) => {
+
+    const uploadImagesAndGetUrls = async (base64Urls: any) => {
         const s3Urls = [];
-      
+
         for (const base64Url of base64Urls) {
-          const file = base64ToFile(base64Url, "image.jpg");
-          const { presignedUrl, imageUrl } = await ImageUpload.getPresignedUrl(file);
-          await ImageUpload.enrollImagesToS3(file, presignedUrl);
-          s3Urls.push('https://' + imageUrl);
+            const file = base64ToFile(base64Url, 'image.jpg');
+            const { presignedUrl, imageUrl } =
+                await ImageUpload.getPresignedUrl(file);
+            await ImageUpload.enrollImagesToS3(file, presignedUrl);
+            s3Urls.push('https://' + imageUrl);
         }
         return s3Urls;
     };
 
     const goMain = () => {
-        navigate("/community")
-    }
+        navigate('/community');
+    };
 
     const SubBoard = () => {
         switch (selectedBoard) {
@@ -283,58 +298,64 @@ const CommunityWrite = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <Back>
-            <ArrowIcon onClick={() => {navigate(-1)}} />
-            <W.Reg
-                isActive={isSubmitEnabled()}
-                onClick={isSubmitEnabled() ? submit : undefined} 
-            >
-                등록
-            </W.Reg>
-        </Back>
-        <W.Container>
-            <W.Title>커뮤니티 글쓰기</W.Title>
-            <W.Tab>
-                <p className="sub">게시판 선택</p>
-                <div className="board">
-                    <W.BoardItem
-                        onClick={() => BoardClick('멋대 중앙')}
-                        isSelected={selectedBoard === '멋대 중앙'}
-                    >
-                        멋대 중앙
-                    </W.BoardItem>
-                    <W.BoardItem
-                        onClick={() => BoardClick('자유게시판')}
-                        isSelected={selectedBoard === '자유게시판'}
-                    >
-                        자유게시판
-                    </W.BoardItem>
-                    <W.BoardItem
-                        onClick={() => BoardClick('멋사 오버플로우')}
-                        isSelected={selectedBoard === '멋사 오버플로우'}
-                    >
-                        멋사 오버플로우
-                    </W.BoardItem>
-                </div>
-                {SubBoard()}
-            </W.Tab>
-            <Editor 
-                contents={editorContent} 
-                title={editorTitle} 
-                onTitleChange={handleTitleChange}
-                onContentChange={handleContentChange}
-            />
-            <div className='btns'>
-                <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
-                <W.RegBtn
+        <div
+            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+        >
+            <Back>
+                <ArrowIcon
+                    onClick={() => {
+                        navigate(-1);
+                    }}
+                />
+                <W.Reg
                     isActive={isSubmitEnabled()}
                     onClick={isSubmitEnabled() ? submit : undefined}
                 >
-                    등록하기
-                </W.RegBtn>
-            </div>
-        </W.Container>
+                    등록
+                </W.Reg>
+            </Back>
+            <W.Container>
+                <W.Title>커뮤니티 글쓰기</W.Title>
+                <W.Tab>
+                    <p className="sub">게시판 선택</p>
+                    <div className="board">
+                        <W.BoardItem
+                            onClick={() => BoardClick('멋대 중앙')}
+                            isSelected={selectedBoard === '멋대 중앙'}
+                        >
+                            멋대 중앙
+                        </W.BoardItem>
+                        <W.BoardItem
+                            onClick={() => BoardClick('자유게시판')}
+                            isSelected={selectedBoard === '자유게시판'}
+                        >
+                            자유게시판
+                        </W.BoardItem>
+                        <W.BoardItem
+                            onClick={() => BoardClick('멋사 오버플로우')}
+                            isSelected={selectedBoard === '멋사 오버플로우'}
+                        >
+                            멋사 오버플로우
+                        </W.BoardItem>
+                    </div>
+                    {SubBoard()}
+                </W.Tab>
+                <Editor
+                    contents={editorContent}
+                    title={editorTitle}
+                    onTitleChange={handleTitleChange}
+                    onContentChange={handleContentChange}
+                />
+                <div className="btns">
+                    <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
+                    <W.RegBtn
+                        isActive={isSubmitEnabled()}
+                        onClick={isSubmitEnabled() ? submit : undefined}
+                    >
+                        등록하기
+                    </W.RegBtn>
+                </div>
+            </W.Container>
         </div>
     );
 };
