@@ -32,34 +32,17 @@ const SideBar: React.FC<SideBarProps> = ({
         <Wrapper>
             <Title>커뮤니티</Title>
             <Content>
-                <SubTitle>멋대 중앙</SubTitle>
-                <Tab
+                <SubTitle>멋쟁이사자처럼</SubTitle>
+                <Tab 
                     $isSelected={
-                        mainCategory === '멋대 중앙' &&
+                        mainCategory === '멋쟁이사자처럼' && 
                         subCategory === '공지사항'
                     }
-                    onClick={() => handleTabClick('멋대 중앙', '공지사항')}
+                    onClick={() => handleTabClick('멋쟁이사자처럼', '공지사항')}
                 >
                     공지사항
                 </Tab>
-                <Tab
-                    $isSelected={
-                        mainCategory === '멋대 중앙' &&
-                        subCategory === '질문건의'
-                    }
-                    onClick={() => handleTabClick('멋대 중앙', '질문건의')}
-                >
-                    질문건의
-                </Tab>
-                <Tab
-                    $isSelected={
-                        mainCategory === '멋대 중앙' &&
-                        subCategory === '정보공유'
-                    }
-                    onClick={() => handleTabClick('멋대 중앙', '정보공유')}
-                >
-                    정보공유
-                </Tab>
+                
             </Content>
             <Divider />
             <Content>
@@ -75,77 +58,68 @@ const SideBar: React.FC<SideBarProps> = ({
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '자유게시판' &&
-                        subCategory === '팀원모집'
+                        mainCategory === '자유게시판' && 
+                        subCategory === '프로젝트 팀원 모집'
                     }
-                    onClick={() => handleTabClick('자유게시판', '팀원모집')}
+                    onClick={() => handleTabClick('자유게시판', '프로젝트 팀원 모집')}
                 >
-                    팀원모집
+                    프로젝트 팀원 모집
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '자유게시판' &&
-                        subCategory === '플젝모집'
+                        mainCategory === '자유게시판' && 
+                        subCategory === '프로젝트 자랑'
                     }
-                    onClick={() => handleTabClick('자유게시판', '플젝모집')}
+                    onClick={() => handleTabClick('자유게시판', '프로젝트 자랑')}
                 >
-                    플젝모집
-                </Tab>
-                <Tab
-                    $isSelected={
-                        mainCategory === '자유게시판' &&
-                        subCategory === '플젝자랑'
-                    }
-                    onClick={() => handleTabClick('자유게시판', '플젝자랑')}
-                >
-                    플젝자랑
+                    프로젝트 자랑
                 </Tab>
             </Content>
             <Divider />
             <Content>
-                <SubTitle>멋사 오버플로우</SubTitle>
+                <SubTitle>트랙별 소통 채널</SubTitle>
                 <Tab
                     $isSelected={
-                        mainCategory === '멋사 오버플로우' &&
-                        subCategory === '프론트'
+                        mainCategory === '트랙별 소통 채널' && 
+                        subCategory === '프론트엔드'
                     }
-                    onClick={() => handleTabClick('멋사 오버플로우', '프론트')}
+                    onClick={() => handleTabClick('트랙별 소통 채널', '프론트엔드')}
                 >
-                    프론트
+                    프론트엔드
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '멋사 오버플로우' &&
-                        subCategory === '백'
+                        mainCategory === '트랙별 소통 채널' && 
+                        subCategory === '백엔드'
                     }
-                    onClick={() => handleTabClick('멋사 오버플로우', '백')}
+                    onClick={() => handleTabClick('트랙별 소통 채널', '백엔드')}
                 >
-                    백
+                    백엔드
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '멋사 오버플로우' &&
+                        mainCategory === '트랙별 소통 채널' && 
                         subCategory === '기획'
                     }
-                    onClick={() => handleTabClick('멋사 오버플로우', '기획')}
+                    onClick={() => handleTabClick('트랙별 소통 채널', '기획')}
                 >
                     기획
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '멋사 오버플로우' &&
+                        mainCategory === '트랙별 소통 채널' && 
                         subCategory === '디자인'
                     }
-                    onClick={() => handleTabClick('멋사 오버플로우', '디자인')}
+                    onClick={() => handleTabClick('트랙별 소통 채널', '디자인')}
                 >
                     디자인
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '멋사 오버플로우' &&
+                        mainCategory === '트랙별 소통 채널' && 
                         subCategory === '기타'
                     }
-                    onClick={() => handleTabClick('멋사 오버플로우', '기타')}
+                    onClick={() => handleTabClick('트랙별 소통 채널', '기타')}
                 >
                     기타
                 </Tab>
