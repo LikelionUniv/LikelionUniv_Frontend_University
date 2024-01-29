@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelectedUsers } from './SelectedUserContext';
+import { useSelectedUsers } from '../SelectedUserContext';
 
 function TableHead() {
     const { selectAll, setSelectAll } = useSelectedUsers();
-
-    const handleSelectAllChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
+    const handleSelectAllChange = (event: {
+        target: { checked: boolean | ((prevState: boolean) => boolean) };
+    }) => {
         setSelectAll(event.target.checked);
     };
 
@@ -79,5 +78,4 @@ const Divider = styled.div`
     height: 3px;
     background-color: var(--Grey-900, #212224);
     width: 100%;
-    margin-top: 15px;
 `;

@@ -5,7 +5,7 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 300px;
-    height: 40px;
+    height: 30px;
     padding: 4px;
     flex-shrink: 0;
     border-radius: 6px;
@@ -14,7 +14,7 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input`
-    height: 90%;
+    height: 70%;
     width: 80%;
     padding: 8px 16px;
     border: none;

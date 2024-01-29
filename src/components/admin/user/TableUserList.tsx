@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import EditModal from './ModifyUser';
-import { User } from './UserList';
-import { useSelectedUsers } from './SelectedUserContext';
+import { User } from './Usertype';
+import { useSelectedUsers } from '../SelectedUserContext';
 import DeleteUser from './DeleteUser';
-import EmailModal from './EmailModal';
 import ModifyUser from './ModifyUser';
+import { useOutletContext } from 'react-router-dom';
+import OutletContext from '../OutletContext';
 
 interface TableUserListProps {
     users: User[];
@@ -27,8 +27,10 @@ function TableUserList({ users, id }: TableUserListProps) {
         setSelectedUserEmails,
         selectAll,
     } = useSelectedUsers();
+
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
     const [editingUser, setEditingUser] = useState<User | null>(null);
+    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
     const selectedEmails = users
         .filter(user => selectedUserIds.includes(user.id))
         .map(user => user.email);
@@ -63,12 +65,15 @@ function TableUserList({ users, id }: TableUserListProps) {
 
     useEffect(() => {
         if (selectAll) {
-            const allUserIds = users.map(user => user.id);
-            setSelectedUserIds(allUserIds);
+            // 전체 선택이 활성화된 경우 모든 사용자의 ID와 이메일을 선택 상태에 추가
+            setSelectedUserIds(users.map(user => user.id));
+            setSelectedUserEmails(users.map(user => user.email));
         } else {
+            // 전체 선택이 비활성화된 경우 선택 상태를 비움
             setSelectedUserIds([]);
+            setSelectedUserEmails([]);
         }
-    }, [selectAll, users]);
+    }, [selectAll, users, setSelectedUserIds, setSelectedUserEmails]);
 
     return (
         <>
@@ -90,6 +95,9 @@ function TableUserList({ users, id }: TableUserListProps) {
                                 />
                             </Table>
                             <Table className="name">{user.name}</Table>
+                            {isAdmin && (
+                                <Table className="univ">{user.univName}</Table>
+                            )}
                             <Table className="major">{user.major}</Table>
                             <Table className="ordinal">{user.ordinal}기</Table>
                             <Table className="part">{user.part}</Table>
@@ -130,14 +138,20 @@ const Wrapper = styled.div`
     overflow-y: hidden;
     align-items: center;
 
-    max-height: 1660px;
+    //max-height: 1660px;
 
     .name {
         min-width: 110px;
     }
 
+    .univ {
+        min-width: 200px;
+        max-width: 200px;
+    }
+
     .major {
         min-width: 140px;
+        max-width: 140px;
     }
 
     .ordinal {
@@ -153,6 +167,7 @@ const Wrapper = styled.div`
     }
     .email {
         min-width: 200px;
+        max-width: 200px;
     }
 `;
 

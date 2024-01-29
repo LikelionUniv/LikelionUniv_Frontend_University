@@ -25,7 +25,7 @@ interface UserResponse {
 function useGetAdminUsers({ id }: useGetAdminUsersProps) {
     const fetchUsers = async () => {
         const response = await request<null, UserResponse, null>({
-            uri: `/api/admin/v1/univAdmin/univ/users?page=0&size=12&sort=createdDate%2CDESC`,
+            uri: `/api/admin/v1/univAdmin/univ/users`,
             method: 'get',
         });
 

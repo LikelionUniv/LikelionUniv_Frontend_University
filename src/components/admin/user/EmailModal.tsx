@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import cancel from '../../../img/admin/Cancel.svg';
-import useGetAdminUsers from '../../../query/get/useGetAdminUsers';
-import { useSelectedUsers } from './SelectedUserContext';
-import useSendEmail from '../../../query/post/useSendEmail';
+import { useSelectedUsers } from '../SelectedUserContext';
+import { axiosInstance } from '../../../utils/axios';
 
 interface SelectedFile {
     id: number;
@@ -18,15 +17,15 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     onCancel,
     selectedEmails,
 }) => {
-    const [sender] = useState('cu4149@likelion.org');
-    const [recipient, setRecipient] = useState<string[]>([]);
+    const [sender] = useState('LIKELION UNIVERSITY');
+    const [receivers, setreceivers] = useState<string[]>([]);
     const [subject, setSubject] = useState('');
     const [content, setContent] = useState('');
     const [attachment, setAttachment] = useState<File | null>(null);
     const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
     const { selectedUserIds } = useSelectedUsers();
     const [isButtonActive, setIsButtonActive] = useState(false);
-    const sendEmail = useSendEmail();
+    const [inputreceivers, setInputreceivers] = useState('');
 
     // 파일 첨부 처리 함수
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,34 +43,42 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
         setSelectedFiles(selectedFiles.filter(file => file.id !== id));
     };
 
-    const handleSendEmail = () => {
-        const emailData = {
-            roles: selectedUserIds.map(id => `User-${id}`),
-            subject: subject,
-            contentsType: 'text/plain',
-            contents: content,
-        };
-
-        sendEmail.mutate(emailData, {
-            onSuccess: data => {
-                console.log('Email sent successfully:', data);
-            },
-            onError: error => {
-                console.error('Error sending email:', error);
-            },
-        });
-    };
-
     useEffect(() => {
-        // 선택된 이메일들을 recipient 상태에 설정
-        setRecipient(selectedEmails);
+        setreceivers(selectedEmails);
+        setInputreceivers(selectedEmails.join(', '));
     }, [selectedEmails]);
 
     useEffect(() => {
         setIsButtonActive(
-            subject !== '' && content !== '' && recipient.length > 0,
+            subject !== '' && content !== '' && receivers.length > 0,
         );
-    }, [subject, content, recipient]);
+    }, [subject, content, receivers]);
+
+    const handlereceiversChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInputreceivers(e.target.value);
+        const emails = e.target.value.split(',').map(email => email.trim());
+        setreceivers(emails);
+    };
+
+    const handleSendEmail = async () => {
+        if (!isButtonActive) return;
+
+        try {
+            const response = await axiosInstance.post(
+                '/api/admin/v1/alarm/recruit',
+                {
+                    receivers: receivers,
+                    subject: subject,
+                    contentsType: 'html',
+                    contents: content,
+                },
+            );
+
+            console.log('Email sent successfully:', response.data);
+        } catch (error) {
+            console.error('Error sending email:', error);
+        }
+    };
 
     return (
         <>
@@ -92,8 +99,9 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
                     <div className="BoxName">받는 사람</div>
                     <input
                         className="InputBox"
-                        value={recipient.join(', ')}
-                        readOnly
+                        type="text"
+                        value={inputreceivers}
+                        onChange={handlereceiversChange}
                     />
                     <Divider />
                     <div className="BoxName">제목</div>
@@ -136,7 +144,7 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
                         backgroundColor: isButtonActive ? '#ff7710' : '#ADB3BA',
                         cursor: isButtonActive ? 'pointer' : 'default',
                     }}
-                    onClick={isButtonActive ? handleSendEmail : undefined}
+                    onClick={handleSendEmail}
                 >
                     보내기
                 </Button>

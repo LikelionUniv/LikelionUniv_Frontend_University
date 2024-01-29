@@ -1,32 +1,42 @@
 import React, { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import AlarmList from './recruit/AlarmList';
+import { SelectedUsersProvider, useSelectedUsers } from './SelectedUserContext';
+import EmailModal from './user/EmailModal';
+import EmailSendButton from './recruit/EmailSendButton';
 
 function RecruitAlarm() {
     const [users, setUsers] = useState<string | undefined>();
+    const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+
+    const openEmailModal = () => setIsEmailModalOpen(true);
+    const closeEmailModal = () => setIsEmailModalOpen(false);
 
     return (
-        <Wrapper>
-            <TableTitle>
-                <TitleAlarm>
-                    <Title>모집 알림</Title>
-                    <AlarmRequest>알림 신청</AlarmRequest>
-                </TitleAlarm>
-                <Button style={{ color: '#ffffff' }}>선택 알림 보내기</Button>
-            </TableTitle>
-            {
+        <SelectedUsersProvider>
+            <Wrapper>
+                <TableTitle>
+                    <TitleAlarm>
+                        <Title>모집 알림</Title>
+                        <AlarmRequest>알림 신청</AlarmRequest>
+                    </TitleAlarm>
+                    <EmailSendButton />
+                </TableTitle>
+
                 <Suspense fallback={<div>loading...</div>}>
                     <AlarmList />
                 </Suspense>
-            }
-        </Wrapper>
+            </Wrapper>
+        </SelectedUsersProvider>
     );
 }
 
 export default RecruitAlarm;
 
 const Wrapper = styled.div`
-    width: 74.5%;
+    width: fit-content;
+    min-width: 1100px;
+    margin-right: 200px;
 `;
 
 const TableTitle = styled.div`

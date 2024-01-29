@@ -34,7 +34,9 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Container = styled.div`
-    display: flex;
     width: 100%;
-    margin: 100px 0;
+    margin: 150px 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 `;

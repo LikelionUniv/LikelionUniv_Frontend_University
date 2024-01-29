@@ -5,11 +5,12 @@ import OrderDropDown from './user/OrderDropDown';
 import SearchBar from './Search/SearchBar';
 import { useOutletContext } from 'react-router-dom';
 import OutletContext from './OutletContext';
+import HeadUserList from './user/HeadUserList';
 
 function User() {
     const [order, setOrder] = useState<string | undefined>();
     const [searchQuery, setSearchQuery] = useState<string | undefined>();
-    const { userinfo, isUniversityAdmin } = useOutletContext<OutletContext>();
+    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
 
     const universityName = userinfo.universityName;
 
@@ -19,14 +20,18 @@ function User() {
                 <Title>회원정보</Title>
                 <UniversityName>{universityName}</UniversityName>
             </div>
-            {!isUniversityAdmin && (
+            {isAdmin && (
                 <Nav>
                     <OrderDropDown />
                     <SearchBar setSearchQuery={setSearchQuery} />
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
-                <UserList order={order} searchQuery={searchQuery} />
+                {isAdmin ? (
+                    <HeadUserList order={order} searchQuery={searchQuery} />
+                ) : (
+                    <UserList order={order} searchQuery={searchQuery} />
+                )}
             </Suspense>
         </Wrapper>
     );
@@ -35,8 +40,8 @@ function User() {
 export default User;
 
 const Wrapper = styled.div`
-    width: 74.5%;
-
+    width: fit-content;
+    margin-right: 200px;
     .TitleUniversity {
         display: flex;
         align-items: baseline;
@@ -46,7 +51,7 @@ const Wrapper = styled.div`
 const Nav = styled.div`
     display: flex;
     align-items: center;
-    margin: 10px 0 10px 0;
+    margin: 10px 0;
 `;
 
 const Title = styled.div`

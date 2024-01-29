@@ -10,12 +10,14 @@ import { User } from './Usertype';
 interface UserListProps {
     order?: string;
     searchQuery?: string;
+    role?: string;
+    univName?: string;
 }
 
-function UserList({ order, searchQuery }: UserListProps, { id }: User) {
+function HeadUserList({ order, searchQuery }: UserListProps, { id }: User) {
     const { curPageItem: users, renderPaginationBtn } =
         useServerSidePagination<User>({
-            uri: '/api/admin/v1/univAdmin/univ/users',
+            uri: '/api/admin/v1/headquaters/users',
             size: 10,
             sort: order,
             search: searchQuery,
@@ -35,15 +37,9 @@ function UserList({ order, searchQuery }: UserListProps, { id }: User) {
     );
 }
 
-export default UserList;
+export default HeadUserList;
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-`;
-
-const Nav = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 10px 0 10px 0;
 `;

@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import { useSelectedUsers } from './SelectedUserContext';
+import { useSelectedUsers } from '../SelectedUserContext';
 import useDeleteUserList from '../../../query/delete/useDeleteUserList';
 import styled from 'styled-components';
 import EmailModal from './EmailModal';
 import { useUserProfile } from '../../../api/mypage/useUserProfile';
+import OutletContext from '../OutletContext';
+import { useOutletContext } from 'react-router-dom';
 
 const TableBottom: React.FC = () => {
     const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =
         useSelectedUsers();
     const { mutate } = useDeleteUserList();
-    // const userProfile = useUserProfile();
+
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const openEmailModal = () => setIsEmailModalOpen(true);
     const closeEmailModal = () => setIsEmailModalOpen(false);
-
+    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
     // const isAdmin = userProfile.role === 'UNIVERSITY_ADMIN';
 
     const handleDelete = () => {
@@ -39,14 +41,14 @@ const TableBottom: React.FC = () => {
             <SelectedActions>
                 <div>선택한 회원</div>
                 <Button onClick={handleDelete}>삭제하기</Button>
-                {/* {!isAdmin && (
+                {isAdmin && (
                     <Button
                         style={{ color: '#4D5359' }}
                         onClick={handleSendEmail}
                     >
                         이메일 보내기
                     </Button>
-                )} */}
+                )}
             </SelectedActions>
             {isEmailModalOpen && (
                 <EmailModal
