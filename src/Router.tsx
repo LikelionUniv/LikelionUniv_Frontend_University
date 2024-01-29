@@ -31,6 +31,7 @@ import AdminPage from './routes/AdminPage';
 import User from './components/admin/User';
 import RecruitAlarm from './components/admin/RecruitAlarm';
 import AdminProtectedRouter from './components/AdminProtectedRouter';
+import NotFound from './routes/NotFound';
 
 const router = createBrowserRouter([
     {
@@ -98,10 +99,6 @@ const router = createBrowserRouter([
                 ],
             },
             {
-                path: '/chat',
-                element: <Chat />,
-            },
-            {
                 path: '/donate',
                 element: <DonatePage />,
                 children: [
@@ -151,11 +148,10 @@ const router = createBrowserRouter([
                     },
                 ],
             },
-
-            {
-                path: '/chat',
-                element: <Chat />,
-            },
+            // {
+            //     path: '/chat',
+            //     element: <Chat />,
+            // },
             {
                 path: '/about',
                 element: <AboutPage />,
@@ -178,6 +174,10 @@ const router = createBrowserRouter([
                     },
                 ],
             },
+            {
+                path: '*',
+                element: <NotFound />
+            }
         ],
     },
     {

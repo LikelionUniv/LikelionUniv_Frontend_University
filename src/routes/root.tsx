@@ -1,5 +1,4 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
 import Nav from '../components/Nav';
 import Footer from '../components/layout/Footer';
 import useIsPC from '../hooks/useIsPC';
