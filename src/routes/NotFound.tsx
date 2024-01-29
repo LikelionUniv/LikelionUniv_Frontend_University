@@ -13,7 +13,7 @@ function NotFound() {
     }, 1000);
     
     if (remainTime === 0) {
-      navigate('/');
+      navigate(-1);
     }
 
     return () => clearInterval(timer);
