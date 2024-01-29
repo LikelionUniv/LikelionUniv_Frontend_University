@@ -27,11 +27,11 @@ import DonateDetail from './components/donate/DonateDetail';
 import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
 import ProtectedRouter from './components/ProtectedRouter';
 import ProjectRegisterWrapper from './components/project/register/ProjectRegisterWrapper';
-import AdminPage from './routes/AdminPage';
 import User from './components/admin/User';
 import RecruitAlarm from './components/admin/RecruitAlarm';
 import AdminProtectedRouter from './components/AdminProtectedRouter';
 import NotFound from './routes/NotFound';
+import Admin from './routes/Admin';
 
 const router = createBrowserRouter([
     {
@@ -160,7 +160,7 @@ const router = createBrowserRouter([
                 path: '/likeliononlyadminuser2013',
                 element: (
                     <AdminProtectedRouter>
-                        <AdminPage />
+                        <Admin />
                     </AdminProtectedRouter>
                 ),
                 children: [

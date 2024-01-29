@@ -1,9 +1,9 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import SideBar from '../components/admin/Sidebar';
+import SideBar from './Sidebar';
 import styled from 'styled-components';
-import useIsAdmin from '../hooks/useIsAdmin';
-import useGetUserInfo from '../query/get/useGetUserInfo';
+import useIsAdmin from '../../hooks/useIsAdmin';
+import useGetUserInfo from '../../query/get/useGetUserInfo';
 
 const AdminPage = () => {
     const [selectedItem, setSelectedItem] = useState<string>('회원정보');

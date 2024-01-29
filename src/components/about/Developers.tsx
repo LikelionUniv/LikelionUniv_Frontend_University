@@ -73,6 +73,12 @@ const Developers = () => {
                         profile={profile18}
                     />
                     <DevInfo
+                        name="김진호"
+                        from="홍익대학교 11기 아기사자"
+                        position="프론트엔드 파트장"
+                        profile={profile13}
+                    />
+                    <DevInfo
                         name="김강민"
                         from="한국외국어대학교(글로벌) 11기 대표"
                         profile={profile10}
@@ -87,11 +93,6 @@ const Developers = () => {
                         name="김예지"
                         from="동덕여자대학교 11기 대표"
                         profile={profile12}
-                    />
-                    <DevInfo
-                        name="김진호"
-                        from="홍익대학교 11기 아기사자"
-                        profile={profile13}
                     />
                     <DevInfo
                         name="노하림"
