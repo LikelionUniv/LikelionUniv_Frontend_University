@@ -8,8 +8,8 @@
         width: 100%;
         border-radius: 0;
         background: #fff;
-        border-top: 1px solid var(--Grey-200, #F2F4F6);
-        border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+        border-top: 1px solid var(--Grey-200, #f2f4f6);
+        border-bottom: 1px solid var(--Grey-200, #f2f4f6);
     }
 
     .quill {
@@ -68,10 +68,7 @@
     }
 }
 
-
-
 @media screen and (min-width: 768px) {
-
     .quill > .ql-toolbar.ql-snow {
         box-sizing: border-box;
         padding: 12px 0 12px 21px;
@@ -87,8 +84,8 @@
             border: none;
             border-radius: 0;
             background: #fff;
-            border-top: 1px solid var(--Grey-200, #F2F4F6);
-            border-bottom: 1px solid var(--Grey-200, #F2F4F6);
+            border-top: 1px solid var(--Grey-200, #f2f4f6);
+            border-bottom: 1px solid var(--Grey-200, #f2f4f6);
         }
     }
 
@@ -106,7 +103,6 @@
             border: none;
             height: 100%;
         }
-
     }
 
     .ql-editor.ql-blank::before {
@@ -165,5 +161,4 @@
             font-size: 0;
         }
     }
-
 }

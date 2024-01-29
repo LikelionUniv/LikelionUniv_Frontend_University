@@ -27,37 +27,46 @@ const Editor: React.FC<EditorProps> = ({
         setInput(title);
     }, [contents, title]);
 
-  useEffect(() => {
-    let prevVisualViewport = window.visualViewport ? window.visualViewport.height : 0;
-  
-    const handleVisualViewportResize = () => {
-      if (!window.visualViewport) return;
-      const currentVisualViewport = window.visualViewport.height;
-      const toolbar = document.querySelector('.quill > .ql-toolbar.ql-snow') as HTMLElement;
-      if (!toolbar) return;
-      
-      //console.log(currentVisualViewport) // 진짜 보이는 칸 크기
-      //console.log (window.innerHeight) // 전체 화면크기
-  
-      const keyboardHeight = window.innerHeight - currentVisualViewport;
-    
-      // 키보드 켜질떄
-      if (keyboardHeight > 0) {
-        //toolbar.style.bottom = `${keyboardHeight}px`; // 키보드 높이만큼 bottom 조정 (크롬브라우저, ios를 위해 필요)
-        //window.scrollTo(0, 0);
-      } else {
-        toolbar.style.bottom = '0'; // 키보드가 비활성화되었을 때 다시 아래
-      }
-      prevVisualViewport = currentVisualViewport;
-    };
-  
-    window.visualViewport?.addEventListener('resize', handleVisualViewportResize);
-  
-    return () => {
-      window.visualViewport?.removeEventListener('resize', handleVisualViewportResize);
-    };
-  }, []);
+    useEffect(() => {
+        let prevVisualViewport = window.visualViewport
+            ? window.visualViewport.height
+            : 0;
 
+        const handleVisualViewportResize = () => {
+            if (!window.visualViewport) return;
+            const currentVisualViewport = window.visualViewport.height;
+            const toolbar = document.querySelector(
+                '.quill > .ql-toolbar.ql-snow',
+            ) as HTMLElement;
+            if (!toolbar) return;
+
+            //console.log(currentVisualViewport) // 진짜 보이는 칸 크기
+            //console.log (window.innerHeight) // 전체 화면크기
+
+            const keyboardHeight = window.innerHeight - currentVisualViewport;
+
+            // 키보드 켜질떄
+            if (keyboardHeight > 0) {
+                //toolbar.style.bottom = `${keyboardHeight}px`; // 키보드 높이만큼 bottom 조정 (크롬브라우저, ios를 위해 필요)
+                //window.scrollTo(0, 0);
+            } else {
+                toolbar.style.bottom = '0'; // 키보드가 비활성화되었을 때 다시 아래
+            }
+            prevVisualViewport = currentVisualViewport;
+        };
+
+        window.visualViewport?.addEventListener(
+            'resize',
+            handleVisualViewportResize,
+        );
+
+        return () => {
+            window.visualViewport?.removeEventListener(
+                'resize',
+                handleVisualViewportResize,
+            );
+        };
+    }, []);
 
     const svgIcon = `<img src="${imgSvg}" alt="이미지" />이미지 추가`;
     var icons = ReactQuill.Quill.import('ui/icons');

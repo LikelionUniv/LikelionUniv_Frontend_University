@@ -9,7 +9,11 @@ interface SideBarProps {
     userProfile: IuserProfile;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ onItemSelect, onSearch, userProfile }) => {
+const SideBar: React.FC<SideBarProps> = ({
+    onItemSelect,
+    onSearch,
+    userProfile,
+}) => {
     // const userProfile = useUserProfile();
     const [selectedTab, setSelectedTab] = useState<string>('공지사항');
     const [inputValue, setInputValue] = useState<string>('');

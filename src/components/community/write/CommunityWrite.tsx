@@ -229,7 +229,9 @@ const CommunityWrite = () => {
                         </W.SubBoardItem>
                         <W.SubBoardItem
                             onClick={() => SubBoardClick('프로젝트 팀원 모집')}
-                            isSelected={selectedSubBoard === '프로젝트 팀원 모집'}
+                            isSelected={
+                                selectedSubBoard === '프로젝트 팀원 모집'
+                            }
                         >
                             프로젝트 팀원 모집
                         </W.SubBoardItem>
@@ -282,64 +284,66 @@ const CommunityWrite = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', width: '100%'}}>
-        <Back>
-            <ArrowIcon 
-                onClick={() => {
-                    navigate(-1)
-                }}
-            />
-            <W.Reg
-                isActive={isSubmitEnabled()}
-                onClick={isSubmitEnabled() ? submit : undefined} 
-            >
-                등록
-            </W.Reg>
-        </Back>
-        <W.Container>
-            <W.Title>커뮤니티 글쓰기</W.Title>
-            <W.Tab>
-                <p className="sub">게시판 선택</p>
-                <div className="board">
-                    {!isAdmin && (
-                    <W.BoardItem
-                        onClick={() => BoardClick('멋쟁이사자처럼')}
-                        isSelected={selectedBoard === '멋쟁이사자처럼'}
-                    >
-                        멋쟁이사자처럼
-                    </W.BoardItem>
-                    )}
-                    <W.BoardItem
-                        onClick={() => BoardClick('자유게시판')}
-                        isSelected={selectedBoard === '자유게시판'}
-                    >
-                        자유게시판
-                    </W.BoardItem>
-                    <W.BoardItem
-                        onClick={() => BoardClick('트랙별 소통 채널')}
-                        isSelected={selectedBoard === '트랙별 소통 채널'}
-                    >
-                        트랙별 소통 채널
-                    </W.BoardItem>
-                </div>
-                {SubBoard()}
-            </W.Tab>
-            <Editor 
-                contents={editorContent} 
-                title={editorTitle} 
-                onTitleChange={handleTitleChange}
-                onContentChange={handleContentChange}
-            />
-            <div className='btns'>
-                <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
-                <W.RegBtn
+        <div
+            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
+        >
+            <Back>
+                <ArrowIcon
+                    onClick={() => {
+                        navigate(-1);
+                    }}
+                />
+                <W.Reg
                     isActive={isSubmitEnabled()}
                     onClick={isSubmitEnabled() ? submit : undefined}
                 >
-                    등록하기
-                </W.RegBtn>
-            </div>
-        </W.Container>
+                    등록
+                </W.Reg>
+            </Back>
+            <W.Container>
+                <W.Title>커뮤니티 글쓰기</W.Title>
+                <W.Tab>
+                    <p className="sub">게시판 선택</p>
+                    <div className="board">
+                        {!isAdmin && (
+                            <W.BoardItem
+                                onClick={() => BoardClick('멋쟁이사자처럼')}
+                                isSelected={selectedBoard === '멋쟁이사자처럼'}
+                            >
+                                멋쟁이사자처럼
+                            </W.BoardItem>
+                        )}
+                        <W.BoardItem
+                            onClick={() => BoardClick('자유게시판')}
+                            isSelected={selectedBoard === '자유게시판'}
+                        >
+                            자유게시판
+                        </W.BoardItem>
+                        <W.BoardItem
+                            onClick={() => BoardClick('트랙별 소통 채널')}
+                            isSelected={selectedBoard === '트랙별 소통 채널'}
+                        >
+                            트랙별 소통 채널
+                        </W.BoardItem>
+                    </div>
+                    {SubBoard()}
+                </W.Tab>
+                <Editor
+                    contents={editorContent}
+                    title={editorTitle}
+                    onTitleChange={handleTitleChange}
+                    onContentChange={handleContentChange}
+                />
+                <div className="btns">
+                    <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
+                    <W.RegBtn
+                        isActive={isSubmitEnabled()}
+                        onClick={isSubmitEnabled() ? submit : undefined}
+                    >
+                        등록하기
+                    </W.RegBtn>
+                </div>
+            </W.Container>
         </div>
     );
 };

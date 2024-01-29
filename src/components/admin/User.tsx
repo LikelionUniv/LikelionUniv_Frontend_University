@@ -9,7 +9,7 @@ import OutletContext from './OutletContext';
 function User() {
     const [order, setOrder] = useState<string | undefined>();
     const [searchQuery, setSearchQuery] = useState<string | undefined>();
-    const {userinfo, isUniversityAdmin} = useOutletContext<OutletContext>();
+    const { userinfo, isUniversityAdmin } = useOutletContext<OutletContext>();
 
     const universityName = userinfo.universityName;
 

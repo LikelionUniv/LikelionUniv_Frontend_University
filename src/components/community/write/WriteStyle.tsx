@@ -16,7 +16,6 @@ export const Container = styled.div`
         margin-top: 44px;
         margin-bottom: 0;
         height: 100%;
-
     }
 
     .btns {

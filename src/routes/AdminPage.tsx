@@ -10,8 +10,8 @@ const AdminPage = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const navigate = useNavigate();
 
-    const {isAdmin, isUniversityAdmin} = useIsAdmin();
-    const {userinfo, error} = useGetUserInfo();
+    const { isAdmin, isUniversityAdmin } = useIsAdmin();
+    const { userinfo, error } = useGetUserInfo();
 
     return (
         <Container>
@@ -20,11 +20,13 @@ const AdminPage = () => {
                 onSearch={(query: string) => setSearchQuery(query)}
                 userProfile={userinfo}
             />
-            <Outlet context={{
-                isAdmin,
-                isUniversityAdmin,
-                userinfo,
-            }} />
+            <Outlet
+                context={{
+                    isAdmin,
+                    isUniversityAdmin,
+                    userinfo,
+                }}
+            />
         </Container>
     );
 };

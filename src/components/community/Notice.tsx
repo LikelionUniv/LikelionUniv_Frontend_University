@@ -150,7 +150,10 @@ const Notice: React.FC<NoticeProps> = ({
             <Header isSearching={isSearching}>
                 <OrderDropDown onOrderChange={handleOrderChange} />
                 {content !== '공지사항' && (
-                    <Button onClick={() => navigate('/community/write')} isSearching={isSearching}>
+                    <Button
+                        onClick={() => navigate('/community/write')}
+                        isSearching={isSearching}
+                    >
                         <img src={WriteIcon} alt="펜" />
                         글쓰기
                     </Button>

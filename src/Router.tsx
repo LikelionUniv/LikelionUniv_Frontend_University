@@ -176,8 +176,8 @@ const router = createBrowserRouter([
                         path: 'recruitalarm',
                         element: <RecruitAlarm />,
                     },
-                ]
-            }
+                ],
+            },
         ],
     },
     {

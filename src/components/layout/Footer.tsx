@@ -50,7 +50,7 @@ function Footer(): JSX.Element {
     const navigate = useNavigate();
     const goAdmin = () => {
         navigate('/likeliononlyadminuser2013');
-    }
+    };
 
     return (
         <F.Wrapper>

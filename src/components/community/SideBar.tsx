@@ -33,16 +33,15 @@ const SideBar: React.FC<SideBarProps> = ({
             <Title>커뮤니티</Title>
             <Content>
                 <SubTitle>멋쟁이사자처럼</SubTitle>
-                <Tab 
+                <Tab
                     $isSelected={
-                        mainCategory === '멋쟁이사자처럼' && 
+                        mainCategory === '멋쟁이사자처럼' &&
                         subCategory === '공지사항'
                     }
                     onClick={() => handleTabClick('멋쟁이사자처럼', '공지사항')}
                 >
                     공지사항
                 </Tab>
-                
             </Content>
             <Divider />
             <Content>
@@ -58,19 +57,23 @@ const SideBar: React.FC<SideBarProps> = ({
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '자유게시판' && 
+                        mainCategory === '자유게시판' &&
                         subCategory === '프로젝트 팀원 모집'
                     }
-                    onClick={() => handleTabClick('자유게시판', '프로젝트 팀원 모집')}
+                    onClick={() =>
+                        handleTabClick('자유게시판', '프로젝트 팀원 모집')
+                    }
                 >
                     프로젝트 팀원 모집
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '자유게시판' && 
+                        mainCategory === '자유게시판' &&
                         subCategory === '프로젝트 자랑'
                     }
-                    onClick={() => handleTabClick('자유게시판', '프로젝트 자랑')}
+                    onClick={() =>
+                        handleTabClick('자유게시판', '프로젝트 자랑')
+                    }
                 >
                     프로젝트 자랑
                 </Tab>
@@ -80,16 +83,18 @@ const SideBar: React.FC<SideBarProps> = ({
                 <SubTitle>트랙별 소통 채널</SubTitle>
                 <Tab
                     $isSelected={
-                        mainCategory === '트랙별 소통 채널' && 
+                        mainCategory === '트랙별 소통 채널' &&
                         subCategory === '프론트엔드'
                     }
-                    onClick={() => handleTabClick('트랙별 소통 채널', '프론트엔드')}
+                    onClick={() =>
+                        handleTabClick('트랙별 소통 채널', '프론트엔드')
+                    }
                 >
                     프론트엔드
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '트랙별 소통 채널' && 
+                        mainCategory === '트랙별 소통 채널' &&
                         subCategory === '백엔드'
                     }
                     onClick={() => handleTabClick('트랙별 소통 채널', '백엔드')}
@@ -98,7 +103,7 @@ const SideBar: React.FC<SideBarProps> = ({
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '트랙별 소통 채널' && 
+                        mainCategory === '트랙별 소통 채널' &&
                         subCategory === '기획'
                     }
                     onClick={() => handleTabClick('트랙별 소통 채널', '기획')}
@@ -107,7 +112,7 @@ const SideBar: React.FC<SideBarProps> = ({
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '트랙별 소통 채널' && 
+                        mainCategory === '트랙별 소통 채널' &&
                         subCategory === '디자인'
                     }
                     onClick={() => handleTabClick('트랙별 소통 채널', '디자인')}
@@ -116,7 +121,7 @@ const SideBar: React.FC<SideBarProps> = ({
                 </Tab>
                 <Tab
                     $isSelected={
-                        mainCategory === '트랙별 소통 채널' && 
+                        mainCategory === '트랙별 소통 채널' &&
                         subCategory === '기타'
                     }
                     onClick={() => handleTabClick('트랙별 소통 채널', '기타')}
