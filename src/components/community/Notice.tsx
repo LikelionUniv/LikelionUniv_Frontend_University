@@ -20,7 +20,7 @@ interface NoticeProps {
 }
 
 const contentSubtitles: Record<string, string> = {
-    공지사항: '멋대 중앙에서 공지 사항을 전달해 드려요.',
+    공지사항: `멋쟁이사자처럼에서 공지 사항을 전달해 드려요.\n문의는 univ_admin@likelion.net 로 해주세요.`,
     정보공유: '서로에게 공유하고 싶은 양질의 정보를 올려주세요.',
     '프로젝트 팀원 모집': '프로젝트에 필요한 팀원을 모집하세요.',
     '프로젝트 자랑': '진행 중이거나 완료한 여러분의 프로젝트를 소개해 주세요.',
@@ -225,6 +225,7 @@ const SubTitle = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 150%;
+    
 
     @media screen and (max-width: 767px) {
         display: none;

@@ -87,9 +87,9 @@ const Tab: React.FC<TabProps> = ({
                         </T.SubBoardItem>
                         <T.SubBoardItem
                             onClick={() => SubBoardClick('백엔드')}
-                            isSelected={selectedSubBoard === '백'}
+                            isSelected={selectedSubBoard === '백엔드'}
                         >
-                            백
+                            백엔드
                         </T.SubBoardItem>
                         <T.SubBoardItem
                             onClick={() => SubBoardClick('기획')}

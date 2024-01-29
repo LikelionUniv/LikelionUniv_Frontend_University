@@ -78,6 +78,22 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(error);
         }
 
+        //커뮤니티 API에 GUEST가 접근할때 메인페이지로 이동
+        /*
+        if (axiosError?.code === '') {
+            alert(axiosError.message);
+            window.location.href = '/';
+            return Promise.reject(error);
+        }
+
+        //커뮤니티 API에 로그인하지 않은 유저가 접근 시 로그인 페이지로 이동
+        if (axiosError?.code === '') {
+            alert(axiosError.message);
+            window.location.href = '/login';
+            return Promise.reject(error);
+        }
+        */
+
         alert(axiosError?.message);
         return Promise.reject(error);
     },

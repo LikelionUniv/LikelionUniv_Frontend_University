@@ -1,14 +1,40 @@
+import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from '../styles/GlobalStyle';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityPage = () => {
+    const { userinfo, isLoading } = useAuth();
+    const navigate = useNavigate();
+
+    //커뮤니티 접근할 때 로그인 안 한 유저 로그인으로 보내기
+    //GUEST는 메인페이지로 보내기
+    useEffect(() => {
+
+        if (isLoading) {
+            return; 
+        }
+
+        if (!userinfo?.isLogin) {
+            navigate('/login');
+        }else if (userinfo?.role === "GUEST"){
+            alert("커뮤니티 이용 권한이 없는 회원입니다.");
+            navigate('/');
+        }
+    }, [userinfo, navigate, isLoading]);
+
+    if (!userinfo?.isLogin || userinfo?.role === "GUEST") {
+        return null;
+    }
+
     return (
         <>
             <GlobalStyles />
-            <Container>
-                <Outlet />
-            </Container>
+                <Container>
+                    <Outlet />
+                </Container>
         </>
     );
 };

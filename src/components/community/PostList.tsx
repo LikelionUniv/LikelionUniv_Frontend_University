@@ -43,11 +43,12 @@ const PostList: React.FC<PostListProps> = ({
 
     const { curPageItem: posts, renderPaginationBtn } =
         useServerSidePagination<PostBoxProp>(paginationParams);
+      
 
     return (
         <Wrapper>
             <>
-                {Array.isArray(posts) &&
+                {Array.isArray(posts) && 
                     posts.map(e => (
                         <PostBox
                             title={e.title}
@@ -64,7 +65,8 @@ const PostList: React.FC<PostListProps> = ({
                             mainCategory={e.mainCategory}
                             isSearching={isSearching}
                         />
-                    ))}
+                    ))
+                }
             </>
             <PageWrapper>
                 <PaginationWrapper>{renderPaginationBtn()}</PaginationWrapper>

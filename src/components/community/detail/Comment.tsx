@@ -55,7 +55,7 @@ const Comment: React.FC<CommentProps> = ({
             postId: id,
         };
 
-        const response = await request<
+        await request<
             CommentRegisterType,
             CommentId,
             CommentParams
@@ -65,19 +65,17 @@ const Comment: React.FC<CommentProps> = ({
             data: commentData,
             params: commentParams,
         });
-        console.log(response.data);
         onCommentUpdate();
         setInputValue('');
     };
 
     //대댓글 생성
     const childCommentSubmit = async () => {
-        const response = await request<CommentRegisterType, CommentId, null>({
+        await request<CommentRegisterType, CommentId, null>({
             uri: `/api/v1/community/comments/${id}/child`,
             method: 'post',
             data: commentData,
         });
-        console.log(response);
         window.location.reload();
     };
 
