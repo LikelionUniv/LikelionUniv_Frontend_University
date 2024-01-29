@@ -5,7 +5,7 @@ export const Container = styled.div`
     width: 100%;
     margin: 0 auto;
     display: flex;
-    justify-content: center;
+    //justify-content: center;
     margin-top: 136px;
     font-family: Pretendard;
     flex-direction: column;
@@ -14,6 +14,9 @@ export const Container = styled.div`
     @media screen and (max-width: 767px) {
         padding: 0;
         margin-top: 44px;
+        margin-bottom: 0;
+        height: 100%;
+
     }
 
     .btns {

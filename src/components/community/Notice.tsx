@@ -20,17 +20,15 @@ interface NoticeProps {
 }
 
 const contentSubtitles: Record<string, string> = {
-    공지사항: '멋대 중앙의 공지사항을 확인할 수 있어요.',
-    질문건의: '미정.',
-    정보공유: '미정.',
-    팀원모집: '미정.',
-    플젝모집: '미정.',
-    플젝자랑: '미정.',
-    프론트: '미정.',
-    백: '미정.',
-    기획: '미정.',
-    디자인: '미정.',
-    기타: '미정.',
+    공지사항: '멋대 중앙에서 공지 사항을 전달해 드려요.',
+    정보공유: '서로에게 공유하고 싶은 양질의 정보를 올려주세요.',
+    '프로젝트 팀원 모집': '프로젝트에 필요한 팀원을 모집하세요.',
+    '프로젝트 자랑': '진행 중이거나 완료한 여러분의 프로젝트를 소개해 주세요.',
+    프론트엔드: '프론트엔드 관련한 정보를 공유하거나 궁금한 점을 나눠보세요.',
+    백엔드: '백엔드 관련한 정보를 공유하거나 궁금한 점을 나눠보세요. ',
+    기획: '기획 관련한 정보를 공유하거나 궁금한 점을 나눠보세요. ',
+    디자인: '디자인 관련한 정보를 공유하거나 궁금한 점을 나눠보세요. ',
+    기타: '이외 직무와 관련한 정보를 공유하거나 궁금한 점을 나눠보세요. ',
 };
 
 const Notice: React.FC<NoticeProps> = ({
@@ -151,13 +149,12 @@ const Notice: React.FC<NoticeProps> = ({
             <Divider />
             <Header isSearching={isSearching}>
                 <OrderDropDown onOrderChange={handleOrderChange} />
-                <Button
-                    onClick={() => navigate('/community/write')}
-                    isSearching={isSearching}
-                >
-                    <img src={WriteIcon} alt="펜" />
-                    글쓰기
-                </Button>
+                {content !== '공지사항' && (
+                    <Button onClick={() => navigate('/community/write')} isSearching={isSearching}>
+                        <img src={WriteIcon} alt="펜" />
+                        글쓰기
+                    </Button>
+                )}
             </Header>
             {searchQuery ? (
                 <Suspense fallback={<div></div>}>
