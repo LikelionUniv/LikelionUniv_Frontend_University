@@ -40,7 +40,7 @@ const Tab: React.FC<TabProps> = ({
 
     const SubBoard = () => {
         switch (selectedBoard) {
-            case '멋대 중앙':
+            case '멋쟁이사자처럼':
                 return (
                     <div className="subBoard">
                         <T.SubBoardItem
@@ -48,18 +48,6 @@ const Tab: React.FC<TabProps> = ({
                             isSelected={selectedSubBoard === '공지사항'}
                         >
                             공지사항
-                        </T.SubBoardItem>
-                        <T.SubBoardItem
-                            onClick={() => SubBoardClick('질문건의')}
-                            isSelected={selectedSubBoard === '질문건의'}
-                        >
-                            질문건의
-                        </T.SubBoardItem>
-                        <T.SubBoardItem
-                            onClick={() => SubBoardClick('정보공유')}
-                            isSelected={selectedSubBoard === '정보공유'}
-                        >
-                            정보공유
                         </T.SubBoardItem>
                     </div>
                 );
@@ -73,36 +61,30 @@ const Tab: React.FC<TabProps> = ({
                             정보공유
                         </T.SubBoardItem>
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('팀원모집')}
-                            isSelected={selectedSubBoard === '팀원모집'}
+                            onClick={() => SubBoardClick('프로젝트 팀원 모집')}
+                            isSelected={selectedSubBoard === '프로젝트 팀원 모집'}
                         >
-                            팀원모집
+                            프로젝트 팀원 모집
                         </T.SubBoardItem>
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('플젝모집')}
-                            isSelected={selectedSubBoard === '플젝모집'}
+                            onClick={() => SubBoardClick('프로젝트 자랑')}
+                            isSelected={selectedSubBoard === '프로젝트 자랑'}
                         >
-                            플젝모집
-                        </T.SubBoardItem>
-                        <T.SubBoardItem
-                            onClick={() => SubBoardClick('플젝자랑')}
-                            isSelected={selectedSubBoard === '플젝자랑'}
-                        >
-                            플젝자랑
+                            프로젝트 자랑
                         </T.SubBoardItem>
                     </div>
                 );
-            case '멋사 오버플로우':
+            case '트랙별 소통 채널':
                 return (
                     <div className="subBoard">
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('프론트')}
-                            isSelected={selectedSubBoard === '프론트'}
+                            onClick={() => SubBoardClick('프론트엔드')}
+                            isSelected={selectedSubBoard === '프론트엔드'}
                         >
-                            프론트
+                            프론트엔드
                         </T.SubBoardItem>
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('백')}
+                            onClick={() => SubBoardClick('백엔드')}
                             isSelected={selectedSubBoard === '백'}
                         >
                             백
@@ -139,10 +121,10 @@ const Tab: React.FC<TabProps> = ({
                     <div className="board">
                         <div className="boards">
                             <T.BoardItem
-                                onClick={() => BoardClick('멋대 중앙')}
-                                isSelected={selectedBoard === '멋대 중앙'}
+                                onClick={() => BoardClick('멋쟁이사자처럼')}
+                                isSelected={selectedBoard === '멋쟁이사자처럼'}
                             >
-                                멋대 중앙
+                                멋쟁이사자처럼
                             </T.BoardItem>
                             <T.BoardItem
                                 onClick={() => BoardClick('자유게시판')}
@@ -151,10 +133,10 @@ const Tab: React.FC<TabProps> = ({
                                 자유게시판
                             </T.BoardItem>
                             <T.BoardItem
-                                onClick={() => BoardClick('멋사 오버플로우')}
-                                isSelected={selectedBoard === '멋사 오버플로우'}
+                                onClick={() => BoardClick('트랙별 소통 채널')}
+                                isSelected={selectedBoard === '트랙별 소통 채널'}
                             >
-                                멋사 오버플로우
+                                트랙별 소통 채널
                             </T.BoardItem>
                         </div>
                         <SearchImg onClick={SearchClick} />

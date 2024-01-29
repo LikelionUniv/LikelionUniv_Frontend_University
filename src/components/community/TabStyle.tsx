@@ -17,13 +17,13 @@ export const Tab = styled.div`
 
     .board {
         display: flex;
-        padding: 9px 20px;
+        padding: 9px 12px;
         justify-content: space-between;
     }
 
     .boards {
         display: flex;
-        gap: 24px;
+        gap: 16px;
     }
 
     .subBoard {

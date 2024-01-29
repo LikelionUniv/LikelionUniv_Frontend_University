@@ -66,44 +66,18 @@ const CategoryModal: React.FC<ModalProp> = ({
                                 }
                             />
                         </p>
-                        <Divider />
-                        <span>멋대 중앙</span>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋대 중앙', '공지사항')
+                        <Divider/>
+                        <span>멋쟁이사자처럼</span>
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('멋쟁이사자처럼', '공지사항')
                             }
                         >
                             공지사항
-                            <Choose
+                            <Choose 
                                 selected={
-                                    selectedMainCategory === '멋대 중앙' &&
+                                    selectedMainCategory === '멋쟁이사자처럼' && 
                                     selectedSubCategory === '공지사항'
-                                }
-                            />
-                        </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋대 중앙', '질문건의')
-                            }
-                        >
-                            질문건의
-                            <Choose
-                                selected={
-                                    selectedMainCategory === '멋대 중앙' &&
-                                    selectedSubCategory === '질문건의'
-                                }
-                            />
-                        </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋대 중앙', '정보공유')
-                            }
-                        >
-                            정보공유
-                            <Choose
-                                selected={
-                                    selectedMainCategory === '멋대 중앙' &&
-                                    selectedSubCategory === '정보공유'
                                 }
                             />
                         </p>
@@ -122,119 +96,95 @@ const CategoryModal: React.FC<ModalProp> = ({
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('자유게시판', '팀원모집')
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('자유게시판', '프로젝트 팀원 모집')
                             }
                         >
-                            팀원모집
-                            <Choose
+                            프로젝트 팀원 모집
+                            <Choose 
                                 selected={
-                                    selectedMainCategory === '자유게시판' &&
-                                    selectedSubCategory === '팀원모집'
+                                    selectedMainCategory === '자유게시판' && 
+                                    selectedSubCategory === '프로젝트 팀원 모집'
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('자유게시판', '플젝모집')
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('자유게시판', '프로젝트 자랑')
                             }
                         >
-                            플젝모집
-                            <Choose
+                            프로젝트 자랑
+                            <Choose 
                                 selected={
-                                    selectedMainCategory === '자유게시판' &&
-                                    selectedSubCategory === '플젝모집'
+                                    selectedMainCategory === '자유게시판' && 
+                                    selectedSubCategory === '프로젝트 자랑'
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('자유게시판', '플젝자랑')
+                        <Divider/>
+                        <span>트랙별 소통 채널</span>
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('트랙별 소통 채널', '프론트엔드')
                             }
                         >
-                            플젝자랑
-                            <Choose
+                            프론트엔드
+                            <Choose 
                                 selected={
-                                    selectedMainCategory === '자유게시판' &&
-                                    selectedSubCategory === '플젝자랑'
+                                    selectedMainCategory === '트랙별 소통 채널' && 
+                                    selectedSubCategory === '프론트엔드'
                                 }
                             />
                         </p>
-                        <Divider />
-                        <span>멋사 오버플로우</span>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect(
-                                    '멋사 오버플로우',
-                                    '프론트',
-                                )
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('트랙별 소통 채널', '백엔드')
                             }
                         >
-                            프론트
-                            <Choose
+                            백엔드
+                            <Choose 
                                 selected={
-                                    selectedMainCategory ===
-                                        '멋사 오버플로우' &&
-                                    selectedSubCategory === '프론트'
+                                    selectedMainCategory === '트랙별 소통 채널' && 
+                                    selectedSubCategory === '백엔드'
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋사 오버플로우', '백')
-                            }
-                        >
-                            백
-                            <Choose
-                                selected={
-                                    selectedMainCategory ===
-                                        '멋사 오버플로우' &&
-                                    selectedSubCategory === '백'
-                                }
-                            />
-                        </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋사 오버플로우', '기획')
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('트랙별 소통 채널', '기획')
                             }
                         >
                             기획
-                            <Choose
+                            <Choose 
                                 selected={
-                                    selectedMainCategory ===
-                                        '멋사 오버플로우' &&
+                                    selectedMainCategory === '트랙별 소통 채널' && 
                                     selectedSubCategory === '기획'
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect(
-                                    '멋사 오버플로우',
-                                    '디자인',
-                                )
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('트랙별 소통 채널', '디자인')
                             }
                         >
                             디자인
-                            <Choose
+                            <Choose 
                                 selected={
-                                    selectedMainCategory ===
-                                        '멋사 오버플로우' &&
+                                    selectedMainCategory === '트랙별 소통 채널' && 
                                     selectedSubCategory === '디자인'
                                 }
                             />
                         </p>
-                        <p
-                            onClick={() =>
-                                handleCategorySelect('멋사 오버플로우', '기타')
+                        <p 
+                            onClick={() => 
+                                handleCategorySelect('트랙별 소통 채널', '기타')
                             }
                         >
                             기타
-                            <Choose
+                            <Choose 
                                 selected={
-                                    selectedMainCategory ===
-                                        '멋사 오버플로우' &&
+                                    selectedMainCategory === '트랙별 소통 채널' && 
                                     selectedSubCategory === '기타'
                                 }
                             />

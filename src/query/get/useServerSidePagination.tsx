@@ -122,6 +122,10 @@ function useServerSidePagination<T>({
         setTotalElements(cachingData.totalElements);
     }, [cachingData]);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [sc, oc]);
+
     const setPage = (page: number): void => {
         setCurrentPageInfo(page);
         setCurrentPage(page);

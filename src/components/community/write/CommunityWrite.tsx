@@ -7,6 +7,7 @@ import request from '../../../utils/request';
 import { axiosInstance } from '../../../utils/axios';
 import ImageUpload from '../../utils/ImageUpload';
 import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
+import useIsAdmin from '../../../hooks/useIsAdmin';
 
 interface CommunityRegisterType {
     title: string;
@@ -21,6 +22,7 @@ interface PostId {
 }
 
 const CommunityWrite = () => {
+    const isAdmin = useIsAdmin();
     const navigate = useNavigate();
     const location = useLocation();
     const info = { ...location.state };
@@ -205,7 +207,7 @@ const CommunityWrite = () => {
 
     const SubBoard = () => {
         switch (selectedBoard) {
-            case '멋대 중앙':
+            case '멋쟁이사자처럼':
                 return (
                     <div className="subBoard">
                         <W.SubBoardItem
@@ -213,18 +215,6 @@ const CommunityWrite = () => {
                             isSelected={selectedSubBoard === '공지사항'}
                         >
                             공지사항
-                        </W.SubBoardItem>
-                        <W.SubBoardItem
-                            onClick={() => SubBoardClick('질문건의')}
-                            isSelected={selectedSubBoard === '질문건의'}
-                        >
-                            질문건의
-                        </W.SubBoardItem>
-                        <W.SubBoardItem
-                            onClick={() => SubBoardClick('정보공유')}
-                            isSelected={selectedSubBoard === '정보공유'}
-                        >
-                            정보공유
                         </W.SubBoardItem>
                     </div>
                 );
@@ -238,39 +228,33 @@ const CommunityWrite = () => {
                             정보공유
                         </W.SubBoardItem>
                         <W.SubBoardItem
-                            onClick={() => SubBoardClick('팀원모집')}
-                            isSelected={selectedSubBoard === '팀원모집'}
+                            onClick={() => SubBoardClick('프로젝트 팀원 모집')}
+                            isSelected={selectedSubBoard === '프로젝트 팀원 모집'}
                         >
-                            팀원모집
+                            프로젝트 팀원 모집
                         </W.SubBoardItem>
                         <W.SubBoardItem
-                            onClick={() => SubBoardClick('플젝모집')}
-                            isSelected={selectedSubBoard === '플젝모집'}
+                            onClick={() => SubBoardClick('프로젝트 자랑')}
+                            isSelected={selectedSubBoard === '프로젝트 자랑'}
                         >
-                            플젝모집
-                        </W.SubBoardItem>
-                        <W.SubBoardItem
-                            onClick={() => SubBoardClick('플젝자랑')}
-                            isSelected={selectedSubBoard === '플젝자랑'}
-                        >
-                            플젝자랑
+                            프로젝트 자랑
                         </W.SubBoardItem>
                     </div>
                 );
-            case '멋사 오버플로우':
+            case '트랙별 소통 채널':
                 return (
                     <div className="subBoard">
                         <W.SubBoardItem
-                            onClick={() => SubBoardClick('프론트')}
-                            isSelected={selectedSubBoard === '프론트'}
+                            onClick={() => SubBoardClick('프론트엔드')}
+                            isSelected={selectedSubBoard === '프론트엔드'}
                         >
-                            프론트
+                            프론트엔드
                         </W.SubBoardItem>
                         <W.SubBoardItem
-                            onClick={() => SubBoardClick('백')}
-                            isSelected={selectedSubBoard === '백'}
+                            onClick={() => SubBoardClick('백엔드')}
+                            isSelected={selectedSubBoard === '백엔드'}
                         >
-                            백
+                            백엔드
                         </W.SubBoardItem>
                         <W.SubBoardItem
                             onClick={() => SubBoardClick('기획')}
@@ -298,64 +282,64 @@ const CommunityWrite = () => {
     };
 
     return (
-        <div
-            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
-        >
-            <Back>
-                <ArrowIcon
-                    onClick={() => {
-                        navigate(-1);
-                    }}
-                />
-                <W.Reg
+        <div style={{ display: 'flex', flexDirection: 'column', width: '100%'}}>
+        <Back>
+            <ArrowIcon 
+                onClick={() => {
+                    navigate(-1)
+                }}
+            />
+            <W.Reg
+                isActive={isSubmitEnabled()}
+                onClick={isSubmitEnabled() ? submit : undefined} 
+            >
+                등록
+            </W.Reg>
+        </Back>
+        <W.Container>
+            <W.Title>커뮤니티 글쓰기</W.Title>
+            <W.Tab>
+                <p className="sub">게시판 선택</p>
+                <div className="board">
+                    {!isAdmin && (
+                    <W.BoardItem
+                        onClick={() => BoardClick('멋쟁이사자처럼')}
+                        isSelected={selectedBoard === '멋쟁이사자처럼'}
+                    >
+                        멋쟁이사자처럼
+                    </W.BoardItem>
+                    )}
+                    <W.BoardItem
+                        onClick={() => BoardClick('자유게시판')}
+                        isSelected={selectedBoard === '자유게시판'}
+                    >
+                        자유게시판
+                    </W.BoardItem>
+                    <W.BoardItem
+                        onClick={() => BoardClick('트랙별 소통 채널')}
+                        isSelected={selectedBoard === '트랙별 소통 채널'}
+                    >
+                        트랙별 소통 채널
+                    </W.BoardItem>
+                </div>
+                {SubBoard()}
+            </W.Tab>
+            <Editor 
+                contents={editorContent} 
+                title={editorTitle} 
+                onTitleChange={handleTitleChange}
+                onContentChange={handleContentChange}
+            />
+            <div className='btns'>
+                <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
+                <W.RegBtn
                     isActive={isSubmitEnabled()}
                     onClick={isSubmitEnabled() ? submit : undefined}
                 >
-                    등록
-                </W.Reg>
-            </Back>
-            <W.Container>
-                <W.Title>커뮤니티 글쓰기</W.Title>
-                <W.Tab>
-                    <p className="sub">게시판 선택</p>
-                    <div className="board">
-                        <W.BoardItem
-                            onClick={() => BoardClick('멋대 중앙')}
-                            isSelected={selectedBoard === '멋대 중앙'}
-                        >
-                            멋대 중앙
-                        </W.BoardItem>
-                        <W.BoardItem
-                            onClick={() => BoardClick('자유게시판')}
-                            isSelected={selectedBoard === '자유게시판'}
-                        >
-                            자유게시판
-                        </W.BoardItem>
-                        <W.BoardItem
-                            onClick={() => BoardClick('멋사 오버플로우')}
-                            isSelected={selectedBoard === '멋사 오버플로우'}
-                        >
-                            멋사 오버플로우
-                        </W.BoardItem>
-                    </div>
-                    {SubBoard()}
-                </W.Tab>
-                <Editor
-                    contents={editorContent}
-                    title={editorTitle}
-                    onTitleChange={handleTitleChange}
-                    onContentChange={handleContentChange}
-                />
-                <div className="btns">
-                    <W.CancelBtn onClick={goMain}>취소하기</W.CancelBtn>
-                    <W.RegBtn
-                        isActive={isSubmitEnabled()}
-                        onClick={isSubmitEnabled() ? submit : undefined}
-                    >
-                        등록하기
-                    </W.RegBtn>
-                </div>
-            </W.Container>
+                    등록하기
+                </W.RegBtn>
+            </div>
+        </W.Container>
         </div>
     );
 };
