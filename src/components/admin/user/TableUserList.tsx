@@ -7,19 +7,18 @@ import ModifyUser from './ModifyUser';
 import { useOutletContext } from 'react-router-dom';
 import OutletContext from '../OutletContext';
 
-interface TableUserListProps {
-    users: User[];
+export interface TableUserListProps {
     id: number;
-}
-
-export interface UserType {
     name: string;
+    email: string;
     major: string;
     part: string;
     ordinal: number;
+    role: string;
+    univName?: string;
 }
 
-function TableUserList({ users, id }: TableUserListProps) {
+const TableUserList: React.FC<TableUserListProps> = props => {
     const {
         selectedUserIds,
         setSelectedUserIds,
@@ -31,9 +30,6 @@ function TableUserList({ users, id }: TableUserListProps) {
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
     const [editingUser, setEditingUser] = useState<User | null>(null);
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-    const selectedEmails = users
-        .filter(user => selectedUserIds.includes(user.id))
-        .map(user => user.email);
 
     const handleCheckboxChange = (
         userId: number,
@@ -50,9 +46,18 @@ function TableUserList({ users, id }: TableUserListProps) {
         );
     };
 
-    const handleEdit = (user: User) => {
-        setEditingUserId(user.id);
-        setEditingUser(user);
+    const handleEdit = () => {
+        setEditingUserId(props.id);
+        setEditingUser({
+            id: props.id,
+            name: props.name,
+            email: props.email,
+            major: props.major,
+            part: props.part,
+            ordinal: props.ordinal,
+            role: props.role,
+            univName: props.univName,
+        });
     };
 
     const USER_ROLE: { [key: string]: string } = {
@@ -65,56 +70,52 @@ function TableUserList({ users, id }: TableUserListProps) {
 
     useEffect(() => {
         if (selectAll) {
-            // 전체 선택이 활성화된 경우 모든 사용자의 ID와 이메일을 선택 상태에 추가
-            setSelectedUserIds(users.map(user => user.id));
-            setSelectedUserEmails(users.map(user => user.email));
+            setSelectedUserIds(prev => [...prev, props.id]);
+            setSelectedUserEmails(prev => [...prev, props.email]);
         } else {
-            // 전체 선택이 비활성화된 경우 선택 상태를 비움
-            setSelectedUserIds([]);
-            setSelectedUserEmails([]);
+            setSelectedUserIds(prev => prev.filter(id => id !== props.id));
+            setSelectedUserEmails(prev =>
+                prev.filter(email => email !== props.email),
+            );
         }
-    }, [selectAll, users, setSelectedUserIds, setSelectedUserEmails]);
+    }, [selectAll, props.id, props.email]);
 
     return (
         <>
             <Wrapper>
                 <BodyTable>
-                    {users.map(user => (
-                        <TableBody key={user.id}>
-                            <Table className="check">
-                                <input
-                                    type="checkbox"
-                                    checked={selectedUserIds.includes(user.id)}
-                                    onChange={e =>
-                                        handleCheckboxChange(
-                                            user.id,
-                                            user.email,
-                                            e.target.checked,
-                                        )
-                                    }
-                                />
-                            </Table>
-                            <Table className="name">{user.name}</Table>
-                            {isAdmin && (
-                                <Table className="univ">{user.univName}</Table>
-                            )}
-                            <Table className="major">{user.major}</Table>
-                            <Table className="ordinal">{user.ordinal}기</Table>
-                            <Table className="part">{user.part}</Table>
-                            <Table className="role">
-                                {USER_ROLE[user.role] || user.role}
-                            </Table>
-                            <Table className="email">{user.email}</Table>
-                            <Table className="edit">
-                                <button onClick={() => handleEdit(user)}>
-                                    수정
-                                </button>
-                            </Table>
-                            <Table>
-                                <DeleteUser id={user.id} userName={user.name} />
-                            </Table>
-                        </TableBody>
-                    ))}
+                    <TableBody key={props.id}>
+                        <Table className="check">
+                            <input
+                                type="checkbox"
+                                checked={selectedUserIds.includes(props.id)}
+                                onChange={e =>
+                                    handleCheckboxChange(
+                                        props.id,
+                                        props.email,
+                                        e.target.checked,
+                                    )
+                                }
+                            />
+                        </Table>
+                        <Table className="name">{props.name}</Table>
+                        {isAdmin && (
+                            <Table className="univ">{props.univName}</Table>
+                        )}
+                        <Table className="major">{props.major}</Table>
+                        <Table className="ordinal">{props.ordinal}기</Table>
+                        <Table className="part">{props.part}</Table>
+                        <Table className="role">
+                            {USER_ROLE[props.role] || props.role}
+                        </Table>
+                        <Table className="email">{props.email}</Table>
+                        <Table className="edit">
+                            <button onClick={() => handleEdit}>수정</button>
+                        </Table>
+                        <Table>
+                            <DeleteUser id={props.id} userName={props.name} />
+                        </Table>
+                    </TableBody>
                 </BodyTable>
             </Wrapper>
             {editingUserId && editingUser && (
@@ -129,7 +130,7 @@ function TableUserList({ users, id }: TableUserListProps) {
             )}
         </>
     );
-}
+};
 
 export default TableUserList;
 

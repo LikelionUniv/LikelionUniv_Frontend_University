@@ -14,7 +14,10 @@ interface UserListProps {
     univName?: string;
 }
 
-function HeadUserList({ order, searchQuery }: UserListProps, { id }: User) {
+const HeadUserList: React.FC<UserListProps> = ({
+    order,
+    searchQuery,
+}: UserListProps) => {
     const { curPageItem: users, renderPaginationBtn } =
         useServerSidePagination<User>({
             uri: '/api/admin/v1/headquaters/users',
@@ -28,14 +31,27 @@ function HeadUserList({ order, searchQuery }: UserListProps, { id }: User) {
             <SelectedUsersProvider>
                 <Wrapper>
                     <TableHead />
-                    <TableUserList users={users} id={id} />
+                    {Array.isArray(users) &&
+                        users.map(user => (
+                            <TableUserList
+                                key={user.id}
+                                id={user.id}
+                                name={user.name}
+                                email={user.email}
+                                major={user.major}
+                                part={user.part}
+                                ordinal={user.ordinal}
+                                role={user.role}
+                                univName={user.univName}
+                            />
+                        ))}
                     {renderPaginationBtn()}
                     <TableBottom />
                 </Wrapper>
             </SelectedUsersProvider>
         </>
     );
-}
+};
 
 export default HeadUserList;
 

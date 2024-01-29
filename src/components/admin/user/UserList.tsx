@@ -12,7 +12,7 @@ interface UserListProps {
     searchQuery?: string;
 }
 
-function UserList({ order, searchQuery }: UserListProps, { id }: User) {
+function UserList({ order, searchQuery }: UserListProps) {
     const { curPageItem: users, renderPaginationBtn } =
         useServerSidePagination<User>({
             uri: '/api/admin/v1/univAdmin/univ/users',
@@ -26,7 +26,19 @@ function UserList({ order, searchQuery }: UserListProps, { id }: User) {
             <SelectedUsersProvider>
                 <Wrapper>
                     <TableHead />
-                    <TableUserList users={users} id={id} />
+                    {Array.isArray(users) &&
+                        users.map(e => (
+                            <TableUserList
+                                id={e.id}
+                                name={e.name}
+                                email={e.email}
+                                major={e.major}
+                                part={e.part}
+                                ordinal={e.ordinal}
+                                role={e.role}
+                                univName={e.univName}
+                            />
+                        ))}
                     {renderPaginationBtn()}
                     <TableBottom />
                 </Wrapper>
