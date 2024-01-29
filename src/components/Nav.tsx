@@ -323,7 +323,7 @@ export default Nav;
 const Wrapper = styled.div`
     position: fixed;
     top: 0;
-    z-index: 998;
+    z-index: 1000;
     width: 100%;
     height: 55px;
     border-bottom: 1px solid var(--grey-300, #eaecee);
