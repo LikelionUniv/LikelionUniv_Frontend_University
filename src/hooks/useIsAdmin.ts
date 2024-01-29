@@ -11,10 +11,12 @@ interface Userinfo {
 
 interface RuseIsAdmin {
     isAdmin: boolean;
+    isUniversityAdmin: boolean;
 }
 
 function useIsAdmin(): RuseIsAdmin {
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [isUniversityAdmin, setIsUniversityAdmin] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchUserRole = async () => {
@@ -29,15 +31,21 @@ function useIsAdmin(): RuseIsAdmin {
                         role => role === response.data.role,
                     ) >= 2,
                 );
+                setIsUniversityAdmin(
+                    RolePriority.findIndex(
+                        role => role === response.data.role,
+                    ) >= 3,
+                );
             } catch (error) {
                 setIsAdmin(false);
+                setIsUniversityAdmin(false);
             }
         };
 
         fetchUserRole();
     }, []);
 
-    return { isAdmin };
+    return { isAdmin, isUniversityAdmin };
 }
 
 export default useIsAdmin;
