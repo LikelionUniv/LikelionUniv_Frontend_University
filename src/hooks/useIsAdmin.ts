@@ -12,11 +12,13 @@ interface Userinfo {
 interface RuseIsAdmin {
     isAdmin: boolean;
     isUniversityAdmin: boolean;
+    isSuperAdmin: boolean;
 }
 
 function useIsAdmin(): RuseIsAdmin {
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [isUniversityAdmin, setIsUniversityAdmin] = useState<boolean>(false);
+    const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchUserRole = async () => {
@@ -36,16 +38,22 @@ function useIsAdmin(): RuseIsAdmin {
                         role => role === response.data.role,
                     ) >= 3,
                 );
+                setIsSuperAdmin(
+                    RolePriority.findIndex(
+                        role => role === response.data.role,
+                    ) >= 4,
+                );
             } catch (error) {
                 setIsAdmin(false);
                 setIsUniversityAdmin(false);
+                setIsSuperAdmin(false);
             }
         };
 
         fetchUserRole();
     }, []);
 
-    return { isAdmin, isUniversityAdmin };
+    return { isAdmin, isUniversityAdmin, isSuperAdmin };
 }
 
 export default useIsAdmin;
