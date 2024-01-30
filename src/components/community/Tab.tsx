@@ -44,10 +44,10 @@ const Tab: React.FC<TabProps> = ({
                 return (
                     <div className="subBoard">
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('공지사항')}
-                            isSelected={selectedSubBoard === '공지사항'}
+                            onClick={() => SubBoardClick('공지 사항')}
+                            isSelected={selectedSubBoard === '공지 사항'}
                         >
-                            공지사항
+                            공지 사항
                         </T.SubBoardItem>
                     </div>
                 );
