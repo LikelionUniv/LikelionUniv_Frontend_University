@@ -6,7 +6,7 @@ import { userState } from '../store/user';
 import { useSetRecoilState } from 'recoil';
 import { useEffect } from 'react';
 
-type User = {
+export type User = {
     name: string;
     profileImage: string;
     userId: number;

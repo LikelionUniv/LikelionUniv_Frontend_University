@@ -149,35 +149,27 @@ const Nav = () => {
 
                     <div className="right">
                         {userinfo?.isLogin ? (
-                            <>
-                                <ChatBtn to="/chat">
-                                    <img src={chat} alt="chat" />
-                                </ChatBtn>
-                                <ProfileBtn
-                                    ref={buttonRef}
-                                    onClick={() => setProfileModal(pre => !pre)}
+                            <ProfileBtn
+                                ref={buttonRef}
+                                onClick={() => setProfileModal(pre => !pre)}
+                                style={{
+                                    backgroundColor: profileModal
+                                        ? 'var(--grey-300, #eaecee)'
+                                        : '',
+                                }}
+                            >
+                                <div className="profile-img">
+                                    <img src={defaultprofile} alt="profile" />
+                                </div>
+                                <Arrow
                                     style={{
-                                        backgroundColor: profileModal
-                                            ? 'var(--grey-300, #eaecee)'
-                                            : '',
+                                        transform: profileModal
+                                            ? 'rotate(0deg)'
+                                            : 'rotate(180deg)',
+                                        stroke: '#868C94',
                                     }}
-                                >
-                                    <div className="profile-img">
-                                        <img
-                                            src={defaultprofile}
-                                            alt="profile"
-                                        />
-                                    </div>
-                                    <Arrow
-                                        style={{
-                                            transform: profileModal
-                                                ? 'rotate(0deg)'
-                                                : 'rotate(180deg)',
-                                            stroke: '#868C94',
-                                        }}
-                                    />
-                                </ProfileBtn>
-                            </>
+                                />
+                            </ProfileBtn>
                         ) : (
                             <LoginBtn onClick={() => navigate('/login')}>
                                 로그인
@@ -217,9 +209,6 @@ const Nav = () => {
                             <MTop>
                                 {userinfo?.isLogin ? (
                                     <MOnLogin>
-                                        <ChatBtn to="/chat">
-                                            <img src={chat} alt="chat" />
-                                        </ChatBtn>
                                         <ProfileBtn
                                             ref={buttonRef}
                                             onClick={() =>
@@ -331,7 +320,7 @@ export default Nav;
 const Wrapper = styled.div`
     position: fixed;
     top: 0;
-    z-index: 998;
+    z-index: 1000;
     width: 100%;
     height: 55px;
     border-bottom: 1px solid var(--grey-300, #eaecee);

@@ -43,9 +43,21 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        // 인가되지 않은 사용자인 경우 로그인으로 돌려버림
-        if (axiosError?.code === 'SECURITY_401') {
-            // window.location.replace('/login');
+        // 인가되지 않은 사용자인 경우 로그인으로 돌려버림 (프로젝트가 아닌 경우)
+        if (
+            axiosError?.code === 'SECURITY_401' &&
+            window.location.pathname !== '/project'
+        ) {
+            alert('로그인 후 사용가능합니다.');
+            window.location.replace('/login');
+            return Promise.reject(error);
+        }
+
+        // 인가되지 않은 사용자인 경우 (프로젝트인 경우) 허용
+        if (
+            axiosError?.code === 'SECURITY_401' &&
+            window.location.pathname === '/project'
+        ) {
             return Promise.reject(error);
         }
 
@@ -75,6 +87,13 @@ axiosInstance.interceptors.response.use(
         if (axiosError?.code === 'USER_404') {
             alert(axiosError.message);
             window.history.back();
+            return Promise.reject(error);
+        }
+
+        //커뮤니티 API에 GUEST 혹은 로그인 안 한 유저가 접근할때 메인페이지로 이동
+        if (axiosError?.code === 'GLOBAL_403') {
+            alert(axiosError.message);
+            window.location.href = '/';
             return Promise.reject(error);
         }
 

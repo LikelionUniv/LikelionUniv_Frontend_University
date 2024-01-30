@@ -47,7 +47,11 @@ const Header: React.FC<HeaderProps> = ({
             <D.Title>{postData.title}</D.Title>
             <D.User>
                 <div className="left">
-                    <img src={profileImageUrl} alt="" className="image" />
+                    <img
+                        src={`https://${profileImageUrl}`}
+                        alt=""
+                        className="image"
+                    />
                     <div>
                         <div className="userBox">
                             <p className="name">{postData.authorName}</p>

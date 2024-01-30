@@ -7,7 +7,7 @@ import useIsPC from '../../hooks/useIsPC';
 const Community: React.FC = () => {
     const isPC = useIsPC();
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const [selectedMainCategory, setSelectedMainCategory] = 
+    const [selectedMainCategory, setSelectedMainCategory] =
         useState('멋쟁이사자처럼');
     const [selectedSubCategory, setSelectedSubCategory] = useState('공지사항');
 

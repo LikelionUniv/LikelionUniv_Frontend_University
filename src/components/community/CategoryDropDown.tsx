@@ -12,97 +12,97 @@ interface OptionType {
 }
 
 const orderOptions: OptionType[] = [
-    { 
-        value: 1, 
-        label: '전체 게시판', 
-        isDisabled: false, 
-        mainCategory: '전체 게시판', 
-        subCategory: '전체 게시판' 
-    },
-    { 
-        value: 2, 
-        label: '멋쟁이사자처럼', 
-        isDisabled: true, 
-        mainCategory: '전체 게시판', 
-        subCategory: '전체 게시판'
-    },
-    { 
-        value: 3, 
-        label: '공지사항', 
-        isDisabled: false, 
-        mainCategory: '멋쟁이사자처럼', 
-        subCategory: '공지사항' 
-    },
-    { 
-        value: 4, 
-        label: '자유게시판', 
-        isDisabled: true, 
-        mainCategory: '전체', 
-        subCategory: '전체' 
-    },
-    { 
-        value: 5, 
-        label: '정보공유', 
-        isDisabled: false, 
-        mainCategory: '자유게시판', 
-        subCategory: '정보공유' 
-    },
-    { 
-        value: 6, 
-        label: '프로젝트 팀원 모집', 
+    {
+        value: 1,
+        label: '전체 게시판',
         isDisabled: false,
-        mainCategory: '자유게시판', 
-        subCategory: '프로젝트 팀원 모집' 
+        mainCategory: '전체 게시판',
+        subCategory: '전체 게시판',
     },
-    { 
-        value: 7, 
-        label: '프로젝트 자랑', 
-        isDisabled: false, 
-        mainCategory: '자유게시판', 
-        subCategory: '프로젝트 자랑' 
+    {
+        value: 2,
+        label: '멋쟁이사자처럼',
+        isDisabled: true,
+        mainCategory: '전체 게시판',
+        subCategory: '전체 게시판',
     },
-    { 
-        value: 8, 
-        label: '트랙별 소통 채널', 
-        isDisabled: true, 
-        mainCategory: '전체', 
-        subCategory: '전체' 
+    {
+        value: 3,
+        label: '공지사항',
+        isDisabled: false,
+        mainCategory: '멋쟁이사자처럼',
+        subCategory: '공지사항',
     },
-    { 
-        value: 9, 
-        label: '프론트엔드', 
-        isDisabled: false, 
-        mainCategory: '트랙별 소통 채널', 
-        subCategory: '프론트엔드' 
+    {
+        value: 4,
+        label: '자유게시판',
+        isDisabled: true,
+        mainCategory: '전체',
+        subCategory: '전체',
     },
-    { 
-        value: 10, 
-        label: '백엔드', 
-        isDisabled: false, 
-        mainCategory: '트랙별 소통 채널', 
-        subCategory: '백엔드' 
+    {
+        value: 5,
+        label: '정보공유',
+        isDisabled: false,
+        mainCategory: '자유게시판',
+        subCategory: '정보공유',
     },
-    { 
-        value: 11, 
-        label: '기획', 
-        isDisabled: false, 
-        mainCategory: '트랙별 소통 채널', 
-        subCategory: '기획' 
+    {
+        value: 6,
+        label: '프로젝트 팀원 모집',
+        isDisabled: false,
+        mainCategory: '자유게시판',
+        subCategory: '프로젝트 팀원 모집',
     },
-    { 
-        value: 12, 
-        label: '디자인', 
-        isDisabled: false, 
-        mainCategory: '트랙별 소통 채널', 
-        subCategory: '디자인' 
+    {
+        value: 7,
+        label: '프로젝트 자랑',
+        isDisabled: false,
+        mainCategory: '자유게시판',
+        subCategory: '프로젝트 자랑',
     },
-    { 
-        value: 13, 
-        label: '기타', 
-        isDisabled: false, 
-        mainCategory: '트랙별 소통 채널', 
-        subCategory: '기타' 
-    }
+    {
+        value: 8,
+        label: '트랙별 소통 채널',
+        isDisabled: true,
+        mainCategory: '전체',
+        subCategory: '전체',
+    },
+    {
+        value: 9,
+        label: '프론트엔드',
+        isDisabled: false,
+        mainCategory: '트랙별 소통 채널',
+        subCategory: '프론트엔드',
+    },
+    {
+        value: 10,
+        label: '백엔드',
+        isDisabled: false,
+        mainCategory: '트랙별 소통 채널',
+        subCategory: '백엔드',
+    },
+    {
+        value: 11,
+        label: '기획',
+        isDisabled: false,
+        mainCategory: '트랙별 소통 채널',
+        subCategory: '기획',
+    },
+    {
+        value: 12,
+        label: '디자인',
+        isDisabled: false,
+        mainCategory: '트랙별 소통 채널',
+        subCategory: '디자인',
+    },
+    {
+        value: 13,
+        label: '기타',
+        isDisabled: false,
+        mainCategory: '트랙별 소통 채널',
+        subCategory: '기타',
+    },
 ];
 
 interface OrderProp {
@@ -123,11 +123,11 @@ const CustomMenuList: React.FC<MenuListProps<any, false>> = props => {
         <components.MenuList {...props}>
             {childrenArray.slice(0, 1)}
             <DropdownDivider />
-            {childrenArray.slice(1,3)}
+            {childrenArray.slice(1, 3)}
             <DropdownDivider />
-            {childrenArray.slice(3,7)}
+            {childrenArray.slice(3, 7)}
             <DropdownDivider />
-            {childrenArray.slice(7,13)}
+            {childrenArray.slice(7, 13)}
         </components.MenuList>
     );
 };

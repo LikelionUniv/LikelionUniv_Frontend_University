@@ -27,6 +27,11 @@ import DonateDetail from './components/donate/DonateDetail';
 import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
 import ProtectedRouter from './components/ProtectedRouter';
 import ProjectRegisterWrapper from './components/project/register/ProjectRegisterWrapper';
+import User from './components/admin/User';
+import RecruitAlarm from './components/admin/RecruitAlarm';
+import AdminProtectedRouter from './components/AdminProtectedRouter';
+import NotFound from './routes/NotFound';
+import Admin from './routes/Admin';
 
 const router = createBrowserRouter([
     {
@@ -94,10 +99,6 @@ const router = createBrowserRouter([
                 ],
             },
             {
-                path: '/chat',
-                element: <Chat />,
-            },
-            {
                 path: '/donate',
                 element: <DonatePage />,
                 children: [
@@ -147,14 +148,35 @@ const router = createBrowserRouter([
                     },
                 ],
             },
-
-            {
-                path: '/chat',
-                element: <Chat />,
-            },
+            // {
+            //     path: '/chat',
+            //     element: <Chat />,
+            // },
             {
                 path: '/about',
                 element: <AboutPage />,
+            },
+            {
+                path: '/likeliononlyadminuser2013',
+                element: (
+                    <AdminProtectedRouter>
+                        <Admin />
+                    </AdminProtectedRouter>
+                ),
+                children: [
+                    {
+                        path: '',
+                        element: <User />,
+                    },
+                    {
+                        path: 'recruitalarm',
+                        element: <RecruitAlarm />,
+                    },
+                ],
+            },
+            {
+                path: '*',
+                element: <NotFound />,
             },
         ],
     },

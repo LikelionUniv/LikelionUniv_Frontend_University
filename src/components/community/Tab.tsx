@@ -62,7 +62,9 @@ const Tab: React.FC<TabProps> = ({
                         </T.SubBoardItem>
                         <T.SubBoardItem
                             onClick={() => SubBoardClick('프로젝트 팀원 모집')}
-                            isSelected={selectedSubBoard === '프로젝트 팀원 모집'}
+                            isSelected={
+                                selectedSubBoard === '프로젝트 팀원 모집'
+                            }
                         >
                             프로젝트 팀원 모집
                         </T.SubBoardItem>
@@ -85,9 +87,9 @@ const Tab: React.FC<TabProps> = ({
                         </T.SubBoardItem>
                         <T.SubBoardItem
                             onClick={() => SubBoardClick('백엔드')}
-                            isSelected={selectedSubBoard === '백'}
+                            isSelected={selectedSubBoard === '백엔드'}
                         >
-                            백
+                            백엔드
                         </T.SubBoardItem>
                         <T.SubBoardItem
                             onClick={() => SubBoardClick('기획')}
@@ -134,7 +136,9 @@ const Tab: React.FC<TabProps> = ({
                             </T.BoardItem>
                             <T.BoardItem
                                 onClick={() => BoardClick('트랙별 소통 채널')}
-                                isSelected={selectedBoard === '트랙별 소통 채널'}
+                                isSelected={
+                                    selectedBoard === '트랙별 소통 채널'
+                                }
                             >
                                 트랙별 소통 채널
                             </T.BoardItem>

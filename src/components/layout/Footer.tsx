@@ -14,6 +14,7 @@ import logo2 from '../../img/landing/logo2.svg';
 
 import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
+import { useNavigate } from 'react-router-dom';
 
 export interface FooterData {
     logo?: string;
@@ -46,6 +47,11 @@ function Footer(): JSX.Element {
         );
     };
 
+    const navigate = useNavigate();
+    const goAdmin = () => {
+        navigate('/likeliononlyadminuser2013');
+    };
+
     return (
         <F.Wrapper>
             <F.Info>
@@ -53,7 +59,8 @@ function Footer(): JSX.Element {
                     <div className="left">
                         <Logo />
                         <p className="text">
-                            사단법인 멋쟁이사자처럼 | 대표자 이두희
+                            사단법인 멋쟁이사자처럼 | 대표자
+                            <span onClick={goAdmin}>{` 이두희`}</span>
                         </p>
                         <p className="text">
                             서울특별시 종로구 종로3길 17, D1동 16, 17층(청진동,
