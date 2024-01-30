@@ -11,12 +11,10 @@ interface Userinfo {
 
 interface RuseIsAdmin {
     isAdmin: boolean;
-    isLogin: boolean;
     isUniversityAdmin: boolean;
 }
 
 function useIsAdmin(): RuseIsAdmin {
-    const [isLogin, setIsLogin] = useState<boolean>(false);
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [isUniversityAdmin, setIsUniversityAdmin] = useState<boolean>(false);
 
@@ -39,7 +37,6 @@ function useIsAdmin(): RuseIsAdmin {
                     ) >= 3,
                 );
             } catch (error) {
-                setIsLogin(false);
                 setIsAdmin(false);
                 setIsUniversityAdmin(false);
             }
@@ -48,7 +45,7 @@ function useIsAdmin(): RuseIsAdmin {
         fetchUserRole();
     }, []);
 
-    return { isLogin, isAdmin, isUniversityAdmin };
+    return { isAdmin, isUniversityAdmin };
 }
 
 export default useIsAdmin;
