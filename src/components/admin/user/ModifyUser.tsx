@@ -20,10 +20,10 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
     const handleSave = () => {
         updateUser(editedData, {
             onSuccess: () => {
-                onClose(); // 수정 성공 후 모달 닫기
+                onClose();
             },
             onError: error => {
-                console.error(error); // 에러 처리
+                console.error(error);
             },
         });
     };
