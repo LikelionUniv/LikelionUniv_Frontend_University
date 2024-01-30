@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelectedUsers } from './SelectedUserContext';
+import { useSelectedUsers } from '../SelectedUserContext';
 import OrderDropDown from './OrderDropDown';
+import { useOutletContext } from 'react-router-dom';
+import OutletContext from '../OutletContext';
 
 function TableHead() {
     const { selectAll, setSelectAll } = useSelectedUsers();
+    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
 
     const handleSelectAllChange = (
         event: React.ChangeEvent<HTMLInputElement>,
@@ -24,6 +27,7 @@ function TableHead() {
                         />
                     </Table>
                     <Table className="name">이름</Table>
+                    {isAdmin && <Table className="univ">소속 대학</Table>}
                     <Table className="major">전공</Table>
                     <Table className="ordinal">기수</Table>
                     <Table className="part">파트</Table>
@@ -57,6 +61,10 @@ const HeadTable = styled.div`
         min-width: 120px;
     }
 
+    .univ {
+        min-width: 205px;
+    }
+
     .major {
         min-width: 145px;
     }
@@ -87,5 +95,4 @@ const Divider = styled.div`
     height: 3px;
     background-color: var(--Grey-900, #212224);
     width: 100%;
-    margin-top: 15px;
 `;

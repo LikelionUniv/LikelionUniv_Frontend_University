@@ -28,6 +28,8 @@ function useDeleteUser({ userId }: UseDeleteUserProps) {
             queryClient.invalidateQueries({
                 queryKey: ['get-users', userId],
             });
+
+            alert(`선택한 사용자가 삭제되었습니다.`);
         },
     });
 
