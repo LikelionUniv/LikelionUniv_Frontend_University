@@ -1,26 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelectedUsers } from './SelectedUserContext';
 import { useParams } from 'react-router-dom';
 import useGetAlarmList from '../../../query/get/useGetAlarmList';
+import { useSelectedUsers } from '../SelectedUserContext';
 
 function TableAlarmList() {
-    const { selectedUserIds, setSelectedUserIds, selectAll } =
-        useSelectedUsers();
+    const {
+        selectedUserEmails,
+        setSelectedUserEmails,
+        selectAll,
+        setSelectAll,
+    } = useSelectedUsers();
+    const { data } = useGetAlarmList({ generation: 12 });
 
-    const { generation } = useParams();
-    const { data } = useGetAlarmList({
-        generation: 12,
-    });
+    useEffect(() => {
+        if (selectAll && data) {
+            setSelectedUserEmails(data.recruits.map(recruit => recruit.email));
+        } else if (!selectAll) {
+            setSelectedUserEmails([]);
+        }
+    }, [selectAll, data, setSelectedUserEmails]);
+
+    const handleCheckboxChange = (recruitEmail: string, isChecked: boolean) => {
+        if (selectAll) {
+            setSelectAll(false);
+        }
+        setSelectedUserEmails(prev =>
+            isChecked
+                ? [...prev, recruitEmail]
+                : prev.filter(email => email !== recruitEmail),
+        );
+    };
 
     return (
         <Wrapper>
-            <TableBody>
-                <Table className="check">
-                    <input type="checkbox" />
-                </Table>
-                <Table className="name"></Table>
-            </TableBody>
+            {data &&
+                data.recruits.map((recruit, index) => (
+                    <TableBody key={index}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <Table className="check">
+                                <input
+                                    type="checkbox"
+                                    checked={
+                                        selectedUserEmails.includes(
+                                            recruit.email,
+                                        ) || selectAll
+                                    }
+                                    onChange={e =>
+                                        handleCheckboxChange(
+                                            recruit.email,
+                                            e.target.checked,
+                                        )
+                                    }
+                                />
+                            </Table>
+                            <Table className="email">{recruit.email}</Table>
+                        </div>
+                        <Table className="email">
+                            {recruit.id}.{recruit.id}.{recruit.id}
+                        </Table>
+                    </TableBody>
+                ))}
         </Wrapper>
     );
 }
@@ -37,7 +77,7 @@ const Wrapper = styled.div`
     max-height: 1660px;
 
     .check {
-        margin: 0 10px 0 0;
+        margin-right: 20px;
         height: 24px;
         accent-color: #ff7710;
         color: #ffffff;
@@ -64,7 +104,7 @@ const Wrapper = styled.div`
     }
 
     .email {
-        width: 311px;
+        width: 120px;
         height: 24px;
     }
 
@@ -77,16 +117,12 @@ const Wrapper = styled.div`
 const TableBody = styled.div`
     display: flex;
     border-bottom: 1px solid #dcdfe3;
+    align-items: center;
+    padding: 5px 0;
+    justify-content: space-between;
 `;
 
 const Table = styled.div`
-    padding: 16px 4px;
-    margin-bottom: 15px;
-`;
-
-const Divider = styled.div`
-    height: 3px;
-    background-color: var(--Grey-900, #212224);
-    width: 100%;
-    margin-top: 15px;
+    padding: 4px 4px;
+    //margin-bottom: 15px;
 `;

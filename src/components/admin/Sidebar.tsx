@@ -77,9 +77,8 @@ const SideBar: React.FC<SideBarProps> = ({
 export default SideBar;
 
 const Wrapper = styled.div<{ showSubList: boolean }>`
-    padding-right: 24px;
     min-width: 150px;
-    margin: 0 auto;
+    margin: 15px 80px;
 
     .ParentTab {
         padding-left: 12px;

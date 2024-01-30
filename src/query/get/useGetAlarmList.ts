@@ -11,11 +11,11 @@ export interface IAlarmList {
 }
 
 export interface IRecruits {
+    id: number;
     name: string;
+    phone: string;
     email: string;
-    phoneNumber: number;
-    generation: number;
-    createdAt: number;
+    date: number;
 }
 
 interface AlarmListParam {

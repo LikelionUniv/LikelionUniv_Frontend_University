@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TableAlarmList from './TableAlarmList';
 import TableHead from './TableHead';
-// import TableBottom from './TableBottom';
-import { SelectedUsersProvider } from './SelectedUserContext';
-import useServerSidePagination from '../../../query/get/useServerSidePagination';
 
 function AlarmList() {
     return (
         <>
-            <SelectedUsersProvider>
-                <Wrapper>
-                    <TableHead />
-                    <TableAlarmList />
-                </Wrapper>
-            </SelectedUsersProvider>
+            <Wrapper>
+                <TableHead />
+                <TableAlarmList />
+            </Wrapper>
         </>
     );
 }

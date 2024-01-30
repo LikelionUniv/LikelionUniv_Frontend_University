@@ -43,9 +43,21 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(error);
         }
 
-        // 인가되지 않은 사용자인 경우 로그인으로 돌려버림
-        if (axiosError?.code === 'SECURITY_401') {
-            // window.location.replace('/login');
+        // 인가되지 않은 사용자인 경우 로그인으로 돌려버림 (프로젝트가 아닌 경우)
+        if (
+            axiosError?.code === 'SECURITY_401' &&
+            window.location.pathname !== '/project'
+        ) {
+            alert('로그인 후 사용가능합니다.');
+            window.location.replace('/login');
+            return Promise.reject(error);
+        }
+
+        // 인가되지 않은 사용자인 경우 (프로젝트인 경우) 허용
+        if (
+            axiosError?.code === 'SECURITY_401' &&
+            window.location.pathname === '/project'
+        ) {
             return Promise.reject(error);
         }
 

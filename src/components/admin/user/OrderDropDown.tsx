@@ -3,6 +3,11 @@ import { OptionType } from '../DropDown/DropDown';
 import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../../img/arrow.svg';
 
+interface OrderDropDownProps {
+    setOrder: React.Dispatch<React.SetStateAction<string | undefined>>;
+    onRoleChange: (role: string) => void;
+}
+
 const orderOptions = [
     { value: 1, label: '전체' },
     { value: 2, label: '대표' },
@@ -10,27 +15,28 @@ const orderOptions = [
     { value: 4, label: '아기사자' },
 ];
 
-//나중에 api 연결할 때 수정
-const OrderDropDown = () => {
+const OrderDropDown = ({ setOrder, onRoleChange }: OrderDropDownProps) => {
     const handleSortChange = (selectedOption: OptionType | null) => {
         if (!selectedOption) return;
 
+        let role = '';
         switch (selectedOption.value) {
             case 1:
-                console.log('전체');
+                role = 'all';
                 break;
             case 2:
-                console.log('대표');
+                role = 'UNIVERSITY_ADMIN';
                 break;
             case 3:
-                console.log('운영진');
+                role = 'MANAGER';
                 break;
             case 4:
-                console.log('아기사자');
+                role = 'USER';
                 break;
             default:
                 break;
         }
+        onRoleChange(role);
     };
 
     const DropdownIndicator = (props: any) => {
