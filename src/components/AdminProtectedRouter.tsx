@@ -11,21 +11,16 @@ const AdminProtectedRouter = ({ children }: AdminProtectedRouterProp) => {
     const { userinfo } = useAuth();
     const navigate = useNavigate();
 
-    const { isAdmin, isLogin } = useIsAdmin();
+    const { isAdmin } = useIsAdmin();
 
     useEffect(() => {
-        if (!isLogin) {
-            navigate('/login');
-            return;
-        }
-
         if (!isAdmin) {
             alert(
                 '어드민 페이지에 접근할 권한이 없습니다. 관리자에게 문의하세요.',
             );
             navigate('/');
         }
-    }, [isLogin, isAdmin, navigate]);
+    }, [isAdmin, navigate]);
 
     return userinfo.isLogin && isAdmin ? <>{children}</> : null;
 };
