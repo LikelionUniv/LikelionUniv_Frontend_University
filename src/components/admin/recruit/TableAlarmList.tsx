@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
 import useGetAlarmList from '../../../query/get/useGetAlarmList';
 import { useSelectedUsers } from '../SelectedUserContext';
 
@@ -11,11 +10,11 @@ function TableAlarmList() {
         selectAll,
         setSelectAll,
     } = useSelectedUsers();
-    const { data } = useGetAlarmList({ generation: 12 });
+    const { data } = useGetAlarmList({ ordinal: 12 });
 
     useEffect(() => {
         if (selectAll && data) {
-            setSelectedUserEmails(data.recruits.map(recruit => recruit.email));
+            setSelectedUserEmails(data.alarms.map(recruit => recruit.email));
         } else if (!selectAll) {
             setSelectedUserEmails([]);
         }
@@ -35,7 +34,7 @@ function TableAlarmList() {
     return (
         <Wrapper>
             {data &&
-                data.recruits.map((recruit, index) => (
+                data.alarms.map((recruit, index) => (
                     <TableBody key={index}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <Table className="check">
@@ -54,10 +53,11 @@ function TableAlarmList() {
                                     }
                                 />
                             </Table>
+                            <Table className="ordinal">{recruit.ordinal}</Table>
                             <Table className="email">{recruit.email}</Table>
                         </div>
-                        <Table className="email">
-                            {recruit.id}.{recruit.id}.{recruit.id}
+                        <Table className="createdDate">
+                            {recruit.createdDate}
                         </Table>
                     </TableBody>
                 ))}
@@ -83,23 +83,8 @@ const Wrapper = styled.div`
         color: #ffffff;
     }
 
-    .name {
-        width: 93px;
-        height: 24px;
-    }
-
-    .major {
-        width: 156px;
-        height: 24px;
-    }
-
     .ordinal {
-        width: 48px;
-        height: 24px;
-    }
-
-    .part {
-        width: 75px;
+        margin-right: 30px;
         height: 24px;
     }
 
@@ -108,9 +93,8 @@ const Wrapper = styled.div`
         height: 24px;
     }
 
-    .role {
-        width: 62px;
-        height: 24px;
+    .createdDate {
+        width: 120px;
     }
 `;
 
