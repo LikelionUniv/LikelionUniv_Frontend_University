@@ -8,15 +8,15 @@ type AdminProtectedRouterProp = {
 };
 
 const AdminProtectedRouter = ({ children }: AdminProtectedRouterProp) => {
-    const { userinfo, isLoading } = useAuth();
+    const { userinfo } = useAuth();
     const navigate = useNavigate();
 
-    const { isAdmin } = useIsAdmin();
-    console.log(isAdmin);
+    const { isAdmin, isLogin } = useIsAdmin();
 
     useEffect(() => {
-        if (!userinfo.isLogin && !isLoading) {
+        if (!isLogin) {
             navigate('/login');
+            return;
         }
 
         if (!isAdmin) {
@@ -25,7 +25,7 @@ const AdminProtectedRouter = ({ children }: AdminProtectedRouterProp) => {
             );
             navigate('/');
         }
-    }, [userinfo.isLogin, isLoading, isAdmin, navigate]);
+    }, [isLogin, isAdmin, navigate]);
 
     return userinfo.isLogin && isAdmin ? <>{children}</> : null;
 };
