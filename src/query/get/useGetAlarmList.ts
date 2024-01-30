@@ -2,33 +2,31 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import request from '../../utils/request';
 
 interface UseGetAlarmsProps {
-    generation: number;
+    ordinal: number;
 }
 
 export interface IAlarmList {
-    universityName: string;
-    recruits: IRecruits[];
+    alarms: IRecruits[];
 }
 
 export interface IRecruits {
     id: number;
-    name: string;
-    phone: string;
+    ordinal: number;
     email: string;
-    date: number;
+    createdDate: string;
 }
 
 interface AlarmListParam {
-    generation: number;
+    ordinal: number;
 }
 
-function useGetAlarmList({ generation }: UseGetAlarmsProps) {
+function useGetAlarmList({ ordinal }: UseGetAlarmsProps) {
     const fetchAlarmsList = async () => {
         const response = await request<null, IAlarmList, AlarmListParam>({
-            uri: `/api/admin/v1/alarm/recruit`,
+            uri: `/api/admin/v1/alarm`,
             method: 'get',
             params: {
-                generation,
+                ordinal,
             },
         });
 
@@ -36,7 +34,7 @@ function useGetAlarmList({ generation }: UseGetAlarmsProps) {
     };
 
     const { data } = useSuspenseQuery({
-        queryKey: ['get-recruits', generation],
+        queryKey: ['get-recruits', ordinal],
         queryFn: fetchAlarmsList,
     });
 

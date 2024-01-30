@@ -63,15 +63,20 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     const handleSendEmail = async () => {
         if (!isButtonActive) return;
 
+        const emailData = {
+            sendEmailDto: {
+                receivers: receivers,
+                subject: subject,
+                contentsType: 'html',
+                contents: content,
+            },
+            attachments: selectedFiles,
+        };
+
         try {
             const response = await axiosInstance.post(
-                '/api/admin/v1/alarm/recruit',
-                {
-                    receivers: receivers,
-                    subject: subject,
-                    contentsType: 'html',
-                    contents: content,
-                },
+                '/api/admin/v1/alarm/email',
+                emailData,
             );
 
             console.log('Email sent successfully:', response.data);

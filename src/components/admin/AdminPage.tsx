@@ -4,6 +4,7 @@ import SideBar from './Sidebar';
 import styled from 'styled-components';
 import useIsAdmin from '../../hooks/useIsAdmin';
 import useGetUserInfo from '../../query/get/useGetUserInfo';
+import GlobalStyles from '../../styles/GlobalStyle';
 
 const AdminPage = () => {
     const [selectedItem, setSelectedItem] = useState<string>('회원정보');
@@ -39,4 +40,12 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    @media screen and (max-width: 1024px) {
+        padding: 0 40px;
+    }
+
+    @media screen and (max-width: 767px) {
+        padding: 0;
+    }
 `;

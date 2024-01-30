@@ -158,11 +158,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/likeliononlyadminuser2013',
-                element: (
-                    <AdminProtectedRouter>
-                        <Admin />
-                    </AdminProtectedRouter>
-                ),
+                element: <Admin />,
                 children: [
                     {
                         path: '',
