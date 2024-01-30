@@ -305,7 +305,7 @@ const CommunityWrite = () => {
                 <W.Tab>
                     <p className="sub">게시판 선택</p>
                     <div className="board">
-                        {!isAdmin && (
+                        {isAdmin.isSuperAdmin && (
                             <W.BoardItem
                                 onClick={() => BoardClick('멋쟁이사자처럼')}
                                 isSelected={selectedBoard === '멋쟁이사자처럼'}
