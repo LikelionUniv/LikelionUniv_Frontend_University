@@ -159,10 +159,7 @@ const Nav = () => {
                                 }}
                             >
                                 <div className="profile-img">
-                                    <img
-                                        src={defaultprofile}
-                                        alt="profile"
-                                    />
+                                    <img src={defaultprofile} alt="profile" />
                                 </div>
                                 <Arrow
                                     style={{

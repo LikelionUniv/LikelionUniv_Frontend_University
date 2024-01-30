@@ -225,7 +225,6 @@ const SubTitle = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 150%;
-    
 
     @media screen and (max-width: 767px) {
         display: none;

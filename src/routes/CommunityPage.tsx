@@ -12,29 +12,29 @@ const CommunityPage = () => {
     //커뮤니티 접근할 때 로그인 안 한 유저 로그인으로 보내기
     //GUEST는 메인페이지로 보내기
     useEffect(() => {
-
         if (isLoading) {
-            return; 
+            return;
         }
 
         if (!userinfo?.isLogin) {
+            alert('로그인 후 이용 기능합니다.');
             navigate('/login');
-        }else if (userinfo?.role === "GUEST"){
-            alert("커뮤니티 이용 권한이 없는 회원입니다.");
+        } else if (userinfo?.role === 'GUEST') {
+            alert('커뮤니티 이용 권한이 없는 회원입니다.');
             navigate('/');
         }
     }, [userinfo, navigate, isLoading]);
 
-    if (!userinfo?.isLogin || userinfo?.role === "GUEST") {
+    if (!userinfo?.isLogin || userinfo?.role === 'GUEST') {
         return null;
     }
 
     return (
         <>
             <GlobalStyles />
-                <Container>
-                    <Outlet />
-                </Container>
+            <Container>
+                <Outlet />
+            </Container>
         </>
     );
 };

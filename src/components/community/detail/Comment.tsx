@@ -55,11 +55,7 @@ const Comment: React.FC<CommentProps> = ({
             postId: id,
         };
 
-        await request<
-            CommentRegisterType,
-            CommentId,
-            CommentParams
-        >({
+        await request<CommentRegisterType, CommentId, CommentParams>({
             uri: '/api/v1/community/comments/parent',
             method: 'post',
             data: commentData,
