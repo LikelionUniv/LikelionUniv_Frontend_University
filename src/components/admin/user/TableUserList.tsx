@@ -56,7 +56,6 @@ const TableUserList: React.FC<TableUserListProps> = props => {
             part: props.part,
             ordinal: props.ordinal,
             role: props.role,
-            univName: props.univName,
         });
     };
 
@@ -110,7 +109,7 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                         </Table>
                         <Table className="email">{props.email}</Table>
                         <Table className="edit">
-                            <button onClick={() => handleEdit}>수정</button>
+                            <button onClick={() => handleEdit()}>수정</button>{' '}
                         </Table>
                         <Table>
                             <DeleteUser id={props.id} userName={props.name} />
