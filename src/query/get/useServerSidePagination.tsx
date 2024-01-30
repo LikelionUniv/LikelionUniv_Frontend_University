@@ -84,8 +84,6 @@ function useServerSidePagination<T>({
         getCurrentPageInfo(),
     );
 
-    useEffect(() => {}, [pageInfo]);
-
     const fetchPagiableData = async () => {
         const response = await request<
             null,
@@ -104,7 +102,7 @@ function useServerSidePagination<T>({
                 st,
                 oc,
             },
-        });
+        });        
 
         return response.data;
     };
@@ -123,7 +121,9 @@ function useServerSidePagination<T>({
     }, [cachingData]);
 
     useEffect(() => {
-        setCurrentPage(1);
+        if (sc !== undefined && oc !== undefined) {
+            setCurrentPage(1);
+        }
     }, [sc, oc]);
 
     const setPage = (page: number): void => {
