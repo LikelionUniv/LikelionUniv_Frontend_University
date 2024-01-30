@@ -4,7 +4,8 @@ import WriteIcon from '../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
 import { ProjectAPI } from './ProjectList';
 import { Gen } from './register/RegisterOptions';
-import useIsAdmin from '../../hooks/useIsAdmin';
+import { useAuth } from '../../hooks/useAuth';
+import { RolePriority } from '../../constants/Role';
 
 interface IHeader {
     setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
@@ -17,8 +18,17 @@ function Header({ setProjectApi }: IHeader) {
         setActiveTab(index);
     };
 
-    const { isAdmin } = useIsAdmin();
+    const { userinfo, isLoading } = useAuth();
+    const isSuperAdminInfo = RolePriority.findIndex(role => role === userinfo.role) >= 3;
 
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (isSuperAdminInfo && !isLoading) {
+            setIsAdmin(true);
+        }
+    }, [isLoading, isSuperAdminInfo]);
+    
     useEffect(() => {
         // 전체를 클릭할 경우
         if (activeTab === undefined) {

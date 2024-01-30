@@ -7,7 +7,8 @@ import request from '../../../utils/request';
 import { axiosInstance } from '../../../utils/axios';
 import ImageUpload from '../../utils/ImageUpload';
 import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
-import useIsAdmin from '../../../hooks/useIsAdmin';
+import { useAuth } from '../../../hooks/useAuth';
+import { RolePriority } from '../../../constants/Role';
 
 interface CommunityRegisterType {
     title: string;
@@ -22,7 +23,6 @@ interface PostId {
 }
 
 const CommunityWrite = () => {
-    const isAdmin = useIsAdmin();
     const navigate = useNavigate();
     const location = useLocation();
     const info = { ...location.state };
@@ -30,6 +30,17 @@ const CommunityWrite = () => {
     const [selectedSubBoard, setSelectedSubBoard] = useState<string>('');
     const [editorTitle, setEditorTitle] = useState('');
     const [editorContent, setEditorContent] = useState('');
+
+    const { userinfo, isLoading } = useAuth();
+    const isSuperAdminInfo = RolePriority.findIndex(role => role === userinfo.role) >= 4; 
+
+    const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (isSuperAdminInfo && !isLoading) {
+            setIsSuperAdmin(true);
+        }
+    }, [isLoading, isSuperAdminInfo]);
 
     //수정모드일때 기존 데이터 불러오기
     const fetchData = async () => {
@@ -305,7 +316,7 @@ const CommunityWrite = () => {
                 <W.Tab>
                     <p className="sub">게시판 선택</p>
                     <div className="board">
-                        {isAdmin.isSuperAdmin && (
+                        {isSuperAdmin && (
                             <W.BoardItem
                                 onClick={() => BoardClick('멋쟁이사자처럼')}
                                 isSelected={selectedBoard === '멋쟁이사자처럼'}
