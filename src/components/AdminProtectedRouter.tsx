@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import useIsAdmin from '../hooks/useIsAdmin';
 import { RolePriority } from '../constants/Role';
 
 type AdminProtectedRouterProp = {
