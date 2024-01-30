@@ -106,7 +106,7 @@ const MainGraphic = () => {
                             <div className="hide-text" />
                             <CountDown isCountDownView={isCountDownView} /> */}
                             <button className="btn" onClick={openModal}>
-                                모집 알림 신청하기
+                                멋대 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
                             </button>
                         </div>
