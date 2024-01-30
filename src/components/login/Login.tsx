@@ -10,9 +10,11 @@ const GoogleLoginUrl = `
 https://accounts.google.com/o/oauth2/auth/oauthchooseaccount?response_type=code&client_id=${process.env.REACT_APP_GOOGLE_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_GOOGLE_REDIRECT_URI}&scope=openid email profile
 `;
 const google_login = () => {
+    localStorage.clear();
     window.open(GoogleLoginUrl, '_self');
 };
 const kakao_login = () => {
+    localStorage.clear();
     window.open(kakaoLoginURL, '_self');
 };
 
