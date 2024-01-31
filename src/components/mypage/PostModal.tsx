@@ -2,15 +2,15 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { usePostDelete } from '../../api/mypage/usePostDelete';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
+import { useAuth } from '../../hooks/useAuth';
 
 const PostModal = ({ id }: { id: number }) => {
     //이거는 하나하나 만드는 거기 때문에 모달을 통합해서 하나로 하는 건 불가능... 수정할때는 해당 페이지로 가고 삭제할때는 리다이렉트가 필요
     const [modal, setModal] = useState<Boolean>(false);
     const modalRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
-    const user = useRecoilValue(userState);
+    const { userinfo: user } = useAuth();
+
     const { mutate } = usePostDelete({
         postId: id,
         user_id: user.userId,

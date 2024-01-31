@@ -1,18 +1,18 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
 import { ProjectCardProp } from './type';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
 import { PostBoxWrapper } from './UserPostSelect';
 import EmptyBox from './EmptyBox';
 import ProjectCard from './ProjectCard';
 import { PaginationWrapper } from '../project/ProjectList.style';
+import { useAuth } from '../../hooks/useAuth';
 
 const ProjectSelect = ({ select }: { select: string }) => {
     const location = useLocation().pathname;
     const params = useParams();
-    const user = useRecoilValue(userState);
+    const { userinfo: user } = useAuth();
+
     const user_id =
         location.includes('userpage') && params.user_id !== undefined
             ? parseInt(params.user_id)

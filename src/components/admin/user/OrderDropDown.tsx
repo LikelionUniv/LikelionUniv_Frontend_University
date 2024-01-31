@@ -4,8 +4,7 @@ import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../../img/arrow.svg';
 
 interface OrderDropDownProps {
-    setOrder: React.Dispatch<React.SetStateAction<string | undefined>>;
-    onRoleChange: (role: string) => void;
+    setRole: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const orderOptions = [
@@ -13,30 +12,32 @@ const orderOptions = [
     { value: 2, label: '대표' },
     { value: 3, label: '운영진' },
     { value: 4, label: '아기사자' },
+    { value: 5, label: '게스트' },
 ];
 
-const OrderDropDown = ({ setOrder, onRoleChange }: OrderDropDownProps) => {
+const OrderDropDown = ({ setRole }: OrderDropDownProps) => {
     const handleSortChange = (selectedOption: OptionType | null) => {
         if (!selectedOption) return;
 
-        let role = '';
         switch (selectedOption.value) {
             case 1:
-                role = 'all';
+                setRole(undefined);
                 break;
             case 2:
-                role = 'UNIVERSITY_ADMIN';
+                setRole('UNIVERSITY_ADMIN');
                 break;
             case 3:
-                role = 'MANAGER';
+                setRole('MANAGER');
                 break;
             case 4:
-                role = 'USER';
+                setRole('USER');
+                break;
+            case 5:
+                setRole('GUEST');
                 break;
             default:
                 break;
         }
-        onRoleChange(role);
     };
 
     const DropdownIndicator = (props: any) => {

@@ -4,13 +4,12 @@ import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 import { usePostLike } from '../../api/mypage/usePostLike';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
+import { useAuth } from '../../hooks/useAuth';
 
 const PostCardWithPhoto = (props: MypagePostCardPropType) => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
-    const user = useRecoilValue(userState);
+    const { userinfo: user } = useAuth();
     const { mutate } = usePostLike({
         postId: props.id,
         user_id: user.userId,

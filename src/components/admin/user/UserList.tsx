@@ -53,9 +53,3 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
 `;
-
-const Nav = styled.div`
-    display: flex;
-    align-items: center;
-    margin: 10px 0 10px 0;
-`;
