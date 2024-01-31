@@ -19,7 +19,8 @@ function Header({ setProjectApi }: IHeader) {
     };
 
     const { userinfo, isLoading } = useAuth();
-    const isSuperAdminInfo = RolePriority.findIndex(role => role === userinfo.role) >= 3;
+    const isSuperAdminInfo =
+        RolePriority.findIndex(role => role === userinfo.role) >= 3;
 
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
@@ -28,7 +29,7 @@ function Header({ setProjectApi }: IHeader) {
             setIsAdmin(true);
         }
     }, [isLoading, isSuperAdminInfo]);
-    
+
     useEffect(() => {
         // 전체를 클릭할 경우
         if (activeTab === undefined) {

@@ -11,7 +11,8 @@ interface IProjectBox {
 
 function Projectbox({ projects }: IProjectBox) {
     const { userinfo, isLoading } = useAuth();
-    const isSuperAdminInfo = RolePriority.findIndex(role => role === userinfo.role) >= 3;
+    const isSuperAdminInfo =
+        RolePriority.findIndex(role => role === userinfo.role) >= 3;
 
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
 

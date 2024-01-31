@@ -42,14 +42,20 @@ function ProjectListInner({ projectApi, pageSize }: ProjectListInnerProps) {
 
     return (
         <>
-        {projects.length > 0 ? (
-            <>
-                <Projectbox projects={projects} />
-                <P.PaginationWrapper>{renderPaginationBtn()}</P.PaginationWrapper>
-            </>
-        ): (
-            <NoneProject isRecentGen={projectApi.uri.includes(Gen.loadRecentFiveGen()[0].toString())} />
-        )}
+            {projects.length > 0 ? (
+                <>
+                    <Projectbox projects={projects} />
+                    <P.PaginationWrapper>
+                        {renderPaginationBtn()}
+                    </P.PaginationWrapper>
+                </>
+            ) : (
+                <NoneProject
+                    isRecentGen={projectApi.uri.includes(
+                        Gen.loadRecentFiveGen()[0].toString(),
+                    )}
+                />
+            )}
         </>
     );
 }

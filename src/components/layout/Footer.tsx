@@ -45,7 +45,9 @@ function Footer(): JSX.Element {
     };
 
     const openRules = () => {
-        window.open('https://likelion.notion.site/IT-f719e7c7bed04422bf15d189c30dc4b7');
+        window.open(
+            'https://likelion.notion.site/IT-f719e7c7bed04422bf15d189c30dc4b7',
+        );
     };
 
     return (

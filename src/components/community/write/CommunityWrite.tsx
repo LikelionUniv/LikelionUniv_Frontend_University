@@ -32,7 +32,8 @@ const CommunityWrite = () => {
     const [editorContent, setEditorContent] = useState('');
 
     const { userinfo, isLoading } = useAuth();
-    const isSuperAdminInfo = RolePriority.findIndex(role => role === userinfo.role) >= 4; 
+    const isSuperAdminInfo =
+        RolePriority.findIndex(role => role === userinfo.role) >= 4;
 
     const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
 
@@ -62,7 +63,7 @@ const CommunityWrite = () => {
             fetchData();
         }
     }, [info.mod]);
-    
+
     //글씨 없이 이미지만 있어도 버튼 활성화
     const checkImage = (html: string): boolean => {
         const doc = new DOMParser().parseFromString(html, 'text/html');
@@ -71,18 +72,18 @@ const CommunityWrite = () => {
 
     const checkText = (html: string): string => {
         const doc = new DOMParser().parseFromString(html, 'text/html');
-        return doc.body.textContent?.trim() || "";
+        return doc.body.textContent?.trim() || '';
     };
 
     const isSubmitEnabled = (): boolean => {
         const content = checkText(editorContent);
         const hasImage = checkImage(editorContent);
-    
+
         return (
             selectedBoard !== '' &&
             selectedSubBoard !== '' &&
             editorTitle.trim() !== '' &&
-            (content !== '' || hasImage) 
+            (content !== '' || hasImage)
         );
     };
 
