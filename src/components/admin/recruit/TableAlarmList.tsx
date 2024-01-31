@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import useGetAlarmList from '../../../query/get/useGetAlarmList';
 import { useSelectedUsers } from '../SelectedUserContext';
+import { IRecruits } from '../../../query/get/useGetAlarmList';
 
 function TableAlarmList() {
     const {
@@ -11,6 +12,24 @@ function TableAlarmList() {
         setSelectAll,
     } = useSelectedUsers();
     const { data } = useGetAlarmList({ ordinal: 12 });
+    const [sortedAlarms, setSortedAlarms] = useState<IRecruits[]>([]);
+
+    const sortByOrdinalAndDate = (a: IRecruits, b: IRecruits): number => {
+        if (a.ordinal < b.ordinal) return -1;
+        if (a.ordinal > b.ordinal) return 1;
+
+        return (
+            new Date(b.createdDate).getTime() -
+            new Date(a.createdDate).getTime()
+        );
+    };
+
+    useEffect(() => {
+        if (data && Array.isArray(data.alarms)) {
+            const sorted = [...data.alarms].sort(sortByOrdinalAndDate);
+            setSortedAlarms(sorted);
+        }
+    }, [data]);
 
     useEffect(() => {
         if (selectAll && data) {
@@ -33,34 +52,33 @@ function TableAlarmList() {
 
     return (
         <Wrapper>
-            {data &&
-                data.alarms.map((recruit, index) => (
-                    <TableBody key={index}>
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <Table className="check">
-                                <input
-                                    type="checkbox"
-                                    checked={
-                                        selectedUserEmails.includes(
-                                            recruit.email,
-                                        ) || selectAll
-                                    }
-                                    onChange={e =>
-                                        handleCheckboxChange(
-                                            recruit.email,
-                                            e.target.checked,
-                                        )
-                                    }
-                                />
-                            </Table>
-                            <Table className="ordinal">{recruit.ordinal}</Table>
-                            <Table className="email">{recruit.email}</Table>
-                        </div>
+            {sortedAlarms.map((recruit, index) => (
+                <TableBody key={index}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Table className="check">
+                            <input
+                                type="checkbox"
+                                checked={
+                                    selectedUserEmails.includes(
+                                        recruit.email,
+                                    ) || selectAll
+                                }
+                                onChange={e =>
+                                    handleCheckboxChange(
+                                        recruit.email,
+                                        e.target.checked,
+                                    )
+                                }
+                            />
+                        </Table>
+                        <Table className="ordinal">{recruit.ordinal}</Table>
+                        <Table className="email">{recruit.email}</Table>
                         <Table className="createdDate">
                             {recruit.createdDate}
                         </Table>
-                    </TableBody>
-                ))}
+                    </div>
+                </TableBody>
+            ))}
         </Wrapper>
     );
 }
