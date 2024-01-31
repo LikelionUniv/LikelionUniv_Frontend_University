@@ -12,7 +12,6 @@ import logo1 from '../../img/landing/logo1.svg';
 import logo2 from '../../img/landing/logo2.svg';
 //import logo3 from '../../img/landing/logo3.png';
 
-import rules from '../../constants/file/rules.pdf';
 import privacyPolicy from '../../constants/file/privacyPolicy.pdf';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,13 +32,6 @@ export const downloadFile = (url: string, fileName: string): void => {
 };
 
 function Footer(): JSX.Element {
-    const downloadRules = () => {
-        downloadFile(
-            rules,
-            '[멋쟁이사자처럼 대학 IT 창업 동아리 연합회칙].pdf',
-        );
-    };
-
     const downloadPrivacyPolicy = () => {
         downloadFile(
             privacyPolicy,
@@ -50,6 +42,10 @@ function Footer(): JSX.Element {
     const navigate = useNavigate();
     const goAdmin = () => {
         navigate('/likeliononlyadminuser2013');
+    };
+
+    const openRules = () => {
+        window.open('https://likelion.notion.site/IT-f719e7c7bed04422bf15d189c30dc4b7');
     };
 
     return (
@@ -131,7 +127,7 @@ function Footer(): JSX.Element {
                         </div>
                         <div className="section">
                             <div className="title">POLICY</div>
-                            <div className="text" onClick={downloadRules}>
+                            <div className="text" onClick={openRules}>
                                 회칙
                             </div>
                             <div
