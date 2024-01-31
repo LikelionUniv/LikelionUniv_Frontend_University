@@ -38,13 +38,13 @@ export default AdminPage;
 
 const Container = styled.div`
     max-width: 1600px;
-    min-width: 1024px;
+
     width: 100%;
     margin: 150px auto;
     display: flex;
     align-items: flex-start;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1200px) {
         padding: 0 40px;
     }
 

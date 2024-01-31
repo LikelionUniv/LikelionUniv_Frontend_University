@@ -9,9 +9,9 @@ import HeadUserList from './user/HeadUserList';
 
 function User() {
     const [order, setOrder] = useState<string | undefined>();
-    const [searchQuery, setSearchQuery] = useState<string | undefined>();
+    const [univName, setunivName] = useState<string | undefined>();
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-    const [selectedRole, setSelectedRole] = useState<string>('');
+    const [role, setRole] = useState<string | undefined>();
 
     const universityName = userinfo.universityName;
 
@@ -23,18 +23,15 @@ function User() {
             </div>
             {isAdmin && (
                 <Nav>
-                    <OrderDropDown
-                        setOrder={setOrder}
-                        onRoleChange={setSelectedRole}
-                    />
-                    <SearchBar setSearchQuery={setSearchQuery} />
+                    <OrderDropDown setRole={setRole} />
+                    <SearchBar setunivName={setunivName} />
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
                 {isAdmin ? (
-                    <HeadUserList order={order} searchQuery={searchQuery} />
+                    <HeadUserList role={role} univName={univName} />
                 ) : (
-                    <UserList order={order} searchQuery={searchQuery} />
+                    <UserList order={order} />
                 )}
             </Suspense>
         </Wrapper>

@@ -3,10 +3,10 @@ import * as S from './SearchBar.style';
 import SearchBtn from '../../../img/admin/search.svg';
 
 interface SearchBarProps {
-    setSearchQuery: React.Dispatch<React.SetStateAction<string | undefined>>;
+    setunivName: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-function SearchBar({ setSearchQuery }: SearchBarProps) {
+function SearchBar({ setunivName }: SearchBarProps) {
     const [query, setQuery] = useState<string>('');
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +16,7 @@ function SearchBar({ setSearchQuery }: SearchBarProps) {
     const onClick = (): void => {
         if (query.trim() === '') return;
 
-        setSearchQuery(query);
+        setunivName(query);
     };
 
     return (

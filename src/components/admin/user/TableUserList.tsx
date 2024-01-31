@@ -139,36 +139,29 @@ const Wrapper = styled.div`
     align-items: center;
 
     .name {
-        min-width: 90px;
         width: 90px;
     }
 
     .univ {
-        min-width: 170px;
         width: 170px;
     }
 
     .major {
-        min-width: 140px;
         width: 140px;
     }
 
     .ordinal {
-        min-width: 40px;
         width: 40px;
     }
 
     .part {
-        min-width: 120px;
         width: 120px;
     }
 
     .role {
-        min-width: 70px;
         width: 70px;
     }
     .email {
-        min-width: 200px;
         width: 200px;
     }
 `;
@@ -213,4 +206,17 @@ const Table = styled.div`
     min-height: 24px;
     margin-right: 20px;
     text-align: start;
+    font-size: 1rem;
+
+    @media (max-width: 1500px) {
+        padding: 12px 2px;
+        margin-right: 5px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 1200px) {
+        padding: 8px 2px;
+        margin-right: 0px;
+        font-size: 0.8rem;
+    }
 `;
