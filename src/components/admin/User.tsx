@@ -11,7 +11,7 @@ function User() {
     const [order, setOrder] = useState<string | undefined>();
     const [searchQuery, setSearchQuery] = useState<string | undefined>();
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-    const [selectedRole, setSelectedRole] = useState<string>('');
+    const [role, setRole] = useState<string | undefined>();
 
     const universityName = userinfo.universityName;
 
@@ -23,16 +23,13 @@ function User() {
             </div>
             {isAdmin && (
                 <Nav>
-                    <OrderDropDown
-                        setOrder={setOrder}
-                        onRoleChange={setSelectedRole}
-                    />
+                    <OrderDropDown setRole={setRole} />
                     <SearchBar setSearchQuery={setSearchQuery} />
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
                 {isAdmin ? (
-                    <HeadUserList order={order} searchQuery={searchQuery} />
+                    <HeadUserList role={role} searchQuery={searchQuery} />
                 ) : (
                     <UserList order={order} searchQuery={searchQuery} />
                 )}

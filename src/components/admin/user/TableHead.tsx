@@ -90,13 +90,33 @@ const HeadTable = styled.div`
         min-width: 200px;
         width: 200px;
     }
+
+    @media (max-width: 1500px) {
+        width: 90%;
+    }
+    @media (max-width: 1200px) {
+        width: 75%;
+    }
 `;
 
 const Table = styled.div`
     padding: 16px 4px;
-    height: 24px;
-    text-align: start;
+    min-height: 24px;
     margin-right: 20px;
+    text-align: start;
+    font-size: 1rem;
+
+    @media (max-width: 1500px) {
+        padding: 12px 2px;
+        margin-right: 5px;
+        font-size: 0.9rem;
+    }
+
+    @media (max-width: 1200px) {
+        padding: 8px 2px;
+        margin-right: 0px;
+        font-size: 0.8rem;
+    }
 `;
 
 const Divider = styled.div`
