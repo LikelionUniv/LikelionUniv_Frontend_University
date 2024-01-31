@@ -16,11 +16,15 @@ jobs:
               with:
                   node-version: lts/Hydrogen
 
+            - name: set up secrets
+              run: |
+                  echo "REACT_APP_REST_API_KEY=${{secrets.REACT_APP_REST_API_KEY}}" >> .env
+                  echo "REACT_APP_GOOGLE_CLIENT_ID=${{secrets.REACT_APP_GOOGLE_CLIENT_ID}}" >> .env
+                  echo "REACT_APP_REDIRECT_URI=${{secrets.REACT_APP_REDIRECT_URI}}" >> .env
+                  echo "REACT_APP_GOOGLE_REDIRECT_URI=${{secrets.REACT_APP_GOOGLE_REDIRECT_URI}}" >> .env
+            - run: cat .env
             - name: Install Dependencies
               run: npm install
-
-            - name: Update caniuse-lite
-              run: npx update-browserslist-db@latest
 
             - name: Build
               run: CI=false npm run build
