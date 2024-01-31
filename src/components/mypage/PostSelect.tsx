@@ -1,6 +1,4 @@
 import { useLocation, useParams } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../store/user';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
 import { MypagePostCardPropType } from './type';
 import { PostBoxWrapper } from './UserPostSelect';
@@ -8,11 +6,13 @@ import EmptyBox from './EmptyBox';
 import PostCard from './PostCard';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import { PaginationWrapper } from '../project/ProjectList.style';
+import { useAuth } from '../../hooks/useAuth';
 
 const PostSelect = ({ select }: { select: string }) => {
     const location = useLocation().pathname;
     const params = useParams();
-    const user = useRecoilValue(userState);
+    const { userinfo: user } = useAuth();
+
     const user_id =
         location.includes('userpage') && params.user_id !== undefined
             ? parseInt(params.user_id)

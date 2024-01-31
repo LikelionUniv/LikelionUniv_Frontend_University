@@ -12,18 +12,18 @@ import PostCard from './PostCard';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
 import { MypagePostCardPropType } from './type';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { likeOptionAtom } from '../../store/mypageData';
 import { useLocation, useParams } from 'react-router-dom';
-import { userState } from '../../store/user';
 import { PaginationWrapper } from '../project/ProjectList.style';
+import { useAuth } from '../../hooks/useAuth';
 
 const LikeSelect = ({ select }: { select: string }) => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [searchOption, setSearchOption] = useRecoilState(likeOptionAtom);
     const location = useLocation().pathname;
     const params = useParams();
-    const user = useRecoilValue(userState);
+    const { userinfo: user } = useAuth();
     const resetSearchOption = useResetRecoilState(likeOptionAtom);
     const user_id =
         location.includes('userpage') && params.user_id !== undefined

@@ -2,10 +2,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { requestUserInfo } from '../api/auth/auth';
 
-import { userState } from '../store/user';
-import { useSetRecoilState } from 'recoil';
-import { useEffect } from 'react';
-
 export type User = {
     name: string;
     profileImage: string;
@@ -23,8 +19,6 @@ const fallback = {
 };
 
 export const useAuth = () => {
-    const updateUserState = useSetRecoilState(userState);
-
     const access_token = localStorage.getItem('access_token');
     const queryClient = useQueryClient();
 
@@ -42,10 +36,6 @@ export const useAuth = () => {
         queryFn: fetchUser,
         enabled: !!access_token,
     });
-
-    useEffect(() => {
-        updateUserState(userinfo);
-    }, [userinfo, updateUserState]);
 
     const handleLogout = () => {
         localStorage.clear();
