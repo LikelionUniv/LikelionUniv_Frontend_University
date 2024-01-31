@@ -87,6 +87,10 @@ const Comment: React.FC<CommentProps> = ({
 
     //등록 or 수정
     const handleSubmit = () => {
+        if (inputValue.trim() === '') {
+            return;
+        }
+        
         if (isChildComment && !isModify) {
             childCommentSubmit();
         } else if (
