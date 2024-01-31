@@ -82,7 +82,7 @@ const SelectBorder = styled.div`
     height: 0px;
     border: 1px solid rgba(234, 236, 238, 1);
     margin-top: -2px;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 1200px;
     }
     @media (max-width: 1280px) {
@@ -101,7 +101,7 @@ export const PostBoxWrapper = styled.div`
     flex-wrap: wrap;
     position: relative;
     margin: 40.5px 0px 80px;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 1200px;
         height: 748px;
     }

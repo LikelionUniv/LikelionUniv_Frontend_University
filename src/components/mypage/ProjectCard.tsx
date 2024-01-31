@@ -41,7 +41,7 @@ const ProjectBox = styled.div`
         background-repeat: no-repeat;
         background-size: 100% 100%;
         margin-bottom: 16px;
-        @media (max-width: 1920px) {
+        @media (min-width: 1281px) {
             height: 216px;
         }
         @media (max-width: 1280px) {
