@@ -44,17 +44,6 @@ const TableTitle = styled.div`
     justify-content: space-between;
 `;
 
-const Button = styled.button`
-    padding: 0px 16px;
-    height: 40px;
-    margin-top: 15px;
-    background-color: #adb3ba;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    border: 1px solid #dcdfe3;
-`;
-
 const TitleAlarm = styled.div`
     display: flex;
     align-items: baseline;
