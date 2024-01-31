@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useGetAlarmList from '../../../query/get/useGetAlarmList';
+import useGetAlarmList, { IRecruits } from '../../../query/get/useGetAlarmList';
 import { useSelectedUsers } from '../SelectedUserContext';
-import { IRecruits } from '../../../query/get/useGetAlarmList';
 
 function TableAlarmList() {
     const {
@@ -73,10 +72,8 @@ function TableAlarmList() {
                         </Table>
                         <Table className="ordinal">{recruit.ordinal}</Table>
                         <Table className="email">{recruit.email}</Table>
-                        <Table className="createdDate">
-                            {recruit.createdDate}
-                        </Table>
                     </div>
+                    <Table className="createdDate">{recruit.createdDate}</Table>
                 </TableBody>
             ))}
         </Wrapper>
