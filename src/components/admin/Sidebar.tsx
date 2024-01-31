@@ -80,6 +80,15 @@ const Wrapper = styled.div<{ showSubList: boolean }>`
     min-width: 150px;
     margin: 15px 80px;
 
+    @media screen and (max-width: 1024px) {
+        margin: 15px 40px;
+    }
+
+    @media screen and (max-width: 768px) {
+        margin: 10px 20px;
+        min-width: 120px;
+    }
+
     .ParentTab {
         padding-left: 12px;
     }

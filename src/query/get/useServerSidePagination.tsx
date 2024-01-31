@@ -102,7 +102,7 @@ function useServerSidePagination<T>({
                 st,
                 oc,
             },
-        });        
+        });
 
         return response.data;
     };
