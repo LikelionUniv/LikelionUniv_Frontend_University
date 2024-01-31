@@ -52,11 +52,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/mypage',
-                element: (
-                    <ProtectedRouter>
-                        <MypageRoot />
-                    </ProtectedRouter>
-                ),
+                element: <MypageRoot />,
+
                 children: [
                     {
                         path: '',

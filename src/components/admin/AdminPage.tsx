@@ -3,6 +3,7 @@ import { useState } from 'react';
 import SideBar from './Sidebar';
 import styled from 'styled-components';
 import useGetUserInfo from '../../query/get/useGetUserInfo';
+import GlobalStyles from '../../styles/GlobalStyle';
 import { RolePriority } from '../../constants/Role';
 
 const AdminPage = () => {
@@ -40,4 +41,12 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-start;
+
+    @media screen and (max-width: 1024px) {
+        padding: 0 40px;
+    }
+
+    @media screen and (max-width: 767px) {
+        padding: 0;
+    }
 `;

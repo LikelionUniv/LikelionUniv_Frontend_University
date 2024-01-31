@@ -23,6 +23,7 @@ function TableHead() {
                                 onChange={handleSelectAllChange}
                             />
                         </Table>
+                        <Table className="ordinal">기수</Table>
                         <Table className="email">이메일</Table>
                     </div>
                     <Table className="date">알림 신청 날짜</Table>{' '}
@@ -49,6 +50,10 @@ const Wrapper = styled.div`
         height: 24px;
         accent-color: #ff7710;
         color: #ffffff;
+    }
+
+    .ordinal {
+        margin: 0 10px;
     }
 
     .email {

@@ -7,6 +7,7 @@ import { axiosInstance } from '../../../utils/axios';
 interface SelectedFile {
     id: number;
     name: string;
+    file: File;
 }
 
 interface EmailModalProps {
@@ -27,18 +28,17 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     const [isButtonActive, setIsButtonActive] = useState(false);
     const [inputreceivers, setInputreceivers] = useState('');
 
-    // 파일 첨부 처리 함수
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             const filesArray = Array.from(event.target.files).map(file => ({
-                id: Math.random(), // 임시 ID 생성
+                id: Math.random(),
                 name: file.name,
+                file: file,
             }));
             setSelectedFiles(filesArray);
         }
     };
 
-    // 파일 제거 함수
     const removeFile = (id: number) => {
         setSelectedFiles(selectedFiles.filter(file => file.id !== id));
     };
@@ -63,14 +63,37 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     const handleSendEmail = async () => {
         if (!isButtonActive) return;
 
+        const formData = new FormData();
+
+        const emailData = JSON.stringify({
+            receivers: receivers,
+            subject: subject,
+            contentsType: 'html',
+            contents: content,
+        });
+        const emailDataBlob = new Blob([emailData], {
+            type: 'application/json',
+        });
+        formData.append('sendEmailDto', emailDataBlob);
+
+        selectedFiles.forEach(selectedFile => {
+            if (selectedFile.file) {
+                formData.append(
+                    'attachments',
+                    selectedFile.file,
+                    selectedFile.name,
+                );
+            }
+        });
+
         try {
             const response = await axiosInstance.post(
-                '/api/admin/v1/alarm/recruit',
+                '/api/admin/v1/alarm/email',
+                formData,
                 {
-                    receivers: receivers,
-                    subject: subject,
-                    contentsType: 'html',
-                    contents: content,
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
                 },
             );
 
@@ -169,7 +192,7 @@ export const Wrapper = styled.div`
     width: fit-content;
     height: fit-content;
     margin: 0 auto;
-    margin-top: 32px;
+    margin-top: 100px;
     background-color: white;
     padding: 32px 24px 24px 24px;
     min-width: 688px;
@@ -288,7 +311,7 @@ const SelectedFileBox = styled.div`
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #dcdfe3;
-    margin-bottom: 16px;
+    margin: 16px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
