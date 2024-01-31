@@ -44,7 +44,7 @@ const partOrder: { [key in PartType]: number } = {
 
 const HeadUserList: React.FC<UserListProps> = ({
     order,
-    searchQuery,
+    univName,
     role,
 }: UserListProps) => {
     const { curPageItem: users, renderPaginationBtn } =
@@ -52,7 +52,7 @@ const HeadUserList: React.FC<UserListProps> = ({
             uri: '/api/admin/v1/headquaters/users',
             size: 10,
             sort: order,
-            search: searchQuery,
+            univName: univName,
             role: role,
         });
 

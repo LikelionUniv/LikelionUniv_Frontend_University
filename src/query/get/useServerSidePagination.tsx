@@ -14,6 +14,7 @@ interface IuseServerSidePagination {
     st?: string;
     oc?: string;
     role?: string;
+    univName?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -43,6 +44,7 @@ interface Pageable {
     st?: string;
     oc?: string;
     role?: string;
+    univName?: string;
 }
 
 function useServerSidePagination<T>({
@@ -55,6 +57,7 @@ function useServerSidePagination<T>({
     st,
     oc,
     role,
+    univName,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
@@ -105,6 +108,7 @@ function useServerSidePagination<T>({
                 st,
                 oc,
                 role,
+                univName,
             },
         });
 
@@ -114,7 +118,19 @@ function useServerSidePagination<T>({
     const { data: cachingData } = useSuspenseQuery({
         queryKey: [
             'get-pagiable',
-            { uri, size, sort, search, currentPage, mc, sc, st, oc, role },
+            {
+                uri,
+                size,
+                sort,
+                search,
+                currentPage,
+                mc,
+                sc,
+                st,
+                oc,
+                role,
+                univName,
+            },
         ],
         queryFn: fetchPagiableData,
     });
