@@ -8,7 +8,7 @@ export const SearchAndSortWrapper = styled.div`
     height: 54px;
     margin-top: 40px;
     z-index: 100;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 1200px;
     }
     @media (max-width: 1280px) {
