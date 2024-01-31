@@ -74,7 +74,6 @@ const Wrapper = styled.div`
     text-align: left;
     align-items: center;
     justify-content: space-between;
-    max-height: 1660px;
 
     .check {
         margin-right: 20px;
