@@ -3,6 +3,8 @@ import * as P from './ProjectList.style';
 import Projectbox from './Projectbox';
 import { ProjectAPI } from './ProjectList';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
+import NoneProject from './NoneProject';
+import { Gen } from './register/RegisterOptions';
 
 export interface Project {
     id: number;
@@ -40,8 +42,14 @@ function ProjectListInner({ projectApi, pageSize }: ProjectListInnerProps) {
 
     return (
         <>
-            <Projectbox projects={projects} />
-            <P.PaginationWrapper>{renderPaginationBtn()}</P.PaginationWrapper>
+        {projects.length > 0 ? (
+            <>
+                <Projectbox projects={projects} />
+                <P.PaginationWrapper>{renderPaginationBtn()}</P.PaginationWrapper>
+            </>
+        ): (
+            <NoneProject isRecentGen={projectApi.uri.includes(Gen.loadRecentFiveGen()[0].toString())} />
+        )}
         </>
     );
 }
