@@ -45,6 +45,10 @@ const ParentBox: React.FC<CommentProps> = props => {
     const [isReplyBoxVisible, setIsReplyBoxVisible] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
 
+    const profileImageUrl = props.hasUserProfileImageUrl
+        ? props.userProfileImageUrl
+        : profileImage;
+
     const menuVisibility = () => {
         setIsMenuVisible(!isMenuVisible);
     };
@@ -169,7 +173,7 @@ const ParentBox: React.FC<CommentProps> = props => {
                             }}
                         >
                             <img
-                                src={profileImage}
+                                src={`https://${profileImageUrl}`}
                                 alt=""
                                 className="profile"
                             />
