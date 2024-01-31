@@ -17,7 +17,7 @@ const PostWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 1200px;
         height: 1134px;
     }

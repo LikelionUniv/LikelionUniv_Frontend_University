@@ -17,7 +17,7 @@ export const PostCardBoxWrapper = styled.div<PhotoCheck>`
     flex-shrink: 0;
     position: relative;
     box-sizing: border-box;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 384px;
         height: 362px;
         padding: 24px 16px 18px 24px;
@@ -62,7 +62,7 @@ export const ProjectBoxWrapper = styled.div`
     padding-bottom: 16px;
     position: relative;
     box-sizing: border-box;
-    @media (max-width: 1920px) {
+    @media (min-width: 1281px) {
         width: 384px;
         height: 346px;
     }
@@ -149,7 +149,7 @@ export const PostCardBox = styled.div<PhotoCheck>`
         background-size: 100% 100%;
         z-index: 10;
         margin-bottom: 16px;
-        @media (max-width: 1920px) {
+        @media (min-width: 1281px) {
             height: 216px;
         }
         @media (max-width: 1280px) {

@@ -23,7 +23,7 @@ const Header: React.FC<HeaderProps> = ({
     const [isFollowed, setIsFollowed] = useState(postData.isFollowedAuthor);
     const isMyPost = postData.isMyPost;
     const profileImageUrl = postData.hasAuthorProfileImageUrl
-        ? postData.authorProfileImageUrl
+        ? `https://${postData.authorProfileImageUrl}`
         : profileImage;
 
     //팔로우 기능
@@ -48,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({
             <D.User>
                 <div className="left">
                     <img
-                        src={`https://${profileImageUrl}`}
+                        src={profileImageUrl}
                         alt=""
                         className="image"
                     />
