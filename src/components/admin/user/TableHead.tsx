@@ -58,30 +58,37 @@ const HeadTable = styled.div`
     }
 
     .name {
-        min-width: 120px;
+        min-width: 90px;
+        width: 90px;
     }
 
     .univ {
-        min-width: 205px;
+        min-width: 170px;
+        width: 170px;
     }
 
     .major {
-        min-width: 145px;
+        min-width: 140px;
+        width: 140px;
     }
 
     .ordinal {
-        min-width: 60px;
+        min-width: 40px;
+        width: 40px;
     }
 
     .part {
-        min-width: 125px;
+        min-width: 120px;
+        width: 120px;
     }
 
     .role {
-        min-width: 110px;
+        min-width: 70px;
+        width: 70px;
     }
     .email {
-        min-width: 30px;
+        min-width: 200px;
+        width: 200px;
     }
 `;
 
@@ -89,6 +96,7 @@ const Table = styled.div`
     padding: 16px 4px;
     height: 24px;
     text-align: start;
+    margin-right: 20px;
 `;
 
 const Divider = styled.div`

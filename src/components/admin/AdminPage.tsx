@@ -37,10 +37,11 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Container = styled.div`
+    max-width: 1600px;
+    min-width: 1024px;
     width: 100%;
-    margin: 150px 0;
+    margin: 150px auto;
     display: flex;
-    justify-content: center;
     align-items: flex-start;
 
     @media screen and (max-width: 1024px) {

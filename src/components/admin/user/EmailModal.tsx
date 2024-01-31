@@ -191,22 +191,18 @@ const BackgroundOverlay = styled.div`
 export const Wrapper = styled.div`
     width: fit-content;
     height: fit-content;
-    margin: 0 auto;
-    margin-top: 100px;
     background-color: white;
     padding: 32px 24px 24px 24px;
-    min-width: 688px;
+    min-width: 588px;
     min-height: 600px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 999;
     border-radius: 20px;
 
     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
 `;
-
 const Button = styled.div`
     margin: 20px;
     width: 95%;

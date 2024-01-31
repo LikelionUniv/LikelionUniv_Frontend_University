@@ -138,36 +138,38 @@ const Wrapper = styled.div`
     overflow-y: hidden;
     align-items: center;
 
-    //max-height: 1660px;
-
     .name {
-        min-width: 110px;
+        min-width: 90px;
+        width: 90px;
     }
 
     .univ {
-        min-width: 200px;
-        max-width: 200px;
+        min-width: 170px;
+        width: 170px;
     }
 
     .major {
         min-width: 140px;
-        max-width: 140px;
+        width: 140px;
     }
 
     .ordinal {
-        min-width: 50px;
+        min-width: 40px;
+        width: 40px;
     }
 
     .part {
         min-width: 120px;
+        width: 120px;
     }
 
     .role {
-        min-width: 100px;
+        min-width: 70px;
+        width: 70px;
     }
     .email {
         min-width: 200px;
-        max-width: 200px;
+        width: 200px;
     }
 `;
 
@@ -209,6 +211,6 @@ const TableBody = styled.div`
 const Table = styled.div`
     padding: 16px 4px;
     min-height: 24px;
-    margin-right: 8px;
+    margin-right: 20px;
     text-align: start;
 `;

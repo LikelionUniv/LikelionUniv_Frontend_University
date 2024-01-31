@@ -45,15 +45,6 @@ export default User;
 
 const Wrapper = styled.div`
     width: fit-content;
-    margin-right: 200px;
-
-    @media screen and (max-width: 1024px) {
-        margin-right: 100px;
-    }
-
-    @media screen and (max-width: 768px) {
-        margin-right: 50px;
-    }
 
     .TitleUniversity {
         display: flex;
