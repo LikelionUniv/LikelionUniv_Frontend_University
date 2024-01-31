@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import heart from '../../img/community/heart16.svg';
 import comment from '../../img/community/comment16.svg';
+import profileImage from '../../img/community/profile.svg';
 import { useNavigate } from 'react-router-dom';
 import DOMPurify from 'dompurify';
 
@@ -29,6 +30,10 @@ const PostBox: React.FC<PostBoxProp> = props => {
         navigate(`/community/${props.postId}`);
     };
 
+    const profileImageUrl = props.hasAuthorProfileImage
+        ? `https://${props.authorProfileImageUrl}`
+        : profileImage;
+
     return (
         <Wrapper onClick={onClick} isSearching={props.isSearching}>
             <BoxWrapper isSearching={props.isSearching}>
@@ -47,7 +52,7 @@ const PostBox: React.FC<PostBoxProp> = props => {
                         <Box
                             className="profile"
                             style={{
-                                backgroundImage: `url(${props.authorProfileImageUrl})`,
+                                backgroundImage: `url(${profileImageUrl})`,
                             }}
                         />
                         <div className="user">{props.authorName}</div>
