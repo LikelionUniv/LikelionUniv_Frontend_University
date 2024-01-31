@@ -27,12 +27,9 @@ function UserProfile({ userProfile }: UserProfileProps) {
         isMine: userProfile.isMine,
     }));
 
-    console.log(userProfile);
-
     const handleModal = (e: React.MouseEvent<HTMLDivElement>) => {
         let follow = e.currentTarget.dataset.type;
         setModalProps(() => ({ ...modalProps, follow }));
-        console.log(modalProps);
         openModal();
     };
 

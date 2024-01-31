@@ -1,13 +1,25 @@
-import {
-    useMutation,
-    useQueryClient,
-    useSuspenseQuery,
-} from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 
 import { axiosInstance } from '../../utils/axios';
 import { IuserProfile, IuserModify } from '../../components/mypage/type';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+
+const DEFAULT_USER_PROFILE = {
+    followerNum: 0,
+    followingNum: 0,
+    id: -1,
+    introduction: '',
+    isMine: false,
+    major: '',
+    name: '',
+    ordinal: -1,
+    part: '',
+    phoneNum: '',
+    profileImage: '',
+    role: '',
+    universityName: '',
+};
 
 async function fetchUserProfile(user_id: number): Promise<IuserProfile> {
     const response = await axiosInstance.get(`/api/v1/user/${user_id}/profile`);
@@ -15,9 +27,10 @@ async function fetchUserProfile(user_id: number): Promise<IuserProfile> {
 }
 
 export function useUserProfile(user_id: number) {
-    const { data: userProfile, error } = useSuspenseQuery({
+    const { data: userProfile = DEFAULT_USER_PROFILE, error } = useQuery({
         queryKey: ['user-profile', user_id],
         queryFn: () => fetchUserProfile(user_id),
+        enabled: user_id !== -1,
         retry: 0,
     });
 

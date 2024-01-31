@@ -42,6 +42,7 @@ export const useAuth = () => {
         queryFn: fetchUser,
         enabled: !!access_token,
     });
+
     useEffect(() => {
         updateUserState(userinfo);
     }, [userinfo, updateUserState]);
