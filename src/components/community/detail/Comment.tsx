@@ -1,6 +1,8 @@
 import * as D from './DetailStyle';
 import { useRef, useCallback, useState } from 'react';
 import request from '../../../utils/request';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../hooks/useAuth';
 
 export interface RegBtnProps {
     inputEmpty: boolean;
@@ -37,6 +39,8 @@ const Comment: React.FC<CommentProps> = ({
 }) => {
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
+    const queryClient = useQueryClient();
+    const { userinfo, isLoading } = useAuth();
     const handleResizeHeight = useCallback(() => {
         const textarea = textRef.current;
         if (textarea) {
@@ -63,6 +67,13 @@ const Comment: React.FC<CommentProps> = ({
         });
         onCommentUpdate();
         setInputValue('');
+
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
     };
 
     //대댓글 생성
@@ -71,6 +82,12 @@ const Comment: React.FC<CommentProps> = ({
             uri: `/api/v1/community/comments/${id}/child`,
             method: 'post',
             data: commentData,
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
         });
         window.location.reload();
     };
@@ -81,6 +98,9 @@ const Comment: React.FC<CommentProps> = ({
             uri: `/api/v1/community/${id}`,
             method: 'patch',
             data: commentData,
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
         });
         window.location.reload();
     };

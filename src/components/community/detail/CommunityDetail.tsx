@@ -57,6 +57,7 @@ const CommunityDetail = () => {
                 `/api/v1/community/comments?postId=${communityId}`,
             );
             setCommentData(response.data.data);
+            console.log(response.data.data);
         } catch (error) {
             console.error(error);
         }
@@ -178,6 +179,9 @@ const CommunityDetail = () => {
                                 hasUserProfileImageUrl={
                                     e.hasUserProfileImageUrl
                                 }
+                                hasUserProfileImage={
+                                  e.hasUserProfileImage
+                              }
                                 userProfileImageUrl={e.userProfileImageUrl}
                                 isLoginUserComment={e.isLoginUserComment}
                                 isAuthorComment={e.isAuthorComment}

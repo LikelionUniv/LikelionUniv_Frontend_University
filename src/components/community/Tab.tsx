@@ -23,7 +23,23 @@ const Tab: React.FC<TabProps> = ({
 
     const BoardClick = (boardName: string) => {
         setSelectedBoard(boardName);
-        setSelectedSubBoard('');
+    
+        let defaultSubBoard = '';
+        switch (boardName) {
+            case '멋쟁이사자처럼':
+                defaultSubBoard = '공지 사항';
+                break;
+            case '자유게시판':
+                defaultSubBoard = '정보공유';
+                break;
+            case '트랙별 소통 채널':
+                defaultSubBoard = '프론트엔드';
+                break;
+            default:
+                defaultSubBoard = '';
+        }
+        setSelectedSubBoard(defaultSubBoard);
+        onCategoryChange(boardName, defaultSubBoard);
     };
 
     const SubBoardClick = (subBoardName: string) => {

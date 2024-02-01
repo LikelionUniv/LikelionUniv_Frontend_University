@@ -7,12 +7,15 @@ import { ReactComponent as MenuIcon } from '../../../img/community/menu.svg';
 import Comment from './Comment';
 import request from '../../../utils/request';
 import { axiosInstance } from '../../../utils/axios';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface CommentProps {
     commentId: number;
     userId: number;
     userName: string;
     hasUserProfileImageUrl: boolean;
+    hasUserProfileImage: boolean;
     userProfileImageUrl?: string;
     isLoginUserComment: boolean;
     isAuthorComment: boolean;
@@ -43,9 +46,11 @@ const ParentBox: React.FC<CommentProps> = props => {
     const [likeNum, setLikeNum] = useState(props.likeCount);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isReplyBoxVisible, setIsReplyBoxVisible] = useState(false);
+    const queryClient = useQueryClient();
+    const { userinfo } = useAuth();
     const menuRef = useRef<HTMLDivElement>(null);
 
-    const profileImageUrl = props.hasUserProfileImageUrl
+    const profileImageUrl = props.hasUserProfileImageUrl || props.hasUserProfileImage
         ? `https://${props.userProfileImageUrl}`
         : profileImage;
 
@@ -77,7 +82,7 @@ const ParentBox: React.FC<CommentProps> = props => {
         };
     }, [menuRef]);
 
-    // 좋아요 생성 & 삭제
+    //댓글 좋아요 생성 & 삭제
     const createLike = async () => {
         const Data: LikeCreateType = {
             commentId: props.commentId,
@@ -103,6 +108,12 @@ const ParentBox: React.FC<CommentProps> = props => {
                 `/api/v1/community/disable/${props.commentId}`,
             );
             setIsDeleted(true);
+            queryClient.invalidateQueries({
+                queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+            });
         } catch (error) {
             console.error(error);
         }
@@ -134,6 +145,9 @@ const ParentBox: React.FC<CommentProps> = props => {
                                 userName={e.userName}
                                 hasUserProfileImageUrl={
                                     e.hasUserProfileImageUrl
+                                }
+                                hasUserProfileImage={
+                                    e.hasUserProfileImage
                                 }
                                 userProfileImageUrl={e.userProfileImageUrl}
                                 isLoginUserComment={e.isLoginUserComment}
@@ -253,6 +267,7 @@ const ParentBox: React.FC<CommentProps> = props => {
                             userId={e.userId}
                             userName={e.userName}
                             hasUserProfileImageUrl={e.hasUserProfileImageUrl}
+                            hasUserProfileImage={e.hasUserProfileImage}
                             userProfileImageUrl={e.userProfileImageUrl}
                             isLoginUserComment={e.isLoginUserComment}
                             isAuthorComment={e.isAuthorComment}

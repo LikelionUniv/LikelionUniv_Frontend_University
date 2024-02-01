@@ -28,6 +28,7 @@ export interface PostComment {
     userId: number;
     userName: string;
     hasUserProfileImageUrl: boolean;
+    hasUserProfileImage: boolean;
     userProfileImageUrl?: string;
     isLoginUserComment: boolean;
     isAuthorComment: boolean;
