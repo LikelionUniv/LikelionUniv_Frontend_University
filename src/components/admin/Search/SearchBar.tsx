@@ -13,20 +13,22 @@ function SearchBar({ setunivName }: SearchBarProps) {
         setQuery(event.currentTarget.value);
     };
 
-    const onClick = (): void => {
+    const onSearch = (event: React.FormEvent<HTMLFormElement>): void => {
+        event.preventDefault();
         if (query.trim() === '') return;
 
         setunivName(query);
     };
 
     return (
-        <S.Container>
+        <S.Container onSubmit={onSearch}>
+            {' '}
             <S.Input
                 type="text"
                 placeholder="대학 이름 검색"
                 onChange={onChange}
             />
-            <S.Search src={SearchBtn} onClick={onClick} />
+            <S.Search src={SearchBtn} onClick={() => setunivName(query)} />
         </S.Container>
     );
 }

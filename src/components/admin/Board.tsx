@@ -31,7 +31,6 @@ const Notice: React.FC<NoticeProps> = ({ selectedItem, searchQuery }) => {
     const content = selectedItem;
     const subtitle = contentSubtitles[content];
 
-    //api 연결할때 PostList에 props 추가해서 카테고리에 맞는 data 받아서 구성하도록 수정할 예정
     return (
         <Wrapper>
             <TitleContainer>

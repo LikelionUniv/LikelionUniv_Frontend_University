@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelectedUsers } from '../SelectedUserContext';
 import useDeleteUserList from '../../../query/delete/useDeleteUserList';
 import styled from 'styled-components';
-import EmailModal from './EmailModal';
+import EmailModal from '../modal/EmailModal';
 import { useUserProfile } from '../../../api/mypage/useUserProfile';
 import OutletContext from '../OutletContext';
 import { useOutletContext } from 'react-router-dom';
