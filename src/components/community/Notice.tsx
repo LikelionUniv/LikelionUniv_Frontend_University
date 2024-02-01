@@ -10,6 +10,8 @@ import Tab from './Tab';
 import useIsPC from '../../hooks/useIsPC';
 import Search from './Search';
 import CategoryModal from './CategoryModal';
+import { useAuth } from '../../hooks/useAuth';
+import { RolePriority } from '../../constants/Role';
 
 interface NoticeProps {
     searchQuery: string;
@@ -50,6 +52,18 @@ const Notice: React.FC<NoticeProps> = ({
     const [tabCategoryChanged, setTabCategoryChanged] = useState(false);
     const content = tabCategoryChanged ? selectedSubCategory : subCategory;
     const subtitle = contentSubtitles[content];
+
+    const { userinfo, isLoading } = useAuth();
+    const isSuperAdminInfo =
+        RolePriority.findIndex(role => role === userinfo.role) >= 4;
+
+    const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (isSuperAdminInfo && !isLoading) {
+            setIsSuperAdmin(true);
+        }
+    }, [isLoading, isSuperAdminInfo]);
 
     const handleCategoryChange = (
         newMainCategory: string,
@@ -149,7 +163,7 @@ const Notice: React.FC<NoticeProps> = ({
             <Divider />
             <Header isSearching={isSearching}>
                 <OrderDropDown onOrderChange={handleOrderChange} />
-                {content !== '공지 사항' && (
+                {isSuperAdmin ? (
                     <Button
                         onClick={() => navigate('/community/write')}
                         isSearching={isSearching}
@@ -157,6 +171,16 @@ const Notice: React.FC<NoticeProps> = ({
                         <img src={WriteIcon} alt="펜" />
                         글쓰기
                     </Button>
+                ) : (
+                    content !== '공지 사항' && (
+                        <Button
+                            onClick={() => navigate('/community/write')}
+                            isSearching={isSearching}
+                        >
+                            <img src={WriteIcon} alt="펜" />
+                            글쓰기
+                        </Button>
+                    )
                 )}
             </Header>
             {searchQuery ? (
