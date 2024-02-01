@@ -1,11 +1,11 @@
 import * as D from './DetailStyle';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
 import Like from './Like';
 import Comment from './Comment';
 import ParentBox from './ParentBox';
-import { Post, PostComment } from './CommentData';
+import { PostComment } from './CommentData';
 import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
 import { ReactComponent as CommentIcon } from '../../../img/community/comment20_900.svg';
 import { ReactComponent as CommentIconMobile } from '../../../img/community/comment16_900.svg';
@@ -14,16 +14,22 @@ import { ReactComponent as Menu } from '../../../img/community/menu_900.svg';
 import { axiosInstance } from '../../../utils/axios';
 import useIsPC from '../../../hooks/useIsPC';
 import DOMPurify from 'dompurify';
+import useGetPostDetail from '../../../query/get/useGetPostDetail';
+import useGetComment from '../../../query/get/useGetComment';
 
 const CommunityDetail = () => {
     const isPC = useIsPC();
     const navigate = useNavigate();
-    const [postData, setPostData] = useState<Post | null>(null);
-    const [commentData, setCommentData] = useState<PostComment[] | null>(null);
-    const [commentUpdate, setCommentUpdate] = useState(false);
+    const { communityId } = useParams();
+    const { data } = useGetPostDetail({
+      communityId : Number(communityId),
+    });
+    const { commentData } = useGetComment({
+      communityId : Number(communityId),
+    });
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-
+    
     const menuVisibility = () => {
         setIsMenuVisible(!isMenuVisible);
     };
@@ -43,49 +49,6 @@ const CommunityDetail = () => {
         };
     }, [menuRef]);
 
-    useEffect(() => {
-        fetchComments();
-    }, [commentUpdate]);
-
-    //댓글 조회
-    const fetchComments = async () => {
-        const path = window.location.pathname;
-        const pathParts = path.split('/');
-        const communityId = pathParts[pathParts.length - 1];
-        try {
-            const response = await axiosInstance.get(
-                `/api/v1/community/comments?postId=${communityId}`,
-            );
-            setCommentData(response.data.data);
-            console.log(response.data.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    //게시글 조회
-    useEffect(() => {
-        const fetchData = async () => {
-            const path = window.location.pathname;
-            const pathParts = path.split('/');
-            const communityId = pathParts[pathParts.length - 1];
-            try {
-                const response = await axiosInstance.get(
-                    `/api/v1/community/posts/${communityId}`,
-                );
-                setPostData(response.data.data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        fetchData();
-        fetchComments();
-    }, []);
-
-    const handleCommentUpdate = () => {
-        setCommentUpdate(prev => !prev);
-    };
-
     const goBack = () => {
         navigate('/community');
     };
@@ -94,7 +57,7 @@ const CommunityDetail = () => {
         navigate('/community/write', {
             state: {
                 mod: true,
-                id: `${postData?.postId}`,
+                id: `${data?.postId}`,
             },
         });
     };
@@ -103,7 +66,7 @@ const CommunityDetail = () => {
     const deletePost = async () => {
         try {
             await axiosInstance.delete(
-                `/api/v1/community/posts/${postData?.postId}`,
+                `/api/v1/community/posts/${data?.postId}`,
             );
             window.location.replace('/community');
         } catch (error) {
@@ -117,7 +80,7 @@ const CommunityDetail = () => {
         >
             <D.Back>
                 <ArrowIcon onClick={goBack} />
-                {postData?.isMyPost && (
+                {data?.isMyPost && (
                     <div className="menu">
                         <Menu onClick={menuVisibility} />
                         {isMenuVisible && (
@@ -135,29 +98,28 @@ const CommunityDetail = () => {
             </D.Back>
             <D.Container>
                 <div className="back" onClick={goBack}>
-                    <ArrowIcon /> {postData?.subCategory}
+                    <ArrowIcon /> {data.subCategory}
                 </div>
-                {postData && (
+                {data && (
                     <Header
-                        postData={postData}
+                        postData={data}
                         onDeletePost={deletePost}
                         onModifyPost={modifyPost}
                     />
                 )}
                 <D.TextArea
                     dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(postData?.body || ''),
+                        __html: DOMPurify.sanitize(data?.body || ''),
                     }}
                 />
-                {postData && <Like postData={postData} />}
+                {data && <Like postData={data} />}
                 <div className="count">
                     {isPC ? <CommentIcon /> : <CommentIconMobile />} 댓글
-                    <p style={{ color: '#ff7710' }}>{postData?.commentCount}</p>
+                    <p style={{ color: '#ff7710' }}>{data.commentCount}</p>
                 </div>
-                {postData && (
+                {data && (
                     <Comment
-                        id={postData.postId}
-                        onCommentUpdate={handleCommentUpdate}
+                        id={data.postId}
                     />
                 )}
                 <div
@@ -192,7 +154,6 @@ const CommunityDetail = () => {
                                 createdDate={e.createdDate}
                                 hasChildComments={e.hasChildComments}
                                 childComments={e.childComments}
-                                onCommentUpdate={handleCommentUpdate}
                             />
                         );
                     })}

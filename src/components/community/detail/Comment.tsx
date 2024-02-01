@@ -3,6 +3,7 @@ import { useRef, useCallback, useState } from 'react';
 import request from '../../../utils/request';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
 
 export interface RegBtnProps {
     inputEmpty: boolean;
@@ -26,11 +27,9 @@ interface CommentProps {
     isModify?: boolean;
     id: number;
     cancel?: () => void;
-    onCommentUpdate: () => void;
 }
 
 const Comment: React.FC<CommentProps> = ({
-    onCommentUpdate,
     contents,
     isChildComment = false,
     isModify = false,
@@ -40,7 +39,8 @@ const Comment: React.FC<CommentProps> = ({
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
     const queryClient = useQueryClient();
-    const { userinfo, isLoading } = useAuth();
+    const { userinfo } = useAuth();
+    const { communityId } = useParams();
     const handleResizeHeight = useCallback(() => {
         const textarea = textRef.current;
         if (textarea) {
@@ -65,7 +65,6 @@ const Comment: React.FC<CommentProps> = ({
             data: commentData,
             params: commentParams,
         });
-        onCommentUpdate();
         setInputValue('');
 
         queryClient.invalidateQueries({
@@ -73,6 +72,12 @@ const Comment: React.FC<CommentProps> = ({
         });
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', id],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', id],
         });
     };
 
@@ -89,8 +94,14 @@ const Comment: React.FC<CommentProps> = ({
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
         });
-        window.location.reload();
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', Number(communityId)],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', Number(communityId)],
+        });
     };
+
 
     //댓글, 대댓글 수정
     const modify = async () => {
@@ -102,7 +113,13 @@ const Comment: React.FC<CommentProps> = ({
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
         });
-        window.location.reload();
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', Number(communityId)],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', Number(communityId)],
+        });
+        
     };
 
     //등록 or 수정
@@ -113,11 +130,13 @@ const Comment: React.FC<CommentProps> = ({
         
         if (isChildComment && !isModify) {
             childCommentSubmit();
+            cancel && cancel();
         } else if (
             (isModify && isChildComment) ||
             (isModify && !isChildComment)
         ) {
             modify();
+            cancel && cancel();
         } else {
             commentSubmit();
         }

@@ -1,14 +1,14 @@
 import * as D from './DetailStyle';
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import profileImage from '../../../img/community/profile.svg';
 import { ReactComponent as HeartIcon } from '../../../img/community/heart16.svg';
 import { ReactComponent as LikedHeartIcon } from '../../../img/community/heart16_liked.svg';
 import { ReactComponent as MenuIcon } from '../../../img/community/menu.svg';
 import Comment from './Comment';
 import request from '../../../utils/request';
-import { axiosInstance } from '../../../utils/axios';
-import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../../hooks/useAuth';
+import usePatchComment from '../../../query/patch/usePatchComment';
 
 interface CommentProps {
     commentId: number;
@@ -28,7 +28,6 @@ interface CommentProps {
     childComments?: CommentProps[];
     parentId?: number;
     isChildComment?: boolean;
-    onCommentUpdate: () => void;
 }
 
 interface CommentId {
@@ -46,9 +45,15 @@ const ParentBox: React.FC<CommentProps> = props => {
     const [likeNum, setLikeNum] = useState(props.likeCount);
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const [isReplyBoxVisible, setIsReplyBoxVisible] = useState(false);
-    const queryClient = useQueryClient();
     const { userinfo } = useAuth();
+    const { communityId } = useParams();
     const menuRef = useRef<HTMLDivElement>(null);
+
+    const { mutate } = usePatchComment({
+        commentId: props.commentId,
+        communityId: Number(communityId),
+        userId: userinfo.userId
+    });
 
     const profileImageUrl = props.hasUserProfileImageUrl || props.hasUserProfileImage
         ? `https://${props.userProfileImageUrl}`
@@ -102,22 +107,10 @@ const ParentBox: React.FC<CommentProps> = props => {
     };
 
     //댓글 soft 삭제
-    const deleteComments = async () => {
-        try {
-            await axiosInstance.patch(
-                `/api/v1/community/disable/${props.commentId}`,
-            );
-            setIsDeleted(true);
-            queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
-            });
-            queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    };
+    const deleteComments = () => {
+        mutate();
+        setIsDeleted(true);
+    }
 
     if (isDeleted) {
         return (
@@ -157,7 +150,6 @@ const ParentBox: React.FC<CommentProps> = props => {
                                 body={e.body}
                                 isDeleted={e.isDeleted}
                                 createdDate={e.createdDate}
-                                onCommentUpdate={props.onCommentUpdate}
                             />
                         );
                     })}
@@ -175,7 +167,6 @@ const ParentBox: React.FC<CommentProps> = props => {
                         contents={props.body}
                         id={props.commentId}
                         cancel={modify}
-                        onCommentUpdate={props.onCommentUpdate}
                     />
                 ) : (
                     <>
@@ -252,7 +243,6 @@ const ParentBox: React.FC<CommentProps> = props => {
                         isChildComment
                         id={props.parentId || props.commentId}
                         cancel={replyBoxVisibility}
-                        onCommentUpdate={props.onCommentUpdate}
                     />
                 </D.ReplyBox>
             )}
@@ -276,7 +266,6 @@ const ParentBox: React.FC<CommentProps> = props => {
                             body={e.body}
                             isDeleted={e.isDeleted}
                             createdDate={e.createdDate}
-                            onCommentUpdate={props.onCommentUpdate}
                         />
                     );
                 })}

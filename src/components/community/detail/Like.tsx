@@ -43,6 +43,9 @@ const Like: React.FC<LikeProps> = ({ postData }) => {
             queryClient.invalidateQueries({
                 queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
             });
+            queryClient.invalidateQueries({
+                queryKey: ['community-detail', postData.postId],
+            });
 
         } catch (error) {
             console.error(error);

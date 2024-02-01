@@ -62,6 +62,9 @@ export function useUpdateUserProfile() {
             });
             alert('성공적으로 저장되었습니다.');
             navigate(-1);
+            queryClient.invalidateQueries({
+                queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+            });
         },
         onError: () => {
             alert('저장에 실패했습니다.');

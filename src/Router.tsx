@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { Suspense } from 'react';
 import SignUp from './routes/SignUp';
 import LoginPage from './routes/LoginPage';
 import LandingPage from './routes/LandingPage';
@@ -137,7 +138,10 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':communityId',
-                        element: <CommunityDetail />,
+                        element: <>
+                        <Suspense fallback={<div>loading...</div>}>
+                        <CommunityDetail />
+                        </Suspense></>,
                     },
                     {
                         path: 'write',
