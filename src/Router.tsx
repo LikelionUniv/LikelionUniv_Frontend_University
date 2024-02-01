@@ -138,10 +138,12 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':communityId',
-                        element: <>
-                        <Suspense fallback={<div>loading...</div>}>
-                        <CommunityDetail />
-                        </Suspense></>,
+                        element: 
+                            <>
+                                <Suspense fallback={<div>loading...</div>}>
+                                    <CommunityDetail />
+                                </Suspense>
+                            </>,
                     },
                     {
                         path: 'write',
