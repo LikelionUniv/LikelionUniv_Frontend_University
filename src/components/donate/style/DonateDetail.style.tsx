@@ -5,8 +5,12 @@ export const Container = styled.div`
     flex-direction: column;
 
     align-items: center;
-    width: 792px;
     margin: 100px auto;
+    padding: 0 20px;
+
+    @media screen and (max-width: 1000px) {
+        margin-top: 50px;
+    };
 `;
 
 export const Title = styled.div`
@@ -36,6 +40,7 @@ export const Nav = styled.div`
 
 export const Left = styled.div`
     display: flex;
+    align-items: center;
 `;
 
 export const Right = styled.div`
@@ -44,6 +49,8 @@ export const Right = styled.div`
 
 export const Profile = styled.img`
     margin-right: 8px;
+    width: 28px;
+    height: 28px;
 `;
 
 export const User = styled.div`

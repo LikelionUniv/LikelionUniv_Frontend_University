@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import eye from '../../img/donate/eye.svg';
-import comment from '../../img/community/comment16.svg';
 import { useNavigate } from 'react-router-dom';
 import { IPost } from './DonateComponentInner';
+import DefaultImage from '../../img/univ/_default.png';
 
 interface DonatePostBoxProps {
     post: IPost;
@@ -22,7 +22,7 @@ function DonatePostBox({ post }: DonatePostBoxProps) {
             <MetaInfo>
                 <Profile
                     style={{
-                        backgroundImage: `url(${post.authorProfileImage})`,
+                        backgroundImage: `url(${post.authorProfileImage ?? DefaultImage})`,
                     }}
                 />
                 <User className="user">{post.authorName}</User>

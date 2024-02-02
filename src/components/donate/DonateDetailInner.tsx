@@ -6,6 +6,7 @@ import download from '../../img/donate/download.svg';
 import { downloadFile } from '../layout/Footer';
 import { LeftArrow } from '../../img/project/detail';
 import useGetDonateDetail from '../../query/get/useGetDonateDetail';
+import DefaultImage from '../../img/univ/_default.png';
 
 function DonateDetailInner() {
     const { donationHistoryId } = useParams();
@@ -22,6 +23,15 @@ function DonateDetailInner() {
     const goList = () => {
         navigate('/donate');
     };
+
+    const makeProfileImage = () => {
+        if (data.authorProfileImage === null) {
+            return DefaultImage;
+        }
+
+        return `https://${data.authorProfileImage}`;
+    };
+    
     return (
         <>
             <D.Title>{data.title}</D.Title>
@@ -29,7 +39,7 @@ function DonateDetailInner() {
                 <D.Nav>
                     <D.Left>
                         <D.Profile
-                            src={`https://${data.authorProfileImage}`}
+                            src={makeProfileImage()}
                             alt="profile"
                         />
                         <D.User>{data.authorName}</D.User>
