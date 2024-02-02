@@ -1,5 +1,5 @@
 import React from 'react';
-import { OptionType } from '../DropDown/DropDown';
+import { OptionType } from './DropDown';
 import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../../img/arrow.svg';
 

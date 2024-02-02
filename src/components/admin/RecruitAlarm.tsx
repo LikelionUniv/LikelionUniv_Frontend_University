@@ -2,15 +2,13 @@ import React, { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import AlarmList from './recruit/AlarmList';
 import { SelectedUsersProvider, useSelectedUsers } from './SelectedUserContext';
-import EmailModal from './user/EmailModal';
 import EmailSendButton from './recruit/EmailSendButton';
+import AlarmRequest from './recruit/AlarmRequest';
+import useGetAlarmList from '../../query/get/useGetAlarmList';
 
 function RecruitAlarm() {
-    const [users, setUsers] = useState<string | undefined>();
-    const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-
-    const openEmailModal = () => setIsEmailModalOpen(true);
-    const closeEmailModal = () => setIsEmailModalOpen(false);
+    const { data } = useGetAlarmList({ ordinal: 12 });
+    const alarmCount = data ? data.alarms.length : 0;
 
     return (
         <SelectedUsersProvider>
@@ -18,7 +16,7 @@ function RecruitAlarm() {
                 <TableTitle>
                     <TitleAlarm>
                         <Title>모집 알림</Title>
-                        <AlarmRequest>알림 신청</AlarmRequest>
+                        <AlarmRequest count={alarmCount}></AlarmRequest>
                     </TitleAlarm>
                     <EmailSendButton />
                 </TableTitle>
@@ -54,15 +52,4 @@ const Title = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     line-height: 150%;
-`;
-
-const AlarmRequest = styled.div`
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--orange-600, #ff7710);
-
-    border-radius: 42px;
-    padding: 6px 12px 6px 12px;
-    margin: 12px;
-    background: #fff2e8;
 `;

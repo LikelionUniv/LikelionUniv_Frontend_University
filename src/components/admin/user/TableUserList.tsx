@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { User } from './Usertype';
 import { useSelectedUsers } from '../SelectedUserContext';
 import DeleteUser from './DeleteUser';
-import ModifyUser from './ModifyUser';
+import ModifyUser from '../modal/ModifyUser';
 import { useOutletContext } from 'react-router-dom';
 import OutletContext from '../OutletContext';
 
