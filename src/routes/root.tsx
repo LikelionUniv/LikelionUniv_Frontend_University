@@ -14,7 +14,7 @@ function Root() {
             location.pathname.match(/^\/community\/\d+$/));
 
     const hideFooter = !isPC && location.pathname === '/community';
-    const {isMobileView} = useIsViewMobileNav();
+    const { isMobileView } = useIsViewMobileNav();
 
     return (
         <>

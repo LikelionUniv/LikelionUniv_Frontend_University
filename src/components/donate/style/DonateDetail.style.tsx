@@ -10,7 +10,7 @@ export const Container = styled.div`
 
     @media screen and (max-width: 1000px) {
         margin-top: 50px;
-    };
+    }
 `;
 
 export const Title = styled.div`

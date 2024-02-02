@@ -23,7 +23,7 @@ function useGetPostDetail({ communityId }: useGetDonatePostProps) {
     };
 
     const { data } = useSuspenseQuery({
-        queryKey: ['community-detail',communityId],
+        queryKey: ['community-detail', communityId],
         queryFn: fetchPostDetail,
     });
 

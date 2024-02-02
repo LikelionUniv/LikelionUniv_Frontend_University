@@ -48,11 +48,10 @@ const Nav = () => {
         };
     }, [profileModal]);
 
-
-    const {isMobileView} = useIsViewMobileNav();
+    const { isMobileView } = useIsViewMobileNav();
 
     // 모바일 네브바 메뉴 상태
-    const[mobileMenu, setMobileMenu] = useState<boolean>(false);
+    const [mobileMenu, setMobileMenu] = useState<boolean>(false);
     // 경로 변경 시 메뉴 닫기
     useEffect(() => {
         setMobileMenu(false);

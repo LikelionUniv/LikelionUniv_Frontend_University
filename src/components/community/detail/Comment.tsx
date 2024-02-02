@@ -68,7 +68,10 @@ const Comment: React.FC<CommentProps> = ({
         setInputValue('');
 
         queryClient.removeQueries({
-            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
         });
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
@@ -89,7 +92,10 @@ const Comment: React.FC<CommentProps> = ({
             data: commentData,
         });
         queryClient.removeQueries({
-            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
         });
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
@@ -102,7 +108,6 @@ const Comment: React.FC<CommentProps> = ({
         });
     };
 
-
     //댓글, 대댓글 수정
     const modify = async () => {
         await request<CommentRegisterType, CommentId, null>({
@@ -111,7 +116,10 @@ const Comment: React.FC<CommentProps> = ({
             data: commentData,
         });
         queryClient.removeQueries({
-            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
         });
         queryClient.invalidateQueries({
             queryKey: ['community-detail', Number(communityId)],
@@ -119,7 +127,6 @@ const Comment: React.FC<CommentProps> = ({
         queryClient.invalidateQueries({
             queryKey: ['community-comment', Number(communityId)],
         });
-        
     };
 
     //등록 or 수정
@@ -127,7 +134,7 @@ const Comment: React.FC<CommentProps> = ({
         if (inputValue.trim() === '') {
             return;
         }
-        
+
         if (isChildComment && !isModify) {
             childCommentSubmit();
             cancel && cancel();

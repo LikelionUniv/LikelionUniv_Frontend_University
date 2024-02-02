@@ -7,12 +7,16 @@ interface usePatchCommentProps {
     userId: number;
 }
 
-function usePatchComment({ commentId, communityId, userId }: usePatchCommentProps) {
+function usePatchComment({
+    commentId,
+    communityId,
+    userId,
+}: usePatchCommentProps) {
     const queryClient = useQueryClient();
 
     const SoftdeleteComments = async () => {
         await request<null, null, null>({
-            uri:`/api/v1/community/disable/${commentId}`,
+            uri: `/api/v1/community/disable/${commentId}`,
             method: 'patch',
         });
     };
@@ -28,7 +32,10 @@ function usePatchComment({ commentId, communityId, userId }: usePatchCommentProp
                 queryKey: ['community-detail', communityId],
             });
             queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: `/api/v1/user/${userId}/posts/comment` }],
+                queryKey: [
+                    'get-pagiable',
+                    { uri: `/api/v1/user/${userId}/posts/comment` },
+                ],
             });
             queryClient.invalidateQueries({
                 queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],

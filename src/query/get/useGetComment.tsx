@@ -12,7 +12,7 @@ interface CommentParam {
 
 function useGetComment({ communityId }: useGetCommentProps) {
     const fetchComment = async () => {
-        const response = await request<null, PostComment[], CommentParam >({
+        const response = await request<null, PostComment[], CommentParam>({
             uri: `/api/v1/community/comments?postId=${communityId}`,
             method: 'get',
             params: {
@@ -23,7 +23,7 @@ function useGetComment({ communityId }: useGetCommentProps) {
     };
 
     const { data: commentData } = useSuspenseQuery({
-        queryKey: ['community-comment',communityId],
+        queryKey: ['community-comment', communityId],
         queryFn: fetchComment,
     });
 

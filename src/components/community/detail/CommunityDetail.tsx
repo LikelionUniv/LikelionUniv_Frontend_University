@@ -26,14 +26,14 @@ const CommunityDetail = () => {
     const { userinfo } = useAuth();
 
     const { data } = useGetPostDetail({
-      communityId : Number(communityId),
+        communityId: Number(communityId),
     });
     const { commentData } = useGetComment({
-      communityId : Number(communityId),
+        communityId: Number(communityId),
     });
     const [isMenuVisible, setIsMenuVisible] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
-    
+
     const menuVisibility = () => {
         setIsMenuVisible(!isMenuVisible);
     };
@@ -75,7 +75,10 @@ const CommunityDetail = () => {
                 `/api/v1/community/posts/${data?.postId}`,
             );
             queryClient.removeQueries({
-                queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+                queryKey: [
+                    'get-pagiable',
+                    { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+                ],
             });
             window.location.replace('/community');
         } catch (error) {
@@ -126,11 +129,7 @@ const CommunityDetail = () => {
                     {isPC ? <CommentIcon /> : <CommentIconMobile />} 댓글
                     <p style={{ color: '#ff7710' }}>{data.commentCount}</p>
                 </div>
-                {data && (
-                    <Comment
-                        id={data.postId}
-                    />
-                )}
+                {data && <Comment id={data.postId} />}
                 <div
                     className="empty"
                     style={{
@@ -150,9 +149,7 @@ const CommunityDetail = () => {
                                 hasUserProfileImageUrl={
                                     e.hasUserProfileImageUrl
                                 }
-                                hasUserProfileImage={
-                                  e.hasUserProfileImage
-                              }
+                                hasUserProfileImage={e.hasUserProfileImage}
                                 userProfileImageUrl={e.userProfileImageUrl}
                                 isLoginUserComment={e.isLoginUserComment}
                                 isAuthorComment={e.isAuthorComment}

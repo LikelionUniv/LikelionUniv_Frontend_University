@@ -31,17 +31,14 @@ function DonateDetailInner() {
 
         return `https://${data.authorProfileImage}`;
     };
-    
+
     return (
         <>
             <D.Title>{data.title}</D.Title>
             <D.Body>
                 <D.Nav>
                     <D.Left>
-                        <D.Profile
-                            src={makeProfileImage()}
-                            alt="profile"
-                        />
+                        <D.Profile src={makeProfileImage()} alt="profile" />
                         <D.User>{data.authorName}</D.User>
                     </D.Left>
                     <D.Right>

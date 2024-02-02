@@ -53,14 +53,15 @@ const ParentBox: React.FC<CommentProps> = props => {
     const { mutate } = usePatchComment({
         commentId: props.commentId,
         communityId: Number(communityId),
-        userId: userinfo.userId
+        userId: userinfo.userId,
     });
 
     const queryClient = useQueryClient();
 
-    const profileImageUrl = props.hasUserProfileImageUrl || props.hasUserProfileImage
-        ? `https://${props.userProfileImageUrl}`
-        : profileImage;
+    const profileImageUrl =
+        props.hasUserProfileImageUrl || props.hasUserProfileImage
+            ? `https://${props.userProfileImageUrl}`
+            : profileImage;
 
     const menuVisibility = () => {
         setIsMenuVisible(!isMenuVisible);
@@ -113,10 +114,13 @@ const ParentBox: React.FC<CommentProps> = props => {
     const deleteComments = () => {
         mutate();
         queryClient.removeQueries({
-            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
         });
         setIsDeleted(true);
-    }
+    };
 
     if (isDeleted) {
         return (
@@ -145,9 +149,7 @@ const ParentBox: React.FC<CommentProps> = props => {
                                 hasUserProfileImageUrl={
                                     e.hasUserProfileImageUrl
                                 }
-                                hasUserProfileImage={
-                                    e.hasUserProfileImage
-                                }
+                                hasUserProfileImage={e.hasUserProfileImage}
                                 userProfileImageUrl={e.userProfileImageUrl}
                                 isLoginUserComment={e.isLoginUserComment}
                                 isAuthorComment={e.isAuthorComment}

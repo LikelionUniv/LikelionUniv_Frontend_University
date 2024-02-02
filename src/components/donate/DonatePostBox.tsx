@@ -22,7 +22,9 @@ function DonatePostBox({ post }: DonatePostBoxProps) {
             <MetaInfo>
                 <Profile
                     style={{
-                        backgroundImage: `url(${post.authorProfileImage ?? DefaultImage})`,
+                        backgroundImage: `url(${
+                            post.authorProfileImage ?? DefaultImage
+                        })`,
                     }}
                 />
                 <User className="user">{post.authorName}</User>
@@ -74,8 +76,8 @@ const MetaInfo = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    min-width: 270px;     
-    
+    min-width: 270px;
+
     @media screen and (max-width: 767px) {
         min-width: 200px;
     }
@@ -107,7 +109,7 @@ const User = styled.p`
     line-height: 150%;
     height: 21px;
     white-space: nowrap;
-        
+
     @media screen and (max-width: 767px) {
         margin-right: 10px;
     }
@@ -122,7 +124,7 @@ const Date = styled.p`
     font-weight: 500;
     line-height: 150%;
     white-space: nowrap;
-    
+
     @media screen and (max-width: 767px) {
         margin-right: 8px;
     }

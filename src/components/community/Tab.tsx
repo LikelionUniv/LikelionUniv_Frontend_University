@@ -23,7 +23,7 @@ const Tab: React.FC<TabProps> = ({
 
     const BoardClick = (boardName: string) => {
         setSelectedBoard(boardName);
-    
+
         let defaultSubBoard = '';
         switch (boardName) {
             case '멋쟁이사자처럼':
