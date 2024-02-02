@@ -87,9 +87,7 @@ const CommunityDetail = () => {
     };
 
     return (
-        <div
-            style={{ display: 'flex', flexDirection: 'column', width: '100%' }}
-        >
+        <D.DetailContainer>
             <D.Back>
                 <ArrowIcon onClick={goBack} />
                 {data?.isMyPost && (
@@ -171,7 +169,7 @@ const CommunityDetail = () => {
                     </a>
                 )}
             </D.Container>
-        </div>
+        </D.DetailContainer>
     );
 };
 

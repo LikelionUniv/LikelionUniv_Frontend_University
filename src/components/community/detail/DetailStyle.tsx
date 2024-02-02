@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { RegBtnProps } from './Comment';
 
+export const DetailContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
 export const Back = styled.div`
     display: none;
     position: fixed;
