@@ -25,6 +25,10 @@ export const Title = styled.header`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+
+    @media screen and (max-width: 1000px) {
+        margin-top: 70px;
+    }
 `;
 
 export const Caption = styled.div`
