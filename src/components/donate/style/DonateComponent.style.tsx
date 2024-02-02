@@ -17,6 +17,10 @@ export const Nav = styled.div`
 
     width: 100%;
     margin: 100px 0 40px 0;
+
+    @media screen and (max-width: 1000px) {
+        margin-top: 50px;
+    }
 `;
 
 export const Divider = styled.div`
