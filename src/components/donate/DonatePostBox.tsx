@@ -17,29 +17,21 @@ function DonatePostBox({ post }: DonatePostBoxProps) {
     };
 
     return (
-        <Wrapper>
-            <BoxWrapper onClick={() => goDetail(post.donationHistoryId)}>
-                <Box className="title">{post.title}</Box>
-                <Box className="nav">
-                    <div className="wrapper">
-                        <Box
-                            className="profile"
-                            style={{
-                                backgroundImage: `url(${post.authorProfileImage})`,
-                            }}
-                        ></Box>
-                        <div className="user">{post.authorName}</div>
-                    </div>
-                    <Dot />
-                    <Box className="date">{post.createdDate}</Box>
-                    <Dot />
-                    <div className="wrapper">
-                        <img src={eye} alt="eye" className="eye" />
-                        <div>{post.viewCount}</div>
-                    </div>
-                    <Dot />
-                </Box>
-            </BoxWrapper>
+        <Wrapper onClick={() => goDetail(post.donationHistoryId)}>
+            <Title>{post.title}</Title>
+            <MetaInfo>
+                <Profile
+                    style={{
+                        backgroundImage: `url(${post.authorProfileImage})`,
+                    }}
+                />
+                <User className="user">{post.authorName}</User>
+                <Date className="date">{post.createdDate}</Date>
+                <ShownCount>
+                    <Eye src={eye} alt="eye" className="eye" />
+                    <ShownNumber>{post.viewCount}</ShownNumber>
+                </ShownCount>
+            </MetaInfo>
         </Wrapper>
     );
 }
@@ -47,11 +39,11 @@ function DonatePostBox({ post }: DonatePostBoxProps) {
 export default DonatePostBox;
 
 const Wrapper = styled.div`
-    width: 100%;
-    height: 64px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    height: 64px;
 
     border-top: 1px solid var(--Grey-400, #dcdfe3);
 
@@ -60,88 +52,100 @@ const Wrapper = styled.div`
     }
 `;
 
-const BoxWrapper = styled.div`
-    display: flex;
-`;
-
-const Dot = styled.div`
-    width: 2px;
-    height: 2px;
-    background-color: var(--Grey-500, #d1d4d8);
-    border-radius: 50%;
-`;
-
-export const Box = styled.div<{ img?: string | null }>`
-    line-height: 150%;
+const Title = styled.p`
+    max-width: 500px;
+    width: 100%;
+    color: var(--Grey-900, #212224);
+    font-family: Pretendard;
+    font-size: 18px;
+    font-style: normal;
     font-weight: 500;
-    &.date {
-        color: var(--Grey-700, #868c94);
+    line-height: 150%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
-        /* Body/14_Medium */
-        font-family: Pretendard;
+    @media screen and (max-width: 767px) {
         font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 150%; /* 21px */
     }
-    &.title {
-        color: var(--Grey-900, #212224);
-        /* Subtitle/18_Medium */
-        font-family: Pretendard;
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 150%; /* 27px */
-        width: 894px;
+`;
+
+const MetaInfo = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 270px;     
+    
+    @media screen and (max-width: 767px) {
+        min-width: 200px;
     }
-    &.nav {
-        display: inline-flex;
-        align-items: center;
-        margin-top: auto;
-        height: 28px;
-        gap: 6px;
-        font-size: 14px;
-        color: rgba(134, 140, 148, 1);
-        & > div {
-            &.wrapper {
-                display: flex;
-                align-items: center;
-                gap: 4px;
-                .eye {
-                    width: 16px;
-                    height: 16px;
-                    background-repeat: no-repeat;
-                    background-image: url(${eye});
-                }
-                .comment {
-                    width: 16px;
-                    height: 16px;
-                    background-repeat: no-repeat;
-                    background-image: url(${comment});
-                }
-                .user {
-                    color: var(--Grey-900, #212224);
-                    /* Subtitle/14_Bold */
-                    font-family: Pretendard;
-                    font-size: 14px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 150%;
-                    width: 37px;
-                    height: 21px;
-                    gap: 6px;
-                }
-                .profile {
-                    background-repeat: no-repeat;
-                    flex-shrink: 0;
-                    width: 28px;
-                    height: 28px;
-                    background-size: cover;
-                    border-radius: 50%;
-                    border: 0.5px solid #eaecee;
-                    margin-right: 6px;
-                }
-            }
-        }
+`;
+
+const Profile = styled.img`
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background-size: cover;
+    border-radius: 50%;
+    border: 0.5px solid #eaecee;
+    margin-right: 6px;
+
+    @media screen and (max-width: 767px) {
+        width: 20px;
+        height: 20px;
     }
+`;
+
+const User = styled.p`
+    margin-right: 35px;
+    color: var(--Grey-900, #212224);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+    height: 21px;
+    white-space: nowrap;
+        
+    @media screen and (max-width: 767px) {
+        margin-right: 10px;
+    }
+`;
+
+const Date = styled.p`
+    margin-right: 27px;
+    color: var(--Grey-700, #868c94);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    white-space: nowrap;
+    
+    @media screen and (max-width: 767px) {
+        margin-right: 8px;
+    }
+`;
+
+const ShownCount = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const Eye = styled.img`
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image: url(${eye});
+    margin-right: 5px;
+`;
+
+const ShownNumber = styled.p`
+    color: var(--Grey-700, #868c94);
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
+    white-space: nowrap;
 `;

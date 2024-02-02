@@ -5,8 +5,9 @@ export const Wrapper = styled.div`
     flex-direction: column;
 
     align-items: center;
-    width: 1200px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 `;
 
 export const Nav = styled.div`
