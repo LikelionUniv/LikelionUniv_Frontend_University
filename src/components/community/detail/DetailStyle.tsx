@@ -158,7 +158,7 @@ export const Title = styled.div`
 
     @media screen and (max-width: 767px) {
         font-size: 20px;
-        margin: 68px 0 16px 0;
+        margin: 20px 0 16px 0;
     }
 `;
 
