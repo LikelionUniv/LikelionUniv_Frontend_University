@@ -12,6 +12,7 @@ import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
 import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
 import { ReactComponent as Cancel } from '../img/nav/cancel.svg';
+import useIsViewMobileNav from '../hooks/useIsViewMobileNav';
 // import default_profile from '../img/mypage/default_profile.svg';
 
 const Nav = () => {
@@ -47,25 +48,11 @@ const Nav = () => {
         };
     }, [profileModal]);
 
-    // 모바일 뷰 감지
-    const [width, setWidth] = useState<number>(window.innerWidth);
-    const [isPC, setIsPC] = useState<boolean>(true);
-    useEffect(() => {
-        const handleResize = debounce(() => {
-            setWidth(window.innerWidth);
-        }, 200);
-        window.addEventListener(`resize`, handleResize);
-        return () => {
-            window.removeEventListener(`resize`, handleResize);
-        };
-    }, []);
-    useEffect(() => {
-        if (width > 1000) setIsPC(true);
-        else setIsPC(false);
-    }, [width]);
+
+    const {isMobileView} = useIsViewMobileNav();
 
     // 모바일 네브바 메뉴 상태
-    const [mobileMenu, setMobileMenu] = useState<boolean>(false);
+    const[mobileMenu, setMobileMenu] = useState<boolean>(false);
     // 경로 변경 시 메뉴 닫기
     useEffect(() => {
         setMobileMenu(false);
@@ -119,7 +106,7 @@ const Nav = () => {
                     : undefined
             }
         >
-            {isPC ? (
+            {!isMobileView ? (
                 <Container>
                     <div className="left">
                         <Logo src={logo} onClick={() => navigate('/')} />

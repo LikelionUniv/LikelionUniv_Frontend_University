@@ -9,6 +9,7 @@ import Comment from './Comment';
 import request from '../../../utils/request';
 import { useAuth } from '../../../hooks/useAuth';
 import usePatchComment from '../../../query/patch/usePatchComment';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface CommentProps {
     commentId: number;
@@ -54,6 +55,8 @@ const ParentBox: React.FC<CommentProps> = props => {
         communityId: Number(communityId),
         userId: userinfo.userId
     });
+
+    const queryClient = useQueryClient();
 
     const profileImageUrl = props.hasUserProfileImageUrl || props.hasUserProfileImage
         ? `https://${props.userProfileImageUrl}`
@@ -109,6 +112,9 @@ const ParentBox: React.FC<CommentProps> = props => {
     //댓글 soft 삭제
     const deleteComments = () => {
         mutate();
+        queryClient.removeQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+        });
         setIsDeleted(true);
     }
 

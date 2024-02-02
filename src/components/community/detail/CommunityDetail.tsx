@@ -16,11 +16,15 @@ import useIsPC from '../../../hooks/useIsPC';
 import DOMPurify from 'dompurify';
 import useGetPostDetail from '../../../query/get/useGetPostDetail';
 import useGetComment from '../../../query/get/useGetComment';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../hooks/useAuth';
 
 const CommunityDetail = () => {
     const isPC = useIsPC();
     const navigate = useNavigate();
     const { communityId } = useParams();
+    const { userinfo } = useAuth();
+
     const { data } = useGetPostDetail({
       communityId : Number(communityId),
     });
@@ -33,6 +37,8 @@ const CommunityDetail = () => {
     const menuVisibility = () => {
         setIsMenuVisible(!isMenuVisible);
     };
+
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -68,6 +74,9 @@ const CommunityDetail = () => {
             await axiosInstance.delete(
                 `/api/v1/community/posts/${data?.postId}`,
             );
+            queryClient.removeQueries({
+                queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
+            });
             window.location.replace('/community');
         } catch (error) {
             console.error(error);

@@ -67,7 +67,7 @@ const Comment: React.FC<CommentProps> = ({
         });
         setInputValue('');
 
-        queryClient.invalidateQueries({
+        queryClient.removeQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
         });
         queryClient.invalidateQueries({
@@ -88,7 +88,7 @@ const Comment: React.FC<CommentProps> = ({
             method: 'post',
             data: commentData,
         });
-        queryClient.invalidateQueries({
+        queryClient.removeQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
         });
         queryClient.invalidateQueries({
@@ -110,7 +110,7 @@ const Comment: React.FC<CommentProps> = ({
             method: 'patch',
             data: commentData,
         });
-        queryClient.invalidateQueries({
+        queryClient.removeQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/user/${userinfo.userId}/posts/comment` }],
         });
         queryClient.invalidateQueries({
