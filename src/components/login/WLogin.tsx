@@ -20,7 +20,7 @@ export default function WLogin({ google_login, kakao_login }: LoginProps) {
                     <span>Google 계정으로 로그인</span>
                 </W.GoogleBtn>
                 <W.KakaoBtn onClick={kakao_login}>
-                    <span>카카오 로그인</span>
+                    <span>카카오 계정으로 로그인</span>
                 </W.KakaoBtn>
             </W.Box>
         </W.Container>
