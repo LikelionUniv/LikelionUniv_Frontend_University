@@ -1,7 +1,9 @@
 import React from 'react';
-import LoginImage from '../../../img/login/Login.png';
 import * as ML from './MLogin.style';
 import MMoreInfo from './MMoreInfo';
+import LoginImage from '../../../img/login/Login.png';
+import googleIcon from '../../../img/login/google-icon.svg';
+import kakaoIcon from '../../../img/login/kakao-icon.svg';
 
 interface LoginProps {
     google_login: () => void;
@@ -21,9 +23,11 @@ const MLogin = ({ google_login, kakao_login }: LoginProps) => {
 
                 <ML.Box>
                     <ML.GoogleBtn onClick={google_login}>
+                        <img src={googleIcon} alt="google_logo" />
                         <span>Google 계정으로 로그인</span>
                     </ML.GoogleBtn>
                     <ML.KakaoBtn onClick={kakao_login}>
+                        <img src={kakaoIcon} alt="kakao_logo" />
                         <span>카카오 계정으로 로그인</span>
                     </ML.KakaoBtn>
                 </ML.Box>
