@@ -4,7 +4,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 588px;
+    width: 50%;
     height: 40px;
     flex-shrink: 0;
     border-radius: 6px;
@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Input = styled.input`
-    width: 80%;
+    width: 70%;
     padding: 8px 16px;
     border: none;
     outline: none;

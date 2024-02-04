@@ -9,7 +9,7 @@ const Community: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [selectedMainCategory, setSelectedMainCategory] =
         useState('멋쟁이사자처럼');
-    const [selectedSubCategory, setSelectedSubCategory] = useState('공지 사항');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('공지사항');
 
     const handleCategorySelect = (
         mainCategory: string,
@@ -70,8 +70,13 @@ const Container = styled.div`
         padding: 0 40px;
     }
 
+    @media screen and (max-width: 1000px) {
+        margin-top: 78px;
+        padding: 0 40px;
+    }
+
     @media screen and (max-width: 767px) {
-        margin-top: 55px;
+        margin-top: 7px;
         padding: 0;
         min-width: 0;
     }

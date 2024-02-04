@@ -1,6 +1,9 @@
 import * as D from './DetailStyle';
 import { useRef, useCallback, useState } from 'react';
 import request from '../../../utils/request';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../hooks/useAuth';
+import { useParams } from 'react-router-dom';
 
 export interface RegBtnProps {
     inputEmpty: boolean;
@@ -24,11 +27,9 @@ interface CommentProps {
     isModify?: boolean;
     id: number;
     cancel?: () => void;
-    onCommentUpdate: () => void;
 }
 
 const Comment: React.FC<CommentProps> = ({
-    onCommentUpdate,
     contents,
     isChildComment = false,
     isModify = false,
@@ -37,6 +38,9 @@ const Comment: React.FC<CommentProps> = ({
 }) => {
     const [inputValue, setInputValue] = useState<string>(contents || '');
     const textRef = useRef<HTMLTextAreaElement>(null);
+    const queryClient = useQueryClient();
+    const { userinfo } = useAuth();
+    const { communityId } = useParams();
     const handleResizeHeight = useCallback(() => {
         const textarea = textRef.current;
         if (textarea) {
@@ -61,8 +65,23 @@ const Comment: React.FC<CommentProps> = ({
             data: commentData,
             params: commentParams,
         });
-        onCommentUpdate();
         setInputValue('');
+
+        queryClient.removeQueries({
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', id],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', id],
+        });
     };
 
     //대댓글 생성
@@ -72,7 +91,21 @@ const Comment: React.FC<CommentProps> = ({
             method: 'post',
             data: commentData,
         });
-        window.location.reload();
+        queryClient.removeQueries({
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', Number(communityId)],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', Number(communityId)],
+        });
     };
 
     //댓글, 대댓글 수정
@@ -82,7 +115,18 @@ const Comment: React.FC<CommentProps> = ({
             method: 'patch',
             data: commentData,
         });
-        window.location.reload();
+        queryClient.removeQueries({
+            queryKey: [
+                'get-pagiable',
+                { uri: `/api/v1/user/${userinfo.userId}/posts/comment` },
+            ],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-detail', Number(communityId)],
+        });
+        queryClient.invalidateQueries({
+            queryKey: ['community-comment', Number(communityId)],
+        });
     };
 
     //등록 or 수정
@@ -90,14 +134,16 @@ const Comment: React.FC<CommentProps> = ({
         if (inputValue.trim() === '') {
             return;
         }
-        
+
         if (isChildComment && !isModify) {
             childCommentSubmit();
+            cancel && cancel();
         } else if (
             (isModify && isChildComment) ||
             (isModify && !isChildComment)
         ) {
             modify();
+            cancel && cancel();
         } else {
             commentSubmit();
         }

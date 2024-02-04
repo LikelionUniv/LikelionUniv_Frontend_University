@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { RegBtnProps } from './Comment';
 
+export const DetailContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+`;
+
 export const Back = styled.div`
     display: none;
     position: fixed;
@@ -158,7 +164,7 @@ export const Title = styled.div`
 
     @media screen and (max-width: 767px) {
         font-size: 20px;
-        margin: 68px 0 16px 0;
+        margin: 20px 0 16px 0;
     }
 `;
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelectedUsers } from '../SelectedUserContext';
-import EmailModal from '../user/EmailModal';
+import EmailModal from '../modal/EmailModal';
 import { styled } from 'styled-components';
 
 interface EmailSendProps {

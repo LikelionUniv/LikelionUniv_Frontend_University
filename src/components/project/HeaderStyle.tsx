@@ -17,6 +17,10 @@ export const HeaderContainer = styled.div`
     &::-webkit-scrollbar {
         display: none;
     }
+
+    @media screen and (max-width: 1000px) {
+        margin-top: 70px;
+    }
 `;
 
 export const TabContainer = styled.div`

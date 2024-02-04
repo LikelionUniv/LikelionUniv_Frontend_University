@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { FormState, ProjectDetail } from './ProjectUpdate';
+import { ProjectDetail } from './ProjectUpdate';
 import { Tech, Thon } from '../register/RegisterOptions';
+import { FormState } from '../register/ProjectRegister';
 
 interface updateInitializerProps {
     project: ProjectDetail;

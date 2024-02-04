@@ -24,30 +24,12 @@ import {
 } from '../register/RegisterOptions';
 import UserFind from '../register/user/UserFind';
 import UserEnrolled from '../register/user/UserEnrolled';
-import { Member, ProjectRegisterType } from '../register/ProjectRegister';
+import { FormState, Image, Member, ProjectRegisterType } from '../register/ProjectRegister';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import useGetProjectDetail from '../../../query/get/useGetProjectDetail';
 import useUpdateInitializer from './useUpdateInitializer';
 import usePatchProjectUpdate from '../../../query/patch/usePatchProjectUpdate';
-
-/* form type */
-export interface FormState {
-    activity: string;
-    activityEtc: string;
-    outPut: string;
-    serviceName: string;
-    ordinal: string;
-    univ: string;
-    startDate: string;
-    endDate: string;
-    projectTeches: string[];
-    projectTechEtc: string;
-    description: string;
-    content: string;
-    productionUrl: string;
-    images: Image[];
-    projectMembers: Member[];
-}
+import DatePicker from '../DatePicker';
 
 export interface ProjectDetail {
     id: number;
@@ -64,11 +46,6 @@ export interface ProjectDetail {
     projectTech: string[];
     imageUrl: string[];
     members: Member[];
-}
-
-interface Image {
-    file?: File;
-    src: string;
 }
 
 const ProjectUpdate = () => {
@@ -456,35 +433,9 @@ const ProjectUpdate = () => {
                 <P.Field>
                     <P.Label>제작 기간</P.Label>
                     <P.FlexField>
-                        <P.PeriodInput
-                            type="date"
-                            placeholder="YYYY-MM-DD"
-                            value={
-                                formState.startDate
-                                    ? formState.startDate
-                                          .toString()
-                                          .substring(0, 10)
-                                    : ''
-                            }
-                            onChange={event =>
-                                handleInputChange('startDate', event)
-                            }
-                        />
-                        <img src={Hyphen} alt="hyphen" />
-                        <P.PeriodInput
-                            type="date"
-                            placeholder="YYYY-MM-DD"
-                            value={
-                                formState.endDate
-                                    ? formState.endDate
-                                          .toString()
-                                          .substring(0, 10)
-                                    : ''
-                            }
-                            onChange={event =>
-                                handleInputChange('endDate', event)
-                            }
-                        />
+                        <DatePicker field='startDate' setFormState={setFormState} defalutValue={initState.startDate} />
+                        <img src={Hyphen} alt="hyphen" style={{marginRight: '8px'}} />
+                        <DatePicker field='endDate' setFormState={setFormState} defalutValue={initState.endDate} />
                     </P.FlexField>
                 </P.Field>
                 <P.Field>

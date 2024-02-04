@@ -45,14 +45,18 @@ export const Text = styled.div`
 export const SocialBtn = styled.button`
     width: 380px;
     height: 62px;
-    padding: 16px 0;
-    border: none;
     border-radius: 12px;
     margin-bottom: 20px;
+    padding-left: 23px;
+    border: none;
     cursor: pointer;
+    position: relative;
+
+    display: flex;
+    align-items: center;
 
     & > span {
-        text-align: center;
+        flex: 1;
         font-size: 20px;
         font-style: normal;
         font-weight: 600;
@@ -69,15 +73,6 @@ export const GoogleBtn = styled(SocialBtn)`
     & > span {
         color: #4d5359;
         position: relative;
-        &::before {
-            content: url(${googleIcon});
-            position: absolute;
-            left: -67px;
-
-            @media (max-width: 1072px) {
-                left: -45px;
-            }
-        }
     }
 `;
 
@@ -87,14 +82,5 @@ export const KakaoBtn = styled(SocialBtn)`
     & > span {
         color: #000;
         position: relative;
-        &::before {
-            content: url(${kakaoIcon});
-            position: absolute;
-            left: -112px;
-
-            @media (max-width: 1072px) {
-                left: -89px;
-            }
-        }
     }
 `;

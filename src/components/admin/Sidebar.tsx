@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import { IuserProfile } from '../mypage/type';
 
 interface SideBarProps {
@@ -22,6 +22,8 @@ const SideBar: React.FC<SideBarProps> = ({
     const isAdmin = userProfile.role === 'UNIVERSITY_ADMIN';
 
     const navigate = useNavigate();
+    const location = useLocation();
+
     const goAlarm = (): void => {
         navigate('recruitalarm');
     };
@@ -33,9 +35,15 @@ const SideBar: React.FC<SideBarProps> = ({
     };
 
     useEffect(() => {
-        onItemSelect('회원정보');
-        setSelectedTab('회원정보');
-    }, [onItemSelect]);
+        const currentPath = location.pathname;
+        if (currentPath.includes('recruitalarm')) {
+            setSelectedTab('모집알림');
+            onItemSelect('모집알림');
+        } else {
+            setSelectedTab('회원정보');
+            onItemSelect('회원정보');
+        }
+    }, [location, onItemSelect]);
 
     function handleToggleSubList() {
         setShowSubList(prevState => !prevState);

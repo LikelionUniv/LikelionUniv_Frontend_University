@@ -19,6 +19,7 @@ import { Gen, Output, Tech, Thon } from './RegisterOptions';
 import ImageUpload, { PresignedUrlResponse } from '../../utils/ImageUpload';
 import useGetUnivList from '../../../query/get/useGetUnivList';
 import usePostProjectRegister from '../../../query/post/usePostProjectRegister';
+import DatePicker from '../DatePicker';
 
 export interface Member {
     userId: number;
@@ -26,7 +27,7 @@ export interface Member {
 }
 
 /* form type */
-interface FormState {
+export interface FormState {
     activity: string;
     activityEtc: string;
     outPut: string;
@@ -60,8 +61,8 @@ export interface ProjectRegisterType {
     projectMembers: Member[];
 }
 
-interface Image {
-    file: File;
+export interface Image {
+    file?: File;
     src: string;
 }
 
@@ -155,7 +156,7 @@ const ProjectRegister = () => {
     };
 
     const processImages = async (): Promise<string[]> => {
-        const imageFiles: File[] = formState.images.map(image => image.file);
+        const imageFiles: File[] = formState.images.map(image => image.file as File);
         const presignedUrlImages: PresignedUrlResponse[] = [];
 
         // presigned url 얻어와서 S3에 등록
@@ -194,7 +195,6 @@ const ProjectRegister = () => {
         if (!isFill) return;
 
         const data = await processSendData();
-
         registerProject(data);
     };
 
@@ -260,7 +260,7 @@ const ProjectRegister = () => {
         }));
     }, [images]);
 
-    useEffect(() => {
+    useEffect(() => {        
         if (
             formState.images.length === 0 ||
             formState.activity === '' ||
@@ -370,35 +370,9 @@ const ProjectRegister = () => {
                 <P.Field>
                     <P.Label>제작 기간</P.Label>
                     <P.FlexField>
-                        <P.PeriodInput
-                            type="date"
-                            placeholder="YYYY-MM-DD"
-                            value={
-                                formState.startDate
-                                    ? formState.startDate
-                                          .toString()
-                                          .substring(0, 10)
-                                    : ''
-                            }
-                            onChange={event =>
-                                handleInputChange('startDate', event)
-                            }
-                        />
-                        <img src={Hyphen} alt="hyphen" />
-                        <P.PeriodInput
-                            type="date"
-                            placeholder="YYYY-MM-DD"
-                            value={
-                                formState.endDate
-                                    ? formState.endDate
-                                          .toString()
-                                          .substring(0, 10)
-                                    : ''
-                            }
-                            onChange={event =>
-                                handleInputChange('endDate', event)
-                            }
-                        />
+                        <DatePicker field='startDate' setFormState={setFormState} />
+                        <img src={Hyphen} alt="hyphen" style={{marginRight: '8px'}} />
+                        <DatePicker field='endDate' setFormState={setFormState} />
                     </P.FlexField>
                 </P.Field>
                 <P.Field>

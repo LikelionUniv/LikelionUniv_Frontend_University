@@ -4,6 +4,8 @@ import { Post } from './CommentData';
 import { ReactComponent as UnlikedIcon } from '../../../img/community/unliked.svg';
 import { ReactComponent as LikedIcon } from '../../../img/community/liked.svg';
 import request from '../../../utils/request';
+import { useQueryClient } from '@tanstack/react-query';
+import { useAuth } from '../../../hooks/useAuth';
 
 interface LikeProps {
     postData: Post;
@@ -17,6 +19,8 @@ const Like: React.FC<LikeProps> = ({ postData }) => {
     const [isLiked, setIsLiked] = useState(postData.isLikedPost);
     const [hovering, setHovering] = useState(false);
     const [likeNum, setLikeNum] = useState(postData.likeCount);
+    const queryClient = useQueryClient();
+    const { userinfo } = useAuth();
 
     // 좋아요 생성 & 삭제
     const createLike = async () => {
@@ -32,6 +36,19 @@ const Like: React.FC<LikeProps> = ({ postData }) => {
             });
             setIsLiked(!isLiked);
             setLikeNum(isLiked ? likeNum - 1 : likeNum + 1);
+
+            queryClient.invalidateQueries({
+                queryKey: [
+                    'get-pagiable',
+                    { uri: `/api/v1/user/${userinfo.userId}/posts/like` },
+                ],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+            });
+            queryClient.invalidateQueries({
+                queryKey: ['community-detail', postData.postId],
+            });
         } catch (error) {
             console.error(error);
         }

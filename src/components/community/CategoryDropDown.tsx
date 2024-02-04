@@ -28,10 +28,10 @@ const orderOptions: OptionType[] = [
     },
     {
         value: 3,
-        label: '공지 사항',
+        label: '공지사항',
         isDisabled: false,
         mainCategory: '멋쟁이사자처럼',
-        subCategory: '공지 사항',
+        subCategory: '공지사항',
     },
     {
         value: 4,

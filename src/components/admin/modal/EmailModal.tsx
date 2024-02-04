@@ -141,17 +141,21 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
                         value={content}
                         onChange={e => setContent(e.target.value)}
                     />
-                    <div className="BoxName">파일 첨부</div>
-                    <label htmlFor="fileInput">
-                        <FileInputLabel>
-                            <FileInput
-                                type="file"
-                                id="fileInput"
-                                onChange={handleFileChange}
-                                multiple
-                            />
-                        </FileInputLabel>
-                    </label>
+                    <div className="FileBox">
+                        <div className="BoxName">파일 첨부</div>
+                        <div className="FileInput">
+                            <label htmlFor="fileInput">
+                                <FileInputLabel className="FileInput">
+                                    <FileInput
+                                        type="file"
+                                        id="fileInput"
+                                        onChange={handleFileChange}
+                                        multiple
+                                    />
+                                </FileInputLabel>
+                            </label>
+                        </div>
+                    </div>
                     {selectedFiles.map(file => (
                         <SelectedFileBox key={file.id}>
                             {file.name}
@@ -204,7 +208,7 @@ export const Wrapper = styled.div`
     z-index: 999;
 `;
 const Button = styled.div`
-    margin: 20px;
+    margin: 10px;
     width: 95%;
     height: 40px;
     padding: 4px 8px;
@@ -228,9 +232,11 @@ const Title = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-bottom: 10px;
 `;
 
 const CancelIcon = styled.img`
+    margin-top: 10px;
     width: 18px;
     height: 18px;
     position: absolute;
@@ -241,11 +247,11 @@ const CancelIcon = styled.img`
 export const Content = styled.div`
     flex-direction: column;
     display: flex;
-    margin: 20px;
+    margin: 20px 40px 20px 20px;
     position: relative;
 
     .BoxName {
-        margin: 20px 0px 20px 0px;
+        margin: 20px 0px;
         font-weight: 700;
     }
 
@@ -255,9 +261,17 @@ export const Content = styled.div`
         padding-left: 20px;
         border-radius: 6px;
         border: 1px solid #dcdfe3;
-        margin-bottom: 16px;
+        margin-bottom: 0px;
         display: flex;
         align-items: center;
+    }
+
+    .FileBox {
+        display: flex;
+    }
+
+    .FileInput {
+        margin: 20px 10px;
     }
 `;
 
@@ -265,11 +279,7 @@ const Divider = styled.div`
     height: 1px;
     background-color: var(--Grey-900, #dcdfe3);
     width: 100%;
-    margin: 13px 0px 13px 0px;
-`;
-
-const Input = styled.input`
-    // Styles for input
+    margin: 13px 0px 0px 0px;
 `;
 
 const Textarea = styled.textarea`
@@ -290,24 +300,24 @@ const FileInput = styled.input`
 
 const FileInputLabel = styled.label`
     &::before {
-        content: '파일 선택하기';
+        content: '파일 추가하기';
         background-color: #ffffff;
         color: #4d5359;
         font-weight: 700;
         border: 1px solid #dcdfe3;
         padding: 7px 16px;
-        border-radius: 4px;
+        border-radius: 10px;
         cursor: pointer;
     }
 `;
 
 const SelectedFileBox = styled.div`
     width: 100%;
-    height: 48px;
+    height: 20px;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid #dcdfe3;
-    margin: 16px 0;
+    margin: 5px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
