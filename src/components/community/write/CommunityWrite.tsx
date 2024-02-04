@@ -237,10 +237,10 @@ const CommunityWrite = () => {
                 return (
                     <div className="subBoard">
                         <W.SubBoardItem
-                            onClick={() => SubBoardClick('공지 사항')}
-                            isSelected={selectedSubBoard === '공지 사항'}
+                            onClick={() => SubBoardClick('공지사항')}
+                            isSelected={selectedSubBoard === '공지사항'}
                         >
-                            공지 사항
+                            공지사항
                         </W.SubBoardItem>
                     </div>
                 );

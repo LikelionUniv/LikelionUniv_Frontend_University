@@ -27,7 +27,7 @@ const Tab: React.FC<TabProps> = ({
         let defaultSubBoard = '';
         switch (boardName) {
             case '멋쟁이사자처럼':
-                defaultSubBoard = '공지 사항';
+                defaultSubBoard = '공지사항';
                 break;
             case '자유게시판':
                 defaultSubBoard = '정보공유';
@@ -60,10 +60,10 @@ const Tab: React.FC<TabProps> = ({
                 return (
                     <div className="subBoard">
                         <T.SubBoardItem
-                            onClick={() => SubBoardClick('공지 사항')}
-                            isSelected={selectedSubBoard === '공지 사항'}
+                            onClick={() => SubBoardClick('공지사항')}
+                            isSelected={selectedSubBoard === '공지사항'}
                         >
-                            공지 사항
+                            공지사항
                         </T.SubBoardItem>
                     </div>
                 );

@@ -9,7 +9,7 @@ const Community: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [selectedMainCategory, setSelectedMainCategory] =
         useState('멋쟁이사자처럼');
-    const [selectedSubCategory, setSelectedSubCategory] = useState('공지 사항');
+    const [selectedSubCategory, setSelectedSubCategory] = useState('공지사항');
 
     const handleCategorySelect = (
         mainCategory: string,

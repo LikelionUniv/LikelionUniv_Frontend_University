@@ -72,15 +72,15 @@ const CategoryModal: React.FC<ModalProp> = ({
                             onClick={() =>
                                 handleCategorySelect(
                                     '멋쟁이사자처럼',
-                                    '공지 사항',
+                                    '공지사항',
                                 )
                             }
                         >
-                            공지 사항
+                            공지사항
                             <Choose
                                 selected={
                                     selectedMainCategory === '멋쟁이사자처럼' &&
-                                    selectedSubCategory === '공지 사항'
+                                    selectedSubCategory === '공지사항'
                                 }
                             />
                         </p>
