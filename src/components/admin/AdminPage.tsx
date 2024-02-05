@@ -37,15 +37,21 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Container = styled.div`
-    max-width: 1600px;
+    max-width: 1200px;
 
     width: 100%;
     margin: 150px auto;
+    padding-right: 300px;
     display: flex;
     align-items: flex-start;
 
-    @media screen and (max-width: 1200px) {
-        padding: 0 40px;
+    @media (max-width: 1500px) {
+        padding-right: 0px;
+        margin-left: 0px;
+    }
+
+    @media (max-width: 1280px) {
+        width: calc(100% - 100px);
     }
 
     @media screen and (max-width: 767px) {
