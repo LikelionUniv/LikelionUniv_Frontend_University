@@ -32,9 +32,7 @@ function RecruitAlarm() {
 export default RecruitAlarm;
 
 const Wrapper = styled.div`
-    width: fit-content;
-    min-width: 1100px;
-    margin-right: 200px;
+    width: 1300px;
 `;
 
 const TableTitle = styled.div`

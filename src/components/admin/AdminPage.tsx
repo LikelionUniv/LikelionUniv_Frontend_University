@@ -37,7 +37,7 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Container = styled.div`
-    max-width: 1200px;
+    max-width: 1300px;
 
     width: 100%;
     margin: 150px auto;
