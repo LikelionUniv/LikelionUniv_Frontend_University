@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDropDown, { findLabelByValue } from './SchoolDropDown';
+import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
@@ -81,8 +81,8 @@ const Sform = () => {
         ) => {
             if (selectedOption) {
                 let label: string;
-                if (field == 'universityName') {
-                    label = findLabelByValue(selectedOption.value);
+                if (field === 'universityName') {
+                    label = selectedOption.label;
                 }
                 setFormState(prev => ({
                     ...prev,
