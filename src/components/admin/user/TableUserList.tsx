@@ -102,7 +102,7 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                             <Table className="univ">{props.univName}</Table>
                         )}
                         <Table className="major">{props.major}</Table>
-                        <Table className="ordinal">{props.ordinal}기</Table>
+                        <Table className="ordinal">{props.ordinal}</Table>
                         <Table className="part">{props.part}</Table>
                         <Table className="role">
                             {USER_ROLE[props.role] || props.role}
