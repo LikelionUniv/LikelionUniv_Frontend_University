@@ -5,6 +5,10 @@ export const Container = styled.div`
     flex-direction: column;
 
     padding: 0 20px;
+
+    @media screen and (min-width: 768px) {
+        display: none;
+    }
 `;
 
 export const SubHeader = styled.header`
@@ -31,7 +35,7 @@ export const Field = styled.div`
         margin-bottom: 222px;
     }
 
-    div {
+    & > div {
         margin-bottom: 12px;
     }
 `;
