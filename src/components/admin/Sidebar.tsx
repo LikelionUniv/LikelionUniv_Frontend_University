@@ -88,6 +88,10 @@ const Wrapper = styled.div<{ showSubList: boolean }>`
     min-width: 150px;
     margin: 15px 80px;
 
+    @media screen and (max-width: 1200px) {
+        margin: 15px 60px;
+    }
+
     @media screen and (max-width: 1024px) {
         margin: 15px 40px;
     }
