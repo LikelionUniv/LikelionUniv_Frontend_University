@@ -31,7 +31,6 @@ function usePatchUser({ userId }: usePatchUserProps) {
     const { mutate } = useMutation({
         mutationFn: patchUser,
         onSuccess: () => {
-            // 적절한 쿼리를 무효화하여 데이터를 최신 상태로 유지합니다.
             queryClient.invalidateQueries({ queryKey: ['users-list'] });
             alert(`수정 완료`);
             navigate(0);
