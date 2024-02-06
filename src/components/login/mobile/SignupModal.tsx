@@ -5,7 +5,13 @@ import useGetLocationUniv, {
     IUniversity,
 } from '../../../query/get/useGetLocationUniv';
 
-function SignupModal() {
+interface SignupModalProps {
+    isOpen: boolean;
+    onSelect: (univName: string) => void;
+    onClose: () => void;
+}
+
+function SignupModal({ isOpen, onSelect, onClose }: SignupModalProps) {
     const [activeTab, setActiveTab] = useState('서울');
     const universities: IUniversity[] = useGetLocationUniv({ activeTab });
 
@@ -15,19 +21,14 @@ function SignupModal() {
         });
     }, []);
 
-    const onUniversityClick = (univName: string) => {
-        console.log(univName);
-        // 폼데이터에 학교 전달
-        // 모달창 닫기
-    };
-
+    if (!isOpen) return null;
     return (
         <SM.ModalWrapper>
             <SM.ModalBackground />
             <SM.ModalContainer>
                 <SM.ModalHeader>
                     학교 선택
-                    <SM.ModalClose />
+                    <SM.ModalClose onClick={onClose} />
                 </SM.ModalHeader>
 
                 <SM.ModalContent>
@@ -47,9 +48,7 @@ function SignupModal() {
                         {universities.map((item, idx) => (
                             <SM.UniversityItem
                                 key={item.universityName + idx}
-                                onClick={() =>
-                                    onUniversityClick(item.universityName)
-                                }
+                                onClick={() => onSelect(item.universityName)}
                             >
                                 {item.universityName}
                             </SM.UniversityItem>
