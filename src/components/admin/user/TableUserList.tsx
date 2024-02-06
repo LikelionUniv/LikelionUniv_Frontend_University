@@ -102,7 +102,7 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                             <Table className="univ">{props.univName}</Table>
                         )}
                         <Table className="major">{props.major}</Table>
-                        <Table className="ordinal">{props.ordinal}기</Table>
+                        <Table className="ordinal">{props.ordinal}</Table>
                         <Table className="part">{props.part}</Table>
                         <Table className="role">
                             {USER_ROLE[props.role] || props.role}
@@ -164,6 +164,64 @@ const Wrapper = styled.div`
     .email {
         width: 200px;
     }
+
+    @media (max-width: 1500px) {
+        .name {
+            width: 70px;
+        }
+
+        .univ {
+            width: 150px;
+        }
+
+        .major {
+            width: 120px;
+        }
+
+        .ordinal {
+            width: 30px;
+        }
+
+        .part {
+            width: 100px;
+        }
+
+        .role {
+            width: 50px;
+        }
+        .email {
+            width: 180px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .name {
+            width: 60px;
+        }
+
+        .univ {
+            width: 140px;
+        }
+
+        .major {
+            width: 110px;
+        }
+
+        .ordinal {
+            width: 30px;
+        }
+
+        .part {
+            width: 90px;
+        }
+
+        .role {
+            width: 40px;
+        }
+        .email {
+            width: 170px;
+        }
+    }
 `;
 
 const BodyTable = styled.div`
@@ -185,6 +243,11 @@ const BodyTable = styled.div`
         &:hover {
             background-color: #ff7710;
             color: #ffffff;
+        }
+
+        @media (max-width: 1400px) {
+            width: 45px;
+            font-size: 0.8rem;
         }
     }
 
@@ -208,15 +271,14 @@ const Table = styled.div`
     text-align: start;
     font-size: 1rem;
 
-    @media (max-width: 1500px) {
-        padding: 12px 2px;
-        margin-right: 5px;
-        font-size: 0.9rem;
+    @media (max-width: 1400px) {
+        padding: 14px 4px;
+        margin-right: 10px;
+        font-size: 0.8rem;
     }
 
-    @media (max-width: 1200px) {
-        padding: 8px 2px;
+    @media (max-width: 1300px) {
+        padding: 14px 2px;
         margin-right: 0px;
-        font-size: 0.8rem;
     }
 `;

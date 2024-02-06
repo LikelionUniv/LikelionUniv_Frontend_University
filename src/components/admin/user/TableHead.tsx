@@ -57,44 +57,95 @@ const HeadTable = styled.div`
     }
 
     .name {
-        min-width: 90px;
+        //min-width: 90px;
         width: 90px;
     }
 
     .univ {
-        min-width: 170px;
+        //min-width: 170px;
         width: 170px;
     }
 
     .major {
-        min-width: 140px;
+        //min-width: 140px;
         width: 140px;
     }
 
     .ordinal {
-        min-width: 40px;
+        //min-width: 40px;
         width: 40px;
     }
 
     .part {
-        min-width: 120px;
+        //min-width: 120px;
         width: 120px;
     }
 
     .role {
-        min-width: 70px;
+        // min-width: 70px;
         width: 70px;
     }
     .email {
-        min-width: 200px;
+        //min-width: 200px;
         width: 200px;
     }
 
     @media (max-width: 1500px) {
-        width: 90%;
+        .name {
+            width: 70px;
+        }
+
+        .univ {
+            width: 150px;
+        }
+
+        .major {
+            width: 120px;
+        }
+
+        .ordinal {
+            width: 30px;
+        }
+
+        .part {
+            width: 100px;
+        }
+
+        .role {
+            width: 50px;
+        }
+        .email {
+            width: 180px;
+        }
     }
+
     @media (max-width: 1200px) {
-        width: 75%;
+        .name {
+            width: 60px;
+        }
+
+        .univ {
+            width: 140px;
+        }
+
+        .major {
+            width: 110px;
+        }
+
+        .ordinal {
+            width: 30px;
+        }
+
+        .part {
+            width: 90px;
+        }
+
+        .role {
+            width: 40px;
+        }
+        .email {
+            width: 170px;
+        }
     }
 `;
 
@@ -105,16 +156,15 @@ const Table = styled.div`
     text-align: start;
     font-size: 1rem;
 
-    @media (max-width: 1500px) {
-        padding: 12px 2px;
-        margin-right: 5px;
-        font-size: 0.9rem;
+    @media (max-width: 1400px) {
+        padding: 14px 4px;
+        margin-right: 10px;
+        font-size: 0.8rem;
     }
 
-    @media (max-width: 1200px) {
-        padding: 8px 2px;
+    @media (max-width: 1300px) {
+        padding: 14px 2px;
         margin-right: 0px;
-        font-size: 0.8rem;
     }
 `;
 
