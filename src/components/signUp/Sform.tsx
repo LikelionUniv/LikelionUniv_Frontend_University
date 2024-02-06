@@ -98,11 +98,8 @@ const Sform = () => {
         const idtoken = localStorage.getItem('idtoken');
         try {
             const response = await axiosInstance.post(
-                `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+                `/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
                 formState,
-                {
-                    withCredentials: true,
-                },
             );
             //응답 성공 시
             if (response.data.isSuccess) {
