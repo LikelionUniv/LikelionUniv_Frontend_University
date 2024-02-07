@@ -77,7 +77,7 @@ function UserFind() {
                     placeholder="이름을 검색해 팀원을 추가해주세요."
                 />
                 <DropDown
-                    placeholder="파트를 입력하세요"
+                    placeholder="파트 선택"
                     options={PART}
                     onChange={handleSelectChange}
                 />

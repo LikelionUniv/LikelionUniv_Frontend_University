@@ -19,7 +19,7 @@ const SideBar: React.FC<SideBarProps> = ({
     const [inputValue, setInputValue] = useState<string>('');
     const [showSubList, setShowSubList] = useState(false);
 
-    const isAdmin = userProfile.role === 'UNIVERSITY_ADMIN';
+    const isAdmin = userProfile.role === 'SUPER_ADMIN';
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -64,7 +64,7 @@ const SideBar: React.FC<SideBarProps> = ({
                 >
                     회원정보
                 </Tab>
-                {!isAdmin && (
+                {isAdmin && (
                     <Tab
                         className="ParentTab"
                         $isSelected={selectedTab === '모집알림'}
@@ -88,8 +88,12 @@ const Wrapper = styled.div<{ showSubList: boolean }>`
     min-width: 150px;
     margin: 15px 80px;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1200px) {
         margin: 15px 40px;
+    }
+
+    @media screen and (max-width: 1024px) {
+        margin: 15px 20px;
     }
 
     @media screen and (max-width: 768px) {

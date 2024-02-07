@@ -3,6 +3,17 @@ import Select, { ActionMeta, components } from 'react-select';
 import styled from 'styled-components';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
 import { schoolStyle } from './customSelectStyles';
+import useGetLocationUniv, {
+    IUniversity,
+} from '../../query/get/useGetLocationUniv';
+
+interface RegionCodeMap {
+    [key: string]: number;
+}
+
+interface UniversityNumber {
+    [key: string]: number;
+}
 
 export type RegionOptionType = {
     value: number;
@@ -27,80 +38,95 @@ const regionOptions: RegionOptionType[] = [
 
     { value: 25, label: '대전' },
     { value: 29, label: '세종' },
-    { value: 33, label: '충북/충남' },
+    { value: 33, label: '충북' },
+    { value: 34, label: '충남' },
     { value: 32, label: '강원' },
 
     { value: 21, label: '부산' },
-    { value: 26, label: '울산' },
     { value: 22, label: '대구' },
-    { value: 37, label: '경북/경남' },
+    { value: 37, label: '경남' },
 
-    { value: 24, label: '광주' },
-    { value: 35, label: '전북/전남' },
-    { value: 39, label: '제주' },
+    { value: 35, label: '전북' },
+    { value: 36, label: '전남' },
 ];
+
+const regionCodeMap: RegionCodeMap = {
+    서울: 11,
+    경기: 31,
+    인천: 23,
+    대전: 25,
+    세종: 29,
+    충북: 33,
+    충남: 34,
+    강원: 32,
+    부산: 21,
+    대구: 22,
+    경남: 37,
+    전북: 35,
+    전남: 36,
+};
 
 // 대학 코드 번호 앞자리 2개가 지역 코드와 일치할 때만 필터링함
-const universityOptions: UniversityOptionType[] = [
-    { value: 1101, label: '가톨릭대학교' },
-    { value: 1102, label: '강남대학교' },
-    { value: 1103, label: '건국대학교' },
-    { value: 1104, label: '고려대학교' },
-    { value: 1105, label: '광운대학교' },
-    { value: 1106, label: '국민대학교' },
-    { value: 1107, label: '단국대학교' },
-    { value: 1108, label: '덕성여자대학교' },
-    { value: 1109, label: '동국대학교' },
-    { value: 1110, label: '동덕여자대학교' },
-    { value: 1111, label: '명지대학교(서울)' },
-    { value: 1112, label: '삼육대학교' },
-    { value: 1113, label: '상명대학교(서울)' },
-    { value: 1114, label: '서강대학교' },
-    { value: 1115, label: '서경대학교' },
-    { value: 1116, label: '서울대학교' },
-    { value: 1117, label: '서울여자대학교' },
-    { value: 1118, label: '성공회대학교' },
-    { value: 1119, label: '성균관대학교' },
-    { value: 1120, label: '성신여자대학교' },
-    { value: 1121, label: '세종대학교' },
-    { value: 1122, label: '숙명여자대학교' },
-    { value: 1123, label: '숭실대학교' },
-    { value: 1124, label: '연세대학교' },
-    { value: 1125, label: '이화여자대학교' },
-    { value: 1126, label: '중앙대학교' },
-    { value: 1127, label: '한국외국어대학교(서울)' },
-    { value: 1128, label: '한성대학교' },
-    { value: 1129, label: '한양여자대학교' },
-    { value: 1130, label: '홍익대학교' },
-    { value: 2101, label: '부산외국어대학교' },
-    { value: 2201, label: '계명대학교' },
-    { value: 2301, label: '인천대학교' },
-    { value: 2302, label: '인하대학교' },
-    { value: 2501, label: '을지대학교(성남)' },
-    { value: 2502, label: '충남대학교' },
-    { value: 2503, label: '한남대학교' },
-    { value: 2504, label: '한밭대학교' },
-    { value: 3101, label: '명지대학교(자연)' },
-    { value: 3102, label: '성결대학교' },
-    { value: 3103, label: '아주대학교' },
-    { value: 3104, label: '중부대학교(고양)' },
-    { value: 3105, label: '한국외국어대학교(글로벌)' },
-    { value: 3106, label: '한국항공대학교' },
-    { value: 3107, label: '한양대학교(에리카)' },
-    { value: 2901, label: '고려대학교(세종)' },
-    { value: 3201, label: '강원대학교' },
-    { value: 3202, label: '한림대학교' },
-    { value: 3301, label: '한국교통대학교' },
-    { value: 3302, label: '남서울대학교' },
-    { value: 3303, label: '상명대학교(천안)' },
-    { value: 3304, label: '순천향대학교' },
-    { value: 3305, label: '한서대학교' },
-    { value: 3501, label: '순천대학교' },
-    { value: 3502, label: '전북대학교' },
-    { value: 3701, label: '경남대학교' },
-    { value: 3702, label: '경상국립대학교' },
-];
-
+// const universityOptions: UniversityOptionType[] = [
+//     { value: 1101, label: '가톨릭대학교' },
+//     { value: 1102, label: '강남대학교' },
+//     { value: 1103, label: '건국대학교' },
+//     { value: 1104, label: '고려대학교' },
+//     { value: 1105, label: '광운대학교' },
+//     { value: 1106, label: '국민대학교' },
+//     { value: 1107, label: '단국대학교' },
+//     { value: 1108, label: '덕성여자대학교' },
+//     { value: 1109, label: '동국대학교' },
+//     { value: 1110, label: '동덕여자대학교' },
+//     { value: 1111, label: '명지대학교(서울)' },
+//     { value: 1112, label: '삼육대학교' },
+//     { value: 1113, label: '상명대학교(서울)' },
+//     { value: 1114, label: '서강대학교' },
+//     { value: 1115, label: '서경대학교' },
+//     { value: 1116, label: '서울대학교' },
+//     { value: 1117, label: '서울여자대학교' },
+//     { value: 1118, label: '성공회대학교' },
+//     { value: 1119, label: '성균관대학교' },
+//     { value: 1120, label: '성신여자대학교' },
+//     { value: 1121, label: '세종대학교' },
+//     { value: 1122, label: '숙명여자대학교' },
+//     { value: 1123, label: '숭실대학교' },
+//     { value: 1124, label: '연세대학교' },
+//     { value: 1125, label: '이화여자대학교' },
+//     { value: 1126, label: '중앙대학교' },
+//     { value: 1127, label: '한국외국어대학교(서울)' },
+//     { value: 1128, label: '한성대학교' },
+//     { value: 1129, label: '한양여자대학교' },
+//     { value: 1130, label: '홍익대학교' },
+//     { value: 2101, label: '부산외국어대학교' },
+//     { value: 2201, label: '계명대학교' },
+//     { value: 2301, label: '인천대학교' },
+//     { value: 2302, label: '인하대학교' },
+//     { value: 2501, label: '을지대학교(성남)' },
+//     { value: 2502, label: '충남대학교' },
+//     { value: 2503, label: '한남대학교' },
+//     { value: 2504, label: '한밭대학교' },
+//     { value: 3101, label: '명지대학교(자연)' },
+//     { value: 3102, label: '성결대학교' },
+//     { value: 3103, label: '아주대학교' },
+//     { value: 3104, label: '중부대학교(고양)' },
+//     { value: 3105, label: '한국외국어대학교(글로벌)' },
+//     { value: 3106, label: '한국항공대학교' },
+//     { value: 3107, label: '한양대학교(에리카)' },
+//     { value: 2901, label: '고려대학교(세종)' },
+//     { value: 3201, label: '강원대학교' },
+//     { value: 3202, label: '한림대학교' },
+//     { value: 3301, label: '한국교통대학교' },
+//     { value: 3302, label: '남서울대학교' },
+//     { value: 3303, label: '상명대학교(천안)' },
+//     { value: 3304, label: '순천향대학교' },
+//     { value: 3305, label: '한서대학교' },
+//     { value: 3501, label: '순천대학교' },
+//     { value: 3502, label: '전북대학교' },
+//     { value: 3701, label: '경남대학교' },
+//     { value: 3702, label: '경상국립대학교' },
+// ];
+const universityOptions: UniversityOptionType[] = [];
 export function findLabelByValue(value: number) {
     const foundOption = universityOptions.find(
         option => option.value === value,
@@ -114,6 +140,29 @@ export function findLabelByValue(value: number) {
 }
 
 const SchoolDropDown = ({ onChange }: SchoolDropDownProps) => {
+    const universities: IUniversity[] = useGetLocationUniv({
+        activeTab: '전체',
+    });
+
+    const universityNumber: UniversityNumber = {};
+
+    // universityOptions 배열 생성
+    const universityOptions = universities.map(data => {
+        const regionCode = regionCodeMap[data.location];
+
+        // 해당 지역의 대학교 번호를 1 증가시킴 (존재하지 않는 경우 1로 초기화)
+        universityNumber[data.location] =
+            (universityNumber[data.location] || 0) + 1;
+
+        // 지역 코드와 대학교 번호를 결합하여 고유한 값을 생성
+        const value = regionCode * 100 + universityNumber[data.location];
+
+        return {
+            value,
+            label: data.universityName,
+        };
+    });
+
     // DropdownIndicator 컴포넌트 재정의(드롭다운 선택시 화살표 돌아가는)
     const DropdownIndicator = (props: any) => {
         return (

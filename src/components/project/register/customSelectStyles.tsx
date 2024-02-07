@@ -30,7 +30,8 @@ const roleTrackStyle = {
             border: '1px solid #ff7710',
         },
         '@media screen and (max-width: 450px)': {
-            width: '130px',
+            width: '150px',
+            fontSize: '13px',
         },
     }),
     menu: (provided: any) => ({
@@ -44,7 +45,8 @@ const roleTrackStyle = {
         alignItems: 'center',
         width: '200px',
         '@media screen and (max-width: 450px)': {
-            width: '130px',
+            width: '150px',
+            fontSize: '13px',
         },
     }),
     menuList: (provided: any) => ({
@@ -61,7 +63,8 @@ const roleTrackStyle = {
             display: 'none',
         },
         '@media screen and (max-width: 450px)': {
-            width: '130px',
+            width: '150px',
+            fontSize: '13px',
         },
     }),
     option: (provided: any, state: any) => ({
@@ -87,7 +90,8 @@ const roleTrackStyle = {
             backgroundColor: 'var(--grey-400, #DCDFE3)',
         },
         '@media screen and (max-width: 450px)': {
-            width: '130px',
+            width: '150px',
+            fontSize: '13px',
         },
     }),
 };
