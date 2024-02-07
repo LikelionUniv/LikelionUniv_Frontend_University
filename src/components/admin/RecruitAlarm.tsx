@@ -33,6 +33,7 @@ export default RecruitAlarm;
 
 const Wrapper = styled.div`
     width: 1300px;
+    min-width: 450px;
 `;
 
 const TableTitle = styled.div`

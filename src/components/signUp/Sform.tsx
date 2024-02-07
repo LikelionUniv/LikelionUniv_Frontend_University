@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import '../../styles/signUp.css';
 import DropDown from '../signUp/DropDown';
-import SchoolDropDown, { findLabelByValue } from './SchoolDropDown';
+import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
@@ -81,8 +81,8 @@ const Sform = () => {
         ) => {
             if (selectedOption) {
                 let label: string;
-                if (field == 'universityName') {
-                    label = findLabelByValue(selectedOption.value);
+                if (field === 'universityName') {
+                    label = selectedOption.label;
                 }
                 setFormState(prev => ({
                     ...prev,
@@ -98,11 +98,8 @@ const Sform = () => {
         const idtoken = localStorage.getItem('idtoken');
         try {
             const response = await axiosInstance.post(
-                `${process.env.REACT_APP_BASE_URL}/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
+                `/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
                 formState,
-                {
-                    withCredentials: true,
-                },
             );
             //응답 성공 시
             if (response.data.isSuccess) {
