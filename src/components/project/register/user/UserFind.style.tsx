@@ -2,16 +2,21 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
 
     width: 100%;
     box-sizing: border-box;
+
+    @media screen and (max-width: 800px) {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 `;
 
 export const InputContainer = styled.div`
     display: flex;
-    width: 680px;
 `;
 
 export const Input = styled.input`
@@ -43,7 +48,6 @@ export const Input = styled.input`
     }
 
     @media screen and (max-width: 800px) {
-        width: 70%;
         font-size: 13px;
     }
 `;
@@ -75,6 +79,7 @@ export const SearchBtn = styled.button`
 
     @media screen and (max-width: 800px) {
         font-size: 13px;
+        margin-top: 10px;
     }
 `;
 
@@ -112,6 +117,10 @@ export const SearchResultContainer = styled.div<{ show: boolean }>`
     border-radius: 6px;
     border: 1px solid var(--Grey-400, #dcdfe3);
     background: var(--White, #fff);
+
+    @media screen and (max-width: 800px) {
+        width: 100%;
+    }
 `;
 
 export const NoResult = styled.div`

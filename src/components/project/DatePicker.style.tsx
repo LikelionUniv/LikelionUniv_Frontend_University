@@ -21,6 +21,10 @@ const DatePickerStyle = styled.div<DatePickerStyleProps>`
     &:hover {
       border-color: #ff7710;
     }
+
+    @media screen and (max-width: 800px) {
+      width: 140px;
+    }
   }
 
   .react-datepicker__input-container {
@@ -44,6 +48,9 @@ const DatePickerStyle = styled.div<DatePickerStyleProps>`
       }
       &::placeholder {
         color: var(--grey-600, #adb3ba);
+      }
+      @media screen and (max-width: 800px) {
+        font-size: 13px;
       }
     }
   }
