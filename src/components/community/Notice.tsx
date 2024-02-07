@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import CategoryDropDown from './CategoryDropDown';
 import search from '../../img/community/search.svg';
 import Tab from './Tab';
-import useIsPC from '../../hooks/useIsPC';
 import Search from './Search';
 import CategoryModal from './CategoryModal';
 import { useAuth } from '../../hooks/useAuth';
@@ -41,7 +40,7 @@ const Notice: React.FC<NoticeProps> = ({
     onCategoryChange,
 }) => {
     const navigate = useNavigate();
-    const isPC = useIsPC();
+    const [isPC, setIsPC] = useState(window.innerWidth > 767);
     const isSearching = searchQuery !== undefined && searchQuery !== '';
     const [inputValue, setInputValue] = useState<string>(searchQuery);
     const [order, setOrder] = useState('CREATED_DATE_ORDER');
@@ -58,6 +57,19 @@ const Notice: React.FC<NoticeProps> = ({
         RolePriority.findIndex(role => role === userinfo.role) >= 4;
 
     const [isSuperAdmin, setIsSuperAdmin] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsPC(window.innerWidth > 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         if (isSuperAdminInfo && !isLoading) {

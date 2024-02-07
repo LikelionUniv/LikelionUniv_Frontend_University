@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import Notice from './Notice';
-import useIsPC from '../../hooks/useIsPC';
 
 const Community: React.FC = () => {
-    const isPC = useIsPC();
+    const [isPC, setIsPC] = useState(window.innerWidth > 767);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [selectedMainCategory, setSelectedMainCategory] =
         useState('멋쟁이사자처럼');
@@ -27,6 +26,19 @@ const Community: React.FC = () => {
         setSelectedMainCategory(mainCategory);
         setSelectedSubCategory(subCategory);
     };
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsPC(window.innerWidth > 767);
+        };
+
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     return (
         <>
