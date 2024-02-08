@@ -92,8 +92,8 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
                             value={editedData.part || ''}
                             onChange={e => handleChange('part', e.target.value)}
                         >
-                            <option value="PM_DESIGNER">기획</option>
-                            <option value="PM_DESIGNER">디자인</option>
+                            <option value="PM">기획</option>
+                            <option value="DESIGNER">디자인</option>
                             <option value="FRONTEND">프론트엔드</option>
                             <option value="BACKEND">백엔드</option>
                         </select>
