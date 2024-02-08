@@ -157,6 +157,8 @@ export const Box = styled.div<{ img?: string | null }>`
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+        word-break: break-word;
+        overflow-wrap: break-word;
 
         @media screen and (max-width: 767px) {
             font-size: 16px;
