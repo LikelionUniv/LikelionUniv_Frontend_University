@@ -194,6 +194,13 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
     margin: 100px 0;
+    box-sizing: border-box;
+
+    @media screen and (max-width: 769px) {
+        padding: 0 20px;
+        width: 100%;
+        max-width: 760px;
+    }
 `;
 
 const Form = styled.form`
@@ -207,6 +214,10 @@ const Form = styled.form`
         text-align: right;
         font-size: 16px;
         font-weight: 500;
+    }
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
     }
 `;
 
@@ -268,6 +279,10 @@ const Nform = styled.input`
     &:focus {
         border: 1px solid var(--orange-600, #ff7710);
     }
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
+    }
 `;
 
 const Nformarea = styled.textarea`
@@ -292,6 +307,10 @@ const Nformarea = styled.textarea`
     &:focus {
         border: 1px solid var(--orange-600, #ff7710);
     }
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
+    }
 `;
 
 const ButtonSmall = styled(Button)`
@@ -299,4 +318,8 @@ const ButtonSmall = styled(Button)`
     height: 44px;
     margin-top: 64px;
     align-self: self-end;
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
+    }
 `;
