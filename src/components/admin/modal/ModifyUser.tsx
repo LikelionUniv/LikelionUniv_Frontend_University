@@ -92,6 +92,7 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
                             value={editedData.part || ''}
                             onChange={e => handleChange('part', e.target.value)}
                         >
+                            <option value="NO_PART">NO_PART</option>
                             <option value="PM">기획</option>
                             <option value="DESIGNER">디자인</option>
                             <option value="FRONTEND">프론트엔드</option>
@@ -106,6 +107,7 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
                             value={editedData.role || ''}
                             onChange={e => handleChange('role', e.target.value)}
                         >
+                            <option value="GUEST">게스트</option>
                             <option value="UNIVERSITY_ADMIN">대표</option>
                             <option value="MANAGER">운영진</option>
                             <option value="USER">아기사자</option>
