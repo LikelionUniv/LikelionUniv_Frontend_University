@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// 스타일 컴포넌트 정의
 const AlarmRequestWrapper = styled.div`
     font-size: 20px;
     font-weight: 600;
