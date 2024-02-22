@@ -86,6 +86,8 @@ const ProjectBox = styled.div`
         gap: 6px;
         font-size: 14px;
         line-height: 150%;
+        position: absolute;
+        bottom: 0;
         color: var(--Grey-700, #868c94);
         .dot {
             width: 2px;

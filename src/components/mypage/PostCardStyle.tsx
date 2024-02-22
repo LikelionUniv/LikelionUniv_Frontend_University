@@ -110,7 +110,7 @@ export const PostCardBox = styled.div<PhotoCheck>`
         }
     }
     &.title {
-        font-size: 20px;
+        font-size: 16px;
         font-weight: 700;
         margin: ${({ phototitle }) =>
             phototitle === 'true' ? '8px 0px' : '11px 0px 8px'};
@@ -119,7 +119,16 @@ export const PostCardBox = styled.div<PhotoCheck>`
         display: -webkit-box;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
+        @media (max-width: 1280px) {
+            font-size: 18px;
+        }
+        @media (max-width: 768px) {
+            font-size: 16px;
+            margin: ${({ phototitle }) =>
+                phototitle === 'true' ? '4px 0px 0px' : '11px 0px 8px'};
+        }
         @media (max-width: 479px) {
+            font-size: 16px;
             margin: 4px 0px 0px;
         }
     }
@@ -132,16 +141,20 @@ export const PostCardBox = styled.div<PhotoCheck>`
             phototitle === 'true' ? 1 : 4};
         -webkit-box-orient: vertical;
         margin: 8px 0px 16px;
+        @media (max-width: 1024px) {
+            font-size: 14px;
+        }
+        @media (max-width: 768px) {
+            margin: 0px 0px 8px;
+            font-size: 12px;
+        }
         @media (max-width: 479px) {
             margin: 0px 0px 8px;
-            font-size: 14px;
-            -webkit-line-clamp: ${({ phototitle }) =>
-                phototitle === 'true' ? 1 : 4};
+            font-size: 13px;
         }
         @media (max-width: 360px) {
             margin: 0px 0px 16px;
-            font-size: 14px;
-            -webkit-line-clamp: ${({ phototitle }) => (phototitle ? 1 : 4)};
+            font-size: 12px;
         }
     }
     &.photo {
