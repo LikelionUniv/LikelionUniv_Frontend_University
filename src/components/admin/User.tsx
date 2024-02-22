@@ -1,8 +1,8 @@
 import React, { Suspense, useState } from 'react';
 import styled from 'styled-components';
 import UserList from './user/UserList';
-import OrderDropDown from './dropdown/OrderDropDown';
-import SearchBar from './search/SearchBar';
+import OrderDropDown from './DropDown/OrderDropDown';
+import SearchBar from './Search/SearchBar';
 import { useOutletContext } from 'react-router-dom';
 import OutletContext from './OutletContext';
 import HeadUserList from './user/HeadUserList';
