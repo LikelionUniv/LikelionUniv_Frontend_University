@@ -61,6 +61,9 @@ const ProjectBox = styled.div`
         font-size: 28px;
         font-weight: 700;
         line-height: 140%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         @media (max-width: 767px) {
             font-size: 20px;
             line-height: 150%;

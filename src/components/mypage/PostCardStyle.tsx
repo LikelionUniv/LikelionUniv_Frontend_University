@@ -114,11 +114,9 @@ export const PostCardBox = styled.div<PhotoCheck>`
         font-weight: 700;
         margin: ${({ phototitle }) =>
             phototitle === 'true' ? '8px 0px' : '11px 0px 8px'};
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
         @media (max-width: 1280px) {
             font-size: 18px;
         }
