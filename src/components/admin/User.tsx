@@ -10,7 +10,8 @@ import HeadUserList from './user/HeadUserList';
 function User() {
     const [order, setOrder] = useState<string | undefined>();
     const [univName, setunivName] = useState<string | undefined>();
-    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
+    const { userinfo, isAdmin, isUniversityAdmin } =
+        useOutletContext<OutletContext>();
     const [role, setRole] = useState<string | undefined>();
 
     const universityName = userinfo.universityName;
@@ -30,9 +31,9 @@ function User() {
             <Suspense fallback={<div>loading...</div>}>
                 {isAdmin ? (
                     <HeadUserList role={role} univName={univName} />
-                ) : (
+                ) : isUniversityAdmin ? (
                     <UserList order={order} />
-                )}
+                ) : null}
             </Suspense>
         </Wrapper>
     );
