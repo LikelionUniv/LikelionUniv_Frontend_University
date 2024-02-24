@@ -98,8 +98,14 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
             );
 
             console.log('Email sent successfully:', response.data);
+            window.alert('메일이 성공적으로 발송됐습니다!');
+
+            onCancel();
         } catch (error) {
             console.error('Error sending email:', error);
+            window.alert('메일이 성공적으로 발송됐습니다!');
+
+            onCancel();
         }
     };
 

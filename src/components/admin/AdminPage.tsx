@@ -50,7 +50,7 @@ const Container = styled.div`
         margin-left: 0px;
     }
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1200px) {
         width: calc(100% - 100px);
     }
 
