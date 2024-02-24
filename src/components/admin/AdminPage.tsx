@@ -12,7 +12,9 @@ const AdminPage = () => {
     const navigate = useNavigate();
 
     const { userinfo, error } = useGetUserInfo();
-    const isAdmin = RolePriority.findIndex(role => role === userinfo.role) == 1;
+    const isAdmin = [1, 4].includes(
+        RolePriority.findIndex(role => role === userinfo.role),
+    );
     const isUniversityAdmin = [2, 3].includes(
         RolePriority.findIndex(role => role === userinfo.role),
     );
