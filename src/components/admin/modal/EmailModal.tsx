@@ -65,6 +65,7 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
         if (!isButtonActive || isSending) return; // 이미 실행 중이면 중복 실행 방지
 
         setIsSending(true); // 버튼 비활성화
+        document.body.style.cursor = 'wait';
 
         const formData = new FormData();
 
@@ -115,6 +116,7 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
             onCancel();
         } finally {
             setIsSending(false);
+            document.body.style.cursor = 'default';
         }
     };
 
