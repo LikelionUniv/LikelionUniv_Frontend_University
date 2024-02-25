@@ -90,7 +90,7 @@ const Univcontent = () => {
                         <U.Text4>~ 3. 17 모집 예정</U.Text4>
                     </button> */}
 
-                    <U.Btn1 onClick={handleBtn1Click}>
+                    <U.Btn1>
                         <U.StyledImg src={Apply1} alt="지원용이미지1" />
                         <U.Text1>중앙 운영단 지원</U.Text1>
                         <U.Text2>2024. 01. 16 ~ 01. 28</U.Text2>

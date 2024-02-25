@@ -27,6 +27,7 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     const { selectedUserIds } = useSelectedUsers();
     const [isButtonActive, setIsButtonActive] = useState(false);
     const [inputreceivers, setInputreceivers] = useState('');
+    const [isSending, setIsSending] = useState(false);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -61,7 +62,10 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
     };
 
     const handleSendEmail = async () => {
-        if (!isButtonActive) return;
+        if (!isButtonActive || isSending) return; // 이미 실행 중이면 중복 실행 방지
+
+        setIsSending(true); // 버튼 비활성화
+        document.body.style.cursor = 'wait';
 
         const formData = new FormData();
 
@@ -97,9 +101,22 @@ const EmailModal: React.FC<EmailModalProps & { selectedEmails: string[] }> = ({
                 },
             );
 
-            console.log('Email sent successfully:', response.data);
+            if (response.status === 200 || response.status === 504) {
+                console.log('Email sent successfully');
+                window.alert('이메일이 성공적으로 발송되었습니다!');
+                onCancel();
+            } else {
+                console.error('Error sending email:', response.data);
+                window.alert('이메일 발송에 실패했습니다.');
+                onCancel();
+            }
         } catch (error) {
             console.error('Error sending email:', error);
+            window.alert('이메일 발송에 실패했습니다.');
+            onCancel();
+        } finally {
+            setIsSending(false);
+            document.body.style.cursor = 'default';
         }
     };
 

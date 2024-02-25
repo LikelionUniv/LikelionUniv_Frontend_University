@@ -12,9 +12,12 @@ const AdminPage = () => {
     const navigate = useNavigate();
 
     const { userinfo, error } = useGetUserInfo();
-    const isAdmin = RolePriority.findIndex(role => role === userinfo.role) >= 2;
-    const isUniversityAdmin =
-        RolePriority.findIndex(role => role === userinfo.role) >= 3;
+    const isAdmin = [1, 4].includes(
+        RolePriority.findIndex(role => role === userinfo.role),
+    );
+    const isUniversityAdmin = [2, 3].includes(
+        RolePriority.findIndex(role => role === userinfo.role),
+    );
 
     return (
         <Container>
@@ -50,7 +53,7 @@ const Container = styled.div`
         margin-left: 0px;
     }
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1200px) {
         width: calc(100% - 100px);
     }
 

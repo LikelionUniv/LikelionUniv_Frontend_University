@@ -9,6 +9,7 @@ import ImageUpload from '../../utils/ImageUpload';
 import { ReactComponent as ArrowIcon } from '../../../img/community/arrow_left.svg';
 import { useAuth } from '../../../hooks/useAuth';
 import { RolePriority } from '../../../constants/Role';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface CommunityRegisterType {
     title: string;
@@ -26,6 +27,7 @@ const CommunityWrite = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const info = { ...location.state };
+    const queryClient = useQueryClient();
     const [selectedBoard, setSelectedBoard] = useState<string>('');
     const [selectedSubBoard, setSelectedSubBoard] = useState<string>('');
     const [editorTitle, setEditorTitle] = useState('');
@@ -168,7 +170,16 @@ const CommunityWrite = () => {
             data,
         });
 
-        window.location.replace('/community');
+        //window.location.replace('/community');
+        navigate('/community', {
+            state : {
+                mainCategory: selectedBoard,
+                subCategory: selectedSubBoard,
+            }
+        })
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
     };
 
     // 게시글 수정
@@ -180,7 +191,16 @@ const CommunityWrite = () => {
             data,
         });
 
-        window.location.replace('/community');
+        //window.location.replace('/community');
+        navigate('/community', {
+            state : {
+                mainCategory: selectedBoard,
+                subCategory: selectedSubBoard,
+            }
+        })
+        queryClient.invalidateQueries({
+            queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
+        });
     };
 
     const submit = () => {

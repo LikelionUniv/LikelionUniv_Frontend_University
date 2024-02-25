@@ -2,7 +2,6 @@ import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
-import DOMPurify from 'dompurify';
 import { usePostLike } from '../../api/mypage/usePostLike';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -46,12 +45,9 @@ const PostCardWithPhoto = (props: MypagePostCardPropType) => {
             <PostCardBox className="title" phototitle="true">
                 {props.title}
             </PostCardBox>
-            <PostCardBox
-                className="content"
-                dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(props.body),
-                }}
-            />
+            <PostCardBox className="content" phototitle="true">
+                {props.body}
+            </PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
                     {props.type === '좋아요' && location.includes('mypage') ? (

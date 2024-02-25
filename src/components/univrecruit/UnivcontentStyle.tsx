@@ -259,9 +259,9 @@ export const Btn1 = styled.button`
     border-radius: 8px;
     word-break: keep-all;
 
-    cursor: pointer;
+    /* cursor: not-allowed; */
 
-    background: var(--Orange-600, #ff7710);
+    background: var(--Grey-500, #d1d4d8);
     border: 0px;
 
     @media screen and (max-width: 768px) {
@@ -284,7 +284,7 @@ export const Btn2 = styled.button`
     justify-content: center;
     padding: 10px;
     flex-shrink: 0;
-    background: var(--Grey-500, #d1d4d8);
+    background: #ff7710;
 
     word-break: keep-all;
     border-radius: 8px;
@@ -347,7 +347,7 @@ export const StyledImg2 = styled.img`
 `;
 
 export const Text1 = styled.div`
-    color: var(--White, #fff);
+    color: var(--Grey-700, #868c94);
     text-align: center;
 
     /* Title/32_Bold */
@@ -358,7 +358,6 @@ export const Text1 = styled.div`
     line-height: 150%; /* 48px */
 
     @media screen and (max-width: 768px) {
-        color: var(--White, #fff);
         text-align: center;
 
         /* Title/32_Bold */
@@ -369,7 +368,6 @@ export const Text1 = styled.div`
         line-height: 150%; /* 48px */
     }
     @media screen and (max-width: 767px) {
-        color: var(--White, #fff);
         text-align: center;
 
         /* Title/24_Bold */
@@ -380,7 +378,6 @@ export const Text1 = styled.div`
         line-height: 150%; /* 36px */
     }
     @media screen and (max-width: 360px) {
-        color: var(--White, #fff);
         text-align: center;
 
         /* Title/24_Bold */
@@ -393,7 +390,7 @@ export const Text1 = styled.div`
 `;
 
 export const Text2 = styled.div`
-    color: var(--White, #fff);
+    color: var(--Grey-700, #868c94);
     text-align: center;
     /* Subtitle/20_Bold */
     font-family: Pretendard;
@@ -403,7 +400,6 @@ export const Text2 = styled.div`
     line-height: 150%; /* 30px */
 
     @media screen and (max-width: 768px) {
-        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
@@ -415,7 +411,6 @@ export const Text2 = styled.div`
         line-height: 150%; /* 30px */
     }
     @media screen and (max-width: 767px) {
-        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
@@ -427,7 +422,6 @@ export const Text2 = styled.div`
         line-height: 150%; /* 21px */
     }
     @media screen and (max-width: 360px) {
-        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
@@ -440,7 +434,7 @@ export const Text2 = styled.div`
     }
 `;
 export const Text3 = styled.div`
-    color: var(--Grey-700, #868c94);
+    color: var(--White, #fff);
     text-align: center;
     /* Title/32_Bold */
     font-family: Pretendard;
@@ -450,7 +444,7 @@ export const Text3 = styled.div`
     line-height: 150%; /* 48px */
 
     @media screen and (max-width: 768px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         /* Title/32_Bold */
         font-family: Pretendard;
@@ -460,7 +454,7 @@ export const Text3 = styled.div`
         line-height: 150%; /* 48px */
     }
     @media screen and (max-width: 767px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         /* Title/24_Bold */
         font-family: Pretendard;
@@ -470,7 +464,7 @@ export const Text3 = styled.div`
         line-height: 150%; /* 36px */
     }
     @media screen and (max-width: 360px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         /* Title/24_Bold */
         font-family: Pretendard;
@@ -481,7 +475,7 @@ export const Text3 = styled.div`
     }
 `;
 export const Text4 = styled.div`
-    color: var(--Grey-700, #868c94);
+    color: var(--White, #fff);
     text-align: center;
 
     /* Subtitle/20_Bold */
@@ -492,7 +486,7 @@ export const Text4 = styled.div`
     line-height: 150%; /* 30px */
 
     @media screen and (max-width: 768px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
@@ -505,7 +499,7 @@ export const Text4 = styled.div`
     }
 
     @media screen and (max-width: 767px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
@@ -518,7 +512,7 @@ export const Text4 = styled.div`
     }
 
     @media screen and (max-width: 360px) {
-        color: var(--Grey-700, #868c94);
+        color: var(--White, #fff);
         text-align: center;
         margin-left: 20px;
 
