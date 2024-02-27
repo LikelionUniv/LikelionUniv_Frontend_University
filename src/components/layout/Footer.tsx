@@ -64,7 +64,7 @@ function Footer(): JSX.Element {
                             서울특별시 종로구 종로3길 17, D1동 16, 17층(청진동,
                             D타워)
                         </p>
-                        <p className="text">등록번호 : 206-82-13812</p>
+                        <p className="text">등록번호 : 206-82-13813</p>
                         <p className="text mail">
                             <EmailIcon />
                             문의처
