@@ -157,10 +157,9 @@ export const PostCardBox = styled.div<PhotoCheck>`
     }
     &.photo {
         background-repeat: no-repeat;
-        background-size: 100% 100%;
+        background-size: cover;
         z-index: 10;
         margin-bottom: 16px;
-        background-size: cover;
         @media (min-width: 1281px) {
             height: 216px;
         }
