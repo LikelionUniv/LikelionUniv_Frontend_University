@@ -37,7 +37,7 @@ const Search: React.FC<SearchProps> = ({ onSearch, searchQuery }) => {
                         className="textInput"
                         type="text"
                         value={inputValue}
-                        placeholder='검색'
+                        placeholder="검색"
                         onKeyDown={(
                             e: React.KeyboardEvent<HTMLInputElement>,
                         ) => {

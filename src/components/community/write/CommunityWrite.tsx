@@ -172,11 +172,11 @@ const CommunityWrite = () => {
 
         //window.location.replace('/community');
         navigate('/community', {
-            state : {
+            state: {
                 mainCategory: selectedBoard,
                 subCategory: selectedSubBoard,
-            }
-        })
+            },
+        });
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
         });
@@ -193,11 +193,11 @@ const CommunityWrite = () => {
 
         //window.location.replace('/community');
         navigate('/community', {
-            state : {
+            state: {
                 mainCategory: selectedBoard,
                 subCategory: selectedSubBoard,
-            }
-        })
+            },
+        });
         queryClient.invalidateQueries({
             queryKey: ['get-pagiable', { uri: `/api/v1/community/posts` }],
         });

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SideBar from './SideBar';
 import Notice from './Notice';
@@ -9,9 +9,12 @@ const Community: React.FC = () => {
     const category = location.state ? location.state : {};
     const [isPC, setIsPC] = useState(window.innerWidth > 767);
     const [searchQuery, setSearchQuery] = useState<string>('');
-    const [selectedMainCategory, setSelectedMainCategory] =
-        useState(category.mainCategory || '멋쟁이사자처럼');
-    const [selectedSubCategory, setSelectedSubCategory] = useState(category.subCategory || '공지사항');
+    const [selectedMainCategory, setSelectedMainCategory] = useState(
+        category.mainCategory || '멋쟁이사자처럼',
+    );
+    const [selectedSubCategory, setSelectedSubCategory] = useState(
+        category.subCategory || '공지사항',
+    );
 
     const handleCategorySelect = (
         mainCategory: string,

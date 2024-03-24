@@ -38,9 +38,7 @@ const SideBar: React.FC<SideBarProps> = ({
                         mainCategory === '멋쟁이사자처럼' &&
                         subCategory === '공지사항'
                     }
-                    onClick={() =>
-                        handleTabClick('멋쟁이사자처럼', '공지사항')
-                    }
+                    onClick={() => handleTabClick('멋쟁이사자처럼', '공지사항')}
                 >
                     공지사항
                 </Tab>

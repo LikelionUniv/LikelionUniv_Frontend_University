@@ -156,7 +156,9 @@ const ProjectRegister = () => {
     };
 
     const processImages = async (): Promise<string[]> => {
-        const imageFiles: File[] = formState.images.map(image => image.file as File);
+        const imageFiles: File[] = formState.images.map(
+            image => image.file as File,
+        );
         const presignedUrlImages: PresignedUrlResponse[] = [];
 
         // presigned url 얻어와서 S3에 등록
@@ -260,7 +262,7 @@ const ProjectRegister = () => {
         }));
     }, [images]);
 
-    useEffect(() => {        
+    useEffect(() => {
         if (
             formState.images.length === 0 ||
             formState.activity === '' ||
@@ -370,9 +372,19 @@ const ProjectRegister = () => {
                 <P.Field>
                     <P.Label>제작 기간</P.Label>
                     <P.FlexField>
-                        <DatePicker field='startDate' setFormState={setFormState} />
-                        <img src={Hyphen} alt="hyphen" style={{marginRight: '8px'}} />
-                        <DatePicker field='endDate' setFormState={setFormState} />
+                        <DatePicker
+                            field="startDate"
+                            setFormState={setFormState}
+                        />
+                        <img
+                            src={Hyphen}
+                            alt="hyphen"
+                            style={{ marginRight: '8px' }}
+                        />
+                        <DatePicker
+                            field="endDate"
+                            setFormState={setFormState}
+                        />
                     </P.FlexField>
                 </P.Field>
                 <P.Field>

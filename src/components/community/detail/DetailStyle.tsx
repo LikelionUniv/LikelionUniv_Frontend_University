@@ -368,10 +368,8 @@ export const TextArea = styled.div`
         font-weight: 500;
         line-height: 160%; /* 25.6px */
         word-break: break-word;
-        overflow-wrap: break-word; 
+        overflow-wrap: break-word;
     }
-
-
 `;
 
 /*Like 좋아요*/
