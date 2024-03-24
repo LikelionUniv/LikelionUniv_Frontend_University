@@ -4,23 +4,11 @@ import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { usePostLike } from '../../api/mypage/usePostLike';
 import { useAuth } from '../../hooks/useAuth';
-import { useEffect, useRef, useState } from 'react';
 const PostCard = (props: MypagePostCardPropType) => {
     const navigate = useNavigate();
     const location = useLocation().pathname;
     const { userinfo: user } = useAuth();
-    const [showMore, setShowMore] = useState(false);
-    const textElement = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        const height = textElement.current!.offsetHeight;
-        const lineheight = parseFloat(
-            getComputedStyle(textElement.current!).lineHeight,
-        );
-        const lines = Math.floor(height / lineheight);
-        if (lines > 4) {
-            setShowMore(true);
-        }
-    }, []);
+
     const { mutate } = usePostLike({
         postId: props.id,
         user_id: user.userId,
@@ -47,19 +35,7 @@ const PostCard = (props: MypagePostCardPropType) => {
                 ) : null}
             </PostCardBox>
             <PostCardBox className="title">{props.title}</PostCardBox>
-            <PostCardBox className="content" ref={textElement}>
-                {props.body}
-                {showMore && (
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-                        }}
-                    >
-                        더보기
-                    </div>
-                )}
-            </PostCardBox>
+            <PostCardBox className="content">{props.body}</PostCardBox>
             <PostCardBox className="nav">
                 <div className="wrapper">
                     {props.type === '좋아요' && location.includes('mypage') ? (
