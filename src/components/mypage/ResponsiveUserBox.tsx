@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import useIsPC from '../../hooks/useIsPC';
-import { useUserProfile } from '../../api/mypage/useUserProfile';
+import { useUserProfile } from '../../query/mypage/useUserProfile';
 
 import { Avatar } from './Common';
 import UserProfile from './UserProfile';

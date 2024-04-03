@@ -13,7 +13,7 @@ import PostCardWithPhoto from './PostCardWithPhoto';
 import useServerSidePagination from '../../query/get/useServerSidePagination';
 import { MypagePostCardPropType } from './type';
 import { useRecoilState, useResetRecoilState } from 'recoil';
-import { likeOptionAtom } from '../../store/mypageData';
+import { likeOptionAtom } from '../../atoms/mypageData';
 import { useLocation, useParams } from 'react-router-dom';
 import { PaginationWrapper } from '../project/ProjectList.style';
 import { useAuth } from '../../hooks/useAuth';

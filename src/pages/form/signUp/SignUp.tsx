@@ -1,6 +1,6 @@
 import MMoreInfo from '../../../components/login/mobile/MMoreInfo';
-import Sform from '../../../components/signUp/Sform';
-import '../../../styles/signUp.css';
+import '../signUp/components/signUp.css';
+import Sform from './components/Sform';
 //import '../components/LoadScript';
 
 const SignUp = () => {

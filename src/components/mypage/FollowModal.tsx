@@ -3,8 +3,8 @@ import { useRef } from 'react';
 import * as FM from './FollowModal.style';
 import { FollowBox } from './FollowBox';
 import { ImodalProps } from './type';
-import { useLoadFollow } from '../../api/mypage/useLoadFollow';
-import { useIntersect } from '../../api/mypage/useIntersect';
+import { useLoadFollow } from '../../query/mypage/useLoadFollow';
+import { useIntersect } from '../../query/mypage/useIntersect';
 
 interface FollowModalProps {
     isOpen: boolean;

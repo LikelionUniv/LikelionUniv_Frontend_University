@@ -10,7 +10,7 @@ import {
     noPartStore,
     planStore,
     userEnrolledStore,
-} from '../../../../../store/projectUser';
+} from '../../../../../atoms/projectUser';
 import { Member } from '../../ProjectRegister';
 
 interface RUseEnrolledUser {

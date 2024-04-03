@@ -1,7 +1,7 @@
 import React from 'react';
 import * as P from './Part.style';
 import EachEnrolledUser from './EachEnrolledUser';
-import { UserAndPart } from '../../../../store/projectUser';
+import { UserAndPart } from '../../../../atoms/projectUser';
 
 interface IPart {
     name: string;

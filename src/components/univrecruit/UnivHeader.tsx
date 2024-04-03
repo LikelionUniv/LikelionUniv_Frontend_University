@@ -2,7 +2,7 @@ import * as U from './UnivHeaderStyle';
 import { useState, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { debounce } from 'lodash';
-import { currentWidthState } from '../../store/landing';
+import { currentWidthState } from '../../atoms/landing';
 import Arrow from '../../img/recruit/warrow.svg';
 import { ReactComponent as PixelLongArrowIcon } from '../../img/landing/pixel_long_right_arrow.svg';
 

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
-import { viewFloatingCountDownState } from '../../store/landing';
+import { viewFloatingCountDownState } from '../../atoms/landing';
 
 import * as F from './Footer.style';
 import recruitimage from '../../img/landing/recruit_image.png';

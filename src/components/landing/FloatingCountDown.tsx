@@ -6,8 +6,8 @@ import CountDown from './CountDown';
 import { recruitURL } from './MainGraphic';
 import { debounce } from 'lodash';
 import { useRecoilValue } from 'recoil';
-import { currentWidthState } from '../../store/landing';
-import { viewFloatingCountDownState } from '../../store/landing';
+import { currentWidthState } from '../../atoms/landing';
+import { viewFloatingCountDownState } from '../../atoms/landing';
 
 const FloatingCountDown = () => {
     const desWidth = useRecoilValue(currentWidthState);

@@ -4,7 +4,7 @@ import Close from '../../img/recruit/close.svg';
 import * as M from './UnivFooterModalMobileStyle';
 import { axiosInstance } from '../../api/axios';
 import ModalComplete from '../recruit/modal-complete/ModalComplete';
-import { EMAIL } from '../../utilsTest/regEx/regEx';
+import { EMAIL } from '../../utils/regEx/regEx';
 
 // 모달 스타일
 const customStyles: Modal.Styles = {

@@ -2,7 +2,7 @@ import * as MG from './MainGraphic.style';
 import { useState, useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
 import { useRecoilState } from 'recoil';
-import { currentWidthState } from '../../store/landing';
+import { currentWidthState } from '../../atoms/landing';
 //import { viewFloatingCountDownState } from '../../store/landing';
 
 import maintext from '../../img/landing/main_text.png';

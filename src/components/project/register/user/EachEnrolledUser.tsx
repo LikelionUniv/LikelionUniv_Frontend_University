@@ -1,7 +1,7 @@
 import React from 'react';
 import * as EU from './EachEnrolledUser.style';
 import Delete from '../../../../img/project/delete.svg';
-import { UserAndPart } from '../../../../store/projectUser';
+import { UserAndPart } from '../../../../atoms/projectUser';
 
 interface IEachEnrolledUser {
     user: UserAndPart;

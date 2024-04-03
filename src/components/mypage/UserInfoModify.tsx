@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Avatar, Button, convertPart } from './Common';
-import DropDown from '../signUp/DropDown';
-import { OptionType } from '../signUp/DropDown';
 import { ActionMeta } from 'react-select';
 import { IuserModify } from './type';
 import ImageUpload from '../utils/ImageUpload';
@@ -10,7 +8,10 @@ import ImageUpload from '../utils/ImageUpload';
 import {
     useUpdateUserProfile,
     useCachedUserProfile,
-} from '../../api/mypage/useUserProfile';
+} from '../../query/mypage/useUserProfile';
+import DropDown, {
+    OptionType,
+} from '../../pages/form/signUp/components/DropDown';
 
 /* dropdown option 부분 */
 const trackOptions = [

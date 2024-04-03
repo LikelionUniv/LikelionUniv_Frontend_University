@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { usePostDelete } from '../../api/mypage/usePostDelete';
+import { usePostDelete } from '../../query/mypage/usePostDelete';
 import { useAuth } from '../../hooks/useAuth';
 
 const PostModal = ({ id }: { id: number }) => {

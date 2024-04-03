@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil';
-import { currentWidthState } from '../../store/landing';
+import { currentWidthState } from '../../atoms/landing';
 import InfoNumber from './InfoNumber';
 import InfoService from './InfoService';
 import InfoActivity from './InfoActivity';

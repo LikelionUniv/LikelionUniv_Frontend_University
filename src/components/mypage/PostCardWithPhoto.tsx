@@ -2,7 +2,7 @@ import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
 import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { usePostLike } from '../../api/mypage/usePostLike';
+import { usePostLike } from '../../query/mypage/usePostLike';
 import { useAuth } from '../../hooks/useAuth';
 
 const PostCardWithPhoto = (props: MypagePostCardPropType) => {

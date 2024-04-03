@@ -3,7 +3,7 @@ import { MypageOptionType } from './type';
 import { ReactComponent as Arrow } from '../../img/arrow.svg';
 import { startTransition, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
-import { likeOptionAtom } from '../../store/mypageData';
+import { likeOptionAtom } from '../../atoms/mypageData';
 
 interface SortType {
     select: string;

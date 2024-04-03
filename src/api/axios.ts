@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { IError } from './request';
 import reissue from './reissue';
-import BASE_URL from '../config';
+import BASE_URL from '../constants/config';
 
 export const axiosInstance = axios.create({
     baseURL: BASE_URL,

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 import { Avatar, Button, convertPart } from './Common';
-import { useFollowAddDelete } from '../../api/mypage/useFollowAddDelete';
+import { useFollowAddDelete } from '../../query/mypage/useFollowAddDelete';
 
 interface IbuttonProps {
     delete: boolean;

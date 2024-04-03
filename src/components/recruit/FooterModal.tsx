@@ -5,7 +5,7 @@ import Close from '../../img/recruit/close.svg';
 import * as M from './FooterModalStyle';
 import { axiosInstance } from '../../api/axios';
 import ModalComplete from './modal-complete/ModalComplete';
-import { EMAIL } from '../../utilsTest/regEx/regEx';
+import { EMAIL } from '../../utils/regEx/regEx';
 
 //modal style
 
