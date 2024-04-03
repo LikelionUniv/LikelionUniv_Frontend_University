@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import * as UE from './UserEnrolled.style';
 import Part from './Part';
 import useEnrolledUser from './userStore/useEnrolledUser';
-import request from '../../../../utils/request';
+import request from '../../../../api/request';
 import { User } from './UserFind';
 import { Member } from '../ProjectRegister';
 

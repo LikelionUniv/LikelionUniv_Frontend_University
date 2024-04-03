@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 
 interface Follow {
     currentPage: number;

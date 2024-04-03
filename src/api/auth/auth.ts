@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 
 // 인가코드 서버로 전송 , idtoken return
 export const requestIdtoken = async (

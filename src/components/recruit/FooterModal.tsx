@@ -3,9 +3,9 @@ import Modal from 'react-modal';
 import Line from '../../img/recruit/line.svg';
 import Close from '../../img/recruit/close.svg';
 import * as M from './FooterModalStyle';
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../api/axios';
 import ModalComplete from './modal-complete/ModalComplete';
-import { EMAIL } from '../../constants/regEx/regEx';
+import { EMAIL } from '../../utilsTest/regEx/regEx';
 
 //modal style
 

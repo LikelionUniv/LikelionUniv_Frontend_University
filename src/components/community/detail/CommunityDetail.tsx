@@ -11,7 +11,7 @@ import { ReactComponent as CommentIcon } from '../../../img/community/comment20_
 import { ReactComponent as CommentIconMobile } from '../../../img/community/comment16_900.svg';
 import { ReactComponent as Arrow } from '../../../img/about/arrow_left.svg';
 import { ReactComponent as Menu } from '../../../img/community/menu_900.svg';
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from '../../../api/axios';
 import useIsPC from '../../../hooks/useIsPC';
 import DOMPurify from 'dompurify';
 import useGetPostDetail from '../../../query/get/useGetPostDetail';

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 import { useAuth } from '../../hooks/useAuth';
 
 export const followAddApi = async (user_id: number) => {

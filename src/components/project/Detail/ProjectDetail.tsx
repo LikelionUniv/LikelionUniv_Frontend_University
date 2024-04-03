@@ -6,7 +6,7 @@ import Styles from './Styles';
 import { LeftArrow } from '../../../img/project/detail';
 import Caruosel from './carousel/Carousel';
 import Title from './Title';
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from '../../../api/axios';
 
 export interface ProjectData {
     activity: string;

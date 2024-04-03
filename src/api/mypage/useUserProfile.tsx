@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 import { IuserProfile, IuserModify } from '../../components/mypage/type';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';

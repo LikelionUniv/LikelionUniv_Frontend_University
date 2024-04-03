@@ -7,7 +7,7 @@ import { ActionMeta } from 'react-select';
 import { OptionType } from '../signUp/DropDown';
 import { useParams } from 'react-router-dom';
 import { LoginComplete } from '../login/LoginComplete';
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../api/axios';
 
 const Ndiv = styled.div`
     color: var(--black, #000);

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useNavigate } from 'react-router-dom';
 import useEnrolledUser from '../../components/project/register/user/userStore/useEnrolledUser';
 import { Member } from '../../components/project/register/ProjectRegister';

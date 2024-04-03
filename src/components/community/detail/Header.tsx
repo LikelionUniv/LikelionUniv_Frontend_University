@@ -6,7 +6,8 @@ import { ReactComponent as HeartIcon } from '../../../img/community/heart20.svg'
 import { ReactComponent as CommentIcon } from '../../../img/community/comment20.svg';
 import { ReactComponent as HeartIconMobile } from '../../../img/community/heart16_mob.svg';
 import { ReactComponent as CommentIconMobile } from '../../../img/community/comment16_mob.svg';
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from '../../../api/axios';
+
 import useIsPC from '../../../hooks/useIsPC';
 
 interface HeaderProps {

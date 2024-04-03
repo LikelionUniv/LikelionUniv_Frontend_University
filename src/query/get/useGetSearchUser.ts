@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { User } from '../../components/project/register/user/UserFind';
 
 interface useGetSearchUserProps {

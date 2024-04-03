@@ -1,5 +1,5 @@
 import { IuserModify } from '../../components/mypage/type';
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 
 export const userProfileApi = async (user_id: number) => {
     return await axiosInstance

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import Close from '../../img/recruit/close.svg';
 import * as M from './UnivFooterModalMobileStyle';
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../api/axios';
 import ModalComplete from '../recruit/modal-complete/ModalComplete';
-import { EMAIL } from '../../constants/regEx/regEx';
+import { EMAIL } from '../../utilsTest/regEx/regEx';
 
 // 모달 스타일
 const customStyles: Modal.Styles = {

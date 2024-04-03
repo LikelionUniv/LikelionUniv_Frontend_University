@@ -1,6 +1,6 @@
 import * as D from './DetailStyle';
 import { useRef, useCallback, useState } from 'react';
-import request from '../../../utils/request';
+import request from '../../../api/request';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../../hooks/useAuth';
 import { useParams } from 'react-router-dom';

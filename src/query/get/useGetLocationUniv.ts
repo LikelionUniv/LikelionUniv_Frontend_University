@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 
 export interface IUniversity {
     universityName: string;

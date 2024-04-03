@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import cancel from '../../../img/admin/Cancel.svg';
 import { useSelectedUsers } from '../SelectedUserContext';
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from '../../../api/axios';
 
 interface SelectedFile {
     id: number;

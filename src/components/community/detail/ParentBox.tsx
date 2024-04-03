@@ -6,7 +6,7 @@ import { ReactComponent as HeartIcon } from '../../../img/community/heart16.svg'
 import { ReactComponent as LikedHeartIcon } from '../../../img/community/heart16_liked.svg';
 import { ReactComponent as MenuIcon } from '../../../img/community/menu.svg';
 import Comment from './Comment';
-import request from '../../../utils/request';
+import request from '../../../api/request';
 import { useAuth } from '../../../hooks/useAuth';
 import usePatchComment from '../../../query/patch/usePatchComment';
 import { useQueryClient } from '@tanstack/react-query';

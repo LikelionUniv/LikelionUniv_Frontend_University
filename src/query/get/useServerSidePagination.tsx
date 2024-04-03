@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 import { useSearchParams } from 'react-router-dom';

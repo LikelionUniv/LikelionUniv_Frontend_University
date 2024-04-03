@@ -8,7 +8,7 @@ import {
 import * as D from './DeveloperInfo.style';
 import { useAuth } from '../../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { axiosInstance } from '../../../utils/axios';
+import { axiosInstance } from '../../../api/axios';
 
 interface ProjectData {
     id: number;

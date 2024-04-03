@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import request from '../utils/request';
+import request from '../api/request';
 
 interface IuseFetch<P> {
     uri: string;

@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 
 interface UseGetAlarmsProps {
     ordinal: number;

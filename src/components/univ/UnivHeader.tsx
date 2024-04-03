@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import * as H from './UnivHeaderStyle';
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../../api/axios';
 
 const UnivHeader = () => {
     const foundingYear = 2013;

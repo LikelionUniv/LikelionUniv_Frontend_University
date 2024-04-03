@@ -3,7 +3,7 @@ import * as D from './DetailStyle';
 import { Post } from './CommentData';
 import { ReactComponent as UnlikedIcon } from '../../../img/community/unliked.svg';
 import { ReactComponent as LikedIcon } from '../../../img/community/liked.svg';
-import request from '../../../utils/request';
+import request from '../../../api/request';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuth } from '../../../hooks/useAuth';
 
