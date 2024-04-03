@@ -1,4 +1,4 @@
-import Landing from '../components/landing/Landing';
+import Landing from '../../components/landing/Landing';
 //import '../components/LoadScript';
 
 const LandingPage = () => {

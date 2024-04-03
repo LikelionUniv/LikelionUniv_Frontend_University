@@ -18,7 +18,7 @@ const trackOptions = [
     { value: 2, label: '디자인' },
     // { value: 3, label: '기획디자인' },
     { value: 3, label: '백엔드' },
-    { value: 3, label: '프론트엔드' },
+    { value: 4, label: '프론트엔드' },
 ];
 
 function findLabelByValue(value: number) {

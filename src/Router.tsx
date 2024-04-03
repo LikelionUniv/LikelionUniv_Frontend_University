@@ -1,28 +1,28 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
-import SignUp from './routes/SignUp';
-import LoginPage from './routes/LoginPage';
-import LandingPage from './routes/LandingPage';
-import Project from './routes/Project';
-import Chat from './routes/Chat';
-import Root from './routes/root';
-import Mypage from './routes/Mypage';
-import MypageRoot from './routes/MypageRoot';
-import UnivPage from './routes/UnivPage';
+import SignUp from './pages/form/signUp/SignUp';
+import LoginPage from './pages/form/login/LoginPage';
+import LandingPage from './pages/landing/LandingPage';
+import Project from './pages/project/Project';
+import Chat from './pages/chat/Chat';
+import Root from './pages/root/root';
+import Mypage from './pages/mypage/Mypage';
+import MypageRoot from './pages/mypage/MypageRoot';
+import UnivPage from './pages/univ/UnivPage';
 import ProjectDetail from './components/project/Detail/ProjectDetail';
 import ProjectList from './components/project/ProjectList';
 import Community from './components/community/Community';
-import RecruitPage from './routes/RecruitPage';
-import AboutPage from './routes/AboutPage';
+import RecruitPage from './pages/recruit/RecruitPage';
+import AboutPage from './pages/about/AboutPage';
 import BabyLion from './components/recruit/apply/mobile/BabyLion';
 import UnivRecruit from './components/univrecruit/UnivRecruit';
 import { Redirect } from './components/login/Redirect';
-import UserModify from './routes/UserModify';
-import Userpage from './routes/Userpage';
+import UserModify from './pages/mypage/modify/UserModify';
+import Userpage from './pages/userpage/Userpage';
 import CommunityWrite from './components/community/write/CommunityWrite';
 import CommunityDetail from './components/community/detail/CommunityDetail';
-import CommunityPage from './routes/CommunityPage';
-import DonatePage from './routes/DonatePage';
+import CommunityPage from './pages/community/CommunityPage';
+import DonatePage from './pages/donate/DonatePage';
 import DonateComponent from './components/donate/DonateComponent';
 import DonateDetail from './components/donate/DonateDetail';
 import ProjectUpdateWrapper from './components/project/update/ProjectUpdateWrapper';
@@ -31,8 +31,8 @@ import ProjectRegisterWrapper from './components/project/register/ProjectRegiste
 import User from './components/admin/User';
 import RecruitAlarm from './components/admin/RecruitAlarm';
 import AdminProtectedRouter from './components/AdminProtectedRouter';
-import NotFound from './routes/NotFound';
-import Admin from './routes/Admin';
+import NotFound from './pages/error/NotFound';
+import Admin from './pages/admin/Admin';
 
 const router = createBrowserRouter([
     {

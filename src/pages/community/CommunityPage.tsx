@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import GlobalStyles from '../styles/GlobalStyle';
-import { useAuth } from '../hooks/useAuth';
+import GlobalStyles from '../../styles/GlobalStyle';
+import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 const CommunityPage = () => {

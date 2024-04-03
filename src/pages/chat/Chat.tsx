@@ -1,4 +1,4 @@
-import ChatHome from '../components/chatting/ChatHome';
+import ChatHome from '../../components/chatting/ChatHome';
 
 const Chat = () => {
     return (

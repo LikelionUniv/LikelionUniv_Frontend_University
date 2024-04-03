@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import AdminPage from '../components/admin/AdminPage';
+import AdminPage from '../../components/admin/AdminPage';
 
 function Admin() {
     return (

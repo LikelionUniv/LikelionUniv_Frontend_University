@@ -1,9 +1,9 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import Nav from '../components/Nav';
-import Footer from '../components/layout/Footer';
-import useIsPC from '../hooks/useIsPC';
+import Nav from '../../components/Nav';
+import Footer from '../../components/layout/Footer';
+import useIsPC from '../../hooks/useIsPC';
 import styled from 'styled-components';
-import useIsViewMobileNav from '../hooks/useIsViewMobileNav';
+import useIsViewMobileNav from '../../hooks/useIsViewMobileNav';
 
 function Root() {
     const isPC = useIsPC();
