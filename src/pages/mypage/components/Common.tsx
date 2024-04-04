@@ -5,7 +5,7 @@ export function convertPart(role: string) {
     const roleDict: { [key: string]: string } = {
         ADMIN: '관리자',
         PM: '기획',
-        DESIGNER: '디자이너',
+        DESIGNER: '디자인',
         PM_DESIGNER: '기획디자인',
         FRONTEND: '프론트엔드',
         BACKEND: '백엔드',
