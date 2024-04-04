@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { IuserProfile } from '../../components/mypage/type';
 import request from '../../api/request';
+import { IuserProfile } from '../../pages/mypage/components/type';
 
 interface Userinfo {
     userId: number;

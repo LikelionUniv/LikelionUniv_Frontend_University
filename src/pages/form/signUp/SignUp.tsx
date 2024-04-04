@@ -1,4 +1,4 @@
-import MMoreInfo from '../../../components/login/mobile/MMoreInfo';
+import MMoreInfo from '../login/components/mobile/MMoreInfo';
 import '../signUp/components/signUp.css';
 import Sform from './components/Sform';
 //import '../components/LoadScript';

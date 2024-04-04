@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import request from '../../api/request';
-import { ProjectDetail } from '../../components/project/update/ProjectUpdate';
+import { ProjectDetail } from '../../pages/project/update/ProjectUpdate';
 
 interface useGetProjectDetailProps {
     id: number;

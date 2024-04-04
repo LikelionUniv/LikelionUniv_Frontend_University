@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import PostBox from './PostBox';
 import { TestData } from './DummyData';
-import Pagination from '../../../../components/mypage/Pagination';
 import { PostBoxProp } from './PostBox';
+import Pagination from '../../../mypage/components/Pagination';
 
 interface PostListProps {
     searchQuery: string;

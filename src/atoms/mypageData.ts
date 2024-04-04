@@ -4,7 +4,7 @@ import {
     MypagePostCardProp,
     IuserProfile,
     ProjectCardProp,
-} from '../components/mypage/type';
+} from '../pages/mypage/components/type';
 
 type mypageDataType = {
     isEmpty: boolean;

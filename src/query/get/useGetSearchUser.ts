@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import request from '../../api/request';
-import { User } from '../../components/project/register/user/UserFind';
+import { User } from '../../pages/project/register/user/UserFind';
 
 interface useGetSearchUserProps {
     keyword: string;

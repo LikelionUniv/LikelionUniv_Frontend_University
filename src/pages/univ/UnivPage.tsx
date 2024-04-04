@@ -1,8 +1,8 @@
 // 참여 대학 페이지
-import UnivTab from '../../components/univ/UnivTab';
-import UnivHeader from '../../components/univ/UnivHeader';
-import { Suspense } from 'react';
 
+import { Suspense } from 'react';
+import UnivHeader from './components/UnivHeader';
+import UnivTab from './components/UnivTab';
 const UnivPage = () => {
     return (
         <div>

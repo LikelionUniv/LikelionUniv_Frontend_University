@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
 import request from '../../api/request';
-import { IDropdown } from '../../components/project/register/RegisterOptions';
+import { IDropdown } from '../../pages/project/register/RegisterOptions';
 
 interface Universities {
     name: string;

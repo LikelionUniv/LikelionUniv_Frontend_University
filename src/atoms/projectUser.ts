@@ -1,5 +1,5 @@
 import { atom, selector } from 'recoil';
-import { User } from '../components/project/register/user/UserFind';
+import { User } from '../pages/project/register/user/UserFind';
 
 export interface UserAndPart {
     user: User;

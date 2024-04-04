@@ -1,4 +1,4 @@
-import { IuserProfile } from '../../../components/mypage/type';
+import { IuserProfile } from '../../mypage/components/type';
 
 interface OutletContext {
     userinfo: IuserProfile;

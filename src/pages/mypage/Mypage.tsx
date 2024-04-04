@@ -1,5 +1,5 @@
-import UserInfomation from '../../components/mypage/UserInfomation';
-import UserPost from '../../components/mypage/UserPost';
+import UserInfomation from './components/UserInfomation';
+import UserPost from './components/UserPost';
 
 const Mypage = () => {
     return (
