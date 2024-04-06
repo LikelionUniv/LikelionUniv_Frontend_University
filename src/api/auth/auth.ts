@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { axiosInstance } from '../../utils/axios';
+import { axiosInstance } from '../axios';
 
 // 인가코드 서버로 전송 , idtoken return
 export const requestIdtoken = async (
@@ -8,7 +8,7 @@ export const requestIdtoken = async (
     provider: string | undefined,
 ) => {
     return await axiosInstance
-        .get(`/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`)
+        .get(`/api/v1/auth/${provider}/idtoken/local?code=${authorizationCode}`)
         .then(response => {
             localStorage.setItem('idtoken', response.data.data.idToken);
             return response.data.data.idToken;

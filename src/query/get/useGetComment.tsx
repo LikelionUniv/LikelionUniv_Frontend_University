@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
-import { PostComment } from '../../components/community/detail/CommentData';
+import request from '../../api/request';
+import { PostComment } from '../../pages/community/components/detail/CommentData';
 
 interface useGetCommentProps {
     communityId: number;
