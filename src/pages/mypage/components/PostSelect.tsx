@@ -1,12 +1,12 @@
 import { useLocation, useParams } from 'react-router-dom';
 import useServerSidePagination from '../../../query/get/useServerSidePagination';
-import { MypagePostCardPropType } from './type';
 import { PostBoxWrapper } from './UserPostSelect';
 import EmptyBox from './EmptyBox';
 import PostCard from './PostCard';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import { PaginationWrapper } from '../../project/components/ProjectList.style';
 import { useAuth } from '../../../hooks/useAuth';
+import { MypagePostCardPropType } from '../../../inteface/myPageType';
 
 const PostSelect = ({ select }: { select: string }) => {
     const location = useLocation().pathname;

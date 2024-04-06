@@ -4,8 +4,8 @@ import UserList from './user/UserList';
 import OrderDropDown from './DropDown/OrderDropDown';
 import SearchBar from './Search/SearchBar';
 import { useOutletContext } from 'react-router-dom';
-import OutletContext from './OutletContext';
 import HeadUserList from './user/HeadUserList';
+import { OutletContext } from '../../../inteface/adminType';
 
 function User() {
     const [order, setOrder] = useState<string | undefined>();

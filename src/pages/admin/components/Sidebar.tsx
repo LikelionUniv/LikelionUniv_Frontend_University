@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate, useLocation } from 'react-router';
-import { IuserProfile } from '../../mypage/components/type';
+import { IuserProfile } from '../../../inteface/myPageType';
 
 interface SideBarProps {
     onItemSelect: (item: string) => void;

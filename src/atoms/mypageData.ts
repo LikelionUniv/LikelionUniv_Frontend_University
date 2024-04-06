@@ -1,10 +1,11 @@
 import { atom } from 'recoil';
+
 import {
     MypageOptionType,
     MypagePostCardProp,
     IuserProfile,
     ProjectCardProp,
-} from '../pages/mypage/components/type';
+} from '../inteface/myPageType';
 
 type mypageDataType = {
     isEmpty: boolean;

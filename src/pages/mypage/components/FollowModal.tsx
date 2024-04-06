@@ -2,9 +2,9 @@ import { useRef } from 'react';
 
 import * as FM from './FollowModal.style';
 import { FollowBox } from './FollowBox';
-import { ImodalProps } from './type';
 import { useLoadFollow } from '../../../query/mypage/useLoadFollow';
 import { useIntersect } from '../../../query/mypage/useIntersect';
+import { ImodalProps } from '../../../inteface/myPageType';
 
 interface FollowModalProps {
     isOpen: boolean;

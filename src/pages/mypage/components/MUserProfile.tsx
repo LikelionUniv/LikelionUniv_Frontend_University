@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 import * as MP from './UserProfile.style';
 import { FollowModal } from './FollowModal';
-import { ImodalProps, IuserProfile } from './type';
 import { convertPart } from './Common';
 import useModal from '../../../hooks/useModal';
+import { ImodalProps, IuserProfile } from '../../../inteface/myPageType';
 
 interface UserProfileProps {
     userProfile: IuserProfile;

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PostCardProp } from './type';
 import heart from '../../../img/admin/heart16.svg';
 import comment from '../../../img/admin/comment16.svg';
+import { PostCardProp } from '../../../../inteface/adminType';
 
 export interface PostBoxProp extends PostCardProp {
     user: string;

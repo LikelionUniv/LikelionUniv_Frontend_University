@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 
 import { axiosInstance } from '../../api/axios';
-import { IuserProfile, IuserModify } from '../../pages/mypage/components/type';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { IuserModify, IuserProfile } from '../../inteface/myPageType';
 
 const DEFAULT_USER_PROFILE = {
     followerNum: 0,

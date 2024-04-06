@@ -5,7 +5,7 @@ import useModal from '../../../hooks/useModal';
 import { FollowModal } from './FollowModal';
 import * as UP from './UserProfile.style';
 import { convertPart } from './Common';
-import { ImodalProps, IuserProfile } from './type';
+import { ImodalProps, IuserProfile } from '../../../inteface/myPageType';
 
 interface UserProfileProps {
     userProfile: IuserProfile;

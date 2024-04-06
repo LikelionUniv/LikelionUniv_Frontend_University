@@ -11,12 +11,12 @@ import EmptyBox from './EmptyBox';
 import PostCard from './PostCard';
 import PostCardWithPhoto from './PostCardWithPhoto';
 import useServerSidePagination from '../../../query/get/useServerSidePagination';
-import { MypagePostCardPropType } from './type';
 import { useRecoilState, useResetRecoilState } from 'recoil';
 import { likeOptionAtom } from '../../../atoms/mypageData';
 import { useLocation, useParams } from 'react-router-dom';
 import { PaginationWrapper } from '../../project/components/ProjectList.style';
 import { useAuth } from '../../../hooks/useAuth';
+import { MypagePostCardPropType } from '../../../inteface/myPageType';
 
 const LikeSelect = ({ select }: { select: string }) => {
     const [searchValue, setSearchValue] = useState<string>('');

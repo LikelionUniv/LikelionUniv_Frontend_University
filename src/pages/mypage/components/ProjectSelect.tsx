@@ -1,12 +1,12 @@
 import React from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import { ProjectCardProp } from './type';
 import useServerSidePagination from '../../../query/get/useServerSidePagination';
 import { PostBoxWrapper } from './UserPostSelect';
 import EmptyBox from './EmptyBox';
 import ProjectCard from './ProjectCard';
 import { PaginationWrapper } from '../../project/components/ProjectList.style';
 import { useAuth } from '../../../hooks/useAuth';
+import { ProjectCardProp } from '../../../inteface/myPageType';
 
 const ProjectSelect = ({ select }: { select: string }) => {
     const location = useLocation().pathname;

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { User } from './Usertype';
 import { useSelectedUsers } from '../SelectedUserContext';
 import DeleteUser from './DeleteUser';
 import ModifyUser from '../modal/ModifyUser';
 import { useOutletContext } from 'react-router-dom';
-import OutletContext from '../OutletContext';
+import { OutletContext, User } from '../../../../inteface/adminType';
 
 export interface TableUserListProps {
     id: number;

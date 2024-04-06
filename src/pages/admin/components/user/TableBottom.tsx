@@ -4,8 +4,8 @@ import useDeleteUserList from '../../../../query/delete/useDeleteUserList';
 import styled from 'styled-components';
 import EmailModal from '../modal/EmailModal';
 import { useUserProfile } from '../../../../query/mypage/useUserProfile';
-import OutletContext from '../OutletContext';
 import { useOutletContext } from 'react-router-dom';
+import { OutletContext } from '../../../../inteface/adminType';
 
 const TableBottom: React.FC = () => {
     const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =

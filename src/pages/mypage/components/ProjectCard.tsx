@@ -1,8 +1,8 @@
 import dot from '../../../img/mypage/dot.svg';
 import { styled } from 'styled-components';
-import { ProjectCardProp } from './type';
 import { ProjectBoxWrapper } from './PostCardStyle';
 import { useNavigate } from 'react-router-dom';
+import { ProjectCardProp } from '../../../inteface/myPageType';
 
 const ProjectCard = (props: ProjectCardProp) => {
     const navigate = useNavigate();

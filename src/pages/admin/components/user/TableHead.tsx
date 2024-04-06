@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelectedUsers } from '../SelectedUserContext';
 import { useOutletContext } from 'react-router-dom';
-import OutletContext from '../OutletContext';
+import { OutletContext } from '../../../../inteface/adminType';
 
 function TableHead() {
     const { selectAll, setSelectAll } = useSelectedUsers();

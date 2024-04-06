@@ -1,9 +1,9 @@
 import { PostCardBox, PostCardBoxWrapper } from './PostCardStyle';
-import { MypagePostCardPropType } from './type';
 import PostModal from './PostModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { usePostLike } from '../../../query/mypage/usePostLike';
 import { useAuth } from '../../../hooks/useAuth';
+import { MypagePostCardPropType } from '../../../inteface/myPageType';
 const PostCard = (props: MypagePostCardPropType) => {
     const navigate = useNavigate();
     const location = useLocation().pathname;

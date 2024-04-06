@@ -5,7 +5,7 @@ import TableHead from './TableHead';
 import TableBottom from './TableBottom';
 import { SelectedUsersProvider } from '../SelectedUserContext';
 import useServerSidePagination from '../../../../query/get/useServerSidePagination';
-import { User } from './Usertype';
+import { User } from '../../../../inteface/adminType';
 
 interface UserListProps {
     order?: string;
