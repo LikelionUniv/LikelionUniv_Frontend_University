@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 
 import * as MI from './MMoreInfo.style';
 import SignupModal from './SignupModal';
-import { axiosInstance } from '../../../../../api/axios';
+import { axiosInstance } from '../../../../api/axios';
 import { LoginComplete } from '../LoginComplete';
 
 interface IForm {

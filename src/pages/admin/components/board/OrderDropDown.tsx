@@ -1,7 +1,7 @@
 import React from 'react';
 import Select, { components } from 'react-select';
 import { ReactComponent as Arrow } from '../../../../img/arrow.svg';
-import { OptionType } from '../../../form/signUp/components/DropDown';
+import { OptionType } from '../../../signUp/components/DropDown';
 
 const orderOptions = [
     { value: 1, label: '최신순' },

@@ -1,9 +1,9 @@
 import React from 'react';
 import * as ML from './MLogin.style';
 import MMoreInfo from './MMoreInfo';
-import LoginImage from '../../../../../img/login/Login.png';
-import googleIcon from '../../../../../img/login/google-icon.svg';
-import kakaoIcon from '../../../../../img/login/kakao-icon.svg';
+import LoginImage from '../../../../img/login/Login.png';
+import googleIcon from '../../../../img/login/google-icon.svg';
+import kakaoIcon from '../../../../img/login/kakao-icon.svg';
 
 interface LoginProps {
     google_login: () => void;

@@ -6,7 +6,7 @@ import {
     requestIdtoken,
     requestLogin,
     requestUserInfo,
-} from '../../../../api/auth/auth';
+} from '../../../api/auth/auth';
 
 const socialLogin = async (
     authorizationCode: string | null,

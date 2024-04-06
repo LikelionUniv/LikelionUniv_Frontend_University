@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import googleIcon from '../../../../../img/login/google-icon.svg';
-import kakaoIcon from '../../../../../img/login/kakao-icon.svg';
+import googleIcon from '../../../../img/login/google-icon.svg';
+import kakaoIcon from '../../../../img/login/kakao-icon.svg';
 
 export const Container = styled.div`
     display: flex;

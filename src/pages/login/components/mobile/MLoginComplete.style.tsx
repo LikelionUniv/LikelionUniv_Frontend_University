@@ -4,21 +4,25 @@ import { Button } from '../../../mypage/components/Common';
 
 export const Container = styled.div`
     display: flex;
-    height: 100%;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
+    margin-bottom: 40px;
 
-    @media screen and (max-width: 767px) {
+    width: 100%;
+    height: 100%;
+
+    @media screen and (min-width: 768px) {
         display: none;
     }
 `;
 
 export const ItemBox = styled.div`
-    width: 290px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
+    margin-top: 10px;
     & > .img {
         width: 200px;
         height: 200px;
@@ -28,15 +32,18 @@ export const ItemBox = styled.div`
         margin-top: 24px;
         color: var(--Grey-900, #212224);
         text-align: center;
+
+        font-family: Pretendard;
         font-size: 24px;
+        font-style: normal;
         font-weight: 700;
-        line-height: 150%; /* 36px */
+        line-height: 150%;
     }
 `;
 
 export const LButton = styled(Button)`
-    margin-top: 56px;
-    width: 182px;
+    margin-top: 237px;
+    width: 100%;
     height: 56px;
     font-size: 20px;
 `;

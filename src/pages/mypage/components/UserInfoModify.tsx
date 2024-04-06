@@ -8,9 +8,7 @@ import {
     useUpdateUserProfile,
     useCachedUserProfile,
 } from '../../../query/mypage/useUserProfile';
-import DropDown, {
-    OptionType,
-} from '../../../pages/form/signUp/components/DropDown';
+import DropDown, { OptionType } from '../../signUp/components/DropDown';
 import ImageUpload from '../../../components/utils/ImageUpload';
 
 /* dropdown option 부분 */

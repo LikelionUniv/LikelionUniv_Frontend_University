@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
-import SignUp from './pages/form/signUp/SignUp';
-import LoginPage from './pages/form/login/LoginPage';
+import SignUp from './pages/signUp/SignUp';
+import LoginPage from './pages/login/LoginPage';
 import LandingPage from './pages/landing/LandingPage';
 import Project from './pages/project/Project';
 import Chat from './pages/chat/Chat';
@@ -30,7 +30,7 @@ import CommunityWrite from './pages/community/components/write/CommunityWrite';
 import Community from './pages/community/components/Community';
 import DonateDetail from './pages/donate/components/DonateDetail';
 import DonateComponent from './pages/donate/components/DonateComponent';
-import { Redirect } from './pages/form/login/components/Redirect';
+import { Redirect } from './pages/login/components/Redirect';
 import ProjectList from './pages/project/components/ProjectList';
 import ProjectRegisterWrapper from './pages/project/register/ProjectRegisterWrapper';
 import ProjectUpdateWrapper from './pages/project/update/ProjectUpdateWrapper';

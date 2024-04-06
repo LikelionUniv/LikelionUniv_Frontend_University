@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Cancel from '../../../../../img/mypage/Cancel.svg';
+import Cancel from '../../../../img/mypage/Cancel.svg';
 
 export const ModalWrapper = styled.div`
     position: absolute;

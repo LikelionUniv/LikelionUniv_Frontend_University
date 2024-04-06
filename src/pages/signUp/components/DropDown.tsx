@@ -1,6 +1,6 @@
 import React from 'react';
 import Select, { ActionMeta, components } from 'react-select';
-import { ReactComponent as Arrow } from '../../../../img/arrow.svg';
+import { ReactComponent as Arrow } from '../../../img/arrow.svg';
 import { roleTrackStyle, genStyle } from './customSelectStyles';
 
 export type OptionType = {

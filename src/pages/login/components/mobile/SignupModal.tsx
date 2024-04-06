@@ -2,8 +2,8 @@ import React, { startTransition, useCallback, useState } from 'react';
 import * as SM from './SignupModal.style';
 import useGetLocationUniv, {
     IUniversity,
-} from '../../../../../query/get/useGetLocationUniv';
-import { regionTab } from '../../../../univ/components/UnivTabData';
+} from '../../../../query/get/useGetLocationUniv';
+import { regionTab } from '../../../univ/components/UnivTabData';
 
 interface SignupModalProps {
     isOpen: boolean;

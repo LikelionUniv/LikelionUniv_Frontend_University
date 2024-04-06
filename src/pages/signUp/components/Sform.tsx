@@ -3,9 +3,9 @@ import './signUp.css';
 import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
-import { OptionType } from '../../signUp/components/DropDown';
+import { OptionType } from './DropDown';
 import { useParams } from 'react-router-dom';
-import { axiosInstance } from '../../../../api/axios';
+import { axiosInstance } from '../../../api/axios';
 import { LoginComplete } from '../../login/components/LoginComplete';
 
 const Ndiv = styled.div`
