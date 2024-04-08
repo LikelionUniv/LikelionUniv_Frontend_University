@@ -69,11 +69,7 @@ function useServerSidePagination<T>({
         if (pageInfo.get('page') === null) {
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (pageInfo.get('page') !== '1' && (search || univName)) {
+        } else if (pageInfo.get('page') !== '1' && (search || univName)) {
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
             setCurrentPage(1);
