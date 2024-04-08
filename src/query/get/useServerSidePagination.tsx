@@ -72,6 +72,14 @@ function useServerSidePagination<T>({
         }
     }, []);
 
+    useEffect(() => {
+        if (pageInfo.get('page') !== '1' && (search || univName)) {
+            pageInfo.set('page', '1');
+            setPageInfo(pageInfo);
+            setCurrentPage(1);
+        }
+    }, [search, univName]);
+
     // 현재 페이지 정보를 불러옴
     const getCurrentPageInfo = () => {
         if (pageInfo.get('page') === null) {
