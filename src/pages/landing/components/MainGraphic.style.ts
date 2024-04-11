@@ -277,6 +277,10 @@ export const Description = styled.div`
             font-size: 28px;
         }
 
+        @media (max-width: 480px) {
+            font-size: 6.2vw;
+        }
+
         svg {
             margin-right: 10px;
             @media (max-width: 1280px) {
@@ -288,6 +292,13 @@ export const Description = styled.div`
                 width: 24px;
                 height: 24px;
                 margin-right: 5px;
+            }
+
+
+            @media (max-width: 480px) {
+                width: 6.4vw;
+                height: 6.4vw;
+                margin-right: 1.5%;
             }
         }
     }
