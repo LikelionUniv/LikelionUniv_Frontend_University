@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
-import { Post } from '../../components/community/detail/CommentData';
+import request from '../../api/request';
+import { Post } from '../../pages/community/components/detail/CommentData';
 
 interface useGetDonatePostProps {
     communityId: number;

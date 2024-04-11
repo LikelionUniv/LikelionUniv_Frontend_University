@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 import { useSearchParams } from 'react-router-dom';
@@ -64,13 +64,20 @@ function useServerSidePagination<T>({
 
     const [pageInfo, setPageInfo] = useSearchParams();
 
-    // 페이지 정보가 없을 때 pageInfo를 채워넣음
+    // (if) 페이지 정보가 없을 때 pageInfo를 채워넣음
+    // (else if) page=1 이 아니면서 검색을 했을때 page=1, currentPage=1 로 변경
     useEffect(() => {
         if (pageInfo.get('page') === null) {
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
+            setCurrentPage(1);
+        } else if (pageInfo.get('page') !== '1' && (search || univName)) {
+            pageInfo.set('page', '1');
+            setPageInfo(pageInfo);
+            setCurrentPage(1);
         }
-    }, []);
+        // eslint-disable-next-line
+    }, [search, univName]);
 
     // 현재 페이지 정보를 불러옴
     const getCurrentPageInfo = () => {
