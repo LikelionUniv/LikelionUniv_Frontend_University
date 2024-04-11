@@ -276,6 +276,7 @@ export const Description = styled.div`
         @media (max-width: 768px) {
             font-size: 28px;
         }
+
         @media (max-width: 480px) {
             font-size: 6.2vw;
         }
@@ -292,6 +293,7 @@ export const Description = styled.div`
                 height: 24px;
                 margin-right: 5px;
             }
+
 
             @media (max-width: 480px) {
                 width: 6.4vw;

@@ -271,6 +271,7 @@ const Table = styled.div`
     font-size: 1rem;
     word-break: break-all;
 
+
     @media (max-width: 1400px) {
         padding: 14px 4px;
         margin-right: 10px;
