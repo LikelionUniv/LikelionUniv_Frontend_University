@@ -36,7 +36,6 @@ axiosInstance.interceptors.response.use(
         const axiosError = customError.response?.data as IError;
 
         const { config } = error;
-        console.log(axiosError.code);
 
         // 리프레시도 만료된 경우나 잘못된 토큰인 경우
         if (axiosError?.code === 'TOKEN_401_1') {

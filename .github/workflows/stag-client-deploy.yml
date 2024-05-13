@@ -1,51 +1,57 @@
 name: stag-client-deploy
 
-on: 
-  push: 
-    branches: [ "stag" ]
-  workflow_dispatch:
+on:
+    push:
+        branches: ['stag']
+    workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2.5.2
-        with:
-          node-version: lts/Hydrogen
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
 
-      - name: Install Dependencies
-        run: npm install
+            - name: Setup Node.js environment
+              uses: actions/setup-node@v2.5.2
+              with:
+                  node-version: lts/Hydrogen
 
-      - name: Build
-        run: npm run build
+            - name: set up secrets
+              run: |
+                  echo "REACT_APP_REST_API_KEY=${{secrets.REACT_APP_REST_API_KEY}}" >> .env
+                  echo "REACT_APP_GOOGLE_CLIENT_ID=${{secrets.REACT_APP_GOOGLE_CLIENT_ID}}" >> .env
+                  echo "REACT_APP_REDIRECT_URI=${{secrets.REACT_APP_REDIRECT_URI}}" >> .env
+                  echo "REACT_APP_GOOGLE_REDIRECT_URI=${{secrets.REACT_APP_GOOGLE_REDIRECT_URI}}" >> .env
+            - run: cat .env
+            - name: Install Dependencies
+              run: npm install
 
-      - name: Docker login
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_EMAIL }}
-          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+            - name: Build
+              run: CI=false npm run build
 
-      - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64
-          push: true
-          tags: ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
+            - name: Docker login
+              uses: docker/login-action@v2
+              with:
+                  username: ${{ secrets.DOCKERHUB_EMAIL }}
+                  password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: client-deploy
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            sudo docker rm -f ${{ secrets.DOCKER_CLIENT_STAG_CONTAINER }}
-            sudo docker rmi ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
-            sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
-            sudo docker image prune -f
+            - name: Build and push
+              uses: docker/build-push-action@v3
+              with:
+                  context: .
+                  file: ./Dockerfile
+                  platforms: linux/amd64
+                  push: true
+                  tags: ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
 
+            - name: client-deploy
+              uses: appleboy/ssh-action@master
+              with:
+                  host: ${{ secrets.SSH_HOST }}
+                  username: ${{ secrets.SSH_USERNAME }}
+                  key: ${{ secrets.SSH_KEY }}
+                  script: |
+                      sudo docker rm -f ${{ secrets.DOCKER_CLIENT_STAG_CONTAINER }}
+                      sudo docker rmi ${{ secrets.DOCKER_CLIENT_STAG_IMAGE }}
+                      sudo docker-compose -f ${{ secrets.DOCKER_COMPOSE_DIRECTORY }} up -d
+                      sudo docker image prune -f
