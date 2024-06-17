@@ -98,7 +98,11 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                         </Table>
                         <Table className="name">{props.name}</Table>
                         {isAdmin && (
-                            <Table className="univ">{props.univName}</Table>
+                            <Table className="univ">
+                                {props.univName!.length >= 5
+                                    ? props.univName!.substr(0, 5)
+                                    : props.univName}
+                            </Table>
                         )}
                         <Table className="major">{props.major}</Table>
                         <Table className="ordinal">{props.ordinal}</Table>
@@ -107,12 +111,32 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                             {USER_ROLE[props.role] || props.role}
                         </Table>
                         <Table className="email">{props.email}</Table>
-                        <Table className="edit">
-                            <button onClick={() => handleEdit()}>수정</button>{' '}
-                        </Table>
-                        <Table>
-                            <DeleteUser id={props.id} userName={props.name} />
-                        </Table>
+                        <MobileBtnWrapper>
+                            <Table className="edit">
+                                <button onClick={() => handleEdit()}>
+                                    수정
+                                </button>{' '}
+                            </Table>
+                            <Table>
+                                <DeleteUser
+                                    id={props.id}
+                                    userName={props.name}
+                                />
+                            </Table>
+                        </MobileBtnWrapper>
+                        <WebBtnWrapper>
+                            <Table className="edit">
+                                <button onClick={() => handleEdit()}>
+                                    수정
+                                </button>{' '}
+                            </Table>
+                            <Table>
+                                <DeleteUser
+                                    id={props.id}
+                                    userName={props.name}
+                                />
+                            </Table>
+                        </WebBtnWrapper>
                     </TableBody>
                 </BodyTable>
             </Wrapper>
@@ -221,6 +245,40 @@ const Wrapper = styled.div`
             width: 170px;
         }
     }
+    @media screen and (max-width: 767px) {
+        .name,
+        .univ,
+        .part,
+        .role {
+            min-width: 60px;
+        }
+        .name {
+            width: 37px;
+        }
+
+        .univ {
+            width: 61px;
+        }
+
+        .major {
+            display: none;
+        }
+
+        .ordinal {
+            width: 30px;
+        }
+
+        .part {
+            width: 70px;
+        }
+
+        .role {
+            width: 49px;
+        }
+        .email {
+            display: none;
+        }
+    }
 `;
 
 const BodyTable = styled.div`
@@ -271,7 +329,6 @@ const Table = styled.div`
     font-size: 1rem;
     word-break: break-all;
 
-
     @media (max-width: 1400px) {
         padding: 14px 4px;
         margin-right: 10px;
@@ -281,5 +338,23 @@ const Table = styled.div`
     @media (max-width: 1300px) {
         padding: 14px 2px;
         margin-right: 0px;
+    }
+`;
+const MobileBtnWrapper = styled.div`
+    display: none;
+    & > div {
+        display: block;
+    }
+    @media screen and (max-width: 767px) {
+        display: block;
+        & > div:first-child {
+            margin-bottom: -20px;
+        }
+    }
+`;
+const WebBtnWrapper = styled.div`
+    display: flex;
+    @media screen and (max-width: 767px) {
+        display: none;
     }
 `;

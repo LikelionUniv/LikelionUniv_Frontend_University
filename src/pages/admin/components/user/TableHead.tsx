@@ -26,7 +26,12 @@ function TableHead() {
                         />
                     </Table>
                     <Table className="name">이름</Table>
-                    {isAdmin && <Table className="univ">소속 대학</Table>}
+                    {isAdmin && (
+                        <Table className="univ">
+                            <span>소속</span> 대학
+                        </Table>
+                    )}
+
                     <Table className="major">전공</Table>
                     <Table className="ordinal">기수</Table>
                     <Table className="part">파트</Table>
@@ -41,7 +46,11 @@ function TableHead() {
 
 export default TableHead;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    @media screen and (max-width: 767px) {
+        width: 97%;
+    }
+`;
 
 const HeadTable = styled.div`
     display: flex;
@@ -145,6 +154,35 @@ const HeadTable = styled.div`
         }
         .email {
             width: 170px;
+        }
+        @media screen and (max-width: 767px) {
+            .email {
+                display: none;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .name,
+            .univ,
+            .part,
+            .role {
+                width: 60px;
+                text-align: center;
+                font-size: 14px;
+            }
+            .univ {
+                & > span {
+                    display: none;
+                }
+            }
+            .major {
+                display: none;
+            }
+            .ordinal {
+                font-size: 14px;
+            }
+            .email {
+                display: none;
+            }
         }
     }
 `;

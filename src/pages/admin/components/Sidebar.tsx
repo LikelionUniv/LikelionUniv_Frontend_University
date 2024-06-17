@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate, useLocation } from 'react-router';
 import { IuserProfile } from '../../../inteface/myPageType';
+import * as P from './SidebarStyle';
 
 interface SideBarProps {
     onItemSelect: (item: string) => void;
@@ -78,6 +79,35 @@ const SideBar: React.FC<SideBarProps> = ({
                     </Tab>
                 )}
             </Content>
+
+            <P.HeaderContainer>
+                <P.TabContainer>
+                    <P.Tab
+                        className={selectedTab === '회원정보' ? 'selected' : ''}
+                        onClick={() => {
+                            onItemSelect('회원정보');
+                            setSelectedTab('회원정보');
+                            goUser();
+                        }}
+                    >
+                        회원정보
+                    </P.Tab>
+                    {isAdmin && (
+                        <P.Tab
+                            className={
+                                selectedTab === '모집알림' ? 'selected' : ''
+                            }
+                            onClick={() => {
+                                onItemSelect('모집알림');
+                                setSelectedTab('모집알림');
+                                goAlarm();
+                            }}
+                        >
+                            모집알림
+                        </P.Tab>
+                    )}
+                </P.TabContainer>
+            </P.HeaderContainer>
         </Wrapper>
     );
 };
@@ -184,6 +214,9 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     padding: 12px 0;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const Divider = styled.div`

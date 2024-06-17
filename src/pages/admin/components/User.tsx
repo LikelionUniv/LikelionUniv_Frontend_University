@@ -61,6 +61,9 @@ const Title = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     line-height: 150%;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const UniversityName = styled.div`

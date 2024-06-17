@@ -40,7 +40,6 @@ export default AdminPage;
 
 const Container = styled.div`
     max-width: 1300px;
-
     width: 100%;
     margin: 150px auto;
     padding-right: 300px;
@@ -55,8 +54,11 @@ const Container = styled.div`
     @media (max-width: 1200px) {
         width: calc(100% - 100px);
     }
-
     @media screen and (max-width: 767px) {
-        padding: 0;
+        flex-direction: column;
+        background-color: red;
+
+        min-width: 105%;
+        padding: 0 20px;
     }
 `;
