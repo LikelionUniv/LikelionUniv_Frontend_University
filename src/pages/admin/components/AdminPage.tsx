@@ -56,9 +56,6 @@ const Container = styled.div`
     }
     @media screen and (max-width: 767px) {
         flex-direction: column;
-        background-color: red;
-
-        min-width: 105%;
         padding: 0 20px;
     }
 `;
