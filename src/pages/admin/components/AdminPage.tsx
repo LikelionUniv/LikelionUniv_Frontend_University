@@ -20,18 +20,20 @@ const AdminPage = () => {
 
     return (
         <Container>
-            <SideBar
-                onItemSelect={setSelectedItem}
-                onSearch={(query: string) => setSearchQuery(query)}
-                userProfile={userinfo}
-            />
-            <Outlet
-                context={{
-                    isAdmin,
-                    isUniversityAdmin,
-                    userinfo,
-                }}
-            />
+            <Wrapper>
+                <SideBar
+                    onItemSelect={setSelectedItem}
+                    onSearch={(query: string) => setSearchQuery(query)}
+                    userProfile={userinfo}
+                />
+                <Outlet
+                    context={{
+                        isAdmin,
+                        isUniversityAdmin,
+                        userinfo,
+                    }}
+                />
+            </Wrapper>
         </Container>
     );
 };
@@ -39,23 +41,26 @@ const AdminPage = () => {
 export default AdminPage;
 
 const Container = styled.div`
-    max-width: 1300px;
-    width: 100%;
+    min-width: 100%;
     margin: 150px auto;
-    padding-right: 300px;
     display: flex;
-    align-items: flex-start;
-
+    justify-content: center;
     @media (max-width: 1500px) {
         padding-right: 0px;
         margin-left: 0px;
     }
-
+    @media screen and (max-width: 767px) {
+        margin: 40px 0;
+    }
     @media (max-width: 1200px) {
         width: calc(100% - 100px);
     }
+`;
+const Wrapper = styled.div`
+    display: flex;
+    align-items: flex-start;
     @media screen and (max-width: 767px) {
         flex-direction: column;
-        padding: 0 20px;
+        margin: 0 20px;
     }
 `;

@@ -239,7 +239,7 @@ const Wrapper = styled.div`
         }
 
         .role {
-            width: 40px;
+            width: 50px;
         }
         .email {
             width: 170px;
@@ -250,10 +250,11 @@ const Wrapper = styled.div`
         .univ,
         .part,
         .role {
-            min-width: 60px;
-        }
-        .name {
-            width: 37px;
+            min-width: 70px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .univ {
@@ -266,6 +267,9 @@ const Wrapper = styled.div`
 
         .ordinal {
             width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .part {
@@ -307,12 +311,22 @@ const BodyTable = styled.div`
             font-size: 0.8rem;
         }
     }
+    @media screen and (max-width: 767px) {
+        .mobileDelete {
+            background-color: #ff7710;
+        }
+    }
 
     .check {
-        margin-right: 10px;
-        height: 24px;
+        height: 70px;
         accent-color: #ff7710;
         color: #ffffff;
+
+        @media screen and (max-width: 767px) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 `;
 
@@ -342,9 +356,7 @@ const Table = styled.div`
 `;
 const MobileBtnWrapper = styled.div`
     display: none;
-    & > div {
-        display: block;
-    }
+
     @media screen and (max-width: 767px) {
         display: block;
         & > div:first-child {
@@ -356,5 +368,8 @@ const WebBtnWrapper = styled.div`
     display: flex;
     @media screen and (max-width: 767px) {
         display: none;
+        .mobileDelete {
+            background-color: orange;
+        }
     }
 `;

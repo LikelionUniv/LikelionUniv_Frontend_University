@@ -11,6 +11,10 @@ export const Container = styled.form`
     border-radius: 6px;
     border: 1px solid var(--Grey-400, #dcdfe3);
     margin-left: 10px;
+
+    @media screen and (max-width: 767px) {
+        width: 260px;
+    }
 `;
 
 export const Input = styled.input`
@@ -34,6 +38,7 @@ export const Input = styled.input`
 
 export const Search = styled.img`
     margin-right: 8px;
+
     &:hover {
         cursor: pointer;
     }

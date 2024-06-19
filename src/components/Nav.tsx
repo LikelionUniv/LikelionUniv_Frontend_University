@@ -349,6 +349,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     /* @media (max-width: 1120px) {
         width: 672px;
     } */

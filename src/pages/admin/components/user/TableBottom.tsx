@@ -40,15 +40,17 @@ const TableBottom: React.FC = () => {
         <Wrapper>
             <SelectedActions>
                 <div>선택한 회원</div>
-                <Button onClick={handleDelete}>삭제하기</Button>
-                {isAdmin && (
-                    <Button
-                        style={{ color: '#4D5359' }}
-                        onClick={handleSendEmail}
-                    >
-                        이메일 보내기
-                    </Button>
-                )}
+                <div>
+                    <Button onClick={handleDelete}>삭제하기</Button>
+                    {isAdmin && (
+                        <Button
+                            style={{ color: '#4D5359' }}
+                            onClick={handleSendEmail}
+                        >
+                            이메일 보내기
+                        </Button>
+                    )}
+                </div>
             </SelectedActions>
             {isEmailModalOpen && (
                 <EmailModal
@@ -69,7 +71,10 @@ const Wrapper = styled.div`
 const SelectedActions = styled.div`
     display: flex;
     margin-top: 20px;
-
+    align-items: center;
+    @media screen and (max-width: 767px) {
+        justify-content: space-between;
+    }
     div {
         font-weight: bold;
         margin-top: 5px;

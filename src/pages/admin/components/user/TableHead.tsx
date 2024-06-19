@@ -48,7 +48,7 @@ export default TableHead;
 
 const Wrapper = styled.div`
     @media screen and (max-width: 767px) {
-        width: 97%;
+        width: 99%;
     }
 `;
 
@@ -59,7 +59,6 @@ const HeadTable = styled.div`
     align-items: center;
 
     .check {
-        margin: 0 10px 0 0;
         height: 24px;
         accent-color: #ff7710;
         color: #ffffff;
@@ -155,17 +154,13 @@ const HeadTable = styled.div`
         .email {
             width: 170px;
         }
-        @media screen and (max-width: 767px) {
-            .email {
-                display: none;
-            }
-        }
+
         @media screen and (max-width: 767px) {
             .name,
             .univ,
             .part,
             .role {
-                width: 60px;
+                width: 70px;
                 text-align: center;
                 font-size: 14px;
             }
@@ -179,6 +174,7 @@ const HeadTable = styled.div`
             }
             .ordinal {
                 font-size: 14px;
+                text-align: center;
             }
             .email {
                 display: none;
