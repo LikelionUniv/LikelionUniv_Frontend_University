@@ -49,11 +49,12 @@ const Container = styled.div`
         padding-right: 0px;
         margin-left: 0px;
     }
-    @media screen and (max-width: 767px) {
-        margin: 40px 0;
-    }
+
     @media (max-width: 1200px) {
         width: calc(100% - 100px);
+    }
+    @media screen and (max-width: 767px) {
+        margin: 40px 0;
     }
 `;
 const Wrapper = styled.div`
@@ -61,6 +62,7 @@ const Wrapper = styled.div`
     align-items: flex-start;
     @media screen and (max-width: 767px) {
         flex-direction: column;
-        margin: 0 20px;
+        /* //보류
+        margin: 0 20px; */
     }
 `;

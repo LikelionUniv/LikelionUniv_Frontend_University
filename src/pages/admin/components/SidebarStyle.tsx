@@ -26,6 +26,10 @@ export const HeaderContainer = styled.div`
 export const TabContainer = styled.div`
     display: flex;
     gap: 0 24px;
+
+    @media screen and (max-width: 380px) {
+        margin-left: 10px;
+    }
 `;
 
 export const Tab = styled.div`

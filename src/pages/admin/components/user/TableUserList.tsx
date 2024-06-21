@@ -250,7 +250,7 @@ const Wrapper = styled.div`
         .univ,
         .part,
         .role {
-            min-width: 70px;
+            width: 60px;
             text-align: center;
             display: flex;
             justify-content: center;
@@ -315,6 +315,9 @@ const BodyTable = styled.div`
         .mobileDelete {
             background-color: #ff7710;
         }
+    }
+    @media screen and (max-width: 380px) {
+        margin-left: 10px;
     }
 
     .check {

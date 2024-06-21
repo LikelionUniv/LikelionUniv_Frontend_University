@@ -64,7 +64,7 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
 
                 <DropDownContainer>
                     <DropDown>
-                        <div className="DropdownName">기수 변경</div>
+                        <div className="DropdownName"></div>
                         <select
                             className="DropdownList"
                             value={editedData.ordinal || ''}
@@ -114,6 +114,62 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
                         </select>
                     </DropDown>
                 </DropDownContainer>
+                <MobileDropDownContainer>
+                    <div>
+                        <DropDown>
+                            <div className="DropdownName">기수 변경</div>
+                            <select
+                                className="DropdownList"
+                                value={editedData.ordinal || ''}
+                                onChange={e =>
+                                    handleChange(
+                                        'ordinal',
+                                        parseInt(e.target.value, 10),
+                                    )
+                                }
+                            >
+                                {Array.from(
+                                    { length: 12 },
+                                    (_, i) => i + 1,
+                                ).map(num => (
+                                    <option key={num} value={num}>
+                                        {`${num}기`}
+                                    </option>
+                                ))}
+                            </select>
+                        </DropDown>
+
+                        <DropDown>
+                            <div className="DropdownName">트랙 변경</div>
+                            <select
+                                className="DropdownList"
+                                value={editedData.part || ''}
+                                onChange={e =>
+                                    handleChange('part', e.target.value)
+                                }
+                            >
+                                <option value="NO_PART">NO_PART</option>
+                                <option value="PM">기획</option>
+                                <option value="DESIGNER">디자인</option>
+                                <option value="FRONTEND">프론트엔드</option>
+                                <option value="BACKEND">백엔드</option>
+                            </select>
+                        </DropDown>
+                    </div>
+                    <DropDown>
+                        <div className="DropdownName">역할 변경</div>
+                        <select
+                            className="DropdownList"
+                            value={editedData.role || ''}
+                            onChange={e => handleChange('role', e.target.value)}
+                        >
+                            <option value="GUEST">게스트</option>
+                            <option value="UNIVERSITY_ADMIN">대표</option>
+                            <option value="MANAGER">운영진</option>
+                            <option value="USER">아기사자</option>
+                        </select>
+                    </DropDown>
+                </MobileDropDownContainer>
                 <Button onClick={handleSave}>수정하기</Button>
             </Wrapper>
         </BackgroundOverlay>
@@ -146,6 +202,9 @@ export const Wrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+    @media screen and (max-width: 767px) {
+        min-width: 80%;
+    }
 `;
 
 const Button = styled.div`
@@ -202,6 +261,10 @@ export const Content = styled.div`
         margin-bottom: 16px;
         align-items: center;
     }
+    @media screen and (max-width: 767px) {
+        /* background-color: orange; */
+        margin: 0;
+    }
 `;
 
 const Divider = styled.div`
@@ -214,12 +277,24 @@ const Divider = styled.div`
 const DropDownContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 767px) {
+        display: none;
+        width: 100%;
+        background-color: orange;
+    }
+`;
+const MobileDropDownContainer = styled.div`
+    display: none;
+    & {
+        @media screen and (max-width: 767px) {
+            display: flex;
+        }
+    }
 `;
 
 const DropDown = styled.div`
     flex: 1;
     margin: 0px 20px 20px 20px;
-    width: 100%;
 
     .DropdownName {
         margin-bottom: 10px;
@@ -228,8 +303,13 @@ const DropDown = styled.div`
 
     .DropdownList {
         padding-left: 20px;
+        padding-right: 20px;
         width: 95%;
+        min-width: 140px;
         height: 42px;
         border: 1px solid #dcdfe3;
+    }
+    @media screen and (max-width: 767px) {
+        margin-left: 0;
     }
 `;

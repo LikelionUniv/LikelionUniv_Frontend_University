@@ -160,7 +160,7 @@ const HeadTable = styled.div`
             .univ,
             .part,
             .role {
-                width: 70px;
+                width: 60px;
                 text-align: center;
                 font-size: 14px;
             }
@@ -179,6 +179,12 @@ const HeadTable = styled.div`
             .email {
                 display: none;
             }
+            .part {
+                width: 70px;
+            }
+        }
+        @media screen and (max-width: 380px) {
+            margin-left: 10px;
         }
     }
 `;

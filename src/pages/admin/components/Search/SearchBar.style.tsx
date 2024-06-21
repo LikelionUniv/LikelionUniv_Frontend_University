@@ -13,7 +13,7 @@ export const Container = styled.form`
     margin-left: 10px;
 
     @media screen and (max-width: 767px) {
-        width: 260px;
+        width: 250px;
     }
 `;
 
