@@ -64,7 +64,7 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
 
                 <DropDownContainer>
                     <DropDown>
-                        <div className="DropdownName"></div>
+                        <div className="DropdownName">기수 변경</div>
                         <select
                             className="DropdownList"
                             value={editedData.ordinal || ''}
@@ -114,62 +114,6 @@ const EditModal: React.FC<EditModalProps> = ({ userId, user, onClose }) => {
                         </select>
                     </DropDown>
                 </DropDownContainer>
-                <MobileDropDownContainer>
-                    <div>
-                        <DropDown>
-                            <div className="DropdownName">기수 변경</div>
-                            <select
-                                className="DropdownList"
-                                value={editedData.ordinal || ''}
-                                onChange={e =>
-                                    handleChange(
-                                        'ordinal',
-                                        parseInt(e.target.value, 10),
-                                    )
-                                }
-                            >
-                                {Array.from(
-                                    { length: 12 },
-                                    (_, i) => i + 1,
-                                ).map(num => (
-                                    <option key={num} value={num}>
-                                        {`${num}기`}
-                                    </option>
-                                ))}
-                            </select>
-                        </DropDown>
-
-                        <DropDown>
-                            <div className="DropdownName">트랙 변경</div>
-                            <select
-                                className="DropdownList"
-                                value={editedData.part || ''}
-                                onChange={e =>
-                                    handleChange('part', e.target.value)
-                                }
-                            >
-                                <option value="NO_PART">NO_PART</option>
-                                <option value="PM">기획</option>
-                                <option value="DESIGNER">디자인</option>
-                                <option value="FRONTEND">프론트엔드</option>
-                                <option value="BACKEND">백엔드</option>
-                            </select>
-                        </DropDown>
-                    </div>
-                    <DropDown>
-                        <div className="DropdownName">역할 변경</div>
-                        <select
-                            className="DropdownList"
-                            value={editedData.role || ''}
-                            onChange={e => handleChange('role', e.target.value)}
-                        >
-                            <option value="GUEST">게스트</option>
-                            <option value="UNIVERSITY_ADMIN">대표</option>
-                            <option value="MANAGER">운영진</option>
-                            <option value="USER">아기사자</option>
-                        </select>
-                    </DropDown>
-                </MobileDropDownContainer>
                 <Button onClick={handleSave}>수정하기</Button>
             </Wrapper>
         </BackgroundOverlay>
@@ -189,12 +133,11 @@ const BackgroundOverlay = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content;
+    height: fit-content; */
     background-color: white;
     padding: 32px 24px 24px 24px;
     min-width: 588px;
-    min-height: 600px;
     border-radius: 20px;
 
     position: fixed;
@@ -204,6 +147,9 @@ export const Wrapper = styled.div`
     z-index: 999;
     @media screen and (max-width: 767px) {
         min-width: 80%;
+        top: 54%;
+        height: 80%;
+        overflow: scroll;
     }
 `;
 
@@ -215,7 +161,6 @@ const Button = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 
     color: #fff;
     border: none;
@@ -224,6 +169,11 @@ const Button = styled.div`
     background-color: #ff7710;
 
     border-radius: 8px;
+    @media screen and (max-width: 767px) {
+        margin: 0;
+        width: 100%;
+        padding: 4px 0;
+    }
 `;
 const Title = styled.div`
     font-size: 20px;
@@ -247,8 +197,11 @@ export const Content = styled.div`
     margin: 20px;
 
     .BoxName {
-        margin: 20px 0px 20px 0px;
+        margin: 20px 0;
         font-weight: 700;
+        @media screen and (max-width: 767px) {
+            margin: 5px 0;
+        }
     }
 
     .InputBox {
@@ -260,35 +213,28 @@ export const Content = styled.div`
         border: 1px solid #dcdfe3;
         margin-bottom: 16px;
         align-items: center;
+        @media screen and (max-width: 767px) {
+            width: 93%;
+        }
     }
     @media screen and (max-width: 767px) {
-        /* background-color: orange; */
         margin: 0;
     }
 `;
 
 const Divider = styled.div`
     height: 1px;
+
     background-color: var(--Grey-900, #dcdfe3);
     width: 100%;
-    margin: 26px 0px 26px 0px;
+    margin: 26px 0px;
 `;
 
 const DropDownContainer = styled.div`
     display: flex;
     justify-content: space-between;
     @media screen and (max-width: 767px) {
-        display: none;
-        width: 100%;
-        background-color: orange;
-    }
-`;
-const MobileDropDownContainer = styled.div`
-    display: none;
-    & {
-        @media screen and (max-width: 767px) {
-            display: flex;
-        }
+        flex-direction: column;
     }
 `;
 
@@ -308,8 +254,14 @@ const DropDown = styled.div`
         min-width: 140px;
         height: 42px;
         border: 1px solid #dcdfe3;
+        @media screen and (max-width: 767px) {
+            width: 100%;
+            height: 48px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
     }
     @media screen and (max-width: 767px) {
-        margin-left: 0;
+        margin: 0;
     }
 `;
