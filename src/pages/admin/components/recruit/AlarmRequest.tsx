@@ -9,6 +9,7 @@ const AlarmRequestWrapper = styled.div`
     border-radius: 42px;
     padding: 6px 12px 6px 12px;
     margin: 12px;
+
     background: #fff2e8;
 `;
 

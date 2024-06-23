@@ -45,10 +45,6 @@ const Container = styled.div`
     margin: 150px auto;
     display: flex;
     justify-content: center;
-    @media (max-width: 1500px) {
-        padding-right: 0px;
-        margin-left: 0px;
-    }
 
     @media (max-width: 1200px) {
         width: calc(100% - 100px);

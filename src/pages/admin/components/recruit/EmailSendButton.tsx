@@ -44,9 +44,7 @@ function EmailSendButton() {
 
 export default EmailSendButton;
 
-const Wrapper = styled.div`
-    =
-`;
+const Wrapper = styled.div``;
 
 const Button = styled.button`
     padding: 0px 16px;

@@ -51,6 +51,23 @@ const HeadTable = styled.div`
     justify-content: space-between;
     font-weight: 700;
     align-items: center;
+
+    @media screen and (max-width: 767px) {
+        .check {
+            margin-right: 0px;
+        }
+        .ordinal {
+            margin-right: 5px;
+        }
+        .email {
+            width: 150px;
+            margin: 10px 0;
+        }
+        .date {
+            width: 120px;
+            text-align: right;
+        }
+    }
 `;
 
 const Table = styled.div`
