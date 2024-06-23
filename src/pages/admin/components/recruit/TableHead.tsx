@@ -44,27 +44,6 @@ const Wrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     max-height: 1660px;
-
-    .check {
-        margin: 0 10px 0 0;
-        height: 24px;
-        accent-color: #ff7710;
-        color: #ffffff;
-    }
-
-    .ordinal {
-        margin: 0 10px;
-    }
-
-    .email {
-        min-width: 100px;
-        margin-left: 10px;
-    }
-
-    .date {
-        min-width: 100px;
-        margin-right: 20px;
-    }
 `;
 const HeadTable = styled.div`
     text-align: left;

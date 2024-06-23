@@ -32,8 +32,12 @@ function RecruitAlarm() {
 export default RecruitAlarm;
 
 const Wrapper = styled.div`
-    width: 1300px;
+    width: 1250px;
     min-width: 450px;
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
 `;
 
 const TableTitle = styled.div`
