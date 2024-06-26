@@ -73,6 +73,5 @@
         "@types/react-dom": "^18.2.7",
         "@types/react-js-pagination": "^3.0.7",
         "@types/styled-components": "^5.1.26"
-    },
-    "proxy": "https://stag.likelionuniv.com"
+    }
 }
