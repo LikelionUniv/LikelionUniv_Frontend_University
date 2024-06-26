@@ -25,14 +25,8 @@ const SideBar: React.FC<SideBarProps> = ({
     const navigate = useNavigate();
     const location = useLocation();
 
-    const goAlarm = (): void => {
-        navigate('recruitalarm');
-    };
-    const goUser = (): void => {
-        navigate('');
-    };
-    const goBoard = (): void => {
-        navigate('/adminboard');
+    const handleNavigate = (url: string): void => {
+        navigate(url);
     };
 
     useEffect(() => {
@@ -40,6 +34,9 @@ const SideBar: React.FC<SideBarProps> = ({
         if (currentPath.includes('recruitalarm')) {
             setSelectedTab('모집알림');
             onItemSelect('모집알림');
+        } else if (currentPath.includes('hackathon')) {
+            setSelectedTab('중앙 해커톤 신청 정보');
+            onItemSelect('중앙 해커톤 신청 정보');
         } else {
             setSelectedTab('회원정보');
             onItemSelect('회원정보');
@@ -60,7 +57,7 @@ const SideBar: React.FC<SideBarProps> = ({
                     onClick={() => {
                         onItemSelect('회원정보');
                         setSelectedTab('회원정보');
-                        goUser();
+                        handleNavigate('');
                     }}
                 >
                     회원정보
@@ -72,10 +69,23 @@ const SideBar: React.FC<SideBarProps> = ({
                         onClick={() => {
                             onItemSelect('모집알림');
                             setSelectedTab('모집알림');
-                            goAlarm();
+                            handleNavigate('recruitalarm');
                         }}
                     >
                         모집알림
+                    </Tab>
+                )}
+                {isAdmin && (
+                    <Tab
+                        className="ParentTab"
+                        $isSelected={selectedTab === '중앙 해커톤 신청 정보'}
+                        onClick={() => {
+                            onItemSelect('중앙 해커톤 신청 정보');
+                            setSelectedTab('중앙 해커톤 신청 정보');
+                            handleNavigate('hackathon');
+                        }}
+                    >
+                        중앙 해커톤 신청 정보
                     </Tab>
                 )}
             </Content>
@@ -87,7 +97,7 @@ const SideBar: React.FC<SideBarProps> = ({
                         onClick={() => {
                             onItemSelect('회원정보');
                             setSelectedTab('회원정보');
-                            goUser();
+                            handleNavigate('');
                         }}
                     >
                         회원정보
@@ -100,10 +110,26 @@ const SideBar: React.FC<SideBarProps> = ({
                             onClick={() => {
                                 onItemSelect('모집알림');
                                 setSelectedTab('모집알림');
-                                goAlarm();
+                                handleNavigate('recruitalarm');
                             }}
                         >
                             모집알림
+                        </P.Tab>
+                    )}
+                    {isAdmin && (
+                        <P.Tab
+                            className={
+                                selectedTab === '중앙 해커톤 신청 정보'
+                                    ? 'selected'
+                                    : ''
+                            }
+                            onClick={() => {
+                                onItemSelect('중앙 해커톤 신청 정보');
+                                setSelectedTab('중앙 해커톤 신청 정보');
+                                handleNavigate('hackathon');
+                            }}
+                        >
+                            중앙 해커톤 신청 정보
                         </P.Tab>
                     )}
                 </P.TabContainer>

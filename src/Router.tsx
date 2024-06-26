@@ -35,6 +35,7 @@ import ProjectList from './pages/project/components/ProjectList';
 import ProjectRegisterWrapper from './pages/project/register/ProjectRegisterWrapper';
 import ProjectUpdateWrapper from './pages/project/update/ProjectUpdateWrapper';
 import UnivRecruit from './pages/univRecruit/UnivRecruit';
+import HackathonPage from './pages/admin/components/hackathon/hackathonPage';
 
 const router = createBrowserRouter([
     {
@@ -177,6 +178,10 @@ const router = createBrowserRouter([
                     {
                         path: 'recruitalarm',
                         element: <RecruitAlarm />,
+                    },
+                    {
+                        path: 'hackathon',
+                        element: <HackathonPage />,
                     },
                 ],
             },
