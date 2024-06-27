@@ -31,14 +31,6 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
     const [editingUser, setEditingUser] = useState<User | null>(null);
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
 
-    const USER_ROLE: { [key: string]: string } = {
-        GUEST: '게스트',
-        USER: '아기사자',
-        MANAGER: '운영진',
-        UNIVERSITY_ADMIN: '대표',
-        SUPER_ADMIN: '관리자',
-    };
-
     return (
         <>
             <Wrapper>
@@ -53,10 +45,10 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
                             </Table>
                         )}
                         <Table className="phone">010-1111-1111</Table>
-                        <Table className="join">{props.ordinal}</Table>
+                        <Table className="join">O</Table>
                         <Table className="part">{props.part}</Table>
                         <Table className="email">test1234@naver.com</Table>
-                        <Table className="email">{props.email}</Table>
+                        <Table className="teamname">{props.email}</Table>
                     </TableBody>
                 </BodyTable>
             </Wrapper>
@@ -127,6 +119,9 @@ const Wrapper = styled.div`
         .email {
             width: 180px;
         }
+        .teamname {
+            width: 180px;
+        }
     }
 
     @media (max-width: 1200px) {
@@ -158,7 +153,6 @@ const Wrapper = styled.div`
         .univ,
         .part {
             width: 60px;
-            text-align: center;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -173,17 +167,20 @@ const Wrapper = styled.div`
         }
 
         .join {
-            width: 30px;
+            width: 60px;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+        }
+        .email {
+            width: 90px;
         }
 
         .part {
             width: 70px;
         }
 
-        .email {
+        .teamname {
             display: none;
         }
     }

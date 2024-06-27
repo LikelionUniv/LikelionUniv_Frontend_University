@@ -52,8 +52,6 @@ const HackathonTableBottom: React.FC = () => {
         teamName: '테스트',
     });
 
-    console.log(body);
-    // STEP 3: header와 body로 worksheet를 생성한다.
     const firstSheet = XLSX.utils.json_to_sheet(body, {
         header: [
             'name',
@@ -98,6 +96,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin: 20px 0;
 `;
 
 const Button = styled.button`

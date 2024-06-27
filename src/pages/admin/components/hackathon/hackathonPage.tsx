@@ -11,7 +11,6 @@ function HackathonPage() {
     const [role, setRole] = useState<string | undefined>();
     const [univName, setunivName] = useState<string | undefined>();
 
-    console.log('해커톤 페이지');
     const { userinfo, isAdmin, isUniversityAdmin } =
         useOutletContext<OutletContext>();
     return (

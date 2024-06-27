@@ -45,8 +45,8 @@ const HackathonHeadUserList: React.FC<UserListProps> = ({
                                 univName={user.univName}
                             />
                         ))}
-                    {renderPaginationBtn()}
                     <HackathonTableBottom />
+                    {renderPaginationBtn()}
                 </Wrapper>
             </SelectedUsersProvider>
         </>
