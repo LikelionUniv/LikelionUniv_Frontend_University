@@ -1,61 +1,92 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useOutletContext } from 'react-router-dom';
-import EmailModal from '../../modal/EmailModal';
-import { useSelectedUsers } from '../../SelectedUserContext';
-import { OutletContext } from '../../../../../inteface/adminType';
-
+import XLSX from 'xlsx-js-style';
+interface ExcelType {
+    name: string;
+    universityName: string;
+    phone: string;
+    offlineParticipation: boolean | string;
+    hackathonPart: string;
+    email: string;
+    teamName: string;
+}
 const HackathonTableBottom: React.FC = () => {
-    const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =
-        useSelectedUsers();
-    // const { mutate } = useDeleteUserList();
+    const workbook = XLSX.utils.book_new();
 
-    const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
-    const openEmailModal = () => setIsEmailModalOpen(true);
-    const closeEmailModal = () => setIsEmailModalOpen(false);
-    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-    // const isAdmin = userProfile.role === 'UNIVERSITY_ADMIN';
+    const body: ExcelType[] = [
+        {
+            name: '홍길동',
+            universityName: '하버드',
+            phone: '010-1111-2222',
+            offlineParticipation: true,
+            hackathonPart: 'PM',
+            email: 'test1234@naver.com',
+            teamName: '화이팅팀',
+        },
+        {
+            name: '홍길동',
+            universityName: '하버드',
+            phone: '010-1111-2222',
+            offlineParticipation: true,
+            hackathonPart: 'PM',
+            email: 'test1234@naver.com',
+            teamName: '화이팅팀',
+        },
+        {
+            name: '홍길동',
+            universityName: '하버드',
+            phone: '010-1111-2222',
+            offlineParticipation: true,
+            hackathonPart: 'PM',
+            email: 'test1234@naver.com',
+            teamName: '화이팅팀',
+        },
+    ];
+    body.unshift({
+        name: '이름',
+        universityName: '대학',
+        phone: '전화번호',
+        offlineParticipation: '참여 여부',
+        hackathonPart: '테스트',
+        email: '테스트',
+        teamName: '테스트',
+    });
 
-    const handleDelete = () => {
-        if (
-            selectedUserIds.length > 0 &&
-            window.confirm('선택한 사용자를 삭제하시겠습니까?')
-        ) {
-            // mutate(selectedUserIds, {
-            //     onSuccess: () => {
-            //         setSelectedUserIds([]);
-            //     },
-            // });
-        }
-    };
-
-    const handleSendEmail = () => {
-        console.log('Sending emails to:', selectedUserEmails);
-        openEmailModal();
-    };
+    console.log(body);
+    // STEP 3: header와 body로 worksheet를 생성한다.
+    const firstSheet = XLSX.utils.json_to_sheet(body, {
+        header: [
+            'name',
+            'universityName',
+            'phone',
+            'offlineParticipation',
+            'hackathonPart',
+            'email',
+            'teamName',
+        ],
+        skipHeader: true,
+    });
+    firstSheet['!cols'] = [
+        { wpx: 120 },
+        { wpx: 180 },
+        { wpx: 200 },
+        { wpx: 100 },
+        { wpx: 130 },
+        { wpx: 200 },
+        { wpx: 200 },
+    ];
+    XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
 
     return (
         <Wrapper>
-            <SelectedActions>
-                <div>선택한 회원</div>
-                <div>
-                    <Button onClick={handleDelete}>삭제하기</Button>
-                    {isAdmin && (
-                        <Button
-                            style={{ color: '#4D5359' }}
-                            onClick={handleSendEmail}
-                        >
-                            이메일 보내기
-                        </Button>
-                    )}
-                </div>
-            </SelectedActions>
-            {isEmailModalOpen && (
-                <EmailModal
-                    selectedEmails={selectedUserEmails}
-                    onCancel={closeEmailModal}
-                />
-            )}
+            <Button
+                style={{ color: '#4D5359' }}
+                onClick={() => {
+                    XLSX.writeFile(workbook, '해커톤신청정보.xlsx');
+                }}
+            >
+                엑셀로 내보내기
+            </Button>
         </Wrapper>
     );
 };
@@ -64,20 +95,9 @@ export default HackathonTableBottom;
 
 const Wrapper = styled.div`
     width: 100%;
-`;
-
-const SelectedActions = styled.div`
     display: flex;
-    margin-top: 20px;
     align-items: center;
-    @media screen and (max-width: 767px) {
-        justify-content: space-between;
-    }
-    div {
-        font-weight: bold;
-        margin-top: 5px;
-        margin-right: 10px;
-    }
+    justify-content: flex-end;
 `;
 
 const Button = styled.button`
@@ -93,10 +113,4 @@ const Button = styled.button`
     &:hover {
         background-color: #d45a07;
     }
-`;
-
-const PageWrapper = styled.div`
-    margin: 64px 0 100px 0;
-    display: flex;
-    justify-content: center;
 `;
