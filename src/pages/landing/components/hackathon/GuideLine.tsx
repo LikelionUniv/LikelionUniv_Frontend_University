@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import HakathonGuide from './HackathonGuide';
 import HackathonTimeLine from './HackathonTimeLine';
+import HackathonAwards from './HackathonAwards';
 
 const BackgroundContainer = styled.div`
     display: flex;
@@ -17,6 +18,7 @@ const GuideLine = () => {
         <BackgroundContainer>
             <HakathonGuide />
             <HackathonTimeLine />
+            <HackathonAwards />
         </BackgroundContainer>
     );
 };

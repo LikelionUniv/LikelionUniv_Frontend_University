@@ -32,8 +32,8 @@ const HackathonButtonWrapper = styled.div`
     width: 100%;
 `;
 
-const HackathonButton = styled.div<{ active?: boolean }>`
-    background-color: ${({ active }) => (active ? '#000' : '#212224')};
+const HackathonButton = styled.div<{ $active?: boolean }>`
+    background-color: ${({ $active }) => ($active ? '#000' : '#212224')};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -89,13 +89,13 @@ const HackathonNav = () => {
             <HackathonNavBox>
                 <HackathonButtonWrapper>
                     <HackathonButton
-                        active={activeContent === 'August 6'}
+                        $active={activeContent === 'August 6'}
                         onClick={() => setActiveContent('August 6')}
                     >
                         8월 6일 타임라인
                     </HackathonButton>
                     <HackathonButtonL
-                        active={activeContent === 'August 7'}
+                        $active={activeContent === 'August 7'}
                         onClick={() => setActiveContent('August 7')}
                     >
                         8월 7일 타임라인

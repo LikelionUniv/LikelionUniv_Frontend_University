@@ -54,7 +54,7 @@ const Circle = styled.div`
         left: 10px;
     }
 
-    @media (max-width: 1480px) and (min-width: 769px) {
+    @media (max-width: 1480px) and (min-width: 767px) {
         left: 12px;
     }
 
