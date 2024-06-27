@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import router from './Router';
 import { RecoilRoot } from 'recoil';
+import { AnimatePresence } from 'framer-motion';
+
+import router from './Router';
 import './styles/font.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -34,7 +36,9 @@ root.render(
     <React.StrictMode>
         <QueryClientProvider client={queryClient}>
             <RecoilRoot>
-                <RouterProvider router={router}></RouterProvider>
+                <AnimatePresence mode="wait">
+                    <RouterProvider router={router}></RouterProvider>
+                </AnimatePresence>
             </RecoilRoot>
             <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>

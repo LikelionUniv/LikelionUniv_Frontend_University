@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { To, useNavigate } from 'react-router-dom';
 
 import Typography from '../../../../components/text/Typography';
 
@@ -103,9 +104,17 @@ const SampleSubTitle = styled(Typography)`
 `;
 
 const HackathonAwardsEx = () => {
+    const navigate = useNavigate();
+
+    const handleNavigate = (path: To) => {
+        setTimeout(() => {
+            navigate(path);
+        }, 300);
+    };
+
     return (
         <GridAwards>
-            <AwardsSamples>
+            <AwardsSamples onClick={() => handleNavigate('/project/81')}>
                 <SampleContentWrapper>
                     <SampleTitle>휠패스</SampleTitle>
                     <SampleUniversity>
@@ -116,7 +125,7 @@ const HackathonAwardsEx = () => {
                 </SampleContentWrapper>
                 <img src={firstImg} alt="first" />
             </AwardsSamples>
-            <AwardsSamples>
+            <AwardsSamples onClick={() => handleNavigate('/project/50')}>
                 <SampleContentWrapper>
                     <SampleTitle>MO:IN</SampleTitle>
                     <SampleUniversity>
@@ -127,7 +136,7 @@ const HackathonAwardsEx = () => {
                 </SampleContentWrapper>
                 <img src={SecondImg} alt="second" />
             </AwardsSamples>
-            <AwardsSamples>
+            <AwardsSamples onClick={() => handleNavigate('/project/41')}>
                 <SampleContentWrapper>
                     <SampleTitle>핸디(Handi)</SampleTitle>
                     <SampleUniversity>
@@ -138,7 +147,7 @@ const HackathonAwardsEx = () => {
                 </SampleContentWrapper>
                 <img src={ThirdImg} alt="third" />
             </AwardsSamples>
-            <AwardsSamples>
+            <AwardsSamples onClick={() => handleNavigate('/project/44')}>
                 <SampleContentWrapper>
                     <SampleTitle>YOUCHECK</SampleTitle>
                     <SampleUniversity>
