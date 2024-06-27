@@ -31,7 +31,7 @@ function usePostProjectRegister() {
 
     const registerProject = async (project: ProjectRegisterType) => {
         const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
+            uri: '/api/v1/projects/',
             method: 'post',
             data: project,
         });
@@ -48,7 +48,7 @@ function usePostProjectRegister() {
             navigate('/project');
 
             queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/projects/' }],
             });
         },
     });
