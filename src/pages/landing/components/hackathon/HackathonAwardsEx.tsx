@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 import Typography from '../../../../components/text/Typography';
 
@@ -103,9 +104,11 @@ const SampleSubTitle = styled(Typography)`
 `;
 
 const HackathonAwardsEx = () => {
+    const navigate = useNavigate();
+
     return (
         <GridAwards>
-            <AwardsSamples>
+            <AwardsSamples onClick={() => navigate('/project/81')}>
                 <SampleContentWrapper>
                     <SampleTitle>휠패스</SampleTitle>
                     <SampleUniversity>
