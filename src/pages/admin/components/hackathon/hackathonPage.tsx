@@ -4,9 +4,7 @@ import OrderDropDown from '../DropDown/OrderDropDown';
 import { OutletContext } from '../../../../inteface/adminType';
 import { useOutletContext } from 'react-router-dom';
 import SearchBar from '../Search/SearchBar';
-import HeadUserList from '../user/HeadUserList';
-import UserList from '../user/UserList';
-import HackathonList from './components/hackathonList';
+import HackathonHeadUserList from './components/HackathonHeadUserList';
 
 function HackathonPage() {
     const [order, setOrder] = useState<string | undefined>();
@@ -28,11 +26,9 @@ function HackathonPage() {
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
-                {isAdmin ? (
-                    <HeadUserList role={role} univName={univName} />
-                ) : isUniversityAdmin ? (
-                    <HackathonList />
-                ) : null}
+                {isAdmin && (
+                    <HackathonHeadUserList role={role} univName={univName} />
+                )}
             </Suspense>
         </Wrapper>
     );

@@ -1,0 +1,188 @@
+import React from 'react';
+import styled from 'styled-components';
+import { useOutletContext } from 'react-router-dom';
+import { OutletContext } from '../../../../../inteface/adminType';
+import { useSelectedUsers } from '../../SelectedUserContext';
+
+function TableHackathonHead() {
+    const { selectAll, setSelectAll } = useSelectedUsers();
+    const { userinfo, isAdmin } = useOutletContext<OutletContext>();
+
+    return (
+        <>
+            <Wrapper>
+                <HeadTable>
+                    <Table className="name">이름</Table>
+                    {isAdmin && <Table className="univ">소속 대학</Table>}
+
+                    <Table className="phone">전화번호</Table>
+                    <Table className="join">참여 여부</Table>
+                    <Table className="part">파트</Table>
+                    <Table className="email">이메일</Table>
+                    <Table className="teamName">팀명</Table>
+                </HeadTable>
+                <Divider />
+            </Wrapper>
+        </>
+    );
+}
+
+export default TableHackathonHead;
+
+const Wrapper = styled.div`
+    @media screen and (max-width: 767px) {
+        width: 99%;
+    }
+`;
+
+const HeadTable = styled.div`
+    display: flex;
+    font-weight: 700;
+    justify-content: start;
+    align-items: center;
+
+    .name {
+        //min-width: 90px;
+        width: 90px;
+    }
+
+    .univ {
+        //min-width: 170px;
+        width: 170px;
+    }
+
+    .phone {
+        //min-width: 140px;
+        width: 140px;
+    }
+
+    .join {
+        //min-width: 40px;
+        width: 60px;
+    }
+
+    .part {
+        //min-width: 120px;
+        width: 120px;
+    }
+
+    .teamName {
+        // min-width: 70px;
+        width: 70px;
+    }
+    .email {
+        //min-width: 200px;
+        width: 200px;
+    }
+
+    @media (max-width: 1500px) {
+        .name {
+            width: 70px;
+        }
+
+        .univ {
+            width: 150px;
+        }
+
+        .phone {
+            width: 120px;
+        }
+
+        .join {
+            width: 60px;
+        }
+
+        .part {
+            width: 100px;
+        }
+
+        .teamName {
+            width: 50px;
+        }
+        .email {
+            width: 180px;
+        }
+    }
+
+    @media (max-width: 1200px) {
+        .name {
+            width: 60px;
+        }
+
+        .univ {
+            width: 140px;
+        }
+
+        .phone {
+            width: 110px;
+        }
+
+        .join {
+            width: 60px;
+        }
+
+        .part {
+            width: 90px;
+        }
+
+        .teamName {
+            width: 40px;
+        }
+        .email {
+            width: 170px;
+        }
+
+        @media screen and (max-width: 767px) {
+            .name,
+            .univ,
+            .part,
+            .teamName {
+                width: 60px;
+                text-align: center;
+                font-size: 14px;
+            }
+
+            .phone {
+                display: none;
+            }
+            .join {
+                font-size: 14px;
+                text-align: center;
+            }
+            .email {
+                display: none;
+            }
+            .part {
+                width: 70px;
+            }
+        }
+        @media screen and (max-width: 380px) {
+            margin-left: 10px;
+        }
+    }
+`;
+
+const Table = styled.div`
+    padding: 16px 4px;
+    min-height: 24px;
+    margin-right: 20px;
+    text-align: start;
+    font-size: 1rem;
+
+    @media (max-width: 1400px) {
+        padding: 14px 4px;
+        margin-right: 10px;
+        font-size: 0.8rem;
+    }
+
+    @media (max-width: 1300px) {
+        padding: 14px 2px;
+        margin-right: 0px;
+    }
+`;
+
+const Divider = styled.div`
+    height: 3px;
+    background-color: var(--Grey-900, #212224);
+    width: 100%;
+`;

@@ -13,7 +13,7 @@ function User() {
     const { userinfo, isAdmin, isUniversityAdmin } =
         useOutletContext<OutletContext>();
     const [role, setRole] = useState<string | undefined>();
-
+    console.log(isAdmin);
     const universityName = userinfo.universityName;
 
     return (

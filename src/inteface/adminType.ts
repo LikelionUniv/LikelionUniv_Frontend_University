@@ -27,6 +27,18 @@ export interface User {
     role: string;
     univName?: string;
 }
+export interface Hackathons {
+    hackathonFormId: number;
+    name: string;
+    email: string;
+    universityName: string;
+    major: string;
+    phone: string;
+    hackathonPart: string;
+    teamName: string;
+    offlineParticipation: boolean;
+    reasonForNotOffline: string;
+}
 export interface OutletContext {
     userinfo: IuserProfile;
     isAdmin: boolean;

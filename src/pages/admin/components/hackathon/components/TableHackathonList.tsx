@@ -18,7 +18,7 @@ export interface TableUserListProps {
     univName?: string;
 }
 
-const TableUserList: React.FC<TableUserListProps> = props => {
+const TableHackathonList: React.FC<TableUserListProps> = props => {
     const {
         selectedUserIds,
         setSelectedUserIds,
@@ -30,19 +30,6 @@ const TableUserList: React.FC<TableUserListProps> = props => {
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
     const [editingUser, setEditingUser] = useState<User | null>(null);
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-
-    const handleEdit = () => {
-        setEditingUserId(props.id);
-        setEditingUser({
-            id: props.id,
-            name: props.name,
-            email: props.email,
-            major: props.major,
-            part: props.part,
-            ordinal: props.ordinal,
-            role: props.role,
-        });
-    };
 
     const USER_ROLE: { [key: string]: string } = {
         GUEST: '게스트',
@@ -57,12 +44,6 @@ const TableUserList: React.FC<TableUserListProps> = props => {
             <Wrapper>
                 <BodyTable>
                     <TableBody key={props.id}>
-                        <Table className="check">
-                            <input
-                                type="checkbox"
-                                checked={selectedUserIds.includes(props.id)}
-                            />
-                        </Table>
                         <Table className="name">{props.name}</Table>
                         {isAdmin && (
                             <Table className="univ">
@@ -71,39 +52,11 @@ const TableUserList: React.FC<TableUserListProps> = props => {
                                     : props.univName}
                             </Table>
                         )}
-                        <Table className="major">{props.major}</Table>
-                        <Table className="ordinal">{props.ordinal}</Table>
+                        <Table className="phone">010-1111-1111</Table>
+                        <Table className="join">{props.ordinal}</Table>
                         <Table className="part">{props.part}</Table>
-                        <Table className="role">
-                            {USER_ROLE[props.role] || props.role}
-                        </Table>
+                        <Table className="email">test1234@naver.com</Table>
                         <Table className="email">{props.email}</Table>
-                        <MobileBtnWrapper>
-                            <Table className="edit">
-                                <button onClick={() => handleEdit()}>
-                                    수정
-                                </button>{' '}
-                            </Table>
-                            <Table>
-                                <DeleteUser
-                                    id={props.id}
-                                    userName={props.name}
-                                />
-                            </Table>
-                        </MobileBtnWrapper>
-                        <WebBtnWrapper>
-                            <Table className="edit">
-                                <button onClick={() => handleEdit()}>
-                                    수정
-                                </button>{' '}
-                            </Table>
-                            <Table>
-                                <DeleteUser
-                                    id={props.id}
-                                    userName={props.name}
-                                />
-                            </Table>
-                        </WebBtnWrapper>
                     </TableBody>
                 </BodyTable>
             </Wrapper>
@@ -121,7 +74,7 @@ const TableUserList: React.FC<TableUserListProps> = props => {
     );
 };
 
-export default TableUserList;
+export default TableHackathonList;
 
 const Wrapper = styled.div`
     overflow-x: auto;
@@ -136,20 +89,16 @@ const Wrapper = styled.div`
         width: 170px;
     }
 
-    .major {
+    .phone {
         width: 140px;
     }
 
-    .ordinal {
-        width: 40px;
+    .join {
+        width: 60px;
     }
 
     .part {
         width: 120px;
-    }
-
-    .role {
-        width: 70px;
     }
     .email {
         width: 200px;
@@ -164,20 +113,16 @@ const Wrapper = styled.div`
             width: 150px;
         }
 
-        .major {
+        .phone {
             width: 120px;
         }
 
-        .ordinal {
+        .join {
             width: 30px;
         }
 
         .part {
             width: 100px;
-        }
-
-        .role {
-            width: 50px;
         }
         .email {
             width: 180px;
@@ -197,16 +142,12 @@ const Wrapper = styled.div`
             width: 110px;
         }
 
-        .ordinal {
+        .join {
             width: 30px;
         }
 
         .part {
             width: 90px;
-        }
-
-        .role {
-            width: 50px;
         }
         .email {
             width: 170px;
@@ -215,8 +156,7 @@ const Wrapper = styled.div`
     @media screen and (max-width: 767px) {
         .name,
         .univ,
-        .part,
-        .role {
+        .part {
             width: 60px;
             text-align: center;
             display: flex;
@@ -228,11 +168,11 @@ const Wrapper = styled.div`
             width: 61px;
         }
 
-        .major {
+        .phone {
             display: none;
         }
 
-        .ordinal {
+        .join {
             width: 30px;
             display: flex;
             justify-content: center;
@@ -243,9 +183,6 @@ const Wrapper = styled.div`
             width: 70px;
         }
 
-        .role {
-            width: 49px;
-        }
         .email {
             display: none;
         }
@@ -286,18 +223,6 @@ const BodyTable = styled.div`
     @media screen and (max-width: 380px) {
         margin-left: 10px;
     }
-
-    .check {
-        height: 70px;
-        accent-color: #ff7710;
-        color: #ffffff;
-
-        @media screen and (max-width: 767px) {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    }
 `;
 
 const TableBody = styled.div`
@@ -322,24 +247,5 @@ const Table = styled.div`
     @media (max-width: 1300px) {
         padding: 14px 2px;
         margin-right: 0px;
-    }
-`;
-const MobileBtnWrapper = styled.div`
-    display: none;
-
-    @media screen and (max-width: 767px) {
-        display: block;
-        & > div:first-child {
-            margin-bottom: -20px;
-        }
-    }
-`;
-const WebBtnWrapper = styled.div`
-    display: flex;
-    @media screen and (max-width: 767px) {
-        display: none;
-        .mobileDelete {
-            background-color: orange;
-        }
     }
 `;

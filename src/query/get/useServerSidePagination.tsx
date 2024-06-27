@@ -15,6 +15,7 @@ interface IuseServerSidePagination {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -45,6 +46,7 @@ interface Pageable {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
 }
 
 function useServerSidePagination<T>({
@@ -58,6 +60,7 @@ function useServerSidePagination<T>({
     oc,
     role,
     univName,
+    isExcelData,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
@@ -116,9 +119,9 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
             },
         });
-
         return response.data;
     };
 

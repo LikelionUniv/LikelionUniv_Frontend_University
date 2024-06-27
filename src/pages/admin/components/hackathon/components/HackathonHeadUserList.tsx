@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-import TableBottom from './TableBottom';
-import { User } from '../../../../../inteface/adminType';
+import { Hackathons, User } from '../../../../../inteface/adminType';
 import useServerSidePagination from '../../../../../query/get/useServerSidePagination';
 import { SelectedUsersProvider } from '../../SelectedUserContext';
-import TableHead from '../../user/TableHead';
-import TableUserList from '../../user/TableUserList';
+import TableHackathonList from './TableHackathonList';
+import HackathonTableBottom from './TableBottom';
+import TableHackathonHead from './TableHead';
 
 interface UserListProps {
     order?: string;
@@ -22,21 +21,19 @@ const HackathonHeadUserList: React.FC<UserListProps> = ({
 }: UserListProps) => {
     const { curPageItem: users, renderPaginationBtn } =
         useServerSidePagination<User>({
-            uri: '/api/admin/v1/headquaters/users',
+            uri: '/api/admin/v1/univAdmin/univ/users',
             size: 10,
             sort: order,
-            univName: univName,
-            role: role,
         });
 
     return (
         <>
             <SelectedUsersProvider>
                 <Wrapper>
-                    <TableHead />
+                    <TableHackathonHead />
                     {Array.isArray(users) &&
                         users.map(user => (
-                            <TableUserList
+                            <TableHackathonList
                                 key={user.id}
                                 id={user.id}
                                 name={user.name}
@@ -49,7 +46,7 @@ const HackathonHeadUserList: React.FC<UserListProps> = ({
                             />
                         ))}
                     {renderPaginationBtn()}
-                    <TableBottom />
+                    <HackathonTableBottom />
                 </Wrapper>
             </SelectedUsersProvider>
         </>

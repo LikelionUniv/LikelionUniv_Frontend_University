@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import TableUserList from './TableUserList';
 import TableHead from './TableHead';
@@ -52,4 +51,5 @@ export default UserList;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
+    background-color: red;
 `;
