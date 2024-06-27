@@ -37,7 +37,6 @@ const AwardsSamples = styled.div`
     justify-content: center;
 
     @media (max-width: 767px) {
-        width: 100%;
         height: clamp(136px, 4vw, 195px);
     }
 
@@ -159,7 +158,7 @@ const HackathonAwardsEx = () => {
             </AwardsSamples>
             <AwardsSamples onClick={() => handleNavigate('/project/44')}>
                 <SampleContentWrapper>
-                    <SampleTitle>youcheck</SampleTitle>
+                    <SampleTitle>YOUCHECK</SampleTitle>
                     <SampleUniversity>
                         <SampleSubTitle>중앙대학교</SampleSubTitle>
                         <SampleSubTitle>BFGGyu</SampleSubTitle>
