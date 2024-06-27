@@ -9,10 +9,12 @@ export const GuideContainer = styled.div`
     color: #fff;
 
     @media (max-width: 767px) {
+        width: 80%;
         margin-top: 120px;
     }
 
     @media (max-width: 360px) {
+        width: 90%;
         margin-top: 80px;
     }
 `;

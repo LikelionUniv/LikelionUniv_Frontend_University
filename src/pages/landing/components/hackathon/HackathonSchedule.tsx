@@ -50,6 +50,10 @@ const ScheduleContainer = styled.div`
     @media (max-width: 767px) {
         height: 109px;
     }
+
+    @media (max-width: 360px) {
+        height: 79px;
+    }
 `;
 
 const ScheduleWrapper = styled.div`
