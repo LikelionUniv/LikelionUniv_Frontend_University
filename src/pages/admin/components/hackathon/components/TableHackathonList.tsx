@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-
 import ModifyUser from '../../modal/ModifyUser';
 import { useOutletContext } from 'react-router-dom';
 import { OutletContext, User } from '../../../../../inteface/adminType';
-import DeleteUser from '../../user/DeleteUser';
-import { useSelectedUsers } from '../../SelectedUserContext';
-
+import HackathonModal from '../../modal/hackathonModal';
 export interface TableUserListProps {
     id: number;
     name: string;
@@ -19,17 +16,17 @@ export interface TableUserListProps {
 }
 
 const TableHackathonList: React.FC<TableUserListProps> = props => {
-    const {
-        selectedUserIds,
-        setSelectedUserIds,
-        selectedUserEmails,
-        setSelectedUserEmails,
-        selectAll,
-    } = useSelectedUsers();
-
     const [editingUserId, setEditingUserId] = useState<number | null>(null);
     const [editingUser, setEditingUser] = useState<User | null>(null);
+    const [isModal, setIsModal] = useState<boolean>(false);
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
+
+    const onCancel = () => {
+        setIsModal(false);
+    };
+
+    const test =
+        '이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~';
 
     return (
         <>
@@ -45,23 +42,20 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
                             </Table>
                         )}
                         <Table className="phone">010-1111-1111</Table>
-                        <Table className="join">O</Table>
+                        <Table className="join">
+                            {false ? (
+                                'O'
+                            ) : (
+                                <Xbtn onClick={() => setIsModal(true)}>X</Xbtn>
+                            )}
+                        </Table>
                         <Table className="part">{props.part}</Table>
                         <Table className="email">test1234@naver.com</Table>
                         <Table className="teamname">{props.email}</Table>
                     </TableBody>
                 </BodyTable>
             </Wrapper>
-            {editingUserId && editingUser && (
-                <ModifyUser
-                    userId={editingUserId}
-                    user={editingUser}
-                    onClose={() => {
-                        setEditingUserId(null);
-                        setEditingUser(null);
-                    }}
-                />
-            )}
+            {isModal && <HackathonModal onCancel={onCancel} reason={test} />}
         </>
     );
 };
@@ -225,6 +219,9 @@ const BodyTable = styled.div`
 const TableBody = styled.div`
     display: flex;
     border-bottom: 1px solid #dcdfe3;
+`;
+const Xbtn = styled.span`
+    cursor: pointer;
 `;
 
 const Table = styled.div`
