@@ -9,7 +9,7 @@ interface useGetProjectDetailProps {
 function useGetProjectDetail({ id }: useGetProjectDetailProps) {
     const fetchProjectDetail = async () => {
         const response = await request<null, ProjectDetail, null>({
-            uri: `/api/v1/project/${id}`,
+            uri: `/api/v1/projects/${id}`,
             method: 'get',
         });
 

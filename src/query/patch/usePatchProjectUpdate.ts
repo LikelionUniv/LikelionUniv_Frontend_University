@@ -19,7 +19,7 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
 
     const updateProject = async (project: ProjectRegisterType) => {
         const response = await request<ProjectRegisterType, PostId, null>({
-            uri: `/api/v1/project/${projectId}`,
+            uri: `/api/v1/projects/${projectId}`,
             method: 'patch',
             data: project,
         });
@@ -32,7 +32,7 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
         mutationFn: updateProject,
         onSuccess: data => {
             queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/projects/' }],
             });
             queryClient.invalidateQueries({
                 queryKey: ['project-detail', projectId],

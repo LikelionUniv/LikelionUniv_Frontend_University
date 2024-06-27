@@ -16,7 +16,7 @@ const PAGESIZE = {
 
 function ProjectList() {
     const [projectApi, setProjectApi] = useState<ProjectAPI>({
-        uri: '/api/v1/project/',
+        uri: '/api/v1/projects/',
     });
 
     const [pageSize, setPageSize] = useState<number>(PAGESIZE.FULL);
