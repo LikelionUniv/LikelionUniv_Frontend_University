@@ -82,7 +82,7 @@ const MainWrapper = styled.div`
 
 const Img = styled.img`
     margin-top: 302px;
-    max-width: clamp(320px, 55vw, 520px); /* Adjusted width with clamp */
+    max-width: clamp(320px, 55vw, 520px);
     height: auto;
 `;
 
