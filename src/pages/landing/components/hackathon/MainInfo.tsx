@@ -1,9 +1,10 @@
-import HackthonTimer from './HackathonTimer';
+import HackathonPart from './HackathonPart';
 
 const MainInfo = () => {
     return (
         <div>
-            <HackthonTimer />
+            <img></img>
+            <HackathonPart />
         </div>
     );
 };
