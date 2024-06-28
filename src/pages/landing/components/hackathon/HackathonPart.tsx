@@ -1,9 +1,21 @@
+import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-
 import arrow from '../../../../img/landing/longrightarrow_s.png';
+
 const HackathonPart = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        const access_token = localStorage.getItem('access_token');
+        if (access_token) {
+            navigate('/hackathons');
+        } else {
+            navigate('/login');
+        }
+    };
+
     return (
-        <PartButton>
+        <PartButton onClick={handleClick}>
             <Info>지금 신청하러 가기</Info>
             <Img src={arrow} />
         </PartButton>
@@ -31,6 +43,8 @@ const PartButton = styled.div`
     align-items: center;
     margin-top: 120px;
     margin-bottom: 148px;
+
+    cursor: pointer;
 
     &:hover {
         background-color: #eb6502;
