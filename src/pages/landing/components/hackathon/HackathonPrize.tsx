@@ -13,9 +13,15 @@ const HackathonPrize = () => {
                 <Img src={bulb} alt="" />
             </PrizeContainer>
             <PrizePost>
-                <Img src={prize1} alt="" />
-                <Img src={prize2} alt="" />
-                <Img src={prize3} alt="" />
+                <ImageWrapper>
+                    <Img src={prize1} alt="" />
+                </ImageWrapper>
+                <ImageWrapper>
+                    <Img src={prize2} alt="" />
+                </ImageWrapper>
+                <ImageWrapper>
+                    <Img src={prize3} alt="" />
+                </ImageWrapper>
             </PrizePost>
             <Sponsor>
                 12기 중앙 해커톤
@@ -57,8 +63,8 @@ const Sponsor = styled.div`
 `;
 
 const Img = styled.img`
-    margin-left: 16px;
-    margin-right: 16px;
+    max-width: 100%;
+    height: auto;
 `;
 
 const EmptyBox = styled.div`
@@ -75,8 +81,19 @@ const EmptyBox = styled.div`
 `;
 
 const PrizePost = styled.div`
+    max-width: 1200px;
     padding-top: 40px;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     flex-direction: row;
     margin-bottom: 160px;
+`;
+
+const ImageWrapper = styled.div`
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
 `;
