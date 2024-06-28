@@ -79,15 +79,14 @@ const HackathonTimer: React.FC = () => {
 export default HackathonTimer;
 
 const TimerContainer = styled.div`
-    /* max-width: 1200px;
-    height: 240px; */
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     background-color: black;
     border-radius: 24px;
-    padding: 56px 197px 56px 196px;
+    height: 240px;
+    width: 1200px;
 `;
 
 const DateContainer = styled.div`
@@ -95,16 +94,17 @@ const DateContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 56px 196px 56px 196px;
 `;
 
 const DateBox = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const DateType = styled.div`
     display: inline-block;
-    /* Subtitle/18_Medium */
     font-family: Pretendard;
     font-size: 18px;
     font-style: normal;
@@ -116,20 +116,19 @@ const BlankBox = styled.div`
     margin-top: 27px;
     margin-left: 30px;
     margin-right: 30px;
-
-    /* Title/72_Bold */
     font-family: Pretendard;
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
-    line-height: 100%;
+    line-height: 10%;
 `;
 
 const DateNum = styled.div`
-    /* Title/72_Bold */
     font-family: Pretendard;
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
     line-height: 100%;
+    width: 100px;
+    text-align: center;
 `;
