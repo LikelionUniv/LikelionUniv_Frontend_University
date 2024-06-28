@@ -33,6 +33,7 @@ interface ReturnuseServerSidePagination<T> {
     curPageItem: T[];
     renderPaginationBtn: () => JSX.Element;
     pageNum: number;
+    refetch: () => void;
 }
 
 interface Pageable {
@@ -125,7 +126,7 @@ function useServerSidePagination<T>({
         return response.data;
     };
 
-    const { data: cachingData } = useSuspenseQuery({
+    const { data: cachingData, refetch } = useSuspenseQuery({
         queryKey: [
             'get-pagiable',
             {
@@ -177,6 +178,7 @@ function useServerSidePagination<T>({
         curPageItem: data,
         renderPaginationBtn,
         pageNum: currentPage,
+        refetch,
     };
 }
 

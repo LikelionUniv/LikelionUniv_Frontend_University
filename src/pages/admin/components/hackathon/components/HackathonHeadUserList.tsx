@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Hackathons, User } from '../../../../../inteface/adminType';
 import useServerSidePagination from '../../../../../query/get/useServerSidePagination';
@@ -19,33 +19,46 @@ const HackathonHeadUserList: React.FC<UserListProps> = ({
     univName,
     role,
 }: UserListProps) => {
-    const { curPageItem: users, renderPaginationBtn } =
-        useServerSidePagination<User>({
-            uri: '/api/admin/v1/univAdmin/univ/users',
-            size: 10,
-            sort: order,
-        });
+    const [isExcelDownload, setIsExcelDownload] = useState(false);
+    console.log(isExcelDownload);
+    const {
+        curPageItem: data,
+        renderPaginationBtn,
+        refetch,
+    } = useServerSidePagination<User>({
+        uri: '/api/admin/v1/hackathons',
+        size: 10,
+        isExcelData: isExcelDownload,
+    });
+
+    console.log(data);
 
     return (
         <>
             <SelectedUsersProvider>
                 <Wrapper>
                     <TableHackathonHead />
-                    {Array.isArray(users) &&
-                        users.map(user => (
-                            <TableHackathonList
-                                key={user.id}
-                                id={user.id}
-                                name={user.name}
-                                email={user.email}
-                                major={user.major}
-                                part={user.part}
-                                ordinal={user.ordinal}
-                                role={user.role}
-                                univName={user.univName}
-                            />
-                        ))}
-                    <HackathonTableBottom />
+                    {Array.isArray(data) && (
+                        <>
+                            {data.map(user => (
+                                <TableHackathonList
+                                    key={user.id}
+                                    id={user.id}
+                                    name={user.name}
+                                    email={user.email}
+                                    major={user.major}
+                                    part={user.part}
+                                    ordinal={user.ordinal}
+                                    role={user.role}
+                                    univName={user.univName}
+                                />
+                            ))}
+                        </>
+                    )}
+                    <HackathonTableBottom
+                        setIsExcelDownload={setIsExcelDownload}
+                        refetch={refetch}
+                    />
                     {renderPaginationBtn()}
                 </Wrapper>
             </SelectedUsersProvider>

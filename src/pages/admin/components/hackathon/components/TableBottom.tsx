@@ -10,9 +10,17 @@ interface ExcelType {
     email: string;
     teamName: string;
 }
-const HackathonTableBottom: React.FC = () => {
-    const workbook = XLSX.utils.book_new();
 
+interface HackathonTableBottomProps {
+    setIsExcelDownload: React.Dispatch<React.SetStateAction<boolean>>;
+    refetch: any;
+}
+const HackathonTableBottom = ({
+    setIsExcelDownload,
+    refetch,
+}: HackathonTableBottomProps) => {
+    const workbook = XLSX.utils.book_new();
+    console.log();
     const body: ExcelType[] = [
         {
             name: '홍길동',
@@ -81,6 +89,8 @@ const HackathonTableBottom: React.FC = () => {
                 style={{ color: '#4D5359' }}
                 onClick={() => {
                     XLSX.writeFile(workbook, '해커톤신청정보.xlsx');
+                    setIsExcelDownload(true);
+                    refetch();
                 }}
             >
                 엑셀로 내보내기
