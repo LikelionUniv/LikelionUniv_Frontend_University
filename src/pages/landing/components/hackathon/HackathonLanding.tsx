@@ -2,6 +2,7 @@ import { Layout, Container } from '../../../../styles/Layout';
 
 import GuideLine from './GuideLine';
 import MainInfo from './MainInfo';
+import Prize from './Prize';
 import TimeInfo from './TimeInfo';
 
 const HakathonLanding = () => {
@@ -11,6 +12,7 @@ const HakathonLanding = () => {
                 <MainInfo />
                 <TimeInfo />
                 <GuideLine />
+                <Prize />
             </Container>
         </Layout>
     );
