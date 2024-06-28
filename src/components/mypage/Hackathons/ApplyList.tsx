@@ -10,7 +10,7 @@ const ApplyList = () => {
                 <A.Date>2024.8.6~8.7</A.Date>
             </A.TextArea>
 
-            <A.Button onClick={navigate(`/hackatons/${hackathonFormId}`)} > 신청 정보 수정하기</A.Button>
+            <A.Button> 신청 정보 수정하기</A.Button>
         </A.Wrapper>
     );
 };
