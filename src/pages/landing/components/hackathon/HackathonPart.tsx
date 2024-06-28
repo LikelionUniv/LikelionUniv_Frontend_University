@@ -17,6 +17,7 @@ const PartButton = styled.div`
     background-color: #ff7711;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 
     border-radius: 8px;
 
@@ -41,5 +42,5 @@ const Info = styled.div`
 `;
 
 const Img = styled.img`
-    padding: 24px 0px 24px 0px;
+    padding: 24px 40px 24px 0px;
 `;
