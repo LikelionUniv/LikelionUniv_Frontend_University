@@ -7,6 +7,9 @@ import info from '../../../../img/landing/info.png';
 import * as MG from '../MainGraphic.style';
 import growl_to_world from '../../../../img/landing/growl_to_world.png';
 import two_check from '../../../../img/landing/two_check.png';
+import check_g from '../../../../img/landing/check_g.png';
+import check_r from '../../../../img/landing/check_r.png';
+import check_o from '../../../../img/landing/check_o.png';
 
 const MainInfo = () => {
     return (
@@ -37,12 +40,16 @@ const MainInfo = () => {
                     </div>
                 ))}
             </MG.Line>
-            <SecondWrapper>
-                <Overlay />
-                <Img1 src={growl_to_world} alt="" />
-                <Img2 src={two_check} alt="" />
-                <img src={info} alt="" />
-            </SecondWrapper>
+            <TherdWrapper>
+                <Img3 src={check_g} alt="" />
+                <SecondWrapper>
+                    <Overlay />
+                    <Img1 src={growl_to_world} alt="" />
+                    <Img2 src={two_check} alt="" />
+                    <img src={info} alt="" />
+                </SecondWrapper>
+                <Img4 src={check_r} alt="" />
+            </TherdWrapper>
         </MainWrapper>
     );
 };
@@ -72,6 +79,7 @@ const Img = styled.img`
 const SecondWrapper = styled.div`
     max-width: 1200px;
     position: relative;
+    align-items: center;
 `;
 
 const Overlay = styled.div`
@@ -95,4 +103,26 @@ const Img1 = styled.img`
 const Img2 = styled.img`
     margin-top: 110px;
     margin-left: 484px;
+`;
+
+const Img3 = styled.img`
+    margin-bottom: 508px;
+    margin-left: 63px;
+    max-width: 100%;
+    margin-top: 1322px;
+    height: auto;
+`;
+
+const Img4 = styled.img`
+    margin-right: 58px;
+    margin-bottom: 1020px;
+    max-width: 100%;
+    margin-top: 776px;
+    height: auto;
+`;
+
+const TherdWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 `;
