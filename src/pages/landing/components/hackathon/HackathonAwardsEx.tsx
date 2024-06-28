@@ -28,7 +28,7 @@ const GridAwards = styled.div`
 `;
 
 const AwardsSamples = styled.div`
-    width: calc(100% - 38px);
+    width: calc(100% - 40px);
     height: clamp(195px, 3vw, 246px);
     padding: 16px 19px 16px 19px;
     background-color: #fff;
@@ -37,7 +37,6 @@ const AwardsSamples = styled.div`
     justify-content: center;
 
     @media (max-width: 767px) {
-        width: 100%;
         height: clamp(136px, 4vw, 195px);
     }
 
@@ -75,6 +74,11 @@ const SampleTitle = styled(Typography)`
     color: #212224;
     font-weight: 700;
     margin-bottom: 8px;
+    text-overflow: hidden;
+
+    @media (max-width: 1200px) {
+        font-size: clamp(20px, 2vw, 24px);
+    }
 
     @media (max-width: 767px) {
         font-size: clamp(16px, 3vw, 20px);
@@ -103,6 +107,11 @@ const SampleSubTitle = styled(Typography)`
     }
 `;
 
+const UnivImg = styled.img`
+    width: 70%;
+    height: auto;
+`;
+
 const HackathonAwardsEx = () => {
     const navigate = useNavigate();
 
@@ -123,7 +132,7 @@ const HackathonAwardsEx = () => {
                     </SampleUniversity>
                     <AwardsImg src={firstPlace} alt="first" />
                 </SampleContentWrapper>
-                <img src={firstImg} alt="first" />
+                <UnivImg src={firstImg} alt="first" />
             </AwardsSamples>
             <AwardsSamples onClick={() => handleNavigate('/project/50')}>
                 <SampleContentWrapper>
@@ -134,7 +143,7 @@ const HackathonAwardsEx = () => {
                     </SampleUniversity>
                     <AwardsImg src={SecondPlace} alt="first" />
                 </SampleContentWrapper>
-                <img src={SecondImg} alt="second" />
+                <UnivImg src={SecondImg} alt="second" />
             </AwardsSamples>
             <AwardsSamples onClick={() => handleNavigate('/project/41')}>
                 <SampleContentWrapper>
@@ -145,7 +154,7 @@ const HackathonAwardsEx = () => {
                     </SampleUniversity>
                     <AwardsImg src={ThirdPlace} alt="first" />
                 </SampleContentWrapper>
-                <img src={ThirdImg} alt="third" />
+                <UnivImg src={ThirdImg} alt="third" />
             </AwardsSamples>
             <AwardsSamples onClick={() => handleNavigate('/project/44')}>
                 <SampleContentWrapper>
@@ -156,7 +165,7 @@ const HackathonAwardsEx = () => {
                     </SampleUniversity>
                     <AwardsImg src={ThirdPlace} alt="first" />
                 </SampleContentWrapper>
-                <img src={ThirdImgSec} alt="third2" />
+                <UnivImg src={ThirdImgSec} alt="third2" />
             </AwardsSamples>
         </GridAwards>
     );
