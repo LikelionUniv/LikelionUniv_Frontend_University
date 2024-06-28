@@ -1,4 +1,5 @@
 import { Layout, Container } from '../../../../styles/Layout';
+import Detail from './Detail';
 
 import GuideLine from './GuideLine';
 import MainInfo from './MainInfo';
@@ -15,6 +16,7 @@ const HakathonLanding = () => {
                 <GuideLine />
                 <More />
                 <Prize />
+                <Detail />
             </Container>
         </Layout>
     );
