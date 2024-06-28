@@ -15,6 +15,18 @@ const EmptyBox = ({ name }: { name: string }) => {
             ) : (
                 <TextPart>좋아요 한 게시글이 없어요.</TextPart>
             )}
+            {/*                         <img src={Eyes} alt="empty" />
+            {name === '신청정보' ? (
+                <TextPart>신청정보가 없어요.</TextPart>
+            ) : name === '프로젝트' ? (
+                <TextPart>등록된 프로젝트가 없어요.</TextPart>
+            ) : name === '게시글' ? (
+                <TextPart>등록된 게시글이 없어요.</TextPart>
+            ) : name === '댓글' ? (
+                <TextPart>댓글 단 게시글이 없어요.</TextPart>
+            ) : (
+                <TextPart>좋아요 한 게시글이 없어요.</TextPart>
+            )} */}
         </EmptyBoxWrapper>
     );
 };

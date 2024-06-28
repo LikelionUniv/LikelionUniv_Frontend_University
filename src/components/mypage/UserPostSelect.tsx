@@ -3,10 +3,14 @@ import { styled } from 'styled-components';
 import ProjectSelect from './ProjectSelect';
 import LikeSelect from './LikeSelect';
 import PostSelect from './PostSelect';
+import ApplyList from './Hackathons/ApplyList';
 
 const UserPostSelect = () => {
-    const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
-    const [select, setSelect] = useState<string>('게시글');
+    //const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
+
+    //해커톤 신청
+    const selectOptions = ['신청정보', '게시글', '프로젝트', '댓글', '좋아요'];
+    const [select, setSelect] = useState<string>('신청정보');
     const optionClickFn = (option: string) => {
         startTransition(() => {
             setSelect(option);
@@ -15,7 +19,7 @@ const UserPostSelect = () => {
     return (
         <>
             <ButtonSelectWrapper>
-                {selectOption.map(e => {
+                {selectOptions.map(e => {
                     return (
                         <button
                             className={select === e ? 'select' : ''}
@@ -30,7 +34,15 @@ const UserPostSelect = () => {
                 })}
             </ButtonSelectWrapper>
             <SelectBorder />
-            {select === '프로젝트' ? (
+            {select === '게시글' ? (
+                <Suspense fallback={<div>loading...</div>}>
+                    <PostSelect select={select} />
+                </Suspense>
+            ) : select === '댓글' ? (
+                <Suspense fallback={<div>loading...</div>}>
+                    <PostSelect select={select} />
+                </Suspense>
+            ) : select === '프로젝트' ? (
                 <>
                     <Suspense fallback={<div>loading...</div>}>
                         <ProjectSelect select={select} />
@@ -41,9 +53,11 @@ const UserPostSelect = () => {
                     <LikeSelect select={select} />
                 </Suspense>
             ) : (
-                <Suspense fallback={<div>loading...</div>}>
-                    <PostSelect select={select} />
-                </Suspense>
+                <>
+                    <Suspense fallback={<div>loading...</div>}>
+                        <ApplyList />
+                    </Suspense>
+                </>
             )}
         </>
     );
@@ -55,7 +69,8 @@ const ButtonSelectWrapper = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 24px;
-    width: 281px;
+    width: 379px;
+    ///width: 281px;
     height: 40px;
     & > button {
         display: flex;
@@ -75,6 +90,13 @@ const ButtonSelectWrapper = styled.div`
             border-bottom: 3px solid #212224;
             z-index: 20;
         }
+        @media (max-width: 360px) {
+            font-size: 16px;
+        }
+    }
+    @media (max-width: 360px) {
+        width: 320px;
+        height: 34px;
     }
 `;
 
@@ -89,6 +111,9 @@ const SelectBorder = styled.div`
         width: 100%;
     }
     @media (max-width: 479px) {
+        width: 100%;
+    }
+    @media (max-width: 360px) {
         width: 100%;
     }
 `;

@@ -34,6 +34,9 @@ import AdminProtectedRouter from './components/AdminProtectedRouter';
 import NotFound from './routes/NotFound';
 import Admin from './routes/Admin';
 
+import HackathonsApplication from './routes/HackathonsApplicationPage';
+import HackathonsModifyPage from './routes/HackathonsModifyPage';
+
 const router = createBrowserRouter([
     {
         path: '/',
@@ -181,6 +184,16 @@ const router = createBrowserRouter([
             {
                 path: '*',
                 element: <NotFound />,
+            },
+            {
+                path: 'hackathons',
+                element: <HackathonsApplication />,
+                children: [
+                    {
+                        path: ':hackathonFormId',
+                        element: <HackathonsModifyPage />,
+                    },
+                ],
             },
         ],
     },
