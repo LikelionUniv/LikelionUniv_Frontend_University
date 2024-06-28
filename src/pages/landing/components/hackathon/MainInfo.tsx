@@ -38,6 +38,7 @@ const MainInfo = () => {
                 ))}
             </MG.Line>
             <SecondWrapper>
+                <Overlay />
                 <Img1 src={growl_to_world} alt="" />
                 <Img2 src={two_check} alt="" />
                 <img src={info} alt="" />
@@ -70,6 +71,16 @@ const Img = styled.img`
 
 const SecondWrapper = styled.div`
     max-width: 1200px;
+    position: relative;
+`;
+
+const Overlay = styled.div`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 351px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 `;
 
 const Img1 = styled.img`
