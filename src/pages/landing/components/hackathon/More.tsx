@@ -33,6 +33,14 @@ const MoreWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     background: linear-gradient(to right, #ff7710, #000000 400px);
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
 
 const Wrapper = styled.div`

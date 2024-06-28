@@ -14,39 +14,48 @@ import check_o from '../../../../img/landing/check_o.png';
 const MainInfo = () => {
     return (
         <MainWrapper>
-            <TitleImg src={title} />
-            <HackathonPart />
-            <MG.Line>
-                {[1, 2].map(item => (
-                    <div
-                        className={
-                            item === 1
-                                ? 'track track1'
-                                : item === 2
-                                ? 'track track2'
-                                : ''
-                        }
-                        key={item}
-                    >
-                        {[1, 2, 3, 4].map(item => (
-                            <div className="flex" key={item}>
-                                <PixelFireworksIcon />
-                                <PixelSingingIcon />
-                                <div className="spacemono text">
-                                    Possibility to Reality
+            <FirstWrapper>
+                <Container>
+                    <TitleImg src={title} />
+                    <HackathonPart />
+                </Container>
+                <MG.Line>
+                    {[1, 2].map(item => (
+                        <div
+                            className={
+                                item === 1
+                                    ? 'track track1'
+                                    : item === 2
+                                    ? 'track track2'
+                                    : ''
+                            }
+                            key={item}
+                        >
+                            {[1, 2, 3, 4].map(item => (
+                                <div className="flex" key={item}>
+                                    <PixelFireworksIcon />
+                                    <PixelSingingIcon />
+                                    <div className="spacemono text">
+                                        Possibility to Reality
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
-            </MG.Line>
+                            ))}
+                        </div>
+                    ))}
+                </MG.Line>
+            </FirstWrapper>
+
             <TherdWrapper>
                 <Img3 src={check_g} alt="" />
                 <SecondWrapper>
                     <Overlay />
-                    <Img1 src={growl_to_world} alt="" />
-                    <Img2 src={two_check} alt="" />
-                    <img src={info} alt="" />
+                    <ImgWrapper>
+                        <Img1 src={growl_to_world} alt="" />
+                        <Img2 src={two_check} alt="" />
+                    </ImgWrapper>
+                    <InfoWrapper>
+                        <InfoImg src={info} alt="" />
+                    </InfoWrapper>
                 </SecondWrapper>
                 <Img4 src={check_r} alt="" />
             </TherdWrapper>
@@ -57,30 +66,90 @@ const MainInfo = () => {
 export default MainInfo;
 
 const MainWrapper = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center; /* 추가된 속성 */
     justify-content: center;
-    align-items: center;
-
-    background: linear-gradient(
+    /* background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0) 550px,
         rgba(0, 0, 0, 0.3) 550px,
-        rgba(255, 146, 64, 0.3) 864px,
-        transparent 864px
-    );
+        rgba(255, 146, 64, 0.3) 964px,
+        transparent 964px
+    ); */
+`;
+
+const FirstWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+`;
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
 `;
 
 const TitleImg = styled.img`
     margin-top: 302px;
-    max-width: clamp(320px, 55vw, 520px);
+    width: clamp(520px, 5wv, 926px);
     height: auto;
+
+    @media (max-width: 1440px) {
+        margin-top: 447px;
+        width: 600px;
+    }
+
+    @media (max-width: 767px) {
+        margin-top: 447px;
+        width: 520px;
+    }
+    @media (max-width: 360px) {
+        margin-top: 287px;
+        width: 320px;
+    }
 `;
 
 const SecondWrapper = styled.div`
     max-width: 1200px;
-    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    position: relative;
+`;
+
+const InfoWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
+`;
+
+const InfoImg = styled.img`
+    max-width: 1200px;
+    width: 100%;
+    height: auto;
+
+    @media (max-width: 767px) {
+        width: 512px;
+    }
+
+    @media (max-width: 360px) {
+        width: 320px;
+    }
 `;
 
 const Overlay = styled.div`
@@ -92,38 +161,74 @@ const Overlay = styled.div`
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 `;
 
+const ImgWrapper = styled.div`
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+    @media (max-width: 360px) {
+        width: 90%;
+    }
+`;
+
 const Img1 = styled.img`
-    max-width: 396px;
-    height: 202px;
-    margin-top: 110px;
-    margin-left: 5px;
-    margin-bottom: 78px;
+    width: 396px;
     height: auto;
+
+    @media (max-width: 767px) {
+        width: 220px;
+        height: 120px;
+    }
+    @media (max-width: 360px) {
+        width: 154px;
+        height: 78px;
+    }
 `;
 
 const Img2 = styled.img`
-    margin-top: 110px;
-    margin-left: 484px;
-`;
+    display: none;
 
-const Img3 = styled.img`
-    margin-bottom: 508px;
-    margin-left: 63px;
-    max-width: 100%;
-    margin-top: 1322px;
-    height: auto;
-`;
-
-const Img4 = styled.img`
-    margin-right: 58px;
-    margin-bottom: 1020px;
-    max-width: 100%;
-    margin-top: 776px;
-    height: auto;
+    @media (max-width: 767px) {
+        display: inline;
+        width: 186px;
+        height: 156px;
+    }
+    @media (max-width: 360px) {
+        display: inline;
+        width: 87px;
+        height: auto;
+    }
 `;
 
 const TherdWrapper = styled.div`
     display: flex;
-    align-items: center;
     flex-direction: row;
+`;
+
+const Img3 = styled.img`
+    margin-left: 63px;
+    margin-top: 1322px;
+    margin-bottom: auto;
+
+    @media (max-width: 1440px) {
+        display: none;
+    }
+`;
+
+const Img4 = styled.img`
+    margin-right: 58px;
+    margin-top: 776px;
+    margin-bottom: auto;
+
+    @media (max-width: 1440px) {
+        display: none;
+    }
 `;

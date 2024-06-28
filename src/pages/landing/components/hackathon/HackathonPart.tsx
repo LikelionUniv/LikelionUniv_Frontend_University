@@ -25,12 +25,13 @@ const HackathonPart = () => {
 export default HackathonPart;
 
 const PartButton = styled.div`
+    align-items: center;
+    justify-content: center;
     color: white;
     background-color: #ff7711;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
 
     border-radius: 8px;
 
@@ -39,7 +40,7 @@ const PartButton = styled.div`
     font-style: normal;
 
     width: 580px;
-    height: 80px;
+    height: auto;
 
     margin-top: 120px;
     margin-bottom: 148px;
@@ -52,37 +53,25 @@ const PartButton = styled.div`
 
     @media (max-width: 767px) {
         width: 520px;
-        height: 60px;
+        height: 64px;
         font-size: 20px;
+        margin-top: 40px;
+        margin-bottom: 446px;
     }
 
     @media (max-width: 360px) {
         width: 282px;
         height: 48px;
         font-size: 16px;
+        margin-top: 36px;
+        margin-bottom: 255px;
     }
 `;
 
 const Info = styled.div`
-    padding: 21px 0px 20px 40px;
-
-    @media (max-width: 767px) {
-        padding: 16px 0px 15px 30px;
-    }
-
-    @media (max-width: 360px) {
-        padding: 12px 0px 10px 20px;
-    }
+    margin: 21px 0px 20px 40px;
 `;
 
 const Img = styled.img`
-    padding: 24px 40px 24px 0px;
-
-    @media (max-width: 767px) {
-        padding: 16px 30px 16px 0px;
-    }
-
-    @media (max-width: 360px) {
-        padding: 12px 20px 12px 0px;
-    }
+    margin: 24px 40px 24px 0px;
 `;

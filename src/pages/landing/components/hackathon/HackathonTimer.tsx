@@ -87,6 +87,14 @@ const TimerContainer = styled.div`
     border-radius: 24px;
     height: 240px;
     width: 1200px;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
 
 const DateContainer = styled.div`

@@ -12,11 +12,11 @@ const HakathonLanding = () => {
         <Layout>
             <Container>
                 <MainInfo />
-                <TimeInfo />
+                {/* <TimeInfo /> */}
                 <GuideLine />
-                <More />
+                {/* <More />
                 <Prize />
-                <Detail />
+                <Detail /> */}
             </Container>
         </Layout>
     );

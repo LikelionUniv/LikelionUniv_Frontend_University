@@ -17,4 +17,12 @@ const PrizeWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
