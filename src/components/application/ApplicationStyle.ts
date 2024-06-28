@@ -167,10 +167,10 @@ export const NradioWrapper = styled.div`
     }
 `;
 
-export const NradioInput = styled.input.attrs({ type: 'radio' })`
+export const NradioInput = styled.input.attrs({ type: 'radio' })<{ checked: boolean }>`
     margin-right: 8px;
     cursor: pointer;
-    appearance: none; /* 기본 라디오 버튼 스타일 제거 */
+    appearance: none;
     width: 20px;
     height: 20px;
     background: center / contain no-repeat

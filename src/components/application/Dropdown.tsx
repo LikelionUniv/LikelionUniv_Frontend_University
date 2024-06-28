@@ -18,7 +18,7 @@ const Dropdown = ({ isOpen, trackOption, control }: DropdownProps) => {
             {trackOption.map(track => (
                 <Controller
                     key={track}
-                    name="part"
+                    name="hackathonPart"
                     control={control}
                     render={({ field }) => {
                         const fieldValue = field.value as string[];

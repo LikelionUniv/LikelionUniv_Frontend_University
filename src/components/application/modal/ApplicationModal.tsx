@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import * as M from './ApplicationModalStyle';
 import Line from '../../../img/recruit/line.svg';
 
@@ -22,8 +20,6 @@ const ApplicationModal: React.FC<ApplicationModalProps> = ({
     content,
     button,
 }) => {
-    const navigate = useNavigate();
-
     return (
         <M.Overlay>
             <M.Content>
@@ -39,7 +35,7 @@ const ApplicationModal: React.FC<ApplicationModalProps> = ({
                     <M.DeleteButton onClick={closeModal}>
                         취소하기
                     </M.DeleteButton>
-                    <M.Button onClick={() => onSubmit}>{button}</M.Button>
+                    <M.Button onClick={() => onSubmit()}>{button}</M.Button>
                 </M.ButtonDiv>
             </M.Content>
         </M.Overlay>

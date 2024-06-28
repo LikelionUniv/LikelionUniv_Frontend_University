@@ -1,15 +1,17 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import * as z from 'zod';
 
 import * as A from './ApplicationStyle';
+import request from '../../utils/request';
 import { applicationSchema } from '../application/ApplicationSchema';
 import ApplicationModal from './modal/ApplicationModal';
 import SelectedOption from './SelectedOption';
 import Dropdown from './Dropdown';
 import AddHypen from './AddHypen';
+import useGetUserInfo from './../../query/get/useGetUserInfo';
 
 type ApplicationFormType = z.infer<typeof applicationSchema>;
 
@@ -21,6 +23,10 @@ interface ApplicationModalProps {
     title: string;
     content: string;
     button: string;
+}
+
+interface hackathonFormId {
+    hackathonFormId: number;
 }
 
 const trackOption = ['기획', '디자인', '프론트엔드', '백엔드'];
@@ -36,32 +42,35 @@ const ApplicationForm = () => {
     const navigate = useNavigate();
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState<ApplicationFormType | null>(null);
-
+    const [formData, setFormData] = useState<ApplicationFormType | undefined>(
+        undefined,
+    );
+    const { userinfo, error } = useGetUserInfo();
     const {
         register,
         handleSubmit,
         control,
         watch,
         setValue,
+        trigger,
         formState: { dirtyFields, errors, isValid },
     } = useForm<ApplicationFormType>({
         mode: 'onChange',
         resolver: zodResolver(applicationSchema),
         defaultValues: {
-            part: [],
             phone: '',
+            hackathonPart: [],
         },
     });
 
-    const selectedOption = useWatch({
+    const selectedParticipation = useWatch({
         control,
-        name: 'offline',
+        name: 'offlineParticipation',
     });
 
     const selectedParts = useWatch({
         control,
-        name: 'part',
+        name: 'hackathonPart',
     });
 
     const openModal = () => {
@@ -81,20 +90,49 @@ const ApplicationForm = () => {
 
     const handleCancelOption = (option: string) => {
         const newValue = selectedParts.filter(selected => selected !== option);
-        setValue('part', newValue.length > 0 ? newValue : []);
+        setValue('hackathonPart', newValue.length > 0 ? newValue : []);
     };
 
     const onSubmit = (data: ApplicationFormType) => {
         setFormData(data);
         setIsModalOpen(true);
-
-        console.log('onSubmit' + data);
     };
 
-    const handleModalSubmit = () => {
-        console.log('handleModalSubmit' + formData);
-        navigate(`/mypage`);
+    const handleModalSubmit = async () => {
+        console.log('요청 데이터');
+        console.log(formData);
+
+        try {
+            const response = await request<
+                ApplicationFormType,
+                hackathonFormId,
+                null
+            >({
+                uri: '/api/v1/hackathons',
+                method: 'post',
+                data: formData,
+            });
+            console.log('서버 응답 데이터:', response);
+            return response.data;
+        } catch (error) {
+            console.error('서버 요청 오류:', error);
+        }
     };
+
+    useEffect(() => {
+        if (userinfo?.name) {
+            setValue('name', userinfo.name);
+            trigger('name');
+        }
+        if (userinfo?.universityName) {
+            setValue('universityName', userinfo.universityName);
+            trigger('universityName');
+        }
+        if (userinfo?.major) {
+            setValue('major', userinfo.major);
+            trigger('major');
+        }
+    }, [userinfo, setValue, trigger]);
 
     return (
         <A.Wrapper>
@@ -117,13 +155,16 @@ const ApplicationForm = () => {
                 > */}
                     <A.Ndiv>
                         이름
-                        {!dirtyFields.name || errors.name ? (
+                        {!userinfo?.name ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
                         )}
                     </A.Ndiv>
-                    <A.Nform {...register('name', { required: true })} />
+                    <A.Nform
+                        {...register('name', { required: true })}
+                        disabled={!!userinfo?.name}
+                    />
                     <A.Ndiv>
                         메일
                         {!dirtyFields.email || errors.email ? (
@@ -135,22 +176,28 @@ const ApplicationForm = () => {
                     <A.Nform {...register('email')} />
                     <A.Ndiv>
                         학교
-                        {!dirtyFields.univ || errors.univ ? (
+                        {!userinfo?.universityName ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
                         )}
                     </A.Ndiv>
-                    <A.Nform {...register('univ')} />
+                    <A.Nform
+                        {...register('universityName')}
+                        disabled={!!userinfo?.universityName}
+                    />
                     <A.Ndiv>
                         학과
-                        {!dirtyFields.major || errors.major ? (
+                        {!userinfo?.major ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
                         )}
                     </A.Ndiv>
-                    <A.Nform {...register('major')} />
+                    <A.Nform
+                        {...register('major')}
+                        disabled={!!userinfo?.major}
+                    />
                     <A.Ndiv>
                         전화번호
                         {!dirtyFields.phone || errors.phone ? (
@@ -168,7 +215,7 @@ const ApplicationForm = () => {
                     />
                     <A.Ndiv>
                         파트 선택
-                        {!dirtyFields.part || errors.part ? (
+                        {!dirtyFields.hackathonPart || errors.hackathonPart ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -225,7 +272,7 @@ const ApplicationForm = () => {
                     )}
                     <A.Ndiv>
                         팀명
-                        {!dirtyFields.team || errors.team ? (
+                        {!dirtyFields.teamName || errors.teamName ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -233,15 +280,16 @@ const ApplicationForm = () => {
                     </A.Ndiv>
                     <A.Nform
                         placeholder="해커톤에 참여하는 팀명을 입력해주세요."
-                        {...register('team')}
+                        {...register('teamName')}
                     />
                     <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
                     <A.Ndiv>
                         오프라인 참가 여부
-                        {!dirtyFields.offline ||
-                        (selectedOption === 'no' &&
-                            (!dirtyFields.nonappearance ||
-                                errors.nonappearance)) ? (
+                        {!dirtyFields.offlineParticipation ||
+                        errors.offlineParticipation ||
+                        (selectedParticipation === false &&
+                            (!dirtyFields.reasonForNotOffline ||
+                                errors.reasonForNotOffline)) ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -251,36 +299,49 @@ const ApplicationForm = () => {
                         *8월 6일~8월 7일 무박 2일로 진행되는 오프라인 해커톤
                         참여 여부를 선택해주세요.
                     </A.Ntxt>
-                    <A.NradioWrapper>
-                        <A.NradioDiv>
-                            <A.Nlabel checked={selectedOption === 'yes'}>
-                                <A.NradioInput
-                                    type="radio"
-                                    value="yes"
-                                    {...register('offline')}
-                                    checked={selectedOption === 'yes'}
-                                />
-                                네, 참여합니다.
-                            </A.Nlabel>
-                        </A.NradioDiv>
-                        <A.NradioDiv>
-                            <A.Nlabel checked={selectedOption === 'no'}>
-                                <A.NradioInput
-                                    type="radio"
-                                    value="no"
-                                    {...register('offline')}
-                                    checked={selectedOption === 'no'}
-                                />
-                                아니오, 참가하지 않습니다.
-                            </A.Nlabel>
-                        </A.NradioDiv>
-                    </A.NradioWrapper>
-                    {selectedOption === 'no' && (
+
+                    <Controller
+                        name="offlineParticipation"
+                        control={control}
+                        render={({ field }) => (
+                            <A.NradioWrapper>
+                                <A.NradioDiv>
+                                    <A.Nlabel checked={field.value === true}>
+                                        <A.NradioInput
+                                            type="radio"
+                                            {...field}
+                                            value="true"
+                                            checked={field.value === true}
+                                            onChange={() =>
+                                                field.onChange(true)
+                                            }
+                                        />
+                                        네, 참여합니다.
+                                    </A.Nlabel>
+                                </A.NradioDiv>
+                                <A.NradioDiv>
+                                    <A.Nlabel checked={field.value === false}>
+                                        <A.NradioInput
+                                            type="radio"
+                                            {...field}
+                                            value="false"
+                                            checked={field.value === false}
+                                            onChange={() =>
+                                                field.onChange(false)
+                                            }
+                                        />
+                                        아니오, 참가하지 않습니다.
+                                    </A.Nlabel>
+                                </A.NradioDiv>
+                            </A.NradioWrapper>
+                        )}
+                    />
+                    {selectedParticipation === false && (
                         <>
                             <A.Nform
                                 type="text"
                                 placeholder="불참 사유를 입력해주세요."
-                                {...register('nonappearance')}
+                                {...control.register('reasonForNotOffline')}
                             />
                             <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
                         </>
