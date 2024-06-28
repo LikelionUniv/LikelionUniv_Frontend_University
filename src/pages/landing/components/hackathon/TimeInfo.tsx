@@ -2,11 +2,12 @@ import { styled } from 'styled-components';
 import HackathonTimer from './HackathonTimer';
 
 import notice from '../../../../img/landing/notice.png';
+
 const TimeInfo = () => {
     return (
         <TimerWrapper>
             <TimerInfo>
-                <img src={notice} />
+                <NoticeImg src={notice} />
                 <DeadlineInfo>
                     7월 14일 일요일 23시 59분 참가 신청 마감
                 </DeadlineInfo>
@@ -22,22 +23,65 @@ export default TimeInfo;
 const TimerWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    text-align: center;
     background-color: #ff7711;
-    padding: 80px 360px 80px 360px;
+    max-width: 1200px;
+    padding: 80px 360px;
+
+    @media (max-width: 1200px) {
+        padding: 30px 10px;
+    }
+
+    @media (max-width: 767px) {
+        padding: 40px 20px;
+    }
+
+    @media (max-width: 360px) {
+        padding: 20px 10px;
+    }
 `;
+
 const TimerInfo = styled.div`
     color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const NoticeImg = styled.img`
+    width: 48px;
+    margin-bottom: 16px;
+    @media (max-width: 767px) {
+        width: 48px;
+    }
+
+    @media (max-width: 360px) {
+        width: 24px;
+    }
 `;
 
 const DeadlineInfo = styled.div`
+    width: 100%;
     /* Title/24_Bold */
     font-family: Pretendard;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+    text-align: center;
+    margin-bottom: 16px;
+
+    @media (max-width: 767px) {
+        font-size: 20px;
+        margin-bottom: 13px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 10px;
+        margin-bottom: 6px;
+    }
 `;
 
 const Info = styled.div`
@@ -47,4 +91,13 @@ const Info = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+    text-align: center;
+
+    @media (max-width: 767px) {
+        font-size: 40px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 16px;
+    }
 `;

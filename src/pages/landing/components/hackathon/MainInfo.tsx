@@ -71,13 +71,34 @@ const MainWrapper = styled.div`
     flex-direction: column;
     align-items: center; /* 추가된 속성 */
     justify-content: center;
-    /* background: linear-gradient(
+
+    background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0) 550px,
         rgba(0, 0, 0, 0.3) 550px,
         rgba(255, 146, 64, 0.3) 964px,
         transparent 964px
-    ); */
+    );
+
+    @media (max-width: 767px) {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 750px,
+            rgba(0, 0, 0, 0.3) 750px,
+            rgba(255, 146, 64, 0.3) 1164px,
+            transparent 1164px
+        );
+    }
+
+    @media (max-width: 360px) {
+        background: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0) 450px,
+            rgba(0, 0, 0, 0.3) 450px,
+            rgba(255, 146, 64, 0.3) 700px,
+            transparent 700px
+        );
+    }
 `;
 
 const FirstWrapper = styled.div`
@@ -111,7 +132,7 @@ const TitleImg = styled.img`
     }
     @media (max-width: 360px) {
         margin-top: 287px;
-        width: 320px;
+        width: clamp(250px, 2vw, 320px);
     }
 `;
 
@@ -144,11 +165,11 @@ const InfoImg = styled.img`
     height: auto;
 
     @media (max-width: 767px) {
-        width: 512px;
+        width: clamp(320px, 4vw, 512px);
     }
 
     @media (max-width: 360px) {
-        width: 320px;
+        width: clamp(200px, 2vw, 320px);
     }
 `;
 
@@ -184,12 +205,10 @@ const Img1 = styled.img`
     height: auto;
 
     @media (max-width: 767px) {
-        width: 220px;
-        height: 120px;
+        width: clamp(154px, 2vw, 220px);
     }
     @media (max-width: 360px) {
-        width: 154px;
-        height: 78px;
+        width: clamp(100px, 2vw, 154px);
     }
 `;
 
@@ -198,12 +217,12 @@ const Img2 = styled.img`
 
     @media (max-width: 767px) {
         display: inline;
-        width: 186px;
-        height: 156px;
+        width: clamp(87px, 2vw, 186px);
+        height: auto;
     }
     @media (max-width: 360px) {
         display: inline;
-        width: 87px;
+        width: clamp(50px, 1vw, 87px);
         height: auto;
     }
 `;

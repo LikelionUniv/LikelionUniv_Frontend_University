@@ -87,13 +87,25 @@ const TimerContainer = styled.div`
     border-radius: 24px;
     height: 240px;
     width: 1200px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    @media (max-width: 1200px) {
+        width: 80%;
+        height: clamp(154px, 4vh, 240px);
+        padding: 5px 20px;
+    }
 
     @media (max-width: 767px) {
         width: 80%;
+        height: clamp(154px, 4vh, 240px);
+        padding: 5px 20px;
     }
 
     @media (max-width: 360px) {
         width: 90%;
+        height: clamp(80px, 2vh, 154px);
+        padding: 5px 10px;
     }
 `;
 
@@ -102,7 +114,15 @@ const DateContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin: 56px 196px 56px 196px;
+    margin: 56px 196px;
+
+    @media (max-width: 767px) {
+        margin: 20px 0;
+    }
+
+    @media (max-width: 360px) {
+        margin: 10px 0;
+    }
 `;
 
 const DateBox = styled.div`
@@ -118,6 +138,14 @@ const DateType = styled.div`
     font-style: normal;
     font-weight: 500;
     line-height: 150%;
+
+    @media (max-width: 767px) {
+        font-size: 16px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 12px;
+    }
 `;
 
 const BlankBox = styled.div`
@@ -129,6 +157,18 @@ const BlankBox = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 10%;
+
+    @media (max-width: 767px) {
+        font-size: 40px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 28px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 `;
 
 const DateNum = styled.div`
@@ -139,4 +179,14 @@ const DateNum = styled.div`
     line-height: 100%;
     width: 100px;
     text-align: center;
+
+    @media (max-width: 767px) {
+        font-size: 40px;
+        width: clamp(42px, 3vw, 60px);
+    }
+
+    @media (max-width: 360px) {
+        font-size: 28px;
+        width: clamp(20px, 2vw, 42px);
+    }
 `;

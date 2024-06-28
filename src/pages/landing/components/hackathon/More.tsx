@@ -32,24 +32,25 @@ const MoreWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: linear-gradient(to right, #ff7710, #000000 400px);
-
-    @media (max-width: 767px) {
-        width: 80%;
-    }
-
-    @media (max-width: 360px) {
-        width: 90%;
-    }
 `;
 
 const Wrapper = styled.div`
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-top: 54px;
+
+    @media (max-width: 767px) {
+        flex-direction: column;
+    }
+
+    @media (max-width: 360px) {
+        flex-direction: column;
+    }
 `;
 
 const MoreTitle = styled.div`
@@ -60,6 +61,14 @@ const MoreTitle = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 48px */
+
+    @media (max-width: 767px) {
+        font-size: 20px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 20px;
+    }
 `;
 
 const MoreBtn = styled.div`
@@ -83,6 +92,15 @@ const MoreBtn = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%; /* 30px */
+
+    @media (max-width: 767px) {
+        width: clamp(360px, 3vw, 523px);
+        height: 48px;
+    }
+    @media (max-width: 360px) {
+        width: clamp(250px, 2vw, 320px);
+        height: 48px;
+    }
 `;
 
 const Img = styled.img``;

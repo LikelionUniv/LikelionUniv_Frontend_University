@@ -36,12 +36,14 @@ const HackathonPrize = () => {
 export default HackathonPrize;
 
 const PrizeWrapper = styled.div`
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     display: flex;
     flex-direction: column;
 `;
 
 const PrizeContainer = styled.div`
+    width: 100%;
     text-align: left;
     color: white;
     /* Title/48_Bold */
@@ -50,6 +52,14 @@ const PrizeContainer = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+
+    @media (max-width: 767px) {
+        font-size: 40px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 24px;
+    }
 `;
 
 const Sponsor = styled.div`
@@ -60,11 +70,21 @@ const Sponsor = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+
+    @media (max-width: 767px) {
+        font-size: 40px;
+    }
+
+    @media (max-width: 360px) {
+        font-size: 24px;
+    }
 `;
 
 const Img = styled.img`
     max-width: 100%;
     height: auto;
+    margin-left: 10px;
+    margin-right: 10px;
 `;
 
 const EmptyBox = styled.div`
@@ -91,7 +111,6 @@ const PrizePost = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
