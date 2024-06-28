@@ -30,6 +30,7 @@ const PartButton = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
 
     border-radius: 8px;
 
@@ -40,7 +41,6 @@ const PartButton = styled.div`
     width: 580px;
     height: 80px;
 
-    align-items: center;
     margin-top: 120px;
     margin-bottom: 148px;
 
@@ -49,12 +49,40 @@ const PartButton = styled.div`
     &:hover {
         background-color: #eb6502;
     }
+
+    @media (max-width: 767px) {
+        width: 520px;
+        height: 60px;
+        font-size: 20px;
+    }
+
+    @media (max-width: 360px) {
+        width: 282px;
+        height: 48px;
+        font-size: 16px;
+    }
 `;
 
 const Info = styled.div`
     padding: 21px 0px 20px 40px;
+
+    @media (max-width: 767px) {
+        padding: 16px 0px 15px 30px;
+    }
+
+    @media (max-width: 360px) {
+        padding: 12px 0px 10px 20px;
+    }
 `;
 
 const Img = styled.img`
     padding: 24px 40px 24px 0px;
+
+    @media (max-width: 767px) {
+        padding: 16px 30px 16px 0px;
+    }
+
+    @media (max-width: 360px) {
+        padding: 12px 20px 12px 0px;
+    }
 `;

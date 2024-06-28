@@ -14,7 +14,7 @@ import check_o from '../../../../img/landing/check_o.png';
 const MainInfo = () => {
     return (
         <MainWrapper>
-            <Img src={title} />
+            <TitleImg src={title} />
             <HackathonPart />
             <MG.Line>
                 {[1, 2].map(item => (
@@ -69,18 +69,9 @@ const MainWrapper = styled.div`
         rgba(255, 146, 64, 0.3) 864px,
         transparent 864px
     );
-
-    @media (max-width: 767px) {
-        width: 80%;
-        margin-top: 120px;
-    }
-
-    @media (max-width: 360px) {
-        width: 90%;
-    }
 `;
 
-const Img = styled.img`
+const TitleImg = styled.img`
     margin-top: 302px;
     max-width: clamp(320px, 55vw, 520px);
     height: auto;
