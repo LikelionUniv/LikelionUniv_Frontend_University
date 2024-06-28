@@ -1,6 +1,9 @@
 import { styled } from 'styled-components';
 import footprint from '../../../../img/landing/footprint.png';
 import bulb from '../../../../img/landing/bulb.png';
+import prize1 from '../../../../img/landing/prize1.png';
+import prize2 from '../../../../img/landing/prize2.png';
+import prize3 from '../../../../img/landing/prize3.png';
 
 const HackathonPrize = () => {
     return (
@@ -9,7 +12,11 @@ const HackathonPrize = () => {
                 12기 중앙 해커톤 수상 혜택
                 <Img src={bulb} alt="" />
             </PrizeContainer>
-            <EmptyBox>준비중</EmptyBox>
+            <PrizePost>
+                <Img src={prize1} alt="" />
+                <Img src={prize2} alt="" />
+                <Img src={prize3} alt="" />
+            </PrizePost>
             <Sponsor>
                 12기 중앙 해커톤
                 <Img src={footprint} alt="" />
@@ -65,4 +72,11 @@ const EmptyBox = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 150%;
+`;
+
+const PrizePost = styled.div`
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 160px;
 `;
