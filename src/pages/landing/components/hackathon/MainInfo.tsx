@@ -61,18 +61,28 @@ const MainWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0) 550px,
         rgba(0, 0, 0, 0.3) 550px,
-        rgba(255, 146, 64, 0.3) 964px,
-        transparent 964px
+        rgba(255, 146, 64, 0.3) 864px,
+        transparent 864px
     );
+
+    @media (max-width: 767px) {
+        width: 80%;
+        margin-top: 120px;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
 
 const Img = styled.img`
     margin-top: 302px;
-    max-width: 926px;
+    max-width: clamp(320px, 55vw, 520px); /* Adjusted width with clamp */
     height: auto;
 `;
 
