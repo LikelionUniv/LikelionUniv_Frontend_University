@@ -122,7 +122,7 @@ const BlankBox = styled.div`
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%;
+    line-height: 100%;
 `;
 
 const DateNum = styled.div`
@@ -131,5 +131,5 @@ const DateNum = styled.div`
     font-size: 72px;
     font-style: normal;
     font-weight: 700;
-    line-height: 150%;
+    line-height: 100%;
 `;
