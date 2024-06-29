@@ -1,42 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelectedUsers } from '../SelectedUserContext';
 import { useOutletContext } from 'react-router-dom';
-import { OutletContext } from '../../../../inteface/adminType';
+import { OutletContext } from '../../../../../inteface/adminType';
+import { useSelectedUsers } from '../../SelectedUserContext';
 
-function TableHead() {
+function TableHackathonHead() {
     const { selectAll, setSelectAll } = useSelectedUsers();
     const { userinfo, isAdmin } = useOutletContext<OutletContext>();
-
-    const handleSelectAllChange = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-        setSelectAll(event.target.checked);
-    };
 
     return (
         <>
             <Wrapper>
                 <HeadTable>
-                    <Table className="check">
-                        <input
-                            type="checkbox"
-                            checked={selectAll}
-                            onChange={handleSelectAllChange}
-                        />
-                    </Table>
                     <Table className="name">이름</Table>
-                    {isAdmin && (
-                        <Table className="univ">
-                            <span>소속</span> 대학
-                        </Table>
-                    )}
+                    {isAdmin && <Table className="univ">소속 대학</Table>}
 
-                    <Table className="major">전공</Table>
-                    <Table className="ordinal">기수</Table>
+                    <Table className="phone">전화번호</Table>
+                    <Table className="join">참여 여부</Table>
                     <Table className="part">파트</Table>
-                    <Table className="role">역할</Table>
                     <Table className="email">이메일</Table>
+                    <Table className="teamName">팀명</Table>
                 </HeadTable>
                 <Divider />
             </Wrapper>
@@ -44,7 +27,7 @@ function TableHead() {
     );
 }
 
-export default TableHead;
+export default TableHackathonHead;
 
 const Wrapper = styled.div`
     @media screen and (max-width: 767px) {
@@ -58,12 +41,6 @@ const HeadTable = styled.div`
     justify-content: start;
     align-items: center;
 
-    .check {
-        height: 24px;
-        accent-color: #ff7710;
-        color: #ffffff;
-    }
-
     .name {
         //min-width: 90px;
         width: 90px;
@@ -74,14 +51,14 @@ const HeadTable = styled.div`
         width: 170px;
     }
 
-    .major {
+    .phone {
         //min-width: 140px;
         width: 140px;
     }
 
-    .ordinal {
+    .join {
         //min-width: 40px;
-        width: 40px;
+        width: 60px;
     }
 
     .part {
@@ -89,7 +66,7 @@ const HeadTable = styled.div`
         width: 120px;
     }
 
-    .role {
+    .teamName {
         // min-width: 70px;
         width: 70px;
     }
@@ -107,19 +84,19 @@ const HeadTable = styled.div`
             width: 150px;
         }
 
-        .major {
+        .phone {
             width: 120px;
         }
 
-        .ordinal {
-            width: 30px;
+        .join {
+            width: 60px;
         }
 
         .part {
             width: 100px;
         }
 
-        .role {
+        .teamName {
             width: 50px;
         }
         .email {
@@ -136,19 +113,19 @@ const HeadTable = styled.div`
             width: 140px;
         }
 
-        .major {
+        .phone {
             width: 110px;
         }
 
-        .ordinal {
-            width: 30px;
+        .join {
+            width: 60px;
         }
 
         .part {
             width: 90px;
         }
 
-        .role {
+        .teamName {
             width: 40px;
         }
         .email {
@@ -159,20 +136,16 @@ const HeadTable = styled.div`
             .name,
             .univ,
             .part,
-            .role {
+            .teamName {
                 width: 60px;
                 text-align: center;
                 font-size: 14px;
             }
-            .univ {
-                & > span {
-                    display: none;
-                }
-            }
-            .major {
+
+            .phone {
                 display: none;
             }
-            .ordinal {
+            .join {
                 font-size: 14px;
                 text-align: center;
             }

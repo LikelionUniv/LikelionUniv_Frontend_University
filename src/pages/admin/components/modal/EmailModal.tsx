@@ -217,12 +217,17 @@ export const Wrapper = styled.div`
     min-width: 588px;
     min-height: 600px;
     border-radius: 20px;
-
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+    @media screen and (max-width: 767px) {
+        min-width: 80%;
+        top: 54%;
+        height: 80%;
+        overflow: scroll;
+    }
 `;
 const Button = styled.div`
     margin: 10px;

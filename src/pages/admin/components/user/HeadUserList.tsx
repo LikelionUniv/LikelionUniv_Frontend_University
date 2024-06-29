@@ -19,9 +19,10 @@ const HeadUserList: React.FC<UserListProps> = ({
     univName,
     role,
 }: UserListProps) => {
+    //메모. 여기가 지금 회원정보 list
     const { curPageItem: users, renderPaginationBtn } =
         useServerSidePagination<User>({
-            uri: '/api/admin/v1/headquaters/users',
+            uri: '/api/admin/v1/univAdmin/univ/users',
             size: 10,
             sort: order,
             univName: univName,

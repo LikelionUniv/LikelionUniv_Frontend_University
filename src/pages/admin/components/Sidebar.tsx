@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useNavigate, useLocation } from 'react-router';
 import { IuserProfile } from '../../../inteface/myPageType';
+import * as P from './SidebarStyle';
 
 interface SideBarProps {
     onItemSelect: (item: string) => void;
@@ -24,14 +25,8 @@ const SideBar: React.FC<SideBarProps> = ({
     const navigate = useNavigate();
     const location = useLocation();
 
-    const goAlarm = (): void => {
-        navigate('recruitalarm');
-    };
-    const goUser = (): void => {
-        navigate('');
-    };
-    const goBoard = (): void => {
-        navigate('/adminboard');
+    const handleNavigate = (url: string): void => {
+        navigate(url);
     };
 
     useEffect(() => {
@@ -39,6 +34,9 @@ const SideBar: React.FC<SideBarProps> = ({
         if (currentPath.includes('recruitalarm')) {
             setSelectedTab('모집알림');
             onItemSelect('모집알림');
+        } else if (currentPath.includes('hackathon')) {
+            setSelectedTab('중앙 해커톤 신청 정보');
+            onItemSelect('중앙 해커톤 신청 정보');
         } else {
             setSelectedTab('회원정보');
             onItemSelect('회원정보');
@@ -59,7 +57,7 @@ const SideBar: React.FC<SideBarProps> = ({
                     onClick={() => {
                         onItemSelect('회원정보');
                         setSelectedTab('회원정보');
-                        goUser();
+                        handleNavigate('');
                     }}
                 >
                     회원정보
@@ -71,13 +69,71 @@ const SideBar: React.FC<SideBarProps> = ({
                         onClick={() => {
                             onItemSelect('모집알림');
                             setSelectedTab('모집알림');
-                            goAlarm();
+                            handleNavigate('recruitalarm');
                         }}
                     >
                         모집알림
                     </Tab>
                 )}
+                {isAdmin && (
+                    <Tab
+                        className="ParentTab"
+                        $isSelected={selectedTab === '중앙 해커톤 신청 정보'}
+                        onClick={() => {
+                            onItemSelect('중앙 해커톤 신청 정보');
+                            setSelectedTab('중앙 해커톤 신청 정보');
+                            handleNavigate('hackathon');
+                        }}
+                    >
+                        중앙 해커톤 신청 정보
+                    </Tab>
+                )}
             </Content>
+
+            <P.HeaderContainer>
+                <P.TabContainer>
+                    <P.Tab
+                        className={selectedTab === '회원정보' ? 'selected' : ''}
+                        onClick={() => {
+                            onItemSelect('회원정보');
+                            setSelectedTab('회원정보');
+                            handleNavigate('');
+                        }}
+                    >
+                        회원정보
+                    </P.Tab>
+                    {isAdmin && (
+                        <P.Tab
+                            className={
+                                selectedTab === '모집알림' ? 'selected' : ''
+                            }
+                            onClick={() => {
+                                onItemSelect('모집알림');
+                                setSelectedTab('모집알림');
+                                handleNavigate('recruitalarm');
+                            }}
+                        >
+                            모집알림
+                        </P.Tab>
+                    )}
+                    {isAdmin && (
+                        <P.Tab
+                            className={
+                                selectedTab === '중앙 해커톤 신청 정보'
+                                    ? 'selected'
+                                    : ''
+                            }
+                            onClick={() => {
+                                onItemSelect('중앙 해커톤 신청 정보');
+                                setSelectedTab('중앙 해커톤 신청 정보');
+                                handleNavigate('hackathon');
+                            }}
+                        >
+                            중앙 해커톤 신청 정보
+                        </P.Tab>
+                    )}
+                </P.TabContainer>
+            </P.HeaderContainer>
         </Wrapper>
     );
 };
@@ -97,7 +153,7 @@ const Wrapper = styled.div<{ showSubList: boolean }>`
     }
 
     @media screen and (max-width: 768px) {
-        margin: 10px 20px;
+        margin: 10px 0px;
         min-width: 120px;
     }
 
@@ -184,6 +240,9 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     padding: 12px 0;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const Divider = styled.div`

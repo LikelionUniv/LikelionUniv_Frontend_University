@@ -112,6 +112,19 @@ const Wrapper = styled.div`
     .createdDate {
         width: 120px;
     }
+    @media screen and (max-width: 767px) {
+        .check {
+            margin-right: 0px;
+        }
+        .email {
+            width: 180px;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        .createdDate {
+            text-align: right;
+        }
+    }
 `;
 
 const TableBody = styled.div`

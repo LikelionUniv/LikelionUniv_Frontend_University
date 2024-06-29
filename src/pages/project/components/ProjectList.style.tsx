@@ -23,4 +23,5 @@ export const PaginationWrapper = styled.div`
     justify-content: center;
     width: 100%;
     margin-bottom: 100px;
+\
 `;

@@ -15,7 +15,7 @@ export default AdminBoard;
 
 const Container = styled.div`
     max-width: 1200px;
-    //padding: 0 40px;
+
     min-width: 768px;
     width: 100%;
     margin: 0 auto;

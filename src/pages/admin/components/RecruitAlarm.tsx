@@ -18,12 +18,17 @@ function RecruitAlarm() {
                         <Title>모집 알림</Title>
                         <AlarmRequest count={alarmCount}></AlarmRequest>
                     </TitleAlarm>
-                    <EmailSendButton />
+                    <EmailDesktopView>
+                        <EmailSendButton />
+                    </EmailDesktopView>
                 </TableTitle>
 
                 <Suspense fallback={<div>loading...</div>}>
                     <AlarmList />
                 </Suspense>
+                <EmailMobileView>
+                    <EmailSendButton />
+                </EmailMobileView>
             </Wrapper>
         </SelectedUsersProvider>
     );
@@ -32,8 +37,24 @@ function RecruitAlarm() {
 export default RecruitAlarm;
 
 const Wrapper = styled.div`
-    width: 1300px;
-    min-width: 450px;
+    width: 1250px;
+
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
+`;
+const EmailDesktopView = styled.div`
+    @media screen and (max-width: 767px) {
+        display: none;
+    }
+`;
+const EmailMobileView = styled.div`
+    display: none;
+    @media screen and (max-width: 767px) {
+        display: flex;
+
+        justify-content: flex-end;
+    }
 `;
 
 const TableTitle = styled.div`

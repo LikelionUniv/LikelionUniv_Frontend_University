@@ -1,26 +1,22 @@
-import React, { Suspense, useState } from 'react';
-import styled from 'styled-components';
-import UserList from './user/UserList';
-import OrderDropDown from './DropDown/OrderDropDown';
-import SearchBar from './Search/SearchBar';
+import { Suspense, useState } from 'react';
+import { styled } from 'styled-components';
+import OrderDropDown from '../DropDown/OrderDropDown';
+import { OutletContext } from '../../../../inteface/adminType';
 import { useOutletContext } from 'react-router-dom';
-import HeadUserList from './user/HeadUserList';
-import { OutletContext } from '../../../inteface/adminType';
+import SearchBar from '../Search/SearchBar';
+import HackathonHeadUserList from './components/HackathonHeadUserList';
 
-function User() {
+function HackathonPage() {
     const [order, setOrder] = useState<string | undefined>();
+    const [role, setRole] = useState<string | undefined>();
     const [univName, setunivName] = useState<string | undefined>();
+
     const { userinfo, isAdmin, isUniversityAdmin } =
         useOutletContext<OutletContext>();
-    const [role, setRole] = useState<string | undefined>();
-
-    const universityName = userinfo.universityName;
-
     return (
         <Wrapper>
             <div className="TitleUniversity">
                 <Title>회원정보</Title>
-                <UniversityName>{universityName}</UniversityName>
             </div>
             {isAdmin && (
                 <Nav>
@@ -29,17 +25,12 @@ function User() {
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
-                {isAdmin ? (
-                    <HeadUserList role={role} univName={univName} />
-                ) : isUniversityAdmin ? (
-                    <UserList order={order} />
-                ) : null}
+                {isAdmin && <HackathonHeadUserList keyword={univName} />}
             </Suspense>
         </Wrapper>
     );
 }
-
-export default User;
+export default HackathonPage;
 
 const Wrapper = styled.div`
     width: fit-content;
@@ -63,20 +54,5 @@ const Title = styled.div`
     line-height: 150%;
     @media screen and (max-width: 768px) {
         display: none;
-    }
-`;
-
-const UniversityName = styled.div`
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--orange-600, #ff7710);
-
-    border-radius: 42px;
-    padding: 6px 12px 6px 12px;
-    margin: 12px;
-
-    background: #fff2e8;
-    @media screen and (max-width: 380px) {
-        margin: 0px;
     }
 `;
