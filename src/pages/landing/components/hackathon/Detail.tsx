@@ -8,7 +8,7 @@ const Detail = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate('');
+        navigate('/about');
         window.scrollTo(0, 0);
     };
 
