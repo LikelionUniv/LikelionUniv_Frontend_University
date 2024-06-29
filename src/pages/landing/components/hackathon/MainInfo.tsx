@@ -129,6 +129,7 @@ const TitleImg = styled.img`
     @media (max-width: 767px) {
         margin-top: 447px;
         width: 520px;
+        width: 100%;
     }
     @media (max-width: 360px) {
         margin-top: 287px;

@@ -57,6 +57,7 @@ const PartButton = styled.div`
         font-size: 20px;
         margin-top: 40px;
         margin-bottom: 446px;
+        width: 300px;
     }
 
     @media (max-width: 360px) {
