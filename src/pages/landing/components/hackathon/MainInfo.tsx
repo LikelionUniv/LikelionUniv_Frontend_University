@@ -165,7 +165,7 @@ const InfoImg = styled.img`
     height: auto;
 
     @media (max-width: 767px) {
-        width: clamp(320px, 4vw, 512px);
+        width: clamp(320px, 3vw, 512px);
     }
 
     @media (max-width: 360px) {
@@ -179,7 +179,11 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 351px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.7)
+    );
 `;
 
 const ImgWrapper = styled.div`
