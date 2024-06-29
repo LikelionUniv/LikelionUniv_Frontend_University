@@ -106,6 +106,14 @@ const MoreBtn = styled.div`
         width: clamp(250px, 2vw, 320px);
         height: 48px;
     }
+    &:hover {
+        color: #ff7710;
+
+        img {
+            filter: invert(39%) sepia(100%) saturate(600%) hue-rotate(347deg)
+                brightness(105%) contrast(103%);
+        }
+    }
 `;
 
 const Img = styled.img``;

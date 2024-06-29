@@ -65,12 +65,12 @@ const MoreTitle = styled.div`
     line-height: 150%; /* 48px */
 
     @media (max-width: 767px) {
-        font-size: 20px;
+        font-size: 30px;
         width: 80%;
     }
 
     @media (max-width: 360px) {
-        font-size: 20px;
+        font-size: 16px;
         width: 90%;
     }
 `;
@@ -104,6 +104,9 @@ const MoreBtn = styled.div`
     @media (max-width: 360px) {
         width: clamp(250px, 2vw, 320px);
         height: 48px;
+    }
+    &:hover {
+        background-color: #d1d4d8;
     }
 `;
 
