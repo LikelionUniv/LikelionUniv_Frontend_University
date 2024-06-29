@@ -151,7 +151,7 @@ const August6Content = () => (
                 <TimelineTitle>저녁식사</TimelineTitle>
                 18~19시
                 <TimelineList>
-                    <TimeLineText>수정 예정</TimeLineText>
+                    <TimeLineText>간단한 저녁이 제공됩니다.</TimeLineText>
                 </TimelineList>
             </TimelineContent>
         </TimelineItem>
