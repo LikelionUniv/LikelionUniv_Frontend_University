@@ -16,6 +16,7 @@ interface IuseServerSidePagination {
     role?: string;
     univName?: string;
     isExcelData?: boolean;
+    keyword?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -48,6 +49,7 @@ interface Pageable {
     role?: string;
     univName?: string;
     isExcelData?: boolean;
+    keyword?: string;
 }
 
 function useServerSidePagination<T>({
@@ -62,12 +64,13 @@ function useServerSidePagination<T>({
     role,
     univName,
     isExcelData,
+    keyword,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
 
     const [pageInfo, setPageInfo] = useSearchParams();
-
+    console.log(typeof pageInfo.get('page'));
     // (if) 페이지 정보가 없을 때 pageInfo를 채워넣음
     // (else if) page=1 이 아니면서 검색을 했을때 page=1, currentPage=1 로 변경
     useEffect(() => {
@@ -76,12 +79,13 @@ function useServerSidePagination<T>({
             setPageInfo(pageInfo);
             setCurrentPage(1);
         } else if (pageInfo.get('page') !== '1' && (search || univName)) {
+            console.log('안되나');
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
             setCurrentPage(1);
         }
         // eslint-disable-next-line
-    }, [search, univName]);
+    }, [search, univName, keyword]);
 
     // 현재 페이지 정보를 불러옴
     const getCurrentPageInfo = () => {
@@ -104,7 +108,7 @@ function useServerSidePagination<T>({
     const fetchPagiableData = async () => {
         const response = await request<
             null,
-            ResponseServerSidePagination<T>,
+            ResponseServerSidePagination<T> | any,
             Pageable
         >({
             uri,
@@ -121,8 +125,10 @@ function useServerSidePagination<T>({
                 role,
                 univName,
                 isExcelData,
+                keyword,
             },
         });
+        if (uri === '/api/admin/v1/hackathons') return response;
         return response.data;
     };
 
@@ -141,6 +147,8 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
+                keyword,
             },
         ],
         queryFn: fetchPagiableData,

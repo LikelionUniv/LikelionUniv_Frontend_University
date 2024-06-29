@@ -26,6 +26,13 @@ export interface User {
     ordinal: number;
     role: string;
     univName?: string;
+    universityName?: string;
+    phone?: string;
+    hackathonPart?: string;
+    offlineParticipation?: boolean;
+    teamName?: string;
+    reasonForNotOffline?: null | string;
+    hackathonFormId?: number;
 }
 export interface Hackathons {
     hackathonFormId: number;

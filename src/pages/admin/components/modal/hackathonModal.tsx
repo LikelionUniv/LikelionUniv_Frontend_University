@@ -3,10 +3,11 @@ import cancel from '../../../../img/admin/Cancel.svg';
 
 interface HackathonModalProps {
     onCancel: () => void;
-    reason: string;
+    reason?: string | null;
 }
 
 function HackathonModal({ onCancel, reason }: HackathonModalProps) {
+    console.log(reason);
     return (
         <>
             <BackgroundOverlay>
@@ -36,7 +37,7 @@ export const Wrapper = styled.div`
     height: fit-content;
     background-color: white;
     padding: 32px 24px 24px 24px;
-    max-width: 518px;
+    min-width: 518px;
     min-height: 350px;
     border-radius: 20px;
     position: fixed;
@@ -44,6 +45,7 @@ export const Wrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+
     @media screen and (max-width: 767px) {
         min-width: 80%;
         top: 54%;
@@ -75,9 +77,13 @@ const Divider = styled.div`
     margin: 13px 0px 0px 0px;
 `;
 const Text = styled.div`
-    max-width: 550px;
-    text-align: center;
-    height: 350px;
-    overflow: scroll;
-    text-overflow: scroll;
+    word-break: break-all;
+    min-height: 350px;
+    max-height: 350px;
+    font-size: 18px;
+    color: #1111116b;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;

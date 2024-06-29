@@ -8,11 +8,12 @@ export interface TableUserListProps {
     id: number;
     name: string;
     email: string;
-    major: string;
-    part: string;
-    ordinal: number;
-    role: string;
-    univName?: string;
+    part?: string;
+    phone?: string;
+    universityName?: string;
+    teamName?: string;
+    offlineParticipation?: boolean;
+    reasonForNotOffline?: string | null;
 }
 
 const TableHackathonList: React.FC<TableUserListProps> = props => {
@@ -25,9 +26,6 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
         setIsModal(false);
     };
 
-    const test =
-        '이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유이유~ㅍㅍㅍ이유~이유~이유~이유~이유~이유~이유~이유~이유~~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~이유~';
-
     return (
         <>
             <Wrapper>
@@ -36,26 +34,31 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
                         <Table className="name">{props.name}</Table>
                         {isAdmin && (
                             <Table className="univ">
-                                {props.univName!.length >= 5
-                                    ? props.univName!.substr(0, 5)
-                                    : props.univName}
+                                {props.universityName!.length >= 5
+                                    ? props.universityName!.substr(0, 5)
+                                    : props.universityName}
                             </Table>
                         )}
-                        <Table className="phone">010-1111-1111</Table>
+                        <Table className="phone">{props.phone}</Table>
                         <Table className="join">
-                            {false ? (
+                            {props.offlineParticipation ? (
                                 'O'
                             ) : (
                                 <Xbtn onClick={() => setIsModal(true)}>X</Xbtn>
                             )}
                         </Table>
                         <Table className="part">{props.part}</Table>
-                        <Table className="email">test1234@naver.com</Table>
-                        <Table className="teamname">{props.email}</Table>
+                        <Table className="email">{props.email}</Table>
+                        <Table className="teamname">{props.teamName}</Table>
                     </TableBody>
                 </BodyTable>
             </Wrapper>
-            {isModal && <HackathonModal onCancel={onCancel} reason={test} />}
+            {isModal && (
+                <HackathonModal
+                    onCancel={onCancel}
+                    reason={props.reasonForNotOffline}
+                />
+            )}
         </>
     );
 };

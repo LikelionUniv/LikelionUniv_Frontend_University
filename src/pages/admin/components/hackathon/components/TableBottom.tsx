@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import XLSX from 'xlsx-js-style';
+import useServerSidePagination from '../../../../../query/get/useServerSidePagination';
+import { User } from '../../../../../inteface/adminType';
 interface ExcelType {
     name: string;
     universityName: string;
@@ -11,88 +13,65 @@ interface ExcelType {
     teamName: string;
 }
 
-interface HackathonTableBottomProps {
-    setIsExcelDownload: React.Dispatch<React.SetStateAction<boolean>>;
-    refetch: any;
-}
-const HackathonTableBottom = ({
-    setIsExcelDownload,
-    refetch,
-}: HackathonTableBottomProps) => {
-    const workbook = XLSX.utils.book_new();
-    console.log();
-    const body: ExcelType[] = [
-        {
-            name: '홍길동',
-            universityName: '하버드',
-            phone: '010-1111-2222',
-            offlineParticipation: true,
-            hackathonPart: 'PM',
-            email: 'test1234@naver.com',
-            teamName: '화이팅팀',
-        },
-        {
-            name: '홍길동',
-            universityName: '하버드',
-            phone: '010-1111-2222',
-            offlineParticipation: true,
-            hackathonPart: 'PM',
-            email: 'test1234@naver.com',
-            teamName: '화이팅팀',
-        },
-        {
-            name: '홍길동',
-            universityName: '하버드',
-            phone: '010-1111-2222',
-            offlineParticipation: true,
-            hackathonPart: 'PM',
-            email: 'test1234@naver.com',
-            teamName: '화이팅팀',
-        },
-    ];
-    body.unshift({
-        name: '이름',
-        universityName: '대학',
-        phone: '전화번호',
-        offlineParticipation: '참여 여부',
-        hackathonPart: '테스트',
-        email: '테스트',
-        teamName: '테스트',
+const HackathonTableBottom = () => {
+    const { curPageItem: users } = useServerSidePagination<User>({
+        uri: '/api/admin/v1/hackathons',
+        size: 10,
+        isExcelData: true,
     });
 
-    const firstSheet = XLSX.utils.json_to_sheet(body, {
-        header: [
-            'name',
-            'universityName',
-            'phone',
-            'offlineParticipation',
-            'hackathonPart',
-            'email',
-            'teamName',
-        ],
-        skipHeader: true,
-    });
-    firstSheet['!cols'] = [
-        { wpx: 120 },
-        { wpx: 180 },
-        { wpx: 200 },
-        { wpx: 100 },
-        { wpx: 130 },
-        { wpx: 200 },
-        { wpx: 200 },
-    ];
-    XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
+    const handleDownExcel = () => {
+        const workbook = XLSX.utils.book_new();
+        const body: ExcelType[] = [];
+        users.map(el => {
+            body.push({
+                name: el.name,
+                universityName: el.universityName!,
+                phone: el.phone!,
+                offlineParticipation: el.offlineParticipation!,
+                hackathonPart: el.part,
+                email: el.email,
+                teamName: el.teamName!,
+            });
+        });
+        body.unshift({
+            name: '이름',
+            universityName: '대학',
+            phone: '전화번호',
+            offlineParticipation: '참여 여부',
+            hackathonPart: '테스트',
+            email: '테스트',
+            teamName: '테스트',
+        });
 
+        const firstSheet = XLSX.utils.json_to_sheet(body, {
+            header: [
+                'name',
+                'universityName',
+                'phone',
+                'offlineParticipation',
+                'hackathonPart',
+                'email',
+                'teamName',
+            ],
+            skipHeader: true,
+        });
+        firstSheet['!cols'] = [
+            { wpx: 120 },
+            { wpx: 180 },
+            { wpx: 200 },
+            { wpx: 100 },
+            { wpx: 130 },
+            { wpx: 200 },
+            { wpx: 200 },
+        ];
+        XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
+
+        XLSX.writeFile(workbook, '해커톤신청정보.xlsx');
+    };
     return (
         <Wrapper>
-            <Button
-                style={{ color: '#4D5359' }}
-                onClick={() => {
-                    XLSX.writeFile(workbook, '해커톤신청정보.xlsx');
-                    setIsExcelDownload(true);
-                    refetch();
-                }}
-            >
+            <Button style={{ color: '#4D5359' }} onClick={handleDownExcel}>
                 엑셀로 내보내기
             </Button>
         </Wrapper>

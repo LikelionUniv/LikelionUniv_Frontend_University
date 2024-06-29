@@ -25,9 +25,7 @@ function HackathonPage() {
                 </Nav>
             )}
             <Suspense fallback={<div>loading...</div>}>
-                {isAdmin && (
-                    <HackathonHeadUserList role={role} univName={univName} />
-                )}
+                {isAdmin && <HackathonHeadUserList keyword={univName} />}
             </Suspense>
         </Wrapper>
     );

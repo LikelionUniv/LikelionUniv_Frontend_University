@@ -25,7 +25,7 @@ function SearchBar({ setunivName }: SearchBarProps) {
             {' '}
             <S.Input
                 type="text"
-                placeholder="대학 이름 검색"
+                placeholder="이름 혹은 대학 이름 검색"
                 onChange={onChange}
             />
             <S.Search src={SearchBtn} onClick={() => setunivName(query)} />

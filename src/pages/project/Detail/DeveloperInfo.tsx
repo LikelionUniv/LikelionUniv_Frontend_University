@@ -61,7 +61,7 @@ const DeveloperInfo: FunctionComponent = () => {
     // 프로젝트 데이터 불러오기
     useEffect(() => {
         axiosInstance
-            .get(`/api/v1/project/${projectId}`)
+            .get(`/api/v1/projects/${projectId}`)
             .then(response => {
                 setProjectData(response.data.data);
                 setMembersData(response.data.data.members);

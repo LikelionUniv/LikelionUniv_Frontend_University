@@ -34,7 +34,7 @@ function Header({ setProjectApi }: IHeader) {
     useEffect(() => {
         // 전체를 클릭할 경우
         if (activeTab === undefined) {
-            setProjectApi({ uri: '/api/v1/project/' });
+            setProjectApi({ uri: '/api/v1/projects/' });
             return;
         }
 

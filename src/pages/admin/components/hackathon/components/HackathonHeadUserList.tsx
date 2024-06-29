@@ -8,57 +8,49 @@ import HackathonTableBottom from './TableBottom';
 import TableHackathonHead from './TableHead';
 
 interface UserListProps {
-    order?: string;
-    searchQuery?: string;
-    role?: string;
-    univName?: string;
+    keyword?: string;
 }
 
-const HackathonHeadUserList: React.FC<UserListProps> = ({
-    order,
-    univName,
-    role,
-}: UserListProps) => {
-    const [isExcelDownload, setIsExcelDownload] = useState(false);
-    console.log(isExcelDownload);
+const HackathonHeadUserList: React.FC<UserListProps> = ({ keyword }) => {
     const {
-        curPageItem: data,
+        curPageItem: users,
         renderPaginationBtn,
         refetch,
     } = useServerSidePagination<User>({
         uri: '/api/admin/v1/hackathons',
         size: 10,
-        isExcelData: isExcelDownload,
+        keyword: keyword,
+        isExcelData: false,
     });
-
-    console.log(data);
 
     return (
         <>
             <SelectedUsersProvider>
                 <Wrapper>
                     <TableHackathonHead />
-                    {Array.isArray(data) && (
+                    {Array.isArray(users) && (
                         <>
-                            {data.map(user => (
+                            {users.map(user => (
                                 <TableHackathonList
                                     key={user.id}
                                     id={user.id}
                                     name={user.name}
                                     email={user.email}
-                                    major={user.major}
-                                    part={user.part}
-                                    ordinal={user.ordinal}
-                                    role={user.role}
-                                    univName={user.univName}
+                                    part={user.hackathonPart}
+                                    phone={user.phone}
+                                    universityName={user.universityName}
+                                    teamName={user.teamName}
+                                    offlineParticipation={
+                                        user.offlineParticipation
+                                    }
+                                    reasonForNotOffline={
+                                        user.reasonForNotOffline
+                                    }
                                 />
                             ))}
                         </>
                     )}
-                    <HackathonTableBottom
-                        setIsExcelDownload={setIsExcelDownload}
-                        refetch={refetch}
-                    />
+                    <HackathonTableBottom />
                     {renderPaginationBtn()}
                 </Wrapper>
             </SelectedUsersProvider>

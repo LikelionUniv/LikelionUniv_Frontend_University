@@ -28,7 +28,7 @@ const ProjectDetail: FunctionComponent = () => {
         const projectId = pathParts[pathParts.length - 1];
 
         axiosInstance
-            .get(`/api/v1/project/${projectId}`)
+            .get(`/api/v1/projects/${projectId}`)
             .then(response => setProjectData(response.data.data))
             .catch(error =>
                 console.error('Error fetching project data:', error),
