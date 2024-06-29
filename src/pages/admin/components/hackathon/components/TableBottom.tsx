@@ -23,13 +23,14 @@ const HackathonTableBottom = () => {
     const handleDownExcel = () => {
         const workbook = XLSX.utils.book_new();
         const body: ExcelType[] = [];
+
         users.map(el => {
             body.push({
                 name: el.name,
                 universityName: el.universityName!,
                 phone: el.phone!,
                 offlineParticipation: el.offlineParticipation!,
-                hackathonPart: el.part,
+                hackathonPart: el.hackathonPart!,
                 email: el.email,
                 teamName: el.teamName!,
             });
@@ -39,9 +40,9 @@ const HackathonTableBottom = () => {
             universityName: '대학',
             phone: '전화번호',
             offlineParticipation: '참여 여부',
-            hackathonPart: '테스트',
-            email: '테스트',
-            teamName: '테스트',
+            hackathonPart: '파트',
+            email: '이메일',
+            teamName: '팀 명',
         });
 
         const firstSheet = XLSX.utils.json_to_sheet(body, {
