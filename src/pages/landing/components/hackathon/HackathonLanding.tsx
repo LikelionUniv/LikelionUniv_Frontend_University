@@ -2,6 +2,7 @@ import { Layout, Container } from '../../../../styles/Layout';
 import Detail from './Detail';
 
 import GuideLine from './GuideLine';
+import SponsorInfo from './HackathonSponsor';
 import MainInfo from './MainInfo';
 import More from './More';
 import Prize from './Prize';
@@ -16,6 +17,7 @@ const HakathonLanding = () => {
                 <GuideLine />
                 <More />
                 <Prize />
+                <SponsorInfo />
                 <Detail />
             </Container>
         </Layout>

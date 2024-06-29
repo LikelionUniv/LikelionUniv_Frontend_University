@@ -54,7 +54,9 @@ const Wrapper = styled.div`
 `;
 
 const MoreTitle = styled.div`
+    text-align: center;
     color: white;
+    width: 100%;
     /* Title/32_Bold */
     font-family: Pretendard;
     font-size: 32px;
@@ -64,10 +66,12 @@ const MoreTitle = styled.div`
 
     @media (max-width: 767px) {
         font-size: 20px;
+        width: 80%;
     }
 
     @media (max-width: 360px) {
         font-size: 20px;
+        width: 90%;
     }
 `;
 
