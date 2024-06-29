@@ -16,7 +16,7 @@ const UnivHeader = () => {
         const fetchTotalUniversities = async () => {
             try {
                 const response = await axiosInstance.get(
-                    '/api/v1/university/all',
+                    '/api/v1/universities/all',
                 );
                 setTotalCount(response.data.data.length);
             } catch (error) {
