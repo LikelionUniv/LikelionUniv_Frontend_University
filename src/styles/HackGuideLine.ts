@@ -5,7 +5,7 @@ import Typography from '../components/text/Typography';
 export const GuideContainer = styled.div`
     max-width: 1200px;
     width: 80%;
-    margin-top: 160px;
+    margin-top: 104px;
     color: #fff;
 
     @media (max-width: 767px) {
