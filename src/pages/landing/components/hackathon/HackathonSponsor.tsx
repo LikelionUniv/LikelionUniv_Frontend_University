@@ -55,7 +55,6 @@ const SponsorInfo = () => {
                                 </div>
                                 <div className="text-section">
                                     <div className="name">{item.name}</div>
-                                    <div className="gen">{item.gen}기</div>
                                 </div>
                             </div>
                         </a>
@@ -71,7 +70,6 @@ export default SponsorInfo;
 type serviceType = {
     id: number;
     name: string;
-    gen: number;
     logo: string;
     url: string;
     backgroundColor?: string;
@@ -80,86 +78,74 @@ const serviceList: serviceType[] = [
     {
         id: 0,
         name: '멋쟁이사자처럼',
-        gen: 1,
         logo: logo1,
-        url: 'https://www.jasoseol.com',
+        url: 'https://www.likelion.net/',
     },
     {
         id: 1,
         name: '영림원소프트랩',
-        gen: 3,
         logo: logo2,
-        url: 'https://www.wingeat.com/',
+        url: 'https://www.ksystem.co.kr/',
     },
     {
         id: 2,
-        name: '멋사 넥스트',
-        gen: 3,
-        logo: logo3,
-        url: 'https://www.banksalad.com',
-    },
-    {
-        id: 3,
         name: '쿼드해시',
-        gen: 3,
         logo: logo4,
-        url: 'https://play.google.com/store/apps/details?id=com.screwbar.gudakcamera&hl=ko&gl=US',
+        url: 'https://twitter.com/quadhash',
         backgroundColor: '#FC3',
     },
     {
+        id: 3,
+        name: '골스튜디오',
+        logo: logo6,
+        url: 'https://goalstudio.com',
+    },
+    {
         id: 4,
-        name: '해시아웃',
-        gen: 4,
-        logo: logo5,
-        url: 'https://taling.me/',
+        name: '체크오',
+        logo: logo8,
+        url: 'https://checko.kr/',
     },
     {
         id: 5,
-        name: '골스튜디오',
-        gen: 8,
-        logo: logo6,
-        url: 'https://www.groomernote.com/',
+        name: '멋사 넥스트',
+        logo: logo3,
+        url: 'https://www.likelion-next.com/',
     },
     {
         id: 6,
         name: '낼나',
-        gen: 10,
         logo: logo7,
-        url: 'https://glucofit.co.kr/',
+        url: 'https://nelna.shop/',
     },
     {
         id: 7,
-        name: '체크오',
-        gen: 10,
-        logo: logo8,
-        url: 'https://glucofit.co.kr/',
+        name: '뉴믹스커피',
+        logo: logo10,
+        url: 'https://www.newmixcoffee.com/',
     },
     {
         id: 8,
-        name: '타이거라들러',
-        gen: 10,
-        logo: logo9,
-        url: 'https://glucofit.co.kr/',
+        name: '해시아웃',
+        logo: logo5,
+        url: 'https://hashout.app/',
     },
     {
         id: 9,
-        name: '뉴믹스커피',
-        gen: 10,
-        logo: logo10,
-        url: 'https://glucofit.co.kr/',
+        name: '타이거라들러',
+        logo: logo9,
+        url: 'https://www.instagram.com/tigerbeer_korea/',
     },
     {
         id: 10,
         name: '디자인오비',
-        gen: 10,
         logo: logo11,
-        url: 'https://glucofit.co.kr/',
+        url: 'http://designob.co.kr',
     },
     {
         id: 11,
         name: '빅썬시스템즈',
-        gen: 10,
         logo: logo12,
-        url: 'https://glucofit.co.kr/',
+        url: 'http://bigsun.kr/',
     },
 ];
