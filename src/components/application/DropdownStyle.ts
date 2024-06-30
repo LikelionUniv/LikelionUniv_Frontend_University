@@ -15,6 +15,13 @@ export const NdropdownAreaDiv = styled.div`
 
     box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.07);
     box-sizing: border-box;
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
+
+    @media screen and (min-width: 360px) {
+        width: 100%;
+    }
 `;
 
 export const NdropdownListDiv = styled.div`

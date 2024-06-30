@@ -90,11 +90,11 @@ const ButtonSelectWrapper = styled.div`
             border-bottom: 3px solid #212224;
             z-index: 20;
         }
-        @media (max-width: 360px) {
+        @media (min-width: 360px) {
             font-size: 16px;
         }
     }
-    @media (max-width: 360px) {
+    @media (min-width: 360px) {
         width: 320px;
         height: 34px;
     }

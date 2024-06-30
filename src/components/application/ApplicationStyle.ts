@@ -24,12 +24,12 @@ export const Container = styled.div`
     margin: 100px 0;
     box-sizing: border-box;
 
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 767px) {
         padding: 0 20px;
         width: 100%;
         max-width: 760px;
     }
-    @media screen and (max-width: 360px) {
+    @media screen and (min-width: 360px) {
         margin: 40px 0;
     }
 `;
@@ -38,9 +38,12 @@ export const StyledArrowIcon = styled(ArrowIcon)`
     padding: 3.5px 24px 3.5px 0;
     margin-left: -56px;
 
-    @media screen and (max-width: 360px) {
-        padding: 2px 4px 2px 0;
+    @media screen and (max-width: 767px) {
         margin-left: 0;
+    }
+
+    @media screen and (min-width: 360px) {
+        padding: 2px 4px 2px 0px;
     }
 `;
 
@@ -54,14 +57,12 @@ export const Stitle = styled.div`
     font-weight: 700;
     line-height: 140%;
 
-    @media screen and (max-width: 360px) {
-        max-width: 360px;
+    @media screen and (max-width: 767px) {
+        font-size: 26px;
+    }
+
+    @media screen and (min-width: 360px) {
         font-size: 24px;
-        /* Title/24_Bold */
-        font-family: Pretendard;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
         line-height: 150%; /* 36px */
     }
 `;
@@ -109,13 +110,14 @@ export const Nform = styled.input`
         border: 1px solid var(--orange-600, #ff7710);
     }
 
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 767px) {
         width: 100%;
     }
 `;
 
 export const NdropdownDiv = styled.div`
     display: flex;
+    justify-content: space-between;
     width: 464px;
     height: 48px;
 
@@ -130,21 +132,22 @@ export const NdropdownDiv = styled.div`
         border: 1px solid var(--orange-600, #ff7710);
     }
 
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 767px) {
         width: 100%;
     }
 `;
 
-export const NdropdownArrow = styled(DropdownArrow)`
-    cursor: pointer;
-`;
-
-export const NdropdownTxt = styled.p`
+export const NdropdownTxt = styled.div`
     font-family: Pretendard;
     font-size: 16px;
     font-weight: 500;
     line-height: 150%;
-    margin-right: 228px;
+
+    min-width: 180px;
+`;
+
+export const NdropdownArrow = styled(DropdownArrow)`
+    cursor: pointer;
 `;
 
 export const SelectedOptionsWrapper = styled.div`
@@ -162,12 +165,18 @@ export const NradioWrapper = styled.div`
 
     line-height: 150%;
 
-    @media screen and (max-width: 360px) {
+    @media screen and (min-width: 767px) {
+        flex-direction: column;
+    }
+
+    @media screen and (min-width: 360px) {
         flex-direction: column;
     }
 `;
 
-export const NradioInput = styled.input.attrs({ type: 'radio' })<{ checked: boolean }>`
+export const NradioInput = styled.input.attrs({ type: 'radio' })<{
+    checked: boolean;
+}>`
     margin-right: 8px;
     cursor: pointer;
     appearance: none;
@@ -235,7 +244,7 @@ export const Button = styled.button<{ disabled: boolean }>`
         ${props => (props.disabled ? 'null' : 'cursor: pointer')};
     }
 
-    @media screen and (max-width: 769px) {
+    @media screen and (max-width: 767px) {
         width: 100%;
         margin-left: 0;
     }

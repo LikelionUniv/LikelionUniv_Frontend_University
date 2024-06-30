@@ -1,30 +1,29 @@
 import styled from 'styled-components';
 
-/// 769px 임의 지정
-
 export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 1202px;
+
     height: 133px;
 
     border-bottom: 1px solid var(--grey-300, #eaecee);
-    @media screen and (max-width: 360px) {
-        height: 86px;
-    }
-    @media screen and (max-width: 769px) {
+    width: 100%;
+    @media screen and (max-width: 767px) {
         width: 100%;
+    }
+    @media screen and (min-width: 360px) {
+        height: 86px;
     }
 `;
 
 export const TextArea = styled.div`
     padding: 32px 0px 33px 40px;
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
+    @media screen and (min-width: 360px) {
         width: 100%;
         padding: 12px 0px 28px 14px;
-    }
-    @media screen and (max-width: 769px) {
-        width: 100%;
     }
 `;
 
@@ -35,11 +34,11 @@ export const Title = styled.div`
     font-family: Pretendard;
     font-size: 24px;
     font-weight: 700;
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 767px) {
         width: 100%;
         font-size: 16px;
     }
-    @media screen and (max-width: 769px) {
+    @media screen and (min-width: 360px) {
         width: 100%;
         font-size: 16px;
     }
@@ -51,11 +50,11 @@ export const Date = styled.div`
     color: var(--grey-800, #4d5359);
     font-family: Pretendard;
     font-size: 16px;
-    @media screen and (max-width: 360px) {
+    @media screen and (max-width: 767px) {
         width: 100%;
         font-size: 12px;
     }
-    @media screen and (max-width: 769px) {
+    @media screen and (min-width: 360px) {
         width: 100%;
         font-size: 12px;
     }
@@ -77,7 +76,11 @@ export const Button = styled.div`
     cursor: pointer;
 
     margin: 43px 40px 42px 0px;
-    @media screen and (max-width: 360px) {
+
+    @media screen and (max-width: 767px) {
+        font-size: 12px;
+    }
+    @media screen and (min-width: 360px) {
         position: absolute;
         border-radius: 4px;
         width: 113px;
@@ -85,8 +88,5 @@ export const Button = styled.div`
         font-size: 12px;
         margin: 50px 0px 12px 193px;
         right: 34px;
-    }
-    @media screen and (max-width: 769px) {
-        font-size: 12px;
     }
 `;
