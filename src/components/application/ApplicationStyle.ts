@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-    margin: 100px 0;
+    padding-top: 50px;
     box-sizing: border-box;
 
     @media screen and (max-width: 767px) {
@@ -30,7 +30,7 @@ export const Container = styled.div`
         max-width: 760px;
     }
     @media screen and (min-width: 360px) {
-        margin: 40px 0;
+        margin: 50px 0;
     }
 `;
 

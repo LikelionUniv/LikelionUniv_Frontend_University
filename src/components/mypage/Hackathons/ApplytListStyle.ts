@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
-
+    margin-right: 0 358px;
     height: 133px;
 
     border-bottom: 1px solid var(--grey-300, #eaecee);
@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 767px) {
         width: 100%;
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (max-width: 360px) {
         height: 86px;
     }
 `;
@@ -21,7 +21,7 @@ export const TextArea = styled.div`
     @media screen and (max-width: 767px) {
         width: 100%;
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (max-width: 360px) {
         width: 100%;
         padding: 12px 0px 28px 14px;
     }
@@ -38,7 +38,7 @@ export const Title = styled.div`
         width: 100%;
         font-size: 16px;
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (max-width: 360px) {
         width: 100%;
         font-size: 16px;
     }
@@ -54,7 +54,7 @@ export const Date = styled.div`
         width: 100%;
         font-size: 12px;
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (max-width: 360px) {
         width: 100%;
         font-size: 12px;
     }
@@ -78,9 +78,16 @@ export const Button = styled.div`
     margin: 43px 40px 42px 0px;
 
     @media screen and (max-width: 767px) {
+        position: absolute;
+        border-radius: 4px;
+        width: 113px;
+        height: 24px;
+        font-size: 12px;
+        margin: 100px 0px 0px 193px;
+        right: 34px;
         font-size: 12px;
     }
-    @media screen and (min-width: 360px) {
+    @media screen and (max-width: 360px) {
         position: absolute;
         border-radius: 4px;
         width: 113px;
