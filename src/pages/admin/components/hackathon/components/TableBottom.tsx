@@ -8,7 +8,7 @@ interface ExcelType {
     universityName: string;
     phone: string;
     offlineParticipation: boolean | string;
-    hackathonPart: string;
+    hackathonParts: string[] | string;
     email: string;
     teamName: string;
 }
@@ -30,7 +30,7 @@ const HackathonTableBottom = () => {
                 universityName: el.universityName!,
                 phone: el.phone!,
                 offlineParticipation: el.offlineParticipation!,
-                hackathonPart: el.hackathonPart!,
+                hackathonParts: el.hackathonParts![0],
                 email: el.email,
                 teamName: el.teamName!,
             });
@@ -40,7 +40,7 @@ const HackathonTableBottom = () => {
             universityName: '대학',
             phone: '전화번호',
             offlineParticipation: '참여 여부',
-            hackathonPart: '파트',
+            hackathonParts: '파트',
             email: '이메일',
             teamName: '팀 명',
         });
@@ -51,7 +51,7 @@ const HackathonTableBottom = () => {
                 'universityName',
                 'phone',
                 'offlineParticipation',
-                'hackathonPart',
+                'hackathonParts',
                 'email',
                 'teamName',
             ],

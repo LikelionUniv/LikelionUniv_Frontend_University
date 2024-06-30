@@ -79,5 +79,4 @@ const YearTh = styled.p<{ $props: boolean }>`
     line-height: 150%;
     padding: 5px 0;
     cursor: pointer;
-    /* background-color: red; */
 `;
