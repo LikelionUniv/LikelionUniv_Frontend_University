@@ -104,6 +104,10 @@ const ApplicationForm = () => {
         setIsModalOpen(false);
     };
 
+    const closeDropdown = () => {
+        setIsDropDownOpen(false);
+    };
+
     const getWidthBasedOnLength = (length: number) => {
         if (length < 3) return 28;
         if (length < 4) return 42;
@@ -325,6 +329,7 @@ const ApplicationForm = () => {
                                 isOpen={isDropDownOpen}
                                 trackOption={trackOption}
                                 control={control}
+                                closeDropdown={closeDropdown}
                             />
                             {!isDropDownOpen && (
                                 <A.SelectedOptionsWrapper>
