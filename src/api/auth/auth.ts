@@ -8,7 +8,8 @@ export const requestIdtoken = async (
     provider: string | undefined,
 ) => {
     return await axiosInstance
-        .get(`/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`)
+        //.get(`/api/v1/auth/${provider}/idtoken?code=${authorizationCode}`)
+        .get(`/api/v1/auth/${provider}/idToken/local?code=${authorizationCode}`)
         .then(response => {
             localStorage.setItem('idtoken', response.data.data.idToken);
             return response.data.data.idToken;
@@ -43,6 +44,6 @@ export const requestLogin = async (
 
 // 유저정보 GET - 실패하거나 에러가 나면 response = undefined
 export const requestUserInfo = async () => {
-    const response = await axiosInstance.get(`/api/v1/auth/userinfo`);
+    const response = await axiosInstance.get(`/api/v1/auth/userInfo`);
     return response.data;
 };
