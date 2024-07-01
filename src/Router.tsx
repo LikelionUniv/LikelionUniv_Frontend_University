@@ -38,7 +38,7 @@ import UnivRecruit from './pages/univRecruit/UnivRecruit';
 import HackathonPage from './pages/admin/components/hackathon/hackathonPage';
 
 import HackathonsApplication from './routes/HackathonsApplicationPage';
-import HackathonsModifyPage from './routes/HackathonsModifyPage';
+import HackathonsApplicationPage from './routes/HackathonsModifyPage';
 
 const router = createBrowserRouter([
     {
@@ -195,12 +195,10 @@ const router = createBrowserRouter([
             {
                 path: 'hackathons',
                 element: <HackathonsApplication />,
-                children: [
-                    {
-                        path: '/hackathons/:hackathonFormId',
-                        element: <HackathonsModifyPage />,
-                    },
-                ],
+            },
+            {
+                path: 'hackathons/:hackathonId',
+                element: <HackathonsApplicationPage />,
             },
         ],
     },

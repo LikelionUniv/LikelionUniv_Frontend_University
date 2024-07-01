@@ -4,6 +4,7 @@ import ProjectSelect from './ProjectSelect';
 import LikeSelect from './LikeSelect';
 import PostSelect from './PostSelect';
 import ApplyList from '../../../components/mypage/Hackathons/ApplyList';
+import ApplySelect from '../../../components/mypage/Hackathons/ApplySelect';
 
 const UserPostSelect = () => {
     //const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
@@ -55,7 +56,7 @@ const UserPostSelect = () => {
             ) : (
                 <>
                     <Suspense fallback={<div>loading...</div>}>
-                        <ApplyList />
+                        <ApplySelect select={select} />
                     </Suspense>
                 </>
             )}

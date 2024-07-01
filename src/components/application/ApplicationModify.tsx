@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, useWatch, Controller } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as z from 'zod';
 
@@ -12,6 +12,7 @@ import SelectedOption from './SelectedOption';
 import Dropdown from './Dropdown';
 import AddHypen from './AddHypen';
 import useGetUserInfo from './../../query/get/useGetUserInfo';
+import request from '../../api/request';
 
 type ApplicationFormType = z.infer<typeof applicationSchema>;
 
@@ -26,10 +27,10 @@ interface ApplicationModalProps {
 }
 
 interface FormId {
-    FormId: number;
+    hackathonId: number;
 }
 
-const trackOption = ['기획', '디자인', '프론트엔드', '백엔드'];
+const trackOption = ['PM', 'DESIGNER', 'FRONTEND', 'BACKEND'];
 
 const ApplicationModalTxt = {
     header: '12기 중앙해커톤 참가 신청',
@@ -38,7 +39,52 @@ const ApplicationModalTxt = {
     button: '수정하기',
 };
 
+interface ThackathonData {
+    hackathonFormId: 1;
+    name: string;
+    email: string;
+    universityName: string;
+    major: string;
+    phone: string;
+    hackathonParts: string[];
+    teamName: string;
+    offlineParticipation: true;
+    reasonForNotOffline: null;
+}
+
 const ApplicationForm = () => {
+    const { hackathonId } = useParams();
+    const [isRadio, setIsRadio] = useState(true);
+    const [hackathonData, setHackathonData] = useState<null | ThackathonData>(
+        null,
+    );
+
+    const formatPhoneNumber = (value: string) => {
+        const phoneNumber = value.replace(/[^\d]/g, '');
+        const phoneNumberLength = phoneNumber.length;
+
+        if (phoneNumberLength < 4) return phoneNumber;
+        if (phoneNumberLength < 8) {
+            return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(3)}`;
+        }
+        return `${phoneNumber.slice(0, 3)}-${phoneNumber.slice(
+            3,
+            7,
+        )}-${phoneNumber.slice(7, 11)}`;
+    };
+
+    const fetchData = async () => {
+        try {
+            const response = await request<null, null, null>({
+                uri: `/api/v1/hackathons/${hackathonId}`,
+                method: 'get',
+            });
+            setHackathonData(response.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
     const navigate = useNavigate();
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,8 +93,8 @@ const ApplicationForm = () => {
     );
     const { userinfo, error } = useGetUserInfo();
     const {
-        register,
         handleSubmit,
+        register,
         control,
         watch,
         setValue,
@@ -93,31 +139,14 @@ const ApplicationForm = () => {
     };
 
     const handleCancelOption = (option: string) => {
+        console.log(option);
         const newValue = selectedParts.filter(selected => selected !== option);
         setValue('hackathonPart', newValue.length > 0 ? newValue : []);
     };
 
-    const onSubmit = (data: ApplicationFormType) => {
-        setFormData(data);
-        setIsModalOpen(true);
-        // 콘솔로 확인
-        console.log('userinfo');
-        console.log(userinfo);
-        console.log('onSubmit');
-        console.log(data);
-    };
-
-    const handleModalSubmit = async () => {
-        console.log('handleModalSubmit');
-        console.log(formData);
-        /*         await request<ApplicationFormType, FormId, null>({
-            uri: '/api/v1/hackathons',
-            method: 'post',
-            data: formData,
-        }); 
-        navigate('/myPage');
-        */
-    };
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     useEffect(() => {
         if (userinfo?.name) {
@@ -133,7 +162,55 @@ const ApplicationForm = () => {
             trigger('major');
         }
     }, [userinfo, setValue, trigger]);
-    console.log('수정페이지');
+
+    useEffect(() => {
+        if (hackathonData) {
+            if (hackathonData?.email) {
+                setValue('email', hackathonData.email);
+            }
+            if (hackathonData?.phone) {
+                setValue('phone', formatPhoneNumber(hackathonData.phone));
+            }
+            if (hackathonData?.teamName) {
+                setValue('teamName', hackathonData.teamName);
+            }
+            if (hackathonData?.hackathonParts) {
+                let arr = [];
+                for (let i = 0; i < hackathonData.hackathonParts.length; i++) {
+                    arr.push(hackathonData.hackathonParts[i]);
+                    setValue('hackathonPart', arr);
+                }
+            }
+            if (hackathonData?.offlineParticipation) {
+                setIsRadio(hackathonData.offlineParticipation);
+                setValue(
+                    'offlineParticipation',
+                    hackathonData.offlineParticipation,
+                );
+            }
+        }
+    }, [hackathonData]);
+
+    const handleModalSubmit = async () => {
+        try {
+            const response = await request<ApplicationFormType, FormId, null>({
+                uri: `/api/v1/hackathons/${hackathonId}`,
+                method: 'PUT',
+                data: formData,
+            });
+
+            return response.data;
+        } catch (error) {
+            console.error('서버 요청 오류:', error);
+        }
+    };
+
+    const onSubmit = (data: ApplicationFormType) => {
+        setFormData(data);
+        console.log(data);
+        setIsModalOpen(true);
+    };
+
     return (
         <A.Wrapper>
             <A.Container>
@@ -147,12 +224,6 @@ const ApplicationForm = () => {
                 </A.Stitle>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    {/*                 <form
-                    onSubmit={handleSubmit(d => {
-                        console.log(d);
-                        openmodal();
-                    })}
-                > */}
                     <A.Ndiv>
                         이름
                         {!userinfo?.name ? (
@@ -167,7 +238,7 @@ const ApplicationForm = () => {
                     />
                     <A.Ndiv>
                         메일
-                        {!dirtyFields.email || errors.email ? (
+                        {errors.email ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -200,7 +271,7 @@ const ApplicationForm = () => {
                     />
                     <A.Ndiv>
                         전화번호
-                        {!dirtyFields.phone || errors.phone ? (
+                        {errors.phone ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -215,7 +286,7 @@ const ApplicationForm = () => {
                     />
                     <A.Ndiv>
                         파트 선택
-                        {!dirtyFields.hackathonPart || errors.hackathonPart ? (
+                        {errors.hackathonPart ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -273,7 +344,7 @@ const ApplicationForm = () => {
                     )}
                     <A.Ndiv>
                         팀명
-                        {!dirtyFields.teamName || errors.teamName ? (
+                        {errors.teamName ? (
                             <A.StyledNotCheckedIcon />
                         ) : (
                             <A.StyledCheckedIcon />
@@ -312,10 +383,13 @@ const ApplicationForm = () => {
                                             type="radio"
                                             {...field}
                                             value="true"
-                                            checked={field.value === true}
-                                            onChange={() =>
-                                                field.onChange(true)
+                                            checked={
+                                                field.value || isRadio === true
                                             }
+                                            onChange={() => {
+                                                field.onChange(true);
+                                                setIsRadio(true);
+                                            }}
                                         />
                                         네, 참여합니다.
                                     </A.Nlabel>
@@ -326,10 +400,11 @@ const ApplicationForm = () => {
                                             type="radio"
                                             {...field}
                                             value="false"
-                                            checked={field.value === false}
-                                            onChange={() =>
-                                                field.onChange(false)
-                                            }
+                                            checked={isRadio === false}
+                                            onChange={() => {
+                                                field.onChange(false);
+                                                setIsRadio(false);
+                                            }}
                                         />
                                         아니오, 참가하지 않습니다.
                                     </A.Nlabel>
@@ -347,7 +422,7 @@ const ApplicationForm = () => {
                             <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
                         </>
                     )}
-                    <A.Button type="submit" disabled={!isValid}>
+                    <A.Button type="submit" disabled={false}>
                         신청하기
                     </A.Button>
                     {isModalOpen && (

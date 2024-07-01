@@ -116,6 +116,7 @@ const ApplicationForm = () => {
     };
 
     const handleCancelOption = (option: string) => {
+        console.log('dd');
         const newValue = selectedParts.filter(selected => selected !== option);
         setValue('hackathonPart', newValue.length > 0 ? newValue : []);
     };
@@ -149,7 +150,7 @@ const ApplicationForm = () => {
                     hackathonFormId,
                     null
                 >({
-                    uri: '/api/v1/hackathons',
+                    uri: '/api/v1/',
                     method: 'post',
                     data: submitData,
                 });
@@ -208,7 +209,7 @@ const ApplicationForm = () => {
     console.log('신청페이지');
     return (
         <>
-            {!isSuccess ? (
+            {isSuccess ? (
                 <CompleteApplication />
             ) : (
                 <A.Wrapper>
