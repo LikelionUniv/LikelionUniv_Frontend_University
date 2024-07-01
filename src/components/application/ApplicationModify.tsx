@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import * as z from 'zod';
 
 import * as A from './ApplicationStyle';
-import request from '../../utils/request';
+
 import { applicationSchema } from '../application/ApplicationSchema';
 import ApplicationModal from './modal/ApplicationModal';
 import SelectedOption from './SelectedOption';
@@ -133,7 +133,7 @@ const ApplicationForm = () => {
             trigger('major');
         }
     }, [userinfo, setValue, trigger]);
-
+    console.log('수정페이지');
     return (
         <A.Wrapper>
             <A.Container>

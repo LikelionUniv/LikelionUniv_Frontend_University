@@ -197,7 +197,7 @@ const router = createBrowserRouter([
                 element: <HackathonsApplication />,
                 children: [
                     {
-                        path: ':hackathonFormId',
+                        path: '/hackathons/:hackathonFormId',
                         element: <HackathonsModifyPage />,
                     },
                 ],

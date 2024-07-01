@@ -3,9 +3,8 @@ import { useForm, useWatch, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as z from 'zod';
-
 import * as A from './ApplicationStyle';
-import request from '../../utils/request';
+
 import { applicationSchema } from '../application/ApplicationSchema';
 import ApplicationModal from './modal/ApplicationModal';
 import SelectedOption from './SelectedOption';
@@ -13,6 +12,7 @@ import Dropdown from './Dropdown';
 import AddHypen from './AddHypen';
 import useGetUserInfo from './../../query/get/useGetUserInfo';
 import CompleteApplication from './CompleteApplication';
+import request from '../../api/request';
 
 type ApplicationFormType = z.infer<typeof applicationSchema>;
 
@@ -47,7 +47,7 @@ interface UserBasicInfo {
     email: string;
 }
 
-const trackOption = ['PM', '디자인', '프론트엔드', '백엔드'];
+const trackOption = ['PM', 'DESIGNER', 'FRONTEND', 'BACKEND'];
 
 const ApplicationModalTxt = {
     header: '12기 중앙해커톤 참가 신청',
@@ -205,10 +205,10 @@ const ApplicationForm = () => {
             trigger('major');
         }
     }, [userinfo, setValue, trigger]);
-
+    console.log('신청페이지');
     return (
         <>
-            {isSuccess ? (
+            {!isSuccess ? (
                 <CompleteApplication />
             ) : (
                 <A.Wrapper>

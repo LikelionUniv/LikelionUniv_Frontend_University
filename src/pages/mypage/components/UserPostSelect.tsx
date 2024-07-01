@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 import ProjectSelect from './ProjectSelect';
 import LikeSelect from './LikeSelect';
 import PostSelect from './PostSelect';
-import ApplyList from './Hackathons/ApplyList';
+import ApplyList from '../../../components/mypage/Hackathons/ApplyList';
 
 const UserPostSelect = () => {
     //const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import request from '../../../utils/request';
-import { PostBoxWrapper } from '../UserPostSelect';
 import ApplyList from './ApplyList';
-import EmptyBox from '../EmptyBox';
-
 import { useAuth } from '../../../hooks/useAuth';
+import { PostBoxWrapper } from '../../../pages/mypage/components/UserPostSelect';
+import request from '../../../api/request';
+import EmptyBox from '../../../pages/mypage/components/EmptyBox';
 
 const ApplySelect = ({ select }: { select: string }) => {
     const { userinfo: user } = useAuth();
