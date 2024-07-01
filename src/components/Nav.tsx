@@ -3,13 +3,11 @@ import styled from 'styled-components';
 import { useNavigate, NavLink } from 'react-router-dom';
 import logo from '../img/nav/logo.svg';
 import navarrow from '../img/nav/nav_arrow.svg';
-import chat from '../img/nav/chat.svg';
 import defaultprofile from '../img/nav/default_profile.svg';
 import mypage from '../img/nav/mypage.svg';
 import logout from '../img/nav/logout.svg';
 import { ReactComponent as Arrow } from '../img/arrow.svg';
 import { ReactComponent as MenuIcon } from '../img/nav/nav_menu.svg';
-import { debounce } from 'lodash';
 import { useAuth } from '../hooks/useAuth';
 import { ReactComponent as Cancel } from '../img/nav/cancel.svg';
 import useIsViewMobileNav from '../hooks/useIsViewMobileNav';
@@ -351,6 +349,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     /* @media (max-width: 1120px) {
         width: 672px;
     } */

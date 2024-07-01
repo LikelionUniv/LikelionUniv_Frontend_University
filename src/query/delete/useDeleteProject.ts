@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 
 interface useDeleteProjectProps {
     projectId: number;
@@ -10,7 +10,7 @@ function useDeleteProject({ projectId }: useDeleteProjectProps) {
 
     const deleteProject = async () => {
         await request<null, null, null>({
-            uri: `/api/v1/project/${projectId}`,
+            uri: `/api/v1/projects/${projectId}`,
             method: 'delete',
         });
     };

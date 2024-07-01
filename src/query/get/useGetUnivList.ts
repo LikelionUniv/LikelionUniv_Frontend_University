@@ -1,6 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
-import { IDropdown } from '../../components/project/register/RegisterOptions';
+import request from '../../api/request';
+import { IDropdown } from '../../pages/project/register/RegisterOptions';
 
 interface Universities {
     name: string;
@@ -9,7 +9,7 @@ interface Universities {
 function useGetUnivList() {
     const fetchUnivList = async () => {
         const response = await request<null, Universities[], null>({
-            uri: '/api/v1/university/',
+            uri: '/api/v1/universities/',
             method: 'get',
         });
 

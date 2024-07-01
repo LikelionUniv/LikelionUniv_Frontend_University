@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useNavigate } from 'react-router-dom';
-import useEnrolledUser from '../../components/project/register/user/userStore/useEnrolledUser';
-import { ProjectRegisterType } from '../../components/project/register/ProjectRegister';
+import useEnrolledUser from '../../pages/project/register/user/userStore/useEnrolledUser';
+import { ProjectRegisterType } from '../../pages/project/register/ProjectRegister';
 
 interface PostId {
     id: number;
@@ -19,7 +19,7 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
 
     const updateProject = async (project: ProjectRegisterType) => {
         const response = await request<ProjectRegisterType, PostId, null>({
-            uri: `/api/v1/project/${projectId}`,
+            uri: `/api/v1/projects/${projectId}`,
             method: 'patch',
             data: project,
         });
@@ -32,7 +32,7 @@ function usePatchProjectUpdate({ projectId }: usePatchProjectUpdateProps) {
         mutationFn: updateProject,
         onSuccess: data => {
             queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/projects/' }],
             });
             queryClient.invalidateQueries({
                 queryKey: ['project-detail', projectId],

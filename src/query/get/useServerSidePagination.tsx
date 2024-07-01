@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useSuspenseQuery } from '@tanstack/react-query';
 import PaginationComponent from '../../components/utils/pagination/PaginationComponent';
 import { useSearchParams } from 'react-router-dom';
@@ -15,6 +15,8 @@ interface IuseServerSidePagination {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
+    keyword?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -32,6 +34,7 @@ interface ReturnuseServerSidePagination<T> {
     curPageItem: T[];
     renderPaginationBtn: () => JSX.Element;
     pageNum: number;
+    refetch: () => void;
 }
 
 interface Pageable {
@@ -45,6 +48,8 @@ interface Pageable {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
+    keyword?: string;
 }
 
 function useServerSidePagination<T>({
@@ -58,19 +63,29 @@ function useServerSidePagination<T>({
     oc,
     role,
     univName,
+    isExcelData,
+    keyword,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
 
     const [pageInfo, setPageInfo] = useSearchParams();
-
-    // 페이지 정보가 없을 때 pageInfo를 채워넣음
+    console.log(typeof pageInfo.get('page'));
+    // (if) 페이지 정보가 없을 때 pageInfo를 채워넣음
+    // (else if) page=1 이 아니면서 검색을 했을때 page=1, currentPage=1 로 변경
     useEffect(() => {
         if (pageInfo.get('page') === null) {
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
+            setCurrentPage(1);
+        } else if (pageInfo.get('page') !== '1' && (search || univName)) {
+            console.log('안되나');
+            pageInfo.set('page', '1');
+            setPageInfo(pageInfo);
+            setCurrentPage(1);
         }
-    }, []);
+        // eslint-disable-next-line
+    }, [search, univName, keyword]);
 
     // 현재 페이지 정보를 불러옴
     const getCurrentPageInfo = () => {
@@ -93,7 +108,7 @@ function useServerSidePagination<T>({
     const fetchPagiableData = async () => {
         const response = await request<
             null,
-            ResponseServerSidePagination<T>,
+            ResponseServerSidePagination<T> | any,
             Pageable
         >({
             uri,
@@ -109,13 +124,15 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
+                keyword,
             },
         });
-
+        if (uri === '/api/admin/v1/hackathons') return response;
         return response.data;
     };
 
-    const { data: cachingData } = useSuspenseQuery({
+    const { data: cachingData, refetch } = useSuspenseQuery({
         queryKey: [
             'get-pagiable',
             {
@@ -130,6 +147,8 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
+                keyword,
             },
         ],
         queryFn: fetchPagiableData,
@@ -167,6 +186,7 @@ function useServerSidePagination<T>({
         curPageItem: data,
         renderPaginationBtn,
         pageNum: currentPage,
+        refetch,
     };
 }
 

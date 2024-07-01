@@ -16,13 +16,15 @@
         "@types/sockjs-client": "^1.5.4",
         "@types/stompjs": "^2.3.9",
         "axios": "^1.6.7",
-        "date-fns": "^3.3.1",
+        "date-fns": "^3.6.0",
         "dayjs": "^1.11.10",
         "dompurify": "^3.0.8",
+        "framer-motion": "^11.2.12",
         "jwt-decode": "^4.0.0",
         "react": "^18.2.0",
         "react-datepicker": "^6.1.0",
         "react-dom": "^18.2.0",
+        "react-ga": "^3.3.1",
         "react-hook-form": "^7.52.0",
         "react-js-pagination": "^3.0.3",
         "react-modal": "^3.16.1",
@@ -36,6 +38,7 @@
         "swiper": "^6.0.2",
         "typescript": "^4.9.5",
         "web-vitals": "^2.1.4",
+        "xlsx-js-style": "^1.2.0",
         "zod": "^3.23.8"
     },
     "scripts": {
@@ -74,6 +77,5 @@
         "@types/react-dom": "^18.2.7",
         "@types/react-js-pagination": "^3.0.7",
         "@types/styled-components": "^5.1.26"
-    },
-    "proxy": "https://stag.likelionuniv.com"
+    }
 }

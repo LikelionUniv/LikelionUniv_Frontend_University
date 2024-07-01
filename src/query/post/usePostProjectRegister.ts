@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 import { useNavigate } from 'react-router-dom';
-import useEnrolledUser from '../../components/project/register/user/userStore/useEnrolledUser';
-import { Member } from '../../components/project/register/ProjectRegister';
+import { Member } from '../../pages/project/register/ProjectRegister';
+import useEnrolledUser from '../../pages/project/register/user/userStore/useEnrolledUser';
 
 interface ProjectRegisterType {
     activity: string;
@@ -31,7 +31,7 @@ function usePostProjectRegister() {
 
     const registerProject = async (project: ProjectRegisterType) => {
         const response = await request<ProjectRegisterType, PostId, null>({
-            uri: '/api/v1/project/',
+            uri: '/api/v1/projects/',
             method: 'post',
             data: project,
         });
@@ -48,7 +48,7 @@ function usePostProjectRegister() {
             navigate('/project');
 
             queryClient.invalidateQueries({
-                queryKey: ['get-pagiable', { uri: '/api/v1/project/' }],
+                queryKey: ['get-pagiable', { uri: '/api/v1/projects/' }],
             });
         },
     });

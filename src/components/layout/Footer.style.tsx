@@ -11,10 +11,10 @@ export const Info = styled.div`
     width: 100%;
     padding: 30px 0 60px 0;
     background-color: #f2f4f6;
+
     display: flex;
     justify-content: center;
     align-items: center;
-
     .container {
         position: relative;
         width: 1200px;
@@ -24,6 +24,7 @@ export const Info = styled.div`
         @media (max-width: 1280px) {
             width: calc(100% - 60px);
         }
+
         @media (max-width: 768px) {
             flex-direction: column;
         }
@@ -32,6 +33,7 @@ export const Info = styled.div`
             & > svg {
                 margin-bottom: 20px;
             }
+
             .text {
                 color: #212224;
                 font-family: Pretendard;

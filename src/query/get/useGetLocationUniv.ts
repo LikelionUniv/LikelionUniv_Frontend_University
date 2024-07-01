@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import request from '../../utils/request';
+import request from '../../api/request';
 
 export interface IUniversity {
     universityName: string;
@@ -16,7 +16,7 @@ function useGetLocationUniv({
     activeTab,
 }: useGetLocationUnivProps): IUniversity[] {
     const tab = activeTab === '전체' ? 'all' : activeTab;
-    const uri = `/api/v1/university/${tab}`;
+    const uri = `/api/v1/universities/${tab}`;
 
     // data 가져오기
     const fetchUniversites = async () => {
