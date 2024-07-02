@@ -206,7 +206,7 @@ const ApplicationForm = () => {
             trigger('major');
         }
     }, [userinfo, setValue, trigger]);
-
+    //
     return (
         <>
             {isSuccess ? (
