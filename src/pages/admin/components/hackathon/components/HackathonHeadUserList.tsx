@@ -36,7 +36,7 @@ const HackathonHeadUserList: React.FC<UserListProps> = ({ keyword }) => {
                                     id={user.id}
                                     name={user.name}
                                     email={user.email}
-                                    part={user.hackathonPart}
+                                    hackathonParts={user.hackathonParts}
                                     phone={user.phone}
                                     universityName={user.universityName}
                                     teamName={user.teamName}

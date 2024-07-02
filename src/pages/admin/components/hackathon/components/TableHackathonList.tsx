@@ -8,7 +8,7 @@ export interface TableUserListProps {
     id: number;
     name: string;
     email: string;
-    part?: string;
+    hackathonParts?: string[];
     phone?: string;
     universityName?: string;
     teamName?: string;
@@ -47,7 +47,9 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
                                 <Xbtn onClick={() => setIsModal(true)}>X</Xbtn>
                             )}
                         </Table>
-                        <Table className="part">{props.part}</Table>
+                        <Table className="part">
+                            {props!.hackathonParts!.map(el => el)}
+                        </Table>
                         <Table className="email">{props.email}</Table>
                         <Table className="teamname">{props.teamName}</Table>
                     </TableBody>

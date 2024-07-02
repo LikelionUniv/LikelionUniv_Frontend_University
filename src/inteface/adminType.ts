@@ -33,6 +33,7 @@ export interface User {
     teamName?: string;
     reasonForNotOffline?: null | string;
     hackathonFormId?: number;
+    hackathonParts?: string[];
 }
 export interface Hackathons {
     hackathonFormId: number;

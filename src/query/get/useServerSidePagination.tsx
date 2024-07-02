@@ -108,7 +108,7 @@ function useServerSidePagination<T>({
     const fetchPagiableData = async () => {
         const response = await request<
             null,
-            ResponseServerSidePagination<T> | any,
+            ResponseServerSidePagination<T>,
             Pageable
         >({
             uri,
@@ -128,7 +128,7 @@ function useServerSidePagination<T>({
                 keyword,
             },
         });
-        if (uri === '/api/admin/v1/hackathons') return response;
+
         return response.data;
     };
 

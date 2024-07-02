@@ -26,15 +26,12 @@ import profile21 from '../../../img/developer/profile21.jpeg';
 import profile22 from '../../../img/developer/profile22.jpg';
 import profile23 from '../../../img/developer/profile23.jpeg';
 
-const Developers = () => {
+const Developers1th = () => {
     return (
         <D.Wrapper>
-            <div className="year">
-                <p className="first">1기</p>
-            </div>
-
             <D.Container>
                 <p className="part">총괄</p>
+
                 <D.PeopleBox>
                     <DevInfo
                         name="이태휘"
@@ -43,6 +40,7 @@ const Developers = () => {
                         profile={profile1}
                     />
                 </D.PeopleBox>
+
                 <D.Divider />
                 <p className="part">PM</p>
                 <D.PeopleBox>
@@ -193,4 +191,4 @@ const Developers = () => {
     );
 };
 
-export default Developers;
+export default Developers1th;
