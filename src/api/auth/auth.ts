@@ -41,7 +41,6 @@ export const requestLogin = async (
         });
 };
 
-// 유저정보 GET - 실패하거나 에러가 나면 response = undefined
 export const requestUserInfo = async () => {
     const response = await axiosInstance.get(`/api/v1/auth/userInfo`);
     return response.data;
