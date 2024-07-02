@@ -21,7 +21,7 @@ export const applicationSchema = z.object({
         .string()
         .nonempty('전화번호를 입력해주세요.')
         .regex(phoneRegex, 'Invalid PhoneNumber'),
-    hackathonPart: z.array(z.string()).min(1, '파트를 선택해주세요.'),
+    hackathonParts: z.array(z.string()).min(1, '파트를 선택해주세요.'),
     teamName: z
         .string()
         .min(1, {

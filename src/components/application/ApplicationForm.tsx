@@ -82,7 +82,7 @@ const ApplicationForm = () => {
         resolver: zodResolver(applicationSchema),
         defaultValues: {
             phone: '',
-            hackathonPart: [],
+            hackathonParts: [],
         },
     });
 
@@ -93,7 +93,7 @@ const ApplicationForm = () => {
 
     const selectedParts = useWatch({
         control,
-        name: 'hackathonPart',
+        name: 'hackathonParts',
     });
 
     const openModal = () => {
@@ -118,7 +118,7 @@ const ApplicationForm = () => {
     const handleCancelOption = (option: string) => {
         console.log('dd');
         const newValue = selectedParts.filter(selected => selected !== option);
-        setValue('hackathonPart', newValue.length > 0 ? newValue : []);
+        setValue('hackathonParts', newValue.length > 0 ? newValue : []);
     };
 
     const onSubmit = (data: ApplicationFormType) => {
@@ -136,7 +136,7 @@ const ApplicationForm = () => {
                 universityId: universityId,
                 major: formData.major,
                 phone: formData.phone,
-                hackathonParts: formData.hackathonPart,
+                hackathonParts: formData.hackathonParts,
                 teamName: formData.teamName,
                 offlineParticipation: formData.offlineParticipation,
                 reasonForNotOffline: formData.reasonForNotOffline,
@@ -289,8 +289,8 @@ const ApplicationForm = () => {
                             />
                             <A.Ndiv>
                                 파트 선택
-                                {!dirtyFields.hackathonPart ||
-                                errors.hackathonPart ? (
+                                {!dirtyFields.hackathonParts ||
+                                errors.hackathonParts ? (
                                     <A.StyledNotCheckedIcon />
                                 ) : (
                                     <A.StyledCheckedIcon />

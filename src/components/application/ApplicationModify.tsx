@@ -40,16 +40,16 @@ const ApplicationModalTxt = {
 };
 
 interface ThackathonData {
-    hackathonFormId: 1;
-    name: string;
-    email: string;
-    universityName: string;
-    major: string;
-    phone: string;
     hackathonParts: string[];
     teamName: string;
-    offlineParticipation: true;
-    reasonForNotOffline: null;
+    offlineParticipation: boolean;
+    reasonForNotOffline?: null | string;
+    hackathonFormId?: number;
+    name?: string;
+    email?: string;
+    universityName?: string;
+    major?: string;
+    phone?: string;
 }
 
 const ApplicationForm = () => {
@@ -105,7 +105,7 @@ const ApplicationForm = () => {
         resolver: zodResolver(applicationSchema),
         defaultValues: {
             phone: '',
-            hackathonPart: [],
+            hackathonParts: [],
         },
     });
 
@@ -116,7 +116,7 @@ const ApplicationForm = () => {
 
     const selectedParts = useWatch({
         control,
-        name: 'hackathonPart',
+        name: 'hackathonParts',
     });
 
     const openModal = () => {
@@ -141,7 +141,7 @@ const ApplicationForm = () => {
     const handleCancelOption = (option: string) => {
         console.log(option);
         const newValue = selectedParts.filter(selected => selected !== option);
-        setValue('hackathonPart', newValue.length > 0 ? newValue : []);
+        setValue('hackathonParts', newValue.length > 0 ? newValue : []);
     };
 
     useEffect(() => {
@@ -178,7 +178,7 @@ const ApplicationForm = () => {
                 let arr = [];
                 for (let i = 0; i < hackathonData.hackathonParts.length; i++) {
                     arr.push(hackathonData.hackathonParts[i]);
-                    setValue('hackathonPart', arr);
+                    setValue('hackathonParts', arr);
                 }
             }
             if (hackathonData?.offlineParticipation) {
@@ -206,8 +206,16 @@ const ApplicationForm = () => {
     };
 
     const onSubmit = (data: ApplicationFormType) => {
-        setFormData(data);
         console.log(data);
+        let datas = {
+            phone: data.phone,
+            hackathonParts: data.hackathonParts,
+            teamName: data.teamName,
+            offlineParticipation: data.offlineParticipation,
+            reasonForNotOffline: data.reasonForNotOffline,
+        };
+        console.log(data);
+        setHackathonData(datas);
         setIsModalOpen(true);
     };
 
@@ -290,7 +298,7 @@ const ApplicationForm = () => {
                         />
                         <A.Ndiv>
                             파트 선택
-                            {errors.hackathonPart ? (
+                            {errors.hackathonParts ? (
                                 <A.StyledNotCheckedIcon />
                             ) : (
                                 <A.StyledCheckedIcon />
