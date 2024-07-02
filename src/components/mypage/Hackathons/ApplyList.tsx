@@ -1,3 +1,4 @@
+import { startTransition } from 'react';
 import * as A from './ApplytListStyle';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,8 +13,9 @@ const ApplyList = ({ hackathonId }: { hackathonId: number | null }) => {
             </A.TextArea>
             <A.Button
                 onClick={() => {
-                    navigate(`/hackathons/${hackathonId}`);
-                    window.location.reload();
+                    startTransition(() => {
+                        navigate(`/hackathons/${hackathonId}`);
+                    });
                 }}
             >
                 신청 정보 수정하기

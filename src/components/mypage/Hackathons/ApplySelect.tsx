@@ -26,11 +26,7 @@ const ApplySelect = ({ select }: { select: string }) => {
                     uri: `/api/v1/hackathons`,
                     method: 'get',
                 });
-                console.log(response.data);
-
                 setHackathonVal(response.data);
-
-                setIsSuccess(true);
             } catch (error) {
                 setIsSuccess(false);
                 console.error('Error fetching data:', error);
@@ -43,7 +39,7 @@ const ApplySelect = ({ select }: { select: string }) => {
     return (
         <>
             <PostBoxWrapper>
-                {isSuccess ? (
+                {hackathonVal && hackathonVal.length !== 0 ? (
                     <ApplyList
                         hackathonId={
                             hackathonVal
