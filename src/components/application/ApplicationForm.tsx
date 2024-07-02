@@ -206,7 +206,7 @@ const ApplicationForm = () => {
             trigger('major');
         }
     }, [userinfo, setValue, trigger]);
-    console.log('신청페이지');
+
     return (
         <>
             {isSuccess ? (
