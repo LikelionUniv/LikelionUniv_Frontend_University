@@ -13,19 +13,17 @@ import Dropdown from './Dropdown';
 import AddHypen from './AddHypen';
 import useGetUserInfo from './../../query/get/useGetUserInfo';
 import request from '../../api/request';
+import CompleteApplication from './CompleteApplication';
 
 type ApplicationFormType = z.infer<typeof applicationSchema>;
 
 interface ApplicationModalProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    onSubmit: () => void;
-    header: string;
-    title: string;
-    content: string;
-    button: string;
+    phone: string;
+    hackathonParts: string[];
+    teamName: string;
+    offlineParticipation: boolean;
+    reasonForNotOffline?: string | null;
 }
-
 interface FormId {
     hackathonId: number;
 }
@@ -58,6 +56,7 @@ const ApplicationForm = () => {
     const [hackathonData, setHackathonData] = useState<null | ThackathonData>(
         null,
     );
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const formatPhoneNumber = (value: string) => {
         const phoneNumber = value.replace(/[^\d]/g, '');
@@ -193,18 +192,18 @@ const ApplicationForm = () => {
 
     const handleModalSubmit = async () => {
         try {
-            const response = await request<ApplicationFormType, FormId, null>({
+            const response = await request<any, FormId, null>({
                 uri: `/api/v1/hackathons/${hackathonId}`,
-                method: 'PUT',
-                data: formData,
+                method: 'PATCH',
+                data: hackathonData,
             });
-
+            setIsSuccess(true);
             return response.data;
         } catch (error) {
             console.error('서버 요청 오류:', error);
         }
     };
-
+    console.log('수정');
     const onSubmit = (data: ApplicationFormType) => {
         console.log(data);
         let datas = {
@@ -221,7 +220,9 @@ const ApplicationForm = () => {
 
     return (
         <A.Wrapper>
-            {hackathonData !== null && (
+            {isSuccess ? (
+                <CompleteApplication />
+            ) : (
                 <A.Container>
                     <A.Stitle>
                         <A.StyledArrowIcon

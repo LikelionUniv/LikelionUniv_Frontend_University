@@ -116,7 +116,6 @@ const ApplicationForm = () => {
     };
 
     const handleCancelOption = (option: string) => {
-        console.log('dd');
         const newValue = selectedParts.filter(selected => selected !== option);
         setValue('hackathonParts', newValue.length > 0 ? newValue : []);
     };
@@ -127,8 +126,6 @@ const ApplicationForm = () => {
     };
 
     const handleModalSubmit = async () => {
-        console.log('요청 데이터');
-        console.log(formData);
         if (formData) {
             const submitData: ApplicationSubmitFormType = {
                 name: formData.name,
@@ -142,8 +139,6 @@ const ApplicationForm = () => {
                 reasonForNotOffline: formData.reasonForNotOffline,
             };
 
-            console.log(submitData);
-
             try {
                 const response = await request<
                     ApplicationSubmitFormType,
@@ -154,7 +149,7 @@ const ApplicationForm = () => {
                     method: 'post',
                     data: submitData,
                 });
-                console.log('서버 응답 데이터:', response);
+
                 return response.data;
             } catch (error) {
                 console.error('서버 요청 오류:', error);
@@ -169,20 +164,34 @@ const ApplicationForm = () => {
         });
         return response;
     };
+    const fetchHackathonsInfo = async () => {
+        const response = await request<null, any, null>({
+            uri: '/api/v1/hackathons',
+            method: 'get',
+        });
+
+        return response;
+    };
 
     useEffect(() => {
         const fetchAndSetUserInfo = async () => {
             try {
                 const userInfoResponse = await fetchUserBasicInfo();
+                const hackathonResponse = await fetchHackathonsInfo();
+
                 const userData = userInfoResponse.data;
                 setUserBasicInfo(userData);
                 if (userData) {
                     setValue('email', userData.email);
                     trigger('email');
-                    console.log(userData.universityId);
+
                     setUniversityId(userData.universityId);
                 }
-                setIsSuccess(true);
+                if (hackathonResponse.data.length === 0) {
+                    setIsSuccess(false);
+                } else {
+                    setIsSuccess(true);
+                }
             } catch (error) {
                 console.error('Failed to fetch user info:', error);
                 setIsSuccess(false);
@@ -207,6 +216,7 @@ const ApplicationForm = () => {
         }
     }, [userinfo, setValue, trigger]);
     //
+
     return (
         <>
             {isSuccess ? (
