@@ -138,8 +138,8 @@ const HackathonAwardsEx = () => {
                 <SampleContentWrapper>
                     <SampleTitle>MO:IN</SampleTitle>
                     <SampleUniversity>
-                        <SampleSubTitle>중앙대학교</SampleSubTitle>
-                        <SampleSubTitle>BFGGyu</SampleSubTitle>
+                        <SampleSubTitle>동국대학교</SampleSubTitle>
+                        <SampleSubTitle>모인</SampleSubTitle>
                     </SampleUniversity>
                     <AwardsImg src={SecondPlace} alt="first" />
                 </SampleContentWrapper>
@@ -149,8 +149,8 @@ const HackathonAwardsEx = () => {
                 <SampleContentWrapper>
                     <SampleTitle>핸디(Handi)</SampleTitle>
                     <SampleUniversity>
-                        <SampleSubTitle>중앙대학교</SampleSubTitle>
-                        <SampleSubTitle>BFGGyu</SampleSubTitle>
+                        <SampleSubTitle>경상국립대</SampleSubTitle>
+                        <SampleSubTitle>뭐라캐쌌노</SampleSubTitle>
                     </SampleUniversity>
                     <AwardsImg src={ThirdPlace} alt="first" />
                 </SampleContentWrapper>
@@ -160,8 +160,8 @@ const HackathonAwardsEx = () => {
                 <SampleContentWrapper>
                     <SampleTitle>YOUCHECK</SampleTitle>
                     <SampleUniversity>
-                        <SampleSubTitle>중앙대학교</SampleSubTitle>
-                        <SampleSubTitle>BFGGyu</SampleSubTitle>
+                        <SampleSubTitle>서강대학교</SampleSubTitle>
+                        <SampleSubTitle>효자동개발자</SampleSubTitle>
                     </SampleUniversity>
                     <AwardsImg src={ThirdPlace} alt="first" />
                 </SampleContentWrapper>
