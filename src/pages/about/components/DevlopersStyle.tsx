@@ -44,7 +44,6 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 140%;
-
         @media screen and (max-width: 500px) {
             font-size: 22px;
         }
@@ -53,7 +52,6 @@ export const Container = styled.div`
 
 export const PeopleBox = styled.div`
     width: 100%;
-    margin-top: 24px;
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(3, minmax(auto, 1fr));
