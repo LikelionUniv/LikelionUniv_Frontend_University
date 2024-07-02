@@ -7,7 +7,6 @@ interface HackathonModalProps {
 }
 
 function HackathonModal({ onCancel, reason }: HackathonModalProps) {
-    console.log(reason);
     return (
         <>
             <BackgroundOverlay>

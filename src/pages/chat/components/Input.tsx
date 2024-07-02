@@ -14,7 +14,6 @@ const Input = () => {
     const openImageModal = (e: React.MouseEvent<HTMLInputElement>) => {
         e.preventDefault();
         setIsImgClick(!isImgClick);
-        console.log('Send image?');
     };
 
     const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

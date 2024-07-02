@@ -70,7 +70,6 @@ function useServerSidePagination<T>({
     const [totalElements, setTotalElements] = useState<number>(0);
 
     const [pageInfo, setPageInfo] = useSearchParams();
-    console.log(typeof pageInfo.get('page'));
     // (if) 페이지 정보가 없을 때 pageInfo를 채워넣음
     // (else if) page=1 이 아니면서 검색을 했을때 page=1, currentPage=1 로 변경
     useEffect(() => {
@@ -79,7 +78,6 @@ function useServerSidePagination<T>({
             setPageInfo(pageInfo);
             setCurrentPage(1);
         } else if (pageInfo.get('page') !== '1' && (search || univName)) {
-            console.log('안되나');
             pageInfo.set('page', '1');
             setPageInfo(pageInfo);
             setCurrentPage(1);

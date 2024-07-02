@@ -190,6 +190,10 @@ const ApplicationForm = () => {
                 if (hackathonResponse.data.length === 0) {
                     setIsSuccess(false);
                 } else {
+                    setValue(
+                        'hackathonParts',
+                        hackathonResponse.data.data.hackathonParts,
+                    );
                     setIsSuccess(true);
                 }
             } catch (error) {

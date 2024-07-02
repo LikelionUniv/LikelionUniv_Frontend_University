@@ -74,10 +74,11 @@ const ApplicationForm = () => {
 
     const fetchData = async () => {
         try {
-            const response = await request<null, null, null>({
+            const response = await request<null, any, null>({
                 uri: `/api/v1/hackathons/${hackathonId}`,
                 method: 'get',
             });
+
             setHackathonData(response.data);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -138,7 +139,6 @@ const ApplicationForm = () => {
     };
 
     const handleCancelOption = (option: string) => {
-        console.log(option);
         const newValue = selectedParts.filter(selected => selected !== option);
         setValue('hackathonParts', newValue.length > 0 ? newValue : []);
     };
@@ -175,8 +175,10 @@ const ApplicationForm = () => {
             }
             if (hackathonData?.hackathonParts) {
                 let arr = [];
+
                 for (let i = 0; i < hackathonData.hackathonParts.length; i++) {
                     arr.push(hackathonData.hackathonParts[i]);
+
                     setValue('hackathonParts', arr);
                 }
             }
@@ -203,9 +205,8 @@ const ApplicationForm = () => {
             console.error('서버 요청 오류:', error);
         }
     };
-    console.log('수정');
+
     const onSubmit = (data: ApplicationFormType) => {
-        console.log(data);
         let datas = {
             phone: data.phone,
             hackathonParts: data.hackathonParts,
@@ -213,7 +214,7 @@ const ApplicationForm = () => {
             offlineParticipation: data.offlineParticipation,
             reasonForNotOffline: data.reasonForNotOffline,
         };
-        console.log(data);
+
         setHackathonData(datas);
         setIsModalOpen(true);
     };

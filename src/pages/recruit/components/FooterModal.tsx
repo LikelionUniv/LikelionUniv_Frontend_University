@@ -106,7 +106,6 @@ const FooterModal = ({ isOpen, closeModal }: FooterModalProps) => {
                 { email: email },
             );
 
-            console.log(response.data);
             setSuccess(response.data.isSuccess);
         } catch (error) {
             console.error('Error submitting form:', error);

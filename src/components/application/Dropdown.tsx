@@ -46,7 +46,7 @@ const Dropdown = ({
                     {trackOption.map(track => (
                         <Controller
                             key={track}
-                            name="hackathonPart"
+                            name="hackathonParts"
                             control={control}
                             render={({ field }) => {
                                 const fieldValue = field.value as string[];
@@ -108,7 +108,7 @@ const Dropdown = ({
                         {trackOption.map(track => (
                             <Controller
                                 key={track}
-                                name="hackathonPart"
+                                name="hackathonParts"
                                 control={control}
                                 render={({ field }) => {
                                     const fieldValue = field.value as string[];
