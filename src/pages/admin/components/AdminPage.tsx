@@ -9,7 +9,7 @@ const AdminPage = () => {
     const [selectedItem, setSelectedItem] = useState<string>('회원정보');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const navigate = useNavigate();
-
+    //
     const { userinfo, error } = useGetUserInfo();
     const isAdmin = [1, 4].includes(
         RolePriority.findIndex(role => role === userinfo.role),

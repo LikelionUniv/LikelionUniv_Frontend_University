@@ -1,16 +1,26 @@
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import arrow from '../../../../img/landing/longrightarrow_s.png';
+import { startTransition } from 'react';
 
 const HackathonPart = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         const access_token = localStorage.getItem('access_token');
+        // if (access_token) {
+        //     navigate('/hackathons');
+        // } else {
+        //     navigate('/login');
+        // }
         if (access_token) {
-            navigate('/hackathons');
+            startTransition(() => {
+                navigate('/hackathons');
+            });
         } else {
-            navigate('/login');
+            startTransition(() => {
+                navigate('/login');
+            });
         }
     };
 
