@@ -213,231 +213,250 @@ const ApplicationForm = () => {
 
     return (
         <A.Wrapper>
-            <A.Container>
-                <A.Stitle>
-                    <A.StyledArrowIcon
-                        onClick={() => {
-                            navigate(-1);
-                        }}
-                    />
-                    12기 중앙 해커톤 참가 신청
-                </A.Stitle>
+            {hackathonData !== null && (
+                <A.Container>
+                    <A.Stitle>
+                        <A.StyledArrowIcon
+                            onClick={() => {
+                                navigate(-1);
+                            }}
+                        />
+                        12기 중앙 해커톤 참가 신청
+                    </A.Stitle>
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <A.Ndiv>
-                        이름
-                        {!userinfo?.name ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Nform
-                        {...register('name', { required: true })}
-                        disabled={!!userinfo?.name}
-                    />
-                    <A.Ndiv>
-                        메일
-                        {errors.email ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Nform {...register('email')} />
-                    <A.Ndiv>
-                        학교
-                        {!userinfo?.universityName ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Nform
-                        {...register('universityName')}
-                        disabled={!!userinfo?.universityName}
-                    />
-                    <A.Ndiv>
-                        학과
-                        {!userinfo?.major ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Nform
-                        {...register('major')}
-                        disabled={!!userinfo?.major}
-                    />
-                    <A.Ndiv>
-                        전화번호
-                        {errors.phone ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <Controller
-                        name="phone"
-                        control={control}
-                        render={({ field: { onChange, value } }) => (
-                            <AddHypen phone={value} onPhoneChange={onChange} />
-                        )}
-                    />
-                    <A.Ndiv>
-                        파트 선택
-                        {errors.hackathonPart ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.NdropdownDiv
-                        style={{
-                            border: isDropDownOpen
-                                ? '1px solid var(--orange-600, #ff7710)'
-                                : '1px solid var(--grey-400, #dcdfe3)',
-                        }}
-                    >
-                        <A.NdropdownTxt
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <A.Ndiv>
+                            이름
+                            {!userinfo?.name ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Nform
+                            {...register('name', { required: true })}
+                            disabled={!!userinfo?.name}
+                        />
+                        <A.Ndiv>
+                            메일
+                            {errors.email ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Nform {...register('email')} />
+                        <A.Ndiv>
+                            학교
+                            {!userinfo?.universityName ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Nform
+                            {...register('universityName')}
+                            disabled={!!userinfo?.universityName}
+                        />
+                        <A.Ndiv>
+                            학과
+                            {!userinfo?.major ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Nform
+                            {...register('major')}
+                            disabled={!!userinfo?.major}
+                        />
+                        <A.Ndiv>
+                            전화번호
+                            {errors.phone ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <Controller
+                            name="phone"
+                            control={control}
+                            render={({ field: { onChange, value } }) => (
+                                <AddHypen
+                                    phone={value}
+                                    onPhoneChange={onChange}
+                                />
+                            )}
+                        />
+                        <A.Ndiv>
+                            파트 선택
+                            {errors.hackathonPart ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.NdropdownDiv
                             style={{
-                                color: isDropDownOpen ? '#212224' : '#adb3ba',
+                                border: isDropDownOpen
+                                    ? '1px solid var(--orange-600, #ff7710)'
+                                    : '1px solid var(--grey-400, #dcdfe3)',
                             }}
                         >
-                            해커톤 파트를 선택해주세요.
-                        </A.NdropdownTxt>
-                        <A.NdropdownArrow
-                            style={{
-                                transform: isDropDownOpen
-                                    ? 'rotate(0deg)'
-                                    : 'rotate(180deg)',
-                                stroke: isDropDownOpen ? '#4D5359' : '#ADB3BA',
-                            }}
-                            onClick={() => setIsDropDownOpen(!isDropDownOpen)}
-                        />
-                    </A.NdropdownDiv>
-                    <Dropdown
-                        isOpen={isDropDownOpen}
-                        trackOption={trackOption}
-                        control={control}
-                        closeDropdown={closeDropdown}
-                    />
-                    {!isDropDownOpen && (
-                        <A.SelectedOptionsWrapper>
-                            {selectedParts.map(option => {
-                                const optionText =
-                                    trackOption.find(o => o === option) || '';
-                                const width = getWidthBasedOnLength(
-                                    optionText.length,
-                                );
-                                return (
-                                    <SelectedOption
-                                        key={option}
-                                        option={option}
-                                        optionText={optionText}
-                                        width={width}
-                                        handleCancelOption={handleCancelOption}
-                                    />
-                                );
-                            })}
-                        </A.SelectedOptionsWrapper>
-                    )}
-                    <A.Ndiv>
-                        팀명
-                        {errors.teamName ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Nform
-                        placeholder="해커톤에 참여하는 팀명을 입력해주세요."
-                        {...register('teamName')}
-                    />
-                    <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
-                    <A.Ndiv>
-                        오프라인 참가 여부
-                        {!dirtyFields.offlineParticipation ||
-                        errors.offlineParticipation ||
-                        (selectedParticipation === false &&
-                            (!dirtyFields.reasonForNotOffline ||
-                                errors.reasonForNotOffline)) ? (
-                            <A.StyledNotCheckedIcon />
-                        ) : (
-                            <A.StyledCheckedIcon />
-                        )}
-                    </A.Ndiv>
-                    <A.Ntxt $offlinetxt>
-                        *8월 6일~8월 7일 무박 2일로 진행되는 오프라인 해커톤
-                        참여 여부를 선택해주세요.
-                    </A.Ntxt>
-
-                    <Controller
-                        name="offlineParticipation"
-                        control={control}
-                        render={({ field }) => (
-                            <A.NradioWrapper>
-                                <A.NradioDiv>
-                                    <A.Nlabel checked={field.value === true}>
-                                        <A.NradioInput
-                                            type="radio"
-                                            {...field}
-                                            value="true"
-                                            checked={
-                                                field.value || isRadio === true
-                                            }
-                                            onChange={() => {
-                                                field.onChange(true);
-                                                setIsRadio(true);
-                                            }}
-                                        />
-                                        네, 참여합니다.
-                                    </A.Nlabel>
-                                </A.NradioDiv>
-                                <A.NradioDiv>
-                                    <A.Nlabel checked={field.value === false}>
-                                        <A.NradioInput
-                                            type="radio"
-                                            {...field}
-                                            value="false"
-                                            checked={isRadio === false}
-                                            onChange={() => {
-                                                field.onChange(false);
-                                                setIsRadio(false);
-                                            }}
-                                        />
-                                        아니오, 참가하지 않습니다.
-                                    </A.Nlabel>
-                                </A.NradioDiv>
-                            </A.NradioWrapper>
-                        )}
-                    />
-                    {selectedParticipation === false && (
-                        <>
-                            <A.Nform
-                                type="text"
-                                placeholder="불참 사유를 입력해주세요."
-                                {...control.register('reasonForNotOffline')}
+                            <A.NdropdownTxt
+                                style={{
+                                    color: isDropDownOpen
+                                        ? '#212224'
+                                        : '#adb3ba',
+                                }}
+                            >
+                                해커톤 파트를 선택해주세요.
+                            </A.NdropdownTxt>
+                            <A.NdropdownArrow
+                                style={{
+                                    transform: isDropDownOpen
+                                        ? 'rotate(0deg)'
+                                        : 'rotate(180deg)',
+                                    stroke: isDropDownOpen
+                                        ? '#4D5359'
+                                        : '#ADB3BA',
+                                }}
+                                onClick={() =>
+                                    setIsDropDownOpen(!isDropDownOpen)
+                                }
                             />
-                            <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
-                        </>
-                    )}
-                    <A.Button type="submit" disabled={false}>
-                        신청하기
-                    </A.Button>
-                    {isModalOpen && (
-                        <ApplicationModal
-                            isOpen={isModalOpen}
-                            closeModal={closeModal}
-                            onSubmit={handleModalSubmit}
-                            header={ApplicationModalTxt.header}
-                            title={ApplicationModalTxt.title}
-                            content={ApplicationModalTxt.content}
-                            button={ApplicationModalTxt.button}
+                        </A.NdropdownDiv>
+                        <Dropdown
+                            isOpen={isDropDownOpen}
+                            trackOption={trackOption}
+                            control={control}
+                            closeDropdown={closeDropdown}
                         />
-                    )}
-                </form>
-            </A.Container>
+                        {!isDropDownOpen && (
+                            <A.SelectedOptionsWrapper>
+                                {selectedParts.map(option => {
+                                    const optionText =
+                                        trackOption.find(o => o === option) ||
+                                        '';
+                                    const width = getWidthBasedOnLength(
+                                        optionText.length,
+                                    );
+                                    return (
+                                        <SelectedOption
+                                            key={option}
+                                            option={option}
+                                            optionText={optionText}
+                                            width={width}
+                                            handleCancelOption={
+                                                handleCancelOption
+                                            }
+                                        />
+                                    );
+                                })}
+                            </A.SelectedOptionsWrapper>
+                        )}
+                        <A.Ndiv>
+                            팀명
+                            {errors.teamName ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Nform
+                            placeholder="해커톤에 참여하는 팀명을 입력해주세요."
+                            {...register('teamName')}
+                        />
+                        <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
+                        <A.Ndiv>
+                            오프라인 참가 여부
+                            {!dirtyFields.offlineParticipation ||
+                            errors.offlineParticipation ||
+                            (selectedParticipation === false &&
+                                (!dirtyFields.reasonForNotOffline ||
+                                    errors.reasonForNotOffline)) ? (
+                                <A.StyledNotCheckedIcon />
+                            ) : (
+                                <A.StyledCheckedIcon />
+                            )}
+                        </A.Ndiv>
+                        <A.Ntxt $offlinetxt>
+                            *8월 6일~8월 7일 무박 2일로 진행되는 오프라인 해커톤
+                            참여 여부를 선택해주세요.
+                        </A.Ntxt>
+
+                        <Controller
+                            name="offlineParticipation"
+                            control={control}
+                            render={({ field }) => (
+                                <A.NradioWrapper>
+                                    <A.NradioDiv>
+                                        <A.Nlabel
+                                            checked={field.value === true}
+                                        >
+                                            <A.NradioInput
+                                                type="radio"
+                                                {...field}
+                                                value="true"
+                                                checked={
+                                                    field.value ||
+                                                    isRadio === true
+                                                }
+                                                onChange={() => {
+                                                    field.onChange(true);
+                                                    setIsRadio(true);
+                                                }}
+                                            />
+                                            네, 참여합니다.
+                                        </A.Nlabel>
+                                    </A.NradioDiv>
+                                    <A.NradioDiv>
+                                        <A.Nlabel
+                                            checked={field.value === false}
+                                        >
+                                            <A.NradioInput
+                                                type="radio"
+                                                {...field}
+                                                value="false"
+                                                checked={isRadio === false}
+                                                onChange={() => {
+                                                    field.onChange(false);
+                                                    setIsRadio(false);
+                                                }}
+                                            />
+                                            아니오, 참가하지 않습니다.
+                                        </A.Nlabel>
+                                    </A.NradioDiv>
+                                </A.NradioWrapper>
+                            )}
+                        />
+                        {selectedParticipation === false && (
+                            <>
+                                <A.Nform
+                                    type="text"
+                                    placeholder="불참 사유를 입력해주세요."
+                                    {...control.register('reasonForNotOffline')}
+                                />
+                                <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
+                            </>
+                        )}
+                        <A.Button type="submit" disabled={false}>
+                            신청하기
+                        </A.Button>
+                        {isModalOpen && (
+                            <ApplicationModal
+                                isOpen={isModalOpen}
+                                closeModal={closeModal}
+                                onSubmit={handleModalSubmit}
+                                header={ApplicationModalTxt.header}
+                                title={ApplicationModalTxt.title}
+                                content={ApplicationModalTxt.content}
+                                button={ApplicationModalTxt.button}
+                            />
+                        )}
+                    </form>
+                </A.Container>
+            )}
         </A.Wrapper>
     );
 };

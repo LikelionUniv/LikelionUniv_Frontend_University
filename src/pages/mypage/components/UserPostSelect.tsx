@@ -1,9 +1,8 @@
-import { Suspense, startTransition, useState } from 'react';
+import { Suspense, lazy, startTransition, useState } from 'react';
 import { styled } from 'styled-components';
 import ProjectSelect from './ProjectSelect';
 import LikeSelect from './LikeSelect';
 import PostSelect from './PostSelect';
-import ApplyList from '../../../components/mypage/Hackathons/ApplyList';
 import ApplySelect from '../../../components/mypage/Hackathons/ApplySelect';
 
 const UserPostSelect = () => {
@@ -13,9 +12,9 @@ const UserPostSelect = () => {
     const selectOptions = ['신청정보', '게시글', '프로젝트', '댓글', '좋아요'];
     const [select, setSelect] = useState<string>('신청정보');
     const optionClickFn = (option: string) => {
-        startTransition(() => {
-            setSelect(option);
-        });
+        // startTransition(() => {
+        setSelect(option);
+        // });
     };
     return (
         <>
@@ -55,9 +54,9 @@ const UserPostSelect = () => {
                 </Suspense>
             ) : (
                 <>
-                    <Suspense fallback={<div>loading...</div>}>
-                        <ApplySelect select={select} />
-                    </Suspense>
+                    {/* <Suspense fallback={<div>loading...</div>}> */}
+                    <ApplySelect select={select} />
+                    {/* </Suspense> */}
                 </>
             )}
         </>
