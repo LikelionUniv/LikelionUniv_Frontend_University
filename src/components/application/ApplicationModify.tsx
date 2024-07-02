@@ -17,13 +17,6 @@ import CompleteApplication from './CompleteApplication';
 
 type ApplicationFormType = z.infer<typeof applicationSchema>;
 
-interface ApplicationModalProps {
-    phone: string;
-    hackathonParts: string[];
-    teamName: string;
-    offlineParticipation: boolean;
-    reasonForNotOffline?: string | null;
-}
 interface FormId {
     hackathonId: number;
 }
@@ -74,7 +67,7 @@ const ApplicationForm = () => {
 
     const fetchData = async () => {
         try {
-            const response = await request<null, any, null>({
+            const response = await request<null, null, null>({
                 uri: `/api/v1/hackathons/${hackathonId}`,
                 method: 'get',
             });
@@ -88,18 +81,15 @@ const ApplicationForm = () => {
     const navigate = useNavigate();
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [formData, setFormData] = useState<ApplicationFormType | undefined>(
-        undefined,
-    );
-    const { userinfo, error } = useGetUserInfo();
+
+    const { userinfo } = useGetUserInfo();
     const {
         handleSubmit,
         register,
         control,
-        watch,
         setValue,
         trigger,
-        formState: { dirtyFields, errors, isValid },
+        formState: { dirtyFields, errors },
     } = useForm<ApplicationFormType>({
         mode: 'onChange',
         resolver: zodResolver(applicationSchema),
@@ -119,9 +109,10 @@ const ApplicationForm = () => {
         name: 'hackathonParts',
     });
 
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
+    const reasonForNotOffline = useWatch({
+        control,
+        name: 'reasonForNotOffline',
+    });
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -175,22 +166,24 @@ const ApplicationForm = () => {
             }
             if (hackathonData?.hackathonParts) {
                 let arr = [];
-
                 for (let i = 0; i < hackathonData.hackathonParts.length; i++) {
                     arr.push(hackathonData.hackathonParts[i]);
-
                     setValue('hackathonParts', arr);
                 }
             }
-            if (hackathonData?.offlineParticipation) {
-                setIsRadio(hackathonData.offlineParticipation);
-                setValue(
-                    'offlineParticipation',
-                    hackathonData.offlineParticipation,
-                );
-            }
+
+            setIsRadio(hackathonData.offlineParticipation);
+            setValue(
+                'offlineParticipation',
+                hackathonData.offlineParticipation,
+            );
+            setValue('reasonForNotOffline', hackathonData.reasonForNotOffline);
         }
     }, [hackathonData]);
+    useEffect(() => {
+        if (isRadio) return setValue('reasonForNotOffline', ' ');
+        return setValue('reasonForNotOffline', null);
+    }, [isRadio]);
 
     const handleModalSubmit = async () => {
         try {
@@ -207,6 +200,7 @@ const ApplicationForm = () => {
     };
 
     const onSubmit = (data: ApplicationFormType) => {
+        if (!data.offlineParticipation && !data.reasonForNotOffline) return;
         let datas = {
             phone: data.phone,
             hackathonParts: data.hackathonParts,
@@ -380,11 +374,12 @@ const ApplicationForm = () => {
                         <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
                         <A.Ndiv>
                             오프라인 참가 여부
-                            {!dirtyFields.offlineParticipation ||
+                            {/* {!dirtyFields.offlineParticipation ||
                             errors.offlineParticipation ||
                             (selectedParticipation === false &&
                                 (!dirtyFields.reasonForNotOffline ||
-                                    errors.reasonForNotOffline)) ? (
+                                    errors.reasonForNotOffline)) */}
+                            {false ? (
                                 <A.StyledNotCheckedIcon />
                             ) : (
                                 <A.StyledCheckedIcon />

@@ -25,7 +25,7 @@ interface ApplicationSubmitFormType {
     hackathonParts: string[];
     teamName: string;
     offlineParticipation: boolean;
-    reasonForNotOffline: string | undefined;
+    reasonForNotOffline?: string | null;
 }
 
 interface ApplicationModalProps {
