@@ -81,6 +81,7 @@ const PartButton = styled.div`
 
 const Info = styled.div`
     margin: 21px 0px 20px 40px;
+    font-weight: bold;
 `;
 
 const Img = styled.img`
