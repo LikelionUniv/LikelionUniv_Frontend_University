@@ -8,16 +8,12 @@ const HackathonPart = () => {
 
     const handleClick = () => {
         const access_token = localStorage.getItem('access_token');
-        // if (access_token) {
-        //     navigate('/hackathons');
-        // } else {
-        //     navigate('/login');
-        // }
         if (access_token) {
             startTransition(() => {
                 navigate('/hackathons');
             });
         } else {
+            sessionStorage.setItem('nav', 'hackathons');
             startTransition(() => {
                 navigate('/login');
             });
@@ -81,6 +77,7 @@ const PartButton = styled.div`
 
 const Info = styled.div`
     margin: 21px 0px 20px 40px;
+    font-weight: bold;
 `;
 
 const Img = styled.img`

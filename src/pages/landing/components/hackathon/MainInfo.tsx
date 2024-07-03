@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { styled } from 'styled-components';
 import HackathonPart from './HackathonPart';
 import title from '../../../../img/landing/title.png';
@@ -9,9 +11,20 @@ import growl_to_world from '../../../../img/landing/growl_to_world.png';
 import two_check from '../../../../img/landing/two_check.png';
 import check_g from '../../../../img/landing/check_g.png';
 import check_r from '../../../../img/landing/check_r.png';
-import check_o from '../../../../img/landing/check_o.png';
 
 const MainInfo = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('access_token');
+        const nav = sessionStorage.getItem('nav');
+
+        if (nav === 'hackathons' && accessToken) {
+            navigate('/hackathons');
+            sessionStorage.removeItem('nav');
+        }
+    }, [navigate]);
+
     return (
         <MainWrapper>
             <FirstWrapper>
@@ -35,9 +48,9 @@ const MainInfo = () => {
                                 <div className="flex" key={item}>
                                     <PixelFireworksIcon />
                                     <PixelSingingIcon />
-                                    <div className="spacemono text">
+                                    <SpacemonoText>
                                         Possibility to Reality
-                                    </div>
+                                    </SpacemonoText>
                                 </div>
                             ))}
                         </div>
@@ -69,7 +82,7 @@ const MainWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 추가된 속성 */
+    align-items: center;
     justify-content: center;
 
     background: linear-gradient(
@@ -85,8 +98,8 @@ const MainWrapper = styled.div`
             to bottom,
             rgba(0, 0, 0, 0) 750px,
             rgba(0, 0, 0, 0.3) 750px,
-            rgba(255, 146, 64, 0.3) 1164px,
-            transparent 1164px
+            rgba(255, 146, 64, 0.3) 1220px,
+            transparent 1220px
         );
     }
 
@@ -254,5 +267,19 @@ const Img4 = styled.img`
 
     @media (max-width: 1440px) {
         display: none;
+    }
+`;
+
+const SpacemonoText = styled.div`
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 28px;
+
+    @media (max-width: 360px) {
+        font-size: 19px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 19px;
     }
 `;
