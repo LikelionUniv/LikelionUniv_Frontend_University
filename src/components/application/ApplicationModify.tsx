@@ -177,12 +177,17 @@ const ApplicationForm = () => {
                 'offlineParticipation',
                 hackathonData.offlineParticipation,
             );
-            setValue('reasonForNotOffline', hackathonData.reasonForNotOffline);
+            setValue(
+                'reasonForNotOffline',
+                hackathonData.reasonForNotOffline === null
+                    ? ''
+                    : hackathonData.reasonForNotOffline!,
+            );
         }
     }, [hackathonData]);
     useEffect(() => {
-        if (isRadio) return setValue('reasonForNotOffline', ' ');
-        return setValue('reasonForNotOffline', null);
+        if (isRadio) return setValue('reasonForNotOffline', '없음');
+        return setValue('reasonForNotOffline', '');
     }, [isRadio]);
 
     const handleModalSubmit = async () => {
@@ -373,7 +378,7 @@ const ApplicationForm = () => {
                         />
                         <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
                         <A.Ndiv>
-                            오프라인 참가 여부
+                            오프라인 참가 여부 (마케팅 활용에 동의 합니다)
                             {/* {!dirtyFields.offlineParticipation ||
                             errors.offlineParticipation ||
                             (selectedParticipation === false &&

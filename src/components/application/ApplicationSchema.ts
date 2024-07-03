@@ -48,12 +48,10 @@ export const applicationSchema = z.object({
         .refine(val => val === true || val === false, {
             message: '참여 여부를 선택해주세요',
         }),
-    reasonForNotOffline: z
-        .string()
-        .max(100, {
-            message: '최대 100자까지 입력가능해요.',
-        })
-        .nonempty()
-        .optional()
-        .nullish(),
+    reasonForNotOffline: z.string().max(100, {
+        message: '최대 100자까지 입력가능해요.',
+    }),
+    // .min(1),
+    // .optional(),
+    // .nullish(),
 });

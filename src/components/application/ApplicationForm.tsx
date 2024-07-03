@@ -28,16 +28,6 @@ interface ApplicationSubmitFormType {
     reasonForNotOffline?: string | null;
 }
 
-interface ApplicationModalProps {
-    isOpen: boolean;
-    closeModal: () => void;
-    onSubmit: () => void;
-    header: string;
-    title: string;
-    content: string;
-    button: string;
-}
-
 interface hackathonFormId {
     hackathonFormId: number;
 }
@@ -60,6 +50,7 @@ const ApplicationForm = () => {
     const navigate = useNavigate();
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isRadio, setIsRadio] = useState(false);
     const [formData, setFormData] = useState<ApplicationFormType | undefined>(
         undefined,
     );
@@ -86,19 +77,14 @@ const ApplicationForm = () => {
         },
     });
 
-    const selectedParticipation = useWatch({
-        control,
-        name: 'offlineParticipation',
-    });
-
     const selectedParts = useWatch({
         control,
         name: 'hackathonParts',
     });
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
+    const reasonForNotOffline = useWatch({
+        control,
+        name: 'reasonForNotOffline',
+    });
 
     const closeModal = () => {
         setIsModalOpen(false);
@@ -204,7 +190,7 @@ const ApplicationForm = () => {
 
         fetchAndSetUserInfo();
     }, [setValue, trigger]);
-
+    console.log('isValid', isValid);
     useEffect(() => {
         if (userinfo?.name) {
             setValue('name', userinfo.name);
@@ -220,7 +206,12 @@ const ApplicationForm = () => {
         }
     }, [userinfo, setValue, trigger]);
     //
+    useEffect(() => {
+        if (isRadio) return setValue('reasonForNotOffline', '없음');
+        return setValue('reasonForNotOffline', '');
+    }, [isRadio]);
 
+    //신청폼
     return (
         <>
             {isSuccess ? (
@@ -384,16 +375,27 @@ const ApplicationForm = () => {
                             />
                             <A.Ntxt>*최대 10글자까지 입력가능해요.</A.Ntxt>
                             <A.Ndiv>
-                                오프라인 참가 여부
-                                {!dirtyFields.offlineParticipation ||
-                                errors.offlineParticipation ||
-                                (selectedParticipation === false &&
-                                    (!dirtyFields.reasonForNotOffline ||
-                                        errors.reasonForNotOffline)) ? (
-                                    <A.StyledNotCheckedIcon />
-                                ) : (
-                                    <A.StyledCheckedIcon />
-                                )}
+                                오프라인 참가 여부 (마케팅 활용에 동의 합니다)
+                                <>
+                                    {isRadio ? (
+                                        <>
+                                            {isRadio ? (
+                                                <A.StyledCheckedIcon />
+                                            ) : (
+                                                <A.StyledNotCheckedIcon />
+                                            )}
+                                        </>
+                                    ) : (
+                                        <>
+                                            {!isRadio &&
+                                            reasonForNotOffline !== '없음' ? (
+                                                <A.StyledNotCheckedIcon />
+                                            ) : (
+                                                <A.StyledCheckedIcon />
+                                            )}
+                                        </>
+                                    )}
+                                </>
                             </A.Ndiv>
                             <A.Ntxt $offlinetxt>
                                 *8월 6일~8월 7일 무박 2일로 진행되는 오프라인
@@ -416,9 +418,10 @@ const ApplicationForm = () => {
                                                     checked={
                                                         field.value === true
                                                     }
-                                                    onChange={() =>
-                                                        field.onChange(true)
-                                                    }
+                                                    onChange={() => {
+                                                        field.onChange(true);
+                                                        setIsRadio(true);
+                                                    }}
                                                 />
                                                 네, 참여합니다.
                                             </A.Nlabel>
@@ -434,9 +437,10 @@ const ApplicationForm = () => {
                                                     checked={
                                                         field.value === false
                                                     }
-                                                    onChange={() =>
-                                                        field.onChange(false)
-                                                    }
+                                                    onChange={() => {
+                                                        field.onChange(false);
+                                                        setIsRadio(false);
+                                                    }}
                                                 />
                                                 아니오, 참가하지 않습니다.
                                             </A.Nlabel>
@@ -444,7 +448,7 @@ const ApplicationForm = () => {
                                     </A.NradioWrapper>
                                 )}
                             />
-                            {selectedParticipation === false && (
+                            {isRadio === false && (
                                 <>
                                     <A.Nform
                                         type="text"
