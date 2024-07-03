@@ -45,10 +45,16 @@ export const Redirect = () => {
     });
 
     useEffect(() => {
+        const accessToken = localStorage.getItem('access_token');
+        const nav = sessionStorage.getItem('nav');
+
         if (error) {
             navigate('/login');
         } else if (data === null) {
             navigate(`/signup/${provider}`);
+        } else if (nav === 'hackathons' && accessToken) {
+            navigate('/hackathons');
+            sessionStorage.removeItem('nav');
         } else if (data) {
             navigate('/');
         }

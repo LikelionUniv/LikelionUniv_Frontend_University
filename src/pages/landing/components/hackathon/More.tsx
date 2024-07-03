@@ -67,15 +67,29 @@ const MoreTitle = styled.div`
     line-height: 150%; /* 48px */
 
     @media (max-width: 767px) {
-        font-size: 30px;
         width: 80%;
+        margin-bottom: 16px;
         text-align: center;
+
+        /* Title/40_Bold */
+        font-family: Pretendard;
+        font-size: clamp(16px, 4vw, 40px);
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
     }
 
     @media (max-width: 360px) {
-        font-size: 16px;
-        text-align: center;
         width: 90%;
+        margin-bottom: 8px;
+        text-align: center;
+
+        /* Title/16_Bold */
+        font-family: Pretendard;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
     }
 `;
 
@@ -102,12 +116,14 @@ const MoreBtn = styled.div`
     line-height: 150%; /* 30px */
 
     @media (max-width: 767px) {
-        width: 300px;
+        width: clamp(320px, 2vw, 530px);
         height: 48px;
+        font-size: 16px;
     }
     @media (max-width: 360px) {
         width: clamp(250px, 2vw, 320px);
         height: 48px;
+        font-size: 16px;
     }
     &:hover {
         background-color: #d1d4d8;
