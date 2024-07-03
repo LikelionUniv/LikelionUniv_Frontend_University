@@ -69,10 +69,12 @@ const MoreTitle = styled.div`
 
     @media (max-width: 767px) {
         font-size: 20px;
+        text-align: center;
     }
 
     @media (max-width: 360px) {
         font-size: 20px;
+        text-align: center;
     }
 `;
 
@@ -101,12 +103,14 @@ const MoreBtn = styled.div`
 
     @media (max-width: 767px) {
         /* width: clamp(360px, 3vw, 523px); */
-        width: 300px;
+        width: 320px;
         height: 48px;
+        font-size: 16px;
     }
     @media (max-width: 360px) {
         width: clamp(250px, 2vw, 320px);
         height: 48px;
+        font-size: 16px;
     }
     &:hover {
         color: #ff7710;

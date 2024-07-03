@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import { styled } from 'styled-components';
 import HackathonPart from './HackathonPart';
 import title from '../../../../img/landing/title.png';
@@ -13,18 +11,6 @@ import check_g from '../../../../img/landing/check_g.png';
 import check_r from '../../../../img/landing/check_r.png';
 
 const MainInfo = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const accessToken = localStorage.getItem('access_token');
-        const nav = sessionStorage.getItem('nav');
-
-        if (nav === 'hackathons' && accessToken) {
-            navigate('/hackathons');
-            sessionStorage.removeItem('nav');
-        }
-    }, [navigate]);
-
     return (
         <MainWrapper>
             <FirstWrapper>
@@ -127,6 +113,14 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     max-width: 1200px;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
 
 const TitleImg = styled.img`
