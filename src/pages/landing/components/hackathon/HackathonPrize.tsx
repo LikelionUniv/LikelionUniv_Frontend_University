@@ -83,7 +83,7 @@ const PrizeContainer = styled.div`
 
 const Title = styled.div`
     text-align: left;
-    width: 100%;
+    width: 80%;
     font-size: clamp(40px, 4vw, 48px);
 
     @media (max-width: 767px) {

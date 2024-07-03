@@ -68,7 +68,7 @@ const MainWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center; /* 추가된 속성 */
+    align-items: center;
     justify-content: center;
 
     background: linear-gradient(
@@ -84,8 +84,8 @@ const MainWrapper = styled.div`
             to bottom,
             rgba(0, 0, 0, 0) 750px,
             rgba(0, 0, 0, 0.3) 750px,
-            rgba(255, 146, 64, 0.3) 1164px,
-            transparent 1164px
+            rgba(255, 146, 64, 0.3) 1220px,
+            transparent 1220px
         );
     }
 

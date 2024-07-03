@@ -38,23 +38,25 @@ const MoreWrapper = styled.div`
 
 const Wrapper = styled.div`
     max-width: 1200px;
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
     @media (max-width: 767px) {
+        width: 80%;
         flex-direction: column;
     }
 
     @media (max-width: 360px) {
+        width: 90%;
         flex-direction: column;
     }
 `;
 
 const MoreTitle = styled.div`
-    text-align: center;
+    text-align: left;
     color: white;
     width: 100%;
     /* Title/32_Bold */
@@ -67,10 +69,12 @@ const MoreTitle = styled.div`
     @media (max-width: 767px) {
         font-size: 30px;
         width: 80%;
+        text-align: center;
     }
 
     @media (max-width: 360px) {
         font-size: 16px;
+        text-align: center;
         width: 90%;
     }
 `;
