@@ -16,13 +16,10 @@ const OrderDropDown = () => {
 
         switch (selectedOption.value) {
             case 1:
-                console.log('최신순');
                 break;
             case 2:
-                console.log('좋아요순');
                 break;
             case 3:
-                console.log('댓글순');
                 break;
             default:
                 break;

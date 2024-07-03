@@ -50,7 +50,7 @@ const ApplicationForm = () => {
     const navigate = useNavigate();
     const [isDropDownOpen, setIsDropDownOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isRadio, setIsRadio] = useState(false);
+    const [isRadio, setIsRadio] = useState<undefined | boolean>(undefined);
     const [formData, setFormData] = useState<ApplicationFormType | undefined>(
         undefined,
     );
@@ -176,10 +176,10 @@ const ApplicationForm = () => {
                 if (hackathonResponse.data.length === 0) {
                     setIsSuccess(false);
                 } else {
-                    setValue(
-                        'hackathonParts',
-                        hackathonResponse.data.data.hackathonParts,
-                    );
+                    // setValue(
+                    //     'hackathonParts',
+                    //     hackathonResponse.data.data.hackathonParts,
+                    // );
                     setIsSuccess(true);
                 }
             } catch (error) {
@@ -190,7 +190,7 @@ const ApplicationForm = () => {
 
         fetchAndSetUserInfo();
     }, [setValue, trigger]);
-    console.log('isValid', isValid);
+
     useEffect(() => {
         if (userinfo?.name) {
             setValue('name', userinfo.name);
@@ -207,11 +207,10 @@ const ApplicationForm = () => {
     }, [userinfo, setValue, trigger]);
     //
     useEffect(() => {
-        if (isRadio) return setValue('reasonForNotOffline', '없음');
+        if (isRadio) return setValue('reasonForNotOffline', '기본값');
         return setValue('reasonForNotOffline', '');
     }, [isRadio]);
 
-    //신청폼
     return (
         <>
             {isSuccess ? (
@@ -379,7 +378,8 @@ const ApplicationForm = () => {
                                 <>
                                     {isRadio ? (
                                         <>
-                                            {isRadio ? (
+                                            {isRadio &&
+                                            reasonForNotOffline === '기본값' ? (
                                                 <A.StyledCheckedIcon />
                                             ) : (
                                                 <A.StyledNotCheckedIcon />
@@ -387,11 +387,11 @@ const ApplicationForm = () => {
                                         </>
                                     ) : (
                                         <>
-                                            {!isRadio &&
-                                            reasonForNotOffline !== '없음' ? (
-                                                <A.StyledNotCheckedIcon />
-                                            ) : (
+                                            {reasonForNotOffline !== '기본값' &&
+                                            reasonForNotOffline !== '' ? (
                                                 <A.StyledCheckedIcon />
+                                            ) : (
+                                                <A.StyledNotCheckedIcon />
                                             )}
                                         </>
                                     )}

@@ -104,14 +104,13 @@ const ApplicationForm = () => {
         name: 'offlineParticipation',
     });
 
-    const selectedParts = useWatch({
-        control,
-        name: 'hackathonParts',
-    });
-
     const reasonForNotOffline = useWatch({
         control,
         name: 'reasonForNotOffline',
+    });
+    const selectedParts = useWatch({
+        control,
+        name: 'hackathonParts',
     });
 
     const closeModal = () => {
@@ -179,16 +178,20 @@ const ApplicationForm = () => {
             );
             setValue(
                 'reasonForNotOffline',
-                hackathonData.reasonForNotOffline === null
+                hackathonData.reasonForNotOffline === ''
                     ? ''
                     : hackathonData.reasonForNotOffline!,
             );
         }
     }, [hackathonData]);
+
     useEffect(() => {
-        if (isRadio) return setValue('reasonForNotOffline', '없음');
-        return setValue('reasonForNotOffline', '');
-    }, [isRadio]);
+        if (isRadio || isRadio === undefined) {
+            setValue('reasonForNotOffline', '기본값');
+        } else {
+            setValue('reasonForNotOffline', '');
+        }
+    }, [selectedParticipation]);
 
     const handleModalSubmit = async () => {
         try {
@@ -384,7 +387,8 @@ const ApplicationForm = () => {
                             (selectedParticipation === false &&
                                 (!dirtyFields.reasonForNotOffline ||
                                     errors.reasonForNotOffline)) */}
-                            {false ? (
+                            {reasonForNotOffline === '' &&
+                            !reasonForNotOffline ? (
                                 <A.StyledNotCheckedIcon />
                             ) : (
                                 <A.StyledCheckedIcon />
