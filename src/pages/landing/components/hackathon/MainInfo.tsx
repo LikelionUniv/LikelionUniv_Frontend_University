@@ -9,7 +9,6 @@ import growl_to_world from '../../../../img/landing/growl_to_world.png';
 import two_check from '../../../../img/landing/two_check.png';
 import check_g from '../../../../img/landing/check_g.png';
 import check_r from '../../../../img/landing/check_r.png';
-import check_o from '../../../../img/landing/check_o.png';
 
 const MainInfo = () => {
     return (
@@ -35,9 +34,9 @@ const MainInfo = () => {
                                 <div className="flex" key={item}>
                                     <PixelFireworksIcon />
                                     <PixelSingingIcon />
-                                    <div className="spacemono text">
+                                    <SpacemonoText>
                                         Possibility to Reality
-                                    </div>
+                                    </SpacemonoText>
                                 </div>
                             ))}
                         </div>
@@ -254,5 +253,19 @@ const Img4 = styled.img`
 
     @media (max-width: 1440px) {
         display: none;
+    }
+`;
+
+const SpacemonoText = styled.div`
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 28px;
+
+    @media (max-width: 360px) {
+        font-size: 19px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 19px;
     }
 `;
