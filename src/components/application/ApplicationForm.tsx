@@ -135,7 +135,7 @@ const ApplicationForm = () => {
                     method: 'post',
                     data: submitData,
                 });
-
+                setIsSuccess(true);
                 return response.data;
             } catch (error) {
                 console.error('서버 요청 오류:', error);
