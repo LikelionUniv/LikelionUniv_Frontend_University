@@ -48,7 +48,9 @@ const TableHackathonList: React.FC<TableUserListProps> = props => {
                             )}
                         </Table>
                         <Table className="part">
-                            {props!.hackathonParts!.map(el => el)}
+                            {props!.hackathonParts!.map(el => (
+                                <div>{el}</div>
+                            ))}
                         </Table>
                         <Table className="email">{props.email}</Table>
                         <Table className="teamname">{props.teamName}</Table>

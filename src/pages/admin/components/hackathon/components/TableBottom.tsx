@@ -8,7 +8,7 @@ interface ExcelType {
     universityName: string;
     phone: string;
     offlineParticipation: boolean | string;
-    hackathonParts: string[] | string;
+    hackathonParts: any;
     email: string;
     teamName: string;
 }
@@ -24,13 +24,34 @@ const HackathonTableBottom = () => {
         const workbook = XLSX.utils.book_new();
         const body: ExcelType[] = [];
 
+        // users.map(el => {
+        //     body.push({
+        //         name: el.name,
+        //         universityName: el.universityName!,
+        //         phone: el.phone!,
+        //         offlineParticipation: el.offlineParticipation!,
+        //         hackathonParts: el.hackathonParts![0],
+        //         email: el.email,
+        //         teamName: el.teamName!,
+        //     });
+        // });
         users.map(el => {
             body.push({
                 name: el.name,
                 universityName: el.universityName!,
                 phone: el.phone!,
-                offlineParticipation: el.offlineParticipation!,
-                hackathonParts: el.hackathonParts![0],
+                offlineParticipation: el.offlineParticipation!
+                    ? '참여'
+                    : '불참',
+                hackathonParts:
+                    el.hackathonParts![0] +
+                    (el.hackathonParts![1]
+                        ? ', ' + el.hackathonParts![1]
+                        : '') +
+                    (el.hackathonParts![2]
+                        ? ', ' + el.hackathonParts![2]
+                        : '') +
+                    (el.hackathonParts![3] ? ', ' + el.hackathonParts![3] : ''),
                 email: el.email,
                 teamName: el.teamName!,
             });
@@ -62,7 +83,7 @@ const HackathonTableBottom = () => {
             { wpx: 180 },
             { wpx: 200 },
             { wpx: 100 },
-            { wpx: 130 },
+            { wpx: 230 },
             { wpx: 200 },
             { wpx: 200 },
         ];

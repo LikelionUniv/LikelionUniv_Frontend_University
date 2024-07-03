@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as z from 'zod';
 import * as A from './ApplicationStyle';
-
 import { applicationSchema } from '../application/ApplicationSchema';
 import ApplicationModal from './modal/ApplicationModal';
 import SelectedOption from './SelectedOption';
@@ -170,7 +169,6 @@ const ApplicationForm = () => {
                 if (userData) {
                     setValue('email', userData.email);
                     trigger('email');
-
                     setUniversityId(userData.universityId);
                 }
                 if (hackathonResponse.data.length === 0) {

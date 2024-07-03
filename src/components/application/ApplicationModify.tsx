@@ -178,9 +178,7 @@ const ApplicationForm = () => {
             );
             setValue(
                 'reasonForNotOffline',
-                hackathonData.reasonForNotOffline === ''
-                    ? ''
-                    : hackathonData.reasonForNotOffline!,
+                hackathonData.reasonForNotOffline === '기본값' ? '기본값' : '',
             );
         }
     }, [hackathonData]);
