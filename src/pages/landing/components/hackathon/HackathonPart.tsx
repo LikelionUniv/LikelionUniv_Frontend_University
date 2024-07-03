@@ -13,6 +13,7 @@ const HackathonPart = () => {
                 navigate('/hackathons');
             });
         } else {
+            sessionStorage.setItem('nav', 'hackathons');
             startTransition(() => {
                 navigate('/login');
             });
