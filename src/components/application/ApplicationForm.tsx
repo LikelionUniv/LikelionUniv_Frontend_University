@@ -145,7 +145,7 @@ const ApplicationForm = () => {
                     hackathonFormId,
                     null
                 >({
-                    uri: '/api/v1/',
+                    uri: '/api/v1/hackathons',
                     method: 'post',
                     data: submitData,
                 });
