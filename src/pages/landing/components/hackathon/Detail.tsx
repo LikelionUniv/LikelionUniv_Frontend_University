@@ -43,7 +43,7 @@ const DetailWrapper = styled.div`
 
 const Wrapper = styled.div`
     max-width: 1200px;
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -54,6 +54,7 @@ const Wrapper = styled.div`
 
     @media (max-width: 360px) {
         flex-direction: column;
+        width: 90%;
     }
 `;
 

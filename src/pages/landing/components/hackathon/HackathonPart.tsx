@@ -8,11 +8,6 @@ const HackathonPart = () => {
 
     const handleClick = () => {
         const access_token = localStorage.getItem('access_token');
-        // if (access_token) {
-        //     navigate('/hackathons');
-        // } else {
-        //     navigate('/login');
-        // }
         if (access_token) {
             startTransition(() => {
                 navigate('/hackathons');
