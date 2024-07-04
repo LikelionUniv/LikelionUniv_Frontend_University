@@ -62,7 +62,7 @@ const PartButton = styled.div`
         height: 64px;
         font-size: 20px;
         margin-top: 40px;
-        margin-bottom: 446px;
+        margin-bottom: clamp(255px, 2vh, 446px);
         width: 300px;
     }
 

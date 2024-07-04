@@ -86,7 +86,8 @@ const TimerContainer = styled.div`
     background-color: black;
     border-radius: 24px;
     height: 240px;
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin-left: 10px;
     margin-right: 10px;
 
@@ -98,14 +99,29 @@ const TimerContainer = styled.div`
 
     @media (max-width: 767px) {
         width: 80%;
-        height: clamp(154px, 4vh, 240px);
+        height: clamp(140px, 4vh, 240px);
         padding: 5px 20px;
+    }
+
+    @media (max-width: 430px) {
+        width: 90%;
+        height: 120px;
+        padding: 0px 20px;
+        border-radius: 8px;
+    }
+
+    @media (max-width: 390px) {
+        width: 90%;
+        height: 120px;
+        padding: 0px 20px;
+        border-radius: 8px;
     }
 
     @media (max-width: 360px) {
         width: 90%;
-        height: clamp(80px, 2vh, 154px);
-        padding: 5px 10px;
+        height: clamp(80px, 2vh, 140px);
+        padding: 5px px;
+        border-radius: 8px;
     }
 `;
 
@@ -140,7 +156,7 @@ const DateType = styled.div`
     line-height: 150%;
 
     @media (max-width: 767px) {
-        font-size: 16px;
+        font-size: clamp(12px, 1vw, 16px);
     }
 
     @media (max-width: 360px) {
@@ -181,12 +197,12 @@ const DateNum = styled.div`
     text-align: center;
 
     @media (max-width: 767px) {
-        font-size: 40px;
-        width: clamp(42px, 3vw, 60px);
+        font-size: clamp(28px, 2vw, 40px);
+        width: clamp(42px, 2vw, 60px);
     }
 
     @media (max-width: 360px) {
         font-size: 28px;
-        width: clamp(20px, 2vw, 42px);
+        width: clamp(20px, 2vw, 28px);
     }
 `;
