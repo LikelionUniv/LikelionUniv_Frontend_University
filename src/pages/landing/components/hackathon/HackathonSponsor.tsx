@@ -79,19 +79,19 @@ const serviceList: serviceType[] = [
         id: 0,
         name: '멋쟁이사자처럼',
         logo: logo1,
-        url: 'https://www.likelion.net/',
+        url: 'https://techit.education/',
     },
     {
         id: 1,
         name: '영림원소프트랩',
         logo: logo2,
-        url: 'https://www.ksystem.co.kr/',
+        url: 'https://flextudio.com/',
     },
     {
         id: 2,
         name: '쿼드해시',
         logo: logo4,
-        url: 'https://twitter.com/quadhash',
+        url: 'https://www.instagram.com/saza.gaza/',
         backgroundColor: '#FC3',
     },
     {
@@ -132,7 +132,7 @@ const serviceList: serviceType[] = [
     },
     {
         id: 9,
-        name: '타이거라들러',
+        name: '타이거 라들러',
         logo: logo9,
         url: 'https://www.instagram.com/tigerbeer_korea/',
     },

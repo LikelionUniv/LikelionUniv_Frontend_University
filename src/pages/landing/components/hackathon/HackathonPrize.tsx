@@ -52,7 +52,7 @@ export default HackathonPrize;
 
 const PrizeWrapper = styled.div`
     max-width: 1200px;
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
 `;
@@ -83,7 +83,7 @@ const PrizeContainer = styled.div`
 
 const Title = styled.div`
     text-align: left;
-    width: 80%;
+    width: 100%;
     font-size: clamp(40px, 4vw, 48px);
 
     @media (max-width: 767px) {
