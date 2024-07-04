@@ -4,7 +4,6 @@ import bulb from '../../../../img/landing/bulb.png';
 import prize1 from '../../../../img/landing/prize1.png';
 import prize2 from '../../../../img/landing/prize2.png';
 import prize3 from '../../../../img/landing/prize3.png';
-import prize1_w from '../../../../img/landing/prize1_w.png';
 import prize2_w from '../../../../img/landing/prize2_w.png';
 import prize3_w from '../../../../img/landing/prize3_w.png';
 
@@ -52,9 +51,17 @@ export default HackathonPrize;
 
 const PrizeWrapper = styled.div`
     max-width: 1200px;
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+
+    @media (max-width: 767px) {
+        width: 80%;
+    }
+
+    @media (max-width: 360px) {
+        width: 90%;
+    }
 `;
 
 const PrizeContainer = styled.div`
@@ -73,10 +80,12 @@ const PrizeContainer = styled.div`
     font-size: clamp(40px, 4vw, 48px);
 
     @media (max-width: 767px) {
+        justify-content: left;
         font-size: clamp(24px, 5vw, 40px);
     }
 
     @media (max-width: 360px) {
+        justify-content: left;
         font-size: clamp(24px, 6vw, 24px);
     }
 `;
@@ -87,13 +96,11 @@ const Title = styled.div`
     font-size: clamp(40px, 4vw, 48px);
 
     @media (max-width: 767px) {
-        width: 80%;
         font-size: clamp(24px, 5vw, 40px);
     }
 
     @media (max-width: 360px) {
-        width: 90%;
-        font-size: clamp(24px, 6vw, 24px);
+        font-size: clamp(20px, 6vw, 24px);
     }
 `;
 
@@ -136,13 +143,11 @@ const SponsorP = styled.div`
     line-height: 150%; /* 30px */
 
     @media (max-width: 767px) {
-        width: 80%;
         font-size: 18px;
         margin-top: 16px;
     }
 
     @media (max-width: 360px) {
-        width: 90%;
         font-size: 14px;
         margin-top: 8px;
     }
@@ -201,11 +206,13 @@ const PrizePost = styled.div`
 
     @media (max-width: 767px) {
         margin-bottom: 120px;
+        padding-top: 24px;
     }
 
     @media (max-width: 360px) {
         margin-bottom: 60px;
         flex-direction: column;
+        padding-top: 24px;
     }
 `;
 

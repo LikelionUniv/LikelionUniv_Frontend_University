@@ -157,10 +157,11 @@ const InfoWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    max-width: 1190px;
 
-    @media (max-width: 767px) {
-        width: 80%;
-    }
+    /* @media (max-width: 767px) {
+        width: clamp(320px, 2vw, 521px);
+    } */
 
     @media (max-width: 360px) {
         width: 90%;
@@ -203,13 +204,6 @@ const ImgWrapper = styled.div`
     margin-bottom: 40px;
     justify-content: space-between;
     align-items: center;
-
-    @media (max-width: 767px) {
-        width: 80%;
-    }
-    @media (max-width: 360px) {
-        width: 90%;
-    }
 `;
 
 const Img1 = styled.img`
