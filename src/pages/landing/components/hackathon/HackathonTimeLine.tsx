@@ -40,7 +40,7 @@ const HackathonTimeLine = () => {
                         src={HackathonCalendar}
                         alt="해커톤 로고 이미지"
                     />
-                    타임 라인
+                    타임라인
                 </GuideTypography>
             </TitleWrapper>
             <GuideSubTypography weight="600" color="#868C94">
