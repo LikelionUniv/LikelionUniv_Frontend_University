@@ -16,7 +16,7 @@ const Detail = () => {
         <DetailWrapper>
             <Wrapper>
                 <MoreTitle>
-                    멋쟁이사자처럼 대학홈페이지를 만든 사람이 궁금하다면?
+                    멋쟁이사자처럼 대학 홈페이지를 만든 사람이 궁금하다면?
                 </MoreTitle>
                 <MoreBtn onClick={handleClick}>
                     제작자 보기
