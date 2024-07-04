@@ -74,9 +74,9 @@ export const ModalTitle = styled.div`
 `;
 
 export const ModalText = styled.div`
-    display: flex;
     font-size: 20px;
     align-items: center;
+    text-align: center;
     line-height: 150%;
     font-weight: 600;
     margin: 8px 110px 0 111px;

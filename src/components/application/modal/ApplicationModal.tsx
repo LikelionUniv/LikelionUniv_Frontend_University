@@ -8,6 +8,7 @@ interface ApplicationModalProps {
     header: string;
     title: string;
     content: string;
+    content2?: string;
     button: string;
 }
 
@@ -18,6 +19,7 @@ const ApplicationModal: React.FC<ApplicationModalProps> = ({
     header,
     title,
     content,
+    content2,
     button,
 }) => {
     return (

@@ -24,9 +24,9 @@ interface FormId {
 const trackOption = ['PM', 'DESIGNER', 'FRONTEND', 'BACKEND'];
 
 const ApplicationModalTxt = {
-    header: '12기 중앙해커톤 참가 신청',
+    header: '12기 중앙 해커톤 참가 신청',
     title: '모든 정보를 정확하게 입력하셨나요?',
-    content: '참가신청 기간 동안 신청정보 수정이 가능합니다.',
+    content: '참가 신청 기간 동안 신청 정보 수정이 가능합니다.',
     button: '수정하기',
 };
 
