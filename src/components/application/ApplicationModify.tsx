@@ -89,7 +89,7 @@ const ApplicationForm = () => {
         control,
         setValue,
         trigger,
-        formState: { dirtyFields, errors },
+        formState: { dirtyFields, errors, isValid },
     } = useForm<ApplicationFormType>({
         mode: 'onChange',
         resolver: zodResolver(applicationSchema),
@@ -178,7 +178,9 @@ const ApplicationForm = () => {
             );
             setValue(
                 'reasonForNotOffline',
-                hackathonData.reasonForNotOffline === '기본값' ? '기본값' : '',
+                hackathonData.reasonForNotOffline === null
+                    ? '기본값'
+                    : hackathonData.reasonForNotOffline,
             );
         }
     }, [hackathonData]);
@@ -206,7 +208,7 @@ const ApplicationForm = () => {
     };
 
     const onSubmit = (data: ApplicationFormType) => {
-        if (!data.offlineParticipation && !data.reasonForNotOffline) return;
+        // if (!data.offlineParticipation && !data.reasonForNotOffline) return;
         let datas = {
             phone: data.phone,
             hackathonParts: data.hackathonParts,
@@ -452,7 +454,10 @@ const ApplicationForm = () => {
                                 <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
                             </>
                         )}
-                        <A.Button type="submit" disabled={false}>
+                        <A.Button
+                            type="submit"
+                            disabled={!isValid || selectedParts.length === 0}
+                        >
                             신청하기
                         </A.Button>
                         {isModalOpen && (

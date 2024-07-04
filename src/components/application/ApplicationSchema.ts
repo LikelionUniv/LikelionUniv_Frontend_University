@@ -53,7 +53,7 @@ export const applicationSchema = z.object({
         .max(100, {
             message: '최대 100자까지 입력가능해요.',
         })
-        // .min(1)
+
         .optional(),
     // .nullish(),
 });
