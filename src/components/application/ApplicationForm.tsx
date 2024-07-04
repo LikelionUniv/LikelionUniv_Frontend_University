@@ -246,7 +246,7 @@ const ApplicationForm = () => {
                                     <A.StyledCheckedIcon />
                                 )}
                             </A.Ndiv>
-                            <A.Nform {...register('email')} />
+                            <A.Nform {...register('email')} disabled />
                             <A.Ndiv>
                                 학교
                                 {!userinfo?.universityName ? (

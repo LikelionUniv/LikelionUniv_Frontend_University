@@ -178,7 +178,9 @@ const ApplicationForm = () => {
             );
             setValue(
                 'reasonForNotOffline',
-                hackathonData.reasonForNotOffline === '기본값' ? '기본값' : '',
+                hackathonData.reasonForNotOffline === null
+                    ? '기본값'
+                    : hackathonData.reasonForNotOffline,
             );
         }
     }, [hackathonData]);
@@ -255,7 +257,7 @@ const ApplicationForm = () => {
                                 <A.StyledCheckedIcon />
                             )}
                         </A.Ndiv>
-                        <A.Nform {...register('email')} />
+                        <A.Nform {...register('email')} disabled />
                         <A.Ndiv>
                             학교
                             {!userinfo?.universityName ? (
@@ -300,7 +302,8 @@ const ApplicationForm = () => {
                         />
                         <A.Ndiv>
                             파트 선택
-                            {errors.hackathonParts ? (
+                            {errors.hackathonParts ||
+                            selectedParts.length < 1 ? (
                                 <A.StyledNotCheckedIcon />
                             ) : (
                                 <A.StyledCheckedIcon />
@@ -452,7 +455,10 @@ const ApplicationForm = () => {
                                 <A.Ntxt>*최대 100자까지 입력가능해요.</A.Ntxt>
                             </>
                         )}
-                        <A.Button type="submit" disabled={false}>
+                        <A.Button
+                            type="submit"
+                            disabled={false || selectedParts.length === 0}
+                        >
                             신청하기
                         </A.Button>
                         {isModalOpen && (

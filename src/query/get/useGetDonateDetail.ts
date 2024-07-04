@@ -31,7 +31,7 @@ interface DonateDetailParam {
 function useGetDonateDetail({ donationHistoryId }: useGetDonateDetailProps) {
     const fetchDonateDetail = async () => {
         const response = await request<null, IDonateDetail, DonateDetailParam>({
-            uri: `/api/v1/donation_history/${donationHistoryId}`,
+            uri: `/api/v1/donation-history/${donationHistoryId}`,
             method: 'get',
             params: {
                 donationHistoryId,
