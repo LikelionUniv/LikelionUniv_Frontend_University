@@ -71,16 +71,16 @@ const DeadlineInfo = styled.div`
     font-weight: 700;
     line-height: 150%;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: clamp(4px, 2vh, 13px);
 
     @media (max-width: 767px) {
         font-size: 20px;
-        margin-bottom: 13px;
+        margin-bottom: clamp(4px, 2vh, 6px);
     }
 
     @media (max-width: 360px) {
         font-size: 10px;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 `;
 
@@ -92,9 +92,10 @@ const Info = styled.div`
     font-weight: 700;
     line-height: 150%;
     text-align: center;
+    margin-bottom: 12px;
 
     @media (max-width: 767px) {
-        font-size: 40px;
+        font-size: clamp(30px, 2vw, 40px);
     }
 
     @media (max-width: 360px) {

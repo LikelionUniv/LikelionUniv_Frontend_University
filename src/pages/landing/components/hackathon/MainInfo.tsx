@@ -18,6 +18,8 @@ const MainInfo = () => {
                     <TitleImg src={title} />
                     <HackathonPart />
                 </Container>
+            </FirstWrapper>
+            <LineWrapper>
                 <MG.Line>
                     {[1, 2].map(item => (
                         <div
@@ -42,7 +44,7 @@ const MainInfo = () => {
                         </div>
                     ))}
                 </MG.Line>
-            </FirstWrapper>
+            </LineWrapper>
 
             <TherdWrapper>
                 <Img3 src={check_g} alt="" />
@@ -68,8 +70,13 @@ const MainWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+`;
+
+const FirstWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: auto;
     align-items: center;
-    justify-content: center;
 
     background: linear-gradient(
         to bottom,
@@ -82,10 +89,10 @@ const MainWrapper = styled.div`
     @media (max-width: 767px) {
         background: linear-gradient(
             to bottom,
-            rgba(0, 0, 0, 0) 750px,
-            rgba(0, 0, 0, 0.3) 750px,
-            rgba(255, 146, 64, 0.3) 1220px,
-            transparent 1220px
+            rgba(0, 0, 0, 0) 500px,
+            rgba(0, 0, 0, 0.3) 500px,
+            rgba(255, 146, 64, 0.3) 950px,
+            transparent 950px
         );
     }
 
@@ -100,11 +107,8 @@ const MainWrapper = styled.div`
     }
 `;
 
-const FirstWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
+const LineWrapper = styled.div`
     width: 100%;
-    align-items: center;
 `;
 
 const Container = styled.div`
@@ -134,7 +138,7 @@ const TitleImg = styled.img`
     }
 
     @media (max-width: 767px) {
-        margin-top: 447px;
+        margin-top: clamp(287px, 2vh, 447px);
         width: 520px;
         width: 100%;
     }
@@ -204,6 +208,13 @@ const ImgWrapper = styled.div`
     margin-bottom: 40px;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 767px) {
+        width: clamp(320px, 2vw, 520px);
+    }
+    @media (max-width: 360px) {
+        width: clamp(200px, 2vw, 320px);
+    }
 `;
 
 const Img1 = styled.img`
