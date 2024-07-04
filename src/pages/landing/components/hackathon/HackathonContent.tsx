@@ -149,7 +149,7 @@ const August6Content = () => (
             <Circle />
             <TimelineContent>
                 <TimelineTitle>저녁식사</TimelineTitle>
-                18~19시
+                <TimeLineSubTitle>18~19시</TimeLineSubTitle>
                 <TimelineList>
                     <TimeLineText>간단한 저녁이 제공됩니다.</TimeLineText>
                 </TimelineList>
@@ -208,7 +208,7 @@ const August7Content = () => (
             <Circle />
             <TimelineContent>
                 <TimelineTitle>시상식 및 폐회식</TimelineTitle>
-                5~6시
+                <TimeLineSubTitle>5~6시</TimeLineSubTitle>
                 <TimelineList>
                     <TimeLineText>
                         발표 내용을 바탕으로 1,2,3등을 가려 시상이 진행됩니다.
