@@ -13,15 +13,15 @@ export default Prize;
 
 const PrizeWrapper = styled.div`
     width: 100%;
-    margin-top: 160px;
+    margin-top: clamp(120px, 2vh, 160px);
     display: flex;
     justify-content: center;
 
     @media (max-width: 767px) {
-        margin-top: 120px;
+        margin-top: clamp(60px, 2vh, 120px);
     }
 
     @media (max-width: 360px) {
-        margin-top: 60px;
+        margin-top: clamp(40px, 2vh, 60px);
     }
 `;
