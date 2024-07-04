@@ -10,39 +10,41 @@ import prize3_w from '../../../../img/landing/prize3_w.png';
 const HackathonPrize = () => {
     return (
         <PrizeWrapper>
-            <PrizeContainer>
-                <Title>
-                    12기 중앙 해커톤 수상 혜택
-                    <Img src={bulb} alt="" />
-                </Title>
-            </PrizeContainer>
-            <PrizePost>
-                <ImageWrapper>
-                    <PrizeImg src={prize1} alt="" />
-                    <PrizeImgW src={prize2_w} alt="" />
-                </ImageWrapper>
-                <ImageWrapper>
-                    <PrizeImg src={prize2} alt="" />
-                    <PrizeImgW src={prize2_w} alt="" />
-                </ImageWrapper>
-                <ImageWrapper>
-                    <PrizeImg src={prize3} alt="" />
-                    <PrizeImgW src={prize3_w} alt="" />
-                </ImageWrapper>
-            </PrizePost>
-            <PrizeContainer>
-                <Title>
-                    12기 중앙 해커톤
-                    <Img src={footprint} alt="" />
-                    후원사
-                </Title>
-            </PrizeContainer>
-            <Sponsor>
-                <SponsorP>
-                    멋쟁이사자처럼 대학 중앙 해커톤이 개최될 수 있도록 도움을
-                    주신 후원사를 소개합니다.
-                </SponsorP>
-            </Sponsor>
+            <PrizeInWrapper>
+                <PrizeContainer>
+                    <Title>
+                        12기 중앙 해커톤 수상 혜택
+                        <Img src={bulb} alt="" />
+                    </Title>
+                </PrizeContainer>
+                <PrizePost>
+                    <ImageWrapper>
+                        <PrizeImg src={prize1} alt="" />
+                        <PrizeImgW src={prize2_w} alt="" />
+                    </ImageWrapper>
+                    <ImageWrapper>
+                        <PrizeImg src={prize2} alt="" />
+                        <PrizeImgW src={prize2_w} alt="" />
+                    </ImageWrapper>
+                    <ImageWrapper>
+                        <PrizeImg src={prize3} alt="" />
+                        <PrizeImgW src={prize3_w} alt="" />
+                    </ImageWrapper>
+                </PrizePost>
+                <PrizeContainer>
+                    <Title>
+                        12기 중앙 해커톤
+                        <Img src={footprint} alt="" />
+                        후원사
+                    </Title>
+                </PrizeContainer>
+                <Sponsor>
+                    <SponsorP>
+                        멋쟁이사자처럼 대학 중앙 해커톤이 개최될 수 있도록
+                        도움을 주신 후원사를 소개합니다.
+                    </SponsorP>
+                </Sponsor>
+            </PrizeInWrapper>
         </PrizeWrapper>
     );
 };
@@ -54,13 +56,29 @@ const PrizeWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 104px;
+    margin-right: 104px;
 
     @media (max-width: 767px) {
         width: 80%;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     @media (max-width: 360px) {
         width: 90%;
+    }
+`;
+
+const PrizeInWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    @media (max-width: 767px) {
+        width: 100%;
     }
 `;
 
@@ -167,8 +185,6 @@ const PrizeImg = styled.img`
 const PrizeImgW = styled.img`
     max-width: 100%;
     height: auto;
-    margin-left: 10px;
-    margin-right: 10px;
     display: none;
 
     @media (max-width: 360px) {
@@ -197,6 +213,7 @@ const Img = styled.img`
 
 const PrizePost = styled.div`
     max-width: 1200px;
+    width: 100%;
     padding-top: 40px;
     display: flex;
     align-items: center;
@@ -221,4 +238,8 @@ const ImageWrapper = styled.div`
     justify-content: center;
     align-items: center;
     padding: 0 10px;
+
+    @media (max-width: 767px) {
+        padding: 0 5px;
+    }
 `;

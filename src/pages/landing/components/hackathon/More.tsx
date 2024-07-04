@@ -116,13 +116,13 @@ const MoreBtn = styled.div`
     line-height: 150%; /* 30px */
 
     @media (max-width: 767px) {
-        width: clamp(320px, 2vw, 530px);
+        width: clamp(320px, 2vw, 523px);
         height: 48px;
         font-size: 16px;
     }
     @media (max-width: 360px) {
         width: clamp(250px, 2vw, 320px);
-        height: 48px;
+        height: 40px;
         font-size: 16px;
     }
     &:hover {
@@ -130,4 +130,11 @@ const MoreBtn = styled.div`
     }
 `;
 
-const Img = styled.img``;
+const Img = styled.img`
+    @media (max-width: 767px) {
+        width: clamp(30px, 2vw, 36px);
+    }
+    @media (max-width: 360px) {
+        width: clamp(20px, 2vw, 30px);
+    }
+`;
