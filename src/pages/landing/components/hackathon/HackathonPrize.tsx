@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 import footprint from '../../../../img/landing/footprint.png';
 import bulb from '../../../../img/landing/bulb.png';
-import prize1 from '../../../../img/landing/prize1.png';
-import prize2 from '../../../../img/landing/prize2.png';
-import prize3 from '../../../../img/landing/prize3.png';
-import prize2_w from '../../../../img/landing/prize2_w.png';
-import prize3_w from '../../../../img/landing/prize3_w.png';
+import prize1 from '../../../../img/landing/Prize1.svg';
+import prize2 from '../../../../img/landing/Prize2.svg';
+import prize3 from '../../../../img/landing/Prize3.svg';
+import prize1_w from '../../../../img/landing/Prize1_w.svg';
+import prize2_w from '../../../../img/landing/Prize2_w.svg';
+import prize3_w from '../../../../img/landing/Prize3_w.svg';
 
 const HackathonPrize = () => {
     return (
@@ -20,7 +21,7 @@ const HackathonPrize = () => {
                 <PrizePost>
                     <ImageWrapper>
                         <PrizeImg src={prize1} alt="" />
-                        <PrizeImgW src={prize2_w} alt="" />
+                        <PrizeImgW src={prize1_w} alt="" />
                     </ImageWrapper>
                     <ImageWrapper>
                         <PrizeImg src={prize2} alt="" />

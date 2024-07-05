@@ -1,9 +1,9 @@
 import { styled } from 'styled-components';
 import HackathonPart from './HackathonPart';
-import title from '../../../../img/landing/title.png';
+import title from '../../../../img/landing/title.svg';
 import { ReactComponent as PixelFireworksIcon } from '../../../../img/landing/pixel_fireworks.svg';
 import { ReactComponent as PixelSingingIcon } from '../../../../img/landing/pixel_singing.svg';
-import info from '../../../../img/landing/info.png';
+import info from '../../../../img/landing/info.svg';
 import * as MG from '../MainGraphic.style';
 import growl_to_world from '../../../../img/landing/growl_to_world.png';
 import two_check from '../../../../img/landing/two_check.png';
@@ -247,6 +247,7 @@ const Img2 = styled.img`
 const TherdWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    justify-content: center;
 `;
 
 const Img3 = styled.img`
