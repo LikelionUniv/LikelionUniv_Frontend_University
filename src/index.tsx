@@ -8,6 +8,7 @@ import router from './Router';
 import './styles/font.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ReactGA from 'react-ga';
 
 // stale time 10분으로 설정
 const queryClient = new QueryClient({
@@ -19,6 +20,14 @@ const queryClient = new QueryClient({
         },
     },
 });
+
+//Google Analytics
+// const gaTrackingId = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID; // 환경 변수에 저장된 추적ID 가져오기
+
+// if (gaTrackingId) {
+//     ReactGA.initialize(gaTrackingId, { debug: true });
+//     ReactGA.pageview(window.location.pathname);
+// }
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement,
