@@ -2,18 +2,18 @@ import * as IF from '../Information.style';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay } from 'swiper';
 
-import logo1 from '../../../../img/landing/sponsor/logo1.png';
-import logo2 from '../../../../img/landing/sponsor/logo2.png';
-import logo3 from '../../../../img/landing/sponsor/logo3.png';
-import logo4 from '../../../../img/landing/sponsor/logo4.png';
-import logo5 from '../../../../img/landing/sponsor/logo5.png';
-import logo6 from '../../../../img/landing/sponsor/logo6.png';
-import logo7 from '../../../../img/landing/sponsor/logo7.png';
-import logo8 from '../../../../img/landing/sponsor/logo8.png';
-import logo9 from '../../../../img/landing/sponsor/logo9.png';
-import logo10 from '../../../../img/landing/sponsor/logo10.png';
-import logo11 from '../../../../img/landing/sponsor/logo11.png';
-import logo12 from '../../../../img/landing/sponsor/logo12.png';
+import logo1 from '../../../../img/landing/sponsor/logo1.svg';
+import logo2 from '../../../../img/landing/sponsor/logo2.svg';
+import logo3 from '../../../../img/landing/sponsor/logo3.svg';
+import logo4 from '../../../../img/landing/sponsor/logo4.svg';
+import logo5 from '../../../../img/landing/sponsor/logo5.svg';
+import logo6 from '../../../../img/landing/sponsor/logo6.svg';
+import logo7 from '../../../../img/landing/sponsor/logo7.svg';
+import logo8 from '../../../../img/landing/sponsor/logo8.svg';
+import logo9 from '../../../../img/landing/sponsor/logo9.svg';
+import logo10 from '../../../../img/landing/sponsor/logo10.svg';
+import logo11 from '../../../../img/landing/sponsor/logo11.svg';
+import logo12 from '../../../../img/landing/sponsor/logo12.svg';
 
 const SponsorInfo = () => {
     SwiperCore.use([Autoplay]);
