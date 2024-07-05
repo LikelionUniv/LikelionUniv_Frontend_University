@@ -12,7 +12,7 @@ interface Userinfo {
 function useGetUserInfo() {
     const fetchUserInfo = async () => {
         const responseUserinfo = await request<null, Userinfo, null>({
-            uri: '/api/v1/auth/userinfo',
+            uri: '/api/v1/auth/userInfo',
             method: 'get',
         });
 

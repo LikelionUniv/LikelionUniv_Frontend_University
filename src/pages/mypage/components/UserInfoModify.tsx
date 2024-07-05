@@ -65,7 +65,6 @@ const UserInfoModify = () => {
                 let label: string;
                 if (field === 'part') {
                     label = findLabelByValue(selectedOption.value);
-                    console.log(label);
                 }
                 setFormState(prev => ({
                     ...prev,

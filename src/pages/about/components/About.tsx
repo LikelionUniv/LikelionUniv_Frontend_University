@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 import Header from './Header';
-import Developers from './Developers';
+import Developers1th from './Developers1th';
+import DeveloperNav from './DeveloperNav';
+import Developers2th from './Developers2th';
+import { useState } from 'react';
 
 const About = () => {
+    const [aboutTh, setAboutTh] = useState<1 | 2>(2);
     return (
         <Wrapper>
             <Header />
-            <Developers />
+            <DeveloperNav aboutTh={aboutTh} setAboutTh={setAboutTh} />
+            {aboutTh === 1 ? <Developers1th /> : <Developers2th />}
         </Wrapper>
     );
 };

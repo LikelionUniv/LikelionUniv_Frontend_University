@@ -133,12 +133,11 @@ const BackgroundOverlay = styled.div`
 `;
 
 export const Wrapper = styled.div`
-    width: fit-content;
-    height: fit-content;
+    /* width: fit-content;
+    height: fit-content; */
     background-color: white;
     padding: 32px 24px 24px 24px;
     min-width: 588px;
-    min-height: 600px;
     border-radius: 20px;
 
     position: fixed;
@@ -146,6 +145,12 @@ export const Wrapper = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 999;
+    @media screen and (max-width: 767px) {
+        min-width: 80%;
+        top: 54%;
+        height: 80%;
+        overflow: scroll;
+    }
 `;
 
 const Button = styled.div`
@@ -156,7 +161,6 @@ const Button = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
 
     color: #fff;
     border: none;
@@ -165,6 +169,11 @@ const Button = styled.div`
     background-color: #ff7710;
 
     border-radius: 8px;
+    @media screen and (max-width: 767px) {
+        margin: 0;
+        width: 100%;
+        padding: 4px 0;
+    }
 `;
 const Title = styled.div`
     font-size: 20px;
@@ -188,8 +197,11 @@ export const Content = styled.div`
     margin: 20px;
 
     .BoxName {
-        margin: 20px 0px 20px 0px;
+        margin: 20px 0;
         font-weight: 700;
+        @media screen and (max-width: 767px) {
+            margin: 5px 0;
+        }
     }
 
     .InputBox {
@@ -201,25 +213,34 @@ export const Content = styled.div`
         border: 1px solid #dcdfe3;
         margin-bottom: 16px;
         align-items: center;
+        @media screen and (max-width: 767px) {
+            width: 93%;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        margin: 0;
     }
 `;
 
 const Divider = styled.div`
     height: 1px;
+
     background-color: var(--Grey-900, #dcdfe3);
     width: 100%;
-    margin: 26px 0px 26px 0px;
+    margin: 26px 0px;
 `;
 
 const DropDownContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    @media screen and (max-width: 767px) {
+        flex-direction: column;
+    }
 `;
 
 const DropDown = styled.div`
     flex: 1;
     margin: 0px 20px 20px 20px;
-    width: 100%;
 
     .DropdownName {
         margin-bottom: 10px;
@@ -228,8 +249,19 @@ const DropDown = styled.div`
 
     .DropdownList {
         padding-left: 20px;
+        padding-right: 20px;
         width: 95%;
+        min-width: 140px;
         height: 42px;
         border: 1px solid #dcdfe3;
+        @media screen and (max-width: 767px) {
+            width: 100%;
+            height: 48px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+    }
+    @media screen and (max-width: 767px) {
+        margin: 0;
     }
 `;

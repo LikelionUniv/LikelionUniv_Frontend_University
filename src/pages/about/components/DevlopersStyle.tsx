@@ -30,28 +30,6 @@ export const Wrapper = styled.div`
     padding: 1rem;
 
     ${responsiveWidth}
-
-    .year {
-        border-bottom: 1px solid #eaecee;
-        width: 100%;
-        position: relative;
-        margin-bottom: 39.5px;
-        .first {
-            color: var(--Grey-900, #212224);
-            width: fit-content;
-            margin: 0;
-            border-bottom: 3px solid var(--Grey-900, #212224);
-            text-align: left;
-            font-size: 20px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: 150%;
-            padding: 5px 0;
-            z-index: 20;
-            position: absolute;
-            bottom: 0;
-        }
-    }
 `;
 
 export const Container = styled.div`
@@ -66,7 +44,6 @@ export const Container = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 140%;
-
         @media screen and (max-width: 500px) {
             font-size: 22px;
         }
@@ -75,7 +52,6 @@ export const Container = styled.div`
 
 export const PeopleBox = styled.div`
     width: 100%;
-    margin-top: 24px;
     display: grid;
     grid-gap: 24px;
     grid-template-columns: repeat(3, minmax(auto, 1fr));
@@ -98,7 +74,7 @@ export const InfoBox = styled.div`
     width: 100%;
     max-width: 384px;
     height: 84px;
-    margin: 0;
+    margin: 20px 0;
     .image {
         background-color: transparent;
         border-radius: 50%;
@@ -121,6 +97,20 @@ export const InfoBox = styled.div`
     .from,
     .position {
         margin: 0;
+    }
+    .email {
+        background-color: var(--Orange-600, #ff7710);
+        display: flex;
+        align-items: center;
+        padding: 5px 10px;
+        border-radius: 15px;
+        margin-top: 10px;
+        font-weight: 600;
+        color: var(--Orange-100, #fff2e8);
+        font-size: 12px;
+        img {
+            margin-right: 5px;
+        }
     }
 
     .name {
@@ -163,5 +153,5 @@ export const Divider = styled.div`
     height: 1px;
     background-color: var(--Grey-900, #212224);
     width: 100%;
-    margin: 32px 0;
+    margin: 70px 0;
 `;

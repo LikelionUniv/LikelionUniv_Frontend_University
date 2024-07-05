@@ -15,9 +15,7 @@ const ChatList = () => {
     }
 
     // 비동기 처리
-    useEffect(() => {
-        console.log(activeUserName);
-    }, [activeUserName]);
+    useEffect(() => {}, [activeUserName]);
 
     return (
         <L.Container>

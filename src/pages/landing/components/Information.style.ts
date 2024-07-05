@@ -194,6 +194,12 @@ export const SwiperWrapper = styled.div`
     overflow-x: hidden;
     padding-bottom: 165px;
 
+    @media (max-width: 767px) {
+        padding-bottom: 120px;
+    }
+    @media (max-width: 360px) {
+        padding-bottom: 60px;
+    }
     .swiper-container {
         width: 984px !important;
         @media (max-width: 1280px) {

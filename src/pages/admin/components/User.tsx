@@ -61,6 +61,9 @@ const Title = styled.div`
     font-weight: 700;
     color: var(--Grey-900, #212224);
     line-height: 150%;
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
 `;
 
 const UniversityName = styled.div`
@@ -71,5 +74,9 @@ const UniversityName = styled.div`
     border-radius: 42px;
     padding: 6px 12px 6px 12px;
     margin: 12px;
+
     background: #fff2e8;
+    @media screen and (max-width: 380px) {
+        margin: 0px;
+    }
 `;

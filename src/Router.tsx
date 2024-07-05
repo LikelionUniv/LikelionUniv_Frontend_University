@@ -18,9 +18,7 @@ import Userpage from './pages/userpage/Userpage';
 import CommunityDetail from './pages/community/components/detail/CommunityDetail';
 import CommunityPage from './pages/community/CommunityPage';
 import DonatePage from './pages/donate/DonatePage';
-
 import ProtectedRouter from './components/ProtectedRouter';
-
 import AdminProtectedRouter from './components/AdminProtectedRouter';
 import NotFound from './pages/error/NotFound';
 import Admin from './pages/admin/Admin';
@@ -35,6 +33,9 @@ import ProjectList from './pages/project/components/ProjectList';
 import ProjectRegisterWrapper from './pages/project/register/ProjectRegisterWrapper';
 import ProjectUpdateWrapper from './pages/project/update/ProjectUpdateWrapper';
 import UnivRecruit from './pages/univRecruit/UnivRecruit';
+import HackathonPage from './pages/admin/components/hackathon/hackathonPage';
+import HackathonsApplication from './routes/HackathonsApplicationPage';
+import HackathonsApplicationPage from './routes/HackathonsModifyPage';
 
 const router = createBrowserRouter([
     {
@@ -178,11 +179,23 @@ const router = createBrowserRouter([
                         path: 'recruitalarm',
                         element: <RecruitAlarm />,
                     },
+                    {
+                        path: 'hackathon',
+                        element: <HackathonPage />,
+                    },
                 ],
             },
             {
                 path: '*',
                 element: <NotFound />,
+            },
+            {
+                path: 'hackathons',
+                element: <HackathonsApplication />,
+            },
+            {
+                path: 'hackathons/:hackathonId',
+                element: <HackathonsApplicationPage />,
             },
         ],
     },

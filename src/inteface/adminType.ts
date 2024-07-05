@@ -26,6 +26,26 @@ export interface User {
     ordinal: number;
     role: string;
     univName?: string;
+    universityName?: string;
+    phone?: string;
+    hackathonPart?: string;
+    offlineParticipation?: boolean;
+    teamName?: string;
+    reasonForNotOffline?: null | string;
+    hackathonFormId?: number;
+    hackathonParts?: string[];
+}
+export interface Hackathons {
+    hackathonFormId: number;
+    name: string;
+    email: string;
+    universityName: string;
+    major: string;
+    phone: string;
+    hackathonPart: string;
+    teamName: string;
+    offlineParticipation: boolean;
+    reasonForNotOffline: string;
 }
 export interface OutletContext {
     userinfo: IuserProfile;

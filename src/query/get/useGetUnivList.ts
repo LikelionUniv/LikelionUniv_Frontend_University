@@ -9,7 +9,7 @@ interface Universities {
 function useGetUnivList() {
     const fetchUnivList = async () => {
         const response = await request<null, Universities[], null>({
-            uri: '/api/v1/university/',
+            uri: '/api/v1/universities/',
             method: 'get',
         });
 

@@ -15,6 +15,8 @@ interface IuseServerSidePagination {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
+    keyword?: string;
 }
 
 interface ResponseServerSidePagination<T> {
@@ -32,6 +34,7 @@ interface ReturnuseServerSidePagination<T> {
     curPageItem: T[];
     renderPaginationBtn: () => JSX.Element;
     pageNum: number;
+    refetch: () => void;
 }
 
 interface Pageable {
@@ -45,6 +48,8 @@ interface Pageable {
     oc?: string;
     role?: string;
     univName?: string;
+    isExcelData?: boolean;
+    keyword?: string;
 }
 
 function useServerSidePagination<T>({
@@ -58,12 +63,13 @@ function useServerSidePagination<T>({
     oc,
     role,
     univName,
+    isExcelData,
+    keyword,
 }: IuseServerSidePagination): ReturnuseServerSidePagination<T> {
     const [data, setData] = useState<T[]>([]);
     const [totalElements, setTotalElements] = useState<number>(0);
 
     const [pageInfo, setPageInfo] = useSearchParams();
-
     // (if) 페이지 정보가 없을 때 pageInfo를 채워넣음
     // (else if) page=1 이 아니면서 검색을 했을때 page=1, currentPage=1 로 변경
     useEffect(() => {
@@ -77,7 +83,7 @@ function useServerSidePagination<T>({
             setCurrentPage(1);
         }
         // eslint-disable-next-line
-    }, [search, univName]);
+    }, [search, univName, keyword]);
 
     // 현재 페이지 정보를 불러옴
     const getCurrentPageInfo = () => {
@@ -116,13 +122,15 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
+                keyword,
             },
         });
 
         return response.data;
     };
 
-    const { data: cachingData } = useSuspenseQuery({
+    const { data: cachingData, refetch } = useSuspenseQuery({
         queryKey: [
             'get-pagiable',
             {
@@ -137,6 +145,8 @@ function useServerSidePagination<T>({
                 oc,
                 role,
                 univName,
+                isExcelData,
+                keyword,
             },
         ],
         queryFn: fetchPagiableData,
@@ -174,6 +184,7 @@ function useServerSidePagination<T>({
         curPageItem: data,
         renderPaginationBtn,
         pageNum: currentPage,
+        refetch,
     };
 }
 

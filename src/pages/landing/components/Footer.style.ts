@@ -252,6 +252,7 @@ export const Notification = styled.div`
 
         .btn {
             width: 230px;
+
             @media (max-width: 1000px) {
                 width: 25%;
             }
@@ -278,6 +279,7 @@ export const Notification = styled.div`
             border: none;
             outline: none;
             cursor: pointer;
+
             &:hover {
                 background-color: #f6f8f9;
             }

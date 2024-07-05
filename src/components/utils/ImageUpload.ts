@@ -39,7 +39,6 @@ class ImageUpload {
     static async enrollImagesToS3(file: File, presignedUrl: string) {
         const response = await axios.put(presignedUrl, file);
         if (response.status !== 200) {
-            console.log('S3 오류');
             return;
         }
     }

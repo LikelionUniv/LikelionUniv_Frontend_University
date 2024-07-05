@@ -129,7 +129,8 @@ const Footer = () => {
                         멋쟁이사자처럼 대학 홈페이지를 만든 사람들이 궁금하다면?
                     </div>
                     <a href="/about" className="btn">
-                        제작자 보기 <PixelArrowIcon />
+                        제작자 보기
+                        <PixelArrowIcon />
                     </a>
                 </div>
             </F.Makers>

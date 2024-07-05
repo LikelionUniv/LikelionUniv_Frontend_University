@@ -17,7 +17,11 @@ function DeleteUser({ id, userName }: DeleteUserProps) {
         }
     };
 
-    return <button onClick={deleteUser}>삭제</button>;
+    return (
+        <button className="mobileDelete" onClick={deleteUser}>
+            삭제
+        </button>
+    );
 }
 
 export default DeleteUser;
