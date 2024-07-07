@@ -51,5 +51,4 @@ export default UserList;
 const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
-    background-color: red;
 `;
