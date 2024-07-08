@@ -90,26 +90,26 @@ const serviceList: serviceType[] = [
     {
         id: 2,
         name: '쿼드해시',
-        logo: logo4,
+        logo: logo3,
         url: 'https://www.instagram.com/saza.gaza/',
         backgroundColor: '#FC3',
     },
     {
         id: 3,
         name: '골스튜디오',
-        logo: logo6,
+        logo: logo4,
         url: 'https://goalstudio.com',
     },
     {
         id: 4,
         name: '체크오',
-        logo: logo8,
+        logo: logo5,
         url: 'https://checko.kr/',
     },
     {
         id: 5,
         name: '멋사 넥스트',
-        logo: logo3,
+        logo: logo6,
         url: 'https://www.likelion-next.com/',
     },
     {
@@ -121,19 +121,19 @@ const serviceList: serviceType[] = [
     {
         id: 7,
         name: '뉴믹스커피',
-        logo: logo10,
+        logo: logo8,
         url: 'https://www.newmixcoffee.com/',
     },
     {
         id: 8,
         name: '해시아웃',
-        logo: logo5,
+        logo: logo9,
         url: 'https://hashout.app/',
     },
     {
         id: 9,
         name: '타이거 라들러',
-        logo: logo9,
+        logo: logo10,
         url: 'https://www.instagram.com/tigerbeer_korea/',
     },
     {
