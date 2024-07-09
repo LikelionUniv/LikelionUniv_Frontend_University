@@ -87,7 +87,6 @@ const TimerContainer = styled.div`
     border-radius: 24px;
     height: 240px;
     max-width: 1200px;
-    width: 100%;
     margin-left: 10px;
     margin-right: 10px;
 

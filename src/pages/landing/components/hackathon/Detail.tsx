@@ -102,8 +102,7 @@ const MoreBtn = styled.div`
     line-height: 150%; /* 30px */
 
     @media (max-width: 767px) {
-        /* width: clamp(360px, 3vw, 523px); */
-        width: 320px;
+        width: clamp(290px, 3vw, 523px);
         height: 48px;
         font-size: 16px;
     }
