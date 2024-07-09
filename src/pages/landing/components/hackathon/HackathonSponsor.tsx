@@ -14,6 +14,7 @@ import logo9 from '../../../../img/landing/sponsor/logo9.svg';
 import logo10 from '../../../../img/landing/sponsor/logo10.svg';
 import logo11 from '../../../../img/landing/sponsor/logo11.svg';
 import logo12 from '../../../../img/landing/sponsor/logo12.svg';
+import { styled } from 'styled-components';
 
 const SponsorInfo = () => {
     SwiperCore.use([Autoplay]);
@@ -74,6 +75,7 @@ type serviceType = {
     url: string;
     backgroundColor?: string;
 };
+
 const serviceList: serviceType[] = [
     {
         id: 0,

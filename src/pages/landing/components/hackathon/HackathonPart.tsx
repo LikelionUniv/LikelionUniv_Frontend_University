@@ -45,7 +45,7 @@ const PartButton = styled.div`
     font-size: 28px;
     font-style: normal;
 
-    width: clamp(530px, 2vw, 580px);
+    width: clamp(520px, 2vw, 580px);
     height: auto;
 
     cursor: pointer;
@@ -55,7 +55,7 @@ const PartButton = styled.div`
     }
 
     @media (max-width: 767px) {
-        width: 530px;
+        width: 520px;
         height: 64px;
         font-size: 20px;
     }
@@ -78,7 +78,7 @@ const PartButton = styled.div`
 `;
 
 const Info = styled.div`
-    margin: 21px 0px 20px 40px;
+    margin: 20px 0px 20px 40px;
     font-weight: bold;
 `;
 
