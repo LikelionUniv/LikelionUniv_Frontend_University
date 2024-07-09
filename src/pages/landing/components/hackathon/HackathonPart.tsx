@@ -45,11 +45,8 @@ const PartButton = styled.div`
     font-size: 28px;
     font-style: normal;
 
-    width: 580px;
+    width: clamp(530px, 2vw, 580px);
     height: auto;
-
-    margin-top: 120px;
-    margin-bottom: 148px;
 
     cursor: pointer;
 
@@ -58,20 +55,25 @@ const PartButton = styled.div`
     }
 
     @media (max-width: 767px) {
-        width: 520px;
+        width: 530px;
         height: 64px;
         font-size: 20px;
-        margin-top: 40px;
-        margin-bottom: clamp(255px, 2vh, 446px);
-        width: 300px;
     }
 
     @media (max-width: 360px) {
         width: 282px;
         height: 48px;
         font-size: 16px;
-        margin-top: 36px;
-        margin-bottom: 255px;
+    }
+    @media (max-width: 390px) {
+        width: 282px;
+        height: 48px;
+        font-size: 16px;
+    }
+    @media (max-width: 430px) {
+        width: 282px;
+        height: 48px;
+        font-size: 16px;
     }
 `;
 

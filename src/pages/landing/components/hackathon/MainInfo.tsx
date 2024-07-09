@@ -16,7 +16,9 @@ const MainInfo = () => {
             <FirstWrapper>
                 <Container>
                     <TitleImg src={title} />
-                    <HackathonPart />
+                    <Participation>
+                        <HackathonPart />
+                    </Participation>
                 </Container>
             </FirstWrapper>
             <LineWrapper>
@@ -124,6 +126,24 @@ const Container = styled.div`
 
     @media (max-width: 360px) {
         width: 90%;
+    }
+`;
+
+const Participation = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 120px;
+    margin-bottom: 148px;
+    width: 100%;
+
+    @media (max-width: 767px) {
+        margin-top: 40px;
+        margin-bottom: clamp(255px, 2vh, 446px);
+    }
+
+    @media (max-width: 360px) {
+        margin-top: 36px;
+        margin-bottom: 255px;
     }
 `;
 
