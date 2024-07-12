@@ -20,7 +20,13 @@ function User() {
         <Wrapper>
             <div className="TitleUniversity">
                 <Title>회원정보</Title>
-                <UniversityName>{universityName}</UniversityName>
+                {isAdmin ? (
+                    univName && (
+                        <UniversityName>{universityName}</UniversityName>
+                    )
+                ) : (
+                    <UniversityName>{universityName}</UniversityName>
+                )}
             </div>
             {isAdmin && (
                 <Nav>
