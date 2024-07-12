@@ -13,14 +13,19 @@ function User() {
     const { userinfo, isAdmin, isUniversityAdmin } =
         useOutletContext<OutletContext>();
     const [role, setRole] = useState<string | undefined>();
-
     const universityName = userinfo.universityName;
 
     return (
         <Wrapper>
             <div className="TitleUniversity">
                 <Title>회원정보</Title>
-                <UniversityName>{universityName}</UniversityName>
+                {isAdmin ? (
+                    univName && (
+                        <UniversityName>{universityName}</UniversityName>
+                    )
+                ) : (
+                    <UniversityName>{universityName}</UniversityName>
+                )}
             </div>
             {isAdmin && (
                 <Nav>
