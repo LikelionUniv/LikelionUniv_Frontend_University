@@ -2,12 +2,21 @@ import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import arrow from '../../../../img/landing/longrightarrow_s.png';
 import { startTransition } from 'react';
+import dayjs from 'dayjs';
 
 const HackathonPart = () => {
     const navigate = useNavigate();
 
     const handleClick = () => {
         const access_token = localStorage.getItem('access_token');
+
+        const deadline = dayjs('2024-07-14 23:59:59');
+
+        if (dayjs().isAfter(deadline)) {
+            alert('신청 마감되었습니다.');
+            return;
+        }
+
         if (access_token) {
             startTransition(() => {
                 navigate('/hackathons');
