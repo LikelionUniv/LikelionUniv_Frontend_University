@@ -2,16 +2,37 @@ import { styled } from 'styled-components';
 import HackathonTimer from './HackathonTimer';
 
 import notice from '../../../../img/landing/notice.png';
+import dayjs from 'dayjs';
+import { useRecoilState } from 'recoil';
+import {
+    deadlineTextState,
+    infoTextState,
+} from '../../../../atoms/HackathonDeadline';
+import { useEffect } from 'react';
 
 const TimeInfo = () => {
+    const [deadlineText, setDeadlineText] = useRecoilState(deadlineTextState);
+    const [infoText, setInfoText] = useRecoilState(infoTextState);
+
+    useEffect(() => {
+        const currentDate = dayjs();
+        const registrationDeadline = dayjs('2024-07-14 23:59:59');
+
+        if (currentDate.isBefore(registrationDeadline)) {
+            setDeadlineText('7월 14일 일요일 23시 59분 참가 신청 마감');
+            setInfoText('참가 신청 마감까지 남은 시간');
+        } else {
+            setDeadlineText('8월 6일 화요일~ 8월 7일 수요일');
+            setInfoText('중앙 해커톤 본선까지 남은 시간');
+        }
+    }, [setDeadlineText, setInfoText]);
+
     return (
         <TimerWrapper>
             <TimerInfo>
                 <NoticeImg src={notice} />
-                <DeadlineInfo>
-                    7월 14일 일요일 23시 59분 참가 신청 마감
-                </DeadlineInfo>
-                <Info>참가 신청 마감까지 남은 시간</Info>
+                <DeadlineInfo>{deadlineText}</DeadlineInfo>
+                <Info>{infoText}</Info>
             </TimerInfo>
             <HackathonTimer />
         </TimerWrapper>
