@@ -29,7 +29,7 @@ const calculateTimeLeft = (deadline: string) => {
     };
 };
 
-const HackathonTimer: React.FC = () => {
+const HackathonTimer = () => {
     const [timeLeft, setTimeLeft] = useRecoilState(timeLeftState);
     const [deadline, setDeadline] = useRecoilState(deadlineState);
 
