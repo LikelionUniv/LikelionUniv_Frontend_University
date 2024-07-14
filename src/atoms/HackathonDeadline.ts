@@ -10,12 +10,12 @@ interface TimeLeft {
 
 export const deadlineTextState = atom<string>({
     key: `deadlineTextState/${v1()}`,
-    default: '',
+    default: '7월 14일 일요일 23시 59분 참가 신청 마감',
 });
 
 export const infoTextState = atom<string>({
     key: `infoTextState/${v1()}`,
-    default: '',
+    default: '참가 신청 마감까지 남은 시간',
 });
 
 export const timeLeftState = atom<TimeLeft>({

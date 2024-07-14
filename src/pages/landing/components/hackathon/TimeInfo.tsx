@@ -15,16 +15,20 @@ const TimeInfo = () => {
     const [infoText, setInfoText] = useRecoilState(infoTextState);
 
     useEffect(() => {
-        const currentDate = dayjs();
-        const registrationDeadline = dayjs('2024-07-14 23:59:59');
+        const interval = setInterval(() => {
+            const currentDate = dayjs();
+            const registrationDeadline = dayjs('2024-07-14 23:59:59');
 
-        if (currentDate.isBefore(registrationDeadline)) {
-            setDeadlineText('7월 14일 일요일 23시 59분 참가 신청 마감');
-            setInfoText('참가 신청 마감까지 남은 시간');
-        } else {
-            setDeadlineText('8월 6일 화요일~ 8월 7일 수요일');
-            setInfoText('중앙 해커톤 본선까지 남은 시간');
-        }
+            if (currentDate.isBefore(registrationDeadline)) {
+                setDeadlineText('7월 14일 일요일 23시 59분 참가 신청 마감');
+                setInfoText('참가 신청 마감까지 남은 시간');
+            } else {
+                setDeadlineText('8월 6일 화요일 ~ 8월 7일 수요일');
+                setInfoText('중앙 해커톤 본선까지 남은 시간');
+            }
+        }, 1000);
+
+        return () => clearInterval(interval);
     }, [setDeadlineText, setInfoText]);
 
     return (
