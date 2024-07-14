@@ -189,10 +189,10 @@ const router = createBrowserRouter([
                 path: '*',
                 element: <NotFound />,
             },
-            {
-                path: 'hackathons',
-                element: <HackathonsApplication />,
-            },
+            // {
+            //     path: 'hackathons',
+            //     element: <HackathonsApplication />,
+            // },
             {
                 path: 'hackathons/:hackathonId',
                 element: <HackathonsApplicationPage />,
