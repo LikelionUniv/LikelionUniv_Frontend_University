@@ -20,9 +20,7 @@ function User() {
             <div className="TitleUniversity">
                 <Title>회원정보</Title>
                 {isAdmin ? (
-                    univName && (
-                        <UniversityName>{universityName}</UniversityName>
-                    )
+                    univName && <UniversityName>{univName}</UniversityName>
                 ) : (
                     <UniversityName>{universityName}</UniversityName>
                 )}
