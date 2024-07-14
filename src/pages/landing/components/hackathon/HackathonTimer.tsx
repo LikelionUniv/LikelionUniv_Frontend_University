@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { styled } from 'styled-components';
+import dayjs from 'dayjs';
+import { useRecoilState } from 'recoil';
+import {
+    deadlineState,
+    timeLeftState,
+} from '../../../../atoms/HackathonDeadline';
 
-interface TimeLeft {
-    days: number;
-    hours: number;
-    minutes: number;
-    seconds: number;
-}
+const calculateTimeLeft = (deadline: string) => {
+    const now = dayjs();
+    const target = dayjs(deadline);
+    const difference = target.diff(now);
 
-const HackathonTimer: React.FC = () => {
-    const deadline = new Date('2024-07-14T23:59:00');
+    if (difference <= 0) {
+        return {
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 0,
+        };
+    }
 
-    const calculateTimeLeft = (): TimeLeft => {
-        const now = new Date();
-        const difference = deadline.getTime() - now.getTime();
-        let timeLeft: TimeLeft;
-
-        if (difference > 0) {
-            timeLeft = {
-                days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((difference / 1000 / 60) % 60),
-                seconds: Math.floor((difference / 1000) % 60),
-            };
-        } else {
-            timeLeft = {
-                days: 0,
-                hours: 0,
-                minutes: 0,
-                seconds: 0,
-            };
-        }
-
-        return timeLeft;
+    return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
     };
+};
 
-    const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
+const HackathonTimer = () => {
+    const [timeLeft, setTimeLeft] = useRecoilState(timeLeftState);
+    const [deadline, setDeadline] = useRecoilState(deadlineState);
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setTimeLeft(calculateTimeLeft());
+            const now = dayjs();
+            if (now.isAfter(dayjs(deadline))) {
+                setDeadline('2024-08-06 14:00:00');
+            }
+            setTimeLeft(calculateTimeLeft(deadline));
         }, 1000);
 
         return () => clearInterval(timer);
-    }, []);
+    }, [deadline, setDeadline, setTimeLeft]);
 
     const formatTime = (time: number): string => {
         return time.toString().padStart(2, '0');
@@ -52,25 +52,15 @@ const HackathonTimer: React.FC = () => {
     return (
         <TimerContainer>
             <DateContainer>
-                <DateBox>
-                    <DateType>DAYS</DateType>
-                    <DateNum>{formatTime(timeLeft.days)}</DateNum>
-                </DateBox>
-                <BlankBox>:</BlankBox>
-                <DateBox>
-                    <DateType>HOURS</DateType>
-                    <DateNum>{formatTime(timeLeft.hours)}</DateNum>
-                </DateBox>
-                <BlankBox>:</BlankBox>
-                <DateBox>
-                    <DateType>MINS</DateType>
-                    <DateNum>{formatTime(timeLeft.minutes)}</DateNum>
-                </DateBox>
-                <BlankBox>:</BlankBox>
-                <DateBox>
-                    <DateType>SECS</DateType>
-                    <DateNum>{formatTime(timeLeft.seconds)}</DateNum>
-                </DateBox>
+                {Object.entries(timeLeft).map(([unit, value]) => (
+                    <React.Fragment key={unit}>
+                        <DateBox>
+                            <DateType>{unit.toUpperCase()}</DateType>
+                            <DateNum>{formatTime(value)}</DateNum>
+                        </DateBox>
+                        {unit !== 'seconds' && <BlankBox>:</BlankBox>}
+                    </React.Fragment>
+                ))}
             </DateContainer>
         </TimerContainer>
     );
@@ -149,6 +139,7 @@ const DateBox = styled.div`
 const DateType = styled.div`
     display: inline-block;
     font-family: Pretendard;
+    color: #d1d4d8;
     font-size: 18px;
     font-style: normal;
     font-weight: 500;

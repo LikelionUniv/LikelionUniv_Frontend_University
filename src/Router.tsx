@@ -34,7 +34,7 @@ import ProjectRegisterWrapper from './pages/project/register/ProjectRegisterWrap
 import ProjectUpdateWrapper from './pages/project/update/ProjectUpdateWrapper';
 import UnivRecruit from './pages/univRecruit/UnivRecruit';
 import HackathonPage from './pages/admin/components/hackathon/hackathonPage';
-import HackathonsApplication from './routes/HackathonsApplicationPage';
+// import HackathonsApplication from './routes/HackathonsApplicationPage';
 import HackathonsApplicationPage from './routes/HackathonsModifyPage';
 
 const router = createBrowserRouter([
@@ -189,10 +189,10 @@ const router = createBrowserRouter([
                 path: '*',
                 element: <NotFound />,
             },
-            {
-                path: 'hackathons',
-                element: <HackathonsApplication />,
-            },
+            // {
+            //     path: 'hackathons',
+            //     element: <HackathonsApplication />,
+            // },
             {
                 path: 'hackathons/:hackathonId',
                 element: <HackathonsApplicationPage />,
