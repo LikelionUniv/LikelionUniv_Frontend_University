@@ -56,9 +56,7 @@ const Tab = () => {
                     {universities.map((university, index) => (
                         <T.TabContent
                             key={index}
-                            onClick={() =>
-                                popupUnivSite(university.recuriteUrl)
-                            }
+                            onClick={() => popupUnivSite(university.recruitUrl)}
                         >
                             <T.SchoolLogo>
                                 <img

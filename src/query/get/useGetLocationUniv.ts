@@ -4,7 +4,7 @@ import request from '../../api/request';
 export interface IUniversity {
     universityName: string;
     location: string;
-    recuriteUrl?: string;
+    recruitUrl?: string;
     image?: string;
 }
 
