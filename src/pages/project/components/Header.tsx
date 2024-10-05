@@ -3,10 +3,7 @@ import * as P from './HeaderStyle';
 import WriteIcon from '../../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
 import { ProjectAPI } from './ProjectList';
-
 import { Gen } from '../register/RegisterOptions';
-import { useAuth } from '../../../hooks/useAuth';
-import { RolePriority } from '../../../constants/Role';
 
 interface IHeader {
     setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
@@ -18,18 +15,6 @@ function Header({ setProjectApi }: IHeader) {
     const handleClick = (index?: number) => {
         setActiveTab(index);
     };
-
-    const { userinfo, isLoading } = useAuth();
-    const isSuperAdminInfo =
-        RolePriority.findIndex(role => role === userinfo.role) >= 3;
-
-    const [isAdmin, setIsAdmin] = useState<boolean>(false);
-
-    useEffect(() => {
-        if (isSuperAdminInfo && !isLoading) {
-            setIsAdmin(true);
-        }
-    }, [isLoading, isSuperAdminInfo]);
 
     useEffect(() => {
         // 전체를 클릭할 경우
@@ -82,7 +67,7 @@ function Header({ setProjectApi }: IHeader) {
                 </P.Tab>
             </P.TabContainer>
 
-            <P.WriteBtn isAdmin={isAdmin} onClick={goRegister}>
+            <P.WriteBtn onClick={goRegister}>
                 <img src={WriteIcon} alt="write" />
                 글쓰기
             </P.WriteBtn>
