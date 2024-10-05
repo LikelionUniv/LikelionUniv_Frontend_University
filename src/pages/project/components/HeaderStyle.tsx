@@ -66,14 +66,13 @@ export const Divider = styled.div`
     display: none;
 `;
 
-export const WriteBtn = styled.button<{ isAdmin: boolean }>`
-    display: ${props => (props.isAdmin ? 'inline-flex' : 'none')};
+export const WriteBtn = styled.button`
     margin-left: 20px;
     padding: 8px 20px 8px 14px;
     justify-content: center;
     align-items: center;
     gap: 6px;
-
+    display: inline-flex;
     border-radius: 6px;
     border: none;
     background: var(--Orange-600, #ff7710);
