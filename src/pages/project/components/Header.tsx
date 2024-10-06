@@ -4,17 +4,30 @@ import WriteIcon from '../../../img/project/write.svg';
 import { useNavigate } from 'react-router-dom';
 import { ProjectAPI } from './ProjectList';
 import { Gen } from '../register/RegisterOptions';
+import { useAuth } from '../../../hooks/useAuth';
+import { RolePriority } from '../../../constants/Role';
 
 interface IHeader {
     setProjectApi: React.Dispatch<React.SetStateAction<ProjectAPI>>;
 }
 
 function Header({ setProjectApi }: IHeader) {
+    const { userinfo, isLoading } = useAuth();
     const [activeTab, setActiveTab] = useState<number | undefined>();
+    const [isUser, setIsUser] = useState<boolean>(false);
 
     const handleClick = (index?: number) => {
         setActiveTab(index);
     };
+
+    const isUserInfo =
+        RolePriority.findIndex(role => role === userinfo.role) >= 1;
+
+    useEffect(() => {
+        if (isUserInfo && !isLoading) {
+            setIsUser(true);
+        }
+    }, [isLoading, isUserInfo]);
 
     useEffect(() => {
         // 전체를 클릭할 경우
@@ -67,7 +80,7 @@ function Header({ setProjectApi }: IHeader) {
                 </P.Tab>
             </P.TabContainer>
 
-            <P.WriteBtn onClick={goRegister}>
+            <P.WriteBtn isUser={isUser} onClick={goRegister}>
                 <img src={WriteIcon} alt="write" />
                 글쓰기
             </P.WriteBtn>

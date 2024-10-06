@@ -66,13 +66,13 @@ export const Divider = styled.div`
     display: none;
 `;
 
-export const WriteBtn = styled.button`
+export const WriteBtn = styled.button<{ isUser: boolean }>`
     margin-left: 20px;
     padding: 8px 20px 8px 14px;
     justify-content: center;
     align-items: center;
     gap: 6px;
-    display: inline-flex;
+    display: ${props => (props.isUser ? 'inline-flex' : 'none')};
     border-radius: 6px;
     border: none;
     background: var(--Orange-600, #ff7710);
