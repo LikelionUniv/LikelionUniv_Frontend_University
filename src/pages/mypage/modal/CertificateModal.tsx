@@ -12,19 +12,18 @@ interface CertificateModalProps {
 
 const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
     const trackOptions = [
-        { value: 1, label: '1기' },
-        { value: 2, label: '2기' },
-        { value: 3, label: '3기' },
-        { value: 4, label: '4기' },
-        { value: 5, label: '5기' },
-        { value: 6, label: '6기' },
-        { value: 7, label: '7기' },
-        { value: 8, label: '8기' },
-        { value: 9, label: '9기' },
-        { value: 10, label: '10기' },
-        { value: 11, label: '11기' },
         { value: 12, label: '12기' },
-        { value: 13, label: '13기' },
+        { value: 11, label: '11기' },
+        { value: 10, label: '10기' },
+        { value: 9, label: '9기' },
+        { value: 8, label: '8기' },
+        { value: 7, label: '7기' },
+        { value: 6, label: '6기' },
+        { value: 5, label: '5기' },
+        { value: 4, label: '4기' },
+        { value: 3, label: '3기' },
+        { value: 2, label: '2기' },
+        { value: 1, label: '1기' },
     ];
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
@@ -37,7 +36,23 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
 
     const onGraduation = () => {
         mutate(ordinal!, {
-            onSuccess: () => {},
+            onSuccess: async data => {
+                const response = await fetch(data.url);
+
+                // Blob 데이터로 변환
+                const blob = await response.blob();
+
+                // Blob을 활용해 다운로드 링크 생성
+                const downloadLink = document.createElement('a');
+                const blobUrl = URL.createObjectURL(blob);
+
+                downloadLink.href = blobUrl;
+                downloadLink.download = '멋쟁이사자처럼 수료증'; // 다운로드 파일 이름 지정
+                downloadLink.click();
+
+                // Blob URL 해제
+                URL.revokeObjectURL(blobUrl);
+            },
             onError: (err: any) => {
                 console.log(err.response.status);
                 if (err.response.status === 404) {
