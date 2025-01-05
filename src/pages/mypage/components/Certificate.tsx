@@ -1,18 +1,23 @@
 import { styled } from 'styled-components';
 import { PostBoxWrapper } from './UserPostSelect';
 import { Button } from './Common';
+import { useState } from 'react';
+import CertificateModal from '../modal/CertificateModal';
 
 const Certificate = () => {
+    const [isModal, setIsModal] = useState<boolean>(false);
+
     return (
         <>
             <PostBoxWrapper>
                 <Container>
                     <Left>멋쟁이사자처럼대학</Left>
-                    <Button onClick={() => console.log('d')}>
+                    <Button onClick={() => setIsModal(true)}>
                         수료증 발급
                     </Button>
                 </Container>
             </PostBoxWrapper>
+            {isModal && <CertificateModal onClose={() => setIsModal(false)} />}
         </>
     );
 };
