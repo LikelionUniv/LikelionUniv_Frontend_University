@@ -54,7 +54,6 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
                 URL.revokeObjectURL(blobUrl);
             },
             onError: (err: any) => {
-                console.log(err.response.status);
                 if (err.response.status === 404) {
                     setIsError(true);
                 }
