@@ -7,6 +7,7 @@ import DropDownOrdinal, { OptionType } from './DropDownOrdinal';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../../api/axios';
 import { LoginComplete } from '../../login/components/LoginComplete';
+import { cpSync } from 'fs';
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -142,7 +143,9 @@ const Sform = () => {
         }
     };
 
-    const handleOrdinal = () => {};
+    const handleOrdinal = (e: any) => {
+        console.log(e.value);
+    };
 
     return (
         <>
@@ -174,13 +177,13 @@ const Sform = () => {
                     />
 
                     <Ndiv>기수 선택</Ndiv>
-                    {/* <Wapper> */}
+
                     <DropDownOrdinal
                         options={trackOptions}
                         onChange={handleOrdinal}
                         placeholder={'기수를 선택해주세요.'}
                     />
-                    {/* </Wapper> */}
+
                     <button className="saveBtn" onClick={handleSubmit}>
                         저장하기
                     </button>
@@ -192,10 +195,4 @@ const Sform = () => {
     );
 };
 
-const Wapper = styled.div`
-    background-color: red;
-    & > div {
-        width: 100%;
-    }
-`;
 export default Sform;
