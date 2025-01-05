@@ -3,7 +3,7 @@ import './signUp.css';
 import SchoolDropDown from './SchoolDropDown';
 import { useState } from 'react';
 import { ActionMeta } from 'react-select';
-import { OptionType } from './DropDown';
+import DropDownOrdinal, { OptionType } from './DropDownOrdinal';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../../api/axios';
 import { LoginComplete } from '../../login/components/LoginComplete';
@@ -47,9 +47,20 @@ for (let i = 11; i >= 1; i--) {
 }
 
 const trackOptions = [
-    { value: 1, label: '기획디자인' },
-    { value: 2, label: '프론트엔드' },
-    { value: 3, label: '백엔드' },
+    { value: 0, label: '알럼나이' },
+    { value: 1, label: '1기' },
+    { value: 2, label: '2기' },
+    { value: 3, label: '3기' },
+    { value: 4, label: '4기' },
+    { value: 5, label: '5기' },
+    { value: 6, label: '6기' },
+    { value: 7, label: '7기' },
+    { value: 8, label: '8기' },
+    { value: 9, label: '9기' },
+    { value: 10, label: '10기' },
+    { value: 11, label: '11기' },
+    { value: 12, label: '12기' },
+    { value: 13, label: '13기' },
 ];
 
 const roleOptions = [
@@ -131,6 +142,8 @@ const Sform = () => {
         }
     };
 
+    const handleOrdinal = () => {};
+
     return (
         <>
             {!isSuccess ? (
@@ -159,6 +172,15 @@ const Sform = () => {
                             })
                         }
                     />
+
+                    <Ndiv>기수 선택</Ndiv>
+                    {/* <Wapper> */}
+                    <DropDownOrdinal
+                        options={trackOptions}
+                        onChange={handleOrdinal}
+                        placeholder={'기수를 선택해주세요.'}
+                    />
+                    {/* </Wapper> */}
                     <button className="saveBtn" onClick={handleSubmit}>
                         저장하기
                     </button>
@@ -170,4 +192,10 @@ const Sform = () => {
     );
 };
 
+const Wapper = styled.div`
+    background-color: red;
+    & > div {
+        width: 100%;
+    }
+`;
 export default Sform;
