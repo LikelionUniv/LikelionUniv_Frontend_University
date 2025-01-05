@@ -3,13 +3,17 @@ import { useSelectedUsers } from '../SelectedUserContext';
 import useDeleteUserList from '../../../../query/delete/useDeleteUserList';
 import styled from 'styled-components';
 import EmailModal from '../modal/EmailModal';
-import { useUserProfile } from '../../../../query/mypage/useUserProfile';
+// import { useUserProfile } from '../../../../query/mypage/useUserProfile';
 import { useOutletContext } from 'react-router-dom';
 import { OutletContext } from '../../../../inteface/adminType';
+import AdminCertificateModal from '../modal/AdminCertificateModal';
 
 const TableBottom: React.FC = () => {
     const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =
         useSelectedUsers();
+    const [isChangeCertificateModal, setIsChangeCertificateModal] =
+        useState(false);
+
     const { mutate } = useDeleteUserList();
 
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
@@ -36,6 +40,11 @@ const TableBottom: React.FC = () => {
         openEmailModal();
     };
 
+    const handleChangeOrdinal = () => {
+        if (selectedUserIds.length <= 0) return;
+        setIsChangeCertificateModal(true);
+    };
+
     return (
         <Wrapper>
             <SelectedActions>
@@ -50,12 +59,24 @@ const TableBottom: React.FC = () => {
                             이메일 보내기
                         </Button>
                     )}
+                    <Button
+                        style={{ color: '#4D5359' }}
+                        onClick={handleChangeOrdinal}
+                    >
+                        수료증 등급 변환
+                    </Button>
                 </div>
             </SelectedActions>
             {isEmailModalOpen && (
                 <EmailModal
                     selectedEmails={selectedUserEmails}
                     onCancel={closeEmailModal}
+                />
+            )}
+            {isChangeCertificateModal && (
+                <AdminCertificateModal
+                    onClose={() => setIsChangeCertificateModal(false)}
+                    selectedUserIds={selectedUserIds}
                 />
             )}
         </Wrapper>
@@ -72,8 +93,12 @@ const SelectedActions = styled.div`
     display: flex;
     margin-top: 20px;
     align-items: center;
-    @media screen and (max-width: 767px) {
-        justify-content: space-between;
+    @media screen and (max-width: 650px) {
+        flex-direction: column;
+        align-items: start;
+        & > div {
+            margin-bottom: 5px;
+        }
     }
     div {
         font-weight: bold;
@@ -95,10 +120,4 @@ const Button = styled.button`
     &:hover {
         background-color: #d45a07;
     }
-`;
-
-const PageWrapper = styled.div`
-    margin: 64px 0 100px 0;
-    display: flex;
-    justify-content: center;
 `;

@@ -4,12 +4,20 @@ import ProjectSelect from './ProjectSelect';
 import LikeSelect from './LikeSelect';
 import PostSelect from './PostSelect';
 import ApplySelect from '../../../components/mypage/Hackathons/ApplySelect';
+import Certificate from './Certificate';
 
 const UserPostSelect = () => {
     //const selectOption = ['게시글', '프로젝트', '댓글', '좋아요'];
 
     //해커톤 신청
-    const selectOptions = ['신청정보', '게시글', '프로젝트', '댓글', '좋아요'];
+    const selectOptions = [
+        '신청정보',
+        '수료증 발급',
+        '게시글',
+        '프로젝트',
+        '댓글',
+        '좋아요',
+    ];
     const [select, setSelect] = useState<string>('신청정보');
     const optionClickFn = (option: string) => {
         // startTransition(() => {
@@ -37,6 +45,10 @@ const UserPostSelect = () => {
             {select === '게시글' ? (
                 <Suspense fallback={<div>loading...</div>}>
                     <PostSelect select={select} />
+                </Suspense>
+            ) : select === '수료증 발급' ? (
+                <Suspense fallback={<div>loading...</div>}>
+                    <Certificate />
                 </Suspense>
             ) : select === '댓글' ? (
                 <Suspense fallback={<div>loading...</div>}>
@@ -69,9 +81,8 @@ const ButtonSelectWrapper = styled.div`
     display: inline-flex;
     align-items: center;
     gap: 24px;
-    width: 379px;
-    ///width: 281px;
-    height: 40px;
+    width: 100%;
+    height: 400px;
     & > button {
         display: flex;
         justify-content: center;
@@ -90,12 +101,11 @@ const ButtonSelectWrapper = styled.div`
             border-bottom: 3px solid #212224;
             z-index: 20;
         }
-        @media (min-width: 360px) {
-            font-size: 16px;
+        @media (max-width: 540px) {
+            font-size: 14px;
         }
     }
     @media (min-width: 360px) {
-        width: 320px;
         height: 34px;
     }
 `;
@@ -103,7 +113,7 @@ const ButtonSelectWrapper = styled.div`
 const SelectBorder = styled.div`
     height: 0px;
     border: 1px solid rgba(234, 236, 238, 1);
-    margin-top: -2px;
+    margin-top: 2px;
     @media (min-width: 1281px) {
         width: 1200px;
     }

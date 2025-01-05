@@ -96,6 +96,8 @@ axiosInstance.interceptors.response.use(
             return Promise.reject(error);
         }
 
+        if (axiosError?.code === 'GRADUATION_404_1')
+            return Promise.reject(error);
         alert(axiosError?.message);
         return Promise.reject(error);
     },
