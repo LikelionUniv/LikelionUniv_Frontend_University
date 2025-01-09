@@ -19,6 +19,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
     const [isError, setIsError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { mutate } = usePostGraduations();
     const handleOrdinal = (e: any) => {
@@ -26,6 +27,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
     };
 
     const onGraduation = () => {
+        setIsLoading(true);
         mutate(ordinal!, {
             onSuccess: async data => {
                 const response = await fetch(data.url);
@@ -43,10 +45,14 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
 
                 // Blob URL 해제
                 URL.revokeObjectURL(blobUrl);
+                setIsLoading(false);
+                setOrdinal(undefined);
             },
             onError: (err: any) => {
                 if (err.response.status === 404) {
                     setIsError(true);
+                    setIsLoading(false);
+                    setOrdinal(undefined);
                 }
             },
         });
@@ -105,14 +111,18 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
                             </div>
                         </Text>
                         <Content>
-                            <>
-                                <div className="BoxName">기수 선택</div>
-                                <DropDownOrdinal
-                                    options={trackOptions}
-                                    onChange={handleOrdinal}
-                                    placeholder={'기수를 선택해주세요.'}
-                                />
-                            </>
+                            {isLoading ? (
+                                <Center> 수료 확인중입니다.</Center>
+                            ) : (
+                                <>
+                                    <div className="BoxName">기수 선택</div>
+                                    <DropDownOrdinal
+                                        options={trackOptions}
+                                        onChange={handleOrdinal}
+                                        placeholder={'기수를 선택해주세요.'}
+                                    />
+                                </>
+                            )}
                         </Content>
                     </>
                 )}
@@ -121,9 +131,19 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
                         취소하기
                     </Button>
 
-                    <Button isColor={true} onClick={onGraduation}>
-                        발급하기
-                    </Button>
+                    {ordinal === undefined ? (
+                        <Button isColor={false}>발급하기</Button>
+                    ) : (
+                        <>
+                            {isLoading ? (
+                                <Button isColor={false}>로딩중</Button>
+                            ) : (
+                                <Button isColor={true} onClick={onGraduation}>
+                                    발급하기
+                                </Button>
+                            )}
+                        </>
+                    )}
                 </ButtonWrapper>
             </Wrapper>
         </BackgroundOverlay>
@@ -200,7 +220,10 @@ const ButtonWrapper = styled.div`
         margin-top: 25px;
     }
 `;
-
+const Center = styled.div`
+    text-align: center;
+    padding: 34px 0;
+`;
 const Button = styled.div<{ isColor: boolean }>`
     margin: 20px;
     width: 100%;
