@@ -7,7 +7,6 @@ import DropDownOrdinal, { OptionType } from './DropDownOrdinal';
 import { useParams } from 'react-router-dom';
 import { axiosInstance } from '../../../api/axios';
 import { LoginComplete } from '../../login/components/LoginComplete';
-import { cpSync } from 'fs';
 
 const Ndiv = styled.div`
     color: var(--black, #000);
@@ -48,7 +47,6 @@ for (let i = 11; i >= 1; i--) {
 }
 
 const trackOptions = [
-    { value: 0, label: '알럼나이' },
     { value: 1, label: '1기' },
     { value: 2, label: '2기' },
     { value: 3, label: '3기' },
@@ -70,11 +68,11 @@ const roleOptions = [
     { value: 3, label: '아기사자' },
 ];
 
-/* form type */
 interface FormState {
     name: string;
     universityName: string;
     major: string;
+    ordinal: undefined | number;
 }
 
 const Sform = () => {
@@ -82,6 +80,7 @@ const Sform = () => {
         name: '',
         universityName: '',
         major: '',
+        ordinal: undefined,
     });
 
     const handleSelectChange =
@@ -130,7 +129,8 @@ const Sform = () => {
         if (
             formState.name === '' ||
             formState.universityName === '' ||
-            formState.major === ''
+            formState.major === '' ||
+            formState.ordinal === undefined
             // formState.generation === 0 ||
             // formState.role === 0 ||
             // formState.track === 0
@@ -141,10 +141,6 @@ const Sform = () => {
             // console.log(formState);
             requestSignup();
         }
-    };
-
-    const handleOrdinal = (e: any) => {
-        console.log(e.value);
     };
 
     return (
@@ -180,7 +176,12 @@ const Sform = () => {
 
                     <DropDownOrdinal
                         options={trackOptions}
-                        onChange={handleOrdinal}
+                        onChange={e =>
+                            setFormState({
+                                ...formState,
+                                ordinal: e!.value,
+                            })
+                        }
                         placeholder={'기수를 선택해주세요.'}
                     />
 

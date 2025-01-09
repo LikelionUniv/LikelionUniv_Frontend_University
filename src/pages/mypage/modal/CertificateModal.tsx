@@ -15,15 +15,6 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
         { value: 12, label: '12기' },
         { value: 11, label: '11기' },
         { value: 10, label: '10기' },
-        { value: 9, label: '9기' },
-        { value: 8, label: '8기' },
-        { value: 7, label: '7기' },
-        { value: 6, label: '6기' },
-        { value: 5, label: '5기' },
-        { value: 4, label: '4기' },
-        { value: 3, label: '3기' },
-        { value: 2, label: '2기' },
-        { value: 1, label: '1기' },
     ];
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
