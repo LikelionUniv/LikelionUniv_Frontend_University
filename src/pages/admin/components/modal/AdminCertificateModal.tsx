@@ -3,15 +3,18 @@ import styled from 'styled-components';
 import Cancel from '../../../../img/admin/Cancel.svg';
 import DropDownOrdinal from '../../../signUp/components/DropDownOrdinal';
 import useChangeGraduations from '../../../../query/post/useChangeGraduations';
+import { useSelectedUsers } from '../SelectedUserContext';
 
 interface CertificateModalProps {
     onClose: () => void;
     selectedUserIds: number[];
+    setSelectedUserIds: React.Dispatch<React.SetStateAction<number[]>>;
 }
 
 const AdminCertificateModal: React.FC<CertificateModalProps> = ({
     onClose,
     selectedUserIds,
+    setSelectedUserIds,
 }) => {
     const trackOptions = [
         { value: 10, label: '10기' },
@@ -20,6 +23,7 @@ const AdminCertificateModal: React.FC<CertificateModalProps> = ({
     ];
 
     const { mutate } = useChangeGraduations();
+    const { selectAll, setSelectAll } = useSelectedUsers();
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
 
@@ -36,6 +40,10 @@ const AdminCertificateModal: React.FC<CertificateModalProps> = ({
             onSuccess: () => {
                 onClose();
                 alert('변경되었습니다.');
+                setSelectedUserIds([]);
+                if (selectAll) {
+                    setSelectAll(false);
+                }
             },
         });
     };

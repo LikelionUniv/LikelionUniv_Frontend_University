@@ -77,6 +77,7 @@ const TableBottom: React.FC = () => {
                 <AdminCertificateModal
                     onClose={() => setIsChangeCertificateModal(false)}
                     selectedUserIds={selectedUserIds}
+                    setSelectedUserIds={setSelectedUserIds}
                 />
             )}
         </Wrapper>

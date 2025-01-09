@@ -15,19 +15,11 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
         { value: 12, label: '12기' },
         { value: 11, label: '11기' },
         { value: 10, label: '10기' },
-        { value: 9, label: '9기' },
-        { value: 8, label: '8기' },
-        { value: 7, label: '7기' },
-        { value: 6, label: '6기' },
-        { value: 5, label: '5기' },
-        { value: 4, label: '4기' },
-        { value: 3, label: '3기' },
-        { value: 2, label: '2기' },
-        { value: 1, label: '1기' },
     ];
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
     const [isError, setIsError] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const { mutate } = usePostGraduations();
     const handleOrdinal = (e: any) => {
@@ -35,6 +27,7 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
     };
 
     const onGraduation = () => {
+        setIsLoading(true);
         mutate(ordinal!, {
             onSuccess: async data => {
                 const response = await fetch(data.url);
@@ -52,10 +45,14 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
 
                 // Blob URL 해제
                 URL.revokeObjectURL(blobUrl);
+                setIsLoading(false);
+                setOrdinal(undefined);
             },
             onError: (err: any) => {
                 if (err.response.status === 404) {
                     setIsError(true);
+                    setIsLoading(false);
+                    setOrdinal(undefined);
                 }
             },
         });
@@ -114,14 +111,18 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
                             </div>
                         </Text>
                         <Content>
-                            <>
-                                <div className="BoxName">기수 선택</div>
-                                <DropDownOrdinal
-                                    options={trackOptions}
-                                    onChange={handleOrdinal}
-                                    placeholder={'기수를 선택해주세요.'}
-                                />
-                            </>
+                            {isLoading ? (
+                                <Center> 수료 확인중입니다.</Center>
+                            ) : (
+                                <>
+                                    <div className="BoxName">기수 선택</div>
+                                    <DropDownOrdinal
+                                        options={trackOptions}
+                                        onChange={handleOrdinal}
+                                        placeholder={'기수를 선택해주세요.'}
+                                    />
+                                </>
+                            )}
                         </Content>
                     </>
                 )}
@@ -130,9 +131,19 @@ const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
                         취소하기
                     </Button>
 
-                    <Button isColor={true} onClick={onGraduation}>
-                        발급하기
-                    </Button>
+                    {ordinal === undefined ? (
+                        <Button isColor={false}>발급하기</Button>
+                    ) : (
+                        <>
+                            {isLoading ? (
+                                <Button isColor={false}>로딩중</Button>
+                            ) : (
+                                <Button isColor={true} onClick={onGraduation}>
+                                    발급하기
+                                </Button>
+                            )}
+                        </>
+                    )}
                 </ButtonWrapper>
             </Wrapper>
         </BackgroundOverlay>
@@ -209,7 +220,10 @@ const ButtonWrapper = styled.div`
         margin-top: 25px;
     }
 `;
-
+const Center = styled.div`
+    text-align: center;
+    padding: 34px 0;
+`;
 const Button = styled.div<{ isColor: boolean }>`
     margin: 20px;
     width: 100%;

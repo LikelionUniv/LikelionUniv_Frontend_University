@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
@@ -6,6 +6,7 @@ import * as MI from './MMoreInfo.style';
 import SignupModal from './SignupModal';
 import { axiosInstance } from '../../../../api/axios';
 import { LoginComplete } from '../LoginComplete';
+import DropDownOrdinal from '../../../signUp/components/DropDownOrdinal';
 
 interface IForm {
     name: string;
@@ -14,7 +15,26 @@ interface IForm {
 }
 
 function MMoreInfo() {
+    const trackOptions = [
+        { value: 1, label: '1기' },
+        { value: 2, label: '2기' },
+        { value: 3, label: '3기' },
+        { value: 4, label: '4기' },
+        { value: 5, label: '5기' },
+        { value: 6, label: '6기' },
+        { value: 7, label: '7기' },
+        { value: 8, label: '8기' },
+        { value: 9, label: '9기' },
+        { value: 10, label: '10기' },
+        { value: 11, label: '11기' },
+        { value: 12, label: '12기' },
+        { value: 13, label: '13기' },
+    ];
+
     const [universityName, setUniversityName] = useState('학교');
+    const [ordinalNumber, setOrdinalNumber] = useState<undefined | number>(
+        undefined,
+    );
     const [modalOpen, setModalOpen] = useState(false);
     const { provider } = useParams();
     const [isSuccess, updateIsSuccess] = useState<boolean>(false);
@@ -28,6 +48,7 @@ function MMoreInfo() {
 
     const requestSignup = async (data: IForm) => {
         const idtoken = localStorage.getItem('idtoken');
+
         try {
             const response = await axiosInstance.post(
                 `/api/v1/auth/${provider}/signup?idtoken=${idtoken}`,
@@ -52,7 +73,14 @@ function MMoreInfo() {
     };
 
     const onSubmit = (data: IForm) => {
-        requestSignup(data);
+        if (!ordinalNumber) return;
+        const totalData = { ...data, ordinal: ordinalNumber };
+
+        requestSignup(totalData);
+    };
+
+    const handleOrdinal = (e: any) => {
+        setOrdinalNumber(e.value);
     };
     if (isSuccess) return <LoginComplete />;
     return (
@@ -91,7 +119,19 @@ function MMoreInfo() {
                             {...register('major', { required: true })}
                         />
                     </MI.Field>
-                    <MI.SaveBtn type="submit" active={isValid}>
+                    <MI.Field>
+                        <MI.Label>기수</MI.Label>
+                        <DropDownOrdinal
+                            options={trackOptions}
+                            onChange={handleOrdinal}
+                            placeholder={'기수를 선택해주세요.'}
+                        />
+                    </MI.Field>
+
+                    <MI.SaveBtn
+                        type="submit"
+                        active={isValid && ordinalNumber !== undefined}
+                    >
                         저장하기
                     </MI.SaveBtn>
                 </MI.Form>
