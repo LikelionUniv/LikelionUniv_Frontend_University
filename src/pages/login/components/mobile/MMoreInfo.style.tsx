@@ -31,7 +31,7 @@ export const Form = styled.form`
 export const Field = styled.div`
     margin-bottom: 34px;
 
-    &:nth-child(3) {
+    &:nth-child(4) {
         margin-bottom: 222px;
     }
 
