@@ -14,55 +14,90 @@ import logo9 from '../../../../img/landing/sponsor/logo9.svg';
 import logo10 from '../../../../img/landing/sponsor/logo10.svg';
 import logo11 from '../../../../img/landing/sponsor/logo11.svg';
 import logo12 from '../../../../img/landing/sponsor/logo12.svg';
+
+import { ReactComponent as PixelFireworksIcon } from '../../../../img/landing/pixel_fireworks.svg';
+import { ReactComponent as PixelSingingIcon } from '../../../../img/landing/pixel_singing.svg';
+
 import { styled } from 'styled-components';
+import * as MG from '../MainGraphic.style';
 
 const SponsorInfo = () => {
     SwiperCore.use([Autoplay]);
     return (
-        <IF.SwiperWrapper>
-            <Swiper
-                loop={true}
-                loopedSlides={4}
-                slidesPerView={2}
-                spaceBetween={24}
-                freeMode={true}
-                mousewheel={true}
-                breakpoints={{
-                    0: {
-                        spaceBetween: 12,
-                    },
-                    768: {
-                        spaceBetween: 18,
-                    },
-                    1280: {
-                        spaceBetween: 24,
-                    },
-                }}
-                autoplay={{ delay: 2500, disableOnInteraction: false }}
-            >
-                {serviceList.map(item => (
-                    <SwiperSlide key={item.id}>
-                        <a href={item.url} target="_blank">
-                            <div className="rect">
-                                <div
-                                    className="logo-rect"
-                                    style={{
-                                        backgroundColor: item.backgroundColor
-                                            ? item.backgroundColor
-                                            : '#fff',
-                                    }}
-                                >
-                                    <img src={item.logo} />
+        <SponsorInfoWrapper>
+            <IF.SwiperWrapper>
+                <Swiper
+                    loop={true}
+                    loopedSlides={4}
+                    slidesPerView={2}
+                    spaceBetween={24}
+                    freeMode={true}
+                    mousewheel={true}
+                    breakpoints={{
+                        0: {
+                            spaceBetween: 12,
+                        },
+                        768: {
+                            spaceBetween: 18,
+                        },
+                        1280: {
+                            spaceBetween: 24,
+                        },
+                    }}
+                    autoplay={{ delay: 2500, disableOnInteraction: false }}
+                >
+                    {serviceList.map(item => (
+                        <SwiperSlide key={item.id}>
+                            <a href={item.url} target="_blank">
+                                <div className="rect">
+                                    <div
+                                        className="logo-rect"
+                                        style={{
+                                            backgroundColor:
+                                                item.backgroundColor
+                                                    ? item.backgroundColor
+                                                    : '#fff',
+                                        }}
+                                    >
+                                        <img src={item.logo} />
+                                    </div>
+                                    <div className="text-section">
+                                        <div className="name">{item.name}</div>
+                                    </div>
                                 </div>
-                                <div className="text-section">
-                                    <div className="name">{item.name}</div>
+                            </a>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </IF.SwiperWrapper>
+
+            <LineWrapper>
+                <MG.Line>
+                    {[1, 2].map(item => (
+                        <div
+                            className={
+                                item === 1
+                                    ? 'track track1'
+                                    : item === 2
+                                    ? 'track track2'
+                                    : ''
+                            }
+                            key={item}
+                        >
+                            {[1, 2, 3, 4].map(item => (
+                                <div className="flex" key={item}>
+                                    <PixelFireworksIcon />
+                                    <PixelSingingIcon />
+                                    <SpacemonoText>
+                                        Possibility to Reality
+                                    </SpacemonoText>
                                 </div>
-                            </div>
-                        </a>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </IF.SwiperWrapper>
+                            ))}
+                        </div>
+                    ))}
+                </MG.Line>
+            </LineWrapper>
+        </SponsorInfoWrapper>
     );
 };
 
@@ -151,3 +186,23 @@ const serviceList: serviceType[] = [
         url: 'http://bigsun.kr/',
     },
 ];
+
+const SponsorInfoWrapper = styled.div``;
+
+const LineWrapper = styled.div`
+    width: 100%;
+`;
+
+const SpacemonoText = styled.div`
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 28px;
+
+    @media (max-width: 360px) {
+        font-size: 19px;
+    }
+
+    @media (max-width: 767px) {
+        font-size: 19px;
+    }
+`;

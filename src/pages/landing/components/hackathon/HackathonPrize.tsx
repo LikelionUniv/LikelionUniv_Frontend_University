@@ -1,18 +1,18 @@
 import { styled } from 'styled-components';
 import footprint from '../../../../img/landing/footprint.png';
-import bulb from '../../../../img/landing/bulb.png';
-import prize1 from '../../../../img/landing/Prize1.svg';
-import prize2 from '../../../../img/landing/Prize2.svg';
-import prize3 from '../../../../img/landing/Prize3.svg';
-import prize1_w from '../../../../img/landing/Prize1_w.svg';
-import prize2_w from '../../../../img/landing/Prize2_w.svg';
-import prize3_w from '../../../../img/landing/Prize3_w.svg';
+// import bulb from '../../../../img/landing/bulb.png';
+// import prize1 from '../../../../img/landing/Prize1.svg';
+// import prize2 from '../../../../img/landing/Prize2.svg';
+// import prize3 from '../../../../img/landing/Prize3.svg';
+// import prize1_w from '../../../../img/landing/Prize1_w.svg';
+// import prize2_w from '../../../../img/landing/Prize2_w.svg';
+// import prize3_w from '../../../../img/landing/Prize3_w.svg';
 
 const HackathonPrize = () => {
     return (
         <PrizeWrapper>
             <PrizeInWrapper>
-                <PrizeContainer>
+                {/* <PrizeContainer>
                     <Title>
                         12기 중앙 해커톤 수상 혜택
                         <Img src={bulb} alt="" />
@@ -32,6 +32,8 @@ const HackathonPrize = () => {
                         <PrizeImgW src={prize3_w} alt="" />
                     </ImageWrapper>
                 </PrizePost>
+                수상혜택에 대한 내용을 보여주는 컴포넌트 입니다.
+                */}
                 <PrizeContainer>
                     <Title>
                         12기 중앙 해커톤
@@ -172,27 +174,27 @@ const SponsorP = styled.div`
     }
 `;
 
-const PrizeImg = styled.img`
-    max-width: 100%;
-    height: auto;
-    margin-left: 10px;
-    margin-right: 10px;
+// const PrizeImg = styled.img`
+//     max-width: 100%;
+//     height: auto;
+//     margin-left: 10px;
+//     margin-right: 10px;
 
-    @media (max-width: 360px) {
-        display: none;
-    }
-`;
+//     @media (max-width: 360px) {
+//         display: none;
+//     }
+// `;
 
-const PrizeImgW = styled.img`
-    max-width: 100%;
-    height: auto;
-    display: none;
+// const PrizeImgW = styled.img`
+//     max-width: 100%;
+//     height: auto;
+//     display: none;
 
-    @media (max-width: 360px) {
-        display: inline;
-        margin-top: 10px;
-    }
-`;
+//     @media (max-width: 360px) {
+//         display: inline;
+//         margin-top: 10px;
+//     }
+// `;
 
 const Img = styled.img`
     max-width: 48px;
@@ -212,35 +214,35 @@ const Img = styled.img`
     }
 `;
 
-const PrizePost = styled.div`
-    max-width: 1200px;
-    width: 100%;
-    padding-top: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: row;
-    margin-bottom: 160px;
+// const PrizePost = styled.div`
+//     max-width: 1200px;
+//     width: 100%;
+//     padding-top: 40px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     flex-direction: row;
+//     margin-bottom: 160px;
 
-    @media (max-width: 767px) {
-        margin-bottom: 120px;
-        padding-top: 24px;
-    }
+//     @media (max-width: 767px) {
+//         margin-bottom: 120px;
+//         padding-top: 24px;
+//     }
 
-    @media (max-width: 360px) {
-        margin-bottom: 60px;
-        flex-direction: column;
-        padding-top: 24px;
-    }
-`;
+//     @media (max-width: 360px) {
+//         margin-bottom: 60px;
+//         flex-direction: column;
+//         padding-top: 24px;
+//     }
+// `;
 
-const ImageWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0 10px;
+// const ImageWrapper = styled.div`
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     padding: 0 10px;
 
-    @media (max-width: 767px) {
-        padding: 0 5px;
-    }
-`;
+//     @media (max-width: 767px) {
+//         padding: 0 5px;
+//     }
+// `;

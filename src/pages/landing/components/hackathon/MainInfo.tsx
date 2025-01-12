@@ -1,10 +1,11 @@
 import { styled } from 'styled-components';
-import HackathonPart from './HackathonPart';
-import title from '../../../../img/landing/title.svg';
-import { ReactComponent as PixelFireworksIcon } from '../../../../img/landing/pixel_fireworks.svg';
-import { ReactComponent as PixelSingingIcon } from '../../../../img/landing/pixel_singing.svg';
+// import HackathonPart from './HackathonPart';
+// import title from '../../../../img/landing/title.svg';
+// import { ReactComponent as PixelFireworksIcon } from '../../../../img/landing/pixel_fireworks.svg';
+// import { ReactComponent as PixelSingingIcon } from '../../../../img/landing/pixel_singing.svg';
+// import * as MG from '../MainGraphic.style';
+
 import info from '../../../../img/landing/info.svg';
-import * as MG from '../MainGraphic.style';
 import growl_to_world from '../../../../img/landing/growl_to_world.png';
 import two_check from '../../../../img/landing/two_check.png';
 import check_g from '../../../../img/landing/check_g.png';
@@ -13,6 +14,9 @@ import check_r from '../../../../img/landing/check_r.png';
 const MainInfo = () => {
     return (
         <MainWrapper>
+            {/* 
+            최상단 컴포넌트로 신청하는 버튼이 있는 컴포넌트
+
             <FirstWrapper>
                 <Container>
                     <TitleImg src={title} />
@@ -20,8 +24,8 @@ const MainInfo = () => {
                         <HackathonPart />
                     </Participation>
                 </Container>
-            </FirstWrapper>
-            <LineWrapper>
+            </FirstWrapper> */}
+            {/* <LineWrapper>
                 <MG.Line>
                     {[1, 2].map(item => (
                         <div
@@ -46,7 +50,8 @@ const MainInfo = () => {
                         </div>
                     ))}
                 </MG.Line>
-            </LineWrapper>
+            </LineWrapper> 
+            */}
 
             <TherdWrapper>
                 <Img3 src={check_g} alt="" />
@@ -74,99 +79,99 @@ const MainWrapper = styled.div`
     flex-direction: column;
 `;
 
-const FirstWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    align-items: center;
+// const FirstWrapper = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     height: auto;
+//     align-items: center;
 
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0) 550px,
-        rgba(0, 0, 0, 0.3) 550px,
-        rgba(255, 146, 64, 0.3) 964px,
-        transparent 964px
-    );
+//     background: linear-gradient(
+//         to bottom,
+//         rgba(0, 0, 0, 0) 550px,
+//         rgba(0, 0, 0, 0.3) 550px,
+//         rgba(255, 146, 64, 0.3) 964px,
+//         transparent 964px
+//     );
 
-    @media (max-width: 767px) {
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 500px,
-            rgba(0, 0, 0, 0.3) 500px,
-            rgba(255, 146, 64, 0.3) 950px,
-            transparent 950px
-        );
-    }
+//     @media (max-width: 767px) {
+//         background: linear-gradient(
+//             to bottom,
+//             rgba(0, 0, 0, 0) 500px,
+//             rgba(0, 0, 0, 0.3) 500px,
+//             rgba(255, 146, 64, 0.3) 950px,
+//             transparent 950px
+//         );
+//     }
 
-    @media (max-width: 360px) {
-        background: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0) 450px,
-            rgba(0, 0, 0, 0.3) 450px,
-            rgba(255, 146, 64, 0.3) 700px,
-            transparent 700px
-        );
-    }
-`;
+//     @media (max-width: 360px) {
+//         background: linear-gradient(
+//             to bottom,
+//             rgba(0, 0, 0, 0) 450px,
+//             rgba(0, 0, 0, 0.3) 450px,
+//             rgba(255, 146, 64, 0.3) 700px,
+//             transparent 700px
+//         );
+//     }
+// `;
 
-const LineWrapper = styled.div`
-    width: 100%;
-`;
+// const LineWrapper = styled.div`
+//     width: 100%;
+// `;
 
-const Container = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
+// const Container = styled.div`
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     width: 100%;
+//     max-width: 1200px;
 
-    @media (max-width: 767px) {
-        width: 80%;
-    }
+//     @media (max-width: 767px) {
+//         width: 80%;
+//     }
 
-    @media (max-width: 360px) {
-        width: 90%;
-    }
-`;
+//     @media (max-width: 360px) {
+//         width: 90%;
+//     }
+// `;
 
-const Participation = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-top: 120px;
-    margin-bottom: 148px;
-    width: 100%;
+// const Participation = styled.div`
+//     display: flex;
+//     justify-content: center;
+//     margin-top: 120px;
+//     margin-bottom: 148px;
+//     width: 100%;
 
-    @media (max-width: 767px) {
-        margin-top: 40px;
-        margin-bottom: clamp(255px, 2vh, 446px);
-    }
+//     @media (max-width: 767px) {
+//         margin-top: 40px;
+//         margin-bottom: clamp(255px, 2vh, 446px);
+//     }
 
-    @media (max-width: 360px) {
-        margin-top: 36px;
-        margin-bottom: 255px;
-    }
-`;
+//     @media (max-width: 360px) {
+//         margin-top: 36px;
+//         margin-bottom: 255px;
+//     }
+// `;
 
-const TitleImg = styled.img`
-    margin-top: 302px;
-    width: clamp(520px, 5wv, 926px);
-    height: auto;
+// const TitleImg = styled.img`
+//     margin-top: 302px;
+//     width: clamp(520px, 5wv, 926px);
+//     height: auto;
 
-    @media (max-width: 1440px) {
-        margin-top: 447px;
-        width: 600px;
-    }
+//     @media (max-width: 1440px) {
+//         margin-top: 447px;
+//         width: 600px;
+//     }
 
-    @media (max-width: 767px) {
-        margin-top: clamp(287px, 2vh, 447px);
-        width: 520px;
-        width: 100%;
-    }
-    @media (max-width: 360px) {
-        margin-top: 287px;
-        width: clamp(250px, 2vw, 320px);
-    }
-`;
+//     @media (max-width: 767px) {
+//         margin-top: clamp(287px, 2vh, 447px);
+//         width: 520px;
+//         width: 100%;
+//     }
+//     @media (max-width: 360px) {
+//         margin-top: 287px;
+//         width: clamp(250px, 2vw, 320px);
+//     }
+// `;
 
 const SecondWrapper = styled.div`
     max-width: 1200px;
@@ -290,16 +295,16 @@ const Img4 = styled.img`
     }
 `;
 
-const SpacemonoText = styled.div`
-    font-family: monospace;
-    font-weight: bold;
-    font-size: 28px;
+// const SpacemonoText = styled.div`
+//     font-family: monospace;
+//     font-weight: bold;
+//     font-size: 28px;
 
-    @media (max-width: 360px) {
-        font-size: 19px;
-    }
+//     @media (max-width: 360px) {
+//         font-size: 19px;
+//     }
 
-    @media (max-width: 767px) {
-        font-size: 19px;
-    }
-`;
+//     @media (max-width: 767px) {
+//         font-size: 19px;
+//     }
+// `;
