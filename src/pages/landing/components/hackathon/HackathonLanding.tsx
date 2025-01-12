@@ -1,4 +1,5 @@
 import { Layout, Container } from '../../../../styles/Layout';
+import CommunityPart from './CommunityPart';
 import Detail from './Detail';
 
 import GuideLine from './GuideLine';
@@ -13,13 +14,15 @@ const HakathonLanding = () => {
         <Layout>
             <Container>
                 <MainInfo />
-                {/* <TimeInfo /> 
-                해커톤 신청 마감기간을 알려주는 컴포넌트 입니다.
+                {/* 
+                해커톤 신청 마감기간을 알려주는 컴포넌트
+                <TimeInfo /> 
                 */}
                 <GuideLine />
                 <More />
                 <Prize />
                 <SponsorInfo />
+                <CommunityPart />
                 <Detail />
             </Container>
         </Layout>

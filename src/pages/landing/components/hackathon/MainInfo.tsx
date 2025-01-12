@@ -273,6 +273,11 @@ const TherdWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 110px;
+
+    @media (max-width: 766px) {
+        margin-top: 0px;
+    }
 `;
 
 const Img3 = styled.img`
