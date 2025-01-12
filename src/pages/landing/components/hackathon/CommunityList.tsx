@@ -32,7 +32,7 @@ const CommunityListWrapper = styled.div`
 `;
 
 const StartAndEndLine = styled.div`
-    height: 1px;
+    height: 3px;
     background-color: black;
     width: 100%;
 `;

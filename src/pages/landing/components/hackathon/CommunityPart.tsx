@@ -55,7 +55,7 @@ const TitleWrapper = styled.div`
     align-items: center;
     gap: 8px;
     max-width: 1200px;
-    width: 100%;
+    width: 80%;
 `;
 
 const TitleImg = styled.img`
@@ -89,7 +89,7 @@ const CommunityWrapper = styled.div`
     flex-direction: column;
     gap: 16px;
     max-width: 1200px;
-    width: 100%;
+    width: 80%;
 
     @media (max-width: 430px) {
         gap: 12px;
