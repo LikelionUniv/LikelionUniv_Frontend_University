@@ -166,6 +166,11 @@ function useServerSidePagination<T>({
     const setPage = (page: number): void => {
         setCurrentPageInfo(page);
         setCurrentPage(page);
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
     };
 
     const renderPaginationBtn = (): JSX.Element => {
