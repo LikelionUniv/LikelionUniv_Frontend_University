@@ -2,8 +2,11 @@ import { styled } from 'styled-components';
 import button_img from '../../../../img/landing/Arrow_Upright.svg';
 import title_img from '../../../../img/landing/Notice.svg';
 import CommunityList from './CommunityList';
+import { useNavigate } from 'react-router-dom';
 
 const CommunityPart = () => {
+    const navigate = useNavigate();
+
     return (
         <CommunityPartWrapper>
             <TitleWrapper>
@@ -13,7 +16,7 @@ const CommunityPart = () => {
             <CommunityWrapper>
                 <SubtitleWrapper>
                     <Subtitle>커뮤니티</Subtitle>
-                    <MoveToCommunityBTN>
+                    <MoveToCommunityBTN onClick={() => navigate('/community')}>
                         <ButtonTitle>커뮤니티 보러가기</ButtonTitle>
                         <ButtonImg src={button_img} />
                     </MoveToCommunityBTN>
