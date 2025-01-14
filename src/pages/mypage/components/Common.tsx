@@ -6,9 +6,9 @@ export function convertPart(role: string) {
         ADMIN: '관리자',
         PM: '기획',
         DESIGNER: '디자인',
-        PM_DESIGNER: '기획디자인',
         FRONTEND: '프론트엔드',
         BACKEND: '백엔드',
+        PM_DESIGNER: '기획 및 디자인',
     };
 
     if (role in roleDict) {
