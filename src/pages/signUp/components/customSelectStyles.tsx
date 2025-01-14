@@ -57,6 +57,7 @@ const roleTrackStyle = {
         fontSize: '16px',
         fontWeight: '500',
         width: '128px',
+
         height: '40px',
         color: 'var(--grey-900, #212224)',
         borderRadius: '4px',
@@ -83,6 +84,7 @@ const genStyle = {
         boxShadow: '0 0 0 0px transparent',
         border: '1px solid var(--grey-400, #DCDFE3)',
         backgroundColor: 'white',
+        width: '133px',
         display: 'flex',
         flexDirection: 'column',
     }),
@@ -91,6 +93,7 @@ const genStyle = {
         backgroundColor: 'transparent',
         maxHeight: '136px',
         width: '133px',
+
         display: 'flex',
         flexDirection: 'column',
         gap: '4px',
@@ -118,6 +121,7 @@ const genStyle = {
         fontSize: '16px',
         fontWeight: '500',
         width: '122px',
+
         height: '40px',
         color: 'var(--grey-900, #212224)',
         borderRadius: '4px',
@@ -148,6 +152,7 @@ const schoolStyle = {
             ? ' 1px solid #ff7710'
             : '1px solid var(--grey-400, #DCDFE3)',
         width: '464px',
+
         height: state.isFocused ? '48px' : '48px',
         borderRadius: '6px',
         backgroundColor: 'white',
@@ -162,6 +167,7 @@ const schoolStyle = {
         backgroundColor: 'transparent',
         maxHeight: '353px',
         width: '316px',
+
         display: 'flex',
         flexDirection: 'column',
         gap: '4px',

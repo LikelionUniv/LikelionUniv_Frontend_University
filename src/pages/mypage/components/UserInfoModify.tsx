@@ -15,9 +15,9 @@ import { IuserModify } from '../../../inteface/myPageType';
 const trackOptions = [
     { value: 1, label: '기획' },
     { value: 2, label: '디자인' },
-    // { value: 3, label: '기획디자인' },
     { value: 3, label: '백엔드' },
     { value: 4, label: '프론트엔드' },
+    { value: 5, label: '기획 및 디자인' },
 ];
 
 function findLabelByValue(value: number) {
