@@ -11,11 +11,7 @@ interface CertificateModalProps {
 }
 
 const CertificateModal: React.FC<CertificateModalProps> = ({ onClose }) => {
-    const trackOptions = [
-        { value: 12, label: '12기' },
-        { value: 11, label: '11기' },
-        { value: 10, label: '10기' },
-    ];
+    const trackOptions = [{ value: 12, label: '12기' }];
 
     const [ordinal, setOrdinal] = useState<number | undefined>(undefined);
     const [isError, setIsError] = useState<boolean>(false);
