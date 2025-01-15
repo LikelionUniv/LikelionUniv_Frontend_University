@@ -16,11 +16,7 @@ const AdminCertificateModal: React.FC<CertificateModalProps> = ({
     selectedUserIds,
     setSelectedUserIds,
 }) => {
-    const trackOptions = [
-        { value: 10, label: '10기' },
-        { value: 11, label: '11기' },
-        { value: 12, label: '12기' },
-    ];
+    const trackOptions = [{ value: 12, label: '12기' }];
 
     const { mutate } = useChangeGraduations();
     const { selectAll, setSelectAll } = useSelectedUsers();
