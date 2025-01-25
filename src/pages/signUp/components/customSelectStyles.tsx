@@ -83,7 +83,7 @@ const genStyle = {
         boxShadow: '0 0 0 0px transparent',
         border: '1px solid var(--grey-400, #DCDFE3)',
         backgroundColor: 'white',
-        width: '133px',
+        minWidth: '133px',
         display: 'flex',
         flexDirection: 'column',
     }),
