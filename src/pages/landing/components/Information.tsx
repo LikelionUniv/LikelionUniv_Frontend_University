@@ -32,6 +32,7 @@ const Information = () => {
                 </div>
             </IF.Wrapper>
             <InfoService />
+
             <IF.Wrapper style={{ paddingTop: '0' }}>
                 <div className="container" style={{ width: desWidth }}>
                     <IF.Title>
@@ -56,17 +57,17 @@ const Information = () => {
                         {/*<InfoTrack />*/}
                         <InfoTrack />
                     </IF.SectionContainer>
-                    <IF.Title>
+                    {/* <IF.Title>
                         연간 <PixelCalendarIcon />
                         일정
                     </IF.Title>
                     <IF.SubText>
                         일년 동안 체계적으로 역량을 쌓을 수 있는 커리큘럼이
                         준비되어 있어요.
-                    </IF.SubText>
-                    <IF.SectionContainer>
+                    </IF.SubText> */}
+                    {/* <IF.SectionContainer>
                         <InfoPlan />
-                    </IF.SectionContainer>
+                    </IF.SectionContainer> */}
                     {/*
                     <IF.Title>
                         <PixelDiamondIcon />

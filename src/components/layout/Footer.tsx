@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import * as F from './Footer.style';
 
 import { ReactComponent as Logo } from '../../img/nav/logo.svg';
