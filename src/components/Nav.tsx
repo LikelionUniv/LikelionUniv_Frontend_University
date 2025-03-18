@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate, NavLink } from 'react-router-dom';
 import logo from '../img/nav/logo.svg';
-import navarrow from '../img/nav/nav_arrow.svg';
+// import navarrow from '../img/nav/nav_arrow.svg';
 import defaultprofile from '../img/nav/default_profile.svg';
 import mypage from '../img/nav/mypage.svg';
 import logout from '../img/nav/logout.svg';
@@ -107,7 +107,7 @@ const Nav = () => {
                 <Container>
                     <div className="left">
                         <Logo src={logo} onClick={() => navigate('/')} />
-                        <Text to="/recruit" className="first">
+                        {/* <Text to="/recruit" className="first">
                             <p>리크루팅</p>
                             <img src={navarrow} alt="indicator" />
                         </Text>
@@ -128,7 +128,7 @@ const Nav = () => {
                                 연간기부금모금액 및 활용실적
                             </p>
                             <img src={navarrow} alt="indicator" />
-                        </Text>
+                        </Text> */}
                     </div>
 
                     <div className="right">
@@ -235,7 +235,7 @@ const Nav = () => {
                                     onClick={() => setMobileMenu(!mobileMenu)}
                                 />
                             </MTop>
-                            <MText to="/recruit">
+                            {/* <MText to="/recruit">
                                 <p>리크루팅</p>
                                 <img src={navarrow} alt="indicator" />
                             </MText>
@@ -256,7 +256,7 @@ const Nav = () => {
                                     연간기부금모금액 및 활용실적
                                 </p>
                                 <img src={navarrow} alt="indicator" />
-                            </MText>
+                            </MText> */}
                             {profileModal && (
                                 <MProfileModal ref={modalRef}>
                                     <div

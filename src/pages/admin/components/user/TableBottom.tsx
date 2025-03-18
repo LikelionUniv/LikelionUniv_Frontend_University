@@ -5,8 +5,10 @@ import styled from 'styled-components';
 import EmailModal from '../modal/EmailModal';
 // import { useUserProfile } from '../../../../query/mypage/useUserProfile';
 import { useOutletContext } from 'react-router-dom';
-import { OutletContext } from '../../../../inteface/adminType';
+import { OutletContext, User } from '../../../../inteface/adminType';
 import AdminCertificateModal from '../modal/AdminCertificateModal';
+import XLSX from 'xlsx-js-style';
+import useServerSidePagination from '../../../../query/get/useServerSidePagination';
 
 const TableBottom: React.FC = () => {
     const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =
@@ -15,6 +17,11 @@ const TableBottom: React.FC = () => {
         useState(false);
 
     const { mutate } = useDeleteUserList();
+    const { curPageItem: users } = useServerSidePagination<User>({
+        uri: '/api/admin/v1/univAdmin/univ/users',
+        size: 10,
+        isExcelData: true,
+    });
 
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const openEmailModal = () => setIsEmailModalOpen(true);
@@ -45,11 +52,62 @@ const TableBottom: React.FC = () => {
         setIsChangeCertificateModal(true);
     };
 
+    const handleDownExcel = () => {
+        const workbook = XLSX.utils.book_new();
+        const body: any[] = [];
+
+        users.map((el: any) => {
+            body.push({
+                name: el.name,
+                univName: el.univName!,
+                major: el.major,
+                ordinal: el.ordinal,
+                part: el.part,
+                role: el.role,
+                email: el.email,
+            });
+        });
+        body.unshift({
+            name: '이름',
+            univName: '소속 대학',
+            major: '전공',
+            ordinal: '기수',
+            part: '파트',
+            role: '역할',
+            email: '이메일',
+        });
+
+        const firstSheet = XLSX.utils.json_to_sheet(body, {
+            header: [
+                'name',
+                'univName',
+                'major',
+                'ordinal',
+                'part',
+                'role',
+                'email',
+            ],
+            skipHeader: true,
+        });
+        firstSheet['!cols'] = [
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 200 },
+        ];
+        XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
+
+        XLSX.writeFile(workbook, '회원정보.xlsx');
+    };
+
     return (
         <Wrapper>
             <SelectedActions>
-                <div>선택한 회원</div>
                 <div>
+                    <div>선택한 회원</div>
                     <Button onClick={handleDelete}>삭제하기</Button>
                     {isAdmin && (
                         <Button
@@ -66,6 +124,9 @@ const TableBottom: React.FC = () => {
                         수료증 등급 변환
                     </Button>
                 </div>
+                <Button style={{ color: '#4D5359' }} onClick={handleDownExcel}>
+                    엑셀로 내보내기
+                </Button>
             </SelectedActions>
             {isEmailModalOpen && (
                 <EmailModal
@@ -94,6 +155,7 @@ const SelectedActions = styled.div`
     display: flex;
     margin-top: 20px;
     align-items: center;
+    justify-content: space-between;
     @media screen and (max-width: 650px) {
         flex-direction: column;
         align-items: start;
@@ -105,6 +167,7 @@ const SelectedActions = styled.div`
         font-weight: bold;
         margin-top: 5px;
         margin-right: 10px;
+        display: flex;
     }
 `;
 

@@ -32,6 +32,9 @@ export const Info = styled.div`
         .left {
             & > svg {
                 margin-bottom: 20px;
+                /* backgroun//d-color: red; */
+                width: 140px;
+                margin-top: -25px;
             }
 
             .text {

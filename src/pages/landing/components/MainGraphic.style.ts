@@ -99,6 +99,56 @@ export const Background = styled.div<{ isCountDownView: boolean }>`
         }
     }
 
+    .customBtn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 32px;
+        margin-top: 35px;
+        margin-bottom: 250px;
+
+        border-radius: 8px;
+        color: #fff;
+        font-family: Pretendard;
+        font-size: 33px;
+        font-weight: 600;
+        white-space: nowrap;
+        text-decoration: none;
+        border: none;
+        outline: none;
+        width: 65%;
+        cursor: pointer;
+        &:hover {
+            background-color: #eb6500;
+        }
+        @media (max-width: 1280px) {
+            padding: 12px 32px;
+            margin-top: 72px;
+        }
+        @media (max-width: 957px) {
+            font-size: 2.1vw;
+        }
+        @media (max-width: 768px) {
+            max-width: calc(520px - 64px);
+            font-size: 20px;
+            padding: 16px 32px;
+            border-radius: 1vw;
+            margin-top: 72px;
+            margin-bottom: 20px;
+        }
+
+        svg {
+            height: 30px;
+            @media (max-width: 957px) {
+                height: 3vw;
+            }
+            @media (max-width: 768px) {
+                width: 36px;
+                height: auto;
+            }
+        }
+    }
+
     .btn {
         display: flex;
         justify-content: space-between;
@@ -293,7 +343,6 @@ export const Description = styled.div`
                 height: 24px;
                 margin-right: 5px;
             }
-
 
             @media (max-width: 480px) {
                 width: 6.4vw;

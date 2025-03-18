@@ -105,10 +105,13 @@ const MainGraphic = () => {
                             </div>
                             <div className="hide-text" />
                             <CountDown isCountDownView={isCountDownView} /> */}
-                            <button className="btn" onClick={openModal}>
+                            <div className="customBtn">
+                                현재 홈페이지는 리뉴얼 중입니다.
+                            </div>
+                            {/* <button className="btn" onClick={openModal}>
                                 멋대 알림 신청하기
                                 <PixelLongArrowIcon fill="#ffffff" />
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                     <img src={mainimage} />

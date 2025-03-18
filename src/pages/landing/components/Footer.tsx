@@ -96,7 +96,7 @@ const Footer = () => {
                     <FooterModal isOpen={isModalOpen} closeModal={closeModal} />
                 )}
             </F.Recruit> */}
-            <F.Notification>
+            {/* <F.Notification>
                 <div className="container">
                     <div className="left">
                         <div className="title">
@@ -121,7 +121,7 @@ const Footer = () => {
                         />
                     )}
                 </div>
-            </F.Notification>
+            </F.Notification> */}
             <F.Makers>
                 <img src={makersbackground} />
                 <div className="makers-container">
