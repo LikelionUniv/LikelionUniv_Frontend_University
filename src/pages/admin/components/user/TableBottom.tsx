@@ -5,9 +5,10 @@ import styled from 'styled-components';
 import EmailModal from '../modal/EmailModal';
 // import { useUserProfile } from '../../../../query/mypage/useUserProfile';
 import { useOutletContext } from 'react-router-dom';
-import { OutletContext } from '../../../../inteface/adminType';
+import { OutletContext, User } from '../../../../inteface/adminType';
 import AdminCertificateModal from '../modal/AdminCertificateModal';
 import XLSX from 'xlsx-js-style';
+import useServerSidePagination from '../../../../query/get/useServerSidePagination';
 
 const TableBottom: React.FC = () => {
     const { selectedUserIds, setSelectedUserIds, selectedUserEmails } =
@@ -16,6 +17,11 @@ const TableBottom: React.FC = () => {
         useState(false);
 
     const { mutate } = useDeleteUserList();
+    const { curPageItem: users } = useServerSidePagination<User>({
+        uri: '/api/admin/v1/univAdmin/univ/users',
+        size: 10,
+        isExcelData: true,
+    });
 
     const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
     const openEmailModal = () => setIsEmailModalOpen(true);
@@ -46,43 +52,56 @@ const TableBottom: React.FC = () => {
         setIsChangeCertificateModal(true);
     };
 
-    // const handleDownExcel = () => {
-    //     const workbook = XLSX.utils.book_new();
-    //     const body: any[] = [];
+    const handleDownExcel = () => {
+        const workbook = XLSX.utils.book_new();
+        const body: any[] = [];
 
-    //     // users.map(el => {
-    //     //     body.push({
-    //     //         name: el.name,
-    //     //         universityName: el.universityName!,
-    //     //         phone: el.phone!,
-    //     //         offlineParticipation: el.offlineParticipation!,
-    //     //         hackathonParts: el.hackathonParts![0],
-    //     //         email: el.email,
-    //     //         teamName: el.teamName!,
-    //     //     });
-    //     // });
-    //     users.alarms.map((el: IRecruits) => {
-    //         body.push({
-    //             ordinal: el.ordinal,
-    //             email: el.email!,
-    //             createdDate: el.createdDate,
-    //         });
-    //     });
-    //     body.unshift({
-    //         ordinal: '기수',
-    //         email: '이메일',
-    //         createdDate: '신청 날짜',
-    //     });
+        users.map((el: any) => {
+            body.push({
+                name: el.name,
+                univName: el.univName!,
+                major: el.major,
+                ordinal: el.ordinal,
+                part: el.part,
+                role: el.role,
+                email: el.email,
+            });
+        });
+        body.unshift({
+            name: '이름',
+            univName: '소속 대학',
+            major: '전공',
+            ordinal: '기수',
+            part: '파트',
+            role: '역할',
+            email: '이메일',
+        });
 
-    //     const firstSheet = XLSX.utils.json_to_sheet(body, {
-    //         header: ['ordinal', 'email', 'createdDate'],
-    //         skipHeader: true,
-    //     });
-    //     firstSheet['!cols'] = [{ wpx: 30 }, { wpx: 180 }, { wpx: 180 }];
-    //     XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
+        const firstSheet = XLSX.utils.json_to_sheet(body, {
+            header: [
+                'name',
+                'univName',
+                'major',
+                'ordinal',
+                'part',
+                'role',
+                'email',
+            ],
+            skipHeader: true,
+        });
+        firstSheet['!cols'] = [
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 100 },
+            { wpx: 200 },
+        ];
+        XLSX.utils.book_append_sheet(workbook, firstSheet, 'hackathonData');
 
-    //     XLSX.writeFile(workbook, '모집알림신청.xlsx');
-    // };
+        XLSX.writeFile(workbook, '회원정보.xlsx');
+    };
 
     return (
         <Wrapper>
