@@ -18,7 +18,7 @@ const TableBottom: React.FC = () => {
 
     const { mutate } = useDeleteUserList();
     const { curPageItem: users } = useServerSidePagination<User>({
-        uri: '/api/admin/v1/univAdmin/univ/users',
+        uri: '/api/admin/v1/headquarters/users',
         size: 10,
         isExcelData: true,
     });
